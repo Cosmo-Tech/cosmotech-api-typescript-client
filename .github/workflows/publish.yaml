@@ -1,0 +1,20 @@
+name: Node.js Package on npm
+on:
+  release:
+    types: [created]
+jobs:
+  build:
+    name: Build & Publish
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '14.x'
+        registry-url: 'https://registry.npmjs.org'
+        scope: '@cosmotech' 
+    - run: yarn
+    - run: git config --global user.email "vincent.carluer@cosmotech.com" && git config --global user.name "Vincent Carluer"
+    - run: yarn publish --new-version ${{ github.event.release.tag_name }} --access public
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
