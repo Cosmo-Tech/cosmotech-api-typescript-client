@@ -877,10 +877,22 @@ export interface Scenario {
     parametersValues?: Array<ScenarioRunTemplateParameterValue>;
     /**
      * 
-     * @type {ScenarioLastRun}
+     * @type {ScenarioLastRun & object}
      * @memberof Scenario
      */
-    lastRun?: ScenarioLastRun;
+    lastRun?: ScenarioLastRun & object;
+    /**
+     * 
+     * @type {ScenarioLastRun & object}
+     * @memberof Scenario
+     */
+    parentLastRun?: ScenarioLastRun & object;
+    /**
+     * 
+     * @type {ScenarioLastRun & object}
+     * @memberof Scenario
+     */
+    rootLastRun?: ScenarioLastRun & object;
 }
 
 /**
@@ -952,7 +964,7 @@ export interface ScenarioComparisonResult {
     changedValues?: Array<ScenarioChangedParameterValue>;
 }
 /**
- * the last Scenarion Run for this Scenario
+ * 
  * @export
  * @interface ScenarioLastRun
  */
