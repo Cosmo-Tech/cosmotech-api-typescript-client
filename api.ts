@@ -511,6 +511,12 @@ export interface RunTemplate {
      */
     fetchDatasets?: boolean;
     /**
+     * whether or not the scenario data download transform step step is done
+     * @type {boolean}
+     * @memberof RunTemplate
+     */
+    scenarioDataDownloadTransform?: boolean;
+    /**
      * whether or not the fetch parameters step is done
      * @type {boolean}
      * @memberof RunTemplate
@@ -595,6 +601,12 @@ export interface RunTemplate {
      */
     postRunSource?: RunTemplateStepSource;
     /**
+     * 
+     * @type {RunTemplateStepSource}
+     * @memberof RunTemplate
+     */
+    scenariodataTransformSource?: RunTemplateStepSource;
+    /**
      * the ordered list of parameters groups for the Run Template
      * @type {Array<string>}
      * @memberof RunTemplate
@@ -618,7 +630,8 @@ export enum RunTemplateHandlerId {
     Validator = 'validator',
     Prerun = 'prerun',
     Engine = 'engine',
-    Postrun = 'postrun'
+    Postrun = 'postrun',
+    ScenariodataTransform = 'scenariodata_transform'
 }
 
 /**
@@ -828,11 +841,11 @@ export interface Scenario {
      */
     users?: Array<ScenarioUser>;
     /**
-     * the Scenario state
-     * @type {string}
+     * 
+     * @type {ScenarioJobState}
      * @memberof Scenario
      */
-    state?: ScenarioStateEnum;
+    state?: ScenarioJobState;
     /**
      * the Scenario creation date
      * @type {string}
@@ -894,19 +907,6 @@ export interface Scenario {
      */
     rootLastRun?: ScenarioLastRun & object;
 }
-
-/**
-    * @export
-    * @enum {string}
-    */
-export enum ScenarioStateEnum {
-    Created = 'Created',
-    Running = 'Running',
-    Successful = 'Successful',
-    Failed = 'Failed',
-    Unknown = 'Unknown'
-}
-
 /**
  * the difference between the values of a parameter
  * @export
@@ -963,6 +963,52 @@ export interface ScenarioComparisonResult {
      */
     changedValues?: Array<ScenarioChangedParameterValue>;
 }
+/**
+ * Scenario data download job info
+ * @export
+ * @interface ScenarioDataDownloadInfo
+ */
+export interface ScenarioDataDownloadInfo {
+    /**
+     * the Scenario Data Download URL
+     * @type {string}
+     * @memberof ScenarioDataDownloadInfo
+     */
+    url?: string;
+    /**
+     * 
+     * @type {ScenarioJobState}
+     * @memberof ScenarioDataDownloadInfo
+     */
+    state?: ScenarioJobState;
+}
+/**
+ * Scenario data download job
+ * @export
+ * @interface ScenarioDataDownloadJob
+ */
+export interface ScenarioDataDownloadJob {
+    /**
+     * the Scenario Data Download job identifier
+     * @type {string}
+     * @memberof ScenarioDataDownloadJob
+     */
+    id?: string;
+}
+/**
+ * the Scenario job state
+ * @export
+ * @enum {string}
+ */
+
+export enum ScenarioJobState {
+    Created = 'Created',
+    Running = 'Running',
+    Successful = 'Successful',
+    Failed = 'Failed',
+    Unknown = 'Unknown'
+}
+
 /**
  * 
  * @export
@@ -1175,6 +1221,31 @@ export interface ScenarioRunContainer {
      * @memberof ScenarioRunContainer
      */
     solutionContainer?: boolean;
+    /**
+     * the list of artifacts
+     * @type {Array<ScenarioRunContainerArtifact>}
+     * @memberof ScenarioRunContainer
+     */
+    artifacts?: Array<ScenarioRunContainerArtifact>;
+}
+/**
+ * a scenario run container artifact
+ * @export
+ * @interface ScenarioRunContainerArtifact
+ */
+export interface ScenarioRunContainerArtifact {
+    /**
+     * the artifact name
+     * @type {string}
+     * @memberof ScenarioRunContainerArtifact
+     */
+    name?: string;
+    /**
+     * the artifact path (relative to /var/csmoutput)
+     * @type {string}
+     * @memberof ScenarioRunContainerArtifact
+     */
+    path?: string;
 }
 /**
  * logs for a given container
@@ -1323,6 +1394,12 @@ export interface ScenarioRunStartContainers {
      * @memberof ScenarioRunStartContainers
      */
     nodeLabel?: string;
+    /**
+     * the workflow labels
+     * @type {{ [key: string]: string; }}
+     * @memberof ScenarioRunStartContainers
+     */
+    labels?: { [key: string]: string; };
     /**
      * the containerslist
      * @type {Array<ScenarioRunContainer>}
@@ -4176,6 +4253,52 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
+         * @summary Download Scenario data
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} scenarioId the Scenario identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        downloadScenarioData: async (organizationId: string, workspaceId: string, scenarioId: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('downloadScenarioData', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('downloadScenarioData', 'workspaceId', workspaceId)
+            // verify required parameter 'scenarioId' is not null or undefined
+            assertParamExists('downloadScenarioData', 'scenarioId', scenarioId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/scenarios/{scenario_id}/downloads`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"scenario_id"}}`, encodeURIComponent(String(scenarioId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary List all Scenarios
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -4236,6 +4359,56 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
                 .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
                 .replace(`{${"scenario_id"}}`, encodeURIComponent(String(scenarioId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get Scenario data download URL
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} scenarioId the Scenario identifier
+         * @param {string} downloadId the Scenario Download identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getScenarioDataDownloadJobInfo: async (organizationId: string, workspaceId: string, scenarioId: string, downloadId: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('getScenarioDataDownloadJobInfo', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('getScenarioDataDownloadJobInfo', 'workspaceId', workspaceId)
+            // verify required parameter 'scenarioId' is not null or undefined
+            assertParamExists('getScenarioDataDownloadJobInfo', 'scenarioId', scenarioId)
+            // verify required parameter 'downloadId' is not null or undefined
+            assertParamExists('getScenarioDataDownloadJobInfo', 'downloadId', downloadId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/scenarios/{scenario_id}/downloads/{download_id}`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"scenario_id"}}`, encodeURIComponent(String(scenarioId)))
+                .replace(`{${"download_id"}}`, encodeURIComponent(String(downloadId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -4591,6 +4764,19 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Download Scenario data
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} scenarioId the Scenario identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async downloadScenarioData(organizationId: string, workspaceId: string, scenarioId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioDataDownloadJob>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.downloadScenarioData(organizationId, workspaceId, scenarioId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @summary List all Scenarios
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -4612,6 +4798,20 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          */
         async findScenarioById(organizationId: string, workspaceId: string, scenarioId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Scenario>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.findScenarioById(organizationId, workspaceId, scenarioId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Get Scenario data download URL
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} scenarioId the Scenario identifier
+         * @param {string} downloadId the Scenario Download identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getScenarioDataDownloadJobInfo(organizationId: string, workspaceId: string, scenarioId: string, downloadId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioDataDownloadInfo>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getScenarioDataDownloadJobInfo(organizationId, workspaceId, scenarioId, downloadId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -4767,6 +4967,18 @@ export const ScenarioApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * 
+         * @summary Download Scenario data
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} scenarioId the Scenario identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        downloadScenarioData(organizationId: string, workspaceId: string, scenarioId: string, options?: any): AxiosPromise<ScenarioDataDownloadJob> {
+            return localVarFp.downloadScenarioData(organizationId, workspaceId, scenarioId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary List all Scenarios
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -4787,6 +4999,19 @@ export const ScenarioApiFactory = function (configuration?: Configuration, baseP
          */
         findScenarioById(organizationId: string, workspaceId: string, scenarioId: string, options?: any): AxiosPromise<Scenario> {
             return localVarFp.findScenarioById(organizationId, workspaceId, scenarioId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get Scenario data download URL
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} scenarioId the Scenario identifier
+         * @param {string} downloadId the Scenario Download identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getScenarioDataDownloadJobInfo(organizationId: string, workspaceId: string, scenarioId: string, downloadId: string, options?: any): AxiosPromise<ScenarioDataDownloadInfo> {
+            return localVarFp.getScenarioDataDownloadJobInfo(organizationId, workspaceId, scenarioId, downloadId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -4948,6 +5173,20 @@ export class ScenarioApi extends BaseAPI {
 
     /**
      * 
+     * @summary Download Scenario data
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} scenarioId the Scenario identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ScenarioApi
+     */
+    public downloadScenarioData(organizationId: string, workspaceId: string, scenarioId: string, options?: any) {
+        return ScenarioApiFp(this.configuration).downloadScenarioData(organizationId, workspaceId, scenarioId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary List all Scenarios
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
@@ -4971,6 +5210,21 @@ export class ScenarioApi extends BaseAPI {
      */
     public findScenarioById(organizationId: string, workspaceId: string, scenarioId: string, options?: any) {
         return ScenarioApiFp(this.configuration).findScenarioById(organizationId, workspaceId, scenarioId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get Scenario data download URL
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} scenarioId the Scenario identifier
+     * @param {string} downloadId the Scenario Download identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ScenarioApi
+     */
+    public getScenarioDataDownloadJobInfo(organizationId: string, workspaceId: string, scenarioId: string, downloadId: string, options?: any) {
+        return ScenarioApiFp(this.configuration).getScenarioDataDownloadJobInfo(organizationId, workspaceId, scenarioId, downloadId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
