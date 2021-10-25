@@ -14,7 +14,7 @@
 
 
 import { Configuration } from './configuration';
-import globalAxios, { AxiosPromise, AxiosInstance } from 'axios';
+import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from './common';
@@ -32,79 +32,79 @@ export interface Connector {
      * @type {string}
      * @memberof Connector
      */
-    id?: string;
+    'id'?: string;
     /**
      * the Connector key which group Connector versions
      * @type {string}
      * @memberof Connector
      */
-    key: string;
+    'key': string;
     /**
      * the Connector name
      * @type {string}
      * @memberof Connector
      */
-    name: string;
+    'name': string;
     /**
      * the Connector description
      * @type {string}
      * @memberof Connector
      */
-    description?: string;
+    'description'?: string;
     /**
      * the registry repository containing the image
      * @type {string}
      * @memberof Connector
      */
-    repository: string;
+    'repository': string;
     /**
      * the Connector version MAJOR.MINOR.PATCH. Must be aligned with an existing repository tag
      * @type {string}
      * @memberof Connector
      */
-    version: string;
+    'version': string;
     /**
      * the list of tags
      * @type {Array<string>}
      * @memberof Connector
      */
-    tags?: Array<string>;
+    'tags'?: Array<string>;
     /**
      * the user id which own this connector version
      * @type {string}
      * @memberof Connector
      */
-    ownerId?: string;
+    'ownerId'?: string;
     /**
      * an optional URL link to connector page
      * @type {string}
      * @memberof Connector
      */
-    url?: string;
+    'url'?: string;
     /**
      * whether or not the connector uses Azure Managed Identity
      * @type {boolean}
      * @memberof Connector
      */
-    azureManagedIdentity?: boolean;
+    'azureManagedIdentity'?: boolean;
     /**
      * whether to authenticate against Azure using the app registration credentials provided by the customer
      * @type {boolean}
      * @memberof Connector
      */
-    azureAuthenticationWithCustomerAppRegistration?: boolean;
+    'azureAuthenticationWithCustomerAppRegistration'?: boolean;
     /**
      * 
      * @type {Array<string>}
      * @memberof Connector
      */
-    ioTypes: Array<ConnectorIoTypesEnum>;
+    'ioTypes': Array<ConnectorIoTypesEnum>;
     /**
      * the list of connector parameters groups
      * @type {Array<ConnectorParameterGroup>}
      * @memberof Connector
      */
-    parameterGroups?: Array<ConnectorParameterGroup>;
+    'parameterGroups'?: Array<ConnectorParameterGroup>;
 }
 
 /**
@@ -127,37 +127,37 @@ export interface ConnectorParameter {
      * @type {string}
      * @memberof ConnectorParameter
      */
-    id: string;
+    'id': string;
     /**
      * the list of translated parameter group labels
      * @type {string}
      * @memberof ConnectorParameter
      */
-    label: string;
+    'label': string;
     /**
      * the parameter value type
      * @type {string}
      * @memberof ConnectorParameter
      */
-    valueType?: string;
+    'valueType'?: string;
     /**
      * the list of available and valid values for the parameter
      * @type {Array<string>}
      * @memberof ConnectorParameter
      */
-    options?: Array<string>;
+    'options'?: Array<string>;
     /**
      * the default value
      * @type {string}
      * @memberof ConnectorParameter
      */
-    _default?: string;
+    'default'?: string;
     /**
      * associated environment variable in connector image
      * @type {string}
      * @memberof ConnectorParameter
      */
-    envVar?: string;
+    'envVar'?: string;
 }
 /**
  * a connector parameters group
@@ -170,19 +170,19 @@ export interface ConnectorParameterGroup {
      * @type {string}
      * @memberof ConnectorParameterGroup
      */
-    id: string;
+    'id': string;
     /**
      * the list of translated parameter group labels
      * @type {string}
      * @memberof ConnectorParameterGroup
      */
-    label: string;
+    'label': string;
     /**
      * the list of parameters
      * @type {Array<ConnectorParameter>}
      * @memberof ConnectorParameterGroup
      */
-    parameters: Array<ConnectorParameter>;
+    'parameters': Array<ConnectorParameter>;
 }
 /**
  * a Dataset
@@ -195,55 +195,55 @@ export interface Dataset {
      * @type {string}
      * @memberof Dataset
      */
-    id?: string;
+    'id'?: string;
     /**
      * the Dataset name
      * @type {string}
      * @memberof Dataset
      */
-    name?: string;
+    'name'?: string;
     /**
      * the Dataset description
      * @type {string}
      * @memberof Dataset
      */
-    description?: string;
+    'description'?: string;
     /**
      * the User id which own this Dataset
      * @type {string}
      * @memberof Dataset
      */
-    ownerId?: string;
+    'ownerId'?: string;
     /**
      * the list of tags
      * @type {Array<string>}
      * @memberof Dataset
      */
-    tags?: Array<string>;
+    'tags'?: Array<string>;
     /**
      * 
      * @type {DatasetConnector}
      * @memberof Dataset
      */
-    connector?: DatasetConnector;
+    'connector'?: DatasetConnector;
     /**
      * the list of other Datasets ids to compose as fragments
      * @type {Array<string>}
      * @memberof Dataset
      */
-    fragmentsIds?: Array<string>;
+    'fragmentsIds'?: Array<string>;
     /**
      * the validator id
      * @type {string}
      * @memberof Dataset
      */
-    validatorId?: string;
+    'validatorId'?: string;
     /**
      * the list of compatible Solutions versions
      * @type {Array<DatasetCompatibility>}
      * @memberof Dataset
      */
-    compatibility?: Array<DatasetCompatibility>;
+    'compatibility'?: Array<DatasetCompatibility>;
 }
 /**
  * a Dataset compatibility constraint to a Solution version open range
@@ -256,19 +256,19 @@ export interface DatasetCompatibility {
      * @type {string}
      * @memberof DatasetCompatibility
      */
-    solutionKey: string;
+    'solutionKey': string;
     /**
      * the Solution minimum version compatibility (version included)
      * @type {string}
      * @memberof DatasetCompatibility
      */
-    minimumVersion?: string;
+    'minimumVersion'?: string;
     /**
      * the Solution maximum version compatibility (version included)
      * @type {string}
      * @memberof DatasetCompatibility
      */
-    maximumVersion?: string;
+    'maximumVersion'?: string;
 }
 /**
  * a Connector setup
@@ -281,25 +281,25 @@ export interface DatasetConnector {
      * @type {string}
      * @memberof DatasetConnector
      */
-    id?: string;
+    'id'?: string;
     /**
      * the Connector name
      * @type {string}
      * @memberof DatasetConnector
      */
-    name?: string;
+    'name'?: string;
     /**
      * the Connector version
      * @type {string}
      * @memberof DatasetConnector
      */
-    version?: string;
+    'version'?: string;
     /**
      * 
      * @type {{ [key: string]: string; }}
      * @memberof DatasetConnector
      */
-    parametersValues?: { [key: string]: string; };
+    'parametersValues'?: { [key: string]: string; };
 }
 /**
  * the Dataset Copy Parameters
@@ -312,19 +312,19 @@ export interface DatasetCopyParameters {
      * @type {string}
      * @memberof DatasetCopyParameters
      */
-    sourceId?: string;
+    'sourceId'?: string;
     /**
      * the target Dataset id
      * @type {string}
      * @memberof DatasetCopyParameters
      */
-    targetId?: string;
+    'targetId'?: string;
     /**
      * freeform options to path to connectors
      * @type {{ [key: string]: object; }}
      * @memberof DatasetCopyParameters
      */
-    options?: { [key: string]: object; };
+    'options'?: { [key: string]: object; };
 }
 /**
  * an Organization
@@ -337,31 +337,31 @@ export interface Organization {
      * @type {string}
      * @memberof Organization
      */
-    id?: string;
+    'id'?: string;
     /**
      * the Organization name
      * @type {string}
      * @memberof Organization
      */
-    name?: string;
+    'name'?: string;
     /**
      * the Owner User Id
      * @type {string}
      * @memberof Organization
      */
-    ownerId?: string;
+    'ownerId'?: string;
     /**
      * 
      * @type {Array<OrganizationUser>}
      * @memberof Organization
      */
-    users?: Array<OrganizationUser>;
+    'users'?: Array<OrganizationUser>;
     /**
      * 
      * @type {OrganizationServices}
      * @memberof Organization
      */
-    services?: OrganizationServices;
+    'services'?: OrganizationServices;
 }
 /**
  * a cloud service resource
@@ -374,31 +374,31 @@ export interface OrganizationService {
      * @type {string}
      * @memberof OrganizationService
      */
-    cloudService?: string;
+    'cloudService'?: string;
     /**
      * the platform base uri for this service
      * @type {string}
      * @memberof OrganizationService
      */
-    baseUri?: string;
+    'baseUri'?: string;
     /**
      * the Platform service associated to the resource
      * @type {string}
      * @memberof OrganizationService
      */
-    platformService?: string;
+    'platformService'?: string;
     /**
      * the Organization specific uri for this service resource
      * @type {string}
      * @memberof OrganizationService
      */
-    resourceUri?: string;
+    'resourceUri'?: string;
     /**
      * a freeform credentials object. Structure depends on service
      * @type {{ [key: string]: object; }}
      * @memberof OrganizationService
      */
-    credentials?: { [key: string]: object; };
+    'credentials'?: { [key: string]: object; };
 }
 /**
  * the cloud service resources of the Organization
@@ -411,19 +411,19 @@ export interface OrganizationServices {
      * @type {{ [key: string]: object; }}
      * @memberof OrganizationServices
      */
-    tenantCredentials?: { [key: string]: object; };
+    'tenantCredentials'?: { [key: string]: object; };
     /**
      * 
      * @type {OrganizationService}
      * @memberof OrganizationServices
      */
-    storage?: OrganizationService;
+    'storage'?: OrganizationService;
     /**
      * 
      * @type {OrganizationService}
      * @memberof OrganizationServices
      */
-    solutionsContainerRegistry?: OrganizationService;
+    'solutionsContainerRegistry'?: OrganizationService;
 }
 /**
  * a User
@@ -436,19 +436,19 @@ export interface OrganizationUser {
      * @type {string}
      * @memberof OrganizationUser
      */
-    id?: string;
+    'id'?: string;
     /**
      * the User name
      * @type {string}
      * @memberof OrganizationUser
      */
-    name?: string;
+    'name'?: string;
     /**
      * the User\'s roles for the Organization
      * @type {Array<string>}
      * @memberof OrganizationUser
      */
-    roles: Array<OrganizationUserRolesEnum>;
+    'roles': Array<OrganizationUserRolesEnum>;
 }
 
 /**
@@ -473,151 +473,151 @@ export interface RunTemplate {
      * @type {string}
      * @memberof RunTemplate
      */
-    id: string;
+    'id': string;
     /**
      * the Run Template name
      * @type {string}
      * @memberof RunTemplate
      */
-    name: string;
+    'name': string;
     /**
      * the Run Template description
      * @type {string}
      * @memberof RunTemplate
      */
-    description?: string;
+    'description'?: string;
     /**
      * the Cosmo Tech simulation name. This information is send to the Engine. Mandatory information if no Engine is defined
      * @type {string}
      * @memberof RunTemplate
      */
-    csmSimulation?: string;
+    'csmSimulation'?: string;
     /**
      * the list of Run Template tags
      * @type {Array<string>}
      * @memberof RunTemplate
      */
-    tags?: Array<string>;
+    'tags'?: Array<string>;
     /**
      * the compute size needed for this Run Template. Standard sizes are basic and highcpu. Default is basic
      * @type {string}
      * @memberof RunTemplate
      */
-    computeSize?: string;
+    'computeSize'?: string;
     /**
      * whether or not the fetch dataset step is done
      * @type {boolean}
      * @memberof RunTemplate
      */
-    fetchDatasets?: boolean;
+    'fetchDatasets'?: boolean;
     /**
      * whether or not the scenario data download transform step step is done
      * @type {boolean}
      * @memberof RunTemplate
      */
-    scenarioDataDownloadTransform?: boolean;
+    'scenarioDataDownloadTransform'?: boolean;
     /**
      * whether or not the fetch parameters step is done
      * @type {boolean}
      * @memberof RunTemplate
      */
-    fetchScenarioParameters?: boolean;
+    'fetchScenarioParameters'?: boolean;
     /**
      * whether or not the apply parameter step is done
      * @type {boolean}
      * @memberof RunTemplate
      */
-    applyParameters?: boolean;
+    'applyParameters'?: boolean;
     /**
      * whether or not the validate step is done
      * @type {boolean}
      * @memberof RunTemplate
      */
-    validateData?: boolean;
+    'validateData'?: boolean;
     /**
      * whether or not the Datasets values are send to the DataWarehouse prior to Simulation Run. If not set follow the Workspace setting
      * @type {boolean}
      * @memberof RunTemplate
      */
-    sendDatasetsToDataWarehouse?: boolean;
+    'sendDatasetsToDataWarehouse'?: boolean;
     /**
      * whether or not the input parameters values are send to the DataWarehouse prior to Simulation Run. If not set follow the Workspace setting
      * @type {boolean}
      * @memberof RunTemplate
      */
-    sendInputParametersToDataWarehouse?: boolean;
+    'sendInputParametersToDataWarehouse'?: boolean;
     /**
      * whether or not the pre-run step is done
      * @type {boolean}
      * @memberof RunTemplate
      */
-    preRun?: boolean;
+    'preRun'?: boolean;
     /**
      * whether or not the run step is done
      * @type {boolean}
      * @memberof RunTemplate
      */
-    run?: boolean;
+    'run'?: boolean;
     /**
      * whether or not the post-run step is done
      * @type {boolean}
      * @memberof RunTemplate
      */
-    postRun?: boolean;
+    'postRun'?: boolean;
     /**
      * whether or not to store the scenario parameters in json instead of csv
      * @type {boolean}
      * @memberof RunTemplate
      */
-    parametersJson?: boolean;
+    'parametersJson'?: boolean;
     /**
      * 
      * @type {RunTemplateStepSource}
      * @memberof RunTemplate
      */
-    parametersHandlerSource?: RunTemplateStepSource;
+    'parametersHandlerSource'?: RunTemplateStepSource;
     /**
      * 
      * @type {RunTemplateStepSource}
      * @memberof RunTemplate
      */
-    datasetValidatorSource?: RunTemplateStepSource;
+    'datasetValidatorSource'?: RunTemplateStepSource;
     /**
      * 
      * @type {RunTemplateStepSource}
      * @memberof RunTemplate
      */
-    preRunSource?: RunTemplateStepSource;
+    'preRunSource'?: RunTemplateStepSource;
     /**
      * 
      * @type {RunTemplateStepSource}
      * @memberof RunTemplate
      */
-    runSource?: RunTemplateStepSource;
+    'runSource'?: RunTemplateStepSource;
     /**
      * 
      * @type {RunTemplateStepSource}
      * @memberof RunTemplate
      */
-    postRunSource?: RunTemplateStepSource;
+    'postRunSource'?: RunTemplateStepSource;
     /**
      * 
      * @type {RunTemplateStepSource}
      * @memberof RunTemplate
      */
-    scenariodataTransformSource?: RunTemplateStepSource;
+    'scenariodataTransformSource'?: RunTemplateStepSource;
     /**
      * the ordered list of parameters groups for the Run Template
      * @type {Array<string>}
      * @memberof RunTemplate
      */
-    parameterGroups?: Array<string>;
+    'parameterGroups'?: Array<string>;
     /**
      * whether or not to stack adjacent scenario run steps in one container run which will chain steps
      * @type {boolean}
      * @memberof RunTemplate
      */
-    stackSteps?: boolean;
+    'stackSteps'?: boolean;
 }
 /**
  * the Run Template step handler identifier
@@ -645,49 +645,49 @@ export interface RunTemplateParameter {
      * @type {string}
      * @memberof RunTemplateParameter
      */
-    id: string;
+    'id': string;
     /**
      * a translated label with key as ISO 639-1 code
      * @type {{ [key: string]: string; }}
      * @memberof RunTemplateParameter
      */
-    labels: { [key: string]: string; };
+    'labels': { [key: string]: string; };
     /**
      * the variable type for the parameter. Basic types or special type %DATASETID%
      * @type {string}
      * @memberof RunTemplateParameter
      */
-    varType: string;
+    'varType': string;
     /**
      * the default value for this parameter
      * @type {string}
      * @memberof RunTemplateParameter
      */
-    defaultValue?: string;
+    'defaultValue'?: string;
     /**
      * the minimum value for this parameter
      * @type {string}
      * @memberof RunTemplateParameter
      */
-    minValue?: string;
+    'minValue'?: string;
     /**
      * the maximum value for this parameter
      * @type {string}
      * @memberof RunTemplateParameter
      */
-    maxValue?: string;
+    'maxValue'?: string;
     /**
      * a regex to validate the value
      * @type {string}
      * @memberof RunTemplateParameter
      */
-    regexValidation?: string;
+    'regexValidation'?: string;
     /**
      * freeform options
      * @type {{ [key: string]: object; }}
      * @memberof RunTemplateParameter
      */
-    options?: { [key: string]: object; };
+    'options'?: { [key: string]: object; };
 }
 /**
  * a Parameter Group for a Run Template
@@ -700,37 +700,37 @@ export interface RunTemplateParameterGroup {
      * @type {string}
      * @memberof RunTemplateParameterGroup
      */
-    id: string;
+    'id': string;
     /**
      * a translated label with key as ISO 639-1 code
      * @type {{ [key: string]: string; }}
      * @memberof RunTemplateParameterGroup
      */
-    labels: { [key: string]: string; };
+    'labels': { [key: string]: string; };
     /**
      * does the group define a table
      * @type {boolean}
      * @memberof RunTemplateParameterGroup
      */
-    isTable?: boolean;
+    'isTable'?: boolean;
     /**
      * freeform options
      * @type {{ [key: string]: object; }}
      * @memberof RunTemplateParameterGroup
      */
-    options?: { [key: string]: object; };
+    'options'?: { [key: string]: object; };
     /**
      * the Run Template Group parent Id
      * @type {string}
      * @memberof RunTemplateParameterGroup
      */
-    parentId?: string;
+    'parentId'?: string;
     /**
      * an ordered list of Run Template Parameters
      * @type {Array<string>}
      * @memberof RunTemplateParameterGroup
      */
-    parameters: Array<string>;
+    'parameters': Array<string>;
 }
 /**
  * the value of Analysis parameter for a Scenario for this ScenarioRun
@@ -743,19 +743,19 @@ export interface RunTemplateParameterValue {
      * @type {string}
      * @memberof RunTemplateParameterValue
      */
-    parameterId: string;
+    'parameterId': string;
     /**
      * the parameter value type
      * @type {string}
      * @memberof RunTemplateParameterValue
      */
-    varType?: string;
+    'varType'?: string;
     /**
      * the parameter value
      * @type {string}
      * @memberof RunTemplateParameterValue
      */
-    value: string;
+    'value': string;
 }
 /**
  * the source local or cloud
@@ -779,133 +779,133 @@ export interface Scenario {
      * @type {string}
      * @memberof Scenario
      */
-    id?: string;
+    'id'?: string;
     /**
      * the Scenario name
      * @type {string}
      * @memberof Scenario
      */
-    name?: string;
+    'name'?: string;
     /**
      * the Scenario description
      * @type {string}
      * @memberof Scenario
      */
-    description?: string;
+    'description'?: string;
     /**
      * the list of tags
      * @type {Array<string>}
      * @memberof Scenario
      */
-    tags?: Array<string>;
+    'tags'?: Array<string>;
     /**
      * the Scenario parent id
      * @type {string}
      * @memberof Scenario
      */
-    parentId?: string;
+    'parentId'?: string;
     /**
      * the user id which own this Scenario
      * @type {string}
      * @memberof Scenario
      */
-    ownerId?: string;
+    'ownerId'?: string;
     /**
      * the scenario root id
      * @type {string}
      * @memberof Scenario
      */
-    rootId?: string;
+    'rootId'?: string;
     /**
      * the Solution Id associated with this Scenario
      * @type {string}
      * @memberof Scenario
      */
-    solutionId?: string;
+    'solutionId'?: string;
     /**
      * the Solution Run Template Id associated with this Scenario
      * @type {string}
      * @memberof Scenario
      */
-    runTemplateId?: string;
+    'runTemplateId'?: string;
     /**
      * the associated Workspace Id
      * @type {string}
      * @memberof Scenario
      */
-    workspaceId?: string;
+    'workspaceId'?: string;
     /**
      * the list of users Id with their role
      * @type {Array<ScenarioUser>}
      * @memberof Scenario
      */
-    users?: Array<ScenarioUser>;
+    'users'?: Array<ScenarioUser>;
     /**
      * 
      * @type {ScenarioJobState}
      * @memberof Scenario
      */
-    state?: ScenarioJobState;
+    'state'?: ScenarioJobState;
     /**
      * the Scenario creation date
      * @type {string}
      * @memberof Scenario
      */
-    creationDate?: string;
+    'creationDate'?: string;
     /**
      * the last time a Scenario was updated
      * @type {string}
      * @memberof Scenario
      */
-    lastUpdate?: string;
+    'lastUpdate'?: string;
     /**
      * the name of the owner
      * @type {string}
      * @memberof Scenario
      */
-    ownerName?: string;
+    'ownerName'?: string;
     /**
      * the Solution name
      * @type {string}
      * @memberof Scenario
      */
-    solutionName?: string;
+    'solutionName'?: string;
     /**
      * the Solution Run Template name associated with this Scenario
      * @type {string}
      * @memberof Scenario
      */
-    runTemplateName?: string;
+    'runTemplateName'?: string;
     /**
      * the list of Dataset Id associated to this Scenario Run Template
      * @type {Array<string>}
      * @memberof Scenario
      */
-    datasetList?: Array<string>;
+    'datasetList'?: Array<string>;
     /**
      * the list of Solution Run Template parameters values
      * @type {Array<ScenarioRunTemplateParameterValue>}
      * @memberof Scenario
      */
-    parametersValues?: Array<ScenarioRunTemplateParameterValue>;
+    'parametersValues'?: Array<ScenarioRunTemplateParameterValue>;
     /**
      * 
      * @type {ScenarioLastRun & object}
      * @memberof Scenario
      */
-    lastRun?: ScenarioLastRun & object;
+    'lastRun'?: ScenarioLastRun & object;
     /**
      * 
      * @type {ScenarioLastRun & object}
      * @memberof Scenario
      */
-    parentLastRun?: ScenarioLastRun & object;
+    'parentLastRun'?: ScenarioLastRun & object;
     /**
      * 
      * @type {ScenarioLastRun & object}
      * @memberof Scenario
      */
-    rootLastRun?: ScenarioLastRun & object;
+    'rootLastRun'?: ScenarioLastRun & object;
 }
 /**
  * the difference between the values of a parameter
@@ -918,25 +918,25 @@ export interface ScenarioChangedParameterValue {
      * @type {string}
      * @memberof ScenarioChangedParameterValue
      */
-    parameterId?: string;
+    'parameterId'?: string;
     /**
      * the parameter value type
      * @type {string}
      * @memberof ScenarioChangedParameterValue
      */
-    varType?: string;
+    'varType'?: string;
     /**
      * the parameter value for the reference Scenario
      * @type {string}
      * @memberof ScenarioChangedParameterValue
      */
-    value?: string;
+    'value'?: string;
     /**
      * the parameter value for the compared Scenario
      * @type {string}
      * @memberof ScenarioChangedParameterValue
      */
-    comparedValue?: string;
+    'comparedValue'?: string;
 }
 /**
  * the result of the comparison of two scenarios
@@ -949,19 +949,19 @@ export interface ScenarioComparisonResult {
      * @type {string}
      * @memberof ScenarioComparisonResult
      */
-    scenarioId?: string;
+    'scenarioId'?: string;
     /**
      * the Scenario Id the reference Scenario is compared to
      * @type {string}
      * @memberof ScenarioComparisonResult
      */
-    comparedScenarioId?: string;
+    'comparedScenarioId'?: string;
     /**
      * the list of changed values for parameters
      * @type {Array<ScenarioChangedParameterValue>}
      * @memberof ScenarioComparisonResult
      */
-    changedValues?: Array<ScenarioChangedParameterValue>;
+    'changedValues'?: Array<ScenarioChangedParameterValue>;
 }
 /**
  * Scenario data download job info
@@ -974,13 +974,13 @@ export interface ScenarioDataDownloadInfo {
      * @type {string}
      * @memberof ScenarioDataDownloadInfo
      */
-    url?: string;
+    'url'?: string;
     /**
      * 
      * @type {ScenarioJobState}
      * @memberof ScenarioDataDownloadInfo
      */
-    state?: ScenarioJobState;
+    'state'?: ScenarioJobState;
 }
 /**
  * Scenario data download job
@@ -993,7 +993,7 @@ export interface ScenarioDataDownloadJob {
      * @type {string}
      * @memberof ScenarioDataDownloadJob
      */
-    id?: string;
+    'id'?: string;
 }
 /**
  * the Scenario job state
@@ -1020,25 +1020,25 @@ export interface ScenarioLastRun {
      * @type {string}
      * @memberof ScenarioLastRun
      */
-    scenarioRunId?: string;
+    'scenarioRunId'?: string;
     /**
      * the last Cosmo Tech Simulation Run id
      * @type {string}
      * @memberof ScenarioLastRun
      */
-    csmSimulationRun?: string;
+    'csmSimulationRun'?: string;
     /**
      * the last Workflow Id
      * @type {string}
      * @memberof ScenarioLastRun
      */
-    workflowId?: string;
+    'workflowId'?: string;
     /**
      * the last Workflow name
      * @type {string}
      * @memberof ScenarioLastRun
      */
-    workflowName?: string;
+    'workflowName'?: string;
 }
 /**
  * a ScenarioRun with only base properties
@@ -1051,115 +1051,115 @@ export interface ScenarioRun {
      * @type {string}
      * @memberof ScenarioRun
      */
-    id?: string;
+    'id'?: string;
     /**
      * the Organization id
      * @type {string}
      * @memberof ScenarioRun
      */
-    organizationId?: string;
+    'organizationId'?: string;
     /**
      * the Cosmo Tech compute cluster Argo Workflow Id to search
      * @type {string}
      * @memberof ScenarioRun
      */
-    workflowId?: string;
+    'workflowId'?: string;
     /**
      * the Cosmo Tech Simulation Run Id
      * @type {string}
      * @memberof ScenarioRun
      */
-    csmSimulationRun?: string;
+    'csmSimulationRun'?: string;
     /**
      * the base name for workflow name generation
      * @type {string}
      * @memberof ScenarioRun
      */
-    generateName?: string;
+    'generateName'?: string;
     /**
      * the Cosmo Tech compute cluster Argo Workflow Name
      * @type {string}
      * @memberof ScenarioRun
      */
-    workflowName?: string;
+    'workflowName'?: string;
     /**
      * the user id which own this scenariorun
      * @type {string}
      * @memberof ScenarioRun
      */
-    ownerId?: string;
+    'ownerId'?: string;
     /**
      * the Workspace Id
      * @type {string}
      * @memberof ScenarioRun
      */
-    workspaceId?: string;
+    'workspaceId'?: string;
     /**
      * technical key for resource name convention and version grouping. Must be unique
      * @type {string}
      * @memberof ScenarioRun
      */
-    workspaceKey?: string;
+    'workspaceKey'?: string;
     /**
      * the Scenario Id
      * @type {string}
      * @memberof ScenarioRun
      */
-    scenarioId?: string;
+    'scenarioId'?: string;
     /**
      * the Solution Id
      * @type {string}
      * @memberof ScenarioRun
      */
-    solutionId?: string;
+    'solutionId'?: string;
     /**
      * the Solution Run Template id
      * @type {string}
      * @memberof ScenarioRun
      */
-    runTemplateId?: string;
+    'runTemplateId'?: string;
     /**
      * the compute size needed for this Analysis. Standard sizes are basic and highcpu. Default is basic
      * @type {string}
      * @memberof ScenarioRun
      */
-    computeSize?: string;
+    'computeSize'?: string;
     /**
      * the list of Dataset Id associated to this Analysis
      * @type {Array<string>}
      * @memberof ScenarioRun
      */
-    datasetList?: Array<string>;
+    'datasetList'?: Array<string>;
     /**
      * the list of Run Template parameters values
      * @type {Array<RunTemplateParameterValue>}
      * @memberof ScenarioRun
      */
-    parametersValues?: Array<RunTemplateParameterValue>;
+    'parametersValues'?: Array<RunTemplateParameterValue>;
     /**
      * whether or not the Datasets values are send to the DataWarehouse prior to Simulation Run. If not set follow the Workspace setting
      * @type {boolean}
      * @memberof ScenarioRun
      */
-    sendDatasetsToDataWarehouse?: boolean;
+    'sendDatasetsToDataWarehouse'?: boolean;
     /**
      * whether or not the input parameters values are send to the DataWarehouse prior to Simulation Run. If not set follow the Workspace setting
      * @type {boolean}
      * @memberof ScenarioRun
      */
-    sendInputParametersToDataWarehouse?: boolean;
+    'sendInputParametersToDataWarehouse'?: boolean;
     /**
      * the node label request
      * @type {string}
      * @memberof ScenarioRun
      */
-    nodeLabel?: string;
+    'nodeLabel'?: string;
     /**
      * the containers list
      * @type {Array<ScenarioRunContainer>}
      * @memberof ScenarioRun
      */
-    containers?: Array<ScenarioRunContainer>;
+    'containers'?: Array<ScenarioRunContainer>;
 }
 /**
  * a ScenarioRun container description
@@ -1172,61 +1172,61 @@ export interface ScenarioRunContainer {
      * @type {string}
      * @memberof ScenarioRunContainer
      */
-    id?: string;
+    'id'?: string;
     /**
      * the container name
      * @type {string}
      * @memberof ScenarioRunContainer
      */
-    name: string;
+    'name': string;
     /**
      * the metadata labels
      * @type {{ [key: string]: string; }}
      * @memberof ScenarioRunContainer
      */
-    labels?: { [key: string]: string; };
+    'labels'?: { [key: string]: string; };
     /**
      * environment variable map
      * @type {{ [key: string]: string; }}
      * @memberof ScenarioRunContainer
      */
-    envVars?: { [key: string]: string; };
+    'envVars'?: { [key: string]: string; };
     /**
      * the container image URI
      * @type {string}
      * @memberof ScenarioRunContainer
      */
-    image: string;
+    'image': string;
     /**
      * the container entry point
      * @type {string}
      * @memberof ScenarioRunContainer
      */
-    entrypoint?: string;
+    'entrypoint'?: string;
     /**
      * the list of run arguments for the container
      * @type {Array<string>}
      * @memberof ScenarioRunContainer
      */
-    runArgs?: Array<string>;
+    'runArgs'?: Array<string>;
     /**
      * the list of dependencies container name to run this container
      * @type {Array<string>}
      * @memberof ScenarioRunContainer
      */
-    dependencies?: Array<string>;
+    'dependencies'?: Array<string>;
     /**
      * whether or not this container is a Cosmo Tech solution container
      * @type {boolean}
      * @memberof ScenarioRunContainer
      */
-    solutionContainer?: boolean;
+    'solutionContainer'?: boolean;
     /**
      * the list of artifacts
      * @type {Array<ScenarioRunContainerArtifact>}
      * @memberof ScenarioRunContainer
      */
-    artifacts?: Array<ScenarioRunContainerArtifact>;
+    'artifacts'?: Array<ScenarioRunContainerArtifact>;
 }
 /**
  * a scenario run container artifact
@@ -1239,13 +1239,13 @@ export interface ScenarioRunContainerArtifact {
      * @type {string}
      * @memberof ScenarioRunContainerArtifact
      */
-    name?: string;
+    'name'?: string;
     /**
      * the artifact path (relative to /var/csmoutput)
      * @type {string}
      * @memberof ScenarioRunContainerArtifact
      */
-    path?: string;
+    'path'?: string;
 }
 /**
  * logs for a given container
@@ -1258,25 +1258,25 @@ export interface ScenarioRunContainerLogs {
      * @type {string}
      * @memberof ScenarioRunContainerLogs
      */
-    nodeId?: string;
+    'nodeId'?: string;
     /**
      * the container name
      * @type {string}
      * @memberof ScenarioRunContainerLogs
      */
-    containerName?: string;
+    'containerName'?: string;
     /**
      * the list of children node id
      * @type {Array<string>}
      * @memberof ScenarioRunContainerLogs
      */
-    children?: Array<string>;
+    'children'?: Array<string>;
     /**
      * the node logs in plain text
      * @type {string}
      * @memberof ScenarioRunContainerLogs
      */
-    logs?: string;
+    'logs'?: string;
 }
 /**
  * the scenariorun logs returned by all containers
@@ -1289,13 +1289,13 @@ export interface ScenarioRunLogs {
      * @type {string}
      * @memberof ScenarioRunLogs
      */
-    scenariorunId?: string;
+    'scenariorunId'?: string;
     /**
      * the container map of logs
      * @type {{ [key: string]: ScenarioRunContainerLogs; }}
      * @memberof ScenarioRunLogs
      */
-    containers?: { [key: string]: ScenarioRunContainerLogs; };
+    'containers'?: { [key: string]: ScenarioRunContainerLogs; };
 }
 /**
  * the search options
@@ -1308,49 +1308,49 @@ export interface ScenarioRunSearch {
      * @type {string}
      * @memberof ScenarioRunSearch
      */
-    solutionId?: string;
+    'solutionId'?: string;
     /**
      * the Solution Analysis Id to search
      * @type {string}
      * @memberof ScenarioRunSearch
      */
-    runTemplateId?: string;
+    'runTemplateId'?: string;
     /**
      * the Workspace Id to search
      * @type {string}
      * @memberof ScenarioRunSearch
      */
-    workspaceId?: string;
+    'workspaceId'?: string;
     /**
      * the Scenario Id to search
      * @type {string}
      * @memberof ScenarioRunSearch
      */
-    scenarioId?: string;
+    'scenarioId'?: string;
     /**
      * the state to search
      * @type {string}
      * @memberof ScenarioRunSearch
      */
-    state?: ScenarioRunSearchStateEnum;
+    'state'?: ScenarioRunSearchStateEnum;
     /**
      * the Cosmo Tech compute cluster Argo Workflow Id to search
      * @type {string}
      * @memberof ScenarioRunSearch
      */
-    workflowId?: string;
+    'workflowId'?: string;
     /**
      * the Cosmo Tech compute cluster Argo Workflow Name
      * @type {string}
      * @memberof ScenarioRunSearch
      */
-    workflowName?: string;
+    'workflowName'?: string;
     /**
      * the owner Id to search
      * @type {string}
      * @memberof ScenarioRunSearch
      */
-    ownerId?: string;
+    'ownerId'?: string;
 }
 
 /**
@@ -1381,31 +1381,31 @@ export interface ScenarioRunStartContainers {
      * @type {string}
      * @memberof ScenarioRunStartContainers
      */
-    generateName?: string;
+    'generateName'?: string;
     /**
      * Cosmo Tech Simulation Run Id
      * @type {string}
      * @memberof ScenarioRunStartContainers
      */
-    csmSimulationId: string;
+    'csmSimulationId': string;
     /**
      * the node label request
      * @type {string}
      * @memberof ScenarioRunStartContainers
      */
-    nodeLabel?: string;
+    'nodeLabel'?: string;
     /**
      * the workflow labels
      * @type {{ [key: string]: string; }}
      * @memberof ScenarioRunStartContainers
      */
-    labels?: { [key: string]: string; };
+    'labels'?: { [key: string]: string; };
     /**
      * the containerslist
      * @type {Array<ScenarioRunContainer>}
      * @memberof ScenarioRunStartContainers
      */
-    containers: Array<ScenarioRunContainer>;
+    'containers': Array<ScenarioRunContainer>;
 }
 /**
  * a ScenarioRun status
@@ -1418,67 +1418,67 @@ export interface ScenarioRunStatus {
      * @type {string}
      * @memberof ScenarioRunStatus
      */
-    id?: string;
+    'id'?: string;
     /**
      * the ScenarioRun id
      * @type {string}
      * @memberof ScenarioRunStatus
      */
-    organizationId?: string;
+    'organizationId'?: string;
     /**
      * the Cosmo Tech compute cluster Argo Workflow Id to search
      * @type {string}
      * @memberof ScenarioRunStatus
      */
-    workflowId?: string;
+    'workflowId'?: string;
     /**
      * the Cosmo Tech compute cluster Argo Workflow Name
      * @type {string}
      * @memberof ScenarioRunStatus
      */
-    workflowName?: string;
+    'workflowName'?: string;
     /**
      * the ScenarioRun start Date Time
      * @type {string}
      * @memberof ScenarioRunStatus
      */
-    startTime?: string;
+    'startTime'?: string;
     /**
      * the ScenarioRun end Date Time
      * @type {string}
      * @memberof ScenarioRunStatus
      */
-    endTime?: string;
+    'endTime'?: string;
     /**
      * high-level summary of where the workflow is in its lifecycle
      * @type {string}
      * @memberof ScenarioRunStatus
      */
-    phase?: string;
+    'phase'?: string;
     /**
      * progress to completion
      * @type {string}
      * @memberof ScenarioRunStatus
      */
-    progress?: string;
+    'progress'?: string;
     /**
      * a  human readable message indicating details about why the workflow is in this condition
      * @type {string}
      * @memberof ScenarioRunStatus
      */
-    message?: string;
+    'message'?: string;
     /**
      * estimatedDuration in seconds
      * @type {number}
      * @memberof ScenarioRunStatus
      */
-    estimatedDuration?: number;
+    'estimatedDuration'?: number;
     /**
      * status of ScenarioRun nodes
      * @type {Array<ScenarioRunStatusNode>}
      * @memberof ScenarioRunStatus
      */
-    nodes?: Array<ScenarioRunStatusNode>;
+    'nodes'?: Array<ScenarioRunStatusNode>;
 }
 /**
  * status of a ScenarioRun Node
@@ -1491,61 +1491,61 @@ export interface ScenarioRunStatusNode {
      * @type {string}
      * @memberof ScenarioRunStatusNode
      */
-    id?: string;
+    'id'?: string;
     /**
      * the node unique name
      * @type {string}
      * @memberof ScenarioRunStatusNode
      */
-    name?: string;
+    'name'?: string;
     /**
      * the ScenarioRun container name
      * @type {string}
      * @memberof ScenarioRunStatusNode
      */
-    containerName?: string;
+    'containerName'?: string;
     /**
      * estimatedDuration in seconds
      * @type {number}
      * @memberof ScenarioRunStatusNode
      */
-    estimatedDuration?: number;
+    'estimatedDuration'?: number;
     /**
      * HostNodeName name of the Kubernetes node on which the Pod is running, if applicable
      * @type {string}
      * @memberof ScenarioRunStatusNode
      */
-    hostNodeName?: string;
+    'hostNodeName'?: string;
     /**
      * a human readable message indicating details about why the node is in this condition
      * @type {string}
      * @memberof ScenarioRunStatusNode
      */
-    message?: string;
+    'message'?: string;
     /**
      * high-level summary of where the node is in its lifecycle
      * @type {string}
      * @memberof ScenarioRunStatusNode
      */
-    phase?: string;
+    'phase'?: string;
     /**
      * progress to completion
      * @type {string}
      * @memberof ScenarioRunStatusNode
      */
-    progress?: string;
+    'progress'?: string;
     /**
      * the node start time
      * @type {string}
      * @memberof ScenarioRunStatusNode
      */
-    startTime?: string;
+    'startTime'?: string;
     /**
      * the node end time
      * @type {string}
      * @memberof ScenarioRunStatusNode
      */
-    endTime?: string;
+    'endTime'?: string;
 }
 /**
  * the value of a Solution Run Template parameter for a Scenario
@@ -1558,25 +1558,25 @@ export interface ScenarioRunTemplateParameterValue {
      * @type {string}
      * @memberof ScenarioRunTemplateParameterValue
      */
-    parameterId: string;
+    'parameterId': string;
     /**
      * the parameter value type
      * @type {string}
      * @memberof ScenarioRunTemplateParameterValue
      */
-    varType?: string;
+    'varType'?: string;
     /**
      * the parameter value
      * @type {string}
      * @memberof ScenarioRunTemplateParameterValue
      */
-    value: string;
+    'value': string;
     /**
      * whether or not the value is inherited from parent or has been changed
      * @type {boolean}
      * @memberof ScenarioRunTemplateParameterValue
      */
-    isInherited?: boolean;
+    'isInherited'?: boolean;
 }
 /**
  * a Scenario user with roles
@@ -1589,19 +1589,19 @@ export interface ScenarioUser {
      * @type {string}
      * @memberof ScenarioUser
      */
-    id: string;
+    'id': string;
     /**
      * the User name
      * @type {string}
      * @memberof ScenarioUser
      */
-    name?: string;
+    'name'?: string;
     /**
      * the User role
      * @type {Array<string>}
      * @memberof ScenarioUser
      */
-    roles: Array<ScenarioUserRolesEnum>;
+    'roles': Array<ScenarioUserRolesEnum>;
 }
 
 /**
@@ -1624,79 +1624,79 @@ export interface Solution {
      * @type {string}
      * @memberof Solution
      */
-    id?: string;
+    'id'?: string;
     /**
      * the Solution key which group Solution versions
      * @type {string}
      * @memberof Solution
      */
-    key: string;
+    'key': string;
     /**
      * the Solution name
      * @type {string}
      * @memberof Solution
      */
-    name: string;
+    'name': string;
     /**
      * the Solution description
      * @type {string}
      * @memberof Solution
      */
-    description?: string;
+    'description'?: string;
     /**
      * the registry repository containing the image
      * @type {string}
      * @memberof Solution
      */
-    repository: string;
+    'repository': string;
     /**
      * the main Cosmo Tech simulator name used in standard Run Template
      * @type {string}
      * @memberof Solution
      */
-    csmSimulator?: string;
+    'csmSimulator'?: string;
     /**
      * the Solution version MAJOR.MINOR.PATCH. Must be aligned with an existing repository tag
      * @type {string}
      * @memberof Solution
      */
-    version: string;
+    'version': string;
     /**
      * the User id which own this Solution
      * @type {string}
      * @memberof Solution
      */
-    ownerId?: string;
+    'ownerId'?: string;
     /**
      * an optional URL link to solution page
      * @type {string}
      * @memberof Solution
      */
-    url?: string;
+    'url'?: string;
     /**
      * the list of tags
      * @type {Array<string>}
      * @memberof Solution
      */
-    tags?: Array<string>;
+    'tags'?: Array<string>;
     /**
      * the list of Run Template Parameters
      * @type {Array<RunTemplateParameter>}
      * @memberof Solution
      */
-    parameters?: Array<RunTemplateParameter>;
+    'parameters'?: Array<RunTemplateParameter>;
     /**
      * the list of parameters groups for the Run Templates
      * @type {Array<RunTemplateParameterGroup>}
      * @memberof Solution
      */
-    parameterGroups?: Array<RunTemplateParameterGroup>;
+    'parameterGroups'?: Array<RunTemplateParameterGroup>;
     /**
      * list of Run Template
      * @type {Array<RunTemplate>}
      * @memberof Solution
      */
-    runTemplates: Array<RunTemplate>;
+    'runTemplates': Array<RunTemplate>;
 }
 /**
  * a User
@@ -1709,25 +1709,25 @@ export interface User {
      * @type {string}
      * @memberof User
      */
-    id?: string;
+    'id'?: string;
     /**
      * the User name
      * @type {string}
      * @memberof User
      */
-    name?: string;
+    'name'?: string;
     /**
      * the list of Platform roles
      * @type {Array<string>}
      * @memberof User
      */
-    platformRoles?: Array<UserPlatformRolesEnum>;
+    'platformRoles'?: Array<UserPlatformRolesEnum>;
     /**
      * 
      * @type {Array<UserOrganization>}
      * @memberof User
      */
-    organizations?: Array<UserOrganization>;
+    'organizations'?: Array<UserOrganization>;
 }
 
 /**
@@ -1751,25 +1751,25 @@ export interface UserOrganization {
      * @type {string}
      * @memberof UserOrganization
      */
-    id?: string;
+    'id'?: string;
     /**
      * the Organization name
      * @type {string}
      * @memberof UserOrganization
      */
-    name?: string;
+    'name'?: string;
     /**
      * the roles of the User in the Organization
      * @type {Array<string>}
      * @memberof UserOrganization
      */
-    roles?: Array<string>;
+    'roles'?: Array<string>;
     /**
      * the list of Workspaces roles
      * @type {Array<UserWorkspace>}
      * @memberof UserOrganization
      */
-    workspaces?: Array<UserWorkspace>;
+    'workspaces'?: Array<UserWorkspace>;
 }
 /**
  * the list of User roles for a Workspace
@@ -1782,19 +1782,19 @@ export interface UserWorkspace {
      * @type {string}
      * @memberof UserWorkspace
      */
-    id?: string;
+    'id'?: string;
     /**
      * the Workspace name
      * @type {string}
      * @memberof UserWorkspace
      */
-    name?: string;
+    'name'?: string;
     /**
      * the roles of the User in the Workspace
      * @type {Array<string>}
      * @memberof UserWorkspace
      */
-    roles?: Array<string>;
+    'roles'?: Array<string>;
 }
 /**
  * a Validator to validate a Dataset
@@ -1807,49 +1807,49 @@ export interface Validator {
      * @type {string}
      * @memberof Validator
      */
-    id: string;
+    'id': string;
     /**
      * the Validator name
      * @type {string}
      * @memberof Validator
      */
-    name: string;
+    'name': string;
     /**
      * the Validator description
      * @type {string}
      * @memberof Validator
      */
-    description?: string;
+    'description'?: string;
     /**
      * the registry repository containing the Validator image
      * @type {string}
      * @memberof Validator
      */
-    repository: string;
+    'repository': string;
     /**
      * the Validator version MAJOR.MINOR.PATCH. Must be aligned with an existing repository tag
      * @type {string}
      * @memberof Validator
      */
-    version: string;
+    'version': string;
     /**
      * the User id which own this Validator
      * @type {string}
      * @memberof Validator
      */
-    ownerId?: string;
+    'ownerId'?: string;
     /**
      * an optional URL link to Validator page
      * @type {string}
      * @memberof Validator
      */
-    url?: string;
+    'url'?: string;
     /**
      * the list of tags
      * @type {Array<string>}
      * @memberof Validator
      */
-    tags?: Array<string>;
+    'tags'?: Array<string>;
 }
 /**
  * a Validator Run
@@ -1862,49 +1862,49 @@ export interface ValidatorRun {
      * @type {string}
      * @memberof ValidatorRun
      */
-    id?: string;
+    'id'?: string;
     /**
      * the Validator id
      * @type {string}
      * @memberof ValidatorRun
      */
-    validatorId?: string;
+    'validatorId'?: string;
     /**
      * the validator name
      * @type {string}
      * @memberof ValidatorRun
      */
-    validatorName?: string;
+    'validatorName'?: string;
     /**
      * the Dataset id to run the validator on
      * @type {string}
      * @memberof ValidatorRun
      */
-    datasetId: string;
+    'datasetId': string;
     /**
      * the Dataset name
      * @type {string}
      * @memberof ValidatorRun
      */
-    datasetName?: string;
+    'datasetName'?: string;
     /**
      * the Validator Run state
      * @type {string}
      * @memberof ValidatorRun
      */
-    state?: ValidatorRunStateEnum;
+    'state'?: ValidatorRunStateEnum;
     /**
      * the Validator Run container id
      * @type {string}
      * @memberof ValidatorRun
      */
-    containerId?: string;
+    'containerId'?: string;
     /**
      * the Validator Run logs
      * @type {string}
      * @memberof ValidatorRun
      */
-    logs?: string;
+    'logs'?: string;
 }
 
 /**
@@ -1928,67 +1928,67 @@ export interface Workspace {
      * @type {string}
      * @memberof Workspace
      */
-    id?: string;
+    'id'?: string;
     /**
      * technical key for resource name convention and version grouping. Must be unique
      * @type {string}
      * @memberof Workspace
      */
-    key: string;
+    'key': string;
     /**
      * the Workspace name
      * @type {string}
      * @memberof Workspace
      */
-    name: string;
+    'name': string;
     /**
      * the Workspace description
      * @type {string}
      * @memberof Workspace
      */
-    description?: string;
+    'description'?: string;
     /**
      * the Workspace version MAJOR.MINOR.PATCH.
      * @type {string}
      * @memberof Workspace
      */
-    version?: string;
+    'version'?: string;
     /**
      * the list of tags
      * @type {Array<string>}
      * @memberof Workspace
      */
-    tags?: Array<string>;
+    'tags'?: Array<string>;
     /**
      * the user id which own this workspace
      * @type {string}
      * @memberof Workspace
      */
-    ownerId?: string;
+    'ownerId'?: string;
     /**
      * 
      * @type {WorkspaceSolution}
      * @memberof Workspace
      */
-    solution: WorkspaceSolution;
+    'solution': WorkspaceSolution;
     /**
      * the list of users Id with their role
      * @type {Array<WorkspaceUser>}
      * @memberof Workspace
      */
-    users?: Array<WorkspaceUser>;
+    'users'?: Array<WorkspaceUser>;
     /**
      * 
      * @type {WorkspaceWebApp}
      * @memberof Workspace
      */
-    webApp?: WorkspaceWebApp;
+    'webApp'?: WorkspaceWebApp;
     /**
      * default setting for all Scenarios and Run Templates to set whether or not the Dataset values and the input parameters values are send to the DataWarehouse prior to the ScenarioRun
      * @type {boolean}
      * @memberof Workspace
      */
-    sendInputToDataWarehouse?: boolean;
+    'sendInputToDataWarehouse'?: boolean;
 }
 /**
  * a Workspace File resource
@@ -2001,7 +2001,7 @@ export interface WorkspaceFile {
      * @type {string}
      * @memberof WorkspaceFile
      */
-    fileName?: string;
+    'fileName'?: string;
 }
 /**
  * the Workspace Solution configuration
@@ -2014,19 +2014,19 @@ export interface WorkspaceSolution {
      * @type {string}
      * @memberof WorkspaceSolution
      */
-    solutionId?: string;
+    'solutionId'?: string;
     /**
      * the list of Solution Run Template Id to filter
      * @type {Array<string>}
      * @memberof WorkspaceSolution
      */
-    runTemplateFilter?: Array<string>;
+    'runTemplateFilter'?: Array<string>;
     /**
      * a map of RunTemplateId/DatasetId to set a default dataset for a Run Template
      * @type {{ [key: string]: object; }}
      * @memberof WorkspaceSolution
      */
-    defaultRunTemplateDataset?: { [key: string]: object; };
+    'defaultRunTemplateDataset'?: { [key: string]: object; };
 }
 /**
  * a Workspace user with roles
@@ -2039,19 +2039,19 @@ export interface WorkspaceUser {
      * @type {string}
      * @memberof WorkspaceUser
      */
-    id: string;
+    'id': string;
     /**
      * the User name
      * @type {string}
      * @memberof WorkspaceUser
      */
-    name?: string;
+    'name'?: string;
     /**
      * the User roles
      * @type {Array<string>}
      * @memberof WorkspaceUser
      */
-    roles: Array<WorkspaceUserRolesEnum>;
+    'roles': Array<WorkspaceUserRolesEnum>;
 }
 
 /**
@@ -2075,19 +2075,19 @@ export interface WorkspaceWebApp {
      * @type {string}
      * @memberof WorkspaceWebApp
      */
-    url: string;
+    'url': string;
     /**
      * a map of iframeKey/iframeURL
      * @type {{ [key: string]: object; }}
      * @memberof WorkspaceWebApp
      */
-    iframes?: { [key: string]: object; };
+    'iframes'?: { [key: string]: object; };
     /**
      * free form options for Web Application
      * @type {{ [key: string]: object; }}
      * @memberof WorkspaceWebApp
      */
-    options?: { [key: string]: object; };
+    'options'?: { [key: string]: object; };
 }
 
 /**
@@ -2102,7 +2102,7 @@ export const ConnectorApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findAllConnectors: async (options: any = {}): Promise<RequestArgs> => {
+        findAllConnectors: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/connectors`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -2121,7 +2121,7 @@ export const ConnectorApiAxiosParamCreator = function (configuration?: Configura
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -2137,7 +2137,7 @@ export const ConnectorApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findConnectorById: async (connectorId: string, options: any = {}): Promise<RequestArgs> => {
+        findConnectorById: async (connectorId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'connectorId' is not null or undefined
             assertParamExists('findConnectorById', 'connectorId', connectorId)
             const localVarPath = `/connectors/{connector_id}`
@@ -2159,7 +2159,7 @@ export const ConnectorApiAxiosParamCreator = function (configuration?: Configura
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -2175,7 +2175,7 @@ export const ConnectorApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        registerConnector: async (connector: Connector, options: any = {}): Promise<RequestArgs> => {
+        registerConnector: async (connector: Connector, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'connector' is not null or undefined
             assertParamExists('registerConnector', 'connector', connector)
             const localVarPath = `/connectors`;
@@ -2198,7 +2198,7 @@ export const ConnectorApiAxiosParamCreator = function (configuration?: Configura
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(connector, localVarRequestOptions, configuration)
@@ -2215,7 +2215,7 @@ export const ConnectorApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        unregisterConnector: async (connectorId: string, options: any = {}): Promise<RequestArgs> => {
+        unregisterConnector: async (connectorId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'connectorId' is not null or undefined
             assertParamExists('unregisterConnector', 'connectorId', connectorId)
             const localVarPath = `/connectors/{connector_id}`
@@ -2237,7 +2237,7 @@ export const ConnectorApiAxiosParamCreator = function (configuration?: Configura
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -2262,7 +2262,7 @@ export const ConnectorApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findAllConnectors(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Connector>>> {
+        async findAllConnectors(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Connector>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.findAllConnectors(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -2273,7 +2273,7 @@ export const ConnectorApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findConnectorById(connectorId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Connector>> {
+        async findConnectorById(connectorId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Connector>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.findConnectorById(connectorId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -2284,7 +2284,7 @@ export const ConnectorApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async registerConnector(connector: Connector, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Connector>> {
+        async registerConnector(connector: Connector, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Connector>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.registerConnector(connector, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -2295,7 +2295,7 @@ export const ConnectorApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async unregisterConnector(connectorId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async unregisterConnector(connectorId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.unregisterConnector(connectorId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -2365,7 +2365,7 @@ export class ConnectorApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ConnectorApi
      */
-    public findAllConnectors(options?: any) {
+    public findAllConnectors(options?: AxiosRequestConfig) {
         return ConnectorApiFp(this.configuration).findAllConnectors(options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -2377,7 +2377,7 @@ export class ConnectorApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ConnectorApi
      */
-    public findConnectorById(connectorId: string, options?: any) {
+    public findConnectorById(connectorId: string, options?: AxiosRequestConfig) {
         return ConnectorApiFp(this.configuration).findConnectorById(connectorId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -2389,7 +2389,7 @@ export class ConnectorApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ConnectorApi
      */
-    public registerConnector(connector: Connector, options?: any) {
+    public registerConnector(connector: Connector, options?: AxiosRequestConfig) {
         return ConnectorApiFp(this.configuration).registerConnector(connector, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -2401,7 +2401,7 @@ export class ConnectorApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ConnectorApi
      */
-    public unregisterConnector(connectorId: string, options?: any) {
+    public unregisterConnector(connectorId: string, options?: AxiosRequestConfig) {
         return ConnectorApiFp(this.configuration).unregisterConnector(connectorId, options).then((request) => request(this.axios, this.basePath));
     }
 }
@@ -2422,7 +2422,7 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addOrReplaceDatasetCompatibilityElements: async (organizationId: string, datasetId: string, datasetCompatibility: Array<DatasetCompatibility>, options: any = {}): Promise<RequestArgs> => {
+        addOrReplaceDatasetCompatibilityElements: async (organizationId: string, datasetId: string, datasetCompatibility: Array<DatasetCompatibility>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('addOrReplaceDatasetCompatibilityElements', 'organizationId', organizationId)
             // verify required parameter 'datasetId' is not null or undefined
@@ -2451,7 +2451,7 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(datasetCompatibility, localVarRequestOptions, configuration)
@@ -2469,7 +2469,7 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        copyDataset: async (organizationId: string, datasetCopyParameters: DatasetCopyParameters, options: any = {}): Promise<RequestArgs> => {
+        copyDataset: async (organizationId: string, datasetCopyParameters: DatasetCopyParameters, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('copyDataset', 'organizationId', organizationId)
             // verify required parameter 'datasetCopyParameters' is not null or undefined
@@ -2495,7 +2495,7 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(datasetCopyParameters, localVarRequestOptions, configuration)
@@ -2513,7 +2513,7 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createDataset: async (organizationId: string, dataset: Dataset, options: any = {}): Promise<RequestArgs> => {
+        createDataset: async (organizationId: string, dataset: Dataset, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('createDataset', 'organizationId', organizationId)
             // verify required parameter 'dataset' is not null or undefined
@@ -2539,7 +2539,7 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(dataset, localVarRequestOptions, configuration)
@@ -2557,7 +2557,7 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteDataset: async (organizationId: string, datasetId: string, options: any = {}): Promise<RequestArgs> => {
+        deleteDataset: async (organizationId: string, datasetId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('deleteDataset', 'organizationId', organizationId)
             // verify required parameter 'datasetId' is not null or undefined
@@ -2582,7 +2582,7 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -2598,7 +2598,7 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findAllDatasets: async (organizationId: string, options: any = {}): Promise<RequestArgs> => {
+        findAllDatasets: async (organizationId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('findAllDatasets', 'organizationId', organizationId)
             const localVarPath = `/organizations/{organization_id}/datasets`
@@ -2620,7 +2620,7 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -2637,7 +2637,7 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findDatasetById: async (organizationId: string, datasetId: string, options: any = {}): Promise<RequestArgs> => {
+        findDatasetById: async (organizationId: string, datasetId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('findDatasetById', 'organizationId', organizationId)
             // verify required parameter 'datasetId' is not null or undefined
@@ -2662,7 +2662,7 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -2679,7 +2679,7 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        removeAllDatasetCompatibilityElements: async (organizationId: string, datasetId: string, options: any = {}): Promise<RequestArgs> => {
+        removeAllDatasetCompatibilityElements: async (organizationId: string, datasetId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('removeAllDatasetCompatibilityElements', 'organizationId', organizationId)
             // verify required parameter 'datasetId' is not null or undefined
@@ -2704,7 +2704,7 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -2722,7 +2722,7 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateDataset: async (organizationId: string, datasetId: string, dataset: Dataset, options: any = {}): Promise<RequestArgs> => {
+        updateDataset: async (organizationId: string, datasetId: string, dataset: Dataset, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('updateDataset', 'organizationId', organizationId)
             // verify required parameter 'datasetId' is not null or undefined
@@ -2751,7 +2751,7 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(dataset, localVarRequestOptions, configuration)
@@ -2780,7 +2780,7 @@ export const DatasetApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async addOrReplaceDatasetCompatibilityElements(organizationId: string, datasetId: string, datasetCompatibility: Array<DatasetCompatibility>, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<DatasetCompatibility>>> {
+        async addOrReplaceDatasetCompatibilityElements(organizationId: string, datasetId: string, datasetCompatibility: Array<DatasetCompatibility>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<DatasetCompatibility>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.addOrReplaceDatasetCompatibilityElements(organizationId, datasetId, datasetCompatibility, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -2792,7 +2792,7 @@ export const DatasetApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async copyDataset(organizationId: string, datasetCopyParameters: DatasetCopyParameters, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DatasetCopyParameters>> {
+        async copyDataset(organizationId: string, datasetCopyParameters: DatasetCopyParameters, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DatasetCopyParameters>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.copyDataset(organizationId, datasetCopyParameters, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -2804,7 +2804,7 @@ export const DatasetApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createDataset(organizationId: string, dataset: Dataset, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Dataset>> {
+        async createDataset(organizationId: string, dataset: Dataset, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Dataset>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createDataset(organizationId, dataset, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -2816,7 +2816,7 @@ export const DatasetApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteDataset(organizationId: string, datasetId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async deleteDataset(organizationId: string, datasetId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteDataset(organizationId, datasetId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -2827,7 +2827,7 @@ export const DatasetApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findAllDatasets(organizationId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Dataset>>> {
+        async findAllDatasets(organizationId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Dataset>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.findAllDatasets(organizationId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -2839,7 +2839,7 @@ export const DatasetApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findDatasetById(organizationId: string, datasetId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Dataset>> {
+        async findDatasetById(organizationId: string, datasetId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Dataset>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.findDatasetById(organizationId, datasetId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -2851,7 +2851,7 @@ export const DatasetApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async removeAllDatasetCompatibilityElements(organizationId: string, datasetId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async removeAllDatasetCompatibilityElements(organizationId: string, datasetId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.removeAllDatasetCompatibilityElements(organizationId, datasetId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -2864,7 +2864,7 @@ export const DatasetApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateDataset(organizationId: string, datasetId: string, dataset: Dataset, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Dataset>> {
+        async updateDataset(organizationId: string, datasetId: string, dataset: Dataset, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Dataset>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateDataset(organizationId, datasetId, dataset, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -2987,7 +2987,7 @@ export class DatasetApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DatasetApi
      */
-    public addOrReplaceDatasetCompatibilityElements(organizationId: string, datasetId: string, datasetCompatibility: Array<DatasetCompatibility>, options?: any) {
+    public addOrReplaceDatasetCompatibilityElements(organizationId: string, datasetId: string, datasetCompatibility: Array<DatasetCompatibility>, options?: AxiosRequestConfig) {
         return DatasetApiFp(this.configuration).addOrReplaceDatasetCompatibilityElements(organizationId, datasetId, datasetCompatibility, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -3000,7 +3000,7 @@ export class DatasetApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DatasetApi
      */
-    public copyDataset(organizationId: string, datasetCopyParameters: DatasetCopyParameters, options?: any) {
+    public copyDataset(organizationId: string, datasetCopyParameters: DatasetCopyParameters, options?: AxiosRequestConfig) {
         return DatasetApiFp(this.configuration).copyDataset(organizationId, datasetCopyParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -3013,7 +3013,7 @@ export class DatasetApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DatasetApi
      */
-    public createDataset(organizationId: string, dataset: Dataset, options?: any) {
+    public createDataset(organizationId: string, dataset: Dataset, options?: AxiosRequestConfig) {
         return DatasetApiFp(this.configuration).createDataset(organizationId, dataset, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -3026,7 +3026,7 @@ export class DatasetApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DatasetApi
      */
-    public deleteDataset(organizationId: string, datasetId: string, options?: any) {
+    public deleteDataset(organizationId: string, datasetId: string, options?: AxiosRequestConfig) {
         return DatasetApiFp(this.configuration).deleteDataset(organizationId, datasetId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -3038,7 +3038,7 @@ export class DatasetApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DatasetApi
      */
-    public findAllDatasets(organizationId: string, options?: any) {
+    public findAllDatasets(organizationId: string, options?: AxiosRequestConfig) {
         return DatasetApiFp(this.configuration).findAllDatasets(organizationId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -3051,7 +3051,7 @@ export class DatasetApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DatasetApi
      */
-    public findDatasetById(organizationId: string, datasetId: string, options?: any) {
+    public findDatasetById(organizationId: string, datasetId: string, options?: AxiosRequestConfig) {
         return DatasetApiFp(this.configuration).findDatasetById(organizationId, datasetId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -3064,7 +3064,7 @@ export class DatasetApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DatasetApi
      */
-    public removeAllDatasetCompatibilityElements(organizationId: string, datasetId: string, options?: any) {
+    public removeAllDatasetCompatibilityElements(organizationId: string, datasetId: string, options?: AxiosRequestConfig) {
         return DatasetApiFp(this.configuration).removeAllDatasetCompatibilityElements(organizationId, datasetId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -3078,7 +3078,7 @@ export class DatasetApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DatasetApi
      */
-    public updateDataset(organizationId: string, datasetId: string, dataset: Dataset, options?: any) {
+    public updateDataset(organizationId: string, datasetId: string, dataset: Dataset, options?: AxiosRequestConfig) {
         return DatasetApiFp(this.configuration).updateDataset(organizationId, datasetId, dataset, options).then((request) => request(this.axios, this.basePath));
     }
 }
@@ -3098,7 +3098,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addOrReplaceUsersInOrganization: async (organizationId: string, organizationUser: Array<OrganizationUser>, options: any = {}): Promise<RequestArgs> => {
+        addOrReplaceUsersInOrganization: async (organizationId: string, organizationUser: Array<OrganizationUser>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('addOrReplaceUsersInOrganization', 'organizationId', organizationId)
             // verify required parameter 'organizationUser' is not null or undefined
@@ -3124,7 +3124,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(organizationUser, localVarRequestOptions, configuration)
@@ -3140,7 +3140,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findAllOrganizations: async (options: any = {}): Promise<RequestArgs> => {
+        findAllOrganizations: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/organizations`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -3159,7 +3159,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -3175,7 +3175,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findOrganizationById: async (organizationId: string, options: any = {}): Promise<RequestArgs> => {
+        findOrganizationById: async (organizationId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('findOrganizationById', 'organizationId', organizationId)
             const localVarPath = `/organizations/{organization_id}`
@@ -3197,7 +3197,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -3213,7 +3213,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        registerOrganization: async (organization: Organization, options: any = {}): Promise<RequestArgs> => {
+        registerOrganization: async (organization: Organization, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organization' is not null or undefined
             assertParamExists('registerOrganization', 'organization', organization)
             const localVarPath = `/organizations`;
@@ -3236,7 +3236,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(organization, localVarRequestOptions, configuration)
@@ -3253,7 +3253,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        removeAllUsersInOrganization: async (organizationId: string, options: any = {}): Promise<RequestArgs> => {
+        removeAllUsersInOrganization: async (organizationId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('removeAllUsersInOrganization', 'organizationId', organizationId)
             const localVarPath = `/organizations/{organization_id}/users`
@@ -3275,7 +3275,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -3292,7 +3292,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        removeUserFromOrganization: async (organizationId: string, userId: string, options: any = {}): Promise<RequestArgs> => {
+        removeUserFromOrganization: async (organizationId: string, userId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('removeUserFromOrganization', 'organizationId', organizationId)
             // verify required parameter 'userId' is not null or undefined
@@ -3317,7 +3317,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -3333,7 +3333,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        unregisterOrganization: async (organizationId: string, options: any = {}): Promise<RequestArgs> => {
+        unregisterOrganization: async (organizationId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('unregisterOrganization', 'organizationId', organizationId)
             const localVarPath = `/organizations/{organization_id}`
@@ -3355,7 +3355,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -3372,7 +3372,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateOrganization: async (organizationId: string, organization: Organization, options: any = {}): Promise<RequestArgs> => {
+        updateOrganization: async (organizationId: string, organization: Organization, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('updateOrganization', 'organizationId', organizationId)
             // verify required parameter 'organization' is not null or undefined
@@ -3398,7 +3398,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(organization, localVarRequestOptions, configuration)
@@ -3416,7 +3416,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateSolutionsContainerRegistryByOrganizationId: async (organizationId: string, organizationService: OrganizationService, options: any = {}): Promise<RequestArgs> => {
+        updateSolutionsContainerRegistryByOrganizationId: async (organizationId: string, organizationService: OrganizationService, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('updateSolutionsContainerRegistryByOrganizationId', 'organizationId', organizationId)
             // verify required parameter 'organizationService' is not null or undefined
@@ -3442,7 +3442,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(organizationService, localVarRequestOptions, configuration)
@@ -3460,7 +3460,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateStorageByOrganizationId: async (organizationId: string, organizationService: OrganizationService, options: any = {}): Promise<RequestArgs> => {
+        updateStorageByOrganizationId: async (organizationId: string, organizationService: OrganizationService, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('updateStorageByOrganizationId', 'organizationId', organizationId)
             // verify required parameter 'organizationService' is not null or undefined
@@ -3486,7 +3486,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(organizationService, localVarRequestOptions, configuration)
@@ -3504,7 +3504,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateTenantCredentialsByOrganizationId: async (organizationId: string, requestBody: { [key: string]: object; }, options: any = {}): Promise<RequestArgs> => {
+        updateTenantCredentialsByOrganizationId: async (organizationId: string, requestBody: { [key: string]: object; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('updateTenantCredentialsByOrganizationId', 'organizationId', organizationId)
             // verify required parameter 'requestBody' is not null or undefined
@@ -3530,7 +3530,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(requestBody, localVarRequestOptions, configuration)
@@ -3558,7 +3558,7 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async addOrReplaceUsersInOrganization(organizationId: string, organizationUser: Array<OrganizationUser>, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<OrganizationUser>>> {
+        async addOrReplaceUsersInOrganization(organizationId: string, organizationUser: Array<OrganizationUser>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<OrganizationUser>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.addOrReplaceUsersInOrganization(organizationId, organizationUser, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -3568,7 +3568,7 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findAllOrganizations(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Organization>>> {
+        async findAllOrganizations(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Organization>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.findAllOrganizations(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -3579,7 +3579,7 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findOrganizationById(organizationId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Organization>> {
+        async findOrganizationById(organizationId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Organization>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.findOrganizationById(organizationId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -3590,7 +3590,7 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async registerOrganization(organization: Organization, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Organization>> {
+        async registerOrganization(organization: Organization, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Organization>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.registerOrganization(organization, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -3601,7 +3601,7 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async removeAllUsersInOrganization(organizationId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async removeAllUsersInOrganization(organizationId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.removeAllUsersInOrganization(organizationId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -3613,7 +3613,7 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async removeUserFromOrganization(organizationId: string, userId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async removeUserFromOrganization(organizationId: string, userId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.removeUserFromOrganization(organizationId, userId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -3624,7 +3624,7 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async unregisterOrganization(organizationId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async unregisterOrganization(organizationId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.unregisterOrganization(organizationId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -3636,7 +3636,7 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateOrganization(organizationId: string, organization: Organization, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Organization>> {
+        async updateOrganization(organizationId: string, organization: Organization, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Organization>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateOrganization(organizationId, organization, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -3648,7 +3648,7 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateSolutionsContainerRegistryByOrganizationId(organizationId: string, organizationService: OrganizationService, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrganizationService>> {
+        async updateSolutionsContainerRegistryByOrganizationId(organizationId: string, organizationService: OrganizationService, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrganizationService>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateSolutionsContainerRegistryByOrganizationId(organizationId, organizationService, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -3660,7 +3660,7 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateStorageByOrganizationId(organizationId: string, organizationService: OrganizationService, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrganizationService>> {
+        async updateStorageByOrganizationId(organizationId: string, organizationService: OrganizationService, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrganizationService>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateStorageByOrganizationId(organizationId, organizationService, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -3672,7 +3672,7 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateTenantCredentialsByOrganizationId(organizationId: string, requestBody: { [key: string]: object; }, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<{ [key: string]: object; }>> {
+        async updateTenantCredentialsByOrganizationId(organizationId: string, requestBody: { [key: string]: object; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<{ [key: string]: object; }>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateTenantCredentialsByOrganizationId(organizationId, requestBody, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -3820,7 +3820,7 @@ export class OrganizationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OrganizationApi
      */
-    public addOrReplaceUsersInOrganization(organizationId: string, organizationUser: Array<OrganizationUser>, options?: any) {
+    public addOrReplaceUsersInOrganization(organizationId: string, organizationUser: Array<OrganizationUser>, options?: AxiosRequestConfig) {
         return OrganizationApiFp(this.configuration).addOrReplaceUsersInOrganization(organizationId, organizationUser, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -3831,7 +3831,7 @@ export class OrganizationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OrganizationApi
      */
-    public findAllOrganizations(options?: any) {
+    public findAllOrganizations(options?: AxiosRequestConfig) {
         return OrganizationApiFp(this.configuration).findAllOrganizations(options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -3843,7 +3843,7 @@ export class OrganizationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OrganizationApi
      */
-    public findOrganizationById(organizationId: string, options?: any) {
+    public findOrganizationById(organizationId: string, options?: AxiosRequestConfig) {
         return OrganizationApiFp(this.configuration).findOrganizationById(organizationId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -3855,7 +3855,7 @@ export class OrganizationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OrganizationApi
      */
-    public registerOrganization(organization: Organization, options?: any) {
+    public registerOrganization(organization: Organization, options?: AxiosRequestConfig) {
         return OrganizationApiFp(this.configuration).registerOrganization(organization, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -3867,7 +3867,7 @@ export class OrganizationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OrganizationApi
      */
-    public removeAllUsersInOrganization(organizationId: string, options?: any) {
+    public removeAllUsersInOrganization(organizationId: string, options?: AxiosRequestConfig) {
         return OrganizationApiFp(this.configuration).removeAllUsersInOrganization(organizationId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -3880,7 +3880,7 @@ export class OrganizationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OrganizationApi
      */
-    public removeUserFromOrganization(organizationId: string, userId: string, options?: any) {
+    public removeUserFromOrganization(organizationId: string, userId: string, options?: AxiosRequestConfig) {
         return OrganizationApiFp(this.configuration).removeUserFromOrganization(organizationId, userId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -3892,7 +3892,7 @@ export class OrganizationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OrganizationApi
      */
-    public unregisterOrganization(organizationId: string, options?: any) {
+    public unregisterOrganization(organizationId: string, options?: AxiosRequestConfig) {
         return OrganizationApiFp(this.configuration).unregisterOrganization(organizationId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -3905,7 +3905,7 @@ export class OrganizationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OrganizationApi
      */
-    public updateOrganization(organizationId: string, organization: Organization, options?: any) {
+    public updateOrganization(organizationId: string, organization: Organization, options?: AxiosRequestConfig) {
         return OrganizationApiFp(this.configuration).updateOrganization(organizationId, organization, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -3918,7 +3918,7 @@ export class OrganizationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OrganizationApi
      */
-    public updateSolutionsContainerRegistryByOrganizationId(organizationId: string, organizationService: OrganizationService, options?: any) {
+    public updateSolutionsContainerRegistryByOrganizationId(organizationId: string, organizationService: OrganizationService, options?: AxiosRequestConfig) {
         return OrganizationApiFp(this.configuration).updateSolutionsContainerRegistryByOrganizationId(organizationId, organizationService, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -3931,7 +3931,7 @@ export class OrganizationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OrganizationApi
      */
-    public updateStorageByOrganizationId(organizationId: string, organizationService: OrganizationService, options?: any) {
+    public updateStorageByOrganizationId(organizationId: string, organizationService: OrganizationService, options?: AxiosRequestConfig) {
         return OrganizationApiFp(this.configuration).updateStorageByOrganizationId(organizationId, organizationService, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -3944,7 +3944,7 @@ export class OrganizationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OrganizationApi
      */
-    public updateTenantCredentialsByOrganizationId(organizationId: string, requestBody: { [key: string]: object; }, options?: any) {
+    public updateTenantCredentialsByOrganizationId(organizationId: string, requestBody: { [key: string]: object; }, options?: AxiosRequestConfig) {
         return OrganizationApiFp(this.configuration).updateTenantCredentialsByOrganizationId(organizationId, requestBody, options).then((request) => request(this.axios, this.basePath));
     }
 }
@@ -3966,7 +3966,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addOrReplaceScenarioParameterValues: async (organizationId: string, workspaceId: string, scenarioId: string, scenarioRunTemplateParameterValue: Array<ScenarioRunTemplateParameterValue>, options: any = {}): Promise<RequestArgs> => {
+        addOrReplaceScenarioParameterValues: async (organizationId: string, workspaceId: string, scenarioId: string, scenarioRunTemplateParameterValue: Array<ScenarioRunTemplateParameterValue>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('addOrReplaceScenarioParameterValues', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
@@ -3998,7 +3998,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(scenarioRunTemplateParameterValue, localVarRequestOptions, configuration)
@@ -4018,7 +4018,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addOrReplaceUsersInScenario: async (organizationId: string, workspaceId: string, scenarioId: string, scenarioUser: Array<ScenarioUser>, options: any = {}): Promise<RequestArgs> => {
+        addOrReplaceUsersInScenario: async (organizationId: string, workspaceId: string, scenarioId: string, scenarioUser: Array<ScenarioUser>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('addOrReplaceUsersInScenario', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
@@ -4050,7 +4050,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(scenarioUser, localVarRequestOptions, configuration)
@@ -4070,7 +4070,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        compareScenarios: async (organizationId: string, workspaceId: string, scenarioId: string, comparedScenarioId: string, options: any = {}): Promise<RequestArgs> => {
+        compareScenarios: async (organizationId: string, workspaceId: string, scenarioId: string, comparedScenarioId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('compareScenarios', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
@@ -4101,7 +4101,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -4119,7 +4119,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createScenario: async (organizationId: string, workspaceId: string, scenario: Scenario, options: any = {}): Promise<RequestArgs> => {
+        createScenario: async (organizationId: string, workspaceId: string, scenario: Scenario, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('createScenario', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
@@ -4148,7 +4148,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(scenario, localVarRequestOptions, configuration)
@@ -4166,7 +4166,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteAllScenarios: async (organizationId: string, workspaceId: string, options: any = {}): Promise<RequestArgs> => {
+        deleteAllScenarios: async (organizationId: string, workspaceId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('deleteAllScenarios', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
@@ -4191,7 +4191,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -4210,7 +4210,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteScenario: async (organizationId: string, workspaceId: string, scenarioId: string, waitRelationshipPropagation?: boolean, options: any = {}): Promise<RequestArgs> => {
+        deleteScenario: async (organizationId: string, workspaceId: string, scenarioId: string, waitRelationshipPropagation?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('deleteScenario', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
@@ -4242,7 +4242,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -4260,7 +4260,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        downloadScenarioData: async (organizationId: string, workspaceId: string, scenarioId: string, options: any = {}): Promise<RequestArgs> => {
+        downloadScenarioData: async (organizationId: string, workspaceId: string, scenarioId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('downloadScenarioData', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
@@ -4288,7 +4288,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -4305,7 +4305,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findAllScenarios: async (organizationId: string, workspaceId: string, options: any = {}): Promise<RequestArgs> => {
+        findAllScenarios: async (organizationId: string, workspaceId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('findAllScenarios', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
@@ -4330,7 +4330,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -4348,7 +4348,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findScenarioById: async (organizationId: string, workspaceId: string, scenarioId: string, options: any = {}): Promise<RequestArgs> => {
+        findScenarioById: async (organizationId: string, workspaceId: string, scenarioId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('findScenarioById', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
@@ -4376,7 +4376,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -4395,7 +4395,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getScenarioDataDownloadJobInfo: async (organizationId: string, workspaceId: string, scenarioId: string, downloadId: string, options: any = {}): Promise<RequestArgs> => {
+        getScenarioDataDownloadJobInfo: async (organizationId: string, workspaceId: string, scenarioId: string, downloadId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('getScenarioDataDownloadJobInfo', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
@@ -4426,7 +4426,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -4443,7 +4443,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getScenariosTree: async (organizationId: string, workspaceId: string, options: any = {}): Promise<RequestArgs> => {
+        getScenariosTree: async (organizationId: string, workspaceId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('getScenariosTree', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
@@ -4468,7 +4468,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -4486,7 +4486,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        removeAllScenarioParameterValues: async (organizationId: string, workspaceId: string, scenarioId: string, options: any = {}): Promise<RequestArgs> => {
+        removeAllScenarioParameterValues: async (organizationId: string, workspaceId: string, scenarioId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('removeAllScenarioParameterValues', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
@@ -4514,7 +4514,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -4532,7 +4532,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        removeAllUsersOfScenario: async (organizationId: string, workspaceId: string, scenarioId: string, options: any = {}): Promise<RequestArgs> => {
+        removeAllUsersOfScenario: async (organizationId: string, workspaceId: string, scenarioId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('removeAllUsersOfScenario', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
@@ -4560,7 +4560,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -4579,7 +4579,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        removeUserFromScenario: async (organizationId: string, workspaceId: string, scenarioId: string, userId: string, options: any = {}): Promise<RequestArgs> => {
+        removeUserFromScenario: async (organizationId: string, workspaceId: string, scenarioId: string, userId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('removeUserFromScenario', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
@@ -4610,7 +4610,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -4629,7 +4629,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateScenario: async (organizationId: string, workspaceId: string, scenarioId: string, scenario: Scenario, options: any = {}): Promise<RequestArgs> => {
+        updateScenario: async (organizationId: string, workspaceId: string, scenarioId: string, scenario: Scenario, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('updateScenario', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
@@ -4661,7 +4661,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(scenario, localVarRequestOptions, configuration)
@@ -4691,7 +4691,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async addOrReplaceScenarioParameterValues(organizationId: string, workspaceId: string, scenarioId: string, scenarioRunTemplateParameterValue: Array<ScenarioRunTemplateParameterValue>, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ScenarioRunTemplateParameterValue>>> {
+        async addOrReplaceScenarioParameterValues(organizationId: string, workspaceId: string, scenarioId: string, scenarioRunTemplateParameterValue: Array<ScenarioRunTemplateParameterValue>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ScenarioRunTemplateParameterValue>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.addOrReplaceScenarioParameterValues(organizationId, workspaceId, scenarioId, scenarioRunTemplateParameterValue, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -4705,7 +4705,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async addOrReplaceUsersInScenario(organizationId: string, workspaceId: string, scenarioId: string, scenarioUser: Array<ScenarioUser>, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ScenarioUser>>> {
+        async addOrReplaceUsersInScenario(organizationId: string, workspaceId: string, scenarioId: string, scenarioUser: Array<ScenarioUser>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ScenarioUser>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.addOrReplaceUsersInScenario(organizationId, workspaceId, scenarioId, scenarioUser, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -4719,7 +4719,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async compareScenarios(organizationId: string, workspaceId: string, scenarioId: string, comparedScenarioId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioComparisonResult>> {
+        async compareScenarios(organizationId: string, workspaceId: string, scenarioId: string, comparedScenarioId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioComparisonResult>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.compareScenarios(organizationId, workspaceId, scenarioId, comparedScenarioId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -4732,7 +4732,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createScenario(organizationId: string, workspaceId: string, scenario: Scenario, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Scenario>> {
+        async createScenario(organizationId: string, workspaceId: string, scenario: Scenario, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Scenario>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createScenario(organizationId, workspaceId, scenario, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -4744,7 +4744,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteAllScenarios(organizationId: string, workspaceId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async deleteAllScenarios(organizationId: string, workspaceId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteAllScenarios(organizationId, workspaceId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -4758,7 +4758,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteScenario(organizationId: string, workspaceId: string, scenarioId: string, waitRelationshipPropagation?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async deleteScenario(organizationId: string, workspaceId: string, scenarioId: string, waitRelationshipPropagation?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteScenario(organizationId, workspaceId, scenarioId, waitRelationshipPropagation, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -4771,7 +4771,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async downloadScenarioData(organizationId: string, workspaceId: string, scenarioId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioDataDownloadJob>> {
+        async downloadScenarioData(organizationId: string, workspaceId: string, scenarioId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioDataDownloadJob>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.downloadScenarioData(organizationId, workspaceId, scenarioId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -4783,7 +4783,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findAllScenarios(organizationId: string, workspaceId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Scenario>>> {
+        async findAllScenarios(organizationId: string, workspaceId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Scenario>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.findAllScenarios(organizationId, workspaceId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -4796,7 +4796,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findScenarioById(organizationId: string, workspaceId: string, scenarioId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Scenario>> {
+        async findScenarioById(organizationId: string, workspaceId: string, scenarioId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Scenario>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.findScenarioById(organizationId, workspaceId, scenarioId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -4810,7 +4810,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getScenarioDataDownloadJobInfo(organizationId: string, workspaceId: string, scenarioId: string, downloadId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioDataDownloadInfo>> {
+        async getScenarioDataDownloadJobInfo(organizationId: string, workspaceId: string, scenarioId: string, downloadId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioDataDownloadInfo>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getScenarioDataDownloadJobInfo(organizationId, workspaceId, scenarioId, downloadId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -4822,7 +4822,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getScenariosTree(organizationId: string, workspaceId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Scenario>>> {
+        async getScenariosTree(organizationId: string, workspaceId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Scenario>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getScenariosTree(organizationId, workspaceId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -4835,7 +4835,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async removeAllScenarioParameterValues(organizationId: string, workspaceId: string, scenarioId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async removeAllScenarioParameterValues(organizationId: string, workspaceId: string, scenarioId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.removeAllScenarioParameterValues(organizationId, workspaceId, scenarioId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -4848,7 +4848,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async removeAllUsersOfScenario(organizationId: string, workspaceId: string, scenarioId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async removeAllUsersOfScenario(organizationId: string, workspaceId: string, scenarioId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.removeAllUsersOfScenario(organizationId, workspaceId, scenarioId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -4862,7 +4862,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async removeUserFromScenario(organizationId: string, workspaceId: string, scenarioId: string, userId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async removeUserFromScenario(organizationId: string, workspaceId: string, scenarioId: string, userId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.removeUserFromScenario(organizationId, workspaceId, scenarioId, userId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -4876,7 +4876,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateScenario(organizationId: string, workspaceId: string, scenarioId: string, scenario: Scenario, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Scenario>> {
+        async updateScenario(organizationId: string, workspaceId: string, scenarioId: string, scenario: Scenario, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Scenario>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateScenario(organizationId, workspaceId, scenarioId, scenario, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -5095,7 +5095,7 @@ export class ScenarioApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
-    public addOrReplaceScenarioParameterValues(organizationId: string, workspaceId: string, scenarioId: string, scenarioRunTemplateParameterValue: Array<ScenarioRunTemplateParameterValue>, options?: any) {
+    public addOrReplaceScenarioParameterValues(organizationId: string, workspaceId: string, scenarioId: string, scenarioRunTemplateParameterValue: Array<ScenarioRunTemplateParameterValue>, options?: AxiosRequestConfig) {
         return ScenarioApiFp(this.configuration).addOrReplaceScenarioParameterValues(organizationId, workspaceId, scenarioId, scenarioRunTemplateParameterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -5110,7 +5110,7 @@ export class ScenarioApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
-    public addOrReplaceUsersInScenario(organizationId: string, workspaceId: string, scenarioId: string, scenarioUser: Array<ScenarioUser>, options?: any) {
+    public addOrReplaceUsersInScenario(organizationId: string, workspaceId: string, scenarioId: string, scenarioUser: Array<ScenarioUser>, options?: AxiosRequestConfig) {
         return ScenarioApiFp(this.configuration).addOrReplaceUsersInScenario(organizationId, workspaceId, scenarioId, scenarioUser, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -5125,7 +5125,7 @@ export class ScenarioApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
-    public compareScenarios(organizationId: string, workspaceId: string, scenarioId: string, comparedScenarioId: string, options?: any) {
+    public compareScenarios(organizationId: string, workspaceId: string, scenarioId: string, comparedScenarioId: string, options?: AxiosRequestConfig) {
         return ScenarioApiFp(this.configuration).compareScenarios(organizationId, workspaceId, scenarioId, comparedScenarioId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -5139,7 +5139,7 @@ export class ScenarioApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
-    public createScenario(organizationId: string, workspaceId: string, scenario: Scenario, options?: any) {
+    public createScenario(organizationId: string, workspaceId: string, scenario: Scenario, options?: AxiosRequestConfig) {
         return ScenarioApiFp(this.configuration).createScenario(organizationId, workspaceId, scenario, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -5152,7 +5152,7 @@ export class ScenarioApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
-    public deleteAllScenarios(organizationId: string, workspaceId: string, options?: any) {
+    public deleteAllScenarios(organizationId: string, workspaceId: string, options?: AxiosRequestConfig) {
         return ScenarioApiFp(this.configuration).deleteAllScenarios(organizationId, workspaceId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -5167,7 +5167,7 @@ export class ScenarioApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
-    public deleteScenario(organizationId: string, workspaceId: string, scenarioId: string, waitRelationshipPropagation?: boolean, options?: any) {
+    public deleteScenario(organizationId: string, workspaceId: string, scenarioId: string, waitRelationshipPropagation?: boolean, options?: AxiosRequestConfig) {
         return ScenarioApiFp(this.configuration).deleteScenario(organizationId, workspaceId, scenarioId, waitRelationshipPropagation, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -5181,7 +5181,7 @@ export class ScenarioApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
-    public downloadScenarioData(organizationId: string, workspaceId: string, scenarioId: string, options?: any) {
+    public downloadScenarioData(organizationId: string, workspaceId: string, scenarioId: string, options?: AxiosRequestConfig) {
         return ScenarioApiFp(this.configuration).downloadScenarioData(organizationId, workspaceId, scenarioId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -5194,7 +5194,7 @@ export class ScenarioApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
-    public findAllScenarios(organizationId: string, workspaceId: string, options?: any) {
+    public findAllScenarios(organizationId: string, workspaceId: string, options?: AxiosRequestConfig) {
         return ScenarioApiFp(this.configuration).findAllScenarios(organizationId, workspaceId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -5208,7 +5208,7 @@ export class ScenarioApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
-    public findScenarioById(organizationId: string, workspaceId: string, scenarioId: string, options?: any) {
+    public findScenarioById(organizationId: string, workspaceId: string, scenarioId: string, options?: AxiosRequestConfig) {
         return ScenarioApiFp(this.configuration).findScenarioById(organizationId, workspaceId, scenarioId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -5223,7 +5223,7 @@ export class ScenarioApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
-    public getScenarioDataDownloadJobInfo(organizationId: string, workspaceId: string, scenarioId: string, downloadId: string, options?: any) {
+    public getScenarioDataDownloadJobInfo(organizationId: string, workspaceId: string, scenarioId: string, downloadId: string, options?: AxiosRequestConfig) {
         return ScenarioApiFp(this.configuration).getScenarioDataDownloadJobInfo(organizationId, workspaceId, scenarioId, downloadId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -5236,7 +5236,7 @@ export class ScenarioApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
-    public getScenariosTree(organizationId: string, workspaceId: string, options?: any) {
+    public getScenariosTree(organizationId: string, workspaceId: string, options?: AxiosRequestConfig) {
         return ScenarioApiFp(this.configuration).getScenariosTree(organizationId, workspaceId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -5250,7 +5250,7 @@ export class ScenarioApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
-    public removeAllScenarioParameterValues(organizationId: string, workspaceId: string, scenarioId: string, options?: any) {
+    public removeAllScenarioParameterValues(organizationId: string, workspaceId: string, scenarioId: string, options?: AxiosRequestConfig) {
         return ScenarioApiFp(this.configuration).removeAllScenarioParameterValues(organizationId, workspaceId, scenarioId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -5264,7 +5264,7 @@ export class ScenarioApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
-    public removeAllUsersOfScenario(organizationId: string, workspaceId: string, scenarioId: string, options?: any) {
+    public removeAllUsersOfScenario(organizationId: string, workspaceId: string, scenarioId: string, options?: AxiosRequestConfig) {
         return ScenarioApiFp(this.configuration).removeAllUsersOfScenario(organizationId, workspaceId, scenarioId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -5279,7 +5279,7 @@ export class ScenarioApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
-    public removeUserFromScenario(organizationId: string, workspaceId: string, scenarioId: string, userId: string, options?: any) {
+    public removeUserFromScenario(organizationId: string, workspaceId: string, scenarioId: string, userId: string, options?: AxiosRequestConfig) {
         return ScenarioApiFp(this.configuration).removeUserFromScenario(organizationId, workspaceId, scenarioId, userId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -5294,7 +5294,7 @@ export class ScenarioApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
-    public updateScenario(organizationId: string, workspaceId: string, scenarioId: string, scenario: Scenario, options?: any) {
+    public updateScenario(organizationId: string, workspaceId: string, scenarioId: string, scenario: Scenario, options?: AxiosRequestConfig) {
         return ScenarioApiFp(this.configuration).updateScenario(organizationId, workspaceId, scenarioId, scenario, options).then((request) => request(this.axios, this.basePath));
     }
 }
@@ -5314,7 +5314,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteScenarioRun: async (organizationId: string, scenariorunId: string, options: any = {}): Promise<RequestArgs> => {
+        deleteScenarioRun: async (organizationId: string, scenariorunId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('deleteScenarioRun', 'organizationId', organizationId)
             // verify required parameter 'scenariorunId' is not null or undefined
@@ -5339,7 +5339,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -5356,7 +5356,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findScenarioRunById: async (organizationId: string, scenariorunId: string, options: any = {}): Promise<RequestArgs> => {
+        findScenarioRunById: async (organizationId: string, scenariorunId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('findScenarioRunById', 'organizationId', organizationId)
             // verify required parameter 'scenariorunId' is not null or undefined
@@ -5381,7 +5381,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -5398,7 +5398,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getScenarioRunCumulatedLogs: async (organizationId: string, scenariorunId: string, options: any = {}): Promise<RequestArgs> => {
+        getScenarioRunCumulatedLogs: async (organizationId: string, scenariorunId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('getScenarioRunCumulatedLogs', 'organizationId', organizationId)
             // verify required parameter 'scenariorunId' is not null or undefined
@@ -5423,7 +5423,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -5440,7 +5440,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getScenarioRunLogs: async (organizationId: string, scenariorunId: string, options: any = {}): Promise<RequestArgs> => {
+        getScenarioRunLogs: async (organizationId: string, scenariorunId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('getScenarioRunLogs', 'organizationId', organizationId)
             // verify required parameter 'scenariorunId' is not null or undefined
@@ -5465,7 +5465,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -5482,7 +5482,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getScenarioRunStatus: async (organizationId: string, scenariorunId: string, options: any = {}): Promise<RequestArgs> => {
+        getScenarioRunStatus: async (organizationId: string, scenariorunId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('getScenarioRunStatus', 'organizationId', organizationId)
             // verify required parameter 'scenariorunId' is not null or undefined
@@ -5507,7 +5507,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -5525,7 +5525,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getScenarioRuns: async (organizationId: string, workspaceId: string, scenarioId: string, options: any = {}): Promise<RequestArgs> => {
+        getScenarioRuns: async (organizationId: string, workspaceId: string, scenarioId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('getScenarioRuns', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
@@ -5553,7 +5553,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -5570,7 +5570,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getWorkspaceScenarioRuns: async (organizationId: string, workspaceId: string, options: any = {}): Promise<RequestArgs> => {
+        getWorkspaceScenarioRuns: async (organizationId: string, workspaceId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('getWorkspaceScenarioRuns', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
@@ -5595,7 +5595,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -5613,7 +5613,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        runScenario: async (organizationId: string, workspaceId: string, scenarioId: string, options: any = {}): Promise<RequestArgs> => {
+        runScenario: async (organizationId: string, workspaceId: string, scenarioId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('runScenario', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
@@ -5641,7 +5641,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -5658,7 +5658,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        searchScenarioRuns: async (organizationId: string, scenarioRunSearch: ScenarioRunSearch, options: any = {}): Promise<RequestArgs> => {
+        searchScenarioRuns: async (organizationId: string, scenarioRunSearch: ScenarioRunSearch, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('searchScenarioRuns', 'organizationId', organizationId)
             // verify required parameter 'scenarioRunSearch' is not null or undefined
@@ -5684,7 +5684,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(scenarioRunSearch, localVarRequestOptions, configuration)
@@ -5702,7 +5702,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        startScenarioRunContainers: async (organizationId: string, scenarioRunStartContainers: ScenarioRunStartContainers, options: any = {}): Promise<RequestArgs> => {
+        startScenarioRunContainers: async (organizationId: string, scenarioRunStartContainers: ScenarioRunStartContainers, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('startScenarioRunContainers', 'organizationId', organizationId)
             // verify required parameter 'scenarioRunStartContainers' is not null or undefined
@@ -5728,7 +5728,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(scenarioRunStartContainers, localVarRequestOptions, configuration)
@@ -5756,7 +5756,7 @@ export const ScenariorunApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteScenarioRun(organizationId: string, scenariorunId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async deleteScenarioRun(organizationId: string, scenariorunId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteScenarioRun(organizationId, scenariorunId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -5768,7 +5768,7 @@ export const ScenariorunApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findScenarioRunById(organizationId: string, scenariorunId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioRun>> {
+        async findScenarioRunById(organizationId: string, scenariorunId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioRun>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.findScenarioRunById(organizationId, scenariorunId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -5780,7 +5780,7 @@ export const ScenariorunApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getScenarioRunCumulatedLogs(organizationId: string, scenariorunId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
+        async getScenarioRunCumulatedLogs(organizationId: string, scenariorunId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getScenarioRunCumulatedLogs(organizationId, scenariorunId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -5792,7 +5792,7 @@ export const ScenariorunApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getScenarioRunLogs(organizationId: string, scenariorunId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioRunLogs>> {
+        async getScenarioRunLogs(organizationId: string, scenariorunId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioRunLogs>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getScenarioRunLogs(organizationId, scenariorunId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -5804,7 +5804,7 @@ export const ScenariorunApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getScenarioRunStatus(organizationId: string, scenariorunId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioRunStatus>> {
+        async getScenarioRunStatus(organizationId: string, scenariorunId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioRunStatus>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getScenarioRunStatus(organizationId, scenariorunId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -5817,7 +5817,7 @@ export const ScenariorunApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getScenarioRuns(organizationId: string, workspaceId: string, scenarioId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ScenarioRun>>> {
+        async getScenarioRuns(organizationId: string, workspaceId: string, scenarioId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ScenarioRun>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getScenarioRuns(organizationId, workspaceId, scenarioId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -5829,7 +5829,7 @@ export const ScenariorunApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getWorkspaceScenarioRuns(organizationId: string, workspaceId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ScenarioRun>>> {
+        async getWorkspaceScenarioRuns(organizationId: string, workspaceId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ScenarioRun>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getWorkspaceScenarioRuns(organizationId, workspaceId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -5842,7 +5842,7 @@ export const ScenariorunApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async runScenario(organizationId: string, workspaceId: string, scenarioId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioRun>> {
+        async runScenario(organizationId: string, workspaceId: string, scenarioId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioRun>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.runScenario(organizationId, workspaceId, scenarioId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -5854,7 +5854,7 @@ export const ScenariorunApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async searchScenarioRuns(organizationId: string, scenarioRunSearch: ScenarioRunSearch, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ScenarioRun>>> {
+        async searchScenarioRuns(organizationId: string, scenarioRunSearch: ScenarioRunSearch, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ScenarioRun>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.searchScenarioRuns(organizationId, scenarioRunSearch, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -5866,7 +5866,7 @@ export const ScenariorunApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async startScenarioRunContainers(organizationId: string, scenarioRunStartContainers: ScenarioRunStartContainers, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioRun>> {
+        async startScenarioRunContainers(organizationId: string, scenarioRunStartContainers: ScenarioRunStartContainers, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioRun>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.startScenarioRunContainers(organizationId, scenarioRunStartContainers, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -6011,7 +6011,7 @@ export class ScenariorunApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ScenariorunApi
      */
-    public deleteScenarioRun(organizationId: string, scenariorunId: string, options?: any) {
+    public deleteScenarioRun(organizationId: string, scenariorunId: string, options?: AxiosRequestConfig) {
         return ScenariorunApiFp(this.configuration).deleteScenarioRun(organizationId, scenariorunId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -6024,7 +6024,7 @@ export class ScenariorunApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ScenariorunApi
      */
-    public findScenarioRunById(organizationId: string, scenariorunId: string, options?: any) {
+    public findScenarioRunById(organizationId: string, scenariorunId: string, options?: AxiosRequestConfig) {
         return ScenariorunApiFp(this.configuration).findScenarioRunById(organizationId, scenariorunId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -6037,7 +6037,7 @@ export class ScenariorunApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ScenariorunApi
      */
-    public getScenarioRunCumulatedLogs(organizationId: string, scenariorunId: string, options?: any) {
+    public getScenarioRunCumulatedLogs(organizationId: string, scenariorunId: string, options?: AxiosRequestConfig) {
         return ScenariorunApiFp(this.configuration).getScenarioRunCumulatedLogs(organizationId, scenariorunId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -6050,7 +6050,7 @@ export class ScenariorunApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ScenariorunApi
      */
-    public getScenarioRunLogs(organizationId: string, scenariorunId: string, options?: any) {
+    public getScenarioRunLogs(organizationId: string, scenariorunId: string, options?: AxiosRequestConfig) {
         return ScenariorunApiFp(this.configuration).getScenarioRunLogs(organizationId, scenariorunId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -6063,7 +6063,7 @@ export class ScenariorunApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ScenariorunApi
      */
-    public getScenarioRunStatus(organizationId: string, scenariorunId: string, options?: any) {
+    public getScenarioRunStatus(organizationId: string, scenariorunId: string, options?: AxiosRequestConfig) {
         return ScenariorunApiFp(this.configuration).getScenarioRunStatus(organizationId, scenariorunId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -6077,7 +6077,7 @@ export class ScenariorunApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ScenariorunApi
      */
-    public getScenarioRuns(organizationId: string, workspaceId: string, scenarioId: string, options?: any) {
+    public getScenarioRuns(organizationId: string, workspaceId: string, scenarioId: string, options?: AxiosRequestConfig) {
         return ScenariorunApiFp(this.configuration).getScenarioRuns(organizationId, workspaceId, scenarioId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -6090,7 +6090,7 @@ export class ScenariorunApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ScenariorunApi
      */
-    public getWorkspaceScenarioRuns(organizationId: string, workspaceId: string, options?: any) {
+    public getWorkspaceScenarioRuns(organizationId: string, workspaceId: string, options?: AxiosRequestConfig) {
         return ScenariorunApiFp(this.configuration).getWorkspaceScenarioRuns(organizationId, workspaceId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -6104,7 +6104,7 @@ export class ScenariorunApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ScenariorunApi
      */
-    public runScenario(organizationId: string, workspaceId: string, scenarioId: string, options?: any) {
+    public runScenario(organizationId: string, workspaceId: string, scenarioId: string, options?: AxiosRequestConfig) {
         return ScenariorunApiFp(this.configuration).runScenario(organizationId, workspaceId, scenarioId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -6117,7 +6117,7 @@ export class ScenariorunApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ScenariorunApi
      */
-    public searchScenarioRuns(organizationId: string, scenarioRunSearch: ScenarioRunSearch, options?: any) {
+    public searchScenarioRuns(organizationId: string, scenarioRunSearch: ScenarioRunSearch, options?: AxiosRequestConfig) {
         return ScenariorunApiFp(this.configuration).searchScenarioRuns(organizationId, scenarioRunSearch, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -6130,7 +6130,7 @@ export class ScenariorunApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ScenariorunApi
      */
-    public startScenarioRunContainers(organizationId: string, scenarioRunStartContainers: ScenarioRunStartContainers, options?: any) {
+    public startScenarioRunContainers(organizationId: string, scenarioRunStartContainers: ScenarioRunStartContainers, options?: AxiosRequestConfig) {
         return ScenariorunApiFp(this.configuration).startScenarioRunContainers(organizationId, scenarioRunStartContainers, options).then((request) => request(this.axios, this.basePath));
     }
 }
@@ -6151,7 +6151,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addOrReplaceParameterGroups: async (organizationId: string, solutionId: string, runTemplateParameterGroup: Array<RunTemplateParameterGroup>, options: any = {}): Promise<RequestArgs> => {
+        addOrReplaceParameterGroups: async (organizationId: string, solutionId: string, runTemplateParameterGroup: Array<RunTemplateParameterGroup>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('addOrReplaceParameterGroups', 'organizationId', organizationId)
             // verify required parameter 'solutionId' is not null or undefined
@@ -6180,7 +6180,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(runTemplateParameterGroup, localVarRequestOptions, configuration)
@@ -6199,7 +6199,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addOrReplaceParameters: async (organizationId: string, solutionId: string, runTemplateParameter: Array<RunTemplateParameter>, options: any = {}): Promise<RequestArgs> => {
+        addOrReplaceParameters: async (organizationId: string, solutionId: string, runTemplateParameter: Array<RunTemplateParameter>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('addOrReplaceParameters', 'organizationId', organizationId)
             // verify required parameter 'solutionId' is not null or undefined
@@ -6228,7 +6228,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(runTemplateParameter, localVarRequestOptions, configuration)
@@ -6247,7 +6247,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addOrReplaceRunTemplates: async (organizationId: string, solutionId: string, runTemplate: Array<RunTemplate>, options: any = {}): Promise<RequestArgs> => {
+        addOrReplaceRunTemplates: async (organizationId: string, solutionId: string, runTemplate: Array<RunTemplate>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('addOrReplaceRunTemplates', 'organizationId', organizationId)
             // verify required parameter 'solutionId' is not null or undefined
@@ -6276,7 +6276,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(runTemplate, localVarRequestOptions, configuration)
@@ -6294,7 +6294,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createSolution: async (organizationId: string, solution: Solution, options: any = {}): Promise<RequestArgs> => {
+        createSolution: async (organizationId: string, solution: Solution, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('createSolution', 'organizationId', organizationId)
             // verify required parameter 'solution' is not null or undefined
@@ -6320,7 +6320,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(solution, localVarRequestOptions, configuration)
@@ -6338,7 +6338,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteSolution: async (organizationId: string, solutionId: string, options: any = {}): Promise<RequestArgs> => {
+        deleteSolution: async (organizationId: string, solutionId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('deleteSolution', 'organizationId', organizationId)
             // verify required parameter 'solutionId' is not null or undefined
@@ -6363,7 +6363,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -6381,7 +6381,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteSolutionRunTemplate: async (organizationId: string, solutionId: string, runTemplateId: string, options: any = {}): Promise<RequestArgs> => {
+        deleteSolutionRunTemplate: async (organizationId: string, solutionId: string, runTemplateId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('deleteSolutionRunTemplate', 'organizationId', organizationId)
             // verify required parameter 'solutionId' is not null or undefined
@@ -6409,7 +6409,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -6425,7 +6425,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findAllSolutions: async (organizationId: string, options: any = {}): Promise<RequestArgs> => {
+        findAllSolutions: async (organizationId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('findAllSolutions', 'organizationId', organizationId)
             const localVarPath = `/organizations/{organization_id}/solutions`
@@ -6447,7 +6447,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -6464,7 +6464,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findSolutionById: async (organizationId: string, solutionId: string, options: any = {}): Promise<RequestArgs> => {
+        findSolutionById: async (organizationId: string, solutionId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('findSolutionById', 'organizationId', organizationId)
             // verify required parameter 'solutionId' is not null or undefined
@@ -6489,7 +6489,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -6506,7 +6506,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        removeAllRunTemplates: async (organizationId: string, solutionId: string, options: any = {}): Promise<RequestArgs> => {
+        removeAllRunTemplates: async (organizationId: string, solutionId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('removeAllRunTemplates', 'organizationId', organizationId)
             // verify required parameter 'solutionId' is not null or undefined
@@ -6531,7 +6531,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -6548,7 +6548,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        removeAllSolutionParameterGroups: async (organizationId: string, solutionId: string, options: any = {}): Promise<RequestArgs> => {
+        removeAllSolutionParameterGroups: async (organizationId: string, solutionId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('removeAllSolutionParameterGroups', 'organizationId', organizationId)
             // verify required parameter 'solutionId' is not null or undefined
@@ -6573,7 +6573,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -6590,7 +6590,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        removeAllSolutionParameters: async (organizationId: string, solutionId: string, options: any = {}): Promise<RequestArgs> => {
+        removeAllSolutionParameters: async (organizationId: string, solutionId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('removeAllSolutionParameters', 'organizationId', organizationId)
             // verify required parameter 'solutionId' is not null or undefined
@@ -6615,7 +6615,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -6633,7 +6633,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateSolution: async (organizationId: string, solutionId: string, solution: Solution, options: any = {}): Promise<RequestArgs> => {
+        updateSolution: async (organizationId: string, solutionId: string, solution: Solution, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('updateSolution', 'organizationId', organizationId)
             // verify required parameter 'solutionId' is not null or undefined
@@ -6662,7 +6662,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(solution, localVarRequestOptions, configuration)
@@ -6682,7 +6682,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateSolutionRunTemplate: async (organizationId: string, solutionId: string, runTemplateId: string, runTemplate: RunTemplate, options: any = {}): Promise<RequestArgs> => {
+        updateSolutionRunTemplate: async (organizationId: string, solutionId: string, runTemplateId: string, runTemplate: RunTemplate, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('updateSolutionRunTemplate', 'organizationId', organizationId)
             // verify required parameter 'solutionId' is not null or undefined
@@ -6714,7 +6714,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(runTemplate, localVarRequestOptions, configuration)
@@ -6736,7 +6736,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadRunTemplateHandler: async (organizationId: string, solutionId: string, runTemplateId: string, handlerId: RunTemplateHandlerId, body: any, overwrite?: boolean, options: any = {}): Promise<RequestArgs> => {
+        uploadRunTemplateHandler: async (organizationId: string, solutionId: string, runTemplateId: string, handlerId: RunTemplateHandlerId, body: any, overwrite?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('uploadRunTemplateHandler', 'organizationId', organizationId)
             // verify required parameter 'solutionId' is not null or undefined
@@ -6775,7 +6775,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
     
             localVarHeaderParameter['Content-Type'] = 'application/octet-stream';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
@@ -6804,7 +6804,7 @@ export const SolutionApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async addOrReplaceParameterGroups(organizationId: string, solutionId: string, runTemplateParameterGroup: Array<RunTemplateParameterGroup>, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<RunTemplateParameterGroup>>> {
+        async addOrReplaceParameterGroups(organizationId: string, solutionId: string, runTemplateParameterGroup: Array<RunTemplateParameterGroup>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<RunTemplateParameterGroup>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.addOrReplaceParameterGroups(organizationId, solutionId, runTemplateParameterGroup, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -6817,7 +6817,7 @@ export const SolutionApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async addOrReplaceParameters(organizationId: string, solutionId: string, runTemplateParameter: Array<RunTemplateParameter>, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<RunTemplateParameter>>> {
+        async addOrReplaceParameters(organizationId: string, solutionId: string, runTemplateParameter: Array<RunTemplateParameter>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<RunTemplateParameter>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.addOrReplaceParameters(organizationId, solutionId, runTemplateParameter, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -6830,7 +6830,7 @@ export const SolutionApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async addOrReplaceRunTemplates(organizationId: string, solutionId: string, runTemplate: Array<RunTemplate>, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<RunTemplate>>> {
+        async addOrReplaceRunTemplates(organizationId: string, solutionId: string, runTemplate: Array<RunTemplate>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<RunTemplate>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.addOrReplaceRunTemplates(organizationId, solutionId, runTemplate, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -6842,7 +6842,7 @@ export const SolutionApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createSolution(organizationId: string, solution: Solution, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Solution>> {
+        async createSolution(organizationId: string, solution: Solution, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Solution>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createSolution(organizationId, solution, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -6854,7 +6854,7 @@ export const SolutionApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteSolution(organizationId: string, solutionId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async deleteSolution(organizationId: string, solutionId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteSolution(organizationId, solutionId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -6867,7 +6867,7 @@ export const SolutionApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteSolutionRunTemplate(organizationId: string, solutionId: string, runTemplateId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async deleteSolutionRunTemplate(organizationId: string, solutionId: string, runTemplateId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteSolutionRunTemplate(organizationId, solutionId, runTemplateId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -6878,7 +6878,7 @@ export const SolutionApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findAllSolutions(organizationId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Solution>>> {
+        async findAllSolutions(organizationId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Solution>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.findAllSolutions(organizationId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -6890,7 +6890,7 @@ export const SolutionApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findSolutionById(organizationId: string, solutionId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Solution>> {
+        async findSolutionById(organizationId: string, solutionId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Solution>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.findSolutionById(organizationId, solutionId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -6902,7 +6902,7 @@ export const SolutionApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async removeAllRunTemplates(organizationId: string, solutionId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async removeAllRunTemplates(organizationId: string, solutionId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.removeAllRunTemplates(organizationId, solutionId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -6914,7 +6914,7 @@ export const SolutionApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async removeAllSolutionParameterGroups(organizationId: string, solutionId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async removeAllSolutionParameterGroups(organizationId: string, solutionId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.removeAllSolutionParameterGroups(organizationId, solutionId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -6926,7 +6926,7 @@ export const SolutionApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async removeAllSolutionParameters(organizationId: string, solutionId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async removeAllSolutionParameters(organizationId: string, solutionId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.removeAllSolutionParameters(organizationId, solutionId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -6939,7 +6939,7 @@ export const SolutionApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateSolution(organizationId: string, solutionId: string, solution: Solution, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Solution>> {
+        async updateSolution(organizationId: string, solutionId: string, solution: Solution, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Solution>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateSolution(organizationId, solutionId, solution, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -6953,7 +6953,7 @@ export const SolutionApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateSolutionRunTemplate(organizationId: string, solutionId: string, runTemplateId: string, runTemplate: RunTemplate, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<RunTemplate>>> {
+        async updateSolutionRunTemplate(organizationId: string, solutionId: string, runTemplateId: string, runTemplate: RunTemplate, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<RunTemplate>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateSolutionRunTemplate(organizationId, solutionId, runTemplateId, runTemplate, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -6969,7 +6969,7 @@ export const SolutionApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadRunTemplateHandler(organizationId: string, solutionId: string, runTemplateId: string, handlerId: RunTemplateHandlerId, body: any, overwrite?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async uploadRunTemplateHandler(organizationId: string, solutionId: string, runTemplateId: string, handlerId: RunTemplateHandlerId, body: any, overwrite?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.uploadRunTemplateHandler(organizationId, solutionId, runTemplateId, handlerId, body, overwrite, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -7167,7 +7167,7 @@ export class SolutionApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SolutionApi
      */
-    public addOrReplaceParameterGroups(organizationId: string, solutionId: string, runTemplateParameterGroup: Array<RunTemplateParameterGroup>, options?: any) {
+    public addOrReplaceParameterGroups(organizationId: string, solutionId: string, runTemplateParameterGroup: Array<RunTemplateParameterGroup>, options?: AxiosRequestConfig) {
         return SolutionApiFp(this.configuration).addOrReplaceParameterGroups(organizationId, solutionId, runTemplateParameterGroup, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -7181,7 +7181,7 @@ export class SolutionApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SolutionApi
      */
-    public addOrReplaceParameters(organizationId: string, solutionId: string, runTemplateParameter: Array<RunTemplateParameter>, options?: any) {
+    public addOrReplaceParameters(organizationId: string, solutionId: string, runTemplateParameter: Array<RunTemplateParameter>, options?: AxiosRequestConfig) {
         return SolutionApiFp(this.configuration).addOrReplaceParameters(organizationId, solutionId, runTemplateParameter, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -7195,7 +7195,7 @@ export class SolutionApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SolutionApi
      */
-    public addOrReplaceRunTemplates(organizationId: string, solutionId: string, runTemplate: Array<RunTemplate>, options?: any) {
+    public addOrReplaceRunTemplates(organizationId: string, solutionId: string, runTemplate: Array<RunTemplate>, options?: AxiosRequestConfig) {
         return SolutionApiFp(this.configuration).addOrReplaceRunTemplates(organizationId, solutionId, runTemplate, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -7208,7 +7208,7 @@ export class SolutionApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SolutionApi
      */
-    public createSolution(organizationId: string, solution: Solution, options?: any) {
+    public createSolution(organizationId: string, solution: Solution, options?: AxiosRequestConfig) {
         return SolutionApiFp(this.configuration).createSolution(organizationId, solution, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -7221,7 +7221,7 @@ export class SolutionApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SolutionApi
      */
-    public deleteSolution(organizationId: string, solutionId: string, options?: any) {
+    public deleteSolution(organizationId: string, solutionId: string, options?: AxiosRequestConfig) {
         return SolutionApiFp(this.configuration).deleteSolution(organizationId, solutionId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -7235,7 +7235,7 @@ export class SolutionApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SolutionApi
      */
-    public deleteSolutionRunTemplate(organizationId: string, solutionId: string, runTemplateId: string, options?: any) {
+    public deleteSolutionRunTemplate(organizationId: string, solutionId: string, runTemplateId: string, options?: AxiosRequestConfig) {
         return SolutionApiFp(this.configuration).deleteSolutionRunTemplate(organizationId, solutionId, runTemplateId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -7247,7 +7247,7 @@ export class SolutionApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SolutionApi
      */
-    public findAllSolutions(organizationId: string, options?: any) {
+    public findAllSolutions(organizationId: string, options?: AxiosRequestConfig) {
         return SolutionApiFp(this.configuration).findAllSolutions(organizationId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -7260,7 +7260,7 @@ export class SolutionApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SolutionApi
      */
-    public findSolutionById(organizationId: string, solutionId: string, options?: any) {
+    public findSolutionById(organizationId: string, solutionId: string, options?: AxiosRequestConfig) {
         return SolutionApiFp(this.configuration).findSolutionById(organizationId, solutionId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -7273,7 +7273,7 @@ export class SolutionApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SolutionApi
      */
-    public removeAllRunTemplates(organizationId: string, solutionId: string, options?: any) {
+    public removeAllRunTemplates(organizationId: string, solutionId: string, options?: AxiosRequestConfig) {
         return SolutionApiFp(this.configuration).removeAllRunTemplates(organizationId, solutionId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -7286,7 +7286,7 @@ export class SolutionApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SolutionApi
      */
-    public removeAllSolutionParameterGroups(organizationId: string, solutionId: string, options?: any) {
+    public removeAllSolutionParameterGroups(organizationId: string, solutionId: string, options?: AxiosRequestConfig) {
         return SolutionApiFp(this.configuration).removeAllSolutionParameterGroups(organizationId, solutionId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -7299,7 +7299,7 @@ export class SolutionApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SolutionApi
      */
-    public removeAllSolutionParameters(organizationId: string, solutionId: string, options?: any) {
+    public removeAllSolutionParameters(organizationId: string, solutionId: string, options?: AxiosRequestConfig) {
         return SolutionApiFp(this.configuration).removeAllSolutionParameters(organizationId, solutionId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -7313,7 +7313,7 @@ export class SolutionApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SolutionApi
      */
-    public updateSolution(organizationId: string, solutionId: string, solution: Solution, options?: any) {
+    public updateSolution(organizationId: string, solutionId: string, solution: Solution, options?: AxiosRequestConfig) {
         return SolutionApiFp(this.configuration).updateSolution(organizationId, solutionId, solution, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -7328,7 +7328,7 @@ export class SolutionApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SolutionApi
      */
-    public updateSolutionRunTemplate(organizationId: string, solutionId: string, runTemplateId: string, runTemplate: RunTemplate, options?: any) {
+    public updateSolutionRunTemplate(organizationId: string, solutionId: string, runTemplateId: string, runTemplate: RunTemplate, options?: AxiosRequestConfig) {
         return SolutionApiFp(this.configuration).updateSolutionRunTemplate(organizationId, solutionId, runTemplateId, runTemplate, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -7345,7 +7345,7 @@ export class SolutionApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SolutionApi
      */
-    public uploadRunTemplateHandler(organizationId: string, solutionId: string, runTemplateId: string, handlerId: RunTemplateHandlerId, body: any, overwrite?: boolean, options?: any) {
+    public uploadRunTemplateHandler(organizationId: string, solutionId: string, runTemplateId: string, handlerId: RunTemplateHandlerId, body: any, overwrite?: boolean, options?: AxiosRequestConfig) {
         return SolutionApiFp(this.configuration).uploadRunTemplateHandler(organizationId, solutionId, runTemplateId, handlerId, body, overwrite, options).then((request) => request(this.axios, this.basePath));
     }
 }
@@ -7363,7 +7363,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authorizeUser: async (options: any = {}): Promise<RequestArgs> => {
+        authorizeUser: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/oauth2/authorize`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -7382,7 +7382,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -7397,7 +7397,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findAllUsers: async (options: any = {}): Promise<RequestArgs> => {
+        findAllUsers: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/users`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -7416,7 +7416,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -7432,7 +7432,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findUserById: async (userId: string, options: any = {}): Promise<RequestArgs> => {
+        findUserById: async (userId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
             assertParamExists('findUserById', 'userId', userId)
             const localVarPath = `/users/{user_id}`
@@ -7454,7 +7454,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -7469,7 +7469,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCurrentUser: async (options: any = {}): Promise<RequestArgs> => {
+        getCurrentUser: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/users/me`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -7488,7 +7488,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -7504,7 +7504,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOrganizationCurrentUser: async (organizationId: string, options: any = {}): Promise<RequestArgs> => {
+        getOrganizationCurrentUser: async (organizationId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('getOrganizationCurrentUser', 'organizationId', organizationId)
             const localVarPath = `/organizations/{organization_id}/me`
@@ -7526,7 +7526,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -7543,7 +7543,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getWorkspaceCurrentUser: async (organizationId: string, workspaceId: string, options: any = {}): Promise<RequestArgs> => {
+        getWorkspaceCurrentUser: async (organizationId: string, workspaceId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('getWorkspaceCurrentUser', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
@@ -7568,7 +7568,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -7584,7 +7584,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        registerUser: async (user: User, options: any = {}): Promise<RequestArgs> => {
+        registerUser: async (user: User, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'user' is not null or undefined
             assertParamExists('registerUser', 'user', user)
             const localVarPath = `/users`;
@@ -7607,7 +7607,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(user, localVarRequestOptions, configuration)
@@ -7623,7 +7623,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        testPlatform: async (options: any = {}): Promise<RequestArgs> => {
+        testPlatform: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/test`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -7642,7 +7642,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -7658,7 +7658,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        unregisterUser: async (userId: string, options: any = {}): Promise<RequestArgs> => {
+        unregisterUser: async (userId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
             assertParamExists('unregisterUser', 'userId', userId)
             const localVarPath = `/users/{user_id}`
@@ -7680,7 +7680,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -7697,7 +7697,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateUser: async (userId: string, user: User, options: any = {}): Promise<RequestArgs> => {
+        updateUser: async (userId: string, user: User, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
             assertParamExists('updateUser', 'userId', userId)
             // verify required parameter 'user' is not null or undefined
@@ -7723,7 +7723,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(user, localVarRequestOptions, configuration)
@@ -7749,7 +7749,7 @@ export const UserApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authorizeUser(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async authorizeUser(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.authorizeUser(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -7759,7 +7759,7 @@ export const UserApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findAllUsers(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<User>>> {
+        async findAllUsers(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<User>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.findAllUsers(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -7770,7 +7770,7 @@ export const UserApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findUserById(userId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
+        async findUserById(userId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.findUserById(userId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -7780,7 +7780,7 @@ export const UserApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getCurrentUser(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
+        async getCurrentUser(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCurrentUser(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -7791,7 +7791,7 @@ export const UserApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getOrganizationCurrentUser(organizationId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
+        async getOrganizationCurrentUser(organizationId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getOrganizationCurrentUser(organizationId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -7803,7 +7803,7 @@ export const UserApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getWorkspaceCurrentUser(organizationId: string, workspaceId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
+        async getWorkspaceCurrentUser(organizationId: string, workspaceId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getWorkspaceCurrentUser(organizationId, workspaceId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -7814,7 +7814,7 @@ export const UserApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async registerUser(user: User, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
+        async registerUser(user: User, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.registerUser(user, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -7824,7 +7824,7 @@ export const UserApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async testPlatform(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
+        async testPlatform(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.testPlatform(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -7835,7 +7835,7 @@ export const UserApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async unregisterUser(userId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async unregisterUser(userId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.unregisterUser(userId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -7847,7 +7847,7 @@ export const UserApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateUser(userId: string, user: User, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
+        async updateUser(userId: string, user: User, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateUser(userId, user, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -7976,7 +7976,7 @@ export class UserApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UserApi
      */
-    public authorizeUser(options?: any) {
+    public authorizeUser(options?: AxiosRequestConfig) {
         return UserApiFp(this.configuration).authorizeUser(options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -7987,7 +7987,7 @@ export class UserApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UserApi
      */
-    public findAllUsers(options?: any) {
+    public findAllUsers(options?: AxiosRequestConfig) {
         return UserApiFp(this.configuration).findAllUsers(options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -7999,7 +7999,7 @@ export class UserApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UserApi
      */
-    public findUserById(userId: string, options?: any) {
+    public findUserById(userId: string, options?: AxiosRequestConfig) {
         return UserApiFp(this.configuration).findUserById(userId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -8010,7 +8010,7 @@ export class UserApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UserApi
      */
-    public getCurrentUser(options?: any) {
+    public getCurrentUser(options?: AxiosRequestConfig) {
         return UserApiFp(this.configuration).getCurrentUser(options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -8022,7 +8022,7 @@ export class UserApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UserApi
      */
-    public getOrganizationCurrentUser(organizationId: string, options?: any) {
+    public getOrganizationCurrentUser(organizationId: string, options?: AxiosRequestConfig) {
         return UserApiFp(this.configuration).getOrganizationCurrentUser(organizationId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -8035,7 +8035,7 @@ export class UserApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UserApi
      */
-    public getWorkspaceCurrentUser(organizationId: string, workspaceId: string, options?: any) {
+    public getWorkspaceCurrentUser(organizationId: string, workspaceId: string, options?: AxiosRequestConfig) {
         return UserApiFp(this.configuration).getWorkspaceCurrentUser(organizationId, workspaceId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -8047,7 +8047,7 @@ export class UserApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UserApi
      */
-    public registerUser(user: User, options?: any) {
+    public registerUser(user: User, options?: AxiosRequestConfig) {
         return UserApiFp(this.configuration).registerUser(user, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -8058,7 +8058,7 @@ export class UserApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UserApi
      */
-    public testPlatform(options?: any) {
+    public testPlatform(options?: AxiosRequestConfig) {
         return UserApiFp(this.configuration).testPlatform(options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -8070,7 +8070,7 @@ export class UserApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UserApi
      */
-    public unregisterUser(userId: string, options?: any) {
+    public unregisterUser(userId: string, options?: AxiosRequestConfig) {
         return UserApiFp(this.configuration).unregisterUser(userId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -8083,7 +8083,7 @@ export class UserApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UserApi
      */
-    public updateUser(userId: string, user: User, options?: any) {
+    public updateUser(userId: string, user: User, options?: AxiosRequestConfig) {
         return UserApiFp(this.configuration).updateUser(userId, user, options).then((request) => request(this.axios, this.basePath));
     }
 }
@@ -8103,7 +8103,7 @@ export const ValidatorApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createValidator: async (organizationId: string, validator: Validator, options: any = {}): Promise<RequestArgs> => {
+        createValidator: async (organizationId: string, validator: Validator, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('createValidator', 'organizationId', organizationId)
             // verify required parameter 'validator' is not null or undefined
@@ -8129,7 +8129,7 @@ export const ValidatorApiAxiosParamCreator = function (configuration?: Configura
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(validator, localVarRequestOptions, configuration)
@@ -8148,7 +8148,7 @@ export const ValidatorApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createValidatorRun: async (organizationId: string, validatorId: string, validatorRun: ValidatorRun, options: any = {}): Promise<RequestArgs> => {
+        createValidatorRun: async (organizationId: string, validatorId: string, validatorRun: ValidatorRun, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('createValidatorRun', 'organizationId', organizationId)
             // verify required parameter 'validatorId' is not null or undefined
@@ -8177,7 +8177,7 @@ export const ValidatorApiAxiosParamCreator = function (configuration?: Configura
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(validatorRun, localVarRequestOptions, configuration)
@@ -8195,7 +8195,7 @@ export const ValidatorApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteValidator: async (organizationId: string, validatorId: string, options: any = {}): Promise<RequestArgs> => {
+        deleteValidator: async (organizationId: string, validatorId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('deleteValidator', 'organizationId', organizationId)
             // verify required parameter 'validatorId' is not null or undefined
@@ -8220,7 +8220,7 @@ export const ValidatorApiAxiosParamCreator = function (configuration?: Configura
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -8238,7 +8238,7 @@ export const ValidatorApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteValidatorRun: async (organizationId: string, validatorId: string, validatorrunId: string, options: any = {}): Promise<RequestArgs> => {
+        deleteValidatorRun: async (organizationId: string, validatorId: string, validatorrunId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('deleteValidatorRun', 'organizationId', organizationId)
             // verify required parameter 'validatorId' is not null or undefined
@@ -8266,7 +8266,7 @@ export const ValidatorApiAxiosParamCreator = function (configuration?: Configura
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -8283,7 +8283,7 @@ export const ValidatorApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findAllValidatorRuns: async (organizationId: string, validatorId: string, options: any = {}): Promise<RequestArgs> => {
+        findAllValidatorRuns: async (organizationId: string, validatorId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('findAllValidatorRuns', 'organizationId', organizationId)
             // verify required parameter 'validatorId' is not null or undefined
@@ -8308,7 +8308,7 @@ export const ValidatorApiAxiosParamCreator = function (configuration?: Configura
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -8324,7 +8324,7 @@ export const ValidatorApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findAllValidators: async (organizationId: string, options: any = {}): Promise<RequestArgs> => {
+        findAllValidators: async (organizationId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('findAllValidators', 'organizationId', organizationId)
             const localVarPath = `/organizations/{organization_id}/datasets/validators`
@@ -8346,7 +8346,7 @@ export const ValidatorApiAxiosParamCreator = function (configuration?: Configura
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -8363,7 +8363,7 @@ export const ValidatorApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findValidatorById: async (organizationId: string, validatorId: string, options: any = {}): Promise<RequestArgs> => {
+        findValidatorById: async (organizationId: string, validatorId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('findValidatorById', 'organizationId', organizationId)
             // verify required parameter 'validatorId' is not null or undefined
@@ -8388,7 +8388,7 @@ export const ValidatorApiAxiosParamCreator = function (configuration?: Configura
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -8406,7 +8406,7 @@ export const ValidatorApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findValidatorRunById: async (organizationId: string, validatorId: string, validatorrunId: string, options: any = {}): Promise<RequestArgs> => {
+        findValidatorRunById: async (organizationId: string, validatorId: string, validatorrunId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('findValidatorRunById', 'organizationId', organizationId)
             // verify required parameter 'validatorId' is not null or undefined
@@ -8434,7 +8434,7 @@ export const ValidatorApiAxiosParamCreator = function (configuration?: Configura
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -8452,7 +8452,7 @@ export const ValidatorApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        runValidator: async (organizationId: string, validatorId: string, validatorRun: ValidatorRun, options: any = {}): Promise<RequestArgs> => {
+        runValidator: async (organizationId: string, validatorId: string, validatorRun: ValidatorRun, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('runValidator', 'organizationId', organizationId)
             // verify required parameter 'validatorId' is not null or undefined
@@ -8481,7 +8481,7 @@ export const ValidatorApiAxiosParamCreator = function (configuration?: Configura
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(validatorRun, localVarRequestOptions, configuration)
@@ -8509,7 +8509,7 @@ export const ValidatorApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createValidator(organizationId: string, validator: Validator, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Validator>> {
+        async createValidator(organizationId: string, validator: Validator, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Validator>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createValidator(organizationId, validator, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8522,7 +8522,7 @@ export const ValidatorApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createValidatorRun(organizationId: string, validatorId: string, validatorRun: ValidatorRun, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ValidatorRun>> {
+        async createValidatorRun(organizationId: string, validatorId: string, validatorRun: ValidatorRun, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ValidatorRun>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createValidatorRun(organizationId, validatorId, validatorRun, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8534,7 +8534,7 @@ export const ValidatorApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteValidator(organizationId: string, validatorId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async deleteValidator(organizationId: string, validatorId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteValidator(organizationId, validatorId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8547,7 +8547,7 @@ export const ValidatorApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteValidatorRun(organizationId: string, validatorId: string, validatorrunId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async deleteValidatorRun(organizationId: string, validatorId: string, validatorrunId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteValidatorRun(organizationId, validatorId, validatorrunId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8559,7 +8559,7 @@ export const ValidatorApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findAllValidatorRuns(organizationId: string, validatorId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ValidatorRun>>> {
+        async findAllValidatorRuns(organizationId: string, validatorId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ValidatorRun>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.findAllValidatorRuns(organizationId, validatorId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8570,7 +8570,7 @@ export const ValidatorApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findAllValidators(organizationId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Validator>>> {
+        async findAllValidators(organizationId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Validator>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.findAllValidators(organizationId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8582,7 +8582,7 @@ export const ValidatorApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findValidatorById(organizationId: string, validatorId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Validator>> {
+        async findValidatorById(organizationId: string, validatorId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Validator>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.findValidatorById(organizationId, validatorId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8595,7 +8595,7 @@ export const ValidatorApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findValidatorRunById(organizationId: string, validatorId: string, validatorrunId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ValidatorRun>> {
+        async findValidatorRunById(organizationId: string, validatorId: string, validatorrunId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ValidatorRun>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.findValidatorRunById(organizationId, validatorId, validatorrunId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8608,7 +8608,7 @@ export const ValidatorApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async runValidator(organizationId: string, validatorId: string, validatorRun: ValidatorRun, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ValidatorRun>> {
+        async runValidator(organizationId: string, validatorId: string, validatorRun: ValidatorRun, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ValidatorRun>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.runValidator(organizationId, validatorId, validatorRun, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8743,7 +8743,7 @@ export class ValidatorApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ValidatorApi
      */
-    public createValidator(organizationId: string, validator: Validator, options?: any) {
+    public createValidator(organizationId: string, validator: Validator, options?: AxiosRequestConfig) {
         return ValidatorApiFp(this.configuration).createValidator(organizationId, validator, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -8757,7 +8757,7 @@ export class ValidatorApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ValidatorApi
      */
-    public createValidatorRun(organizationId: string, validatorId: string, validatorRun: ValidatorRun, options?: any) {
+    public createValidatorRun(organizationId: string, validatorId: string, validatorRun: ValidatorRun, options?: AxiosRequestConfig) {
         return ValidatorApiFp(this.configuration).createValidatorRun(organizationId, validatorId, validatorRun, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -8770,7 +8770,7 @@ export class ValidatorApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ValidatorApi
      */
-    public deleteValidator(organizationId: string, validatorId: string, options?: any) {
+    public deleteValidator(organizationId: string, validatorId: string, options?: AxiosRequestConfig) {
         return ValidatorApiFp(this.configuration).deleteValidator(organizationId, validatorId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -8784,7 +8784,7 @@ export class ValidatorApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ValidatorApi
      */
-    public deleteValidatorRun(organizationId: string, validatorId: string, validatorrunId: string, options?: any) {
+    public deleteValidatorRun(organizationId: string, validatorId: string, validatorrunId: string, options?: AxiosRequestConfig) {
         return ValidatorApiFp(this.configuration).deleteValidatorRun(organizationId, validatorId, validatorrunId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -8797,7 +8797,7 @@ export class ValidatorApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ValidatorApi
      */
-    public findAllValidatorRuns(organizationId: string, validatorId: string, options?: any) {
+    public findAllValidatorRuns(organizationId: string, validatorId: string, options?: AxiosRequestConfig) {
         return ValidatorApiFp(this.configuration).findAllValidatorRuns(organizationId, validatorId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -8809,7 +8809,7 @@ export class ValidatorApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ValidatorApi
      */
-    public findAllValidators(organizationId: string, options?: any) {
+    public findAllValidators(organizationId: string, options?: AxiosRequestConfig) {
         return ValidatorApiFp(this.configuration).findAllValidators(organizationId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -8822,7 +8822,7 @@ export class ValidatorApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ValidatorApi
      */
-    public findValidatorById(organizationId: string, validatorId: string, options?: any) {
+    public findValidatorById(organizationId: string, validatorId: string, options?: AxiosRequestConfig) {
         return ValidatorApiFp(this.configuration).findValidatorById(organizationId, validatorId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -8836,7 +8836,7 @@ export class ValidatorApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ValidatorApi
      */
-    public findValidatorRunById(organizationId: string, validatorId: string, validatorrunId: string, options?: any) {
+    public findValidatorRunById(organizationId: string, validatorId: string, validatorrunId: string, options?: AxiosRequestConfig) {
         return ValidatorApiFp(this.configuration).findValidatorRunById(organizationId, validatorId, validatorrunId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -8850,7 +8850,7 @@ export class ValidatorApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ValidatorApi
      */
-    public runValidator(organizationId: string, validatorId: string, validatorRun: ValidatorRun, options?: any) {
+    public runValidator(organizationId: string, validatorId: string, validatorRun: ValidatorRun, options?: AxiosRequestConfig) {
         return ValidatorApiFp(this.configuration).runValidator(organizationId, validatorId, validatorRun, options).then((request) => request(this.axios, this.basePath));
     }
 }
@@ -8871,7 +8871,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addOrReplaceUsersInOrganizationWorkspace: async (organizationId: string, workspaceId: string, workspaceUser: Array<WorkspaceUser>, options: any = {}): Promise<RequestArgs> => {
+        addOrReplaceUsersInOrganizationWorkspace: async (organizationId: string, workspaceId: string, workspaceUser: Array<WorkspaceUser>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('addOrReplaceUsersInOrganizationWorkspace', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
@@ -8900,7 +8900,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(workspaceUser, localVarRequestOptions, configuration)
@@ -8918,7 +8918,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createWorkspace: async (organizationId: string, workspace: Workspace, options: any = {}): Promise<RequestArgs> => {
+        createWorkspace: async (organizationId: string, workspace: Workspace, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('createWorkspace', 'organizationId', organizationId)
             // verify required parameter 'workspace' is not null or undefined
@@ -8944,7 +8944,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(workspace, localVarRequestOptions, configuration)
@@ -8962,7 +8962,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteAllWorkspaceFiles: async (organizationId: string, workspaceId: string, options: any = {}): Promise<RequestArgs> => {
+        deleteAllWorkspaceFiles: async (organizationId: string, workspaceId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('deleteAllWorkspaceFiles', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
@@ -8987,7 +8987,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -9004,7 +9004,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteWorkspace: async (organizationId: string, workspaceId: string, options: any = {}): Promise<RequestArgs> => {
+        deleteWorkspace: async (organizationId: string, workspaceId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('deleteWorkspace', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
@@ -9029,7 +9029,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -9047,7 +9047,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteWorkspaceFile: async (organizationId: string, workspaceId: string, fileName: string, options: any = {}): Promise<RequestArgs> => {
+        deleteWorkspaceFile: async (organizationId: string, workspaceId: string, fileName: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('deleteWorkspaceFile', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
@@ -9078,7 +9078,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -9096,7 +9096,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        downloadWorkspaceFile: async (organizationId: string, workspaceId: string, fileName: string, options: any = {}): Promise<RequestArgs> => {
+        downloadWorkspaceFile: async (organizationId: string, workspaceId: string, fileName: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('downloadWorkspaceFile', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
@@ -9127,7 +9127,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -9144,7 +9144,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findAllWorkspaceFiles: async (organizationId: string, workspaceId: string, options: any = {}): Promise<RequestArgs> => {
+        findAllWorkspaceFiles: async (organizationId: string, workspaceId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('findAllWorkspaceFiles', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
@@ -9169,7 +9169,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -9185,7 +9185,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findAllWorkspaces: async (organizationId: string, options: any = {}): Promise<RequestArgs> => {
+        findAllWorkspaces: async (organizationId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('findAllWorkspaces', 'organizationId', organizationId)
             const localVarPath = `/organizations/{organization_id}/workspaces`
@@ -9207,7 +9207,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -9224,7 +9224,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findWorkspaceById: async (organizationId: string, workspaceId: string, options: any = {}): Promise<RequestArgs> => {
+        findWorkspaceById: async (organizationId: string, workspaceId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('findWorkspaceById', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
@@ -9249,7 +9249,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -9266,7 +9266,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        removeAllUsersOfWorkspace: async (organizationId: string, workspaceId: string, options: any = {}): Promise<RequestArgs> => {
+        removeAllUsersOfWorkspace: async (organizationId: string, workspaceId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('removeAllUsersOfWorkspace', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
@@ -9291,7 +9291,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -9309,7 +9309,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        removeUserFromOrganizationWorkspace: async (organizationId: string, workspaceId: string, userId: string, options: any = {}): Promise<RequestArgs> => {
+        removeUserFromOrganizationWorkspace: async (organizationId: string, workspaceId: string, userId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('removeUserFromOrganizationWorkspace', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
@@ -9337,7 +9337,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
 
 
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
@@ -9355,7 +9355,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateWorkspace: async (organizationId: string, workspaceId: string, workspace: Workspace, options: any = {}): Promise<RequestArgs> => {
+        updateWorkspace: async (organizationId: string, workspaceId: string, workspace: Workspace, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('updateWorkspace', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
@@ -9384,7 +9384,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(workspace, localVarRequestOptions, configuration)
@@ -9405,7 +9405,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadWorkspaceFile: async (organizationId: string, workspaceId: string, file: any, overwrite?: boolean, destination?: string, options: any = {}): Promise<RequestArgs> => {
+        uploadWorkspaceFile: async (organizationId: string, workspaceId: string, file: any, overwrite?: boolean, destination?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('uploadWorkspaceFile', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
@@ -9447,7 +9447,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
     
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
     
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = localVarFormParams;
@@ -9476,7 +9476,7 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async addOrReplaceUsersInOrganizationWorkspace(organizationId: string, workspaceId: string, workspaceUser: Array<WorkspaceUser>, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<WorkspaceUser>>> {
+        async addOrReplaceUsersInOrganizationWorkspace(organizationId: string, workspaceId: string, workspaceUser: Array<WorkspaceUser>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<WorkspaceUser>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.addOrReplaceUsersInOrganizationWorkspace(organizationId, workspaceId, workspaceUser, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -9488,7 +9488,7 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createWorkspace(organizationId: string, workspace: Workspace, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Workspace>> {
+        async createWorkspace(organizationId: string, workspace: Workspace, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Workspace>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createWorkspace(organizationId, workspace, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -9500,7 +9500,7 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteAllWorkspaceFiles(organizationId: string, workspaceId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async deleteAllWorkspaceFiles(organizationId: string, workspaceId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteAllWorkspaceFiles(organizationId, workspaceId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -9512,7 +9512,7 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteWorkspace(organizationId: string, workspaceId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Workspace>> {
+        async deleteWorkspace(organizationId: string, workspaceId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Workspace>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteWorkspace(organizationId, workspaceId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -9525,7 +9525,7 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteWorkspaceFile(organizationId: string, workspaceId: string, fileName: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async deleteWorkspaceFile(organizationId: string, workspaceId: string, fileName: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteWorkspaceFile(organizationId, workspaceId, fileName, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -9538,7 +9538,7 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async downloadWorkspaceFile(organizationId: string, workspaceId: string, fileName: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+        async downloadWorkspaceFile(organizationId: string, workspaceId: string, fileName: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.downloadWorkspaceFile(organizationId, workspaceId, fileName, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -9550,7 +9550,7 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findAllWorkspaceFiles(organizationId: string, workspaceId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<WorkspaceFile>>> {
+        async findAllWorkspaceFiles(organizationId: string, workspaceId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<WorkspaceFile>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.findAllWorkspaceFiles(organizationId, workspaceId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -9561,7 +9561,7 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findAllWorkspaces(organizationId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Workspace>>> {
+        async findAllWorkspaces(organizationId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Workspace>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.findAllWorkspaces(organizationId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -9573,7 +9573,7 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findWorkspaceById(organizationId: string, workspaceId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Workspace>> {
+        async findWorkspaceById(organizationId: string, workspaceId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Workspace>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.findWorkspaceById(organizationId, workspaceId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -9585,7 +9585,7 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async removeAllUsersOfWorkspace(organizationId: string, workspaceId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async removeAllUsersOfWorkspace(organizationId: string, workspaceId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.removeAllUsersOfWorkspace(organizationId, workspaceId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -9598,7 +9598,7 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async removeUserFromOrganizationWorkspace(organizationId: string, workspaceId: string, userId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async removeUserFromOrganizationWorkspace(organizationId: string, workspaceId: string, userId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.removeUserFromOrganizationWorkspace(organizationId, workspaceId, userId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -9611,7 +9611,7 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateWorkspace(organizationId: string, workspaceId: string, workspace: Workspace, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Workspace>> {
+        async updateWorkspace(organizationId: string, workspaceId: string, workspace: Workspace, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Workspace>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateWorkspace(organizationId, workspaceId, workspace, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -9626,7 +9626,7 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadWorkspaceFile(organizationId: string, workspaceId: string, file: any, overwrite?: boolean, destination?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkspaceFile>> {
+        async uploadWorkspaceFile(organizationId: string, workspaceId: string, file: any, overwrite?: boolean, destination?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkspaceFile>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.uploadWorkspaceFile(organizationId, workspaceId, file, overwrite, destination, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -9810,7 +9810,7 @@ export class WorkspaceApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof WorkspaceApi
      */
-    public addOrReplaceUsersInOrganizationWorkspace(organizationId: string, workspaceId: string, workspaceUser: Array<WorkspaceUser>, options?: any) {
+    public addOrReplaceUsersInOrganizationWorkspace(organizationId: string, workspaceId: string, workspaceUser: Array<WorkspaceUser>, options?: AxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).addOrReplaceUsersInOrganizationWorkspace(organizationId, workspaceId, workspaceUser, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -9823,7 +9823,7 @@ export class WorkspaceApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof WorkspaceApi
      */
-    public createWorkspace(organizationId: string, workspace: Workspace, options?: any) {
+    public createWorkspace(organizationId: string, workspace: Workspace, options?: AxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).createWorkspace(organizationId, workspace, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -9836,7 +9836,7 @@ export class WorkspaceApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof WorkspaceApi
      */
-    public deleteAllWorkspaceFiles(organizationId: string, workspaceId: string, options?: any) {
+    public deleteAllWorkspaceFiles(organizationId: string, workspaceId: string, options?: AxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).deleteAllWorkspaceFiles(organizationId, workspaceId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -9849,7 +9849,7 @@ export class WorkspaceApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof WorkspaceApi
      */
-    public deleteWorkspace(organizationId: string, workspaceId: string, options?: any) {
+    public deleteWorkspace(organizationId: string, workspaceId: string, options?: AxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).deleteWorkspace(organizationId, workspaceId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -9863,7 +9863,7 @@ export class WorkspaceApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof WorkspaceApi
      */
-    public deleteWorkspaceFile(organizationId: string, workspaceId: string, fileName: string, options?: any) {
+    public deleteWorkspaceFile(organizationId: string, workspaceId: string, fileName: string, options?: AxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).deleteWorkspaceFile(organizationId, workspaceId, fileName, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -9877,7 +9877,7 @@ export class WorkspaceApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof WorkspaceApi
      */
-    public downloadWorkspaceFile(organizationId: string, workspaceId: string, fileName: string, options?: any) {
+    public downloadWorkspaceFile(organizationId: string, workspaceId: string, fileName: string, options?: AxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).downloadWorkspaceFile(organizationId, workspaceId, fileName, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -9890,7 +9890,7 @@ export class WorkspaceApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof WorkspaceApi
      */
-    public findAllWorkspaceFiles(organizationId: string, workspaceId: string, options?: any) {
+    public findAllWorkspaceFiles(organizationId: string, workspaceId: string, options?: AxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).findAllWorkspaceFiles(organizationId, workspaceId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -9902,7 +9902,7 @@ export class WorkspaceApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof WorkspaceApi
      */
-    public findAllWorkspaces(organizationId: string, options?: any) {
+    public findAllWorkspaces(organizationId: string, options?: AxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).findAllWorkspaces(organizationId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -9915,7 +9915,7 @@ export class WorkspaceApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof WorkspaceApi
      */
-    public findWorkspaceById(organizationId: string, workspaceId: string, options?: any) {
+    public findWorkspaceById(organizationId: string, workspaceId: string, options?: AxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).findWorkspaceById(organizationId, workspaceId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -9928,7 +9928,7 @@ export class WorkspaceApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof WorkspaceApi
      */
-    public removeAllUsersOfWorkspace(organizationId: string, workspaceId: string, options?: any) {
+    public removeAllUsersOfWorkspace(organizationId: string, workspaceId: string, options?: AxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).removeAllUsersOfWorkspace(organizationId, workspaceId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -9942,7 +9942,7 @@ export class WorkspaceApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof WorkspaceApi
      */
-    public removeUserFromOrganizationWorkspace(organizationId: string, workspaceId: string, userId: string, options?: any) {
+    public removeUserFromOrganizationWorkspace(organizationId: string, workspaceId: string, userId: string, options?: AxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).removeUserFromOrganizationWorkspace(organizationId, workspaceId, userId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -9956,7 +9956,7 @@ export class WorkspaceApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof WorkspaceApi
      */
-    public updateWorkspace(organizationId: string, workspaceId: string, workspace: Workspace, options?: any) {
+    public updateWorkspace(organizationId: string, workspaceId: string, workspace: Workspace, options?: AxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).updateWorkspace(organizationId, workspaceId, workspace, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -9972,7 +9972,7 @@ export class WorkspaceApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof WorkspaceApi
      */
-    public uploadWorkspaceFile(organizationId: string, workspaceId: string, file: any, overwrite?: boolean, destination?: string, options?: any) {
+    public uploadWorkspaceFile(organizationId: string, workspaceId: string, file: any, overwrite?: boolean, destination?: string, options?: AxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).uploadWorkspaceFile(organizationId, workspaceId, file, overwrite, destination, options).then((request) => request(this.axios, this.basePath));
     }
 }
