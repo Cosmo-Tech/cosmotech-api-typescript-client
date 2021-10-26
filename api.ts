@@ -1989,6 +1989,12 @@ export interface Workspace {
      * @memberof Workspace
      */
     'sendInputToDataWarehouse'?: boolean;
+    /**
+     * Set this property to true to use a dedicated Azure Event Hub Namespace for this Workspace. The Event Hub Namespace must be named \\\'<organization_id\\>-<workspace_id\\>\\\' (in lower case). This Namespace must also contain two Event Hubs named \\\'probesmeasures\\\' and \\\'scenariorun\\\'.
+     * @type {boolean}
+     * @memberof Workspace
+     */
+    'useDedicatedEventHubNamespace'?: boolean;
 }
 /**
  * a Workspace File resource
