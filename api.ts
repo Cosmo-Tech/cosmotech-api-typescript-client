@@ -6426,6 +6426,56 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
+         * @summary Download a Run Template step handler zip file
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {string} runTemplateId the Run Template identifier
+         * @param {RunTemplateHandlerId} handlerId the Handler identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        downloadRunTemplateHandler: async (organizationId: string, solutionId: string, runTemplateId: string, handlerId: RunTemplateHandlerId, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('downloadRunTemplateHandler', 'organizationId', organizationId)
+            // verify required parameter 'solutionId' is not null or undefined
+            assertParamExists('downloadRunTemplateHandler', 'solutionId', solutionId)
+            // verify required parameter 'runTemplateId' is not null or undefined
+            assertParamExists('downloadRunTemplateHandler', 'runTemplateId', runTemplateId)
+            // verify required parameter 'handlerId' is not null or undefined
+            assertParamExists('downloadRunTemplateHandler', 'handlerId', handlerId)
+            const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/runtemplates/{run_template_id}/handlers/{handler_id}/download`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)))
+                .replace(`{${"run_template_id"}}`, encodeURIComponent(String(runTemplateId)))
+                .replace(`{${"handler_id"}}`, encodeURIComponent(String(handlerId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary List all Solutions
          * @param {string} organizationId the Organization identifier
          * @param {*} [options] Override http request option.
@@ -6879,6 +6929,20 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Download a Run Template step handler zip file
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {string} runTemplateId the Run Template identifier
+         * @param {RunTemplateHandlerId} handlerId the Handler identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async downloadRunTemplateHandler(organizationId: string, solutionId: string, runTemplateId: string, handlerId: RunTemplateHandlerId, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.downloadRunTemplateHandler(organizationId, solutionId, runTemplateId, handlerId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @summary List all Solutions
          * @param {string} organizationId the Organization identifier
          * @param {*} [options] Override http request option.
@@ -7058,6 +7122,19 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
          */
         deleteSolutionRunTemplate(organizationId: string, solutionId: string, runTemplateId: string, options?: any): AxiosPromise<void> {
             return localVarFp.deleteSolutionRunTemplate(organizationId, solutionId, runTemplateId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Download a Run Template step handler zip file
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {string} runTemplateId the Run Template identifier
+         * @param {RunTemplateHandlerId} handlerId the Handler identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        downloadRunTemplateHandler(organizationId: string, solutionId: string, runTemplateId: string, handlerId: RunTemplateHandlerId, options?: any): AxiosPromise<any> {
+            return localVarFp.downloadRunTemplateHandler(organizationId, solutionId, runTemplateId, handlerId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -7243,6 +7320,21 @@ export class SolutionApi extends BaseAPI {
      */
     public deleteSolutionRunTemplate(organizationId: string, solutionId: string, runTemplateId: string, options?: AxiosRequestConfig) {
         return SolutionApiFp(this.configuration).deleteSolutionRunTemplate(organizationId, solutionId, runTemplateId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Download a Run Template step handler zip file
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
+     * @param {string} runTemplateId the Run Template identifier
+     * @param {RunTemplateHandlerId} handlerId the Handler identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SolutionApi
+     */
+    public downloadRunTemplateHandler(organizationId: string, solutionId: string, runTemplateId: string, handlerId: RunTemplateHandlerId, options?: AxiosRequestConfig) {
+        return SolutionApiFp(this.configuration).downloadRunTemplateHandler(organizationId, solutionId, runTemplateId, handlerId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
