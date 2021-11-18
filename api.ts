@@ -327,6 +327,19 @@ export interface DatasetCopyParameters {
     'options'?: { [key: string]: object; };
 }
 /**
+ * the search options
+ * @export
+ * @interface DatasetSearch
+ */
+export interface DatasetSearch {
+    /**
+     * the dataset tag list to search
+     * @type {Array<string>}
+     * @memberof DatasetSearch
+     */
+    'datasetTags': Array<string>;
+}
+/**
  * an Organization
  * @export
  * @interface Organization
@@ -2721,6 +2734,50 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @summary Search Datasets
+         * @param {string} organizationId the Organization identifier
+         * @param {DatasetSearch} datasetSearch the Dataset search parameters
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        searchDatasets: async (organizationId: string, datasetSearch: DatasetSearch, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('searchDatasets', 'organizationId', organizationId)
+            // verify required parameter 'datasetSearch' is not null or undefined
+            assertParamExists('searchDatasets', 'datasetSearch', datasetSearch)
+            const localVarPath = `/organizations/{organization_id}/datasets/search`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(datasetSearch, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Update a dataset
          * @param {string} organizationId the Organization identifier
          * @param {string} datasetId the Dataset identifier
@@ -2863,6 +2920,18 @@ export const DatasetApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Search Datasets
+         * @param {string} organizationId the Organization identifier
+         * @param {DatasetSearch} datasetSearch the Dataset search parameters
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async searchDatasets(organizationId: string, datasetSearch: DatasetSearch, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Dataset>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.searchDatasets(organizationId, datasetSearch, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @summary Update a dataset
          * @param {string} organizationId the Organization identifier
          * @param {string} datasetId the Dataset identifier
@@ -2960,6 +3029,17 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          */
         removeAllDatasetCompatibilityElements(organizationId: string, datasetId: string, options?: any): AxiosPromise<void> {
             return localVarFp.removeAllDatasetCompatibilityElements(organizationId, datasetId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Search Datasets
+         * @param {string} organizationId the Organization identifier
+         * @param {DatasetSearch} datasetSearch the Dataset search parameters
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        searchDatasets(organizationId: string, datasetSearch: DatasetSearch, options?: any): AxiosPromise<Array<Dataset>> {
+            return localVarFp.searchDatasets(organizationId, datasetSearch, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -3072,6 +3152,19 @@ export class DatasetApi extends BaseAPI {
      */
     public removeAllDatasetCompatibilityElements(organizationId: string, datasetId: string, options?: AxiosRequestConfig) {
         return DatasetApiFp(this.configuration).removeAllDatasetCompatibilityElements(organizationId, datasetId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Search Datasets
+     * @param {string} organizationId the Organization identifier
+     * @param {DatasetSearch} datasetSearch the Dataset search parameters
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DatasetApi
+     */
+    public searchDatasets(organizationId: string, datasetSearch: DatasetSearch, options?: AxiosRequestConfig) {
+        return DatasetApiFp(this.configuration).searchDatasets(organizationId, datasetSearch, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
