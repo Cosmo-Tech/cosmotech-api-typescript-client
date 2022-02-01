@@ -1019,7 +1019,8 @@ export enum ScenarioJobState {
     Running = 'Running',
     Successful = 'Successful',
     Failed = 'Failed',
-    Unknown = 'Unknown'
+    Unknown = 'Unknown',
+    DataIngestionInProgress = 'DataIngestionInProgress'
 }
 
 /**
@@ -1065,6 +1066,12 @@ export interface ScenarioRun {
      * @memberof ScenarioRun
      */
     'id'?: string;
+    /**
+     * 
+     * @type {ScenarioRunState}
+     * @memberof ScenarioRun
+     */
+    'state'?: ScenarioRunState;
     /**
      * the Organization id
      * @type {string}
@@ -1421,6 +1428,21 @@ export interface ScenarioRunStartContainers {
     'containers': Array<ScenarioRunContainer>;
 }
 /**
+ * the ScenarioRun end-to-end state
+ * @export
+ * @enum {string}
+ */
+
+export enum ScenarioRunState {
+    Running = 'Running',
+    Successful = 'Successful',
+    Failed = 'Failed',
+    Unknown = 'Unknown',
+    DataIngestionInProgress = 'DataIngestionInProgress',
+    DataIngestionFailure = 'DataIngestionFailure'
+}
+
+/**
  * a ScenarioRun status
  * @export
  * @interface ScenarioRunStatus
@@ -1492,6 +1514,12 @@ export interface ScenarioRunStatus {
      * @memberof ScenarioRunStatus
      */
     'nodes'?: Array<ScenarioRunStatusNode>;
+    /**
+     * 
+     * @type {ScenarioRunState}
+     * @memberof ScenarioRunStatus
+     */
+    'state'?: ScenarioRunState;
 }
 /**
  * status of a ScenarioRun Node
