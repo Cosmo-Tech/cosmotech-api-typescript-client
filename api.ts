@@ -107,14 +107,12 @@ export interface Connector {
     'parameterGroups'?: Array<ConnectorParameterGroup>;
 }
 
-/**
-    * @export
-    * @enum {string}
-    */
-export enum ConnectorIoTypesEnum {
-    Read = 'read',
-    Write = 'write'
-}
+export const ConnectorIoTypesEnum = {
+    Read: 'read',
+    Write: 'write'
+} as const;
+
+export type ConnectorIoTypesEnum = typeof ConnectorIoTypesEnum[keyof typeof ConnectorIoTypesEnum];
 
 /**
  * a connector parameter
@@ -464,16 +462,14 @@ export interface OrganizationUser {
     'roles': Array<OrganizationUserRolesEnum>;
 }
 
-/**
-    * @export
-    * @enum {string}
-    */
-export enum OrganizationUserRolesEnum {
-    Admin = 'Admin',
-    User = 'User',
-    Viewer = 'Viewer',
-    Developer = 'Developer'
-}
+export const OrganizationUserRolesEnum = {
+    Admin: 'Admin',
+    User: 'User',
+    Viewer: 'Viewer',
+    Developer: 'Developer'
+} as const;
+
+export type OrganizationUserRolesEnum = typeof OrganizationUserRolesEnum[keyof typeof OrganizationUserRolesEnum];
 
 /**
  * a Solution Run Template
@@ -638,14 +634,17 @@ export interface RunTemplate {
  * @enum {string}
  */
 
-export enum RunTemplateHandlerId {
-    ParametersHandler = 'parameters_handler',
-    Validator = 'validator',
-    Prerun = 'prerun',
-    Engine = 'engine',
-    Postrun = 'postrun',
-    ScenariodataTransform = 'scenariodata_transform'
-}
+export const RunTemplateHandlerId = {
+    ParametersHandler: 'parameters_handler',
+    Validator: 'validator',
+    Prerun: 'prerun',
+    Engine: 'engine',
+    Postrun: 'postrun',
+    ScenariodataTransform: 'scenariodata_transform'
+} as const;
+
+export type RunTemplateHandlerId = typeof RunTemplateHandlerId[keyof typeof RunTemplateHandlerId];
+
 
 /**
  * a Run Template Parameter
@@ -776,10 +775,13 @@ export interface RunTemplateParameterValue {
  * @enum {string}
  */
 
-export enum RunTemplateStepSource {
-    Local = 'local',
-    Cloud = 'cloud'
-}
+export const RunTemplateStepSource = {
+    Local: 'local',
+    Cloud: 'cloud'
+} as const;
+
+export type RunTemplateStepSource = typeof RunTemplateStepSource[keyof typeof RunTemplateStepSource];
+
 
 /**
  * a Scenario with base information
@@ -1014,14 +1016,17 @@ export interface ScenarioDataDownloadJob {
  * @enum {string}
  */
 
-export enum ScenarioJobState {
-    Created = 'Created',
-    Running = 'Running',
-    Successful = 'Successful',
-    Failed = 'Failed',
-    Unknown = 'Unknown',
-    DataIngestionInProgress = 'DataIngestionInProgress'
-}
+export const ScenarioJobState = {
+    Created: 'Created',
+    Running: 'Running',
+    Successful: 'Successful',
+    Failed: 'Failed',
+    Unknown: 'Unknown',
+    DataIngestionInProgress: 'DataIngestionInProgress'
+} as const;
+
+export type ScenarioJobState = typeof ScenarioJobState[keyof typeof ScenarioJobState];
+
 
 /**
  * 
@@ -1373,22 +1378,20 @@ export interface ScenarioRunSearch {
     'ownerId'?: string;
 }
 
-/**
-    * @export
-    * @enum {string}
-    */
-export enum ScenarioRunSearchStateEnum {
-    FetchingDatasets = 'FetchingDatasets',
-    FetchingScenarioParameters = 'FetchingScenarioParameters',
-    ApplyingScenarioParameters = 'ApplyingScenarioParameters',
-    ValidatingScenarioData = 'ValidatingScenarioData',
-    SendingScenarioDataToDataWarehouse = 'SendingScenarioDataToDataWarehouse',
-    PreRun = 'PreRun',
-    Running = 'Running',
-    PostRun = 'PostRun',
-    Success = 'Success',
-    Failed = 'Failed'
-}
+export const ScenarioRunSearchStateEnum = {
+    FetchingDatasets: 'FetchingDatasets',
+    FetchingScenarioParameters: 'FetchingScenarioParameters',
+    ApplyingScenarioParameters: 'ApplyingScenarioParameters',
+    ValidatingScenarioData: 'ValidatingScenarioData',
+    SendingScenarioDataToDataWarehouse: 'SendingScenarioDataToDataWarehouse',
+    PreRun: 'PreRun',
+    Running: 'Running',
+    PostRun: 'PostRun',
+    Success: 'Success',
+    Failed: 'Failed'
+} as const;
+
+export type ScenarioRunSearchStateEnum = typeof ScenarioRunSearchStateEnum[keyof typeof ScenarioRunSearchStateEnum];
 
 /**
  * the parameters to run directly containers
@@ -1433,14 +1436,17 @@ export interface ScenarioRunStartContainers {
  * @enum {string}
  */
 
-export enum ScenarioRunState {
-    Running = 'Running',
-    Successful = 'Successful',
-    Failed = 'Failed',
-    Unknown = 'Unknown',
-    DataIngestionInProgress = 'DataIngestionInProgress',
-    DataIngestionFailure = 'DataIngestionFailure'
-}
+export const ScenarioRunState = {
+    Running: 'Running',
+    Successful: 'Successful',
+    Failed: 'Failed',
+    Unknown: 'Unknown',
+    DataIngestionInProgress: 'DataIngestionInProgress',
+    DataIngestionFailure: 'DataIngestionFailure'
+} as const;
+
+export type ScenarioRunState = typeof ScenarioRunState[keyof typeof ScenarioRunState];
+
 
 /**
  * a ScenarioRun status
@@ -1645,14 +1651,12 @@ export interface ScenarioUser {
     'roles': Array<ScenarioUserRolesEnum>;
 }
 
-/**
-    * @export
-    * @enum {string}
-    */
-export enum ScenarioUserRolesEnum {
-    Viewer = 'Viewer',
-    Editor = 'Editor'
-}
+export const ScenarioUserRolesEnum = {
+    Viewer: 'Viewer',
+    Editor: 'Editor'
+} as const;
+
+export type ScenarioUserRolesEnum = typeof ScenarioUserRolesEnum[keyof typeof ScenarioUserRolesEnum];
 
 /**
  * a version of a Solution
@@ -1771,15 +1775,13 @@ export interface User {
     'organizations'?: Array<UserOrganization>;
 }
 
-/**
-    * @export
-    * @enum {string}
-    */
-export enum UserPlatformRolesEnum {
-    Admin = 'Admin',
-    User = 'User',
-    ConnectorDeveloper = 'ConnectorDeveloper'
-}
+export const UserPlatformRolesEnum = {
+    Admin: 'Admin',
+    User: 'User',
+    ConnectorDeveloper: 'ConnectorDeveloper'
+} as const;
+
+export type UserPlatformRolesEnum = typeof UserPlatformRolesEnum[keyof typeof UserPlatformRolesEnum];
 
 /**
  * The organization of the user
@@ -1948,15 +1950,13 @@ export interface ValidatorRun {
     'logs'?: string;
 }
 
-/**
-    * @export
-    * @enum {string}
-    */
-export enum ValidatorRunStateEnum {
-    Running = 'Running',
-    Finished = 'Finished',
-    OnError = 'OnError'
-}
+export const ValidatorRunStateEnum = {
+    Running: 'Running',
+    Finished: 'Finished',
+    OnError: 'OnError'
+} as const;
+
+export type ValidatorRunStateEnum = typeof ValidatorRunStateEnum[keyof typeof ValidatorRunStateEnum];
 
 /**
  * a Workspace
@@ -2101,15 +2101,13 @@ export interface WorkspaceUser {
     'roles': Array<WorkspaceUserRolesEnum>;
 }
 
-/**
-    * @export
-    * @enum {string}
-    */
-export enum WorkspaceUserRolesEnum {
-    Admin = 'Admin',
-    User = 'User',
-    Viewer = 'Viewer'
-}
+export const WorkspaceUserRolesEnum = {
+    Admin: 'Admin',
+    User: 'User',
+    Viewer: 'Viewer'
+} as const;
+
+export type WorkspaceUserRolesEnum = typeof WorkspaceUserRolesEnum[keyof typeof WorkspaceUserRolesEnum];
 
 /**
  * a Workspace Web Application
