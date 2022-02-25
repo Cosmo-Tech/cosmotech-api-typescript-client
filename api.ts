@@ -5865,6 +5865,48 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @summary stop a ScenarioRun for the Scenario
+         * @param {string} organizationId the Organization identifier
+         * @param {string} scenariorunId the scenariorun identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        stopScenarioRun: async (organizationId: string, scenariorunId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('stopScenarioRun', 'organizationId', organizationId)
+            // verify required parameter 'scenariorunId' is not null or undefined
+            assertParamExists('stopScenarioRun', 'scenariorunId', scenariorunId)
+            const localVarPath = `/organizations/{organization_id}/scenarioruns/{scenariorun_id}/stop`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"scenariorun_id"}}`, encodeURIComponent(String(scenariorunId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -5997,6 +6039,18 @@ export const ScenariorunApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.startScenarioRunContainers(organizationId, scenarioRunStartContainers, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
+        /**
+         * 
+         * @summary stop a ScenarioRun for the Scenario
+         * @param {string} organizationId the Organization identifier
+         * @param {string} scenariorunId the scenariorun identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async stopScenarioRun(organizationId: string, scenariorunId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioRunStatus>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.stopScenarioRun(organizationId, scenariorunId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
     }
 };
 
@@ -6118,6 +6172,17 @@ export const ScenariorunApiFactory = function (configuration?: Configuration, ba
          */
         startScenarioRunContainers(organizationId: string, scenarioRunStartContainers: ScenarioRunStartContainers, options?: any): AxiosPromise<ScenarioRun> {
             return localVarFp.startScenarioRunContainers(organizationId, scenarioRunStartContainers, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary stop a ScenarioRun for the Scenario
+         * @param {string} organizationId the Organization identifier
+         * @param {string} scenariorunId the scenariorun identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        stopScenarioRun(organizationId: string, scenariorunId: string, options?: any): AxiosPromise<ScenarioRunStatus> {
+            return localVarFp.stopScenarioRun(organizationId, scenariorunId, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -6259,6 +6324,19 @@ export class ScenariorunApi extends BaseAPI {
      */
     public startScenarioRunContainers(organizationId: string, scenarioRunStartContainers: ScenarioRunStartContainers, options?: AxiosRequestConfig) {
         return ScenariorunApiFp(this.configuration).startScenarioRunContainers(organizationId, scenarioRunStartContainers, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary stop a ScenarioRun for the Scenario
+     * @param {string} organizationId the Organization identifier
+     * @param {string} scenariorunId the scenariorun identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ScenariorunApi
+     */
+    public stopScenarioRun(organizationId: string, scenariorunId: string, options?: AxiosRequestConfig) {
+        return ScenariorunApiFp(this.configuration).stopScenarioRun(organizationId, scenariorunId, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
