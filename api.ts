@@ -1180,7 +1180,7 @@ export interface ScenarioRun {
      */
     'nodeLabel'?: string;
     /**
-     * the containers list
+     * the containers list. This information is not returned by the API.
      * @type {Array<ScenarioRunContainer>}
      * @memberof ScenarioRun
      */
