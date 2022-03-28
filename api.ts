@@ -514,6 +514,12 @@ export interface RunTemplate {
      */
     'computeSize'?: string;
     /**
+     * set to true if the run template does not want to check data ingestion state (no probes or not control plane)
+     * @type {boolean}
+     * @memberof RunTemplate
+     */
+    'noDataIngestionState'?: boolean;
+    /**
      * whether or not the fetch dataset step is done
      * @type {boolean}
      * @memberof RunTemplate
@@ -1150,6 +1156,18 @@ export interface ScenarioRun {
      */
     'computeSize'?: string;
     /**
+     * the MAJOR.MINOR version used to build the solution solution
+     * @type {string}
+     * @memberof ScenarioRun
+     */
+    'sdkVersion'?: string;
+    /**
+     * set to true if the run template does not use any Datawarehouse consumers (AMQP consumers for Azure)
+     * @type {boolean}
+     * @memberof ScenarioRun
+     */
+    'noDataIngestionState'?: boolean;
+    /**
      * the list of Dataset Id associated to this Analysis
      * @type {Array<string>}
      * @memberof ScenarioRun
@@ -1712,6 +1730,12 @@ export interface Solution {
      * @memberof Solution
      */
     'ownerId'?: string;
+    /**
+     * the MAJOR.MINOR version used to build this solution
+     * @type {string}
+     * @memberof Solution
+     */
+    'sdkVersion'?: string;
     /**
      * an optional URL link to solution page
      * @type {string}
