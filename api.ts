@@ -633,6 +633,24 @@ export interface RunTemplate {
      * @memberof RunTemplate
      */
     'stackSteps'?: boolean;
+    /**
+     * an optional URL to the git repository
+     * @type {string}
+     * @memberof RunTemplate
+     */
+    'gitRepositoryUrl'?: string;
+    /**
+     * an optional git branch name
+     * @type {string}
+     * @memberof RunTemplate
+     */
+    'gitBranchName'?: string;
+    /**
+     * an optional directory where to find the run template source
+     * @type {string}
+     * @memberof RunTemplate
+     */
+    'runTemplateSourceDir'?: string;
 }
 /**
  * the Run Template step handler identifier
@@ -776,14 +794,16 @@ export interface RunTemplateParameterValue {
     'value': string;
 }
 /**
- * the source local or cloud
+ * the source local, cloud or git repository
  * @export
  * @enum {string}
  */
 
 export const RunTemplateStepSource = {
+    Cloud: 'cloud',
+    Git: 'git',
     Local: 'local',
-    Cloud: 'cloud'
+    Platform: 'platform'
 } as const;
 
 export type RunTemplateStepSource = typeof RunTemplateStepSource[keyof typeof RunTemplateStepSource];
