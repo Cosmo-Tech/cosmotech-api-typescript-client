@@ -10,11 +10,11 @@ jobs:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v1
       with:
-        node-version: '14.x'
+        node-version: '16.x'
         registry-url: 'https://registry.npmjs.org'
         scope: '@cosmotech' 
     - run: yarn
     - run: git config --global user.email "vincent.carluer@cosmotech.com" && git config --global user.name "Vincent Carluer"
-    - run: yarn publish --new-version ${{ github.event.release.tag_name }} --access public
+    - run: yarn publish --new-version ${{ github.event.release.tag_name }} --access public --verbose
       env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
