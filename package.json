@@ -1,6 +1,6 @@
 {
   "name": "@cosmotech/api-ts",
-  "version": "0.0.13-SNAPSHOT",
+  "version": "0.0.13-rc",
   "description": "OpenAPI client for @cosmotech/api-ts",
   "author": "OpenAPI-Generator Contributors",
   "keywords": [
