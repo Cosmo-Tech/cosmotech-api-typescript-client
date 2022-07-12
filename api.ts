@@ -651,6 +651,12 @@ export interface RunTemplate {
      * @memberof RunTemplate
      */
     'runTemplateSourceDir'?: string;
+    /**
+     * an optional duration in seconds in which a workflow is allowed to run
+     * @type {number}
+     * @memberof RunTemplate
+     */
+    'executionTimeout'?: number;
 }
 /**
  * the Run Template step handler identifier
