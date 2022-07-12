@@ -488,7 +488,7 @@ export interface RunTemplate {
      * @type {string}
      * @memberof RunTemplate
      */
-    'name': string;
+    'name'?: string;
     /**
      * the Run Template description
      * @type {string}
@@ -693,13 +693,13 @@ export interface RunTemplateParameter {
      * @type {{ [key: string]: string; }}
      * @memberof RunTemplateParameter
      */
-    'labels': { [key: string]: string; };
+    'labels'?: { [key: string]: string; };
     /**
      * the variable type for the parameter. Basic types or special type %DATASETID%
      * @type {string}
      * @memberof RunTemplateParameter
      */
-    'varType': string;
+    'varType'?: string;
     /**
      * the default value for this parameter
      * @type {string}
@@ -748,7 +748,7 @@ export interface RunTemplateParameterGroup {
      * @type {{ [key: string]: string; }}
      * @memberof RunTemplateParameterGroup
      */
-    'labels': { [key: string]: string; };
+    'labels'?: { [key: string]: string; };
     /**
      * does the group define a table
      * @type {boolean}
@@ -772,7 +772,7 @@ export interface RunTemplateParameterGroup {
      * @type {Array<string>}
      * @memberof RunTemplateParameterGroup
      */
-    'parameters': Array<string>;
+    'parameters'?: Array<string>;
 }
 /**
  * the value of Analysis parameter for a Scenario for this ScenarioRun
@@ -1741,13 +1741,13 @@ export interface Solution {
      * @type {string}
      * @memberof Solution
      */
-    'key': string;
+    'key'?: string;
     /**
      * the Solution name
      * @type {string}
      * @memberof Solution
      */
-    'name': string;
+    'name'?: string;
     /**
      * the Solution description
      * @type {string}
@@ -1759,7 +1759,7 @@ export interface Solution {
      * @type {string}
      * @memberof Solution
      */
-    'repository': string;
+    'repository'?: string;
     /**
      * the main Cosmo Tech simulator name used in standard Run Template
      * @type {string}
@@ -1771,7 +1771,7 @@ export interface Solution {
      * @type {string}
      * @memberof Solution
      */
-    'version': string;
+    'version'?: string;
     /**
      * the User id which own this Solution
      * @type {string}
@@ -1813,7 +1813,7 @@ export interface Solution {
      * @type {Array<RunTemplate>}
      * @memberof Solution
      */
-    'runTemplates': Array<RunTemplate>;
+    'runTemplates'?: Array<RunTemplate>;
 }
 /**
  * a User
