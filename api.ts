@@ -2108,6 +2108,12 @@ export interface Workspace {
      * @memberof Workspace
      */
     'useDedicatedEventHubNamespace'?: boolean;
+    /**
+     * Set this property to false to not send scenario metada to Azure Event Hub Namespace for this Workspace. The Event Hub Namespace must be named \\\'<organization_id\\>-<workspace_id\\>\\\' (in lower case). This Namespace must also contain two Event Hubs named \\\'scenariometadata\\\' and \\\'scenariorunmetadata\\\'.
+     * @type {boolean}
+     * @memberof Workspace
+     */
+    'sendScenarioMetadataToEventHub'?: boolean;
 }
 /**
  * a Workspace File resource
