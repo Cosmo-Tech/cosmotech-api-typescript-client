@@ -5681,6 +5681,90 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
     return {
         /**
          * 
+         * @summary Delete all historical ScenarioRuns in the database
+         * @param {string} organizationId the Organization identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteHistoricalDataOrganization: async (organizationId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('deleteHistoricalDataOrganization', 'organizationId', organizationId)
+            const localVarPath = `/organizations/{organization_id}/scenarioruns/deletehistoricaldata`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Delete all historical ScenarioRuns for the Scenario
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} scenarioId the Scenario identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteHistoricalScenarioRunsByScenario: async (organizationId: string, workspaceId: string, scenarioId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('deleteHistoricalScenarioRunsByScenario', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('deleteHistoricalScenarioRunsByScenario', 'workspaceId', workspaceId)
+            // verify required parameter 'scenarioId' is not null or undefined
+            assertParamExists('deleteHistoricalScenarioRunsByScenario', 'scenarioId', scenarioId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/scenarios/{scenario_id}/scenarioruns`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"scenario_id"}}`, encodeURIComponent(String(scenarioId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Delete a scenariorun
          * @param {string} organizationId the Organization identifier
          * @param {string} scenariorunId the ScenarioRun identifier
@@ -6165,6 +6249,30 @@ export const ScenariorunApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @summary Delete all historical ScenarioRuns in the database
+         * @param {string} organizationId the Organization identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteHistoricalDataOrganization(organizationId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteHistoricalDataOrganization(organizationId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Delete all historical ScenarioRuns for the Scenario
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} scenarioId the Scenario identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteHistoricalScenarioRunsByScenario(organizationId: string, workspaceId: string, scenarioId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteHistoricalScenarioRunsByScenario(organizationId, workspaceId, scenarioId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @summary Delete a scenariorun
          * @param {string} organizationId the Organization identifier
          * @param {string} scenariorunId the ScenarioRun identifier
@@ -6309,6 +6417,28 @@ export const ScenariorunApiFactory = function (configuration?: Configuration, ba
     return {
         /**
          * 
+         * @summary Delete all historical ScenarioRuns in the database
+         * @param {string} organizationId the Organization identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteHistoricalDataOrganization(organizationId: string, options?: any): AxiosPromise<void> {
+            return localVarFp.deleteHistoricalDataOrganization(organizationId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Delete all historical ScenarioRuns for the Scenario
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} scenarioId the Scenario identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteHistoricalScenarioRunsByScenario(organizationId: string, workspaceId: string, scenarioId: string, options?: any): AxiosPromise<void> {
+            return localVarFp.deleteHistoricalScenarioRunsByScenario(organizationId, workspaceId, scenarioId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Delete a scenariorun
          * @param {string} organizationId the Organization identifier
          * @param {string} scenariorunId the ScenarioRun identifier
@@ -6440,6 +6570,32 @@ export const ScenariorunApiFactory = function (configuration?: Configuration, ba
  * @extends {BaseAPI}
  */
 export class ScenariorunApi extends BaseAPI {
+    /**
+     * 
+     * @summary Delete all historical ScenarioRuns in the database
+     * @param {string} organizationId the Organization identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ScenariorunApi
+     */
+    public deleteHistoricalDataOrganization(organizationId: string, options?: AxiosRequestConfig) {
+        return ScenariorunApiFp(this.configuration).deleteHistoricalDataOrganization(organizationId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Delete all historical ScenarioRuns for the Scenario
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} scenarioId the Scenario identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ScenariorunApi
+     */
+    public deleteHistoricalScenarioRunsByScenario(organizationId: string, workspaceId: string, scenarioId: string, options?: AxiosRequestConfig) {
+        return ScenariorunApiFp(this.configuration).deleteHistoricalScenarioRunsByScenario(organizationId, workspaceId, scenarioId, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @summary Delete a scenariorun
