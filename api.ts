@@ -22,25 +22,6 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from './base';
 
 /**
- * a RBAC by component
- * @export
- * @interface ComponentRolePermissions
- */
-export interface ComponentRolePermissions {
-    /**
-     * 
-     * @type {string}
-     * @memberof ComponentRolePermissions
-     */
-    'component'?: string;
-    /**
-     * 
-     * @type {{ [key: string]: Array<string>; }}
-     * @memberof ComponentRolePermissions
-     */
-    'roles'?: { [key: string]: Array<string>; };
-}
-/**
  * a version of a Connector
  * @export
  * @interface Connector
@@ -200,44 +181,6 @@ export interface ConnectorParameterGroup {
      * @memberof ConnectorParameterGroup
      */
     'parameters': Array<ConnectorParameter>;
-}
-/**
- * define cpus and memory needs
- * @export
- * @interface ContainerResourceSizeInfo
- */
-export interface ContainerResourceSizeInfo {
-    /**
-     * define cpu needs
-     * @type {string}
-     * @memberof ContainerResourceSizeInfo
-     */
-    'cpu': string;
-    /**
-     * define memory needs
-     * @type {string}
-     * @memberof ContainerResourceSizeInfo
-     */
-    'memory': string;
-}
-/**
- * a description object for resource requests and limits (default same configuration as basic sizing)
- * @export
- * @interface ContainerResourceSizing
- */
-export interface ContainerResourceSizing {
-    /**
-     * 
-     * @type {ContainerResourceSizeInfo}
-     * @memberof ContainerResourceSizing
-     */
-    'requests': ContainerResourceSizeInfo;
-    /**
-     * 
-     * @type {ContainerResourceSizeInfo}
-     * @memberof ContainerResourceSizing
-     */
-    'limits': ContainerResourceSizeInfo;
 }
 /**
  * a Dataset
@@ -420,54 +363,16 @@ export interface Organization {
     'ownerId'?: string;
     /**
      * 
+     * @type {Array<OrganizationUser>}
+     * @memberof Organization
+     */
+    'users'?: Array<OrganizationUser>;
+    /**
+     * 
      * @type {OrganizationServices}
      * @memberof Organization
      */
     'services'?: OrganizationServices;
-    /**
-     * 
-     * @type {OrganizationSecurity}
-     * @memberof Organization
-     */
-    'security'?: OrganizationSecurity;
-}
-/**
- * a Organization access control item
- * @export
- * @interface OrganizationAccessControl
- */
-export interface OrganizationAccessControl {
-    /**
-     * the identity id
-     * @type {string}
-     * @memberof OrganizationAccessControl
-     */
-    'id': string;
-    /**
-     * a role
-     * @type {string}
-     * @memberof OrganizationAccessControl
-     */
-    'role': string;
-}
-/**
- * the Organization security information
- * @export
- * @interface OrganizationSecurity
- */
-export interface OrganizationSecurity {
-    /**
-     * the role by default
-     * @type {string}
-     * @memberof OrganizationSecurity
-     */
-    'default': string;
-    /**
-     * the list which can access this Organization with detailed access control information
-     * @type {Array<OrganizationAccessControl>}
-     * @memberof OrganizationSecurity
-     */
-    'accessControlList': Array<OrganizationAccessControl>;
 }
 /**
  * a cloud service resource
@@ -532,24 +437,40 @@ export interface OrganizationServices {
     'solutionsContainerRegistry'?: OrganizationService;
 }
 /**
- * define cpus and memory needs
+ * a User
  * @export
- * @interface ResourceSizeInfo
+ * @interface OrganizationUser
  */
-export interface ResourceSizeInfo {
+export interface OrganizationUser {
     /**
-     * define cpu needs
+     * the User unique identifier, in response
      * @type {string}
-     * @memberof ResourceSizeInfo
+     * @memberof OrganizationUser
      */
-    'cpu': string;
+    'id'?: string;
     /**
-     * define memory needs
+     * the User name
      * @type {string}
-     * @memberof ResourceSizeInfo
+     * @memberof OrganizationUser
      */
-    'memory': string;
+    'name'?: string;
+    /**
+     * the User\'s roles for the Organization
+     * @type {Array<string>}
+     * @memberof OrganizationUser
+     */
+    'roles': Array<OrganizationUserRolesEnum>;
 }
+
+export const OrganizationUserRolesEnum = {
+    Admin: 'Admin',
+    User: 'User',
+    Viewer: 'Viewer',
+    Developer: 'Developer'
+} as const;
+
+export type OrganizationUserRolesEnum = typeof OrganizationUserRolesEnum[keyof typeof OrganizationUserRolesEnum];
+
 /**
  * a Solution Run Template
  * @export
@@ -592,12 +513,6 @@ export interface RunTemplate {
      * @memberof RunTemplate
      */
     'computeSize'?: string;
-    /**
-     * 
-     * @type {RunTemplateResourceSizing}
-     * @memberof RunTemplate
-     */
-    'runSizing'?: RunTemplateResourceSizing;
     /**
      * set to true if the run template does not want to check data ingestion state (no probes or not control plane)
      * @type {boolean}
@@ -885,25 +800,6 @@ export interface RunTemplateParameterValue {
     'value': string;
 }
 /**
- * a description object for resource requests and limits (default same configuration as basic sizing)
- * @export
- * @interface RunTemplateResourceSizing
- */
-export interface RunTemplateResourceSizing {
-    /**
-     * 
-     * @type {ResourceSizeInfo}
-     * @memberof RunTemplateResourceSizing
-     */
-    'requests': ResourceSizeInfo;
-    /**
-     * 
-     * @type {ResourceSizeInfo}
-     * @memberof RunTemplateResourceSizing
-     */
-    'limits': ResourceSizeInfo;
-}
-/**
  * the source local, cloud or git repository
  * @export
  * @enum {string}
@@ -986,6 +882,12 @@ export interface Scenario {
      */
     'workspaceId'?: string;
     /**
+     * the list of users Id with their role
+     * @type {Array<ScenarioUser>}
+     * @memberof Scenario
+     */
+    'users'?: Array<ScenarioUser>;
+    /**
      * 
      * @type {ScenarioJobState}
      * @memberof Scenario
@@ -1028,12 +930,6 @@ export interface Scenario {
      */
     'datasetList'?: Array<string>;
     /**
-     * 
-     * @type {ScenarioResourceSizing}
-     * @memberof Scenario
-     */
-    'runSizing'?: ScenarioResourceSizing;
-    /**
      * the list of Solution Run Template parameters values
      * @type {Array<ScenarioRunTemplateParameterValue>}
      * @memberof Scenario
@@ -1063,31 +959,6 @@ export interface Scenario {
      * @memberof Scenario
      */
     'validationStatus'?: ScenarioValidationStatus;
-    /**
-     * 
-     * @type {ScenarioSecurity}
-     * @memberof Scenario
-     */
-    'security'?: ScenarioSecurity;
-}
-/**
- * a Scenario access control item
- * @export
- * @interface ScenarioAccessControl
- */
-export interface ScenarioAccessControl {
-    /**
-     * the identity id
-     * @type {string}
-     * @memberof ScenarioAccessControl
-     */
-    'id': string;
-    /**
-     * a role
-     * @type {string}
-     * @memberof ScenarioAccessControl
-     */
-    'role': string;
 }
 /**
  * the difference between the values of a parameter
@@ -1225,25 +1096,6 @@ export interface ScenarioLastRun {
      * @memberof ScenarioLastRun
      */
     'workflowName'?: string;
-}
-/**
- * a description object for resource requests and limits (default same configuration as basic sizing)
- * @export
- * @interface ScenarioResourceSizing
- */
-export interface ScenarioResourceSizing {
-    /**
-     * 
-     * @type {ResourceSizeInfo}
-     * @memberof ScenarioResourceSizing
-     */
-    'requests': ResourceSizeInfo;
-    /**
-     * 
-     * @type {ResourceSizeInfo}
-     * @memberof ScenarioResourceSizing
-     */
-    'limits': ResourceSizeInfo;
 }
 /**
  * a ScenarioRun with only base properties
@@ -1444,18 +1296,6 @@ export interface ScenarioRunContainer {
      * @memberof ScenarioRunContainer
      */
     'solutionContainer'?: boolean;
-    /**
-     * the node label request
-     * @type {string}
-     * @memberof ScenarioRunContainer
-     */
-    'nodeLabel'?: string;
-    /**
-     * 
-     * @type {ContainerResourceSizing}
-     * @memberof ScenarioRunContainer
-     */
-    'runSizing'?: ContainerResourceSizing;
     /**
      * the list of artifacts
      * @type {Array<ScenarioRunContainerArtifact>}
@@ -1836,24 +1676,38 @@ export interface ScenarioRunTemplateParameterValue {
     'isInherited'?: boolean;
 }
 /**
- * the Scenario security information
+ * a Scenario user with roles
  * @export
- * @interface ScenarioSecurity
+ * @interface ScenarioUser
  */
-export interface ScenarioSecurity {
+export interface ScenarioUser {
     /**
-     * the role by default
+     * the User id
      * @type {string}
-     * @memberof ScenarioSecurity
+     * @memberof ScenarioUser
      */
-    'default': string;
+    'id': string;
     /**
-     * the list which can access this Scenario with detailed access control information
-     * @type {Array<ScenarioAccessControl>}
-     * @memberof ScenarioSecurity
+     * the User name
+     * @type {string}
+     * @memberof ScenarioUser
      */
-    'accessControlList': Array<ScenarioAccessControl>;
+    'name'?: string;
+    /**
+     * the User role
+     * @type {Array<string>}
+     * @memberof ScenarioUser
+     */
+    'roles': Array<ScenarioUserRolesEnum>;
 }
+
+export const ScenarioUserRolesEnum = {
+    Viewer: 'Viewer',
+    Editor: 'Editor'
+} as const;
+
+export type ScenarioUserRolesEnum = typeof ScenarioUserRolesEnum[keyof typeof ScenarioUserRolesEnum];
+
 /**
  * the validation status of the scenario
  * @export
@@ -2231,6 +2085,12 @@ export interface Workspace {
      */
     'solution': WorkspaceSolution;
     /**
+     * the list of users Id with their role
+     * @type {Array<WorkspaceUser>}
+     * @memberof Workspace
+     */
+    'users'?: Array<WorkspaceUser>;
+    /**
      * 
      * @type {WorkspaceWebApp}
      * @memberof Workspace
@@ -2254,31 +2114,6 @@ export interface Workspace {
      * @memberof Workspace
      */
     'sendScenarioMetadataToEventHub'?: boolean;
-    /**
-     * 
-     * @type {WorkspaceSecurity}
-     * @memberof Workspace
-     */
-    'security'?: WorkspaceSecurity;
-}
-/**
- * a Workspace access control item
- * @export
- * @interface WorkspaceAccessControl
- */
-export interface WorkspaceAccessControl {
-    /**
-     * the identity id
-     * @type {string}
-     * @memberof WorkspaceAccessControl
-     */
-    'id': string;
-    /**
-     * a role
-     * @type {string}
-     * @memberof WorkspaceAccessControl
-     */
-    'role': string;
 }
 /**
  * a Workspace File resource
@@ -2292,25 +2127,6 @@ export interface WorkspaceFile {
      * @memberof WorkspaceFile
      */
     'fileName'?: string;
-}
-/**
- * the workspace security information
- * @export
- * @interface WorkspaceSecurity
- */
-export interface WorkspaceSecurity {
-    /**
-     * the role by default
-     * @type {string}
-     * @memberof WorkspaceSecurity
-     */
-    'default': string;
-    /**
-     * the list which can access this Workspace with detailed access control information
-     * @type {Array<WorkspaceAccessControl>}
-     * @memberof WorkspaceSecurity
-     */
-    'accessControlList': Array<WorkspaceAccessControl>;
 }
 /**
  * the Workspace Solution configuration
@@ -2337,6 +2153,40 @@ export interface WorkspaceSolution {
      */
     'defaultRunTemplateDataset'?: { [key: string]: object; };
 }
+/**
+ * a Workspace user with roles
+ * @export
+ * @interface WorkspaceUser
+ */
+export interface WorkspaceUser {
+    /**
+     * the User id
+     * @type {string}
+     * @memberof WorkspaceUser
+     */
+    'id': string;
+    /**
+     * the User name
+     * @type {string}
+     * @memberof WorkspaceUser
+     */
+    'name'?: string;
+    /**
+     * the User roles
+     * @type {Array<string>}
+     * @memberof WorkspaceUser
+     */
+    'roles': Array<WorkspaceUserRolesEnum>;
+}
+
+export const WorkspaceUserRolesEnum = {
+    Admin: 'Admin',
+    User: 'User',
+    Viewer: 'Viewer'
+} as const;
+
+export type WorkspaceUserRolesEnum = typeof WorkspaceUserRolesEnum[keyof typeof WorkspaceUserRolesEnum];
+
 /**
  * a Workspace Web Application
  * @export
@@ -3445,18 +3295,18 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
     return {
         /**
          * 
-         * @summary add a control acccess to the Organization
+         * @summary Add (or replace) users in the Organization specified
          * @param {string} organizationId the Organization identifier
-         * @param {OrganizationAccessControl} organizationAccessControl the new Organization security access to add.
+         * @param {Array<OrganizationUser>} organizationUser the Users to add. Any User with the same ID is overwritten
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addOrganizationAccessControl: async (organizationId: string, organizationAccessControl: OrganizationAccessControl, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        addOrReplaceUsersInOrganization: async (organizationId: string, organizationUser: Array<OrganizationUser>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('addOrganizationAccessControl', 'organizationId', organizationId)
-            // verify required parameter 'organizationAccessControl' is not null or undefined
-            assertParamExists('addOrganizationAccessControl', 'organizationAccessControl', organizationAccessControl)
-            const localVarPath = `/organizations/{organization_id}/security/access`
+            assertParamExists('addOrReplaceUsersInOrganization', 'organizationId', organizationId)
+            // verify required parameter 'organizationUser' is not null or undefined
+            assertParamExists('addOrReplaceUsersInOrganization', 'organizationUser', organizationUser)
+            const localVarPath = `/organizations/{organization_id}/users`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -3480,7 +3330,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(organizationAccessControl, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(organizationUser, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -3561,200 +3411,6 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
-         * @summary Get all permissions per components
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAllPermissions: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/organizations/permissions`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary get a control acccess for the Organization
-         * @param {string} organizationId the Organization identifier
-         * @param {string} identityId the User identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getOrganizationAccessControl: async (organizationId: string, identityId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('getOrganizationAccessControl', 'organizationId', organizationId)
-            // verify required parameter 'identityId' is not null or undefined
-            assertParamExists('getOrganizationAccessControl', 'identityId', identityId)
-            const localVarPath = `/organizations/{organization_id}/security/access/{identity_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get the Organization permissions by given role
-         * @param {string} organizationId the Organization identifier
-         * @param {string} role the Role
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getOrganizationPermissions: async (organizationId: string, role: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('getOrganizationPermissions', 'organizationId', organizationId)
-            // verify required parameter 'role' is not null or undefined
-            assertParamExists('getOrganizationPermissions', 'role', role)
-            const localVarPath = `/organizations/{organization_id}/permissions/{role}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"role"}}`, encodeURIComponent(String(role)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get the Organization security information
-         * @param {string} organizationId the Organization identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getOrganizationSecurity: async (organizationId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('getOrganizationSecurity', 'organizationId', organizationId)
-            const localVarPath = `/organizations/{organization_id}/security`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get the Organization security users list
-         * @param {string} organizationId the Organization identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getOrganizationSecurityUsers: async (organizationId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('getOrganizationSecurityUsers', 'organizationId', organizationId)
-            const localVarPath = `/organizations/{organization_id}/security/users`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @summary Register a new organization
          * @param {Organization} organization the Organization to register
          * @param {*} [options] Override http request option.
@@ -3795,20 +3451,16 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
-         * @summary Remove the specified access from the given Organization
+         * @summary Remove all users from the Organization specified
          * @param {string} organizationId the Organization identifier
-         * @param {string} identityId the User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        removeOrganizationAccessControl: async (organizationId: string, identityId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        removeAllUsersInOrganization: async (organizationId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('removeOrganizationAccessControl', 'organizationId', organizationId)
-            // verify required parameter 'identityId' is not null or undefined
-            assertParamExists('removeOrganizationAccessControl', 'identityId', identityId)
-            const localVarPath = `/organizations/{organization_id}/security/access/{identity_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
+            assertParamExists('removeAllUsersInOrganization', 'organizationId', organizationId)
+            const localVarPath = `/organizations/{organization_id}/users`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -3837,19 +3489,20 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
-         * @summary set the Organization default security
+         * @summary Remove the specified user from the given Organization
          * @param {string} organizationId the Organization identifier
-         * @param {string} body the new Organization default security.
+         * @param {string} userId the User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        setOrganizationDefaultSecurity: async (organizationId: string, body: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        removeUserFromOrganization: async (organizationId: string, userId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('setOrganizationDefaultSecurity', 'organizationId', organizationId)
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('setOrganizationDefaultSecurity', 'body', body)
-            const localVarPath = `/organizations/{organization_id}/security/default`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
+            assertParamExists('removeUserFromOrganization', 'organizationId', organizationId)
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('removeUserFromOrganization', 'userId', userId)
+            const localVarPath = `/organizations/{organization_id}/users/{user_id}`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"user_id"}}`, encodeURIComponent(String(userId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -3857,7 +3510,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -3867,12 +3520,9 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
 
 
     
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -4105,14 +3755,14 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary add a control acccess to the Organization
+         * @summary Add (or replace) users in the Organization specified
          * @param {string} organizationId the Organization identifier
-         * @param {OrganizationAccessControl} organizationAccessControl the new Organization security access to add.
+         * @param {Array<OrganizationUser>} organizationUser the Users to add. Any User with the same ID is overwritten
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async addOrganizationAccessControl(organizationId: string, organizationAccessControl: OrganizationAccessControl, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrganizationAccessControl>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.addOrganizationAccessControl(organizationId, organizationAccessControl, options);
+        async addOrReplaceUsersInOrganization(organizationId: string, organizationUser: Array<OrganizationUser>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<OrganizationUser>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.addOrReplaceUsersInOrganization(organizationId, organizationUser, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -4138,62 +3788,6 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Get all permissions per components
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getAllPermissions(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ComponentRolePermissions>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllPermissions(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary get a control acccess for the Organization
-         * @param {string} organizationId the Organization identifier
-         * @param {string} identityId the User identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getOrganizationAccessControl(organizationId: string, identityId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrganizationAccessControl>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getOrganizationAccessControl(organizationId, identityId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Get the Organization permissions by given role
-         * @param {string} organizationId the Organization identifier
-         * @param {string} role the Role
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getOrganizationPermissions(organizationId: string, role: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getOrganizationPermissions(organizationId, role, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Get the Organization security information
-         * @param {string} organizationId the Organization identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getOrganizationSecurity(organizationId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrganizationSecurity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getOrganizationSecurity(organizationId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Get the Organization security users list
-         * @param {string} organizationId the Organization identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getOrganizationSecurityUsers(organizationId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getOrganizationSecurityUsers(organizationId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
          * @summary Register a new organization
          * @param {Organization} organization the Organization to register
          * @param {*} [options] Override http request option.
@@ -4205,26 +3799,25 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Remove the specified access from the given Organization
+         * @summary Remove all users from the Organization specified
          * @param {string} organizationId the Organization identifier
-         * @param {string} identityId the User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async removeOrganizationAccessControl(organizationId: string, identityId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.removeOrganizationAccessControl(organizationId, identityId, options);
+        async removeAllUsersInOrganization(organizationId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.removeAllUsersInOrganization(organizationId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
-         * @summary set the Organization default security
+         * @summary Remove the specified user from the given Organization
          * @param {string} organizationId the Organization identifier
-         * @param {string} body the new Organization default security.
+         * @param {string} userId the User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async setOrganizationDefaultSecurity(organizationId: string, body: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrganizationSecurity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setOrganizationDefaultSecurity(organizationId, body, options);
+        async removeUserFromOrganization(organizationId: string, userId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.removeUserFromOrganization(organizationId, userId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -4298,14 +3891,14 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
     return {
         /**
          * 
-         * @summary add a control acccess to the Organization
+         * @summary Add (or replace) users in the Organization specified
          * @param {string} organizationId the Organization identifier
-         * @param {OrganizationAccessControl} organizationAccessControl the new Organization security access to add.
+         * @param {Array<OrganizationUser>} organizationUser the Users to add. Any User with the same ID is overwritten
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addOrganizationAccessControl(organizationId: string, organizationAccessControl: OrganizationAccessControl, options?: any): AxiosPromise<OrganizationAccessControl> {
-            return localVarFp.addOrganizationAccessControl(organizationId, organizationAccessControl, options).then((request) => request(axios, basePath));
+        addOrReplaceUsersInOrganization(organizationId: string, organizationUser: Array<OrganizationUser>, options?: any): AxiosPromise<Array<OrganizationUser>> {
+            return localVarFp.addOrReplaceUsersInOrganization(organizationId, organizationUser, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -4328,57 +3921,6 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
         },
         /**
          * 
-         * @summary Get all permissions per components
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAllPermissions(options?: any): AxiosPromise<Array<ComponentRolePermissions>> {
-            return localVarFp.getAllPermissions(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary get a control acccess for the Organization
-         * @param {string} organizationId the Organization identifier
-         * @param {string} identityId the User identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getOrganizationAccessControl(organizationId: string, identityId: string, options?: any): AxiosPromise<OrganizationAccessControl> {
-            return localVarFp.getOrganizationAccessControl(organizationId, identityId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get the Organization permissions by given role
-         * @param {string} organizationId the Organization identifier
-         * @param {string} role the Role
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getOrganizationPermissions(organizationId: string, role: string, options?: any): AxiosPromise<Array<string>> {
-            return localVarFp.getOrganizationPermissions(organizationId, role, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get the Organization security information
-         * @param {string} organizationId the Organization identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getOrganizationSecurity(organizationId: string, options?: any): AxiosPromise<OrganizationSecurity> {
-            return localVarFp.getOrganizationSecurity(organizationId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get the Organization security users list
-         * @param {string} organizationId the Organization identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getOrganizationSecurityUsers(organizationId: string, options?: any): AxiosPromise<Array<string>> {
-            return localVarFp.getOrganizationSecurityUsers(organizationId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @summary Register a new organization
          * @param {Organization} organization the Organization to register
          * @param {*} [options] Override http request option.
@@ -4389,25 +3931,24 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
         },
         /**
          * 
-         * @summary Remove the specified access from the given Organization
+         * @summary Remove all users from the Organization specified
          * @param {string} organizationId the Organization identifier
-         * @param {string} identityId the User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        removeOrganizationAccessControl(organizationId: string, identityId: string, options?: any): AxiosPromise<void> {
-            return localVarFp.removeOrganizationAccessControl(organizationId, identityId, options).then((request) => request(axios, basePath));
+        removeAllUsersInOrganization(organizationId: string, options?: any): AxiosPromise<void> {
+            return localVarFp.removeAllUsersInOrganization(organizationId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @summary set the Organization default security
+         * @summary Remove the specified user from the given Organization
          * @param {string} organizationId the Organization identifier
-         * @param {string} body the new Organization default security.
+         * @param {string} userId the User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        setOrganizationDefaultSecurity(organizationId: string, body: string, options?: any): AxiosPromise<OrganizationSecurity> {
-            return localVarFp.setOrganizationDefaultSecurity(organizationId, body, options).then((request) => request(axios, basePath));
+        removeUserFromOrganization(organizationId: string, userId: string, options?: any): AxiosPromise<void> {
+            return localVarFp.removeUserFromOrganization(organizationId, userId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -4475,15 +4016,15 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
 export class OrganizationApi extends BaseAPI {
     /**
      * 
-     * @summary add a control acccess to the Organization
+     * @summary Add (or replace) users in the Organization specified
      * @param {string} organizationId the Organization identifier
-     * @param {OrganizationAccessControl} organizationAccessControl the new Organization security access to add.
+     * @param {Array<OrganizationUser>} organizationUser the Users to add. Any User with the same ID is overwritten
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OrganizationApi
      */
-    public addOrganizationAccessControl(organizationId: string, organizationAccessControl: OrganizationAccessControl, options?: AxiosRequestConfig) {
-        return OrganizationApiFp(this.configuration).addOrganizationAccessControl(organizationId, organizationAccessControl, options).then((request) => request(this.axios, this.basePath));
+    public addOrReplaceUsersInOrganization(organizationId: string, organizationUser: Array<OrganizationUser>, options?: AxiosRequestConfig) {
+        return OrganizationApiFp(this.configuration).addOrReplaceUsersInOrganization(organizationId, organizationUser, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4511,67 +4052,6 @@ export class OrganizationApi extends BaseAPI {
 
     /**
      * 
-     * @summary Get all permissions per components
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof OrganizationApi
-     */
-    public getAllPermissions(options?: AxiosRequestConfig) {
-        return OrganizationApiFp(this.configuration).getAllPermissions(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary get a control acccess for the Organization
-     * @param {string} organizationId the Organization identifier
-     * @param {string} identityId the User identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof OrganizationApi
-     */
-    public getOrganizationAccessControl(organizationId: string, identityId: string, options?: AxiosRequestConfig) {
-        return OrganizationApiFp(this.configuration).getOrganizationAccessControl(organizationId, identityId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get the Organization permissions by given role
-     * @param {string} organizationId the Organization identifier
-     * @param {string} role the Role
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof OrganizationApi
-     */
-    public getOrganizationPermissions(organizationId: string, role: string, options?: AxiosRequestConfig) {
-        return OrganizationApiFp(this.configuration).getOrganizationPermissions(organizationId, role, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get the Organization security information
-     * @param {string} organizationId the Organization identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof OrganizationApi
-     */
-    public getOrganizationSecurity(organizationId: string, options?: AxiosRequestConfig) {
-        return OrganizationApiFp(this.configuration).getOrganizationSecurity(organizationId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get the Organization security users list
-     * @param {string} organizationId the Organization identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof OrganizationApi
-     */
-    public getOrganizationSecurityUsers(organizationId: string, options?: AxiosRequestConfig) {
-        return OrganizationApiFp(this.configuration).getOrganizationSecurityUsers(organizationId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
      * @summary Register a new organization
      * @param {Organization} organization the Organization to register
      * @param {*} [options] Override http request option.
@@ -4584,28 +4064,27 @@ export class OrganizationApi extends BaseAPI {
 
     /**
      * 
-     * @summary Remove the specified access from the given Organization
+     * @summary Remove all users from the Organization specified
      * @param {string} organizationId the Organization identifier
-     * @param {string} identityId the User identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OrganizationApi
      */
-    public removeOrganizationAccessControl(organizationId: string, identityId: string, options?: AxiosRequestConfig) {
-        return OrganizationApiFp(this.configuration).removeOrganizationAccessControl(organizationId, identityId, options).then((request) => request(this.axios, this.basePath));
+    public removeAllUsersInOrganization(organizationId: string, options?: AxiosRequestConfig) {
+        return OrganizationApiFp(this.configuration).removeAllUsersInOrganization(organizationId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @summary set the Organization default security
+     * @summary Remove the specified user from the given Organization
      * @param {string} organizationId the Organization identifier
-     * @param {string} body the new Organization default security.
+     * @param {string} userId the User identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OrganizationApi
      */
-    public setOrganizationDefaultSecurity(organizationId: string, body: string, options?: AxiosRequestConfig) {
-        return OrganizationApiFp(this.configuration).setOrganizationDefaultSecurity(organizationId, body, options).then((request) => request(this.axios, this.basePath));
+    public removeUserFromOrganization(organizationId: string, userId: string, options?: AxiosRequestConfig) {
+        return OrganizationApiFp(this.configuration).removeUserFromOrganization(organizationId, userId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4734,24 +4213,24 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
-         * @summary add a control acccess to the Scenario
+         * @summary Add (or replace) users in the Scenario specified
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
-         * @param {ScenarioAccessControl} scenarioAccessControl the new Scenario security access to add.
+         * @param {Array<ScenarioUser>} scenarioUser the Users to add. Any User with the same ID is overwritten
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addScenarioAccessControl: async (organizationId: string, workspaceId: string, scenarioId: string, scenarioAccessControl: ScenarioAccessControl, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        addOrReplaceUsersInScenario: async (organizationId: string, workspaceId: string, scenarioId: string, scenarioUser: Array<ScenarioUser>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('addScenarioAccessControl', 'organizationId', organizationId)
+            assertParamExists('addOrReplaceUsersInScenario', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('addScenarioAccessControl', 'workspaceId', workspaceId)
+            assertParamExists('addOrReplaceUsersInScenario', 'workspaceId', workspaceId)
             // verify required parameter 'scenarioId' is not null or undefined
-            assertParamExists('addScenarioAccessControl', 'scenarioId', scenarioId)
-            // verify required parameter 'scenarioAccessControl' is not null or undefined
-            assertParamExists('addScenarioAccessControl', 'scenarioAccessControl', scenarioAccessControl)
-            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/scenarios/{scenario_id}/security/access`
+            assertParamExists('addOrReplaceUsersInScenario', 'scenarioId', scenarioId)
+            // verify required parameter 'scenarioUser' is not null or undefined
+            assertParamExists('addOrReplaceUsersInScenario', 'scenarioUser', scenarioUser)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/scenarios/{scenario_id}/users`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
                 .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
                 .replace(`{${"scenario_id"}}`, encodeURIComponent(String(scenarioId)));
@@ -4777,7 +4256,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(scenarioAccessControl, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(scenarioUser, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -5157,56 +4636,6 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
-         * @summary get a control acccess for the Scenario
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} scenarioId the Scenario identifier
-         * @param {string} identityId the User identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getScenarioAccessControl: async (organizationId: string, workspaceId: string, scenarioId: string, identityId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('getScenarioAccessControl', 'organizationId', organizationId)
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('getScenarioAccessControl', 'workspaceId', workspaceId)
-            // verify required parameter 'scenarioId' is not null or undefined
-            assertParamExists('getScenarioAccessControl', 'scenarioId', scenarioId)
-            // verify required parameter 'identityId' is not null or undefined
-            assertParamExists('getScenarioAccessControl', 'identityId', identityId)
-            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/scenarios/{scenario_id}/security/access/{identity_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"scenario_id"}}`, encodeURIComponent(String(scenarioId)))
-                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @summary Get Scenario data download URL
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -5229,144 +4658,6 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
                 .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
                 .replace(`{${"scenario_id"}}`, encodeURIComponent(String(scenarioId)))
                 .replace(`{${"download_id"}}`, encodeURIComponent(String(downloadId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get the Scenario permission by given role
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} role the Role
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getScenarioPermissions: async (organizationId: string, workspaceId: string, role: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('getScenarioPermissions', 'organizationId', organizationId)
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('getScenarioPermissions', 'workspaceId', workspaceId)
-            // verify required parameter 'role' is not null or undefined
-            assertParamExists('getScenarioPermissions', 'role', role)
-            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/scenarios/permissions/{role}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"role"}}`, encodeURIComponent(String(role)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get the Scenario security information
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} scenarioId the Scenario identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getScenarioSecurity: async (organizationId: string, workspaceId: string, scenarioId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('getScenarioSecurity', 'organizationId', organizationId)
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('getScenarioSecurity', 'workspaceId', workspaceId)
-            // verify required parameter 'scenarioId' is not null or undefined
-            assertParamExists('getScenarioSecurity', 'scenarioId', scenarioId)
-            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/scenarios/{scenario_id}/security`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"scenario_id"}}`, encodeURIComponent(String(scenarioId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get the Scenario security users list
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} scenarioId the Scenario identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getScenarioSecurityUsers: async (organizationId: string, workspaceId: string, scenarioId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('getScenarioSecurityUsers', 'organizationId', organizationId)
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('getScenarioSecurityUsers', 'workspaceId', workspaceId)
-            // verify required parameter 'scenarioId' is not null or undefined
-            assertParamExists('getScenarioSecurityUsers', 'scenarioId', scenarioId)
-            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/scenarios/{scenario_id}/security/users`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"scenario_id"}}`, encodeURIComponent(String(scenarioId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -5529,28 +4820,24 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
-         * @summary Remove the specified access from the given Organization Scenario
+         * @summary Remove all users from the Scenario specified
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
-         * @param {string} identityId the User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        removeScenarioAccessControl: async (organizationId: string, workspaceId: string, scenarioId: string, identityId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        removeAllUsersOfScenario: async (organizationId: string, workspaceId: string, scenarioId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('removeScenarioAccessControl', 'organizationId', organizationId)
+            assertParamExists('removeAllUsersOfScenario', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('removeScenarioAccessControl', 'workspaceId', workspaceId)
+            assertParamExists('removeAllUsersOfScenario', 'workspaceId', workspaceId)
             // verify required parameter 'scenarioId' is not null or undefined
-            assertParamExists('removeScenarioAccessControl', 'scenarioId', scenarioId)
-            // verify required parameter 'identityId' is not null or undefined
-            assertParamExists('removeScenarioAccessControl', 'identityId', identityId)
-            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/scenarios/{scenario_id}/security/access/{identity_id}`
+            assertParamExists('removeAllUsersOfScenario', 'scenarioId', scenarioId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/scenarios/{scenario_id}/users`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
                 .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"scenario_id"}}`, encodeURIComponent(String(scenarioId)))
-                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
+                .replace(`{${"scenario_id"}}`, encodeURIComponent(String(scenarioId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -5579,27 +4866,28 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
-         * @summary set the Scenario default security
+         * @summary Remove the specified user from the given Scenario
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
-         * @param {string} body the new Scenario default security.
+         * @param {string} userId the User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        setScenarioDefaultSecurity: async (organizationId: string, workspaceId: string, scenarioId: string, body: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        removeUserFromScenario: async (organizationId: string, workspaceId: string, scenarioId: string, userId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('setScenarioDefaultSecurity', 'organizationId', organizationId)
+            assertParamExists('removeUserFromScenario', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('setScenarioDefaultSecurity', 'workspaceId', workspaceId)
+            assertParamExists('removeUserFromScenario', 'workspaceId', workspaceId)
             // verify required parameter 'scenarioId' is not null or undefined
-            assertParamExists('setScenarioDefaultSecurity', 'scenarioId', scenarioId)
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('setScenarioDefaultSecurity', 'body', body)
-            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/scenarios/{scenario_id}/security/default`
+            assertParamExists('removeUserFromScenario', 'scenarioId', scenarioId)
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('removeUserFromScenario', 'userId', userId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/scenarios/{scenario_id}/users/{user_id}`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
                 .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"scenario_id"}}`, encodeURIComponent(String(scenarioId)));
+                .replace(`{${"scenario_id"}}`, encodeURIComponent(String(scenarioId)))
+                .replace(`{${"user_id"}}`, encodeURIComponent(String(userId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -5607,7 +4895,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -5617,12 +4905,9 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
 
 
     
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -5707,16 +4992,16 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary add a control acccess to the Scenario
+         * @summary Add (or replace) users in the Scenario specified
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
-         * @param {ScenarioAccessControl} scenarioAccessControl the new Scenario security access to add.
+         * @param {Array<ScenarioUser>} scenarioUser the Users to add. Any User with the same ID is overwritten
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async addScenarioAccessControl(organizationId: string, workspaceId: string, scenarioId: string, scenarioAccessControl: ScenarioAccessControl, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioAccessControl>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.addScenarioAccessControl(organizationId, workspaceId, scenarioId, scenarioAccessControl, options);
+        async addOrReplaceUsersInScenario(organizationId: string, workspaceId: string, scenarioId: string, scenarioUser: Array<ScenarioUser>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ScenarioUser>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.addOrReplaceUsersInScenario(organizationId, workspaceId, scenarioId, scenarioUser, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -5825,20 +5110,6 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary get a control acccess for the Scenario
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} scenarioId the Scenario identifier
-         * @param {string} identityId the User identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getScenarioAccessControl(organizationId: string, workspaceId: string, scenarioId: string, identityId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioAccessControl>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getScenarioAccessControl(organizationId, workspaceId, scenarioId, identityId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
          * @summary Get Scenario data download URL
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -5849,45 +5120,6 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          */
         async getScenarioDataDownloadJobInfo(organizationId: string, workspaceId: string, scenarioId: string, downloadId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioDataDownloadInfo>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getScenarioDataDownloadJobInfo(organizationId, workspaceId, scenarioId, downloadId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Get the Scenario permission by given role
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} role the Role
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getScenarioPermissions(organizationId: string, workspaceId: string, role: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getScenarioPermissions(organizationId, workspaceId, role, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Get the Scenario security information
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} scenarioId the Scenario identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getScenarioSecurity(organizationId: string, workspaceId: string, scenarioId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioSecurity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getScenarioSecurity(organizationId, workspaceId, scenarioId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Get the Scenario security users list
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} scenarioId the Scenario identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getScenarioSecurityUsers(organizationId: string, workspaceId: string, scenarioId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getScenarioSecurityUsers(organizationId, workspaceId, scenarioId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -5930,30 +5162,29 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Remove the specified access from the given Organization Scenario
+         * @summary Remove all users from the Scenario specified
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
-         * @param {string} identityId the User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async removeScenarioAccessControl(organizationId: string, workspaceId: string, scenarioId: string, identityId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.removeScenarioAccessControl(organizationId, workspaceId, scenarioId, identityId, options);
+        async removeAllUsersOfScenario(organizationId: string, workspaceId: string, scenarioId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.removeAllUsersOfScenario(organizationId, workspaceId, scenarioId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
-         * @summary set the Scenario default security
+         * @summary Remove the specified user from the given Scenario
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
-         * @param {string} body the new Scenario default security.
+         * @param {string} userId the User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async setScenarioDefaultSecurity(organizationId: string, workspaceId: string, scenarioId: string, body: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioSecurity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setScenarioDefaultSecurity(organizationId, workspaceId, scenarioId, body, options);
+        async removeUserFromScenario(organizationId: string, workspaceId: string, scenarioId: string, userId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.removeUserFromScenario(organizationId, workspaceId, scenarioId, userId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -5995,16 +5226,16 @@ export const ScenarioApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * 
-         * @summary add a control acccess to the Scenario
+         * @summary Add (or replace) users in the Scenario specified
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
-         * @param {ScenarioAccessControl} scenarioAccessControl the new Scenario security access to add.
+         * @param {Array<ScenarioUser>} scenarioUser the Users to add. Any User with the same ID is overwritten
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addScenarioAccessControl(organizationId: string, workspaceId: string, scenarioId: string, scenarioAccessControl: ScenarioAccessControl, options?: any): AxiosPromise<ScenarioAccessControl> {
-            return localVarFp.addScenarioAccessControl(organizationId, workspaceId, scenarioId, scenarioAccessControl, options).then((request) => request(axios, basePath));
+        addOrReplaceUsersInScenario(organizationId: string, workspaceId: string, scenarioId: string, scenarioUser: Array<ScenarioUser>, options?: any): AxiosPromise<Array<ScenarioUser>> {
+            return localVarFp.addOrReplaceUsersInScenario(organizationId, workspaceId, scenarioId, scenarioUser, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -6104,19 +5335,6 @@ export const ScenarioApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * 
-         * @summary get a control acccess for the Scenario
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} scenarioId the Scenario identifier
-         * @param {string} identityId the User identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getScenarioAccessControl(organizationId: string, workspaceId: string, scenarioId: string, identityId: string, options?: any): AxiosPromise<ScenarioAccessControl> {
-            return localVarFp.getScenarioAccessControl(organizationId, workspaceId, scenarioId, identityId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @summary Get Scenario data download URL
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -6127,42 +5345,6 @@ export const ScenarioApiFactory = function (configuration?: Configuration, baseP
          */
         getScenarioDataDownloadJobInfo(organizationId: string, workspaceId: string, scenarioId: string, downloadId: string, options?: any): AxiosPromise<ScenarioDataDownloadInfo> {
             return localVarFp.getScenarioDataDownloadJobInfo(organizationId, workspaceId, scenarioId, downloadId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get the Scenario permission by given role
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} role the Role
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getScenarioPermissions(organizationId: string, workspaceId: string, role: string, options?: any): AxiosPromise<Array<string>> {
-            return localVarFp.getScenarioPermissions(organizationId, workspaceId, role, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get the Scenario security information
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} scenarioId the Scenario identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getScenarioSecurity(organizationId: string, workspaceId: string, scenarioId: string, options?: any): AxiosPromise<ScenarioSecurity> {
-            return localVarFp.getScenarioSecurity(organizationId, workspaceId, scenarioId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get the Scenario security users list
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} scenarioId the Scenario identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getScenarioSecurityUsers(organizationId: string, workspaceId: string, scenarioId: string, options?: any): AxiosPromise<Array<string>> {
-            return localVarFp.getScenarioSecurityUsers(organizationId, workspaceId, scenarioId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -6201,29 +5383,28 @@ export const ScenarioApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * 
-         * @summary Remove the specified access from the given Organization Scenario
+         * @summary Remove all users from the Scenario specified
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
-         * @param {string} identityId the User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        removeScenarioAccessControl(organizationId: string, workspaceId: string, scenarioId: string, identityId: string, options?: any): AxiosPromise<void> {
-            return localVarFp.removeScenarioAccessControl(organizationId, workspaceId, scenarioId, identityId, options).then((request) => request(axios, basePath));
+        removeAllUsersOfScenario(organizationId: string, workspaceId: string, scenarioId: string, options?: any): AxiosPromise<void> {
+            return localVarFp.removeAllUsersOfScenario(organizationId, workspaceId, scenarioId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @summary set the Scenario default security
+         * @summary Remove the specified user from the given Scenario
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
-         * @param {string} body the new Scenario default security.
+         * @param {string} userId the User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        setScenarioDefaultSecurity(organizationId: string, workspaceId: string, scenarioId: string, body: string, options?: any): AxiosPromise<ScenarioSecurity> {
-            return localVarFp.setScenarioDefaultSecurity(organizationId, workspaceId, scenarioId, body, options).then((request) => request(axios, basePath));
+        removeUserFromScenario(organizationId: string, workspaceId: string, scenarioId: string, userId: string, options?: any): AxiosPromise<void> {
+            return localVarFp.removeUserFromScenario(organizationId, workspaceId, scenarioId, userId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -6265,17 +5446,17 @@ export class ScenarioApi extends BaseAPI {
 
     /**
      * 
-     * @summary add a control acccess to the Scenario
+     * @summary Add (or replace) users in the Scenario specified
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
      * @param {string} scenarioId the Scenario identifier
-     * @param {ScenarioAccessControl} scenarioAccessControl the new Scenario security access to add.
+     * @param {Array<ScenarioUser>} scenarioUser the Users to add. Any User with the same ID is overwritten
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
-    public addScenarioAccessControl(organizationId: string, workspaceId: string, scenarioId: string, scenarioAccessControl: ScenarioAccessControl, options?: AxiosRequestConfig) {
-        return ScenarioApiFp(this.configuration).addScenarioAccessControl(organizationId, workspaceId, scenarioId, scenarioAccessControl, options).then((request) => request(this.axios, this.basePath));
+    public addOrReplaceUsersInScenario(organizationId: string, workspaceId: string, scenarioId: string, scenarioUser: Array<ScenarioUser>, options?: AxiosRequestConfig) {
+        return ScenarioApiFp(this.configuration).addOrReplaceUsersInScenario(organizationId, workspaceId, scenarioId, scenarioUser, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6392,21 +5573,6 @@ export class ScenarioApi extends BaseAPI {
 
     /**
      * 
-     * @summary get a control acccess for the Scenario
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
-     * @param {string} scenarioId the Scenario identifier
-     * @param {string} identityId the User identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ScenarioApi
-     */
-    public getScenarioAccessControl(organizationId: string, workspaceId: string, scenarioId: string, identityId: string, options?: AxiosRequestConfig) {
-        return ScenarioApiFp(this.configuration).getScenarioAccessControl(organizationId, workspaceId, scenarioId, identityId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
      * @summary Get Scenario data download URL
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
@@ -6418,48 +5584,6 @@ export class ScenarioApi extends BaseAPI {
      */
     public getScenarioDataDownloadJobInfo(organizationId: string, workspaceId: string, scenarioId: string, downloadId: string, options?: AxiosRequestConfig) {
         return ScenarioApiFp(this.configuration).getScenarioDataDownloadJobInfo(organizationId, workspaceId, scenarioId, downloadId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get the Scenario permission by given role
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
-     * @param {string} role the Role
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ScenarioApi
-     */
-    public getScenarioPermissions(organizationId: string, workspaceId: string, role: string, options?: AxiosRequestConfig) {
-        return ScenarioApiFp(this.configuration).getScenarioPermissions(organizationId, workspaceId, role, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get the Scenario security information
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
-     * @param {string} scenarioId the Scenario identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ScenarioApi
-     */
-    public getScenarioSecurity(organizationId: string, workspaceId: string, scenarioId: string, options?: AxiosRequestConfig) {
-        return ScenarioApiFp(this.configuration).getScenarioSecurity(organizationId, workspaceId, scenarioId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get the Scenario security users list
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
-     * @param {string} scenarioId the Scenario identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ScenarioApi
-     */
-    public getScenarioSecurityUsers(organizationId: string, workspaceId: string, scenarioId: string, options?: AxiosRequestConfig) {
-        return ScenarioApiFp(this.configuration).getScenarioSecurityUsers(organizationId, workspaceId, scenarioId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6505,32 +5629,31 @@ export class ScenarioApi extends BaseAPI {
 
     /**
      * 
-     * @summary Remove the specified access from the given Organization Scenario
+     * @summary Remove all users from the Scenario specified
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
      * @param {string} scenarioId the Scenario identifier
-     * @param {string} identityId the User identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
-    public removeScenarioAccessControl(organizationId: string, workspaceId: string, scenarioId: string, identityId: string, options?: AxiosRequestConfig) {
-        return ScenarioApiFp(this.configuration).removeScenarioAccessControl(organizationId, workspaceId, scenarioId, identityId, options).then((request) => request(this.axios, this.basePath));
+    public removeAllUsersOfScenario(organizationId: string, workspaceId: string, scenarioId: string, options?: AxiosRequestConfig) {
+        return ScenarioApiFp(this.configuration).removeAllUsersOfScenario(organizationId, workspaceId, scenarioId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @summary set the Scenario default security
+     * @summary Remove the specified user from the given Scenario
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
      * @param {string} scenarioId the Scenario identifier
-     * @param {string} body the new Scenario default security.
+     * @param {string} userId the User identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
-    public setScenarioDefaultSecurity(organizationId: string, workspaceId: string, scenarioId: string, body: string, options?: AxiosRequestConfig) {
-        return ScenarioApiFp(this.configuration).setScenarioDefaultSecurity(organizationId, workspaceId, scenarioId, body, options).then((request) => request(this.axios, this.basePath));
+    public removeUserFromScenario(organizationId: string, workspaceId: string, scenarioId: string, userId: string, options?: AxiosRequestConfig) {
+        return ScenarioApiFp(this.configuration).removeUserFromScenario(organizationId, workspaceId, scenarioId, userId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -10518,21 +9641,21 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
     return {
         /**
          * 
-         * @summary add a control acccess to the Workspace
+         * @summary Add (or replace) users to the Workspace specified
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
-         * @param {WorkspaceAccessControl} workspaceAccessControl the new Workspace security access to add.
+         * @param {Array<WorkspaceUser>} workspaceUser the Users to add. Any User with the same ID is overwritten
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addWorkspaceAccessControl: async (organizationId: string, workspaceId: string, workspaceAccessControl: WorkspaceAccessControl, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        addOrReplaceUsersInOrganizationWorkspace: async (organizationId: string, workspaceId: string, workspaceUser: Array<WorkspaceUser>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('addWorkspaceAccessControl', 'organizationId', organizationId)
+            assertParamExists('addOrReplaceUsersInOrganizationWorkspace', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('addWorkspaceAccessControl', 'workspaceId', workspaceId)
-            // verify required parameter 'workspaceAccessControl' is not null or undefined
-            assertParamExists('addWorkspaceAccessControl', 'workspaceAccessControl', workspaceAccessControl)
-            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/security/access`
+            assertParamExists('addOrReplaceUsersInOrganizationWorkspace', 'workspaceId', workspaceId)
+            // verify required parameter 'workspaceUser' is not null or undefined
+            assertParamExists('addOrReplaceUsersInOrganizationWorkspace', 'workspaceUser', workspaceUser)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/users`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
                 .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -10557,7 +9680,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(workspaceAccessControl, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(workspaceUser, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -10914,200 +10037,20 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary get a control acccess for the Workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} identityId the User identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getWorkspaceAccessControl: async (organizationId: string, workspaceId: string, identityId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('getWorkspaceAccessControl', 'organizationId', organizationId)
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('getWorkspaceAccessControl', 'workspaceId', workspaceId)
-            // verify required parameter 'identityId' is not null or undefined
-            assertParamExists('getWorkspaceAccessControl', 'identityId', identityId)
-            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/security/access/{identity_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get the Workspace permission by given role
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} role the Role
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getWorkspacePermissions: async (organizationId: string, workspaceId: string, role: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('getWorkspacePermissions', 'organizationId', organizationId)
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('getWorkspacePermissions', 'workspaceId', workspaceId)
-            // verify required parameter 'role' is not null or undefined
-            assertParamExists('getWorkspacePermissions', 'role', role)
-            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/permissions/{role}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"role"}}`, encodeURIComponent(String(role)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get the Workspace security information
+         * @summary Remove all users from the Workspace specified
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getWorkspaceSecurity: async (organizationId: string, workspaceId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        removeAllUsersOfWorkspace: async (organizationId: string, workspaceId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('getWorkspaceSecurity', 'organizationId', organizationId)
+            assertParamExists('removeAllUsersOfWorkspace', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('getWorkspaceSecurity', 'workspaceId', workspaceId)
-            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/security`
+            assertParamExists('removeAllUsersOfWorkspace', 'workspaceId', workspaceId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/users`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
                 .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get the Workspace security users list
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getWorkspaceSecurityUsers: async (organizationId: string, workspaceId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('getWorkspaceSecurityUsers', 'organizationId', organizationId)
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('getWorkspaceSecurityUsers', 'workspaceId', workspaceId)
-            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/security/users`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Remove the specified access from the given Organization Workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} identityId the User identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        removeWorkspaceAccessControl: async (organizationId: string, workspaceId: string, identityId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('removeWorkspaceAccessControl', 'organizationId', organizationId)
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('removeWorkspaceAccessControl', 'workspaceId', workspaceId)
-            // verify required parameter 'identityId' is not null or undefined
-            assertParamExists('removeWorkspaceAccessControl', 'identityId', identityId)
-            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/security/access/{identity_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -11136,23 +10079,24 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary set the Workspace default security
+         * @summary Remove the specified user from the given Organization Workspace
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
-         * @param {string} body the new Workspace default security.
+         * @param {string} userId the User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        setWorkspaceDefaultSecurity: async (organizationId: string, workspaceId: string, body: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        removeUserFromOrganizationWorkspace: async (organizationId: string, workspaceId: string, userId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('setWorkspaceDefaultSecurity', 'organizationId', organizationId)
+            assertParamExists('removeUserFromOrganizationWorkspace', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('setWorkspaceDefaultSecurity', 'workspaceId', workspaceId)
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('setWorkspaceDefaultSecurity', 'body', body)
-            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/security/default`
+            assertParamExists('removeUserFromOrganizationWorkspace', 'workspaceId', workspaceId)
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('removeUserFromOrganizationWorkspace', 'userId', userId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/users/{user_id}`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"user_id"}}`, encodeURIComponent(String(userId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -11160,7 +10104,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -11170,12 +10114,9 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
 
 
     
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -11305,15 +10246,15 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary add a control acccess to the Workspace
+         * @summary Add (or replace) users to the Workspace specified
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
-         * @param {WorkspaceAccessControl} workspaceAccessControl the new Workspace security access to add.
+         * @param {Array<WorkspaceUser>} workspaceUser the Users to add. Any User with the same ID is overwritten
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async addWorkspaceAccessControl(organizationId: string, workspaceId: string, workspaceAccessControl: WorkspaceAccessControl, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkspaceAccessControl>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.addWorkspaceAccessControl(organizationId, workspaceId, workspaceAccessControl, options);
+        async addOrReplaceUsersInOrganizationWorkspace(organizationId: string, workspaceId: string, workspaceUser: Array<WorkspaceUser>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<WorkspaceUser>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.addOrReplaceUsersInOrganizationWorkspace(organizationId, workspaceId, workspaceUser, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -11415,78 +10356,27 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary get a control acccess for the Workspace
+         * @summary Remove all users from the Workspace specified
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
-         * @param {string} identityId the User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getWorkspaceAccessControl(organizationId: string, workspaceId: string, identityId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkspaceAccessControl>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getWorkspaceAccessControl(organizationId, workspaceId, identityId, options);
+        async removeAllUsersOfWorkspace(organizationId: string, workspaceId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.removeAllUsersOfWorkspace(organizationId, workspaceId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
-         * @summary Get the Workspace permission by given role
+         * @summary Remove the specified user from the given Organization Workspace
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
-         * @param {string} role the Role
+         * @param {string} userId the User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getWorkspacePermissions(organizationId: string, workspaceId: string, role: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getWorkspacePermissions(organizationId, workspaceId, role, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Get the Workspace security information
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getWorkspaceSecurity(organizationId: string, workspaceId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkspaceSecurity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getWorkspaceSecurity(organizationId, workspaceId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Get the Workspace security users list
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getWorkspaceSecurityUsers(organizationId: string, workspaceId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getWorkspaceSecurityUsers(organizationId, workspaceId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary Remove the specified access from the given Organization Workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} identityId the User identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async removeWorkspaceAccessControl(organizationId: string, workspaceId: string, identityId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.removeWorkspaceAccessControl(organizationId, workspaceId, identityId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary set the Workspace default security
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} body the new Workspace default security.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async setWorkspaceDefaultSecurity(organizationId: string, workspaceId: string, body: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkspaceSecurity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setWorkspaceDefaultSecurity(organizationId, workspaceId, body, options);
+        async removeUserFromOrganizationWorkspace(organizationId: string, workspaceId: string, userId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.removeUserFromOrganizationWorkspace(organizationId, workspaceId, userId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -11529,15 +10419,15 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
     return {
         /**
          * 
-         * @summary add a control acccess to the Workspace
+         * @summary Add (or replace) users to the Workspace specified
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
-         * @param {WorkspaceAccessControl} workspaceAccessControl the new Workspace security access to add.
+         * @param {Array<WorkspaceUser>} workspaceUser the Users to add. Any User with the same ID is overwritten
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addWorkspaceAccessControl(organizationId: string, workspaceId: string, workspaceAccessControl: WorkspaceAccessControl, options?: any): AxiosPromise<WorkspaceAccessControl> {
-            return localVarFp.addWorkspaceAccessControl(organizationId, workspaceId, workspaceAccessControl, options).then((request) => request(axios, basePath));
+        addOrReplaceUsersInOrganizationWorkspace(organizationId: string, workspaceId: string, workspaceUser: Array<WorkspaceUser>, options?: any): AxiosPromise<Array<WorkspaceUser>> {
+            return localVarFp.addOrReplaceUsersInOrganizationWorkspace(organizationId, workspaceId, workspaceUser, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -11630,73 +10520,26 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary get a control acccess for the Workspace
+         * @summary Remove all users from the Workspace specified
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
-         * @param {string} identityId the User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getWorkspaceAccessControl(organizationId: string, workspaceId: string, identityId: string, options?: any): AxiosPromise<WorkspaceAccessControl> {
-            return localVarFp.getWorkspaceAccessControl(organizationId, workspaceId, identityId, options).then((request) => request(axios, basePath));
+        removeAllUsersOfWorkspace(organizationId: string, workspaceId: string, options?: any): AxiosPromise<void> {
+            return localVarFp.removeAllUsersOfWorkspace(organizationId, workspaceId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @summary Get the Workspace permission by given role
+         * @summary Remove the specified user from the given Organization Workspace
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
-         * @param {string} role the Role
+         * @param {string} userId the User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getWorkspacePermissions(organizationId: string, workspaceId: string, role: string, options?: any): AxiosPromise<Array<string>> {
-            return localVarFp.getWorkspacePermissions(organizationId, workspaceId, role, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get the Workspace security information
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getWorkspaceSecurity(organizationId: string, workspaceId: string, options?: any): AxiosPromise<WorkspaceSecurity> {
-            return localVarFp.getWorkspaceSecurity(organizationId, workspaceId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get the Workspace security users list
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getWorkspaceSecurityUsers(organizationId: string, workspaceId: string, options?: any): AxiosPromise<Array<string>> {
-            return localVarFp.getWorkspaceSecurityUsers(organizationId, workspaceId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Remove the specified access from the given Organization Workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} identityId the User identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        removeWorkspaceAccessControl(organizationId: string, workspaceId: string, identityId: string, options?: any): AxiosPromise<void> {
-            return localVarFp.removeWorkspaceAccessControl(organizationId, workspaceId, identityId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary set the Workspace default security
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} body the new Workspace default security.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        setWorkspaceDefaultSecurity(organizationId: string, workspaceId: string, body: string, options?: any): AxiosPromise<WorkspaceSecurity> {
-            return localVarFp.setWorkspaceDefaultSecurity(organizationId, workspaceId, body, options).then((request) => request(axios, basePath));
+        removeUserFromOrganizationWorkspace(organizationId: string, workspaceId: string, userId: string, options?: any): AxiosPromise<void> {
+            return localVarFp.removeUserFromOrganizationWorkspace(organizationId, workspaceId, userId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -11736,16 +10579,16 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
 export class WorkspaceApi extends BaseAPI {
     /**
      * 
-     * @summary add a control acccess to the Workspace
+     * @summary Add (or replace) users to the Workspace specified
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
-     * @param {WorkspaceAccessControl} workspaceAccessControl the new Workspace security access to add.
+     * @param {Array<WorkspaceUser>} workspaceUser the Users to add. Any User with the same ID is overwritten
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WorkspaceApi
      */
-    public addWorkspaceAccessControl(organizationId: string, workspaceId: string, workspaceAccessControl: WorkspaceAccessControl, options?: AxiosRequestConfig) {
-        return WorkspaceApiFp(this.configuration).addWorkspaceAccessControl(organizationId, workspaceId, workspaceAccessControl, options).then((request) => request(this.axios, this.basePath));
+    public addOrReplaceUsersInOrganizationWorkspace(organizationId: string, workspaceId: string, workspaceUser: Array<WorkspaceUser>, options?: AxiosRequestConfig) {
+        return WorkspaceApiFp(this.configuration).addOrReplaceUsersInOrganizationWorkspace(organizationId, workspaceId, workspaceUser, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -11855,84 +10698,29 @@ export class WorkspaceApi extends BaseAPI {
 
     /**
      * 
-     * @summary get a control acccess for the Workspace
+     * @summary Remove all users from the Workspace specified
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
-     * @param {string} identityId the User identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WorkspaceApi
      */
-    public getWorkspaceAccessControl(organizationId: string, workspaceId: string, identityId: string, options?: AxiosRequestConfig) {
-        return WorkspaceApiFp(this.configuration).getWorkspaceAccessControl(organizationId, workspaceId, identityId, options).then((request) => request(this.axios, this.basePath));
+    public removeAllUsersOfWorkspace(organizationId: string, workspaceId: string, options?: AxiosRequestConfig) {
+        return WorkspaceApiFp(this.configuration).removeAllUsersOfWorkspace(organizationId, workspaceId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @summary Get the Workspace permission by given role
+     * @summary Remove the specified user from the given Organization Workspace
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
-     * @param {string} role the Role
+     * @param {string} userId the User identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WorkspaceApi
      */
-    public getWorkspacePermissions(organizationId: string, workspaceId: string, role: string, options?: AxiosRequestConfig) {
-        return WorkspaceApiFp(this.configuration).getWorkspacePermissions(organizationId, workspaceId, role, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get the Workspace security information
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof WorkspaceApi
-     */
-    public getWorkspaceSecurity(organizationId: string, workspaceId: string, options?: AxiosRequestConfig) {
-        return WorkspaceApiFp(this.configuration).getWorkspaceSecurity(organizationId, workspaceId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get the Workspace security users list
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof WorkspaceApi
-     */
-    public getWorkspaceSecurityUsers(organizationId: string, workspaceId: string, options?: AxiosRequestConfig) {
-        return WorkspaceApiFp(this.configuration).getWorkspaceSecurityUsers(organizationId, workspaceId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Remove the specified access from the given Organization Workspace
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
-     * @param {string} identityId the User identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof WorkspaceApi
-     */
-    public removeWorkspaceAccessControl(organizationId: string, workspaceId: string, identityId: string, options?: AxiosRequestConfig) {
-        return WorkspaceApiFp(this.configuration).removeWorkspaceAccessControl(organizationId, workspaceId, identityId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary set the Workspace default security
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
-     * @param {string} body the new Workspace default security.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof WorkspaceApi
-     */
-    public setWorkspaceDefaultSecurity(organizationId: string, workspaceId: string, body: string, options?: AxiosRequestConfig) {
-        return WorkspaceApiFp(this.configuration).setWorkspaceDefaultSecurity(organizationId, workspaceId, body, options).then((request) => request(this.axios, this.basePath));
+    public removeUserFromOrganizationWorkspace(organizationId: string, workspaceId: string, userId: string, options?: AxiosRequestConfig) {
+        return WorkspaceApiFp(this.configuration).removeUserFromOrganizationWorkspace(organizationId, workspaceId, userId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
