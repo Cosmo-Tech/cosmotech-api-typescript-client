@@ -16,7 +16,7 @@ jobs:
     - run: yarn
     - run: git config --global user.email "vincent.carluer@cosmotech.com" && git config --global user.name "Vincent Carluer"
     - run: npm version ${{ github.event.release.tag_name }} --allow-same-version
-    - run: npm publish --access=public
+    - run: npm publish
       env:
         NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
