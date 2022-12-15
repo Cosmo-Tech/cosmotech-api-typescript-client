@@ -2140,6 +2140,24 @@ export interface Workspace {
      */
     'useDedicatedEventHubNamespace'?: boolean;
     /**
+     * the Dedicated Event Hub SAS key name, default to RootManageSharedAccessKey. Use the /secret endpoint to set the key value
+     * @type {string}
+     * @memberof Workspace
+     */
+    'dedicatedEventHubSasKeyName'?: string;
+    /**
+     * the Event Hub authentication strategy, SHARED_ACCESS_POLICY or TENANT_CLIENT_CREDENTIALS. Default to the one defined for the tenant.
+     * @type {string}
+     * @memberof Workspace
+     */
+    'dedicatedEventHubAuthenticationStrategy'?: string;
+    /**
+     * default setting for all Scenarios and Run Templates to set whether or not the ScenarioRun is send to the Event Hub
+     * @type {boolean}
+     * @memberof Workspace
+     */
+    'sendScenarioRunToEventHub'?: boolean;
+    /**
      * Set this property to false to not send scenario metada to Azure Event Hub Namespace for this Workspace. The Event Hub Namespace must be named \\\'<organization_id\\>-<workspace_id\\>\\\' (in lower case). This Namespace must also contain two Event Hubs named \\\'scenariometadata\\\' and \\\'scenariorunmetadata\\\'.
      * @type {boolean}
      * @memberof Workspace
@@ -2158,6 +2176,19 @@ export interface WorkspaceFile {
      * @memberof WorkspaceFile
      */
     'fileName'?: string;
+}
+/**
+ * the secret definition
+ * @export
+ * @interface WorkspaceSecret
+ */
+export interface WorkspaceSecret {
+    /**
+     * the dedicated event hub shared access key
+     * @type {string}
+     * @memberof WorkspaceSecret
+     */
+    'dedicatedEventHubKey'?: string;
 }
 /**
  * the Workspace Solution configuration
@@ -9744,6 +9775,54 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
+         * @summary Create a secret for the Workspace
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {WorkspaceSecret} workspaceSecret the definition of the secret
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createSecret: async (organizationId: string, workspaceId: string, workspaceSecret: WorkspaceSecret, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('createSecret', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('createSecret', 'workspaceId', workspaceId)
+            // verify required parameter 'workspaceSecret' is not null or undefined
+            assertParamExists('createSecret', 'workspaceSecret', workspaceSecret)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/secret`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(workspaceSecret, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Create a new workspace
          * @param {string} organizationId the Organization identifier
          * @param {Workspace} workspace the Workspace to create
@@ -10314,6 +10393,19 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Create a secret for the Workspace
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {WorkspaceSecret} workspaceSecret the definition of the secret
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createSecret(organizationId: string, workspaceId: string, workspaceSecret: WorkspaceSecret, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createSecret(organizationId, workspaceId, workspaceSecret, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @summary Create a new workspace
          * @param {string} organizationId the Organization identifier
          * @param {Workspace} workspace the Workspace to create
@@ -10486,6 +10578,18 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
+         * @summary Create a secret for the Workspace
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {WorkspaceSecret} workspaceSecret the definition of the secret
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createSecret(organizationId: string, workspaceId: string, workspaceSecret: WorkspaceSecret, options?: any): AxiosPromise<void> {
+            return localVarFp.createSecret(organizationId, workspaceId, workspaceSecret, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Create a new workspace
          * @param {string} organizationId the Organization identifier
          * @param {Workspace} workspace the Workspace to create
@@ -10644,6 +10748,20 @@ export class WorkspaceApi extends BaseAPI {
      */
     public addOrReplaceUsersInOrganizationWorkspace(organizationId: string, workspaceId: string, workspaceUser: Array<WorkspaceUser>, options?: AxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).addOrReplaceUsersInOrganizationWorkspace(organizationId, workspaceId, workspaceUser, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Create a secret for the Workspace
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {WorkspaceSecret} workspaceSecret the definition of the secret
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof WorkspaceApi
+     */
+    public createSecret(organizationId: string, workspaceId: string, workspaceSecret: WorkspaceSecret, options?: AxiosRequestConfig) {
+        return WorkspaceApiFp(this.configuration).createSecret(organizationId, workspaceId, workspaceSecret, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
