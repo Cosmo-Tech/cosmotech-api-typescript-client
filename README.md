@@ -1,4 +1,4 @@
-## @cosmotech/api-ts@2.3.3-dev
+## @cosmotech/api-ts@2.3.4-dev
 
 This generator creates TypeScript/JavaScript client that utilizes [axios](https://github.com/axios/axios). The generated Node module can be used in the following environments:
 
@@ -36,7 +36,7 @@ navigate to the folder of your consuming project and run one of the following co
 _published:_
 
 ```
-npm install @cosmotech/api-ts@2.3.3-dev --save
+npm install @cosmotech/api-ts@2.3.4-dev --save
 ```
 
 _unPublished (not recommended):_
