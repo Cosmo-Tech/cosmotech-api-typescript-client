@@ -10078,6 +10078,7 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
     return {
         /**
          * Launch a mass delete job
+         * @summary Launch a mass delete job
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {*} [options] Override http request option.
@@ -10119,6 +10120,7 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * Run a query on a graph instance and return the result as a zip file in async mode
+         * @summary Run a query on a graph instance and return the result as a zip file in async mode
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {TwinGraphQuery} twinGraphQuery the query to run
@@ -10166,6 +10168,7 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * Async batch update by loading a CSV file on a graph instance 
+         * @summary Async batch update by loading a CSV file on a graph instance 
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {TwinGraphQuery} twinGraphQuery 
@@ -10220,6 +10223,7 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * create new entities in a graph instance
+         * @summary Create new entities in a graph instance
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {'node' | 'relationship'} modelType the entity model type
@@ -10271,6 +10275,7 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * Create a new graph
+         * @summary Create a new graph
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {any} [body] 
@@ -10316,6 +10321,7 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * delete entities in a graph instance
+         * @summary Delete entities in a graph instance
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {'node' | 'relationship'} modelType the entity model type
@@ -10368,6 +10374,7 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * Download a graph compressed in a zip file
+         * @summary Download a graph compressed in a zip file
          * @param {string} organizationId the Organization identifier
          * @param {string} hash the Graph download identifier
          * @param {*} [options] Override http request option.
@@ -10409,6 +10416,7 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * Return the list of all graphs stored in the organization
+         * @summary Return the list of all graphs stored in the organization
          * @param {string} organizationId the Organization identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -10446,6 +10454,7 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * get entities in a graph instance
+         * @summary Get entities in a graph instance
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {'node' | 'relationship'} modelType the entity model type
@@ -10498,6 +10507,7 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * Return the metaData of the specified graph
+         * @summary Return the metaData of the specified graph
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {*} [options] Override http request option.
@@ -10539,6 +10549,7 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * Import a new version of a twin graph
+         * @summary Import a new version of a twin graph
          * @param {string} organizationId the Organization identifier
          * @param {TwinGraphImport} twinGraphImport the graph to import
          * @param {*} [options] Override http request option.
@@ -10582,6 +10593,7 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * Get the status of a job
+         * @summary Get the status of a job
          * @param {string} organizationId the Organization identifier
          * @param {string} jobId the job identifier
          * @param {*} [options] Override http request option.
@@ -10623,6 +10635,7 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * Run a query on a graph instance
+         * @summary Run a query on a graph instance
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {TwinGraphQuery} twinGraphQuery the query to run
@@ -10670,6 +10683,7 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * update entities in a graph instance
+         * @summary Update entities in a graph instance
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {'node' | 'relationship'} modelType the entity model type
@@ -10721,6 +10735,7 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * Update the metaData of the specified graph
+         * @summary Update the metaData of the specified graph
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {{ [key: string]: string; }} requestBody the metaData to update
@@ -10778,6 +10793,7 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
     return {
         /**
          * Launch a mass delete job
+         * @summary Launch a mass delete job
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {*} [options] Override http request option.
@@ -10789,6 +10805,7 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
         },
         /**
          * Run a query on a graph instance and return the result as a zip file in async mode
+         * @summary Run a query on a graph instance and return the result as a zip file in async mode
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {TwinGraphQuery} twinGraphQuery the query to run
@@ -10801,6 +10818,7 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
         },
         /**
          * Async batch update by loading a CSV file on a graph instance 
+         * @summary Async batch update by loading a CSV file on a graph instance 
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {TwinGraphQuery} twinGraphQuery 
@@ -10814,6 +10832,7 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
         },
         /**
          * create new entities in a graph instance
+         * @summary Create new entities in a graph instance
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {'node' | 'relationship'} modelType the entity model type
@@ -10827,6 +10846,7 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
         },
         /**
          * Create a new graph
+         * @summary Create a new graph
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {any} [body] 
@@ -10839,6 +10859,7 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
         },
         /**
          * delete entities in a graph instance
+         * @summary Delete entities in a graph instance
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {'node' | 'relationship'} modelType the entity model type
@@ -10852,6 +10873,7 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
         },
         /**
          * Download a graph compressed in a zip file
+         * @summary Download a graph compressed in a zip file
          * @param {string} organizationId the Organization identifier
          * @param {string} hash the Graph download identifier
          * @param {*} [options] Override http request option.
@@ -10863,6 +10885,7 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
         },
         /**
          * Return the list of all graphs stored in the organization
+         * @summary Return the list of all graphs stored in the organization
          * @param {string} organizationId the Organization identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -10873,6 +10896,7 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
         },
         /**
          * get entities in a graph instance
+         * @summary Get entities in a graph instance
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {'node' | 'relationship'} modelType the entity model type
@@ -10886,6 +10910,7 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
         },
         /**
          * Return the metaData of the specified graph
+         * @summary Return the metaData of the specified graph
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {*} [options] Override http request option.
@@ -10897,6 +10922,7 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
         },
         /**
          * Import a new version of a twin graph
+         * @summary Import a new version of a twin graph
          * @param {string} organizationId the Organization identifier
          * @param {TwinGraphImport} twinGraphImport the graph to import
          * @param {*} [options] Override http request option.
@@ -10908,6 +10934,7 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
         },
         /**
          * Get the status of a job
+         * @summary Get the status of a job
          * @param {string} organizationId the Organization identifier
          * @param {string} jobId the job identifier
          * @param {*} [options] Override http request option.
@@ -10919,6 +10946,7 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
         },
         /**
          * Run a query on a graph instance
+         * @summary Run a query on a graph instance
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {TwinGraphQuery} twinGraphQuery the query to run
@@ -10931,6 +10959,7 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
         },
         /**
          * update entities in a graph instance
+         * @summary Update entities in a graph instance
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {'node' | 'relationship'} modelType the entity model type
@@ -10944,6 +10973,7 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
         },
         /**
          * Update the metaData of the specified graph
+         * @summary Update the metaData of the specified graph
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {{ [key: string]: string; }} requestBody the metaData to update
@@ -10966,6 +10996,7 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
     return {
         /**
          * Launch a mass delete job
+         * @summary Launch a mass delete job
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {*} [options] Override http request option.
@@ -10976,6 +11007,7 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
         },
         /**
          * Run a query on a graph instance and return the result as a zip file in async mode
+         * @summary Run a query on a graph instance and return the result as a zip file in async mode
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {TwinGraphQuery} twinGraphQuery the query to run
@@ -10987,6 +11019,7 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
         },
         /**
          * Async batch update by loading a CSV file on a graph instance 
+         * @summary Async batch update by loading a CSV file on a graph instance 
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {TwinGraphQuery} twinGraphQuery 
@@ -10999,6 +11032,7 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
         },
         /**
          * create new entities in a graph instance
+         * @summary Create new entities in a graph instance
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {'node' | 'relationship'} modelType the entity model type
@@ -11011,6 +11045,7 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
         },
         /**
          * Create a new graph
+         * @summary Create a new graph
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {any} [body] 
@@ -11022,6 +11057,7 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
         },
         /**
          * delete entities in a graph instance
+         * @summary Delete entities in a graph instance
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {'node' | 'relationship'} modelType the entity model type
@@ -11034,6 +11070,7 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
         },
         /**
          * Download a graph compressed in a zip file
+         * @summary Download a graph compressed in a zip file
          * @param {string} organizationId the Organization identifier
          * @param {string} hash the Graph download identifier
          * @param {*} [options] Override http request option.
@@ -11044,6 +11081,7 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
         },
         /**
          * Return the list of all graphs stored in the organization
+         * @summary Return the list of all graphs stored in the organization
          * @param {string} organizationId the Organization identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -11053,6 +11091,7 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
         },
         /**
          * get entities in a graph instance
+         * @summary Get entities in a graph instance
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {'node' | 'relationship'} modelType the entity model type
@@ -11065,6 +11104,7 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
         },
         /**
          * Return the metaData of the specified graph
+         * @summary Return the metaData of the specified graph
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {*} [options] Override http request option.
@@ -11075,6 +11115,7 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
         },
         /**
          * Import a new version of a twin graph
+         * @summary Import a new version of a twin graph
          * @param {string} organizationId the Organization identifier
          * @param {TwinGraphImport} twinGraphImport the graph to import
          * @param {*} [options] Override http request option.
@@ -11085,6 +11126,7 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
         },
         /**
          * Get the status of a job
+         * @summary Get the status of a job
          * @param {string} organizationId the Organization identifier
          * @param {string} jobId the job identifier
          * @param {*} [options] Override http request option.
@@ -11095,6 +11137,7 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
         },
         /**
          * Run a query on a graph instance
+         * @summary Run a query on a graph instance
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {TwinGraphQuery} twinGraphQuery the query to run
@@ -11106,6 +11149,7 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
         },
         /**
          * update entities in a graph instance
+         * @summary Update entities in a graph instance
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {'node' | 'relationship'} modelType the entity model type
@@ -11118,6 +11162,7 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
         },
         /**
          * Update the metaData of the specified graph
+         * @summary Update the metaData of the specified graph
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {{ [key: string]: string; }} requestBody the metaData to update
@@ -11139,6 +11184,7 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
 export class TwingraphApi extends BaseAPI {
     /**
      * Launch a mass delete job
+     * @summary Launch a mass delete job
      * @param {string} organizationId the Organization identifier
      * @param {string} graphId the Graph Identifier
      * @param {*} [options] Override http request option.
@@ -11151,6 +11197,7 @@ export class TwingraphApi extends BaseAPI {
 
     /**
      * Run a query on a graph instance and return the result as a zip file in async mode
+     * @summary Run a query on a graph instance and return the result as a zip file in async mode
      * @param {string} organizationId the Organization identifier
      * @param {string} graphId the Graph Identifier
      * @param {TwinGraphQuery} twinGraphQuery the query to run
@@ -11164,6 +11211,7 @@ export class TwingraphApi extends BaseAPI {
 
     /**
      * Async batch update by loading a CSV file on a graph instance 
+     * @summary Async batch update by loading a CSV file on a graph instance 
      * @param {string} organizationId the Organization identifier
      * @param {string} graphId the Graph Identifier
      * @param {TwinGraphQuery} twinGraphQuery 
@@ -11178,6 +11226,7 @@ export class TwingraphApi extends BaseAPI {
 
     /**
      * create new entities in a graph instance
+     * @summary Create new entities in a graph instance
      * @param {string} organizationId the Organization identifier
      * @param {string} graphId the Graph Identifier
      * @param {'node' | 'relationship'} modelType the entity model type
@@ -11192,6 +11241,7 @@ export class TwingraphApi extends BaseAPI {
 
     /**
      * Create a new graph
+     * @summary Create a new graph
      * @param {string} organizationId the Organization identifier
      * @param {string} graphId the Graph Identifier
      * @param {any} [body] 
@@ -11205,6 +11255,7 @@ export class TwingraphApi extends BaseAPI {
 
     /**
      * delete entities in a graph instance
+     * @summary Delete entities in a graph instance
      * @param {string} organizationId the Organization identifier
      * @param {string} graphId the Graph Identifier
      * @param {'node' | 'relationship'} modelType the entity model type
@@ -11219,6 +11270,7 @@ export class TwingraphApi extends BaseAPI {
 
     /**
      * Download a graph compressed in a zip file
+     * @summary Download a graph compressed in a zip file
      * @param {string} organizationId the Organization identifier
      * @param {string} hash the Graph download identifier
      * @param {*} [options] Override http request option.
@@ -11231,6 +11283,7 @@ export class TwingraphApi extends BaseAPI {
 
     /**
      * Return the list of all graphs stored in the organization
+     * @summary Return the list of all graphs stored in the organization
      * @param {string} organizationId the Organization identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -11242,6 +11295,7 @@ export class TwingraphApi extends BaseAPI {
 
     /**
      * get entities in a graph instance
+     * @summary Get entities in a graph instance
      * @param {string} organizationId the Organization identifier
      * @param {string} graphId the Graph Identifier
      * @param {'node' | 'relationship'} modelType the entity model type
@@ -11256,6 +11310,7 @@ export class TwingraphApi extends BaseAPI {
 
     /**
      * Return the metaData of the specified graph
+     * @summary Return the metaData of the specified graph
      * @param {string} organizationId the Organization identifier
      * @param {string} graphId the Graph Identifier
      * @param {*} [options] Override http request option.
@@ -11268,6 +11323,7 @@ export class TwingraphApi extends BaseAPI {
 
     /**
      * Import a new version of a twin graph
+     * @summary Import a new version of a twin graph
      * @param {string} organizationId the Organization identifier
      * @param {TwinGraphImport} twinGraphImport the graph to import
      * @param {*} [options] Override http request option.
@@ -11280,6 +11336,7 @@ export class TwingraphApi extends BaseAPI {
 
     /**
      * Get the status of a job
+     * @summary Get the status of a job
      * @param {string} organizationId the Organization identifier
      * @param {string} jobId the job identifier
      * @param {*} [options] Override http request option.
@@ -11292,6 +11349,7 @@ export class TwingraphApi extends BaseAPI {
 
     /**
      * Run a query on a graph instance
+     * @summary Run a query on a graph instance
      * @param {string} organizationId the Organization identifier
      * @param {string} graphId the Graph Identifier
      * @param {TwinGraphQuery} twinGraphQuery the query to run
@@ -11305,6 +11363,7 @@ export class TwingraphApi extends BaseAPI {
 
     /**
      * update entities in a graph instance
+     * @summary Update entities in a graph instance
      * @param {string} organizationId the Organization identifier
      * @param {string} graphId the Graph Identifier
      * @param {'node' | 'relationship'} modelType the entity model type
@@ -11319,6 +11378,7 @@ export class TwingraphApi extends BaseAPI {
 
     /**
      * Update the metaData of the specified graph
+     * @summary Update the metaData of the specified graph
      * @param {string} organizationId the Organization identifier
      * @param {string} graphId the Graph Identifier
      * @param {{ [key: string]: string; }} requestBody the metaData to update
