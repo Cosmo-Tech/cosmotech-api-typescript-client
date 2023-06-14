@@ -10077,8 +10077,8 @@ export class SolutionApi extends BaseAPI {
 export const TwingraphApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Launch a mass delete job
-         * @summary Launch a mass delete job
+         * Delete all versions of a graph and his metadatas
+         * @summary Delete all versions of a graph and his metadatas
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {*} [options] Override http request option.
@@ -10274,7 +10274,7 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * Create a new graph
+         * To create a new graph from flat files,  you need to create a Zip file. This Zip file must countain two folders named Edges and Nodes.  .zip hierarchy: *main_folder/Nodes *main_folder/Edges  In each folder you can place one or multiple csv files containing your Nodes or Edges data.  Your csv files must follow the following header (column name) requirements:  The Nodes CSVs requires at least one column (the 1st).Column name = \'Id\'. It will represent the nodes ID Ids must be populated with string  The Edges CSVs require three columns named, in order, * source * target * Id  those colomns represent * The source of the edge * The target of the edge * The Id of the edge  All following columns content are up to you. 
          * @summary Create a new graph
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
@@ -10792,8 +10792,8 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = TwingraphApiAxiosParamCreator(configuration)
     return {
         /**
-         * Launch a mass delete job
-         * @summary Launch a mass delete job
+         * Delete all versions of a graph and his metadatas
+         * @summary Delete all versions of a graph and his metadatas
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {*} [options] Override http request option.
@@ -10840,12 +10840,12 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createEntities(organizationId: string, graphId: string, modelType: 'node' | 'relationship', graphProperties: Array<GraphProperties>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<object>>> {
+        async createEntities(organizationId: string, graphId: string, modelType: 'node' | 'relationship', graphProperties: Array<GraphProperties>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createEntities(organizationId, graphId, modelType, graphProperties, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Create a new graph
+         * To create a new graph from flat files,  you need to create a Zip file. This Zip file must countain two folders named Edges and Nodes.  .zip hierarchy: *main_folder/Nodes *main_folder/Edges  In each folder you can place one or multiple csv files containing your Nodes or Edges data.  Your csv files must follow the following header (column name) requirements:  The Nodes CSVs requires at least one column (the 1st).Column name = \'Id\'. It will represent the nodes ID Ids must be populated with string  The Edges CSVs require three columns named, in order, * source * target * Id  those colomns represent * The source of the edge * The target of the edge * The Id of the edge  All following columns content are up to you. 
          * @summary Create a new graph
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
@@ -10904,7 +10904,7 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getEntities(organizationId: string, graphId: string, modelType: 'node' | 'relationship', ids: Array<string>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<object>>> {
+        async getEntities(organizationId: string, graphId: string, modelType: 'node' | 'relationship', ids: Array<string>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getEntities(organizationId, graphId, modelType, ids, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10967,7 +10967,7 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateEntities(organizationId: string, graphId: string, modelType: 'node' | 'relationship', graphProperties: Array<GraphProperties>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<object>>> {
+        async updateEntities(organizationId: string, graphId: string, modelType: 'node' | 'relationship', graphProperties: Array<GraphProperties>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateEntities(organizationId, graphId, modelType, graphProperties, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -10995,8 +10995,8 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
     const localVarFp = TwingraphApiFp(configuration)
     return {
         /**
-         * Launch a mass delete job
-         * @summary Launch a mass delete job
+         * Delete all versions of a graph and his metadatas
+         * @summary Delete all versions of a graph and his metadatas
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {*} [options] Override http request option.
@@ -11040,11 +11040,11 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createEntities(organizationId: string, graphId: string, modelType: 'node' | 'relationship', graphProperties: Array<GraphProperties>, options?: any): AxiosPromise<Array<object>> {
+        createEntities(organizationId: string, graphId: string, modelType: 'node' | 'relationship', graphProperties: Array<GraphProperties>, options?: any): AxiosPromise<string> {
             return localVarFp.createEntities(organizationId, graphId, modelType, graphProperties, options).then((request) => request(axios, basePath));
         },
         /**
-         * Create a new graph
+         * To create a new graph from flat files,  you need to create a Zip file. This Zip file must countain two folders named Edges and Nodes.  .zip hierarchy: *main_folder/Nodes *main_folder/Edges  In each folder you can place one or multiple csv files containing your Nodes or Edges data.  Your csv files must follow the following header (column name) requirements:  The Nodes CSVs requires at least one column (the 1st).Column name = \'Id\'. It will represent the nodes ID Ids must be populated with string  The Edges CSVs require three columns named, in order, * source * target * Id  those colomns represent * The source of the edge * The target of the edge * The Id of the edge  All following columns content are up to you. 
          * @summary Create a new graph
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
@@ -11099,7 +11099,7 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getEntities(organizationId: string, graphId: string, modelType: 'node' | 'relationship', ids: Array<string>, options?: any): AxiosPromise<Array<object>> {
+        getEntities(organizationId: string, graphId: string, modelType: 'node' | 'relationship', ids: Array<string>, options?: any): AxiosPromise<string> {
             return localVarFp.getEntities(organizationId, graphId, modelType, ids, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11157,7 +11157,7 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateEntities(organizationId: string, graphId: string, modelType: 'node' | 'relationship', graphProperties: Array<GraphProperties>, options?: any): AxiosPromise<Array<object>> {
+        updateEntities(organizationId: string, graphId: string, modelType: 'node' | 'relationship', graphProperties: Array<GraphProperties>, options?: any): AxiosPromise<string> {
             return localVarFp.updateEntities(organizationId, graphId, modelType, graphProperties, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11183,8 +11183,8 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
  */
 export class TwingraphApi extends BaseAPI {
     /**
-     * Launch a mass delete job
-     * @summary Launch a mass delete job
+     * Delete all versions of a graph and his metadatas
+     * @summary Delete all versions of a graph and his metadatas
      * @param {string} organizationId the Organization identifier
      * @param {string} graphId the Graph Identifier
      * @param {*} [options] Override http request option.
@@ -11240,7 +11240,7 @@ export class TwingraphApi extends BaseAPI {
     }
 
     /**
-     * Create a new graph
+     * To create a new graph from flat files,  you need to create a Zip file. This Zip file must countain two folders named Edges and Nodes.  .zip hierarchy: *main_folder/Nodes *main_folder/Edges  In each folder you can place one or multiple csv files containing your Nodes or Edges data.  Your csv files must follow the following header (column name) requirements:  The Nodes CSVs requires at least one column (the 1st).Column name = \'Id\'. It will represent the nodes ID Ids must be populated with string  The Edges CSVs require three columns named, in order, * source * target * Id  those colomns represent * The source of the edge * The target of the edge * The Id of the edge  All following columns content are up to you. 
      * @summary Create a new graph
      * @param {string} organizationId the Organization identifier
      * @param {string} graphId the Graph Identifier
