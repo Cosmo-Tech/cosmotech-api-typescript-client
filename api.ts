@@ -10226,24 +10226,24 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
          * @summary Create new entities in a graph instance
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
-         * @param {'node' | 'relationship'} modelType the entity model type
+         * @param {'node' | 'relationship'} type the entity model type
          * @param {Array<GraphProperties>} graphProperties the entities to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createEntities: async (organizationId: string, graphId: string, modelType: 'node' | 'relationship', graphProperties: Array<GraphProperties>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createEntities: async (organizationId: string, graphId: string, type: 'node' | 'relationship', graphProperties: Array<GraphProperties>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('createEntities', 'organizationId', organizationId)
             // verify required parameter 'graphId' is not null or undefined
             assertParamExists('createEntities', 'graphId', graphId)
-            // verify required parameter 'modelType' is not null or undefined
-            assertParamExists('createEntities', 'modelType', modelType)
+            // verify required parameter 'type' is not null or undefined
+            assertParamExists('createEntities', 'type', type)
             // verify required parameter 'graphProperties' is not null or undefined
             assertParamExists('createEntities', 'graphProperties', graphProperties)
-            const localVarPath = `/organizations/{organization_id}/twingraph/{graph_id}/{modelType}`
+            const localVarPath = `/organizations/{organization_id}/twingraph/{graph_id}/entity/{type}`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
                 .replace(`{${"graph_id"}}`, encodeURIComponent(String(graphId)))
-                .replace(`{${"modelType"}}`, encodeURIComponent(String(modelType)));
+                .replace(`{${"type"}}`, encodeURIComponent(String(type)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -10324,24 +10324,24 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
          * @summary Delete entities in a graph instance
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
-         * @param {'node' | 'relationship'} modelType the entity model type
+         * @param {'node' | 'relationship'} type the entity model type
          * @param {Array<string>} ids the entities to delete
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteEntities: async (organizationId: string, graphId: string, modelType: 'node' | 'relationship', ids: Array<string>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteEntities: async (organizationId: string, graphId: string, type: 'node' | 'relationship', ids: Array<string>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('deleteEntities', 'organizationId', organizationId)
             // verify required parameter 'graphId' is not null or undefined
             assertParamExists('deleteEntities', 'graphId', graphId)
-            // verify required parameter 'modelType' is not null or undefined
-            assertParamExists('deleteEntities', 'modelType', modelType)
+            // verify required parameter 'type' is not null or undefined
+            assertParamExists('deleteEntities', 'type', type)
             // verify required parameter 'ids' is not null or undefined
             assertParamExists('deleteEntities', 'ids', ids)
-            const localVarPath = `/organizations/{organization_id}/twingraph/{graph_id}/{modelType}`
+            const localVarPath = `/organizations/{organization_id}/twingraph/{graph_id}/entity/{type}`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
                 .replace(`{${"graph_id"}}`, encodeURIComponent(String(graphId)))
-                .replace(`{${"modelType"}}`, encodeURIComponent(String(modelType)));
+                .replace(`{${"type"}}`, encodeURIComponent(String(type)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -10385,7 +10385,7 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
             assertParamExists('downloadGraph', 'organizationId', organizationId)
             // verify required parameter 'hash' is not null or undefined
             assertParamExists('downloadGraph', 'hash', hash)
-            const localVarPath = `/organizations/{organization_id}/twingraph/bulk-query/download/{hash}`
+            const localVarPath = `/organizations/{organization_id}/twingraph/download/{hash}`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
                 .replace(`{${"hash"}}`, encodeURIComponent(String(hash)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -10457,24 +10457,24 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
          * @summary Get entities in a graph instance
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
-         * @param {'node' | 'relationship'} modelType the entity model type
+         * @param {'node' | 'relationship'} type the entity model type
          * @param {Array<string>} ids the entities to get
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getEntities: async (organizationId: string, graphId: string, modelType: 'node' | 'relationship', ids: Array<string>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getEntities: async (organizationId: string, graphId: string, type: 'node' | 'relationship', ids: Array<string>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('getEntities', 'organizationId', organizationId)
             // verify required parameter 'graphId' is not null or undefined
             assertParamExists('getEntities', 'graphId', graphId)
-            // verify required parameter 'modelType' is not null or undefined
-            assertParamExists('getEntities', 'modelType', modelType)
+            // verify required parameter 'type' is not null or undefined
+            assertParamExists('getEntities', 'type', type)
             // verify required parameter 'ids' is not null or undefined
             assertParamExists('getEntities', 'ids', ids)
-            const localVarPath = `/organizations/{organization_id}/twingraph/{graph_id}/{modelType}`
+            const localVarPath = `/organizations/{organization_id}/twingraph/{graph_id}/entity/{type}`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
                 .replace(`{${"graph_id"}}`, encodeURIComponent(String(graphId)))
-                .replace(`{${"modelType"}}`, encodeURIComponent(String(modelType)));
+                .replace(`{${"type"}}`, encodeURIComponent(String(type)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -10686,24 +10686,24 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
          * @summary Update entities in a graph instance
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
-         * @param {'node' | 'relationship'} modelType the entity model type
+         * @param {'node' | 'relationship'} type the entity model type
          * @param {Array<GraphProperties>} graphProperties the entities to update
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateEntities: async (organizationId: string, graphId: string, modelType: 'node' | 'relationship', graphProperties: Array<GraphProperties>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateEntities: async (organizationId: string, graphId: string, type: 'node' | 'relationship', graphProperties: Array<GraphProperties>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('updateEntities', 'organizationId', organizationId)
             // verify required parameter 'graphId' is not null or undefined
             assertParamExists('updateEntities', 'graphId', graphId)
-            // verify required parameter 'modelType' is not null or undefined
-            assertParamExists('updateEntities', 'modelType', modelType)
+            // verify required parameter 'type' is not null or undefined
+            assertParamExists('updateEntities', 'type', type)
             // verify required parameter 'graphProperties' is not null or undefined
             assertParamExists('updateEntities', 'graphProperties', graphProperties)
-            const localVarPath = `/organizations/{organization_id}/twingraph/{graph_id}/{modelType}`
+            const localVarPath = `/organizations/{organization_id}/twingraph/{graph_id}/entity/{type}`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
                 .replace(`{${"graph_id"}}`, encodeURIComponent(String(graphId)))
-                .replace(`{${"modelType"}}`, encodeURIComponent(String(modelType)));
+                .replace(`{${"type"}}`, encodeURIComponent(String(type)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -10835,13 +10835,13 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
          * @summary Create new entities in a graph instance
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
-         * @param {'node' | 'relationship'} modelType the entity model type
+         * @param {'node' | 'relationship'} type the entity model type
          * @param {Array<GraphProperties>} graphProperties the entities to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createEntities(organizationId: string, graphId: string, modelType: 'node' | 'relationship', graphProperties: Array<GraphProperties>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createEntities(organizationId, graphId, modelType, graphProperties, options);
+        async createEntities(organizationId: string, graphId: string, type: 'node' | 'relationship', graphProperties: Array<GraphProperties>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createEntities(organizationId, graphId, type, graphProperties, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -10862,13 +10862,13 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
          * @summary Delete entities in a graph instance
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
-         * @param {'node' | 'relationship'} modelType the entity model type
+         * @param {'node' | 'relationship'} type the entity model type
          * @param {Array<string>} ids the entities to delete
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteEntities(organizationId: string, graphId: string, modelType: 'node' | 'relationship', ids: Array<string>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteEntities(organizationId, graphId, modelType, ids, options);
+        async deleteEntities(organizationId: string, graphId: string, type: 'node' | 'relationship', ids: Array<string>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteEntities(organizationId, graphId, type, ids, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -10899,13 +10899,13 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
          * @summary Get entities in a graph instance
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
-         * @param {'node' | 'relationship'} modelType the entity model type
+         * @param {'node' | 'relationship'} type the entity model type
          * @param {Array<string>} ids the entities to get
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getEntities(organizationId: string, graphId: string, modelType: 'node' | 'relationship', ids: Array<string>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getEntities(organizationId, graphId, modelType, ids, options);
+        async getEntities(organizationId: string, graphId: string, type: 'node' | 'relationship', ids: Array<string>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getEntities(organizationId, graphId, type, ids, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -10962,13 +10962,13 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
          * @summary Update entities in a graph instance
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
-         * @param {'node' | 'relationship'} modelType the entity model type
+         * @param {'node' | 'relationship'} type the entity model type
          * @param {Array<GraphProperties>} graphProperties the entities to update
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateEntities(organizationId: string, graphId: string, modelType: 'node' | 'relationship', graphProperties: Array<GraphProperties>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateEntities(organizationId, graphId, modelType, graphProperties, options);
+        async updateEntities(organizationId: string, graphId: string, type: 'node' | 'relationship', graphProperties: Array<GraphProperties>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateEntities(organizationId, graphId, type, graphProperties, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -11035,13 +11035,13 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
          * @summary Create new entities in a graph instance
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
-         * @param {'node' | 'relationship'} modelType the entity model type
+         * @param {'node' | 'relationship'} type the entity model type
          * @param {Array<GraphProperties>} graphProperties the entities to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createEntities(organizationId: string, graphId: string, modelType: 'node' | 'relationship', graphProperties: Array<GraphProperties>, options?: any): AxiosPromise<string> {
-            return localVarFp.createEntities(organizationId, graphId, modelType, graphProperties, options).then((request) => request(axios, basePath));
+        createEntities(organizationId: string, graphId: string, type: 'node' | 'relationship', graphProperties: Array<GraphProperties>, options?: any): AxiosPromise<string> {
+            return localVarFp.createEntities(organizationId, graphId, type, graphProperties, options).then((request) => request(axios, basePath));
         },
         /**
          * To create a new graph from flat files,  you need to create a Zip file. This Zip file must countain two folders named Edges and Nodes.  .zip hierarchy: *main_folder/Nodes *main_folder/Edges  In each folder you can place one or multiple csv files containing your Nodes or Edges data.  Your csv files must follow the following header (column name) requirements:  The Nodes CSVs requires at least one column (the 1st).Column name = \'Id\'. It will represent the nodes ID Ids must be populated with string  The Edges CSVs require three columns named, in order, * source * target * Id  those colomns represent * The source of the edge * The target of the edge * The Id of the edge  All following columns content are up to you. 
@@ -11060,13 +11060,13 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
          * @summary Delete entities in a graph instance
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
-         * @param {'node' | 'relationship'} modelType the entity model type
+         * @param {'node' | 'relationship'} type the entity model type
          * @param {Array<string>} ids the entities to delete
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteEntities(organizationId: string, graphId: string, modelType: 'node' | 'relationship', ids: Array<string>, options?: any): AxiosPromise<void> {
-            return localVarFp.deleteEntities(organizationId, graphId, modelType, ids, options).then((request) => request(axios, basePath));
+        deleteEntities(organizationId: string, graphId: string, type: 'node' | 'relationship', ids: Array<string>, options?: any): AxiosPromise<void> {
+            return localVarFp.deleteEntities(organizationId, graphId, type, ids, options).then((request) => request(axios, basePath));
         },
         /**
          * Download a graph compressed in a zip file
@@ -11094,13 +11094,13 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
          * @summary Get entities in a graph instance
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
-         * @param {'node' | 'relationship'} modelType the entity model type
+         * @param {'node' | 'relationship'} type the entity model type
          * @param {Array<string>} ids the entities to get
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getEntities(organizationId: string, graphId: string, modelType: 'node' | 'relationship', ids: Array<string>, options?: any): AxiosPromise<string> {
-            return localVarFp.getEntities(organizationId, graphId, modelType, ids, options).then((request) => request(axios, basePath));
+        getEntities(organizationId: string, graphId: string, type: 'node' | 'relationship', ids: Array<string>, options?: any): AxiosPromise<string> {
+            return localVarFp.getEntities(organizationId, graphId, type, ids, options).then((request) => request(axios, basePath));
         },
         /**
          * Return the metaData of the specified graph
@@ -11152,13 +11152,13 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
          * @summary Update entities in a graph instance
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
-         * @param {'node' | 'relationship'} modelType the entity model type
+         * @param {'node' | 'relationship'} type the entity model type
          * @param {Array<GraphProperties>} graphProperties the entities to update
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateEntities(organizationId: string, graphId: string, modelType: 'node' | 'relationship', graphProperties: Array<GraphProperties>, options?: any): AxiosPromise<string> {
-            return localVarFp.updateEntities(organizationId, graphId, modelType, graphProperties, options).then((request) => request(axios, basePath));
+        updateEntities(organizationId: string, graphId: string, type: 'node' | 'relationship', graphProperties: Array<GraphProperties>, options?: any): AxiosPromise<string> {
+            return localVarFp.updateEntities(organizationId, graphId, type, graphProperties, options).then((request) => request(axios, basePath));
         },
         /**
          * Update the metaData of the specified graph
@@ -11229,14 +11229,14 @@ export class TwingraphApi extends BaseAPI {
      * @summary Create new entities in a graph instance
      * @param {string} organizationId the Organization identifier
      * @param {string} graphId the Graph Identifier
-     * @param {'node' | 'relationship'} modelType the entity model type
+     * @param {'node' | 'relationship'} type the entity model type
      * @param {Array<GraphProperties>} graphProperties the entities to create
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TwingraphApi
      */
-    public createEntities(organizationId: string, graphId: string, modelType: 'node' | 'relationship', graphProperties: Array<GraphProperties>, options?: AxiosRequestConfig) {
-        return TwingraphApiFp(this.configuration).createEntities(organizationId, graphId, modelType, graphProperties, options).then((request) => request(this.axios, this.basePath));
+    public createEntities(organizationId: string, graphId: string, type: 'node' | 'relationship', graphProperties: Array<GraphProperties>, options?: AxiosRequestConfig) {
+        return TwingraphApiFp(this.configuration).createEntities(organizationId, graphId, type, graphProperties, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -11258,14 +11258,14 @@ export class TwingraphApi extends BaseAPI {
      * @summary Delete entities in a graph instance
      * @param {string} organizationId the Organization identifier
      * @param {string} graphId the Graph Identifier
-     * @param {'node' | 'relationship'} modelType the entity model type
+     * @param {'node' | 'relationship'} type the entity model type
      * @param {Array<string>} ids the entities to delete
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TwingraphApi
      */
-    public deleteEntities(organizationId: string, graphId: string, modelType: 'node' | 'relationship', ids: Array<string>, options?: AxiosRequestConfig) {
-        return TwingraphApiFp(this.configuration).deleteEntities(organizationId, graphId, modelType, ids, options).then((request) => request(this.axios, this.basePath));
+    public deleteEntities(organizationId: string, graphId: string, type: 'node' | 'relationship', ids: Array<string>, options?: AxiosRequestConfig) {
+        return TwingraphApiFp(this.configuration).deleteEntities(organizationId, graphId, type, ids, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -11298,14 +11298,14 @@ export class TwingraphApi extends BaseAPI {
      * @summary Get entities in a graph instance
      * @param {string} organizationId the Organization identifier
      * @param {string} graphId the Graph Identifier
-     * @param {'node' | 'relationship'} modelType the entity model type
+     * @param {'node' | 'relationship'} type the entity model type
      * @param {Array<string>} ids the entities to get
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TwingraphApi
      */
-    public getEntities(organizationId: string, graphId: string, modelType: 'node' | 'relationship', ids: Array<string>, options?: AxiosRequestConfig) {
-        return TwingraphApiFp(this.configuration).getEntities(organizationId, graphId, modelType, ids, options).then((request) => request(this.axios, this.basePath));
+    public getEntities(organizationId: string, graphId: string, type: 'node' | 'relationship', ids: Array<string>, options?: AxiosRequestConfig) {
+        return TwingraphApiFp(this.configuration).getEntities(organizationId, graphId, type, ids, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -11366,14 +11366,14 @@ export class TwingraphApi extends BaseAPI {
      * @summary Update entities in a graph instance
      * @param {string} organizationId the Organization identifier
      * @param {string} graphId the Graph Identifier
-     * @param {'node' | 'relationship'} modelType the entity model type
+     * @param {'node' | 'relationship'} type the entity model type
      * @param {Array<GraphProperties>} graphProperties the entities to update
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TwingraphApi
      */
-    public updateEntities(organizationId: string, graphId: string, modelType: 'node' | 'relationship', graphProperties: Array<GraphProperties>, options?: AxiosRequestConfig) {
-        return TwingraphApiFp(this.configuration).updateEntities(organizationId, graphId, modelType, graphProperties, options).then((request) => request(this.axios, this.basePath));
+    public updateEntities(organizationId: string, graphId: string, type: 'node' | 'relationship', graphProperties: Array<GraphProperties>, options?: AxiosRequestConfig) {
+        return TwingraphApiFp(this.configuration).updateEntities(organizationId, graphId, type, graphProperties, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
