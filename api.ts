@@ -5544,11 +5544,10 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
-         * @param {boolean} [waitRelationshipPropagation] whether to wait until child scenarios are effectively updated
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteScenario: async (organizationId: string, workspaceId: string, scenarioId: string, waitRelationshipPropagation?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteScenario: async (organizationId: string, workspaceId: string, scenarioId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('deleteScenario', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
@@ -5573,10 +5572,6 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
             // authentication oAuth2AuthCode required
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-            if (waitRelationshipPropagation !== undefined) {
-                localVarQueryParameter['wait_relationship_propagation'] = waitRelationshipPropagation;
-            }
 
 
     
@@ -6502,12 +6497,11 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
-         * @param {boolean} [waitRelationshipPropagation] whether to wait until child scenarios are effectively updated
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteScenario(organizationId: string, workspaceId: string, scenarioId: string, waitRelationshipPropagation?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteScenario(organizationId, workspaceId, scenarioId, waitRelationshipPropagation, options);
+        async deleteScenario(organizationId: string, workspaceId: string, scenarioId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteScenario(organizationId, workspaceId, scenarioId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -6818,12 +6812,11 @@ export const ScenarioApiFactory = function (configuration?: Configuration, baseP
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
-         * @param {boolean} [waitRelationshipPropagation] whether to wait until child scenarios are effectively updated
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteScenario(organizationId: string, workspaceId: string, scenarioId: string, waitRelationshipPropagation?: boolean, options?: any): AxiosPromise<void> {
-            return localVarFp.deleteScenario(organizationId, workspaceId, scenarioId, waitRelationshipPropagation, options).then((request) => request(axios, basePath));
+        deleteScenario(organizationId: string, workspaceId: string, scenarioId: string, options?: any): AxiosPromise<void> {
+            return localVarFp.deleteScenario(organizationId, workspaceId, scenarioId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -7126,13 +7119,12 @@ export class ScenarioApi extends BaseAPI {
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
      * @param {string} scenarioId the Scenario identifier
-     * @param {boolean} [waitRelationshipPropagation] whether to wait until child scenarios are effectively updated
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
-    public deleteScenario(organizationId: string, workspaceId: string, scenarioId: string, waitRelationshipPropagation?: boolean, options?: AxiosRequestConfig) {
-        return ScenarioApiFp(this.configuration).deleteScenario(organizationId, workspaceId, scenarioId, waitRelationshipPropagation, options).then((request) => request(this.axios, this.basePath));
+    public deleteScenario(organizationId: string, workspaceId: string, scenarioId: string, options?: AxiosRequestConfig) {
+        return ScenarioApiFp(this.configuration).deleteScenario(organizationId, workspaceId, scenarioId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
