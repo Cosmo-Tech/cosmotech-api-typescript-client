@@ -1448,6 +1448,12 @@ export interface ScenarioRun {
      */
     'sdkVersion'?: string;
     /**
+     * the ScenarioRun creation date
+     * @type {string}
+     * @memberof ScenarioRun
+     */
+    'createdAt'?: string;
+    /**
      * set to true if the run template does not use any Datawarehouse consumers (AMQP consumers for Azure)
      * @type {boolean}
      * @memberof ScenarioRun
