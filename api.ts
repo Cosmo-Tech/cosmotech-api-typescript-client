@@ -818,6 +818,12 @@ export interface RunTemplate {
      */
     'runTemplateSourceDir'?: string;
     /**
+     * 
+     * @type {RunTemplateOrchestrator}
+     * @memberof RunTemplate
+     */
+    'orchestratorType'?: RunTemplateOrchestrator;
+    /**
      * an optional duration in seconds in which a workflow is allowed to run
      * @type {number}
      * @memberof RunTemplate
@@ -846,6 +852,20 @@ export const RunTemplateHandlerId = {
 } as const;
 
 export type RunTemplateHandlerId = typeof RunTemplateHandlerId[keyof typeof RunTemplateHandlerId];
+
+
+/**
+ * the Orchestrator to use for the Run Template
+ * @export
+ * @enum {string}
+ */
+
+export const RunTemplateOrchestrator = {
+    ArgoWorkflow: 'argo-workflow',
+    CsmOrc: 'csm-orc'
+} as const;
+
+export type RunTemplateOrchestrator = typeof RunTemplateOrchestrator[keyof typeof RunTemplateOrchestrator];
 
 
 /**
