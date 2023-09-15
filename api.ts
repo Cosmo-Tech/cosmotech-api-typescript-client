@@ -1684,6 +1684,25 @@ export interface ScenarioRunResourceRequested {
     'memory'?: number;
 }
 /**
+ * a ScenarioRunProbeResult with all ScenarioRunResult
+ * @export
+ * @interface ScenarioRunResult
+ */
+export interface ScenarioRunResult {
+    /**
+     * 
+     * @type {string}
+     * @memberof ScenarioRunResult
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {Array<{ [key: string]: string; }>}
+     * @memberof ScenarioRunResult
+     */
+    'results'?: Array<{ [key: string]: string; }>;
+}
+/**
  * the search options
  * @export
  * @interface ScenarioRunSearch
@@ -8712,6 +8731,251 @@ export class ScenariorunApi extends BaseAPI {
      */
     public stopScenarioRun(organizationId: string, scenariorunId: string, options?: AxiosRequestConfig) {
         return ScenariorunApiFp(this.configuration).stopScenarioRun(organizationId, scenariorunId, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * ScenariorunresultApi - axios parameter creator
+ * @export
+ */
+export const ScenariorunresultApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Get a ScenarioRunResult in the Organization
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} scenarioId the Scenario identifier
+         * @param {string} scenariorunId the ScenarioRun identifier
+         * @param {string} probeId the Probe identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getScenarioRunResult: async (organizationId: string, workspaceId: string, scenarioId: string, scenariorunId: string, probeId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('getScenarioRunResult', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('getScenarioRunResult', 'workspaceId', workspaceId)
+            // verify required parameter 'scenarioId' is not null or undefined
+            assertParamExists('getScenarioRunResult', 'scenarioId', scenarioId)
+            // verify required parameter 'scenariorunId' is not null or undefined
+            assertParamExists('getScenarioRunResult', 'scenariorunId', scenariorunId)
+            // verify required parameter 'probeId' is not null or undefined
+            assertParamExists('getScenarioRunResult', 'probeId', probeId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/scenarios/{scenario_id}/scenarioruns/{scenariorun_id}/probes/{probe_id}`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"scenario_id"}}`, encodeURIComponent(String(scenarioId)))
+                .replace(`{${"scenariorun_id"}}`, encodeURIComponent(String(scenariorunId)))
+                .replace(`{${"probe_id"}}`, encodeURIComponent(String(probeId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Create a new ScenarioRunResult in the Organization
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} scenarioId the Scenario identifier
+         * @param {string} scenariorunId the ScenarioRun identifier
+         * @param {string} probeId the Probe identifier
+         * @param {{ [key: string]: string; }} requestBody the ScenarioRunResult to register
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        sendScenarioRunResult: async (organizationId: string, workspaceId: string, scenarioId: string, scenariorunId: string, probeId: string, requestBody: { [key: string]: string; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('sendScenarioRunResult', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('sendScenarioRunResult', 'workspaceId', workspaceId)
+            // verify required parameter 'scenarioId' is not null or undefined
+            assertParamExists('sendScenarioRunResult', 'scenarioId', scenarioId)
+            // verify required parameter 'scenariorunId' is not null or undefined
+            assertParamExists('sendScenarioRunResult', 'scenariorunId', scenariorunId)
+            // verify required parameter 'probeId' is not null or undefined
+            assertParamExists('sendScenarioRunResult', 'probeId', probeId)
+            // verify required parameter 'requestBody' is not null or undefined
+            assertParamExists('sendScenarioRunResult', 'requestBody', requestBody)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/scenarios/{scenario_id}/scenarioruns/{scenariorun_id}/probes/{probe_id}`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"scenario_id"}}`, encodeURIComponent(String(scenarioId)))
+                .replace(`{${"scenariorun_id"}}`, encodeURIComponent(String(scenariorunId)))
+                .replace(`{${"probe_id"}}`, encodeURIComponent(String(probeId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(requestBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * ScenariorunresultApi - functional programming interface
+ * @export
+ */
+export const ScenariorunresultApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ScenariorunresultApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary Get a ScenarioRunResult in the Organization
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} scenarioId the Scenario identifier
+         * @param {string} scenariorunId the ScenarioRun identifier
+         * @param {string} probeId the Probe identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getScenarioRunResult(organizationId: string, workspaceId: string, scenarioId: string, scenariorunId: string, probeId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioRunResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getScenarioRunResult(organizationId, workspaceId, scenarioId, scenariorunId, probeId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Create a new ScenarioRunResult in the Organization
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} scenarioId the Scenario identifier
+         * @param {string} scenariorunId the ScenarioRun identifier
+         * @param {string} probeId the Probe identifier
+         * @param {{ [key: string]: string; }} requestBody the ScenarioRunResult to register
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async sendScenarioRunResult(organizationId: string, workspaceId: string, scenarioId: string, scenariorunId: string, probeId: string, requestBody: { [key: string]: string; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioRunResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.sendScenarioRunResult(organizationId, workspaceId, scenarioId, scenariorunId, probeId, requestBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * ScenariorunresultApi - factory interface
+ * @export
+ */
+export const ScenariorunresultApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ScenariorunresultApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary Get a ScenarioRunResult in the Organization
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} scenarioId the Scenario identifier
+         * @param {string} scenariorunId the ScenarioRun identifier
+         * @param {string} probeId the Probe identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getScenarioRunResult(organizationId: string, workspaceId: string, scenarioId: string, scenariorunId: string, probeId: string, options?: any): AxiosPromise<ScenarioRunResult> {
+            return localVarFp.getScenarioRunResult(organizationId, workspaceId, scenarioId, scenariorunId, probeId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Create a new ScenarioRunResult in the Organization
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} scenarioId the Scenario identifier
+         * @param {string} scenariorunId the ScenarioRun identifier
+         * @param {string} probeId the Probe identifier
+         * @param {{ [key: string]: string; }} requestBody the ScenarioRunResult to register
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        sendScenarioRunResult(organizationId: string, workspaceId: string, scenarioId: string, scenariorunId: string, probeId: string, requestBody: { [key: string]: string; }, options?: any): AxiosPromise<ScenarioRunResult> {
+            return localVarFp.sendScenarioRunResult(organizationId, workspaceId, scenarioId, scenariorunId, probeId, requestBody, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * ScenariorunresultApi - object-oriented interface
+ * @export
+ * @class ScenariorunresultApi
+ * @extends {BaseAPI}
+ */
+export class ScenariorunresultApi extends BaseAPI {
+    /**
+     * 
+     * @summary Get a ScenarioRunResult in the Organization
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} scenarioId the Scenario identifier
+     * @param {string} scenariorunId the ScenarioRun identifier
+     * @param {string} probeId the Probe identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ScenariorunresultApi
+     */
+    public getScenarioRunResult(organizationId: string, workspaceId: string, scenarioId: string, scenariorunId: string, probeId: string, options?: AxiosRequestConfig) {
+        return ScenariorunresultApiFp(this.configuration).getScenarioRunResult(organizationId, workspaceId, scenarioId, scenariorunId, probeId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Create a new ScenarioRunResult in the Organization
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} scenarioId the Scenario identifier
+     * @param {string} scenariorunId the ScenarioRun identifier
+     * @param {string} probeId the Probe identifier
+     * @param {{ [key: string]: string; }} requestBody the ScenarioRunResult to register
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ScenariorunresultApi
+     */
+    public sendScenarioRunResult(organizationId: string, workspaceId: string, scenarioId: string, scenariorunId: string, probeId: string, requestBody: { [key: string]: string; }, options?: AxiosRequestConfig) {
+        return ScenariorunresultApiFp(this.configuration).sendScenarioRunResult(organizationId, workspaceId, scenarioId, scenariorunId, probeId, requestBody, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
