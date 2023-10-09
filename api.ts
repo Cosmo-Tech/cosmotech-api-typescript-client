@@ -861,8 +861,8 @@ export type RunTemplateHandlerId = typeof RunTemplateHandlerId[keyof typeof RunT
  */
 
 export const RunTemplateOrchestrator = {
-    ArgoWorkflow: 'argo-workflow',
-    CsmOrc: 'csm-orc'
+    ArgoWorkflow: 'argoWorkflow',
+    CsmOrc: 'csmOrc'
 } as const;
 
 export type RunTemplateOrchestrator = typeof RunTemplateOrchestrator[keyof typeof RunTemplateOrchestrator];
