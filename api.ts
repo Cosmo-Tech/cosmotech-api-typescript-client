@@ -7792,58 +7792,6 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
-         * @summary import a ScenarioRun for the Scenario
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} scenarioId the Scenario identifier
-         * @param {ScenarioRun} scenarioRun the ScenarioRun to import
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        importScenarioRun: async (organizationId: string, workspaceId: string, scenarioId: string, scenarioRun: ScenarioRun, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('importScenarioRun', 'organizationId', organizationId)
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('importScenarioRun', 'workspaceId', workspaceId)
-            // verify required parameter 'scenarioId' is not null or undefined
-            assertParamExists('importScenarioRun', 'scenarioId', scenarioId)
-            // verify required parameter 'scenarioRun' is not null or undefined
-            assertParamExists('importScenarioRun', 'scenarioRun', scenarioRun)
-            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/scenarios/{scenario_id}/run/import`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"scenario_id"}}`, encodeURIComponent(String(scenarioId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(scenarioRun, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @summary run a ScenarioRun for the Scenario
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -8168,20 +8116,6 @@ export const ScenariorunApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary import a ScenarioRun for the Scenario
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} scenarioId the Scenario identifier
-         * @param {ScenarioRun} scenarioRun the ScenarioRun to import
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async importScenarioRun(organizationId: string, workspaceId: string, scenarioId: string, scenarioRun: ScenarioRun, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioRun>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.importScenarioRun(organizationId, workspaceId, scenarioId, scenarioRun, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
          * @summary run a ScenarioRun for the Scenario
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -8358,19 +8292,6 @@ export const ScenariorunApiFactory = function (configuration?: Configuration, ba
          */
         getWorkspaceScenarioRuns(organizationId: string, workspaceId: string, page?: number, size?: number, options?: any): AxiosPromise<Array<ScenarioRun>> {
             return localVarFp.getWorkspaceScenarioRuns(organizationId, workspaceId, page, size, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary import a ScenarioRun for the Scenario
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} scenarioId the Scenario identifier
-         * @param {ScenarioRun} scenarioRun the ScenarioRun to import
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        importScenarioRun(organizationId: string, workspaceId: string, scenarioId: string, scenarioRun: ScenarioRun, options?: any): AxiosPromise<ScenarioRun> {
-            return localVarFp.importScenarioRun(organizationId, workspaceId, scenarioId, scenarioRun, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -8565,21 +8486,6 @@ export class ScenariorunApi extends BaseAPI {
      */
     public getWorkspaceScenarioRuns(organizationId: string, workspaceId: string, page?: number, size?: number, options?: AxiosRequestConfig) {
         return ScenariorunApiFp(this.configuration).getWorkspaceScenarioRuns(organizationId, workspaceId, page, size, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary import a ScenarioRun for the Scenario
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
-     * @param {string} scenarioId the Scenario identifier
-     * @param {ScenarioRun} scenarioRun the ScenarioRun to import
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ScenariorunApi
-     */
-    public importScenarioRun(organizationId: string, workspaceId: string, scenarioId: string, scenarioRun: ScenarioRun, options?: AxiosRequestConfig) {
-        return ScenariorunApiFp(this.configuration).importScenarioRun(organizationId, workspaceId, scenarioId, scenarioRun, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
