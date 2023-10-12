@@ -2478,50 +2478,6 @@ export interface TwinGraphHash {
     'hash'?: string;
 }
 /**
- * a twin graph import info
- * @export
- * @interface TwinGraphImport
- */
-export interface TwinGraphImport {
-    /**
-     * 
-     * @type {SourceInfo}
-     * @memberof TwinGraphImport
-     */
-    'source': SourceInfo;
-    /**
-     * the graph id to import to
-     * @type {string}
-     * @memberof TwinGraphImport
-     */
-    'graphId': string;
-    /**
-     * The version of the graph to import to.  When not set, the last version before import is upgraded by 1. When set, the targeted graph is replaced 
-     * @type {string}
-     * @memberof TwinGraphImport
-     */
-    'version'?: string;
-}
-/**
- * a twin graph query in cypher language
- * @export
- * @interface TwinGraphImportInfo
- */
-export interface TwinGraphImportInfo {
-    /**
-     * the import job id
-     * @type {string}
-     * @memberof TwinGraphImportInfo
-     */
-    'jobId'?: string;
-    /**
-     * the twin graph name
-     * @type {string}
-     * @memberof TwinGraphImportInfo
-     */
-    'graphName'?: string;
-}
-/**
  * a twin graph query in cypher language
  * @export
  * @interface TwinGraphQuery
@@ -3024,46 +2980,6 @@ export const ConnectorApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary Import existing connector
-         * @param {Connector} connector the Connector to import
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        importConnector: async (connector: Connector, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'connector' is not null or undefined
-            assertParamExists('importConnector', 'connector', connector)
-            const localVarPath = `/connectors/import`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(connector, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @summary Register a new connector
          * @param {Connector} connector the Connector to register
          * @param {*} [options] Override http request option.
@@ -3186,17 +3102,6 @@ export const ConnectorApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Import existing connector
-         * @param {Connector} connector the Connector to import
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async importConnector(connector: Connector, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Connector>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.importConnector(connector, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
          * @summary Register a new connector
          * @param {Connector} connector the Connector to register
          * @param {*} [options] Override http request option.
@@ -3257,16 +3162,6 @@ export const ConnectorApiFactory = function (configuration?: Configuration, base
          */
         findConnectorByName(connectorName: string, options?: any): AxiosPromise<Connector> {
             return localVarFp.findConnectorByName(connectorName, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Import existing connector
-         * @param {Connector} connector the Connector to import
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        importConnector(connector: Connector, options?: any): AxiosPromise<Connector> {
-            return localVarFp.importConnector(connector, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -3333,18 +3228,6 @@ export class ConnectorApi extends BaseAPI {
      */
     public findConnectorByName(connectorName: string, options?: AxiosRequestConfig) {
         return ConnectorApiFp(this.configuration).findConnectorByName(connectorName, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Import existing connector
-     * @param {Connector} connector the Connector to import
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ConnectorApi
-     */
-    public importConnector(connector: Connector, options?: AxiosRequestConfig) {
-        return ConnectorApiFp(this.configuration).importConnector(connector, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -12698,50 +12581,6 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * Import a new version of a twin graph
-         * @summary Import a new version of a twin graph
-         * @param {string} organizationId the Organization identifier
-         * @param {TwinGraphImport} twinGraphImport the graph to import
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        importGraph: async (organizationId: string, twinGraphImport: TwinGraphImport, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('importGraph', 'organizationId', organizationId)
-            // verify required parameter 'twinGraphImport' is not null or undefined
-            assertParamExists('importGraph', 'twinGraphImport', twinGraphImport)
-            const localVarPath = `/organizations/{organization_id}/twingraph/import`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(twinGraphImport, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Get the status of a job
          * @summary Get the status of a job
          * @param {string} organizationId the Organization identifier
@@ -13071,18 +12910,6 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Import a new version of a twin graph
-         * @summary Import a new version of a twin graph
-         * @param {string} organizationId the Organization identifier
-         * @param {TwinGraphImport} twinGraphImport the graph to import
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async importGraph(organizationId: string, twinGraphImport: TwinGraphImport, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TwinGraphImportInfo>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.importGraph(organizationId, twinGraphImport, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
          * Get the status of a job
          * @summary Get the status of a job
          * @param {string} organizationId the Organization identifier
@@ -13262,17 +13089,6 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
          */
         getGraphMetaData(organizationId: string, graphId: string, options?: any): AxiosPromise<object> {
             return localVarFp.getGraphMetaData(organizationId, graphId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Import a new version of a twin graph
-         * @summary Import a new version of a twin graph
-         * @param {string} organizationId the Organization identifier
-         * @param {TwinGraphImport} twinGraphImport the graph to import
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        importGraph(organizationId: string, twinGraphImport: TwinGraphImport, options?: any): AxiosPromise<TwinGraphImportInfo> {
-            return localVarFp.importGraph(organizationId, twinGraphImport, options).then((request) => request(axios, basePath));
         },
         /**
          * Get the status of a job
@@ -13469,19 +13285,6 @@ export class TwingraphApi extends BaseAPI {
      */
     public getGraphMetaData(organizationId: string, graphId: string, options?: AxiosRequestConfig) {
         return TwingraphApiFp(this.configuration).getGraphMetaData(organizationId, graphId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Import a new version of a twin graph
-     * @summary Import a new version of a twin graph
-     * @param {string} organizationId the Organization identifier
-     * @param {TwinGraphImport} twinGraphImport the graph to import
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TwingraphApi
-     */
-    public importGraph(organizationId: string, twinGraphImport: TwinGraphImport, options?: AxiosRequestConfig) {
-        return TwingraphApiFp(this.configuration).importGraph(organizationId, twinGraphImport, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
