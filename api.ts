@@ -2419,6 +2419,12 @@ export interface SourceInfo {
      * @memberof SourceInfo
      */
     'path'?: string;
+    /**
+     * indicate the last import jobId
+     * @type {string}
+     * @memberof SourceInfo
+     */
+    'jobId'?: string;
 }
 /**
  * a twin graph query in cypher language
@@ -3920,21 +3926,17 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
          * @summary Get the dataset\'s refresh job status
          * @param {string} organizationId the Organization identifier
          * @param {string} datasetId the dataset identifier
-         * @param {string} jobId the job identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getDatasetTwingraphStatus: async (organizationId: string, datasetId: string, jobId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getDatasetTwingraphStatus: async (organizationId: string, datasetId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('getDatasetTwingraphStatus', 'organizationId', organizationId)
             // verify required parameter 'datasetId' is not null or undefined
             assertParamExists('getDatasetTwingraphStatus', 'datasetId', datasetId)
-            // verify required parameter 'jobId' is not null or undefined
-            assertParamExists('getDatasetTwingraphStatus', 'jobId', jobId)
-            const localVarPath = `/organizations/{organization_id}/datasets/{dataset_id}/job/{job_id}/status`
+            const localVarPath = `/organizations/{organization_id}/datasets/{dataset_id}/status`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)))
-                .replace(`{${"job_id"}}`, encodeURIComponent(String(jobId)));
+                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -4789,12 +4791,11 @@ export const DatasetApiFp = function(configuration?: Configuration) {
          * @summary Get the dataset\'s refresh job status
          * @param {string} organizationId the Organization identifier
          * @param {string} datasetId the dataset identifier
-         * @param {string} jobId the job identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getDatasetTwingraphStatus(organizationId: string, datasetId: string, jobId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getDatasetTwingraphStatus(organizationId, datasetId, jobId, options);
+        async getDatasetTwingraphStatus(organizationId: string, datasetId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getDatasetTwingraphStatus(organizationId, datasetId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -5147,12 +5148,11 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @summary Get the dataset\'s refresh job status
          * @param {string} organizationId the Organization identifier
          * @param {string} datasetId the dataset identifier
-         * @param {string} jobId the job identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getDatasetTwingraphStatus(organizationId: string, datasetId: string, jobId: string, options?: any): AxiosPromise<string> {
-            return localVarFp.getDatasetTwingraphStatus(organizationId, datasetId, jobId, options).then((request) => request(axios, basePath));
+        getDatasetTwingraphStatus(organizationId: string, datasetId: string, options?: any): AxiosPromise<string> {
+            return localVarFp.getDatasetTwingraphStatus(organizationId, datasetId, options).then((request) => request(axios, basePath));
         },
         /**
          * get entities in a graph instance
@@ -5519,13 +5519,12 @@ export class DatasetApi extends BaseAPI {
      * @summary Get the dataset\'s refresh job status
      * @param {string} organizationId the Organization identifier
      * @param {string} datasetId the dataset identifier
-     * @param {string} jobId the job identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DatasetApi
      */
-    public getDatasetTwingraphStatus(organizationId: string, datasetId: string, jobId: string, options?: AxiosRequestConfig) {
-        return DatasetApiFp(this.configuration).getDatasetTwingraphStatus(organizationId, datasetId, jobId, options).then((request) => request(this.axios, this.basePath));
+    public getDatasetTwingraphStatus(organizationId: string, datasetId: string, options?: AxiosRequestConfig) {
+        return DatasetApiFp(this.configuration).getDatasetTwingraphStatus(organizationId, datasetId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
