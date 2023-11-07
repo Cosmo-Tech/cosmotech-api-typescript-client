@@ -3833,6 +3833,48 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @summary Get the Dataset security information
+         * @param {string} organizationId the Organization identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getDatasetSecurity: async (organizationId: string, datasetId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('getDatasetSecurity', 'organizationId', organizationId)
+            // verify required parameter 'datasetId' is not null or undefined
+            assertParamExists('getDatasetSecurity', 'datasetId', datasetId)
+            const localVarPath = `/organizations/{organization_id}/datasets/{dataset_id}/security`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Get the Dataset security users list
          * @param {string} organizationId the Organization identifier
          * @param {string} datasetId the Dataset identifier
@@ -4150,6 +4192,54 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(datasetSearch, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Set the Dataset default security
+         * @param {string} organizationId the Organization identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {DatasetRole} datasetRole the new Dataset default security.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        setDatasetDefaultSecurity: async (organizationId: string, datasetId: string, datasetRole: DatasetRole, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('setDatasetDefaultSecurity', 'organizationId', organizationId)
+            // verify required parameter 'datasetId' is not null or undefined
+            assertParamExists('setDatasetDefaultSecurity', 'datasetId', datasetId)
+            // verify required parameter 'datasetRole' is not null or undefined
+            assertParamExists('setDatasetDefaultSecurity', 'datasetRole', datasetRole)
+            const localVarPath = `/organizations/{organization_id}/datasets/{dataset_id}/security/default`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(datasetRole, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -4672,6 +4762,18 @@ export const DatasetApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Get the Dataset security information
+         * @param {string} organizationId the Organization identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getDatasetSecurity(organizationId: string, datasetId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DatasetSecurity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getDatasetSecurity(organizationId, datasetId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @summary Get the Dataset security users list
          * @param {string} organizationId the Organization identifier
          * @param {string} datasetId the Dataset identifier
@@ -4758,6 +4860,19 @@ export const DatasetApiFp = function(configuration?: Configuration) {
          */
         async searchDatasets(organizationId: string, datasetSearch: DatasetSearch, page?: number, size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Dataset>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.searchDatasets(organizationId, datasetSearch, page, size, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Set the Dataset default security
+         * @param {string} organizationId the Organization identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {DatasetRole} datasetRole the new Dataset default security.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async setDatasetDefaultSecurity(organizationId: string, datasetId: string, datasetRole: DatasetRole, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DatasetSecurity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setDatasetDefaultSecurity(organizationId, datasetId, datasetRole, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -5007,6 +5122,17 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
+         * @summary Get the Dataset security information
+         * @param {string} organizationId the Organization identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getDatasetSecurity(organizationId: string, datasetId: string, options?: any): AxiosPromise<DatasetSecurity> {
+            return localVarFp.getDatasetSecurity(organizationId, datasetId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Get the Dataset security users list
          * @param {string} organizationId the Organization identifier
          * @param {string} datasetId the Dataset identifier
@@ -5087,6 +5213,18 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          */
         searchDatasets(organizationId: string, datasetSearch: DatasetSearch, page?: number, size?: number, options?: any): AxiosPromise<Array<Dataset>> {
             return localVarFp.searchDatasets(organizationId, datasetSearch, page, size, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Set the Dataset default security
+         * @param {string} organizationId the Organization identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {DatasetRole} datasetRole the new Dataset default security.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        setDatasetDefaultSecurity(organizationId: string, datasetId: string, datasetRole: DatasetRole, options?: any): AxiosPromise<DatasetSecurity> {
+            return localVarFp.setDatasetDefaultSecurity(organizationId, datasetId, datasetRole, options).then((request) => request(axios, basePath));
         },
         /**
          * Run a query on a graph instance and return the result as a zip file in async mode
@@ -5352,6 +5490,19 @@ export class DatasetApi extends BaseAPI {
 
     /**
      * 
+     * @summary Get the Dataset security information
+     * @param {string} organizationId the Organization identifier
+     * @param {string} datasetId the Dataset identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DatasetApi
+     */
+    public getDatasetSecurity(organizationId: string, datasetId: string, options?: AxiosRequestConfig) {
+        return DatasetApiFp(this.configuration).getDatasetSecurity(organizationId, datasetId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary Get the Dataset security users list
      * @param {string} organizationId the Organization identifier
      * @param {string} datasetId the Dataset identifier
@@ -5445,6 +5596,20 @@ export class DatasetApi extends BaseAPI {
      */
     public searchDatasets(organizationId: string, datasetSearch: DatasetSearch, page?: number, size?: number, options?: AxiosRequestConfig) {
         return DatasetApiFp(this.configuration).searchDatasets(organizationId, datasetSearch, page, size, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Set the Dataset default security
+     * @param {string} organizationId the Organization identifier
+     * @param {string} datasetId the Dataset identifier
+     * @param {DatasetRole} datasetRole the new Dataset default security.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DatasetApi
+     */
+    public setDatasetDefaultSecurity(organizationId: string, datasetId: string, datasetRole: DatasetRole, options?: AxiosRequestConfig) {
+        return DatasetApiFp(this.configuration).setDatasetDefaultSecurity(organizationId, datasetId, datasetRole, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -10881,6 +11046,48 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
+         * @summary Get the Solution security information
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSolutionSecurity: async (organizationId: string, solutionId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('getSolutionSecurity', 'organizationId', organizationId)
+            // verify required parameter 'solutionId' is not null or undefined
+            assertParamExists('getSolutionSecurity', 'solutionId', solutionId)
+            const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/security`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Get the Solution security users list
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
@@ -11087,6 +11294,54 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Set the Solution default security
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {SolutionRole} solutionRole the new Solution default security.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        setSolutionDefaultSecurity: async (organizationId: string, solutionId: string, solutionRole: SolutionRole, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('setSolutionDefaultSecurity', 'organizationId', organizationId)
+            // verify required parameter 'solutionId' is not null or undefined
+            assertParamExists('setSolutionDefaultSecurity', 'solutionId', solutionId)
+            // verify required parameter 'solutionRole' is not null or undefined
+            assertParamExists('setSolutionDefaultSecurity', 'solutionRole', solutionRole)
+            const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/security/default`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(solutionRole, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -11459,6 +11714,18 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Get the Solution security information
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getSolutionSecurity(organizationId: string, solutionId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SolutionSecurity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getSolutionSecurity(organizationId, solutionId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @summary Get the Solution security users list
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
@@ -11516,6 +11783,19 @@ export const SolutionApiFp = function(configuration?: Configuration) {
          */
         async removeSolutionAccessControl(organizationId: string, solutionId: string, identityId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.removeSolutionAccessControl(organizationId, solutionId, identityId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Set the Solution default security
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {SolutionRole} solutionRole the new Solution default security.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async setSolutionDefaultSecurity(organizationId: string, solutionId: string, solutionRole: SolutionRole, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SolutionSecurity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setSolutionDefaultSecurity(organizationId, solutionId, solutionRole, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -11717,6 +11997,17 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * 
+         * @summary Get the Solution security information
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSolutionSecurity(organizationId: string, solutionId: string, options?: any): AxiosPromise<SolutionSecurity> {
+            return localVarFp.getSolutionSecurity(organizationId, solutionId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Get the Solution security users list
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
@@ -11770,6 +12061,18 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
          */
         removeSolutionAccessControl(organizationId: string, solutionId: string, identityId: string, options?: any): AxiosPromise<void> {
             return localVarFp.removeSolutionAccessControl(organizationId, solutionId, identityId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Set the Solution default security
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {SolutionRole} solutionRole the new Solution default security.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        setSolutionDefaultSecurity(organizationId: string, solutionId: string, solutionRole: SolutionRole, options?: any): AxiosPromise<SolutionSecurity> {
+            return localVarFp.setSolutionDefaultSecurity(organizationId, solutionId, solutionRole, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -11988,6 +12291,19 @@ export class SolutionApi extends BaseAPI {
 
     /**
      * 
+     * @summary Get the Solution security information
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SolutionApi
+     */
+    public getSolutionSecurity(organizationId: string, solutionId: string, options?: AxiosRequestConfig) {
+        return SolutionApiFp(this.configuration).getSolutionSecurity(organizationId, solutionId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary Get the Solution security users list
      * @param {string} organizationId the Organization identifier
      * @param {string} solutionId the Solution identifier
@@ -12050,6 +12366,20 @@ export class SolutionApi extends BaseAPI {
      */
     public removeSolutionAccessControl(organizationId: string, solutionId: string, identityId: string, options?: AxiosRequestConfig) {
         return SolutionApiFp(this.configuration).removeSolutionAccessControl(organizationId, solutionId, identityId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Set the Solution default security
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
+     * @param {SolutionRole} solutionRole the new Solution default security.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SolutionApi
+     */
+    public setSolutionDefaultSecurity(organizationId: string, solutionId: string, solutionRole: SolutionRole, options?: AxiosRequestConfig) {
+        return SolutionApiFp(this.configuration).setSolutionDefaultSecurity(organizationId, solutionId, solutionRole, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
