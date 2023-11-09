@@ -4205,7 +4205,7 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
          * @summary Set the Dataset default security
          * @param {string} organizationId the Organization identifier
          * @param {string} datasetId the Dataset identifier
-         * @param {DatasetRole} datasetRole the new Dataset default security.
+         * @param {DatasetRole} datasetRole This change the dataset default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the dataset.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -4868,7 +4868,7 @@ export const DatasetApiFp = function(configuration?: Configuration) {
          * @summary Set the Dataset default security
          * @param {string} organizationId the Organization identifier
          * @param {string} datasetId the Dataset identifier
-         * @param {DatasetRole} datasetRole the new Dataset default security.
+         * @param {DatasetRole} datasetRole This change the dataset default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the dataset.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -5219,7 +5219,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @summary Set the Dataset default security
          * @param {string} organizationId the Organization identifier
          * @param {string} datasetId the Dataset identifier
-         * @param {DatasetRole} datasetRole the new Dataset default security.
+         * @param {DatasetRole} datasetRole This change the dataset default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the dataset.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -5602,7 +5602,7 @@ export class DatasetApi extends BaseAPI {
      * @summary Set the Dataset default security
      * @param {string} organizationId the Organization identifier
      * @param {string} datasetId the Dataset identifier
-     * @param {DatasetRole} datasetRole the new Dataset default security.
+     * @param {DatasetRole} datasetRole This change the dataset default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the dataset.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DatasetApi
@@ -6126,7 +6126,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
          * 
          * @summary Set the Organization default security
          * @param {string} organizationId the Organization identifier
-         * @param {OrganizationRole} organizationRole the new Organization default security.
+         * @param {OrganizationRole} organizationRole This change the organization default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the organization.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6556,7 +6556,7 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
          * 
          * @summary Set the Organization default security
          * @param {string} organizationId the Organization identifier
-         * @param {OrganizationRole} organizationRole the new Organization default security.
+         * @param {OrganizationRole} organizationRole This change the organization default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the organization.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6754,7 +6754,7 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
          * 
          * @summary Set the Organization default security
          * @param {string} organizationId the Organization identifier
-         * @param {OrganizationRole} organizationRole the new Organization default security.
+         * @param {OrganizationRole} organizationRole This change the organization default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the organization.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6965,7 +6965,7 @@ export class OrganizationApi extends BaseAPI {
      * 
      * @summary Set the Organization default security
      * @param {string} organizationId the Organization identifier
-     * @param {OrganizationRole} organizationRole the new Organization default security.
+     * @param {OrganizationRole} organizationRole This change the organization default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the organization.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OrganizationApi
@@ -7982,7 +7982,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
-         * @param {ScenarioRole} scenarioRole the new Scenario default security.
+         * @param {ScenarioRole} scenarioRole This change the scenario default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the scenario.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -8407,7 +8407,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
-         * @param {ScenarioRole} scenarioRole the new Scenario default security.
+         * @param {ScenarioRole} scenarioRole This change the scenario default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the scenario.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -8696,7 +8696,7 @@ export const ScenarioApiFactory = function (configuration?: Configuration, baseP
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
-         * @param {ScenarioRole} scenarioRole the new Scenario default security.
+         * @param {ScenarioRole} scenarioRole This change the scenario default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the scenario.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -9020,7 +9020,7 @@ export class ScenarioApi extends BaseAPI {
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
      * @param {string} scenarioId the Scenario identifier
-     * @param {ScenarioRole} scenarioRole the new Scenario default security.
+     * @param {ScenarioRole} scenarioRole This change the scenario default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the scenario.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ScenarioApi
@@ -11304,7 +11304,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
          * @summary Set the Solution default security
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
-         * @param {SolutionRole} solutionRole the new Solution default security.
+         * @param {SolutionRole} solutionRole This change the solution default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the solution.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11789,7 +11789,7 @@ export const SolutionApiFp = function(configuration?: Configuration) {
          * @summary Set the Solution default security
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
-         * @param {SolutionRole} solutionRole the new Solution default security.
+         * @param {SolutionRole} solutionRole This change the solution default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the solution.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -12066,7 +12066,7 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
          * @summary Set the Solution default security
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
-         * @param {SolutionRole} solutionRole the new Solution default security.
+         * @param {SolutionRole} solutionRole This change the solution default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the solution.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -12372,7 +12372,7 @@ export class SolutionApi extends BaseAPI {
      * @summary Set the Solution default security
      * @param {string} organizationId the Organization identifier
      * @param {string} solutionId the Solution identifier
-     * @param {SolutionRole} solutionRole the new Solution default security.
+     * @param {SolutionRole} solutionRole This change the solution default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the solution.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
@@ -15140,7 +15140,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
          * @summary Set the Workspace default security
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
-         * @param {WorkspaceRole} workspaceRole the new Workspace default security.
+         * @param {WorkspaceRole} workspaceRole This change the workspace default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the workspace.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -15549,7 +15549,7 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
          * @summary Set the Workspace default security
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
-         * @param {WorkspaceRole} workspaceRole the new Workspace default security.
+         * @param {WorkspaceRole} workspaceRole This change the workspace default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the workspace.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -15787,7 +15787,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
          * @summary Set the Workspace default security
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
-         * @param {WorkspaceRole} workspaceRole the new Workspace default security.
+         * @param {WorkspaceRole} workspaceRole This change the workspace default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the workspace.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -16051,7 +16051,7 @@ export class WorkspaceApi extends BaseAPI {
      * @summary Set the Workspace default security
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
-     * @param {WorkspaceRole} workspaceRole the new Workspace default security.
+     * @param {WorkspaceRole} workspaceRole This change the workspace default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the workspace.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WorkspaceApi
