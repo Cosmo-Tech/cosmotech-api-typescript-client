@@ -12456,6 +12456,7 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         _delete: async (organizationId: string, graphId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -12499,6 +12500,7 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
          * @param {string} graphId the Graph Identifier
          * @param {TwinGraphQuery} twinGraphQuery the query to run
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         batchQuery: async (organizationId: string, graphId: string, twinGraphQuery: TwinGraphQuery, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -12548,6 +12550,7 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
          * @param {TwinGraphQuery} twinGraphQuery 
          * @param {any} body 
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         batchUploadUpdate: async (organizationId: string, graphId: string, twinGraphQuery: TwinGraphQuery, body: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -12603,6 +12606,7 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
          * @param {'node' | 'relationship'} type the entity model type
          * @param {Array<GraphProperties>} graphProperties the entities to create
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         createEntities: async (organizationId: string, graphId: string, type: 'node' | 'relationship', graphProperties: Array<GraphProperties>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -12654,6 +12658,7 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
          * @param {string} graphId the Graph Identifier
          * @param {any} [body] 
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         createGraph: async (organizationId: string, graphId: string, body?: any, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -12701,6 +12706,7 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
          * @param {'node' | 'relationship'} type the entity model type
          * @param {Array<string>} ids the entities to delete
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         deleteEntities: async (organizationId: string, graphId: string, type: 'node' | 'relationship', ids: Array<string>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -12752,6 +12758,7 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
          * @param {string} organizationId the Organization identifier
          * @param {string} hash the Graph download identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         downloadGraph: async (organizationId: string, hash: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -12793,6 +12800,7 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
          * @summary Return the list of all graphs stored in the organization
          * @param {string} organizationId the Organization identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         findAllTwingraphs: async (organizationId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -12834,6 +12842,7 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
          * @param {'node' | 'relationship'} type the entity model type
          * @param {Array<string>} ids the entities to get
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getEntities: async (organizationId: string, graphId: string, type: 'node' | 'relationship', ids: Array<string>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -12885,6 +12894,7 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getGraphMetaData: async (organizationId: string, graphId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -12927,6 +12937,7 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
          * @param {string} organizationId the Organization identifier
          * @param {string} jobId the job identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         jobStatus: async (organizationId: string, jobId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -12970,6 +12981,7 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
          * @param {string} graphId the Graph Identifier
          * @param {TwinGraphQuery} twinGraphQuery the query to run
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         query: async (organizationId: string, graphId: string, twinGraphQuery: TwinGraphQuery, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -13019,6 +13031,7 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
          * @param {'node' | 'relationship'} type the entity model type
          * @param {Array<GraphProperties>} graphProperties the entities to update
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         updateEntities: async (organizationId: string, graphId: string, type: 'node' | 'relationship', graphProperties: Array<GraphProperties>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -13070,6 +13083,7 @@ export const TwingraphApiAxiosParamCreator = function (configuration?: Configura
          * @param {string} graphId the Graph Identifier
          * @param {{ [key: string]: string; }} requestBody the metaData to update
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         updateGraphMetaData: async (organizationId: string, graphId: string, requestBody: { [key: string]: string; }, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -13127,6 +13141,7 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async _delete(organizationId: string, graphId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
@@ -13140,6 +13155,7 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
          * @param {string} graphId the Graph Identifier
          * @param {TwinGraphQuery} twinGraphQuery the query to run
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async batchQuery(organizationId: string, graphId: string, twinGraphQuery: TwinGraphQuery, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TwinGraphHash>> {
@@ -13154,6 +13170,7 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
          * @param {TwinGraphQuery} twinGraphQuery 
          * @param {any} body 
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async batchUploadUpdate(organizationId: string, graphId: string, twinGraphQuery: TwinGraphQuery, body: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TwinGraphBatchResult>> {
@@ -13168,6 +13185,7 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
          * @param {'node' | 'relationship'} type the entity model type
          * @param {Array<GraphProperties>} graphProperties the entities to create
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async createEntities(organizationId: string, graphId: string, type: 'node' | 'relationship', graphProperties: Array<GraphProperties>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
@@ -13181,6 +13199,7 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
          * @param {string} graphId the Graph Identifier
          * @param {any} [body] 
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async createGraph(organizationId: string, graphId: string, body?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
@@ -13195,6 +13214,7 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
          * @param {'node' | 'relationship'} type the entity model type
          * @param {Array<string>} ids the entities to delete
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async deleteEntities(organizationId: string, graphId: string, type: 'node' | 'relationship', ids: Array<string>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
@@ -13207,6 +13227,7 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
          * @param {string} organizationId the Organization identifier
          * @param {string} hash the Graph download identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async downloadGraph(organizationId: string, hash: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
@@ -13218,6 +13239,7 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
          * @summary Return the list of all graphs stored in the organization
          * @param {string} organizationId the Organization identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async findAllTwingraphs(organizationId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
@@ -13232,6 +13254,7 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
          * @param {'node' | 'relationship'} type the entity model type
          * @param {Array<string>} ids the entities to get
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async getEntities(organizationId: string, graphId: string, type: 'node' | 'relationship', ids: Array<string>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
@@ -13244,6 +13267,7 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async getGraphMetaData(organizationId: string, graphId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
@@ -13256,6 +13280,7 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
          * @param {string} organizationId the Organization identifier
          * @param {string} jobId the job identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async jobStatus(organizationId: string, jobId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
@@ -13269,6 +13294,7 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
          * @param {string} graphId the Graph Identifier
          * @param {TwinGraphQuery} twinGraphQuery the query to run
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async query(organizationId: string, graphId: string, twinGraphQuery: TwinGraphQuery, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
@@ -13283,6 +13309,7 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
          * @param {'node' | 'relationship'} type the entity model type
          * @param {Array<GraphProperties>} graphProperties the entities to update
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async updateEntities(organizationId: string, graphId: string, type: 'node' | 'relationship', graphProperties: Array<GraphProperties>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
@@ -13296,6 +13323,7 @@ export const TwingraphApiFp = function(configuration?: Configuration) {
          * @param {string} graphId the Graph Identifier
          * @param {{ [key: string]: string; }} requestBody the metaData to update
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async updateGraphMetaData(organizationId: string, graphId: string, requestBody: { [key: string]: string; }, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
@@ -13318,6 +13346,7 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         _delete(organizationId: string, graphId: string, options?: any): AxiosPromise<void> {
@@ -13330,6 +13359,7 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
          * @param {string} graphId the Graph Identifier
          * @param {TwinGraphQuery} twinGraphQuery the query to run
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         batchQuery(organizationId: string, graphId: string, twinGraphQuery: TwinGraphQuery, options?: any): AxiosPromise<TwinGraphHash> {
@@ -13343,6 +13373,7 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
          * @param {TwinGraphQuery} twinGraphQuery 
          * @param {any} body 
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         batchUploadUpdate(organizationId: string, graphId: string, twinGraphQuery: TwinGraphQuery, body: any, options?: any): AxiosPromise<TwinGraphBatchResult> {
@@ -13356,6 +13387,7 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
          * @param {'node' | 'relationship'} type the entity model type
          * @param {Array<GraphProperties>} graphProperties the entities to create
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         createEntities(organizationId: string, graphId: string, type: 'node' | 'relationship', graphProperties: Array<GraphProperties>, options?: any): AxiosPromise<string> {
@@ -13368,6 +13400,7 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
          * @param {string} graphId the Graph Identifier
          * @param {any} [body] 
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         createGraph(organizationId: string, graphId: string, body?: any, options?: any): AxiosPromise<void> {
@@ -13381,6 +13414,7 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
          * @param {'node' | 'relationship'} type the entity model type
          * @param {Array<string>} ids the entities to delete
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         deleteEntities(organizationId: string, graphId: string, type: 'node' | 'relationship', ids: Array<string>, options?: any): AxiosPromise<void> {
@@ -13392,6 +13426,7 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
          * @param {string} organizationId the Organization identifier
          * @param {string} hash the Graph download identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         downloadGraph(organizationId: string, hash: string, options?: any): AxiosPromise<any> {
@@ -13402,6 +13437,7 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
          * @summary Return the list of all graphs stored in the organization
          * @param {string} organizationId the Organization identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         findAllTwingraphs(organizationId: string, options?: any): AxiosPromise<Array<string>> {
@@ -13415,6 +13451,7 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
          * @param {'node' | 'relationship'} type the entity model type
          * @param {Array<string>} ids the entities to get
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getEntities(organizationId: string, graphId: string, type: 'node' | 'relationship', ids: Array<string>, options?: any): AxiosPromise<string> {
@@ -13426,6 +13463,7 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
          * @param {string} organizationId the Organization identifier
          * @param {string} graphId the Graph Identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getGraphMetaData(organizationId: string, graphId: string, options?: any): AxiosPromise<object> {
@@ -13437,6 +13475,7 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
          * @param {string} organizationId the Organization identifier
          * @param {string} jobId the job identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         jobStatus(organizationId: string, jobId: string, options?: any): AxiosPromise<string> {
@@ -13449,6 +13488,7 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
          * @param {string} graphId the Graph Identifier
          * @param {TwinGraphQuery} twinGraphQuery the query to run
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         query(organizationId: string, graphId: string, twinGraphQuery: TwinGraphQuery, options?: any): AxiosPromise<string> {
@@ -13462,6 +13502,7 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
          * @param {'node' | 'relationship'} type the entity model type
          * @param {Array<GraphProperties>} graphProperties the entities to update
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         updateEntities(organizationId: string, graphId: string, type: 'node' | 'relationship', graphProperties: Array<GraphProperties>, options?: any): AxiosPromise<string> {
@@ -13474,6 +13515,7 @@ export const TwingraphApiFactory = function (configuration?: Configuration, base
          * @param {string} graphId the Graph Identifier
          * @param {{ [key: string]: string; }} requestBody the metaData to update
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         updateGraphMetaData(organizationId: string, graphId: string, requestBody: { [key: string]: string; }, options?: any): AxiosPromise<object> {
@@ -13495,6 +13537,7 @@ export class TwingraphApi extends BaseAPI {
      * @param {string} organizationId the Organization identifier
      * @param {string} graphId the Graph Identifier
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof TwingraphApi
      */
@@ -13509,6 +13552,7 @@ export class TwingraphApi extends BaseAPI {
      * @param {string} graphId the Graph Identifier
      * @param {TwinGraphQuery} twinGraphQuery the query to run
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof TwingraphApi
      */
@@ -13524,6 +13568,7 @@ export class TwingraphApi extends BaseAPI {
      * @param {TwinGraphQuery} twinGraphQuery 
      * @param {any} body 
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof TwingraphApi
      */
@@ -13539,6 +13584,7 @@ export class TwingraphApi extends BaseAPI {
      * @param {'node' | 'relationship'} type the entity model type
      * @param {Array<GraphProperties>} graphProperties the entities to create
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof TwingraphApi
      */
@@ -13553,6 +13599,7 @@ export class TwingraphApi extends BaseAPI {
      * @param {string} graphId the Graph Identifier
      * @param {any} [body] 
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof TwingraphApi
      */
@@ -13568,6 +13615,7 @@ export class TwingraphApi extends BaseAPI {
      * @param {'node' | 'relationship'} type the entity model type
      * @param {Array<string>} ids the entities to delete
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof TwingraphApi
      */
@@ -13581,6 +13629,7 @@ export class TwingraphApi extends BaseAPI {
      * @param {string} organizationId the Organization identifier
      * @param {string} hash the Graph download identifier
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof TwingraphApi
      */
@@ -13593,6 +13642,7 @@ export class TwingraphApi extends BaseAPI {
      * @summary Return the list of all graphs stored in the organization
      * @param {string} organizationId the Organization identifier
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof TwingraphApi
      */
@@ -13608,6 +13658,7 @@ export class TwingraphApi extends BaseAPI {
      * @param {'node' | 'relationship'} type the entity model type
      * @param {Array<string>} ids the entities to get
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof TwingraphApi
      */
@@ -13621,6 +13672,7 @@ export class TwingraphApi extends BaseAPI {
      * @param {string} organizationId the Organization identifier
      * @param {string} graphId the Graph Identifier
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof TwingraphApi
      */
@@ -13634,6 +13686,7 @@ export class TwingraphApi extends BaseAPI {
      * @param {string} organizationId the Organization identifier
      * @param {string} jobId the job identifier
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof TwingraphApi
      */
@@ -13648,6 +13701,7 @@ export class TwingraphApi extends BaseAPI {
      * @param {string} graphId the Graph Identifier
      * @param {TwinGraphQuery} twinGraphQuery the query to run
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof TwingraphApi
      */
@@ -13663,6 +13717,7 @@ export class TwingraphApi extends BaseAPI {
      * @param {'node' | 'relationship'} type the entity model type
      * @param {Array<GraphProperties>} graphProperties the entities to update
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof TwingraphApi
      */
@@ -13677,6 +13732,7 @@ export class TwingraphApi extends BaseAPI {
      * @param {string} graphId the Graph Identifier
      * @param {{ [key: string]: string; }} requestBody the metaData to update
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof TwingraphApi
      */
