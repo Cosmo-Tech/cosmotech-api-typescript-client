@@ -270,6 +270,12 @@ export interface Dataset {
      */
     'ownerId'?: string;
     /**
+     * the name of the owner
+     * @type {string}
+     * @memberof Dataset
+     */
+    'ownerName'?: string;
+    /**
      * the Organization Id related to this Dataset
      * @type {string}
      * @memberof Dataset
