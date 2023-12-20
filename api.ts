@@ -2347,6 +2347,12 @@ export interface Solution {
      */
     'repository'?: string;
     /**
+     * set to true if the runtemplate wants to always pull the image
+     * @type {boolean}
+     * @memberof Solution
+     */
+    'alwaysPull'?: boolean;
+    /**
      * the main Cosmo Tech simulator name used in standard Run Template
      * @type {string}
      * @memberof Solution
