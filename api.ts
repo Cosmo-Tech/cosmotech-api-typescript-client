@@ -11816,7 +11816,7 @@ export const SolutionApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async downloadRunTemplateHandler(organizationId: string, solutionId: string, runTemplateId: string, handlerId: RunTemplateHandlerId, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
+        async downloadRunTemplateHandler(organizationId: string, solutionId: string, runTemplateId: string, handlerId: RunTemplateHandlerId, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.downloadRunTemplateHandler(organizationId, solutionId, runTemplateId, handlerId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -12103,7 +12103,7 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        downloadRunTemplateHandler(organizationId: string, solutionId: string, runTemplateId: string, handlerId: RunTemplateHandlerId, options?: any): AxiosPromise<any> {
+        downloadRunTemplateHandler(organizationId: string, solutionId: string, runTemplateId: string, handlerId: RunTemplateHandlerId, options?: any): AxiosPromise<string> {
             return localVarFp.downloadRunTemplateHandler(organizationId, solutionId, runTemplateId, handlerId, options).then((request) => request(axios, basePath));
         },
         /**
