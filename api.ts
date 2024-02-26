@@ -556,7 +556,8 @@ export const DatasetSourceType = {
     AzureStorage: 'AzureStorage',
     File: 'File',
     None: 'None',
-    Twincache: 'Twincache'
+    Twincache: 'Twincache',
+    Etl: 'ETL'
 } as const;
 
 export type DatasetSourceType = typeof DatasetSourceType[keyof typeof DatasetSourceType];
