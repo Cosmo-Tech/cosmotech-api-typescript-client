@@ -883,6 +883,588 @@ export interface ResourceSizeInfo {
     'memory': string;
 }
 /**
+ * a Run with only base properties
+ * @export
+ * @interface Run
+ */
+export interface Run {
+    /**
+     * the Run
+     * @type {string}
+     * @memberof Run
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {RunState}
+     * @memberof Run
+     */
+    'state'?: RunState;
+    /**
+     * the Organization id
+     * @type {string}
+     * @memberof Run
+     */
+    'organizationId'?: string;
+    /**
+     * the Cosmo Tech compute cluster Argo Workflow Id to search
+     * @type {string}
+     * @memberof Run
+     */
+    'workflowId'?: string;
+    /**
+     * the Cosmo Tech Simulation Run Id
+     * @type {string}
+     * @memberof Run
+     */
+    'csmSimulationRun'?: string;
+    /**
+     * the base name for workflow name generation
+     * @type {string}
+     * @memberof Run
+     */
+    'generateName'?: string;
+    /**
+     * the Cosmo Tech compute cluster Argo Workflow Name
+     * @type {string}
+     * @memberof Run
+     */
+    'workflowName'?: string;
+    /**
+     * the user id which own this run
+     * @type {string}
+     * @memberof Run
+     */
+    'ownerId'?: string;
+    /**
+     * the Workspace Id
+     * @type {string}
+     * @memberof Run
+     */
+    'workspaceId'?: string;
+    /**
+     * technical key for resource name convention and version grouping. Must be unique
+     * @type {string}
+     * @memberof Run
+     */
+    'workspaceKey'?: string;
+    /**
+     * the Runner Id
+     * @type {string}
+     * @memberof Run
+     */
+    'runnerId'?: string;
+    /**
+     * the Solution Id
+     * @type {string}
+     * @memberof Run
+     */
+    'solutionId'?: string;
+    /**
+     * the Solution Run Template id
+     * @type {string}
+     * @memberof Run
+     */
+    'runTemplateId'?: string;
+    /**
+     * the compute size needed for this Analysis. Standard sizes are basic and highcpu. Default is basic
+     * @type {string}
+     * @memberof Run
+     */
+    'computeSize'?: string;
+    /**
+     * the Run creation date
+     * @type {string}
+     * @memberof Run
+     */
+    'createdAt'?: string;
+    /**
+     * the list of Dataset Id associated to this Run
+     * @type {Array<string>}
+     * @memberof Run
+     */
+    'datasetList'?: Array<string>;
+    /**
+     * the list of Run Template parameters values
+     * @type {Array<RunTemplateParameterValue>}
+     * @memberof Run
+     */
+    'parametersValues'?: Array<RunTemplateParameterValue>;
+    /**
+     * the node label request
+     * @type {string}
+     * @memberof Run
+     */
+    'nodeLabel'?: string;
+    /**
+     * the containers list. This information is not returned by the API.
+     * @type {Array<RunContainer>}
+     * @memberof Run
+     */
+    'containers'?: Array<RunContainer>;
+}
+/**
+ * a Run container description
+ * @export
+ * @interface RunContainer
+ */
+export interface RunContainer {
+    /**
+     * the container Id
+     * @type {string}
+     * @memberof RunContainer
+     */
+    'id'?: string;
+    /**
+     * the container name
+     * @type {string}
+     * @memberof RunContainer
+     */
+    'name': string;
+    /**
+     * the metadata labels
+     * @type {{ [key: string]: string; }}
+     * @memberof RunContainer
+     */
+    'labels'?: { [key: string]: string; };
+    /**
+     * environment variable map
+     * @type {{ [key: string]: string; }}
+     * @memberof RunContainer
+     */
+    'envVars'?: { [key: string]: string; };
+    /**
+     * the container image URI
+     * @type {string}
+     * @memberof RunContainer
+     */
+    'image': string;
+    /**
+     * the container entry point
+     * @type {string}
+     * @memberof RunContainer
+     */
+    'entrypoint'?: string;
+    /**
+     * the list of run arguments for the container
+     * @type {Array<string>}
+     * @memberof RunContainer
+     */
+    'runArgs'?: Array<string>;
+    /**
+     * the list of dependencies container name to run this container
+     * @type {Array<string>}
+     * @memberof RunContainer
+     */
+    'dependencies'?: Array<string>;
+    /**
+     * whether or not this container is a Cosmo Tech solution container
+     * @type {boolean}
+     * @memberof RunContainer
+     */
+    'solutionContainer'?: boolean;
+    /**
+     * the node label request
+     * @type {string}
+     * @memberof RunContainer
+     */
+    'nodeLabel'?: string;
+    /**
+     * 
+     * @type {ContainerResourceSizing}
+     * @memberof RunContainer
+     */
+    'runSizing'?: ContainerResourceSizing;
+    /**
+     * the list of artifacts
+     * @type {Array<RunContainerArtifact>}
+     * @memberof RunContainer
+     */
+    'artifacts'?: Array<RunContainerArtifact>;
+}
+/**
+ * a runner run container artifact
+ * @export
+ * @interface RunContainerArtifact
+ */
+export interface RunContainerArtifact {
+    /**
+     * the artifact name
+     * @type {string}
+     * @memberof RunContainerArtifact
+     */
+    'name'?: string;
+    /**
+     * the artifact path (relative to /var/csmoutput)
+     * @type {string}
+     * @memberof RunContainerArtifact
+     */
+    'path'?: string;
+}
+/**
+ * logs for a given container
+ * @export
+ * @interface RunContainerLogs
+ */
+export interface RunContainerLogs {
+    /**
+     * the node Id which has executed this log
+     * @type {string}
+     * @memberof RunContainerLogs
+     */
+    'nodeId'?: string;
+    /**
+     * the container name
+     * @type {string}
+     * @memberof RunContainerLogs
+     */
+    'containerName'?: string;
+    /**
+     * the list of children node id
+     * @type {Array<string>}
+     * @memberof RunContainerLogs
+     */
+    'children'?: Array<string>;
+    /**
+     * the node logs in plain text
+     * @type {string}
+     * @memberof RunContainerLogs
+     */
+    'logs'?: string;
+}
+/**
+ * the run logs returned by all containers
+ * @export
+ * @interface RunLogs
+ */
+export interface RunLogs {
+    /**
+     * the Run Id
+     * @type {string}
+     * @memberof RunLogs
+     */
+    'runId'?: string;
+    /**
+     * the container map of logs
+     * @type {{ [key: string]: RunContainerLogs; }}
+     * @memberof RunLogs
+     */
+    'containers'?: { [key: string]: RunContainerLogs; };
+}
+/**
+ * the memory and CPU requested by the pod
+ * @export
+ * @interface RunResourceRequested
+ */
+export interface RunResourceRequested {
+    /**
+     * the cpu requested
+     * @type {number}
+     * @memberof RunResourceRequested
+     */
+    'cpu'?: number;
+    /**
+     * the memory requested
+     * @type {number}
+     * @memberof RunResourceRequested
+     */
+    'memory'?: number;
+}
+/**
+ * the search options
+ * @export
+ * @interface RunSearch
+ */
+export interface RunSearch {
+    /**
+     * the Solution Id to search
+     * @type {string}
+     * @memberof RunSearch
+     */
+    'solutionId'?: string;
+    /**
+     * the Solution Analysis Id to search
+     * @type {string}
+     * @memberof RunSearch
+     */
+    'runTemplateId'?: string;
+    /**
+     * the Workspace Id to search
+     * @type {string}
+     * @memberof RunSearch
+     */
+    'workspaceId'?: string;
+    /**
+     * the Runner Id to search
+     * @type {string}
+     * @memberof RunSearch
+     */
+    'runnerId'?: string;
+    /**
+     * the state to search
+     * @type {string}
+     * @memberof RunSearch
+     */
+    'state'?: RunSearchStateEnum;
+    /**
+     * the Cosmo Tech compute cluster Argo Workflow Id to search
+     * @type {string}
+     * @memberof RunSearch
+     */
+    'workflowId'?: string;
+    /**
+     * the Cosmo Tech compute cluster Argo Workflow Name
+     * @type {string}
+     * @memberof RunSearch
+     */
+    'workflowName'?: string;
+    /**
+     * the owner Id to search
+     * @type {string}
+     * @memberof RunSearch
+     */
+    'ownerId'?: string;
+}
+
+export const RunSearchStateEnum = {
+    FetchingDatasets: 'FetchingDatasets',
+    FetchingScenarioParameters: 'FetchingScenarioParameters',
+    ApplyingScenarioParameters: 'ApplyingScenarioParameters',
+    ValidatingScenarioData: 'ValidatingScenarioData',
+    SendingScenarioDataToDataWarehouse: 'SendingScenarioDataToDataWarehouse',
+    PreRun: 'PreRun',
+    Running: 'Running',
+    PostRun: 'PostRun',
+    Success: 'Success',
+    Failed: 'Failed'
+} as const;
+
+export type RunSearchStateEnum = typeof RunSearchStateEnum[keyof typeof RunSearchStateEnum];
+
+/**
+ * the parameters to run directly containers
+ * @export
+ * @interface RunStartContainers
+ */
+export interface RunStartContainers {
+    /**
+     * the base name for workflow name generation
+     * @type {string}
+     * @memberof RunStartContainers
+     */
+    'generateName'?: string;
+    /**
+     * Cosmo Tech Simulation Run Id
+     * @type {string}
+     * @memberof RunStartContainers
+     */
+    'csmSimulationId': string;
+    /**
+     * the node label request
+     * @type {string}
+     * @memberof RunStartContainers
+     */
+    'nodeLabel'?: string;
+    /**
+     * the workflow labels
+     * @type {{ [key: string]: string; }}
+     * @memberof RunStartContainers
+     */
+    'labels'?: { [key: string]: string; };
+    /**
+     * the containerslist
+     * @type {Array<RunContainer>}
+     * @memberof RunStartContainers
+     */
+    'containers': Array<RunContainer>;
+}
+/**
+ * the Run end-to-end state
+ * @export
+ * @enum {string}
+ */
+
+export const RunState = {
+    Running: 'Running',
+    Successful: 'Successful',
+    Failed: 'Failed',
+    Unknown: 'Unknown'
+} as const;
+
+export type RunState = typeof RunState[keyof typeof RunState];
+
+
+/**
+ * a Run status
+ * @export
+ * @interface RunStatus
+ */
+export interface RunStatus {
+    /**
+     * the Run id
+     * @type {string}
+     * @memberof RunStatus
+     */
+    'id'?: string;
+    /**
+     * the Organization id
+     * @type {string}
+     * @memberof RunStatus
+     */
+    'organizationId'?: string;
+    /**
+     * the Workspace id
+     * @type {string}
+     * @memberof RunStatus
+     */
+    'workspaceId'?: string;
+    /**
+     * the Runner id
+     * @type {string}
+     * @memberof RunStatus
+     */
+    'runnerId'?: string;
+    /**
+     * the Cosmo Tech compute cluster Argo Workflow Id to search
+     * @type {string}
+     * @memberof RunStatus
+     */
+    'workflowId'?: string;
+    /**
+     * the Cosmo Tech compute cluster Argo Workflow Name
+     * @type {string}
+     * @memberof RunStatus
+     */
+    'workflowName'?: string;
+    /**
+     * the Run start Date Time
+     * @type {string}
+     * @memberof RunStatus
+     */
+    'startTime'?: string;
+    /**
+     * the Run end Date Time
+     * @type {string}
+     * @memberof RunStatus
+     */
+    'endTime'?: string;
+    /**
+     * high-level summary of where the workflow is in its lifecycle
+     * @type {string}
+     * @memberof RunStatus
+     */
+    'phase'?: string;
+    /**
+     * progress to completion
+     * @type {string}
+     * @memberof RunStatus
+     */
+    'progress'?: string;
+    /**
+     * a  human readable message indicating details about why the workflow is in this condition
+     * @type {string}
+     * @memberof RunStatus
+     */
+    'message'?: string;
+    /**
+     * estimatedDuration in seconds
+     * @type {number}
+     * @memberof RunStatus
+     */
+    'estimatedDuration'?: number;
+    /**
+     * status of Run nodes
+     * @type {Array<RunStatusNode>}
+     * @memberof RunStatus
+     */
+    'nodes'?: Array<RunStatusNode>;
+    /**
+     * 
+     * @type {RunState}
+     * @memberof RunStatus
+     */
+    'state'?: RunState;
+}
+/**
+ * status of a Run Node
+ * @export
+ * @interface RunStatusNode
+ */
+export interface RunStatusNode {
+    /**
+     * the node id
+     * @type {string}
+     * @memberof RunStatusNode
+     */
+    'id'?: string;
+    /**
+     * the node unique name
+     * @type {string}
+     * @memberof RunStatusNode
+     */
+    'name'?: string;
+    /**
+     * the Run container name
+     * @type {string}
+     * @memberof RunStatusNode
+     */
+    'containerName'?: string;
+    /**
+     * the list of outbound nodes
+     * @type {Array<string>}
+     * @memberof RunStatusNode
+     */
+    'outboundNodes'?: Array<string>;
+    /**
+     * 
+     * @type {RunResourceRequested}
+     * @memberof RunStatusNode
+     */
+    'resourcesDuration'?: RunResourceRequested;
+    /**
+     * estimatedDuration in seconds
+     * @type {number}
+     * @memberof RunStatusNode
+     */
+    'estimatedDuration'?: number;
+    /**
+     * HostNodeName name of the Kubernetes node on which the Pod is running, if applicable
+     * @type {string}
+     * @memberof RunStatusNode
+     */
+    'hostNodeName'?: string;
+    /**
+     * a human readable message indicating details about why the node is in this condition
+     * @type {string}
+     * @memberof RunStatusNode
+     */
+    'message'?: string;
+    /**
+     * high-level summary of where the node is in its lifecycle
+     * @type {string}
+     * @memberof RunStatusNode
+     */
+    'phase'?: string;
+    /**
+     * progress to completion
+     * @type {string}
+     * @memberof RunStatusNode
+     */
+    'progress'?: string;
+    /**
+     * the node start time
+     * @type {string}
+     * @memberof RunStatusNode
+     */
+    'startTime'?: string;
+    /**
+     * the node end time
+     * @type {string}
+     * @memberof RunStatusNode
+     */
+    'endTime'?: string;
+}
+/**
  * a Solution Run Template
  * @export
  * @interface RunTemplate
@@ -1282,6 +1864,417 @@ export const RunTemplateStepSource = {
 } as const;
 
 export type RunTemplateStepSource = typeof RunTemplateStepSource[keyof typeof RunTemplateStepSource];
+
+
+/**
+ * a Runner with base information
+ * @export
+ * @interface Runner
+ */
+export interface Runner {
+    /**
+     * the Runner unique identifier
+     * @type {string}
+     * @memberof Runner
+     */
+    'id'?: string;
+    /**
+     * the Runner name
+     * @type {string}
+     * @memberof Runner
+     */
+    'name'?: string;
+    /**
+     * the Runner description
+     * @type {string}
+     * @memberof Runner
+     */
+    'description'?: string;
+    /**
+     * the list of tags
+     * @type {Array<string>}
+     * @memberof Runner
+     */
+    'tags'?: Array<string>;
+    /**
+     * the Runner parent id
+     * @type {string}
+     * @memberof Runner
+     */
+    'parentId'?: string;
+    /**
+     * the user id which own this Runner
+     * @type {string}
+     * @memberof Runner
+     */
+    'ownerId'?: string;
+    /**
+     * the runner root id
+     * @type {string}
+     * @memberof Runner
+     */
+    'rootId'?: string;
+    /**
+     * the Solution Id associated with this Runner
+     * @type {string}
+     * @memberof Runner
+     */
+    'solutionId'?: string;
+    /**
+     * the Solution Run Template Id associated with this Runner
+     * @type {string}
+     * @memberof Runner
+     */
+    'runTemplateId'?: string;
+    /**
+     * the associated Organization Id
+     * @type {string}
+     * @memberof Runner
+     */
+    'organizationId'?: string;
+    /**
+     * the associated Workspace Id
+     * @type {string}
+     * @memberof Runner
+     */
+    'workspaceId'?: string;
+    /**
+     * 
+     * @type {RunnerJobState}
+     * @memberof Runner
+     */
+    'state'?: RunnerJobState;
+    /**
+     * the Runner creation date
+     * @type {number}
+     * @memberof Runner
+     */
+    'creationDate'?: number;
+    /**
+     * the last time a Runner was updated
+     * @type {number}
+     * @memberof Runner
+     */
+    'lastUpdate'?: number;
+    /**
+     * the name of the owner
+     * @type {string}
+     * @memberof Runner
+     */
+    'ownerName'?: string;
+    /**
+     * the Solution name
+     * @type {string}
+     * @memberof Runner
+     */
+    'solutionName'?: string;
+    /**
+     * the Solution Run Template name associated with this Runner
+     * @type {string}
+     * @memberof Runner
+     */
+    'runTemplateName'?: string;
+    /**
+     * the list of Dataset Id associated to this Runner Run Template
+     * @type {Array<string>}
+     * @memberof Runner
+     */
+    'datasetList'?: Array<string>;
+    /**
+     * 
+     * @type {RunnerResourceSizing}
+     * @memberof Runner
+     */
+    'runSizing'?: RunnerResourceSizing;
+    /**
+     * the list of Solution Run Template parameters values
+     * @type {Array<RunnerRunTemplateParameterValue>}
+     * @memberof Runner
+     */
+    'parametersValues'?: Array<RunnerRunTemplateParameterValue>;
+    /**
+     * 
+     * @type {RunnerLastRun & object}
+     * @memberof Runner
+     */
+    'lastRun'?: RunnerLastRun & object;
+    /**
+     * 
+     * @type {RunnerLastRun & object}
+     * @memberof Runner
+     */
+    'parentLastRun'?: RunnerLastRun & object;
+    /**
+     * 
+     * @type {RunnerLastRun & object}
+     * @memberof Runner
+     */
+    'rootLastRun'?: RunnerLastRun & object;
+    /**
+     * 
+     * @type {RunnerValidationStatus}
+     * @memberof Runner
+     */
+    'validationStatus'?: RunnerValidationStatus;
+    /**
+     * 
+     * @type {RunnerSecurity}
+     * @memberof Runner
+     */
+    'security'?: RunnerSecurity;
+}
+/**
+ * a Runner access control item
+ * @export
+ * @interface RunnerAccessControl
+ */
+export interface RunnerAccessControl {
+    /**
+     * the identity id
+     * @type {string}
+     * @memberof RunnerAccessControl
+     */
+    'id': string;
+    /**
+     * a role
+     * @type {string}
+     * @memberof RunnerAccessControl
+     */
+    'role': string;
+}
+/**
+ * the difference between the values of a parameter
+ * @export
+ * @interface RunnerChangedParameterValue
+ */
+export interface RunnerChangedParameterValue {
+    /**
+     * the parameter id the values refer to
+     * @type {string}
+     * @memberof RunnerChangedParameterValue
+     */
+    'parameterId'?: string;
+    /**
+     * the parameter value type
+     * @type {string}
+     * @memberof RunnerChangedParameterValue
+     */
+    'varType'?: string;
+    /**
+     * the parameter value for the reference Runner
+     * @type {string}
+     * @memberof RunnerChangedParameterValue
+     */
+    'value'?: string;
+    /**
+     * the parameter value for the compared Runner
+     * @type {string}
+     * @memberof RunnerChangedParameterValue
+     */
+    'comparedValue'?: string;
+}
+/**
+ * the result of the comparison of two runners
+ * @export
+ * @interface RunnerComparisonResult
+ */
+export interface RunnerComparisonResult {
+    /**
+     * the Runner Id which is the reference for the comparison
+     * @type {string}
+     * @memberof RunnerComparisonResult
+     */
+    'runnerId'?: string;
+    /**
+     * the Runner Id the reference Runner is compared to
+     * @type {string}
+     * @memberof RunnerComparisonResult
+     */
+    'comparedRunnerId'?: string;
+    /**
+     * the list of changed values for parameters
+     * @type {Array<RunnerChangedParameterValue>}
+     * @memberof RunnerComparisonResult
+     */
+    'changedValues'?: Array<RunnerChangedParameterValue>;
+}
+/**
+ * Runner data download job info
+ * @export
+ * @interface RunnerDataDownloadInfo
+ */
+export interface RunnerDataDownloadInfo {
+    /**
+     * the Runner Data Download URL
+     * @type {string}
+     * @memberof RunnerDataDownloadInfo
+     */
+    'url'?: string;
+    /**
+     * 
+     * @type {RunnerJobState}
+     * @memberof RunnerDataDownloadInfo
+     */
+    'state'?: RunnerJobState;
+}
+/**
+ * Runner data download job
+ * @export
+ * @interface RunnerDataDownloadJob
+ */
+export interface RunnerDataDownloadJob {
+    /**
+     * the Runner Data Download job identifier
+     * @type {string}
+     * @memberof RunnerDataDownloadJob
+     */
+    'id'?: string;
+}
+/**
+ * the Runner job state
+ * @export
+ * @enum {string}
+ */
+
+export const RunnerJobState = {
+    Created: 'Created',
+    Running: 'Running',
+    Successful: 'Successful',
+    Failed: 'Failed',
+    Unknown: 'Unknown',
+    DataIngestionInProgress: 'DataIngestionInProgress'
+} as const;
+
+export type RunnerJobState = typeof RunnerJobState[keyof typeof RunnerJobState];
+
+
+/**
+ * 
+ * @export
+ * @interface RunnerLastRun
+ */
+export interface RunnerLastRun {
+    /**
+     * the last Runner Run id
+     * @type {string}
+     * @memberof RunnerLastRun
+     */
+    'runnerRunId'?: string;
+    /**
+     * the last Cosmo Tech Simulation Run id
+     * @type {string}
+     * @memberof RunnerLastRun
+     */
+    'csmSimulationRun'?: string;
+    /**
+     * the last Workflow Id
+     * @type {string}
+     * @memberof RunnerLastRun
+     */
+    'workflowId'?: string;
+    /**
+     * the last Workflow name
+     * @type {string}
+     * @memberof RunnerLastRun
+     */
+    'workflowName'?: string;
+}
+/**
+ * a description object for resource requests and limits (default same configuration as basic sizing)
+ * @export
+ * @interface RunnerResourceSizing
+ */
+export interface RunnerResourceSizing {
+    /**
+     * 
+     * @type {ResourceSizeInfo}
+     * @memberof RunnerResourceSizing
+     */
+    'requests': ResourceSizeInfo;
+    /**
+     * 
+     * @type {ResourceSizeInfo}
+     * @memberof RunnerResourceSizing
+     */
+    'limits': ResourceSizeInfo;
+}
+/**
+ * the Runner Role
+ * @export
+ * @interface RunnerRole
+ */
+export interface RunnerRole {
+    /**
+     * the Runner Role
+     * @type {string}
+     * @memberof RunnerRole
+     */
+    'role': string;
+}
+/**
+ * the value of a Solution Run Template parameter for a Runner
+ * @export
+ * @interface RunnerRunTemplateParameterValue
+ */
+export interface RunnerRunTemplateParameterValue {
+    /**
+     * the parameter Id
+     * @type {string}
+     * @memberof RunnerRunTemplateParameterValue
+     */
+    'parameterId': string;
+    /**
+     * the parameter value type
+     * @type {string}
+     * @memberof RunnerRunTemplateParameterValue
+     */
+    'varType'?: string;
+    /**
+     * the parameter value
+     * @type {string}
+     * @memberof RunnerRunTemplateParameterValue
+     */
+    'value': string;
+    /**
+     * whether or not the value is inherited from parent or has been changed
+     * @type {boolean}
+     * @memberof RunnerRunTemplateParameterValue
+     */
+    'isInherited'?: boolean;
+}
+/**
+ * the Runner security information
+ * @export
+ * @interface RunnerSecurity
+ */
+export interface RunnerSecurity {
+    /**
+     * the role by default
+     * @type {string}
+     * @memberof RunnerSecurity
+     */
+    'default': string;
+    /**
+     * the list which can access this Runner with detailed access control information
+     * @type {Array<RunnerAccessControl>}
+     * @memberof RunnerSecurity
+     */
+    'accessControlList': Array<RunnerAccessControl>;
+}
+/**
+ * the validation status of the runner
+ * @export
+ * @enum {string}
+ */
+
+export const RunnerValidationStatus = {
+    Draft: 'Draft',
+    Rejected: 'Rejected',
+    Unknown: 'Unknown',
+    Validated: 'Validated'
+} as const;
+
+export type RunnerValidationStatus = typeof RunnerValidationStatus[keyof typeof RunnerValidationStatus];
 
 
 /**
@@ -7383,6 +8376,1901 @@ export class OrganizationApi extends BaseAPI {
      */
     public updateTenantCredentialsByOrganizationId(organizationId: string, requestBody: { [key: string]: object; }, options?: AxiosRequestConfig) {
         return OrganizationApiFp(this.configuration).updateTenantCredentialsByOrganizationId(organizationId, requestBody, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * RunApi - axios parameter creator
+ * @export
+ */
+export const RunApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Delete a run
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} runId the Run identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteRun: async (organizationId: string, workspaceId: string, runnerId: string, runId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('deleteRun', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('deleteRun', 'workspaceId', workspaceId)
+            // verify required parameter 'runnerId' is not null or undefined
+            assertParamExists('deleteRun', 'runnerId', runnerId)
+            // verify required parameter 'runId' is not null or undefined
+            assertParamExists('deleteRun', 'runId', runId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/runs/{run_id}`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)))
+                .replace(`{${"run_id"}}`, encodeURIComponent(String(runId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get the details of a run
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} runId the Run identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRun: async (organizationId: string, workspaceId: string, runnerId: string, runId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('getRun', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('getRun', 'workspaceId', workspaceId)
+            // verify required parameter 'runnerId' is not null or undefined
+            assertParamExists('getRun', 'runnerId', runnerId)
+            // verify required parameter 'runId' is not null or undefined
+            assertParamExists('getRun', 'runId', runId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/runs/{run_id}`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)))
+                .replace(`{${"run_id"}}`, encodeURIComponent(String(runId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary get the logs for the Run
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} runId the Run identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRunLogs: async (organizationId: string, workspaceId: string, runnerId: string, runId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('getRunLogs', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('getRunLogs', 'workspaceId', workspaceId)
+            // verify required parameter 'runnerId' is not null or undefined
+            assertParamExists('getRunLogs', 'runnerId', runnerId)
+            // verify required parameter 'runId' is not null or undefined
+            assertParamExists('getRunLogs', 'runId', runId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/runs/{run_id}/logs`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)))
+                .replace(`{${"run_id"}}`, encodeURIComponent(String(runId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary get the status for the Run
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} runId the Run identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRunStatus: async (organizationId: string, workspaceId: string, runnerId: string, runId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('getRunStatus', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('getRunStatus', 'workspaceId', workspaceId)
+            // verify required parameter 'runnerId' is not null or undefined
+            assertParamExists('getRunStatus', 'runnerId', runnerId)
+            // verify required parameter 'runId' is not null or undefined
+            assertParamExists('getRunStatus', 'runId', runId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/runs/{run_id}/status`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)))
+                .replace(`{${"run_id"}}`, encodeURIComponent(String(runId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary get the list of Runs for the Runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {number} [page] page number to query
+         * @param {number} [size] amount of result by page
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listRuns: async (organizationId: string, workspaceId: string, runnerId: string, page?: number, size?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('listRuns', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('listRuns', 'workspaceId', workspaceId)
+            // verify required parameter 'runnerId' is not null or undefined
+            assertParamExists('listRuns', 'runnerId', runnerId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/runs`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (size !== undefined) {
+                localVarQueryParameter['size'] = size;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * RunApi - functional programming interface
+ * @export
+ */
+export const RunApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = RunApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary Delete a run
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} runId the Run identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteRun(organizationId: string, workspaceId: string, runnerId: string, runId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteRun(organizationId, workspaceId, runnerId, runId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Get the details of a run
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} runId the Run identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getRun(organizationId: string, workspaceId: string, runnerId: string, runId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Run>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRun(organizationId, workspaceId, runnerId, runId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary get the logs for the Run
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} runId the Run identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getRunLogs(organizationId: string, workspaceId: string, runnerId: string, runId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RunLogs>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRunLogs(organizationId, workspaceId, runnerId, runId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary get the status for the Run
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} runId the Run identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getRunStatus(organizationId: string, workspaceId: string, runnerId: string, runId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RunStatus>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRunStatus(organizationId, workspaceId, runnerId, runId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary get the list of Runs for the Runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {number} [page] page number to query
+         * @param {number} [size] amount of result by page
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listRuns(organizationId: string, workspaceId: string, runnerId: string, page?: number, size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Run>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listRuns(organizationId, workspaceId, runnerId, page, size, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * RunApi - factory interface
+ * @export
+ */
+export const RunApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = RunApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary Delete a run
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} runId the Run identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteRun(organizationId: string, workspaceId: string, runnerId: string, runId: string, options?: any): AxiosPromise<void> {
+            return localVarFp.deleteRun(organizationId, workspaceId, runnerId, runId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get the details of a run
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} runId the Run identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRun(organizationId: string, workspaceId: string, runnerId: string, runId: string, options?: any): AxiosPromise<Run> {
+            return localVarFp.getRun(organizationId, workspaceId, runnerId, runId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary get the logs for the Run
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} runId the Run identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRunLogs(organizationId: string, workspaceId: string, runnerId: string, runId: string, options?: any): AxiosPromise<RunLogs> {
+            return localVarFp.getRunLogs(organizationId, workspaceId, runnerId, runId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary get the status for the Run
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} runId the Run identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRunStatus(organizationId: string, workspaceId: string, runnerId: string, runId: string, options?: any): AxiosPromise<RunStatus> {
+            return localVarFp.getRunStatus(organizationId, workspaceId, runnerId, runId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary get the list of Runs for the Runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {number} [page] page number to query
+         * @param {number} [size] amount of result by page
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listRuns(organizationId: string, workspaceId: string, runnerId: string, page?: number, size?: number, options?: any): AxiosPromise<Array<Run>> {
+            return localVarFp.listRuns(organizationId, workspaceId, runnerId, page, size, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * RunApi - object-oriented interface
+ * @export
+ * @class RunApi
+ * @extends {BaseAPI}
+ */
+export class RunApi extends BaseAPI {
+    /**
+     * 
+     * @summary Delete a run
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} runnerId the Runner identifier
+     * @param {string} runId the Run identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RunApi
+     */
+    public deleteRun(organizationId: string, workspaceId: string, runnerId: string, runId: string, options?: AxiosRequestConfig) {
+        return RunApiFp(this.configuration).deleteRun(organizationId, workspaceId, runnerId, runId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get the details of a run
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} runnerId the Runner identifier
+     * @param {string} runId the Run identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RunApi
+     */
+    public getRun(organizationId: string, workspaceId: string, runnerId: string, runId: string, options?: AxiosRequestConfig) {
+        return RunApiFp(this.configuration).getRun(organizationId, workspaceId, runnerId, runId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary get the logs for the Run
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} runnerId the Runner identifier
+     * @param {string} runId the Run identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RunApi
+     */
+    public getRunLogs(organizationId: string, workspaceId: string, runnerId: string, runId: string, options?: AxiosRequestConfig) {
+        return RunApiFp(this.configuration).getRunLogs(organizationId, workspaceId, runnerId, runId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary get the status for the Run
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} runnerId the Runner identifier
+     * @param {string} runId the Run identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RunApi
+     */
+    public getRunStatus(organizationId: string, workspaceId: string, runnerId: string, runId: string, options?: AxiosRequestConfig) {
+        return RunApiFp(this.configuration).getRunStatus(organizationId, workspaceId, runnerId, runId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary get the list of Runs for the Runner
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} runnerId the Runner identifier
+     * @param {number} [page] page number to query
+     * @param {number} [size] amount of result by page
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RunApi
+     */
+    public listRuns(organizationId: string, workspaceId: string, runnerId: string, page?: number, size?: number, options?: AxiosRequestConfig) {
+        return RunApiFp(this.configuration).listRuns(organizationId, workspaceId, runnerId, page, size, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * RunnerApi - axios parameter creator
+ * @export
+ */
+export const RunnerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Add a control access to the Runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {RunnerAccessControl} runnerAccessControl the new Runner security access to add.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        addRunnerAccessControl: async (organizationId: string, workspaceId: string, runnerId: string, runnerAccessControl: RunnerAccessControl, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('addRunnerAccessControl', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('addRunnerAccessControl', 'workspaceId', workspaceId)
+            // verify required parameter 'runnerId' is not null or undefined
+            assertParamExists('addRunnerAccessControl', 'runnerId', runnerId)
+            // verify required parameter 'runnerAccessControl' is not null or undefined
+            assertParamExists('addRunnerAccessControl', 'runnerAccessControl', runnerAccessControl)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/security/access`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(runnerAccessControl, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Create a new Runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {Runner} runner the Runner to create
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createRunner: async (organizationId: string, workspaceId: string, runner: Runner, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('createRunner', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('createRunner', 'workspaceId', workspaceId)
+            // verify required parameter 'runner' is not null or undefined
+            assertParamExists('createRunner', 'runner', runner)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(runner, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Delete a runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteRunner: async (organizationId: string, workspaceId: string, runnerId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('deleteRunner', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('deleteRunner', 'workspaceId', workspaceId)
+            // verify required parameter 'runnerId' is not null or undefined
+            assertParamExists('deleteRunner', 'runnerId', runnerId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get the details of an runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRunner: async (organizationId: string, workspaceId: string, runnerId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('getRunner', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('getRunner', 'workspaceId', workspaceId)
+            // verify required parameter 'runnerId' is not null or undefined
+            assertParamExists('getRunner', 'runnerId', runnerId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get a control access for the Runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} identityId the User identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRunnerAccessControl: async (organizationId: string, workspaceId: string, runnerId: string, identityId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('getRunnerAccessControl', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('getRunnerAccessControl', 'workspaceId', workspaceId)
+            // verify required parameter 'runnerId' is not null or undefined
+            assertParamExists('getRunnerAccessControl', 'runnerId', runnerId)
+            // verify required parameter 'identityId' is not null or undefined
+            assertParamExists('getRunnerAccessControl', 'identityId', identityId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/security/access/{identity_id}`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)))
+                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get the Runner permission by given role
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} role the Role
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRunnerPermissions: async (organizationId: string, workspaceId: string, runnerId: string, role: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('getRunnerPermissions', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('getRunnerPermissions', 'workspaceId', workspaceId)
+            // verify required parameter 'runnerId' is not null or undefined
+            assertParamExists('getRunnerPermissions', 'runnerId', runnerId)
+            // verify required parameter 'role' is not null or undefined
+            assertParamExists('getRunnerPermissions', 'role', role)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/permissions/{role}`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)))
+                .replace(`{${"role"}}`, encodeURIComponent(String(role)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get the Runner security information
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRunnerSecurity: async (organizationId: string, workspaceId: string, runnerId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('getRunnerSecurity', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('getRunnerSecurity', 'workspaceId', workspaceId)
+            // verify required parameter 'runnerId' is not null or undefined
+            assertParamExists('getRunnerSecurity', 'runnerId', runnerId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/security`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get the Runner security users list
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRunnerSecurityUsers: async (organizationId: string, workspaceId: string, runnerId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('getRunnerSecurityUsers', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('getRunnerSecurityUsers', 'workspaceId', workspaceId)
+            // verify required parameter 'runnerId' is not null or undefined
+            assertParamExists('getRunnerSecurityUsers', 'runnerId', runnerId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/security/users`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary List all Runners
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {number} [page] page number to query
+         * @param {number} [size] amount of result by page
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listRunners: async (organizationId: string, workspaceId: string, page?: number, size?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('listRunners', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('listRunners', 'workspaceId', workspaceId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (size !== undefined) {
+                localVarQueryParameter['size'] = size;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Remove the specified access from the given Organization Runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} identityId the User identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        removeRunnerAccessControl: async (organizationId: string, workspaceId: string, runnerId: string, identityId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('removeRunnerAccessControl', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('removeRunnerAccessControl', 'workspaceId', workspaceId)
+            // verify required parameter 'runnerId' is not null or undefined
+            assertParamExists('removeRunnerAccessControl', 'runnerId', runnerId)
+            // verify required parameter 'identityId' is not null or undefined
+            assertParamExists('removeRunnerAccessControl', 'identityId', identityId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/security/access/{identity_id}`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)))
+                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Set the Runner default security
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {RunnerRole} runnerRole This change the runner default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the runner.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        setRunnerDefaultSecurity: async (organizationId: string, workspaceId: string, runnerId: string, runnerRole: RunnerRole, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('setRunnerDefaultSecurity', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('setRunnerDefaultSecurity', 'workspaceId', workspaceId)
+            // verify required parameter 'runnerId' is not null or undefined
+            assertParamExists('setRunnerDefaultSecurity', 'runnerId', runnerId)
+            // verify required parameter 'runnerRole' is not null or undefined
+            assertParamExists('setRunnerDefaultSecurity', 'runnerRole', runnerRole)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/security/default`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(runnerRole, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Start a run with runner parameters
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        startRun: async (organizationId: string, workspaceId: string, runnerId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('startRun', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('startRun', 'workspaceId', workspaceId)
+            // verify required parameter 'runnerId' is not null or undefined
+            assertParamExists('startRun', 'runnerId', runnerId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/start`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Stop the last run
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        stopRun: async (organizationId: string, workspaceId: string, runnerId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('stopRun', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('stopRun', 'workspaceId', workspaceId)
+            // verify required parameter 'runnerId' is not null or undefined
+            assertParamExists('stopRun', 'runnerId', runnerId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/stop`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Update a runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {Runner} runner the new Runner details. This endpoint can\&#39;t be used to update security
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateRunner: async (organizationId: string, workspaceId: string, runnerId: string, runner: Runner, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('updateRunner', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('updateRunner', 'workspaceId', workspaceId)
+            // verify required parameter 'runnerId' is not null or undefined
+            assertParamExists('updateRunner', 'runnerId', runnerId)
+            // verify required parameter 'runner' is not null or undefined
+            assertParamExists('updateRunner', 'runner', runner)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(runner, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Update the specified access to User for a Runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} identityId the User identifier
+         * @param {RunnerRole} runnerRole The new Runner Access Control
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateRunnerAccessControl: async (organizationId: string, workspaceId: string, runnerId: string, identityId: string, runnerRole: RunnerRole, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('updateRunnerAccessControl', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('updateRunnerAccessControl', 'workspaceId', workspaceId)
+            // verify required parameter 'runnerId' is not null or undefined
+            assertParamExists('updateRunnerAccessControl', 'runnerId', runnerId)
+            // verify required parameter 'identityId' is not null or undefined
+            assertParamExists('updateRunnerAccessControl', 'identityId', identityId)
+            // verify required parameter 'runnerRole' is not null or undefined
+            assertParamExists('updateRunnerAccessControl', 'runnerRole', runnerRole)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/security/access/{identity_id}`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)))
+                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(runnerRole, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * RunnerApi - functional programming interface
+ * @export
+ */
+export const RunnerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = RunnerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary Add a control access to the Runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {RunnerAccessControl} runnerAccessControl the new Runner security access to add.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async addRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, runnerAccessControl: RunnerAccessControl, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RunnerAccessControl>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.addRunnerAccessControl(organizationId, workspaceId, runnerId, runnerAccessControl, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Create a new Runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {Runner} runner the Runner to create
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createRunner(organizationId: string, workspaceId: string, runner: Runner, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Runner>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createRunner(organizationId, workspaceId, runner, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Delete a runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteRunner(organizationId: string, workspaceId: string, runnerId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteRunner(organizationId, workspaceId, runnerId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Get the details of an runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getRunner(organizationId: string, workspaceId: string, runnerId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Runner>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRunner(organizationId, workspaceId, runnerId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Get a control access for the Runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} identityId the User identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, identityId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RunnerAccessControl>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRunnerAccessControl(organizationId, workspaceId, runnerId, identityId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Get the Runner permission by given role
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} role the Role
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getRunnerPermissions(organizationId: string, workspaceId: string, runnerId: string, role: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRunnerPermissions(organizationId, workspaceId, runnerId, role, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Get the Runner security information
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getRunnerSecurity(organizationId: string, workspaceId: string, runnerId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RunnerSecurity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRunnerSecurity(organizationId, workspaceId, runnerId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Get the Runner security users list
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getRunnerSecurityUsers(organizationId: string, workspaceId: string, runnerId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRunnerSecurityUsers(organizationId, workspaceId, runnerId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary List all Runners
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {number} [page] page number to query
+         * @param {number} [size] amount of result by page
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listRunners(organizationId: string, workspaceId: string, page?: number, size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Runner>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listRunners(organizationId, workspaceId, page, size, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Remove the specified access from the given Organization Runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} identityId the User identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async removeRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, identityId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.removeRunnerAccessControl(organizationId, workspaceId, runnerId, identityId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Set the Runner default security
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {RunnerRole} runnerRole This change the runner default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the runner.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async setRunnerDefaultSecurity(organizationId: string, workspaceId: string, runnerId: string, runnerRole: RunnerRole, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RunnerSecurity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setRunnerDefaultSecurity(organizationId, workspaceId, runnerId, runnerRole, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Start a run with runner parameters
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async startRun(organizationId: string, workspaceId: string, runnerId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RunnerLastRun>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.startRun(organizationId, workspaceId, runnerId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Stop the last run
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async stopRun(organizationId: string, workspaceId: string, runnerId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.stopRun(organizationId, workspaceId, runnerId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Update a runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {Runner} runner the new Runner details. This endpoint can\&#39;t be used to update security
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateRunner(organizationId: string, workspaceId: string, runnerId: string, runner: Runner, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Runner>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateRunner(organizationId, workspaceId, runnerId, runner, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Update the specified access to User for a Runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} identityId the User identifier
+         * @param {RunnerRole} runnerRole The new Runner Access Control
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, identityId: string, runnerRole: RunnerRole, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RunnerAccessControl>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateRunnerAccessControl(organizationId, workspaceId, runnerId, identityId, runnerRole, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * RunnerApi - factory interface
+ * @export
+ */
+export const RunnerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = RunnerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary Add a control access to the Runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {RunnerAccessControl} runnerAccessControl the new Runner security access to add.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        addRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, runnerAccessControl: RunnerAccessControl, options?: any): AxiosPromise<RunnerAccessControl> {
+            return localVarFp.addRunnerAccessControl(organizationId, workspaceId, runnerId, runnerAccessControl, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Create a new Runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {Runner} runner the Runner to create
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createRunner(organizationId: string, workspaceId: string, runner: Runner, options?: any): AxiosPromise<Runner> {
+            return localVarFp.createRunner(organizationId, workspaceId, runner, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Delete a runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteRunner(organizationId: string, workspaceId: string, runnerId: string, options?: any): AxiosPromise<void> {
+            return localVarFp.deleteRunner(organizationId, workspaceId, runnerId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get the details of an runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRunner(organizationId: string, workspaceId: string, runnerId: string, options?: any): AxiosPromise<Runner> {
+            return localVarFp.getRunner(organizationId, workspaceId, runnerId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get a control access for the Runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} identityId the User identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, identityId: string, options?: any): AxiosPromise<RunnerAccessControl> {
+            return localVarFp.getRunnerAccessControl(organizationId, workspaceId, runnerId, identityId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get the Runner permission by given role
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} role the Role
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRunnerPermissions(organizationId: string, workspaceId: string, runnerId: string, role: string, options?: any): AxiosPromise<Array<string>> {
+            return localVarFp.getRunnerPermissions(organizationId, workspaceId, runnerId, role, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get the Runner security information
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRunnerSecurity(organizationId: string, workspaceId: string, runnerId: string, options?: any): AxiosPromise<RunnerSecurity> {
+            return localVarFp.getRunnerSecurity(organizationId, workspaceId, runnerId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get the Runner security users list
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRunnerSecurityUsers(organizationId: string, workspaceId: string, runnerId: string, options?: any): AxiosPromise<Array<string>> {
+            return localVarFp.getRunnerSecurityUsers(organizationId, workspaceId, runnerId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary List all Runners
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {number} [page] page number to query
+         * @param {number} [size] amount of result by page
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listRunners(organizationId: string, workspaceId: string, page?: number, size?: number, options?: any): AxiosPromise<Array<Runner>> {
+            return localVarFp.listRunners(organizationId, workspaceId, page, size, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Remove the specified access from the given Organization Runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} identityId the User identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        removeRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, identityId: string, options?: any): AxiosPromise<void> {
+            return localVarFp.removeRunnerAccessControl(organizationId, workspaceId, runnerId, identityId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Set the Runner default security
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {RunnerRole} runnerRole This change the runner default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the runner.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        setRunnerDefaultSecurity(organizationId: string, workspaceId: string, runnerId: string, runnerRole: RunnerRole, options?: any): AxiosPromise<RunnerSecurity> {
+            return localVarFp.setRunnerDefaultSecurity(organizationId, workspaceId, runnerId, runnerRole, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Start a run with runner parameters
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        startRun(organizationId: string, workspaceId: string, runnerId: string, options?: any): AxiosPromise<RunnerLastRun> {
+            return localVarFp.startRun(organizationId, workspaceId, runnerId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Stop the last run
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        stopRun(organizationId: string, workspaceId: string, runnerId: string, options?: any): AxiosPromise<void> {
+            return localVarFp.stopRun(organizationId, workspaceId, runnerId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Update a runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {Runner} runner the new Runner details. This endpoint can\&#39;t be used to update security
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateRunner(organizationId: string, workspaceId: string, runnerId: string, runner: Runner, options?: any): AxiosPromise<Runner> {
+            return localVarFp.updateRunner(organizationId, workspaceId, runnerId, runner, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Update the specified access to User for a Runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} identityId the User identifier
+         * @param {RunnerRole} runnerRole The new Runner Access Control
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, identityId: string, runnerRole: RunnerRole, options?: any): AxiosPromise<RunnerAccessControl> {
+            return localVarFp.updateRunnerAccessControl(organizationId, workspaceId, runnerId, identityId, runnerRole, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * RunnerApi - object-oriented interface
+ * @export
+ * @class RunnerApi
+ * @extends {BaseAPI}
+ */
+export class RunnerApi extends BaseAPI {
+    /**
+     * 
+     * @summary Add a control access to the Runner
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} runnerId the Runner identifier
+     * @param {RunnerAccessControl} runnerAccessControl the new Runner security access to add.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RunnerApi
+     */
+    public addRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, runnerAccessControl: RunnerAccessControl, options?: AxiosRequestConfig) {
+        return RunnerApiFp(this.configuration).addRunnerAccessControl(organizationId, workspaceId, runnerId, runnerAccessControl, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Create a new Runner
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {Runner} runner the Runner to create
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RunnerApi
+     */
+    public createRunner(organizationId: string, workspaceId: string, runner: Runner, options?: AxiosRequestConfig) {
+        return RunnerApiFp(this.configuration).createRunner(organizationId, workspaceId, runner, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Delete a runner
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} runnerId the Runner identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RunnerApi
+     */
+    public deleteRunner(organizationId: string, workspaceId: string, runnerId: string, options?: AxiosRequestConfig) {
+        return RunnerApiFp(this.configuration).deleteRunner(organizationId, workspaceId, runnerId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get the details of an runner
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} runnerId the Runner identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RunnerApi
+     */
+    public getRunner(organizationId: string, workspaceId: string, runnerId: string, options?: AxiosRequestConfig) {
+        return RunnerApiFp(this.configuration).getRunner(organizationId, workspaceId, runnerId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get a control access for the Runner
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} runnerId the Runner identifier
+     * @param {string} identityId the User identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RunnerApi
+     */
+    public getRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, identityId: string, options?: AxiosRequestConfig) {
+        return RunnerApiFp(this.configuration).getRunnerAccessControl(organizationId, workspaceId, runnerId, identityId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get the Runner permission by given role
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} runnerId the Runner identifier
+     * @param {string} role the Role
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RunnerApi
+     */
+    public getRunnerPermissions(organizationId: string, workspaceId: string, runnerId: string, role: string, options?: AxiosRequestConfig) {
+        return RunnerApiFp(this.configuration).getRunnerPermissions(organizationId, workspaceId, runnerId, role, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get the Runner security information
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} runnerId the Runner identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RunnerApi
+     */
+    public getRunnerSecurity(organizationId: string, workspaceId: string, runnerId: string, options?: AxiosRequestConfig) {
+        return RunnerApiFp(this.configuration).getRunnerSecurity(organizationId, workspaceId, runnerId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get the Runner security users list
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} runnerId the Runner identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RunnerApi
+     */
+    public getRunnerSecurityUsers(organizationId: string, workspaceId: string, runnerId: string, options?: AxiosRequestConfig) {
+        return RunnerApiFp(this.configuration).getRunnerSecurityUsers(organizationId, workspaceId, runnerId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary List all Runners
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {number} [page] page number to query
+     * @param {number} [size] amount of result by page
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RunnerApi
+     */
+    public listRunners(organizationId: string, workspaceId: string, page?: number, size?: number, options?: AxiosRequestConfig) {
+        return RunnerApiFp(this.configuration).listRunners(organizationId, workspaceId, page, size, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Remove the specified access from the given Organization Runner
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} runnerId the Runner identifier
+     * @param {string} identityId the User identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RunnerApi
+     */
+    public removeRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, identityId: string, options?: AxiosRequestConfig) {
+        return RunnerApiFp(this.configuration).removeRunnerAccessControl(organizationId, workspaceId, runnerId, identityId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Set the Runner default security
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} runnerId the Runner identifier
+     * @param {RunnerRole} runnerRole This change the runner default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the runner.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RunnerApi
+     */
+    public setRunnerDefaultSecurity(organizationId: string, workspaceId: string, runnerId: string, runnerRole: RunnerRole, options?: AxiosRequestConfig) {
+        return RunnerApiFp(this.configuration).setRunnerDefaultSecurity(organizationId, workspaceId, runnerId, runnerRole, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Start a run with runner parameters
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} runnerId the Runner identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RunnerApi
+     */
+    public startRun(organizationId: string, workspaceId: string, runnerId: string, options?: AxiosRequestConfig) {
+        return RunnerApiFp(this.configuration).startRun(organizationId, workspaceId, runnerId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Stop the last run
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} runnerId the Runner identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RunnerApi
+     */
+    public stopRun(organizationId: string, workspaceId: string, runnerId: string, options?: AxiosRequestConfig) {
+        return RunnerApiFp(this.configuration).stopRun(organizationId, workspaceId, runnerId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Update a runner
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} runnerId the Runner identifier
+     * @param {Runner} runner the new Runner details. This endpoint can\&#39;t be used to update security
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RunnerApi
+     */
+    public updateRunner(organizationId: string, workspaceId: string, runnerId: string, runner: Runner, options?: AxiosRequestConfig) {
+        return RunnerApiFp(this.configuration).updateRunner(organizationId, workspaceId, runnerId, runner, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Update the specified access to User for a Runner
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} runnerId the Runner identifier
+     * @param {string} identityId the User identifier
+     * @param {RunnerRole} runnerRole The new Runner Access Control
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RunnerApi
+     */
+    public updateRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, identityId: string, runnerRole: RunnerRole, options?: AxiosRequestConfig) {
+        return RunnerApiFp(this.configuration).updateRunnerAccessControl(organizationId, workspaceId, runnerId, identityId, runnerRole, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
