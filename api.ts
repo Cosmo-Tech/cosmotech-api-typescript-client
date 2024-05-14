@@ -867,6 +867,19 @@ export interface OrganizationServices {
     'solutionsContainerRegistry'?: OrganizationService;
 }
 /**
+ * the result of a SQL Query
+ * @export
+ * @interface QueryResult
+ */
+export interface QueryResult {
+    /**
+     * the list of results
+     * @type {Array<{ [key: string]: any; }>}
+     * @memberof QueryResult
+     */
+    'result'?: Array<{ [key: string]: any; }>;
+}
+/**
  * define cpus and memory needs
  * @export
  * @interface ResourceSizeInfo
@@ -1136,6 +1149,44 @@ export interface RunContainerLogs {
      * @memberof RunContainerLogs
      */
     'logs'?: string;
+}
+/**
+ * Run Data to send
+ * @export
+ * @interface RunData
+ */
+export interface RunData {
+    /**
+     * Database name
+     * @type {string}
+     * @memberof RunData
+     */
+    'database_name'?: string;
+    /**
+     * Table name
+     * @type {string}
+     * @memberof RunData
+     */
+    'table_name'?: string;
+    /**
+     * 
+     * @type {Array<{ [key: string]: any; }>}
+     * @memberof RunData
+     */
+    'data'?: Array<{ [key: string]: any; }>;
+}
+/**
+ * a data result query in SQL
+ * @export
+ * @interface RunDataQuery
+ */
+export interface RunDataQuery {
+    /**
+     * the query in SQL
+     * @type {string}
+     * @memberof RunDataQuery
+     */
+    'query': string;
 }
 /**
  * the run logs returned by all containers
@@ -3016,25 +3067,6 @@ export interface ScenarioRunResourceRequested {
     'memory'?: number;
 }
 /**
- * a ScenarioRunProbeResult with all ScenarioRunResult
- * @export
- * @interface ScenarioRunResult
- */
-export interface ScenarioRunResult {
-    /**
-     * 
-     * @type {string}
-     * @memberof ScenarioRunResult
-     */
-    'id'?: string;
-    /**
-     * 
-     * @type {Array<{ [key: string]: string; }>}
-     * @memberof ScenarioRunResult
-     */
-    'results'?: Array<{ [key: string]: string; }>;
-}
-/**
  * the search options
  * @export
  * @interface ScenarioRunSearch
@@ -3386,6 +3418,25 @@ export const ScenarioValidationStatus = {
 export type ScenarioValidationStatus = typeof ScenarioValidationStatus[keyof typeof ScenarioValidationStatus];
 
 
+/**
+ * 
+ * @export
+ * @interface SendRunDataRequest
+ */
+export interface SendRunDataRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof SendRunDataRequest
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {Array<{ [key: string]: any; }>}
+     * @memberof SendRunDataRequest
+     */
+    'data'?: Array<{ [key: string]: any; }>;
+}
 /**
  * a version of a Solution
  * @export
@@ -8868,6 +8919,118 @@ export const RunApiAxiosParamCreator = function (configuration?: Configuration) 
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @summary query the run data
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} runId the Run identifier
+         * @param {RunDataQuery} runDataQuery the query to run
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        queryRunData: async (organizationId: string, workspaceId: string, runnerId: string, runId: string, runDataQuery: RunDataQuery, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('queryRunData', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('queryRunData', 'workspaceId', workspaceId)
+            // verify required parameter 'runnerId' is not null or undefined
+            assertParamExists('queryRunData', 'runnerId', runnerId)
+            // verify required parameter 'runId' is not null or undefined
+            assertParamExists('queryRunData', 'runId', runId)
+            // verify required parameter 'runDataQuery' is not null or undefined
+            assertParamExists('queryRunData', 'runDataQuery', runDataQuery)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/runs/{run_id}/data/query`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)))
+                .replace(`{${"run_id"}}`, encodeURIComponent(String(runId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(runDataQuery, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Send data associated to a run
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} runId the Run identifier
+         * @param {SendRunDataRequest} sendRunDataRequest Custom data to register
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        sendRunData: async (organizationId: string, workspaceId: string, runnerId: string, runId: string, sendRunDataRequest: SendRunDataRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('sendRunData', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('sendRunData', 'workspaceId', workspaceId)
+            // verify required parameter 'runnerId' is not null or undefined
+            assertParamExists('sendRunData', 'runnerId', runnerId)
+            // verify required parameter 'runId' is not null or undefined
+            assertParamExists('sendRunData', 'runId', runId)
+            // verify required parameter 'sendRunDataRequest' is not null or undefined
+            assertParamExists('sendRunData', 'sendRunDataRequest', sendRunDataRequest)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/runs/{run_id}/data/send`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)))
+                .replace(`{${"run_id"}}`, encodeURIComponent(String(runId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(sendRunDataRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -8959,6 +9122,40 @@ export const RunApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['RunApi.listRuns']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * 
+         * @summary query the run data
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} runId the Run identifier
+         * @param {RunDataQuery} runDataQuery the query to run
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async queryRunData(organizationId: string, workspaceId: string, runnerId: string, runId: string, runDataQuery: RunDataQuery, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<QueryResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.queryRunData(organizationId, workspaceId, runnerId, runId, runDataQuery, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RunApi.queryRunData']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Send data associated to a run
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} runId the Run identifier
+         * @param {SendRunDataRequest} sendRunDataRequest Custom data to register
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async sendRunData(organizationId: string, workspaceId: string, runnerId: string, runId: string, sendRunDataRequest: SendRunDataRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RunData>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.sendRunData(organizationId, workspaceId, runnerId, runId, sendRunDataRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RunApi.sendRunData']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -9034,6 +9231,34 @@ export const RunApiFactory = function (configuration?: Configuration, basePath?:
          */
         listRuns(organizationId: string, workspaceId: string, runnerId: string, page?: number, size?: number, options?: any): AxiosPromise<Array<Run>> {
             return localVarFp.listRuns(organizationId, workspaceId, runnerId, page, size, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary query the run data
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} runId the Run identifier
+         * @param {RunDataQuery} runDataQuery the query to run
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        queryRunData(organizationId: string, workspaceId: string, runnerId: string, runId: string, runDataQuery: RunDataQuery, options?: any): AxiosPromise<QueryResult> {
+            return localVarFp.queryRunData(organizationId, workspaceId, runnerId, runId, runDataQuery, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Send data associated to a run
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} runId the Run identifier
+         * @param {SendRunDataRequest} sendRunDataRequest Custom data to register
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        sendRunData(organizationId: string, workspaceId: string, runnerId: string, runId: string, sendRunDataRequest: SendRunDataRequest, options?: any): AxiosPromise<RunData> {
+            return localVarFp.sendRunData(organizationId, workspaceId, runnerId, runId, sendRunDataRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -9119,6 +9344,38 @@ export class RunApi extends BaseAPI {
      */
     public listRuns(organizationId: string, workspaceId: string, runnerId: string, page?: number, size?: number, options?: RawAxiosRequestConfig) {
         return RunApiFp(this.configuration).listRuns(organizationId, workspaceId, runnerId, page, size, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary query the run data
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} runnerId the Runner identifier
+     * @param {string} runId the Run identifier
+     * @param {RunDataQuery} runDataQuery the query to run
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RunApi
+     */
+    public queryRunData(organizationId: string, workspaceId: string, runnerId: string, runId: string, runDataQuery: RunDataQuery, options?: RawAxiosRequestConfig) {
+        return RunApiFp(this.configuration).queryRunData(organizationId, workspaceId, runnerId, runId, runDataQuery, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Send data associated to a run
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} runnerId the Runner identifier
+     * @param {string} runId the Run identifier
+     * @param {SendRunDataRequest} sendRunDataRequest Custom data to register
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RunApi
+     */
+    public sendRunData(organizationId: string, workspaceId: string, runnerId: string, runId: string, sendRunDataRequest: SendRunDataRequest, options?: RawAxiosRequestConfig) {
+        return RunApiFp(this.configuration).sendRunData(organizationId, workspaceId, runnerId, runId, sendRunDataRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -10557,6 +10814,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {string} scenarioId the Scenario identifier
          * @param {Array<ScenarioRunTemplateParameterValue>} scenarioRunTemplateParameterValue the Parameter Value to add. Any Parameter Value with the same ID is overwritten
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         addOrReplaceScenarioParameterValues: async (organizationId: string, workspaceId: string, scenarioId: string, scenarioRunTemplateParameterValue: Array<ScenarioRunTemplateParameterValue>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -10609,6 +10867,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {string} scenarioId the Scenario identifier
          * @param {ScenarioAccessControl} scenarioAccessControl the new Scenario security access to add.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         addScenarioAccessControl: async (organizationId: string, workspaceId: string, scenarioId: string, scenarioAccessControl: ScenarioAccessControl, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -10661,6 +10920,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {string} scenarioId the Scenario identifier
          * @param {string} comparedScenarioId the Scenario identifier to compare to
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         compareScenarios: async (organizationId: string, workspaceId: string, scenarioId: string, comparedScenarioId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -10710,6 +10970,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {string} workspaceId the Workspace identifier
          * @param {Scenario} scenario the Scenario to create
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         createScenario: async (organizationId: string, workspaceId: string, scenario: Scenario, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -10757,6 +11018,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         deleteAllScenarios: async (organizationId: string, workspaceId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -10800,6 +11062,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         deleteScenario: async (organizationId: string, workspaceId: string, scenarioId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -10846,6 +11109,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         downloadScenarioData: async (organizationId: string, workspaceId: string, scenarioId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -10893,6 +11157,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {number} [page] page number to query
          * @param {number} [size] amount of result by page
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         findAllScenarios: async (organizationId: string, workspaceId: string, page?: number, size?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -10946,6 +11211,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {number} [page] page number to query
          * @param {number} [size] amount of result by page
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         findAllScenariosByValidationStatus: async (organizationId: string, workspaceId: string, validationStatus: ScenarioValidationStatus, page?: number, size?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -11000,6 +11266,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         findScenarioById: async (organizationId: string, workspaceId: string, scenarioId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -11047,6 +11314,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {string} scenarioId the Scenario identifier
          * @param {string} identityId the User identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getScenarioAccessControl: async (organizationId: string, workspaceId: string, scenarioId: string, identityId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -11097,6 +11365,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {string} scenarioId the Scenario identifier
          * @param {string} downloadId the Scenario Download identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getScenarioDataDownloadJobInfo: async (organizationId: string, workspaceId: string, scenarioId: string, downloadId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -11147,6 +11416,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {string} scenarioId the Scenario identifier
          * @param {string} role the Role
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getScenarioPermissions: async (organizationId: string, workspaceId: string, scenarioId: string, role: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -11196,6 +11466,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getScenarioSecurity: async (organizationId: string, workspaceId: string, scenarioId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -11242,6 +11513,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getScenarioSecurityUsers: async (organizationId: string, workspaceId: string, scenarioId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -11288,6 +11560,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getScenarioValidationStatusById: async (organizationId: string, workspaceId: string, scenarioId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -11333,6 +11606,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getScenariosTree: async (organizationId: string, workspaceId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -11376,6 +11650,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         removeAllScenarioParameterValues: async (organizationId: string, workspaceId: string, scenarioId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -11423,6 +11698,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {string} scenarioId the Scenario identifier
          * @param {string} identityId the User identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         removeScenarioAccessControl: async (organizationId: string, workspaceId: string, scenarioId: string, identityId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -11473,6 +11749,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {string} scenarioId the Scenario identifier
          * @param {ScenarioRole} scenarioRole This change the scenario default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the scenario.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         setScenarioDefaultSecurity: async (organizationId: string, workspaceId: string, scenarioId: string, scenarioRole: ScenarioRole, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -11525,6 +11802,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {string} scenarioId the Scenario identifier
          * @param {Scenario} scenario the new Scenario details. This endpoint can\&#39;t be used to update security
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         updateScenario: async (organizationId: string, workspaceId: string, scenarioId: string, scenario: Scenario, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -11578,6 +11856,7 @@ export const ScenarioApiAxiosParamCreator = function (configuration?: Configurat
          * @param {string} identityId the User identifier
          * @param {ScenarioRole} scenarioRole The new Scenario Access Control
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         updateScenarioAccessControl: async (organizationId: string, workspaceId: string, scenarioId: string, identityId: string, scenarioRole: ScenarioRole, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -11643,6 +11922,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {string} scenarioId the Scenario identifier
          * @param {Array<ScenarioRunTemplateParameterValue>} scenarioRunTemplateParameterValue the Parameter Value to add. Any Parameter Value with the same ID is overwritten
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async addOrReplaceScenarioParameterValues(organizationId: string, workspaceId: string, scenarioId: string, scenarioRunTemplateParameterValue: Array<ScenarioRunTemplateParameterValue>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ScenarioRunTemplateParameterValue>>> {
@@ -11659,6 +11939,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {string} scenarioId the Scenario identifier
          * @param {ScenarioAccessControl} scenarioAccessControl the new Scenario security access to add.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async addScenarioAccessControl(organizationId: string, workspaceId: string, scenarioId: string, scenarioAccessControl: ScenarioAccessControl, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioAccessControl>> {
@@ -11675,6 +11956,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {string} scenarioId the Scenario identifier
          * @param {string} comparedScenarioId the Scenario identifier to compare to
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async compareScenarios(organizationId: string, workspaceId: string, scenarioId: string, comparedScenarioId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioComparisonResult>> {
@@ -11690,6 +11972,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {string} workspaceId the Workspace identifier
          * @param {Scenario} scenario the Scenario to create
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async createScenario(organizationId: string, workspaceId: string, scenario: Scenario, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Scenario>> {
@@ -11704,6 +11987,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async deleteAllScenarios(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
@@ -11719,6 +12003,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async deleteScenario(organizationId: string, workspaceId: string, scenarioId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
@@ -11734,6 +12019,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async downloadScenarioData(organizationId: string, workspaceId: string, scenarioId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioDataDownloadJob>> {
@@ -11750,6 +12036,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {number} [page] page number to query
          * @param {number} [size] amount of result by page
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async findAllScenarios(organizationId: string, workspaceId: string, page?: number, size?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Scenario>>> {
@@ -11767,6 +12054,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {number} [page] page number to query
          * @param {number} [size] amount of result by page
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async findAllScenariosByValidationStatus(organizationId: string, workspaceId: string, validationStatus: ScenarioValidationStatus, page?: number, size?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Scenario>>> {
@@ -11782,6 +12070,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async findScenarioById(organizationId: string, workspaceId: string, scenarioId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Scenario>> {
@@ -11798,6 +12087,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {string} scenarioId the Scenario identifier
          * @param {string} identityId the User identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async getScenarioAccessControl(organizationId: string, workspaceId: string, scenarioId: string, identityId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioAccessControl>> {
@@ -11814,6 +12104,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {string} scenarioId the Scenario identifier
          * @param {string} downloadId the Scenario Download identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async getScenarioDataDownloadJobInfo(organizationId: string, workspaceId: string, scenarioId: string, downloadId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioDataDownloadInfo>> {
@@ -11830,6 +12121,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {string} scenarioId the Scenario identifier
          * @param {string} role the Role
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async getScenarioPermissions(organizationId: string, workspaceId: string, scenarioId: string, role: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
@@ -11845,6 +12137,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async getScenarioSecurity(organizationId: string, workspaceId: string, scenarioId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioSecurity>> {
@@ -11860,6 +12153,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async getScenarioSecurityUsers(organizationId: string, workspaceId: string, scenarioId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
@@ -11875,6 +12169,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async getScenarioValidationStatusById(organizationId: string, workspaceId: string, scenarioId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioValidationStatus>> {
@@ -11889,6 +12184,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async getScenariosTree(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Scenario>>> {
@@ -11904,6 +12200,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async removeAllScenarioParameterValues(organizationId: string, workspaceId: string, scenarioId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
@@ -11920,6 +12217,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {string} scenarioId the Scenario identifier
          * @param {string} identityId the User identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async removeScenarioAccessControl(organizationId: string, workspaceId: string, scenarioId: string, identityId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
@@ -11936,6 +12234,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {string} scenarioId the Scenario identifier
          * @param {ScenarioRole} scenarioRole This change the scenario default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the scenario.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async setScenarioDefaultSecurity(organizationId: string, workspaceId: string, scenarioId: string, scenarioRole: ScenarioRole, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioSecurity>> {
@@ -11952,6 +12251,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {string} scenarioId the Scenario identifier
          * @param {Scenario} scenario the new Scenario details. This endpoint can\&#39;t be used to update security
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async updateScenario(organizationId: string, workspaceId: string, scenarioId: string, scenario: Scenario, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Scenario>> {
@@ -11969,6 +12269,7 @@ export const ScenarioApiFp = function(configuration?: Configuration) {
          * @param {string} identityId the User identifier
          * @param {ScenarioRole} scenarioRole The new Scenario Access Control
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async updateScenarioAccessControl(organizationId: string, workspaceId: string, scenarioId: string, identityId: string, scenarioRole: ScenarioRole, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioAccessControl>> {
@@ -11995,6 +12296,7 @@ export const ScenarioApiFactory = function (configuration?: Configuration, baseP
          * @param {string} scenarioId the Scenario identifier
          * @param {Array<ScenarioRunTemplateParameterValue>} scenarioRunTemplateParameterValue the Parameter Value to add. Any Parameter Value with the same ID is overwritten
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         addOrReplaceScenarioParameterValues(organizationId: string, workspaceId: string, scenarioId: string, scenarioRunTemplateParameterValue: Array<ScenarioRunTemplateParameterValue>, options?: any): AxiosPromise<Array<ScenarioRunTemplateParameterValue>> {
@@ -12008,6 +12310,7 @@ export const ScenarioApiFactory = function (configuration?: Configuration, baseP
          * @param {string} scenarioId the Scenario identifier
          * @param {ScenarioAccessControl} scenarioAccessControl the new Scenario security access to add.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         addScenarioAccessControl(organizationId: string, workspaceId: string, scenarioId: string, scenarioAccessControl: ScenarioAccessControl, options?: any): AxiosPromise<ScenarioAccessControl> {
@@ -12021,6 +12324,7 @@ export const ScenarioApiFactory = function (configuration?: Configuration, baseP
          * @param {string} scenarioId the Scenario identifier
          * @param {string} comparedScenarioId the Scenario identifier to compare to
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         compareScenarios(organizationId: string, workspaceId: string, scenarioId: string, comparedScenarioId: string, options?: any): AxiosPromise<ScenarioComparisonResult> {
@@ -12033,6 +12337,7 @@ export const ScenarioApiFactory = function (configuration?: Configuration, baseP
          * @param {string} workspaceId the Workspace identifier
          * @param {Scenario} scenario the Scenario to create
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         createScenario(organizationId: string, workspaceId: string, scenario: Scenario, options?: any): AxiosPromise<Scenario> {
@@ -12044,6 +12349,7 @@ export const ScenarioApiFactory = function (configuration?: Configuration, baseP
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         deleteAllScenarios(organizationId: string, workspaceId: string, options?: any): AxiosPromise<void> {
@@ -12056,6 +12362,7 @@ export const ScenarioApiFactory = function (configuration?: Configuration, baseP
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         deleteScenario(organizationId: string, workspaceId: string, scenarioId: string, options?: any): AxiosPromise<void> {
@@ -12068,6 +12375,7 @@ export const ScenarioApiFactory = function (configuration?: Configuration, baseP
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         downloadScenarioData(organizationId: string, workspaceId: string, scenarioId: string, options?: any): AxiosPromise<ScenarioDataDownloadJob> {
@@ -12081,6 +12389,7 @@ export const ScenarioApiFactory = function (configuration?: Configuration, baseP
          * @param {number} [page] page number to query
          * @param {number} [size] amount of result by page
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         findAllScenarios(organizationId: string, workspaceId: string, page?: number, size?: number, options?: any): AxiosPromise<Array<Scenario>> {
@@ -12095,6 +12404,7 @@ export const ScenarioApiFactory = function (configuration?: Configuration, baseP
          * @param {number} [page] page number to query
          * @param {number} [size] amount of result by page
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         findAllScenariosByValidationStatus(organizationId: string, workspaceId: string, validationStatus: ScenarioValidationStatus, page?: number, size?: number, options?: any): AxiosPromise<Array<Scenario>> {
@@ -12107,6 +12417,7 @@ export const ScenarioApiFactory = function (configuration?: Configuration, baseP
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         findScenarioById(organizationId: string, workspaceId: string, scenarioId: string, options?: any): AxiosPromise<Scenario> {
@@ -12120,6 +12431,7 @@ export const ScenarioApiFactory = function (configuration?: Configuration, baseP
          * @param {string} scenarioId the Scenario identifier
          * @param {string} identityId the User identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getScenarioAccessControl(organizationId: string, workspaceId: string, scenarioId: string, identityId: string, options?: any): AxiosPromise<ScenarioAccessControl> {
@@ -12133,6 +12445,7 @@ export const ScenarioApiFactory = function (configuration?: Configuration, baseP
          * @param {string} scenarioId the Scenario identifier
          * @param {string} downloadId the Scenario Download identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getScenarioDataDownloadJobInfo(organizationId: string, workspaceId: string, scenarioId: string, downloadId: string, options?: any): AxiosPromise<ScenarioDataDownloadInfo> {
@@ -12146,6 +12459,7 @@ export const ScenarioApiFactory = function (configuration?: Configuration, baseP
          * @param {string} scenarioId the Scenario identifier
          * @param {string} role the Role
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getScenarioPermissions(organizationId: string, workspaceId: string, scenarioId: string, role: string, options?: any): AxiosPromise<Array<string>> {
@@ -12158,6 +12472,7 @@ export const ScenarioApiFactory = function (configuration?: Configuration, baseP
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getScenarioSecurity(organizationId: string, workspaceId: string, scenarioId: string, options?: any): AxiosPromise<ScenarioSecurity> {
@@ -12170,6 +12485,7 @@ export const ScenarioApiFactory = function (configuration?: Configuration, baseP
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getScenarioSecurityUsers(organizationId: string, workspaceId: string, scenarioId: string, options?: any): AxiosPromise<Array<string>> {
@@ -12182,6 +12498,7 @@ export const ScenarioApiFactory = function (configuration?: Configuration, baseP
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getScenarioValidationStatusById(organizationId: string, workspaceId: string, scenarioId: string, options?: any): AxiosPromise<ScenarioValidationStatus> {
@@ -12193,6 +12510,7 @@ export const ScenarioApiFactory = function (configuration?: Configuration, baseP
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getScenariosTree(organizationId: string, workspaceId: string, options?: any): AxiosPromise<Array<Scenario>> {
@@ -12205,6 +12523,7 @@ export const ScenarioApiFactory = function (configuration?: Configuration, baseP
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         removeAllScenarioParameterValues(organizationId: string, workspaceId: string, scenarioId: string, options?: any): AxiosPromise<void> {
@@ -12218,6 +12537,7 @@ export const ScenarioApiFactory = function (configuration?: Configuration, baseP
          * @param {string} scenarioId the Scenario identifier
          * @param {string} identityId the User identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         removeScenarioAccessControl(organizationId: string, workspaceId: string, scenarioId: string, identityId: string, options?: any): AxiosPromise<void> {
@@ -12231,6 +12551,7 @@ export const ScenarioApiFactory = function (configuration?: Configuration, baseP
          * @param {string} scenarioId the Scenario identifier
          * @param {ScenarioRole} scenarioRole This change the scenario default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the scenario.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         setScenarioDefaultSecurity(organizationId: string, workspaceId: string, scenarioId: string, scenarioRole: ScenarioRole, options?: any): AxiosPromise<ScenarioSecurity> {
@@ -12244,6 +12565,7 @@ export const ScenarioApiFactory = function (configuration?: Configuration, baseP
          * @param {string} scenarioId the Scenario identifier
          * @param {Scenario} scenario the new Scenario details. This endpoint can\&#39;t be used to update security
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         updateScenario(organizationId: string, workspaceId: string, scenarioId: string, scenario: Scenario, options?: any): AxiosPromise<Scenario> {
@@ -12258,6 +12580,7 @@ export const ScenarioApiFactory = function (configuration?: Configuration, baseP
          * @param {string} identityId the User identifier
          * @param {ScenarioRole} scenarioRole The new Scenario Access Control
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         updateScenarioAccessControl(organizationId: string, workspaceId: string, scenarioId: string, identityId: string, scenarioRole: ScenarioRole, options?: any): AxiosPromise<ScenarioAccessControl> {
@@ -12281,6 +12604,7 @@ export class ScenarioApi extends BaseAPI {
      * @param {string} scenarioId the Scenario identifier
      * @param {Array<ScenarioRunTemplateParameterValue>} scenarioRunTemplateParameterValue the Parameter Value to add. Any Parameter Value with the same ID is overwritten
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
@@ -12296,6 +12620,7 @@ export class ScenarioApi extends BaseAPI {
      * @param {string} scenarioId the Scenario identifier
      * @param {ScenarioAccessControl} scenarioAccessControl the new Scenario security access to add.
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
@@ -12311,6 +12636,7 @@ export class ScenarioApi extends BaseAPI {
      * @param {string} scenarioId the Scenario identifier
      * @param {string} comparedScenarioId the Scenario identifier to compare to
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
@@ -12325,6 +12651,7 @@ export class ScenarioApi extends BaseAPI {
      * @param {string} workspaceId the Workspace identifier
      * @param {Scenario} scenario the Scenario to create
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
@@ -12338,6 +12665,7 @@ export class ScenarioApi extends BaseAPI {
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
@@ -12352,6 +12680,7 @@ export class ScenarioApi extends BaseAPI {
      * @param {string} workspaceId the Workspace identifier
      * @param {string} scenarioId the Scenario identifier
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
@@ -12366,6 +12695,7 @@ export class ScenarioApi extends BaseAPI {
      * @param {string} workspaceId the Workspace identifier
      * @param {string} scenarioId the Scenario identifier
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
@@ -12381,6 +12711,7 @@ export class ScenarioApi extends BaseAPI {
      * @param {number} [page] page number to query
      * @param {number} [size] amount of result by page
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
@@ -12397,6 +12728,7 @@ export class ScenarioApi extends BaseAPI {
      * @param {number} [page] page number to query
      * @param {number} [size] amount of result by page
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
@@ -12411,6 +12743,7 @@ export class ScenarioApi extends BaseAPI {
      * @param {string} workspaceId the Workspace identifier
      * @param {string} scenarioId the Scenario identifier
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
@@ -12426,6 +12759,7 @@ export class ScenarioApi extends BaseAPI {
      * @param {string} scenarioId the Scenario identifier
      * @param {string} identityId the User identifier
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
@@ -12441,6 +12775,7 @@ export class ScenarioApi extends BaseAPI {
      * @param {string} scenarioId the Scenario identifier
      * @param {string} downloadId the Scenario Download identifier
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
@@ -12456,6 +12791,7 @@ export class ScenarioApi extends BaseAPI {
      * @param {string} scenarioId the Scenario identifier
      * @param {string} role the Role
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
@@ -12470,6 +12806,7 @@ export class ScenarioApi extends BaseAPI {
      * @param {string} workspaceId the Workspace identifier
      * @param {string} scenarioId the Scenario identifier
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
@@ -12484,6 +12821,7 @@ export class ScenarioApi extends BaseAPI {
      * @param {string} workspaceId the Workspace identifier
      * @param {string} scenarioId the Scenario identifier
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
@@ -12498,6 +12836,7 @@ export class ScenarioApi extends BaseAPI {
      * @param {string} workspaceId the Workspace identifier
      * @param {string} scenarioId the Scenario identifier
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
@@ -12511,6 +12850,7 @@ export class ScenarioApi extends BaseAPI {
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
@@ -12525,6 +12865,7 @@ export class ScenarioApi extends BaseAPI {
      * @param {string} workspaceId the Workspace identifier
      * @param {string} scenarioId the Scenario identifier
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
@@ -12540,6 +12881,7 @@ export class ScenarioApi extends BaseAPI {
      * @param {string} scenarioId the Scenario identifier
      * @param {string} identityId the User identifier
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
@@ -12555,6 +12897,7 @@ export class ScenarioApi extends BaseAPI {
      * @param {string} scenarioId the Scenario identifier
      * @param {ScenarioRole} scenarioRole This change the scenario default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the scenario.
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
@@ -12570,6 +12913,7 @@ export class ScenarioApi extends BaseAPI {
      * @param {string} scenarioId the Scenario identifier
      * @param {Scenario} scenario the new Scenario details. This endpoint can\&#39;t be used to update security
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
@@ -12586,6 +12930,7 @@ export class ScenarioApi extends BaseAPI {
      * @param {string} identityId the User identifier
      * @param {ScenarioRole} scenarioRole The new Scenario Access Control
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenarioApi
      */
@@ -12608,6 +12953,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
          * @param {string} organizationId the Organization identifier
          * @param {boolean} [deleteUnknown] condition to delete runs with an Unknown status
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         deleteHistoricalDataOrganization: async (organizationId: string, deleteUnknown?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -12653,6 +12999,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
          * @param {string} scenarioId the Scenario identifier
          * @param {boolean} [deleteUnknown] condition to delete runs with an Unknown status
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         deleteHistoricalDataScenario: async (organizationId: string, workspaceId: string, scenarioId: string, deleteUnknown?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -12703,6 +13050,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
          * @param {string} workspaceId the Workspace identifier
          * @param {boolean} [deleteUnknown] condition to delete runs with an Unknown status
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         deleteHistoricalDataWorkspace: async (organizationId: string, workspaceId: string, deleteUnknown?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -12749,6 +13097,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
          * @param {string} organizationId the Organization identifier
          * @param {string} scenariorunId the ScenarioRun identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         deleteScenarioRun: async (organizationId: string, scenariorunId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -12791,6 +13140,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
          * @param {string} organizationId the Organization identifier
          * @param {string} scenariorunId the ScenarioRun identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         findScenarioRunById: async (organizationId: string, scenariorunId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -12833,6 +13183,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
          * @param {string} organizationId the Organization identifier
          * @param {string} scenariorunId the ScenarioRun identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getScenarioRunCumulatedLogs: async (organizationId: string, scenariorunId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -12875,6 +13226,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
          * @param {string} organizationId the Organization identifier
          * @param {string} scenariorunId the ScenarioRun identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getScenarioRunLogs: async (organizationId: string, scenariorunId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -12917,6 +13269,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
          * @param {string} organizationId the Organization identifier
          * @param {string} scenariorunId the ScenarioRun identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getScenarioRunStatus: async (organizationId: string, scenariorunId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -12962,6 +13315,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
          * @param {number} [page] page number to query
          * @param {number} [size] amount of result by page
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getScenarioRuns: async (organizationId: string, workspaceId: string, scenarioId: string, page?: number, size?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -13017,6 +13371,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
          * @param {number} [page] page number to query
          * @param {number} [size] amount of result by page
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getWorkspaceScenarioRuns: async (organizationId: string, workspaceId: string, page?: number, size?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -13068,6 +13423,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         runScenario: async (organizationId: string, workspaceId: string, scenarioId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -13115,6 +13471,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
          * @param {number} [page] page number to query
          * @param {number} [size] amount of result by page
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         searchScenarioRuns: async (organizationId: string, scenarioRunSearch: ScenarioRunSearch, page?: number, size?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -13167,6 +13524,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
          * @param {string} organizationId the Organization identifier
          * @param {ScenarioRunStartContainers} scenarioRunStartContainers the raw containers definition
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         startScenarioRunContainers: async (organizationId: string, scenarioRunStartContainers: ScenarioRunStartContainers, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -13211,6 +13569,7 @@ export const ScenariorunApiAxiosParamCreator = function (configuration?: Configu
          * @param {string} organizationId the Organization identifier
          * @param {string} scenariorunId the scenariorun identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         stopScenarioRun: async (organizationId: string, scenariorunId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -13263,6 +13622,7 @@ export const ScenariorunApiFp = function(configuration?: Configuration) {
          * @param {string} organizationId the Organization identifier
          * @param {boolean} [deleteUnknown] condition to delete runs with an Unknown status
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async deleteHistoricalDataOrganization(organizationId: string, deleteUnknown?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
@@ -13279,6 +13639,7 @@ export const ScenariorunApiFp = function(configuration?: Configuration) {
          * @param {string} scenarioId the Scenario identifier
          * @param {boolean} [deleteUnknown] condition to delete runs with an Unknown status
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async deleteHistoricalDataScenario(organizationId: string, workspaceId: string, scenarioId: string, deleteUnknown?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
@@ -13294,6 +13655,7 @@ export const ScenariorunApiFp = function(configuration?: Configuration) {
          * @param {string} workspaceId the Workspace identifier
          * @param {boolean} [deleteUnknown] condition to delete runs with an Unknown status
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async deleteHistoricalDataWorkspace(organizationId: string, workspaceId: string, deleteUnknown?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
@@ -13308,6 +13670,7 @@ export const ScenariorunApiFp = function(configuration?: Configuration) {
          * @param {string} organizationId the Organization identifier
          * @param {string} scenariorunId the ScenarioRun identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async deleteScenarioRun(organizationId: string, scenariorunId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
@@ -13322,6 +13685,7 @@ export const ScenariorunApiFp = function(configuration?: Configuration) {
          * @param {string} organizationId the Organization identifier
          * @param {string} scenariorunId the ScenarioRun identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async findScenarioRunById(organizationId: string, scenariorunId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioRun>> {
@@ -13336,6 +13700,7 @@ export const ScenariorunApiFp = function(configuration?: Configuration) {
          * @param {string} organizationId the Organization identifier
          * @param {string} scenariorunId the ScenarioRun identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async getScenarioRunCumulatedLogs(organizationId: string, scenariorunId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
@@ -13350,6 +13715,7 @@ export const ScenariorunApiFp = function(configuration?: Configuration) {
          * @param {string} organizationId the Organization identifier
          * @param {string} scenariorunId the ScenarioRun identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async getScenarioRunLogs(organizationId: string, scenariorunId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioRunLogs>> {
@@ -13364,6 +13730,7 @@ export const ScenariorunApiFp = function(configuration?: Configuration) {
          * @param {string} organizationId the Organization identifier
          * @param {string} scenariorunId the ScenarioRun identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async getScenarioRunStatus(organizationId: string, scenariorunId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioRunStatus>> {
@@ -13381,6 +13748,7 @@ export const ScenariorunApiFp = function(configuration?: Configuration) {
          * @param {number} [page] page number to query
          * @param {number} [size] amount of result by page
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async getScenarioRuns(organizationId: string, workspaceId: string, scenarioId: string, page?: number, size?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ScenarioRun>>> {
@@ -13397,6 +13765,7 @@ export const ScenariorunApiFp = function(configuration?: Configuration) {
          * @param {number} [page] page number to query
          * @param {number} [size] amount of result by page
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async getWorkspaceScenarioRuns(organizationId: string, workspaceId: string, page?: number, size?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ScenarioRun>>> {
@@ -13412,6 +13781,7 @@ export const ScenariorunApiFp = function(configuration?: Configuration) {
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async runScenario(organizationId: string, workspaceId: string, scenarioId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioRun>> {
@@ -13428,6 +13798,7 @@ export const ScenariorunApiFp = function(configuration?: Configuration) {
          * @param {number} [page] page number to query
          * @param {number} [size] amount of result by page
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async searchScenarioRuns(organizationId: string, scenarioRunSearch: ScenarioRunSearch, page?: number, size?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ScenarioRun>>> {
@@ -13442,6 +13813,7 @@ export const ScenariorunApiFp = function(configuration?: Configuration) {
          * @param {string} organizationId the Organization identifier
          * @param {ScenarioRunStartContainers} scenarioRunStartContainers the raw containers definition
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async startScenarioRunContainers(organizationId: string, scenarioRunStartContainers: ScenarioRunStartContainers, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioRun>> {
@@ -13456,6 +13828,7 @@ export const ScenariorunApiFp = function(configuration?: Configuration) {
          * @param {string} organizationId the Organization identifier
          * @param {string} scenariorunId the scenariorun identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async stopScenarioRun(organizationId: string, scenariorunId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioRunStatus>> {
@@ -13480,6 +13853,7 @@ export const ScenariorunApiFactory = function (configuration?: Configuration, ba
          * @param {string} organizationId the Organization identifier
          * @param {boolean} [deleteUnknown] condition to delete runs with an Unknown status
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         deleteHistoricalDataOrganization(organizationId: string, deleteUnknown?: boolean, options?: any): AxiosPromise<void> {
@@ -13493,6 +13867,7 @@ export const ScenariorunApiFactory = function (configuration?: Configuration, ba
          * @param {string} scenarioId the Scenario identifier
          * @param {boolean} [deleteUnknown] condition to delete runs with an Unknown status
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         deleteHistoricalDataScenario(organizationId: string, workspaceId: string, scenarioId: string, deleteUnknown?: boolean, options?: any): AxiosPromise<void> {
@@ -13505,6 +13880,7 @@ export const ScenariorunApiFactory = function (configuration?: Configuration, ba
          * @param {string} workspaceId the Workspace identifier
          * @param {boolean} [deleteUnknown] condition to delete runs with an Unknown status
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         deleteHistoricalDataWorkspace(organizationId: string, workspaceId: string, deleteUnknown?: boolean, options?: any): AxiosPromise<void> {
@@ -13516,6 +13892,7 @@ export const ScenariorunApiFactory = function (configuration?: Configuration, ba
          * @param {string} organizationId the Organization identifier
          * @param {string} scenariorunId the ScenarioRun identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         deleteScenarioRun(organizationId: string, scenariorunId: string, options?: any): AxiosPromise<void> {
@@ -13527,6 +13904,7 @@ export const ScenariorunApiFactory = function (configuration?: Configuration, ba
          * @param {string} organizationId the Organization identifier
          * @param {string} scenariorunId the ScenarioRun identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         findScenarioRunById(organizationId: string, scenariorunId: string, options?: any): AxiosPromise<ScenarioRun> {
@@ -13538,6 +13916,7 @@ export const ScenariorunApiFactory = function (configuration?: Configuration, ba
          * @param {string} organizationId the Organization identifier
          * @param {string} scenariorunId the ScenarioRun identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getScenarioRunCumulatedLogs(organizationId: string, scenariorunId: string, options?: any): AxiosPromise<string> {
@@ -13549,6 +13928,7 @@ export const ScenariorunApiFactory = function (configuration?: Configuration, ba
          * @param {string} organizationId the Organization identifier
          * @param {string} scenariorunId the ScenarioRun identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getScenarioRunLogs(organizationId: string, scenariorunId: string, options?: any): AxiosPromise<ScenarioRunLogs> {
@@ -13560,6 +13940,7 @@ export const ScenariorunApiFactory = function (configuration?: Configuration, ba
          * @param {string} organizationId the Organization identifier
          * @param {string} scenariorunId the ScenarioRun identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getScenarioRunStatus(organizationId: string, scenariorunId: string, options?: any): AxiosPromise<ScenarioRunStatus> {
@@ -13574,6 +13955,7 @@ export const ScenariorunApiFactory = function (configuration?: Configuration, ba
          * @param {number} [page] page number to query
          * @param {number} [size] amount of result by page
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getScenarioRuns(organizationId: string, workspaceId: string, scenarioId: string, page?: number, size?: number, options?: any): AxiosPromise<Array<ScenarioRun>> {
@@ -13587,6 +13969,7 @@ export const ScenariorunApiFactory = function (configuration?: Configuration, ba
          * @param {number} [page] page number to query
          * @param {number} [size] amount of result by page
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getWorkspaceScenarioRuns(organizationId: string, workspaceId: string, page?: number, size?: number, options?: any): AxiosPromise<Array<ScenarioRun>> {
@@ -13599,6 +13982,7 @@ export const ScenariorunApiFactory = function (configuration?: Configuration, ba
          * @param {string} workspaceId the Workspace identifier
          * @param {string} scenarioId the Scenario identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         runScenario(organizationId: string, workspaceId: string, scenarioId: string, options?: any): AxiosPromise<ScenarioRun> {
@@ -13612,6 +13996,7 @@ export const ScenariorunApiFactory = function (configuration?: Configuration, ba
          * @param {number} [page] page number to query
          * @param {number} [size] amount of result by page
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         searchScenarioRuns(organizationId: string, scenarioRunSearch: ScenarioRunSearch, page?: number, size?: number, options?: any): AxiosPromise<Array<ScenarioRun>> {
@@ -13623,6 +14008,7 @@ export const ScenariorunApiFactory = function (configuration?: Configuration, ba
          * @param {string} organizationId the Organization identifier
          * @param {ScenarioRunStartContainers} scenarioRunStartContainers the raw containers definition
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         startScenarioRunContainers(organizationId: string, scenarioRunStartContainers: ScenarioRunStartContainers, options?: any): AxiosPromise<ScenarioRun> {
@@ -13634,6 +14020,7 @@ export const ScenariorunApiFactory = function (configuration?: Configuration, ba
          * @param {string} organizationId the Organization identifier
          * @param {string} scenariorunId the scenariorun identifier
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         stopScenarioRun(organizationId: string, scenariorunId: string, options?: any): AxiosPromise<ScenarioRunStatus> {
@@ -13655,6 +14042,7 @@ export class ScenariorunApi extends BaseAPI {
      * @param {string} organizationId the Organization identifier
      * @param {boolean} [deleteUnknown] condition to delete runs with an Unknown status
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenariorunApi
      */
@@ -13670,6 +14058,7 @@ export class ScenariorunApi extends BaseAPI {
      * @param {string} scenarioId the Scenario identifier
      * @param {boolean} [deleteUnknown] condition to delete runs with an Unknown status
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenariorunApi
      */
@@ -13684,6 +14073,7 @@ export class ScenariorunApi extends BaseAPI {
      * @param {string} workspaceId the Workspace identifier
      * @param {boolean} [deleteUnknown] condition to delete runs with an Unknown status
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenariorunApi
      */
@@ -13697,6 +14087,7 @@ export class ScenariorunApi extends BaseAPI {
      * @param {string} organizationId the Organization identifier
      * @param {string} scenariorunId the ScenarioRun identifier
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenariorunApi
      */
@@ -13710,6 +14101,7 @@ export class ScenariorunApi extends BaseAPI {
      * @param {string} organizationId the Organization identifier
      * @param {string} scenariorunId the ScenarioRun identifier
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenariorunApi
      */
@@ -13723,6 +14115,7 @@ export class ScenariorunApi extends BaseAPI {
      * @param {string} organizationId the Organization identifier
      * @param {string} scenariorunId the ScenarioRun identifier
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenariorunApi
      */
@@ -13736,6 +14129,7 @@ export class ScenariorunApi extends BaseAPI {
      * @param {string} organizationId the Organization identifier
      * @param {string} scenariorunId the ScenarioRun identifier
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenariorunApi
      */
@@ -13749,6 +14143,7 @@ export class ScenariorunApi extends BaseAPI {
      * @param {string} organizationId the Organization identifier
      * @param {string} scenariorunId the ScenarioRun identifier
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenariorunApi
      */
@@ -13765,6 +14160,7 @@ export class ScenariorunApi extends BaseAPI {
      * @param {number} [page] page number to query
      * @param {number} [size] amount of result by page
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenariorunApi
      */
@@ -13780,6 +14176,7 @@ export class ScenariorunApi extends BaseAPI {
      * @param {number} [page] page number to query
      * @param {number} [size] amount of result by page
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenariorunApi
      */
@@ -13794,6 +14191,7 @@ export class ScenariorunApi extends BaseAPI {
      * @param {string} workspaceId the Workspace identifier
      * @param {string} scenarioId the Scenario identifier
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenariorunApi
      */
@@ -13809,6 +14207,7 @@ export class ScenariorunApi extends BaseAPI {
      * @param {number} [page] page number to query
      * @param {number} [size] amount of result by page
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenariorunApi
      */
@@ -13822,6 +14221,7 @@ export class ScenariorunApi extends BaseAPI {
      * @param {string} organizationId the Organization identifier
      * @param {ScenarioRunStartContainers} scenarioRunStartContainers the raw containers definition
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenariorunApi
      */
@@ -13835,261 +14235,12 @@ export class ScenariorunApi extends BaseAPI {
      * @param {string} organizationId the Organization identifier
      * @param {string} scenariorunId the scenariorun identifier
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ScenariorunApi
      */
     public stopScenarioRun(organizationId: string, scenariorunId: string, options?: RawAxiosRequestConfig) {
         return ScenariorunApiFp(this.configuration).stopScenarioRun(organizationId, scenariorunId, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-
-/**
- * ScenariorunresultApi - axios parameter creator
- * @export
- */
-export const ScenariorunresultApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @summary Get a ScenarioRunResult in the Organization
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} scenarioId the Scenario identifier
-         * @param {string} scenariorunId the ScenarioRun identifier
-         * @param {string} probeId the Probe identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getScenarioRunResult: async (organizationId: string, workspaceId: string, scenarioId: string, scenariorunId: string, probeId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('getScenarioRunResult', 'organizationId', organizationId)
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('getScenarioRunResult', 'workspaceId', workspaceId)
-            // verify required parameter 'scenarioId' is not null or undefined
-            assertParamExists('getScenarioRunResult', 'scenarioId', scenarioId)
-            // verify required parameter 'scenariorunId' is not null or undefined
-            assertParamExists('getScenarioRunResult', 'scenariorunId', scenariorunId)
-            // verify required parameter 'probeId' is not null or undefined
-            assertParamExists('getScenarioRunResult', 'probeId', probeId)
-            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/scenarios/{scenario_id}/scenarioruns/{scenariorun_id}/probes/{probe_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"scenario_id"}}`, encodeURIComponent(String(scenarioId)))
-                .replace(`{${"scenariorun_id"}}`, encodeURIComponent(String(scenariorunId)))
-                .replace(`{${"probe_id"}}`, encodeURIComponent(String(probeId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Create a new ScenarioRunResult in the Organization
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} scenarioId the Scenario identifier
-         * @param {string} scenariorunId the ScenarioRun identifier
-         * @param {string} probeId the Probe identifier
-         * @param {{ [key: string]: string; }} requestBody the ScenarioRunResult to register
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        sendScenarioRunResult: async (organizationId: string, workspaceId: string, scenarioId: string, scenariorunId: string, probeId: string, requestBody: { [key: string]: string; }, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('sendScenarioRunResult', 'organizationId', organizationId)
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('sendScenarioRunResult', 'workspaceId', workspaceId)
-            // verify required parameter 'scenarioId' is not null or undefined
-            assertParamExists('sendScenarioRunResult', 'scenarioId', scenarioId)
-            // verify required parameter 'scenariorunId' is not null or undefined
-            assertParamExists('sendScenarioRunResult', 'scenariorunId', scenariorunId)
-            // verify required parameter 'probeId' is not null or undefined
-            assertParamExists('sendScenarioRunResult', 'probeId', probeId)
-            // verify required parameter 'requestBody' is not null or undefined
-            assertParamExists('sendScenarioRunResult', 'requestBody', requestBody)
-            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/scenarios/{scenario_id}/scenarioruns/{scenariorun_id}/probes/{probe_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"scenario_id"}}`, encodeURIComponent(String(scenarioId)))
-                .replace(`{${"scenariorun_id"}}`, encodeURIComponent(String(scenariorunId)))
-                .replace(`{${"probe_id"}}`, encodeURIComponent(String(probeId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(requestBody, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * ScenariorunresultApi - functional programming interface
- * @export
- */
-export const ScenariorunresultApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = ScenariorunresultApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @summary Get a ScenarioRunResult in the Organization
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} scenarioId the Scenario identifier
-         * @param {string} scenariorunId the ScenarioRun identifier
-         * @param {string} probeId the Probe identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getScenarioRunResult(organizationId: string, workspaceId: string, scenarioId: string, scenariorunId: string, probeId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioRunResult>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getScenarioRunResult(organizationId, workspaceId, scenarioId, scenariorunId, probeId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ScenariorunresultApi.getScenarioRunResult']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Create a new ScenarioRunResult in the Organization
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} scenarioId the Scenario identifier
-         * @param {string} scenariorunId the ScenarioRun identifier
-         * @param {string} probeId the Probe identifier
-         * @param {{ [key: string]: string; }} requestBody the ScenarioRunResult to register
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async sendScenarioRunResult(organizationId: string, workspaceId: string, scenarioId: string, scenariorunId: string, probeId: string, requestBody: { [key: string]: string; }, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScenarioRunResult>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.sendScenarioRunResult(organizationId, workspaceId, scenarioId, scenariorunId, probeId, requestBody, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ScenariorunresultApi.sendScenarioRunResult']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
-
-/**
- * ScenariorunresultApi - factory interface
- * @export
- */
-export const ScenariorunresultApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = ScenariorunresultApiFp(configuration)
-    return {
-        /**
-         * 
-         * @summary Get a ScenarioRunResult in the Organization
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} scenarioId the Scenario identifier
-         * @param {string} scenariorunId the ScenarioRun identifier
-         * @param {string} probeId the Probe identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getScenarioRunResult(organizationId: string, workspaceId: string, scenarioId: string, scenariorunId: string, probeId: string, options?: any): AxiosPromise<ScenarioRunResult> {
-            return localVarFp.getScenarioRunResult(organizationId, workspaceId, scenarioId, scenariorunId, probeId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Create a new ScenarioRunResult in the Organization
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} scenarioId the Scenario identifier
-         * @param {string} scenariorunId the ScenarioRun identifier
-         * @param {string} probeId the Probe identifier
-         * @param {{ [key: string]: string; }} requestBody the ScenarioRunResult to register
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        sendScenarioRunResult(organizationId: string, workspaceId: string, scenarioId: string, scenariorunId: string, probeId: string, requestBody: { [key: string]: string; }, options?: any): AxiosPromise<ScenarioRunResult> {
-            return localVarFp.sendScenarioRunResult(organizationId, workspaceId, scenarioId, scenariorunId, probeId, requestBody, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * ScenariorunresultApi - object-oriented interface
- * @export
- * @class ScenariorunresultApi
- * @extends {BaseAPI}
- */
-export class ScenariorunresultApi extends BaseAPI {
-    /**
-     * 
-     * @summary Get a ScenarioRunResult in the Organization
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
-     * @param {string} scenarioId the Scenario identifier
-     * @param {string} scenariorunId the ScenarioRun identifier
-     * @param {string} probeId the Probe identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ScenariorunresultApi
-     */
-    public getScenarioRunResult(organizationId: string, workspaceId: string, scenarioId: string, scenariorunId: string, probeId: string, options?: RawAxiosRequestConfig) {
-        return ScenariorunresultApiFp(this.configuration).getScenarioRunResult(organizationId, workspaceId, scenarioId, scenariorunId, probeId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Create a new ScenarioRunResult in the Organization
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
-     * @param {string} scenarioId the Scenario identifier
-     * @param {string} scenariorunId the ScenarioRun identifier
-     * @param {string} probeId the Probe identifier
-     * @param {{ [key: string]: string; }} requestBody the ScenarioRunResult to register
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ScenariorunresultApi
-     */
-    public sendScenarioRunResult(organizationId: string, workspaceId: string, scenarioId: string, scenariorunId: string, probeId: string, requestBody: { [key: string]: string; }, options?: RawAxiosRequestConfig) {
-        return ScenariorunresultApiFp(this.configuration).sendScenarioRunResult(organizationId, workspaceId, scenarioId, scenariorunId, probeId, requestBody, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -17416,792 +17567,6 @@ export const UpdateEntitiesTypeEnum = {
     Relationship: 'relationship'
 } as const;
 export type UpdateEntitiesTypeEnum = typeof UpdateEntitiesTypeEnum[keyof typeof UpdateEntitiesTypeEnum];
-
-
-/**
- * ValidatorApi - axios parameter creator
- * @export
- */
-export const ValidatorApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @summary Register a new validator
-         * @param {string} organizationId the Organization identifier
-         * @param {Validator} validator the Validator to create
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createValidator: async (organizationId: string, validator: Validator, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('createValidator', 'organizationId', organizationId)
-            // verify required parameter 'validator' is not null or undefined
-            assertParamExists('createValidator', 'validator', validator)
-            const localVarPath = `/organizations/{organization_id}/datasets/validators`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(validator, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Register a new validator run
-         * @param {string} organizationId the Organization identifier
-         * @param {string} validatorId the ValidatorRun identifier
-         * @param {ValidatorRun} validatorRun the Validator Run to create
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createValidatorRun: async (organizationId: string, validatorId: string, validatorRun: ValidatorRun, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('createValidatorRun', 'organizationId', organizationId)
-            // verify required parameter 'validatorId' is not null or undefined
-            assertParamExists('createValidatorRun', 'validatorId', validatorId)
-            // verify required parameter 'validatorRun' is not null or undefined
-            assertParamExists('createValidatorRun', 'validatorRun', validatorRun)
-            const localVarPath = `/organizations/{organization_id}/datasets/validators/{validator_id}/history`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"validator_id"}}`, encodeURIComponent(String(validatorId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(validatorRun, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Delete a validator
-         * @param {string} organizationId the Organization identifier
-         * @param {string} validatorId the Validator identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        deleteValidator: async (organizationId: string, validatorId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('deleteValidator', 'organizationId', organizationId)
-            // verify required parameter 'validatorId' is not null or undefined
-            assertParamExists('deleteValidator', 'validatorId', validatorId)
-            const localVarPath = `/organizations/{organization_id}/datasets/validators/{validator_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"validator_id"}}`, encodeURIComponent(String(validatorId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Delete a validator run
-         * @param {string} organizationId the Organization identifier
-         * @param {string} validatorId the Validator identifier
-         * @param {string} validatorrunId the Validator Run identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        deleteValidatorRun: async (organizationId: string, validatorId: string, validatorrunId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('deleteValidatorRun', 'organizationId', organizationId)
-            // verify required parameter 'validatorId' is not null or undefined
-            assertParamExists('deleteValidatorRun', 'validatorId', validatorId)
-            // verify required parameter 'validatorrunId' is not null or undefined
-            assertParamExists('deleteValidatorRun', 'validatorrunId', validatorrunId)
-            const localVarPath = `/organizations/{organization_id}/datasets/validators/{validator_id}/history/{validatorrun_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"validator_id"}}`, encodeURIComponent(String(validatorId)))
-                .replace(`{${"validatorrun_id"}}`, encodeURIComponent(String(validatorrunId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary List all Validator Runs
-         * @param {string} organizationId the Organization identifier
-         * @param {string} validatorId the ValidatorRun identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        findAllValidatorRuns: async (organizationId: string, validatorId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('findAllValidatorRuns', 'organizationId', organizationId)
-            // verify required parameter 'validatorId' is not null or undefined
-            assertParamExists('findAllValidatorRuns', 'validatorId', validatorId)
-            const localVarPath = `/organizations/{organization_id}/datasets/validators/{validator_id}/history`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"validator_id"}}`, encodeURIComponent(String(validatorId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary List all Validators
-         * @param {string} organizationId the Organization identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        findAllValidators: async (organizationId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('findAllValidators', 'organizationId', organizationId)
-            const localVarPath = `/organizations/{organization_id}/datasets/validators`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get the details of a validator
-         * @param {string} organizationId the Organization identifier
-         * @param {string} validatorId the Validator identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        findValidatorById: async (organizationId: string, validatorId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('findValidatorById', 'organizationId', organizationId)
-            // verify required parameter 'validatorId' is not null or undefined
-            assertParamExists('findValidatorById', 'validatorId', validatorId)
-            const localVarPath = `/organizations/{organization_id}/datasets/validators/{validator_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"validator_id"}}`, encodeURIComponent(String(validatorId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get the details of a validator run
-         * @param {string} organizationId the Organization identifier
-         * @param {string} validatorId the Validator identifier
-         * @param {string} validatorrunId the Validator Run identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        findValidatorRunById: async (organizationId: string, validatorId: string, validatorrunId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('findValidatorRunById', 'organizationId', organizationId)
-            // verify required parameter 'validatorId' is not null or undefined
-            assertParamExists('findValidatorRunById', 'validatorId', validatorId)
-            // verify required parameter 'validatorrunId' is not null or undefined
-            assertParamExists('findValidatorRunById', 'validatorrunId', validatorrunId)
-            const localVarPath = `/organizations/{organization_id}/datasets/validators/{validator_id}/history/{validatorrun_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"validator_id"}}`, encodeURIComponent(String(validatorId)))
-                .replace(`{${"validatorrun_id"}}`, encodeURIComponent(String(validatorrunId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Run a Validator
-         * @param {string} organizationId the Organization identifier
-         * @param {string} validatorId the ValidatorRun identifier
-         * @param {ValidatorRun} validatorRun the Validator to run
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        runValidator: async (organizationId: string, validatorId: string, validatorRun: ValidatorRun, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('runValidator', 'organizationId', organizationId)
-            // verify required parameter 'validatorId' is not null or undefined
-            assertParamExists('runValidator', 'validatorId', validatorId)
-            // verify required parameter 'validatorRun' is not null or undefined
-            assertParamExists('runValidator', 'validatorRun', validatorRun)
-            const localVarPath = `/organizations/{organization_id}/datasets/validators/{validator_id}/run`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"validator_id"}}`, encodeURIComponent(String(validatorId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(validatorRun, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * ValidatorApi - functional programming interface
- * @export
- */
-export const ValidatorApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = ValidatorApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @summary Register a new validator
-         * @param {string} organizationId the Organization identifier
-         * @param {Validator} validator the Validator to create
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async createValidator(organizationId: string, validator: Validator, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Validator>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createValidator(organizationId, validator, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ValidatorApi.createValidator']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Register a new validator run
-         * @param {string} organizationId the Organization identifier
-         * @param {string} validatorId the ValidatorRun identifier
-         * @param {ValidatorRun} validatorRun the Validator Run to create
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async createValidatorRun(organizationId: string, validatorId: string, validatorRun: ValidatorRun, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ValidatorRun>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createValidatorRun(organizationId, validatorId, validatorRun, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ValidatorApi.createValidatorRun']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Delete a validator
-         * @param {string} organizationId the Organization identifier
-         * @param {string} validatorId the Validator identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async deleteValidator(organizationId: string, validatorId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteValidator(organizationId, validatorId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ValidatorApi.deleteValidator']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Delete a validator run
-         * @param {string} organizationId the Organization identifier
-         * @param {string} validatorId the Validator identifier
-         * @param {string} validatorrunId the Validator Run identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async deleteValidatorRun(organizationId: string, validatorId: string, validatorrunId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteValidatorRun(organizationId, validatorId, validatorrunId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ValidatorApi.deleteValidatorRun']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary List all Validator Runs
-         * @param {string} organizationId the Organization identifier
-         * @param {string} validatorId the ValidatorRun identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async findAllValidatorRuns(organizationId: string, validatorId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ValidatorRun>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.findAllValidatorRuns(organizationId, validatorId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ValidatorApi.findAllValidatorRuns']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary List all Validators
-         * @param {string} organizationId the Organization identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async findAllValidators(organizationId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Validator>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.findAllValidators(organizationId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ValidatorApi.findAllValidators']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Get the details of a validator
-         * @param {string} organizationId the Organization identifier
-         * @param {string} validatorId the Validator identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async findValidatorById(organizationId: string, validatorId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Validator>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.findValidatorById(organizationId, validatorId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ValidatorApi.findValidatorById']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Get the details of a validator run
-         * @param {string} organizationId the Organization identifier
-         * @param {string} validatorId the Validator identifier
-         * @param {string} validatorrunId the Validator Run identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async findValidatorRunById(organizationId: string, validatorId: string, validatorrunId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ValidatorRun>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.findValidatorRunById(organizationId, validatorId, validatorrunId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ValidatorApi.findValidatorRunById']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Run a Validator
-         * @param {string} organizationId the Organization identifier
-         * @param {string} validatorId the ValidatorRun identifier
-         * @param {ValidatorRun} validatorRun the Validator to run
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async runValidator(organizationId: string, validatorId: string, validatorRun: ValidatorRun, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ValidatorRun>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.runValidator(organizationId, validatorId, validatorRun, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ValidatorApi.runValidator']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
-
-/**
- * ValidatorApi - factory interface
- * @export
- */
-export const ValidatorApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = ValidatorApiFp(configuration)
-    return {
-        /**
-         * 
-         * @summary Register a new validator
-         * @param {string} organizationId the Organization identifier
-         * @param {Validator} validator the Validator to create
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createValidator(organizationId: string, validator: Validator, options?: any): AxiosPromise<Validator> {
-            return localVarFp.createValidator(organizationId, validator, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Register a new validator run
-         * @param {string} organizationId the Organization identifier
-         * @param {string} validatorId the ValidatorRun identifier
-         * @param {ValidatorRun} validatorRun the Validator Run to create
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createValidatorRun(organizationId: string, validatorId: string, validatorRun: ValidatorRun, options?: any): AxiosPromise<ValidatorRun> {
-            return localVarFp.createValidatorRun(organizationId, validatorId, validatorRun, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Delete a validator
-         * @param {string} organizationId the Organization identifier
-         * @param {string} validatorId the Validator identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        deleteValidator(organizationId: string, validatorId: string, options?: any): AxiosPromise<void> {
-            return localVarFp.deleteValidator(organizationId, validatorId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Delete a validator run
-         * @param {string} organizationId the Organization identifier
-         * @param {string} validatorId the Validator identifier
-         * @param {string} validatorrunId the Validator Run identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        deleteValidatorRun(organizationId: string, validatorId: string, validatorrunId: string, options?: any): AxiosPromise<void> {
-            return localVarFp.deleteValidatorRun(organizationId, validatorId, validatorrunId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary List all Validator Runs
-         * @param {string} organizationId the Organization identifier
-         * @param {string} validatorId the ValidatorRun identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        findAllValidatorRuns(organizationId: string, validatorId: string, options?: any): AxiosPromise<Array<ValidatorRun>> {
-            return localVarFp.findAllValidatorRuns(organizationId, validatorId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary List all Validators
-         * @param {string} organizationId the Organization identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        findAllValidators(organizationId: string, options?: any): AxiosPromise<Array<Validator>> {
-            return localVarFp.findAllValidators(organizationId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get the details of a validator
-         * @param {string} organizationId the Organization identifier
-         * @param {string} validatorId the Validator identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        findValidatorById(organizationId: string, validatorId: string, options?: any): AxiosPromise<Validator> {
-            return localVarFp.findValidatorById(organizationId, validatorId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get the details of a validator run
-         * @param {string} organizationId the Organization identifier
-         * @param {string} validatorId the Validator identifier
-         * @param {string} validatorrunId the Validator Run identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        findValidatorRunById(organizationId: string, validatorId: string, validatorrunId: string, options?: any): AxiosPromise<ValidatorRun> {
-            return localVarFp.findValidatorRunById(organizationId, validatorId, validatorrunId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Run a Validator
-         * @param {string} organizationId the Organization identifier
-         * @param {string} validatorId the ValidatorRun identifier
-         * @param {ValidatorRun} validatorRun the Validator to run
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        runValidator(organizationId: string, validatorId: string, validatorRun: ValidatorRun, options?: any): AxiosPromise<ValidatorRun> {
-            return localVarFp.runValidator(organizationId, validatorId, validatorRun, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * ValidatorApi - object-oriented interface
- * @export
- * @class ValidatorApi
- * @extends {BaseAPI}
- */
-export class ValidatorApi extends BaseAPI {
-    /**
-     * 
-     * @summary Register a new validator
-     * @param {string} organizationId the Organization identifier
-     * @param {Validator} validator the Validator to create
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ValidatorApi
-     */
-    public createValidator(organizationId: string, validator: Validator, options?: RawAxiosRequestConfig) {
-        return ValidatorApiFp(this.configuration).createValidator(organizationId, validator, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Register a new validator run
-     * @param {string} organizationId the Organization identifier
-     * @param {string} validatorId the ValidatorRun identifier
-     * @param {ValidatorRun} validatorRun the Validator Run to create
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ValidatorApi
-     */
-    public createValidatorRun(organizationId: string, validatorId: string, validatorRun: ValidatorRun, options?: RawAxiosRequestConfig) {
-        return ValidatorApiFp(this.configuration).createValidatorRun(organizationId, validatorId, validatorRun, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Delete a validator
-     * @param {string} organizationId the Organization identifier
-     * @param {string} validatorId the Validator identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ValidatorApi
-     */
-    public deleteValidator(organizationId: string, validatorId: string, options?: RawAxiosRequestConfig) {
-        return ValidatorApiFp(this.configuration).deleteValidator(organizationId, validatorId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Delete a validator run
-     * @param {string} organizationId the Organization identifier
-     * @param {string} validatorId the Validator identifier
-     * @param {string} validatorrunId the Validator Run identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ValidatorApi
-     */
-    public deleteValidatorRun(organizationId: string, validatorId: string, validatorrunId: string, options?: RawAxiosRequestConfig) {
-        return ValidatorApiFp(this.configuration).deleteValidatorRun(organizationId, validatorId, validatorrunId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary List all Validator Runs
-     * @param {string} organizationId the Organization identifier
-     * @param {string} validatorId the ValidatorRun identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ValidatorApi
-     */
-    public findAllValidatorRuns(organizationId: string, validatorId: string, options?: RawAxiosRequestConfig) {
-        return ValidatorApiFp(this.configuration).findAllValidatorRuns(organizationId, validatorId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary List all Validators
-     * @param {string} organizationId the Organization identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ValidatorApi
-     */
-    public findAllValidators(organizationId: string, options?: RawAxiosRequestConfig) {
-        return ValidatorApiFp(this.configuration).findAllValidators(organizationId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get the details of a validator
-     * @param {string} organizationId the Organization identifier
-     * @param {string} validatorId the Validator identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ValidatorApi
-     */
-    public findValidatorById(organizationId: string, validatorId: string, options?: RawAxiosRequestConfig) {
-        return ValidatorApiFp(this.configuration).findValidatorById(organizationId, validatorId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get the details of a validator run
-     * @param {string} organizationId the Organization identifier
-     * @param {string} validatorId the Validator identifier
-     * @param {string} validatorrunId the Validator Run identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ValidatorApi
-     */
-    public findValidatorRunById(organizationId: string, validatorId: string, validatorrunId: string, options?: RawAxiosRequestConfig) {
-        return ValidatorApiFp(this.configuration).findValidatorRunById(organizationId, validatorId, validatorrunId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Run a Validator
-     * @param {string} organizationId the Organization identifier
-     * @param {string} validatorId the ValidatorRun identifier
-     * @param {ValidatorRun} validatorRun the Validator to run
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ValidatorApi
-     */
-    public runValidator(organizationId: string, validatorId: string, validatorRun: ValidatorRun, options?: RawAxiosRequestConfig) {
-        return ValidatorApiFp(this.configuration).runValidator(organizationId, validatorId, validatorRun, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
 
 
 /**
