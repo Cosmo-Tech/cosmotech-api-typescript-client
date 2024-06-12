@@ -1685,24 +1685,6 @@ export interface RunTemplate {
 
 
 /**
- * the Run Template step handler identifier
- * @export
- * @enum {string}
- */
-
-export const RunTemplateHandlerId = {
-    ParametersHandler: 'parameters_handler',
-    Validator: 'validator',
-    Prerun: 'prerun',
-    Engine: 'engine',
-    Postrun: 'postrun',
-    ScenariodataTransform: 'scenariodata_transform'
-} as const;
-
-export type RunTemplateHandlerId = typeof RunTemplateHandlerId[keyof typeof RunTemplateHandlerId];
-
-
-/**
  * the Orchestrator to use for the Run Template
  * @export
  * @enum {string}
@@ -9600,56 +9582,6 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
-         * @summary Download a Run Template step handler zip file
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} runTemplateId the Run Template identifier
-         * @param {RunTemplateHandlerId} handlerId the Handler identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        downloadRunTemplateHandler: async (organizationId: string, solutionId: string, runTemplateId: string, handlerId: RunTemplateHandlerId, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('downloadRunTemplateHandler', 'organizationId', organizationId)
-            // verify required parameter 'solutionId' is not null or undefined
-            assertParamExists('downloadRunTemplateHandler', 'solutionId', solutionId)
-            // verify required parameter 'runTemplateId' is not null or undefined
-            assertParamExists('downloadRunTemplateHandler', 'runTemplateId', runTemplateId)
-            // verify required parameter 'handlerId' is not null or undefined
-            assertParamExists('downloadRunTemplateHandler', 'handlerId', handlerId)
-            const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/runtemplates/{run_template_id}/handlers/{handler_id}/download`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)))
-                .replace(`{${"run_template_id"}}`, encodeURIComponent(String(runTemplateId)))
-                .replace(`{${"handler_id"}}`, encodeURIComponent(String(handlerId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @summary List all Solutions
          * @param {string} organizationId the Organization identifier
          * @param {number} [page] page number to query
@@ -10240,67 +10172,6 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
                 options: localVarRequestOptions,
             };
         },
-        /**
-         * 
-         * @summary Upload a Run Template step handler zip file
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} runTemplateId the Run Template identifier
-         * @param {RunTemplateHandlerId} handlerId the Handler identifier
-         * @param {File} body 
-         * @param {boolean} [overwrite] whether to overwrite any existing handler resource
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        uploadRunTemplateHandler: async (organizationId: string, solutionId: string, runTemplateId: string, handlerId: RunTemplateHandlerId, body: File, overwrite?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('uploadRunTemplateHandler', 'organizationId', organizationId)
-            // verify required parameter 'solutionId' is not null or undefined
-            assertParamExists('uploadRunTemplateHandler', 'solutionId', solutionId)
-            // verify required parameter 'runTemplateId' is not null or undefined
-            assertParamExists('uploadRunTemplateHandler', 'runTemplateId', runTemplateId)
-            // verify required parameter 'handlerId' is not null or undefined
-            assertParamExists('uploadRunTemplateHandler', 'handlerId', handlerId)
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('uploadRunTemplateHandler', 'body', body)
-            const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/runtemplates/{run_template_id}/handlers/{handler_id}/upload`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)))
-                .replace(`{${"run_template_id"}}`, encodeURIComponent(String(runTemplateId)))
-                .replace(`{${"handler_id"}}`, encodeURIComponent(String(handlerId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-            if (overwrite !== undefined) {
-                localVarQueryParameter['overwrite'] = overwrite;
-            }
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/octet-stream';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
     }
 };
 
@@ -10412,22 +10283,6 @@ export const SolutionApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteSolutionRunTemplate(organizationId, solutionId, runTemplateId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SolutionApi.deleteSolutionRunTemplate']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Download a Run Template step handler zip file
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} runTemplateId the Run Template identifier
-         * @param {RunTemplateHandlerId} handlerId the Handler identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async downloadRunTemplateHandler(organizationId: string, solutionId: string, runTemplateId: string, handlerId: RunTemplateHandlerId, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.downloadRunTemplateHandler(organizationId, solutionId, runTemplateId, handlerId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SolutionApi.downloadRunTemplateHandler']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -10621,24 +10476,6 @@ export const SolutionApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['SolutionApi.updateSolutionRunTemplate']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
-        /**
-         * 
-         * @summary Upload a Run Template step handler zip file
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} runTemplateId the Run Template identifier
-         * @param {RunTemplateHandlerId} handlerId the Handler identifier
-         * @param {File} body 
-         * @param {boolean} [overwrite] whether to overwrite any existing handler resource
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async uploadRunTemplateHandler(organizationId: string, solutionId: string, runTemplateId: string, handlerId: RunTemplateHandlerId, body: File, overwrite?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadRunTemplateHandler(organizationId, solutionId, runTemplateId, handlerId, body, overwrite, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SolutionApi.uploadRunTemplateHandler']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
     }
 };
 
@@ -10730,19 +10567,6 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
          */
         deleteSolutionRunTemplate(organizationId: string, solutionId: string, runTemplateId: string, options?: any): AxiosPromise<void> {
             return localVarFp.deleteSolutionRunTemplate(organizationId, solutionId, runTemplateId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Download a Run Template step handler zip file
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} runTemplateId the Run Template identifier
-         * @param {RunTemplateHandlerId} handlerId the Handler identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        downloadRunTemplateHandler(organizationId: string, solutionId: string, runTemplateId: string, handlerId: RunTemplateHandlerId, options?: any): AxiosPromise<string> {
-            return localVarFp.downloadRunTemplateHandler(organizationId, solutionId, runTemplateId, handlerId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -10896,21 +10720,6 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         updateSolutionRunTemplate(organizationId: string, solutionId: string, runTemplateId: string, runTemplate: RunTemplate, options?: any): AxiosPromise<Array<RunTemplate>> {
             return localVarFp.updateSolutionRunTemplate(organizationId, solutionId, runTemplateId, runTemplate, options).then((request) => request(axios, basePath));
         },
-        /**
-         * 
-         * @summary Upload a Run Template step handler zip file
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} runTemplateId the Run Template identifier
-         * @param {RunTemplateHandlerId} handlerId the Handler identifier
-         * @param {File} body 
-         * @param {boolean} [overwrite] whether to overwrite any existing handler resource
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        uploadRunTemplateHandler(organizationId: string, solutionId: string, runTemplateId: string, handlerId: RunTemplateHandlerId, body: File, overwrite?: boolean, options?: any): AxiosPromise<void> {
-            return localVarFp.uploadRunTemplateHandler(organizationId, solutionId, runTemplateId, handlerId, body, overwrite, options).then((request) => request(axios, basePath));
-        },
     };
 };
 
@@ -11015,21 +10824,6 @@ export class SolutionApi extends BaseAPI {
      */
     public deleteSolutionRunTemplate(organizationId: string, solutionId: string, runTemplateId: string, options?: RawAxiosRequestConfig) {
         return SolutionApiFp(this.configuration).deleteSolutionRunTemplate(organizationId, solutionId, runTemplateId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Download a Run Template step handler zip file
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
-     * @param {string} runTemplateId the Run Template identifier
-     * @param {RunTemplateHandlerId} handlerId the Handler identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SolutionApi
-     */
-    public downloadRunTemplateHandler(organizationId: string, solutionId: string, runTemplateId: string, handlerId: RunTemplateHandlerId, options?: RawAxiosRequestConfig) {
-        return SolutionApiFp(this.configuration).downloadRunTemplateHandler(organizationId, solutionId, runTemplateId, handlerId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -11208,23 +11002,6 @@ export class SolutionApi extends BaseAPI {
      */
     public updateSolutionRunTemplate(organizationId: string, solutionId: string, runTemplateId: string, runTemplate: RunTemplate, options?: RawAxiosRequestConfig) {
         return SolutionApiFp(this.configuration).updateSolutionRunTemplate(organizationId, solutionId, runTemplateId, runTemplate, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Upload a Run Template step handler zip file
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
-     * @param {string} runTemplateId the Run Template identifier
-     * @param {RunTemplateHandlerId} handlerId the Handler identifier
-     * @param {File} body 
-     * @param {boolean} [overwrite] whether to overwrite any existing handler resource
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SolutionApi
-     */
-    public uploadRunTemplateHandler(organizationId: string, solutionId: string, runTemplateId: string, handlerId: RunTemplateHandlerId, body: File, overwrite?: boolean, options?: RawAxiosRequestConfig) {
-        return SolutionApiFp(this.configuration).uploadRunTemplateHandler(organizationId, solutionId, runTemplateId, handlerId, body, overwrite, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
