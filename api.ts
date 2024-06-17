@@ -5047,7 +5047,7 @@ export const DatasetApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async twingraphQuery(organizationId: string, datasetId: string, datasetTwinGraphQuery: DatasetTwinGraphQuery, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
+        async twingraphQuery(organizationId: string, datasetId: string, datasetTwinGraphQuery: DatasetTwinGraphQuery, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<object>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.twingraphQuery(organizationId, datasetId, datasetTwinGraphQuery, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['DatasetApi.twingraphQuery']?.[localVarOperationServerIndex]?.url;
@@ -5441,7 +5441,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        twingraphQuery(organizationId: string, datasetId: string, datasetTwinGraphQuery: DatasetTwinGraphQuery, options?: any): AxiosPromise<string> {
+        twingraphQuery(organizationId: string, datasetId: string, datasetTwinGraphQuery: DatasetTwinGraphQuery, options?: any): AxiosPromise<Array<object>> {
             return localVarFp.twingraphQuery(organizationId, datasetId, datasetTwinGraphQuery, options).then((request) => request(axios, basePath));
         },
         /**
