@@ -103,18 +103,6 @@ export interface Connector {
      */
     'url'?: string;
     /**
-     * whether or not the connector uses Azure Managed Identity
-     * @type {boolean}
-     * @memberof Connector
-     */
-    'azureManagedIdentity'?: boolean;
-    /**
-     * whether to authenticate against Azure using the app registration credentials provided by the customer
-     * @type {boolean}
-     * @memberof Connector
-     */
-    'azureAuthenticationWithCustomerAppRegistration'?: boolean;
-    /**
      * 
      * @type {Array<IoTypesEnum>}
      * @memberof Connector
@@ -2704,11 +2692,17 @@ export interface WorkspaceRole {
  */
 export interface WorkspaceSecret {
     /**
-     * the dedicated event hub shared access key
+     * the secret name
      * @type {string}
      * @memberof WorkspaceSecret
      */
-    'dedicatedEventHubKey'?: string;
+    'name': string;
+    /**
+     * the secret value
+     * @type {string}
+     * @memberof WorkspaceSecret
+     */
+    'value': string;
 }
 /**
  * the workspace security information
