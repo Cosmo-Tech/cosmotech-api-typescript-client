@@ -11968,7 +11968,7 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteWorkspace(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Workspace>> {
+        async deleteWorkspace(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteWorkspace(organizationId, workspaceId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.deleteWorkspace']?.[localVarOperationServerIndex]?.url;
@@ -12275,7 +12275,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteWorkspace(organizationId: string, workspaceId: string, options?: any): AxiosPromise<Workspace> {
+        deleteWorkspace(organizationId: string, workspaceId: string, options?: any): AxiosPromise<void> {
             return localVarFp.deleteWorkspace(organizationId, workspaceId, options).then((request) => request(axios, basePath));
         },
         /**
