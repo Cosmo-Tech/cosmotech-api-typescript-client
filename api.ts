@@ -2261,7 +2261,7 @@ export interface Solution {
      * @type {Array<RunTemplate>}
      * @memberof Solution
      */
-    'runTemplates'?: Array<RunTemplate>;
+    'runTemplates': Array<RunTemplate>;
     /**
      * 
      * @type {SolutionSecurity}
