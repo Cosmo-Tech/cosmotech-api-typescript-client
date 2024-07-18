@@ -1908,7 +1908,7 @@ export interface Runner {
      * @type {Array<string>}
      * @memberof Runner
      */
-    'datasetList'?: Array<string>;
+    'datasetList': Array<string>;
     /**
      * 
      * @type {RunnerResourceSizing}
