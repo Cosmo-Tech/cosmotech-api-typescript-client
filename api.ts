@@ -2308,7 +2308,7 @@ export interface Workspace {
      */
     'useDedicatedEventHubNamespace'?: boolean;
     /**
-     * the Dedicated Event Hub SAS key name, default to RootManageSharedAccessKey. Use the /secret endpoint to set the key value
+     * the Dedicated Event Hub SAS key name, default to RootManageSharedAccessKey. Ask you DevOps Team to add the associated value to your Workspace Secret
      * @type {string}
      * @memberof Workspace
      */
@@ -2388,25 +2388,6 @@ export interface WorkspaceRole {
      * @memberof WorkspaceRole
      */
     'role': string;
-}
-/**
- * the secret definition
- * @export
- * @interface WorkspaceSecret
- */
-export interface WorkspaceSecret {
-    /**
-     * the secret name
-     * @type {string}
-     * @memberof WorkspaceSecret
-     */
-    'name': string;
-    /**
-     * the secret value
-     * @type {string}
-     * @memberof WorkspaceSecret
-     */
-    'value': string;
 }
 /**
  * the workspace security information
@@ -10320,50 +10301,6 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary Create a secret for the Workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {WorkspaceSecret} workspaceSecret the definition of the secret
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createSecret: async (organizationId: string, workspaceId: string, workspaceSecret: WorkspaceSecret, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('createSecret', 'organizationId', organizationId)
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('createSecret', 'workspaceId', workspaceId)
-            // verify required parameter 'workspaceSecret' is not null or undefined
-            assertParamExists('createSecret', 'workspaceSecret', workspaceSecret)
-            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/secret`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(workspaceSecret, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @summary Create a new workspace
          * @param {string} organizationId the Organization identifier
          * @param {Workspace} workspace the Workspace to create
@@ -11200,21 +11137,6 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Create a secret for the Workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {WorkspaceSecret} workspaceSecret the definition of the secret
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async createSecret(organizationId: string, workspaceId: string, workspaceSecret: WorkspaceSecret, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createSecret(organizationId, workspaceId, workspaceSecret, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.createSecret']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
          * @summary Create a new workspace
          * @param {string} organizationId the Organization identifier
          * @param {Workspace} workspace the Workspace to create
@@ -11516,18 +11438,6 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary Create a secret for the Workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {WorkspaceSecret} workspaceSecret the definition of the secret
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createSecret(organizationId: string, workspaceId: string, workspaceSecret: WorkspaceSecret, options?: any): AxiosPromise<void> {
-            return localVarFp.createSecret(organizationId, workspaceId, workspaceSecret, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @summary Create a new workspace
          * @param {string} organizationId the Organization identifier
          * @param {Workspace} workspace the Workspace to create
@@ -11770,20 +11680,6 @@ export class WorkspaceApi extends BaseAPI {
      */
     public addWorkspaceAccessControl(organizationId: string, workspaceId: string, workspaceAccessControl: WorkspaceAccessControl, options?: RawAxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).addWorkspaceAccessControl(organizationId, workspaceId, workspaceAccessControl, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Create a secret for the Workspace
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
-     * @param {WorkspaceSecret} workspaceSecret the definition of the secret
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof WorkspaceApi
-     */
-    public createSecret(organizationId: string, workspaceId: string, workspaceSecret: WorkspaceSecret, options?: RawAxiosRequestConfig) {
-        return WorkspaceApiFp(this.configuration).createSecret(organizationId, workspaceId, workspaceSecret, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
