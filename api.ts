@@ -2719,7 +2719,7 @@ export const ConnectorApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findAllConnectors(page?: number, size?: number, options?: any): AxiosPromise<Array<Connector>> {
+        findAllConnectors(page?: number, size?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<Connector>> {
             return localVarFp.findAllConnectors(page, size, options).then((request) => request(axios, basePath));
         },
         /**
@@ -2729,7 +2729,7 @@ export const ConnectorApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findConnectorById(connectorId: string, options?: any): AxiosPromise<Connector> {
+        findConnectorById(connectorId: string, options?: RawAxiosRequestConfig): AxiosPromise<Connector> {
             return localVarFp.findConnectorById(connectorId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -2739,7 +2739,7 @@ export const ConnectorApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        registerConnector(connector: Connector, options?: any): AxiosPromise<Connector> {
+        registerConnector(connector: Connector, options?: RawAxiosRequestConfig): AxiosPromise<Connector> {
             return localVarFp.registerConnector(connector, options).then((request) => request(axios, basePath));
         },
         /**
@@ -2749,7 +2749,7 @@ export const ConnectorApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        unregisterConnector(connectorId: string, options?: any): AxiosPromise<void> {
+        unregisterConnector(connectorId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.unregisterConnector(connectorId, options).then((request) => request(axios, basePath));
         },
     };
@@ -4767,7 +4767,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addDatasetAccessControl(organizationId: string, datasetId: string, datasetAccessControl: DatasetAccessControl, options?: any): AxiosPromise<DatasetAccessControl> {
+        addDatasetAccessControl(organizationId: string, datasetId: string, datasetAccessControl: DatasetAccessControl, options?: RawAxiosRequestConfig): AxiosPromise<DatasetAccessControl> {
             return localVarFp.addDatasetAccessControl(organizationId, datasetId, datasetAccessControl, options).then((request) => request(axios, basePath));
         },
         /**
@@ -4779,7 +4779,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addOrReplaceDatasetCompatibilityElements(organizationId: string, datasetId: string, datasetCompatibility: Array<DatasetCompatibility>, options?: any): AxiosPromise<Array<DatasetCompatibility>> {
+        addOrReplaceDatasetCompatibilityElements(organizationId: string, datasetId: string, datasetCompatibility: Array<DatasetCompatibility>, options?: RawAxiosRequestConfig): AxiosPromise<Array<DatasetCompatibility>> {
             return localVarFp.addOrReplaceDatasetCompatibilityElements(organizationId, datasetId, datasetCompatibility, options).then((request) => request(axios, basePath));
         },
         /**
@@ -4790,7 +4790,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        copyDataset(organizationId: string, datasetCopyParameters: DatasetCopyParameters, options?: any): AxiosPromise<DatasetCopyParameters> {
+        copyDataset(organizationId: string, datasetCopyParameters: DatasetCopyParameters, options?: RawAxiosRequestConfig): AxiosPromise<DatasetCopyParameters> {
             return localVarFp.copyDataset(organizationId, datasetCopyParameters, options).then((request) => request(axios, basePath));
         },
         /**
@@ -4801,7 +4801,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createDataset(organizationId: string, dataset: Dataset, options?: any): AxiosPromise<Dataset> {
+        createDataset(organizationId: string, dataset: Dataset, options?: RawAxiosRequestConfig): AxiosPromise<Dataset> {
             return localVarFp.createDataset(organizationId, dataset, options).then((request) => request(axios, basePath));
         },
         /**
@@ -4813,7 +4813,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createSubDataset(organizationId: string, datasetId: string, subDatasetGraphQuery: SubDatasetGraphQuery, options?: any): AxiosPromise<Dataset> {
+        createSubDataset(organizationId: string, datasetId: string, subDatasetGraphQuery: SubDatasetGraphQuery, options?: RawAxiosRequestConfig): AxiosPromise<Dataset> {
             return localVarFp.createSubDataset(organizationId, datasetId, subDatasetGraphQuery, options).then((request) => request(axios, basePath));
         },
         /**
@@ -4826,7 +4826,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createTwingraphEntities(organizationId: string, datasetId: string, type: CreateTwingraphEntitiesTypeEnum, graphProperties: Array<GraphProperties>, options?: any): AxiosPromise<string> {
+        createTwingraphEntities(organizationId: string, datasetId: string, type: CreateTwingraphEntitiesTypeEnum, graphProperties: Array<GraphProperties>, options?: RawAxiosRequestConfig): AxiosPromise<string> {
             return localVarFp.createTwingraphEntities(organizationId, datasetId, type, graphProperties, options).then((request) => request(axios, basePath));
         },
         /**
@@ -4837,7 +4837,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteDataset(organizationId: string, datasetId: string, options?: any): AxiosPromise<void> {
+        deleteDataset(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.deleteDataset(organizationId, datasetId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -4850,7 +4850,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteTwingraphEntities(organizationId: string, datasetId: string, type: DeleteTwingraphEntitiesTypeEnum, ids: Array<string>, options?: any): AxiosPromise<void> {
+        deleteTwingraphEntities(organizationId: string, datasetId: string, type: DeleteTwingraphEntitiesTypeEnum, ids: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.deleteTwingraphEntities(organizationId, datasetId, type, ids, options).then((request) => request(axios, basePath));
         },
         /**
@@ -4861,7 +4861,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        downloadTwingraph(organizationId: string, hash: string, options?: any): AxiosPromise<File> {
+        downloadTwingraph(organizationId: string, hash: string, options?: RawAxiosRequestConfig): AxiosPromise<File> {
             return localVarFp.downloadTwingraph(organizationId, hash, options).then((request) => request(axios, basePath));
         },
         /**
@@ -4873,7 +4873,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findAllDatasets(organizationId: string, page?: number, size?: number, options?: any): AxiosPromise<Array<Dataset>> {
+        findAllDatasets(organizationId: string, page?: number, size?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<Dataset>> {
             return localVarFp.findAllDatasets(organizationId, page, size, options).then((request) => request(axios, basePath));
         },
         /**
@@ -4884,7 +4884,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findDatasetById(organizationId: string, datasetId: string, options?: any): AxiosPromise<Dataset> {
+        findDatasetById(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig): AxiosPromise<Dataset> {
             return localVarFp.findDatasetById(organizationId, datasetId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -4896,7 +4896,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getDatasetAccessControl(organizationId: string, datasetId: string, identityId: string, options?: any): AxiosPromise<DatasetAccessControl> {
+        getDatasetAccessControl(organizationId: string, datasetId: string, identityId: string, options?: RawAxiosRequestConfig): AxiosPromise<DatasetAccessControl> {
             return localVarFp.getDatasetAccessControl(organizationId, datasetId, identityId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -4907,7 +4907,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getDatasetSecurity(organizationId: string, datasetId: string, options?: any): AxiosPromise<DatasetSecurity> {
+        getDatasetSecurity(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig): AxiosPromise<DatasetSecurity> {
             return localVarFp.getDatasetSecurity(organizationId, datasetId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -4918,7 +4918,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getDatasetSecurityUsers(organizationId: string, datasetId: string, options?: any): AxiosPromise<Array<string>> {
+        getDatasetSecurityUsers(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<string>> {
             return localVarFp.getDatasetSecurityUsers(organizationId, datasetId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -4929,7 +4929,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getDatasetTwingraphStatus(organizationId: string, datasetId: string, options?: any): AxiosPromise<string> {
+        getDatasetTwingraphStatus(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig): AxiosPromise<string> {
             return localVarFp.getDatasetTwingraphStatus(organizationId, datasetId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -4942,7 +4942,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTwingraphEntities(organizationId: string, datasetId: string, type: GetTwingraphEntitiesTypeEnum, ids: Array<string>, options?: any): AxiosPromise<string> {
+        getTwingraphEntities(organizationId: string, datasetId: string, type: GetTwingraphEntitiesTypeEnum, ids: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<string> {
             return localVarFp.getTwingraphEntities(organizationId, datasetId, type, ids, options).then((request) => request(axios, basePath));
         },
         /**
@@ -4953,7 +4953,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        linkWorkspace(organizationId: string, datasetId: string, workspaceId: string, options?: any): AxiosPromise<Dataset> {
+        linkWorkspace(organizationId: string, datasetId: string, workspaceId: string, options?: RawAxiosRequestConfig): AxiosPromise<Dataset> {
             return localVarFp.linkWorkspace(organizationId, datasetId, workspaceId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -4964,7 +4964,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        refreshDataset(organizationId: string, datasetId: string, options?: any): AxiosPromise<DatasetTwinGraphInfo> {
+        refreshDataset(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig): AxiosPromise<DatasetTwinGraphInfo> {
             return localVarFp.refreshDataset(organizationId, datasetId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -4975,7 +4975,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        removeAllDatasetCompatibilityElements(organizationId: string, datasetId: string, options?: any): AxiosPromise<void> {
+        removeAllDatasetCompatibilityElements(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.removeAllDatasetCompatibilityElements(organizationId, datasetId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -4987,7 +4987,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        removeDatasetAccessControl(organizationId: string, datasetId: string, identityId: string, options?: any): AxiosPromise<void> {
+        removeDatasetAccessControl(organizationId: string, datasetId: string, identityId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.removeDatasetAccessControl(organizationId, datasetId, identityId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -4998,7 +4998,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rollbackRefresh(organizationId: string, datasetId: string, options?: any): AxiosPromise<string> {
+        rollbackRefresh(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig): AxiosPromise<string> {
             return localVarFp.rollbackRefresh(organizationId, datasetId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -5011,7 +5011,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        searchDatasets(organizationId: string, datasetSearch: DatasetSearch, page?: number, size?: number, options?: any): AxiosPromise<Array<Dataset>> {
+        searchDatasets(organizationId: string, datasetSearch: DatasetSearch, page?: number, size?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<Dataset>> {
             return localVarFp.searchDatasets(organizationId, datasetSearch, page, size, options).then((request) => request(axios, basePath));
         },
         /**
@@ -5023,7 +5023,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        setDatasetDefaultSecurity(organizationId: string, datasetId: string, datasetRole: DatasetRole, options?: any): AxiosPromise<DatasetSecurity> {
+        setDatasetDefaultSecurity(organizationId: string, datasetId: string, datasetRole: DatasetRole, options?: RawAxiosRequestConfig): AxiosPromise<DatasetSecurity> {
             return localVarFp.setDatasetDefaultSecurity(organizationId, datasetId, datasetRole, options).then((request) => request(axios, basePath));
         },
         /**
@@ -5035,7 +5035,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        twingraphBatchQuery(organizationId: string, datasetId: string, datasetTwinGraphQuery: DatasetTwinGraphQuery, options?: any): AxiosPromise<DatasetTwinGraphHash> {
+        twingraphBatchQuery(organizationId: string, datasetId: string, datasetTwinGraphQuery: DatasetTwinGraphQuery, options?: RawAxiosRequestConfig): AxiosPromise<DatasetTwinGraphHash> {
             return localVarFp.twingraphBatchQuery(organizationId, datasetId, datasetTwinGraphQuery, options).then((request) => request(axios, basePath));
         },
         /**
@@ -5048,7 +5048,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        twingraphBatchUpdate(organizationId: string, datasetId: string, twinGraphQuery: DatasetTwinGraphQuery, body: File, options?: any): AxiosPromise<TwinGraphBatchResult> {
+        twingraphBatchUpdate(organizationId: string, datasetId: string, twinGraphQuery: DatasetTwinGraphQuery, body: File, options?: RawAxiosRequestConfig): AxiosPromise<TwinGraphBatchResult> {
             return localVarFp.twingraphBatchUpdate(organizationId, datasetId, twinGraphQuery, body, options).then((request) => request(axios, basePath));
         },
         /**
@@ -5060,7 +5060,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        twingraphQuery(organizationId: string, datasetId: string, datasetTwinGraphQuery: DatasetTwinGraphQuery, options?: any): AxiosPromise<Array<object>> {
+        twingraphQuery(organizationId: string, datasetId: string, datasetTwinGraphQuery: DatasetTwinGraphQuery, options?: RawAxiosRequestConfig): AxiosPromise<Array<object>> {
             return localVarFp.twingraphQuery(organizationId, datasetId, datasetTwinGraphQuery, options).then((request) => request(axios, basePath));
         },
         /**
@@ -5071,7 +5071,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        unlinkWorkspace(organizationId: string, datasetId: string, workspaceId: string, options?: any): AxiosPromise<Dataset> {
+        unlinkWorkspace(organizationId: string, datasetId: string, workspaceId: string, options?: RawAxiosRequestConfig): AxiosPromise<Dataset> {
             return localVarFp.unlinkWorkspace(organizationId, datasetId, workspaceId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -5083,7 +5083,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateDataset(organizationId: string, datasetId: string, dataset: Dataset, options?: any): AxiosPromise<Dataset> {
+        updateDataset(organizationId: string, datasetId: string, dataset: Dataset, options?: RawAxiosRequestConfig): AxiosPromise<Dataset> {
             return localVarFp.updateDataset(organizationId, datasetId, dataset, options).then((request) => request(axios, basePath));
         },
         /**
@@ -5096,7 +5096,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateDatasetAccessControl(organizationId: string, datasetId: string, identityId: string, datasetRole: DatasetRole, options?: any): AxiosPromise<DatasetAccessControl> {
+        updateDatasetAccessControl(organizationId: string, datasetId: string, identityId: string, datasetRole: DatasetRole, options?: RawAxiosRequestConfig): AxiosPromise<DatasetAccessControl> {
             return localVarFp.updateDatasetAccessControl(organizationId, datasetId, identityId, datasetRole, options).then((request) => request(axios, basePath));
         },
         /**
@@ -5109,7 +5109,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateTwingraphEntities(organizationId: string, datasetId: string, type: UpdateTwingraphEntitiesTypeEnum, graphProperties: Array<GraphProperties>, options?: any): AxiosPromise<string> {
+        updateTwingraphEntities(organizationId: string, datasetId: string, type: UpdateTwingraphEntitiesTypeEnum, graphProperties: Array<GraphProperties>, options?: RawAxiosRequestConfig): AxiosPromise<string> {
             return localVarFp.updateTwingraphEntities(organizationId, datasetId, type, graphProperties, options).then((request) => request(axios, basePath));
         },
         /**
@@ -5121,7 +5121,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadTwingraph(organizationId: string, datasetId: string, body: File, options?: any): AxiosPromise<FileUploadValidation> {
+        uploadTwingraph(organizationId: string, datasetId: string, body: File, options?: RawAxiosRequestConfig): AxiosPromise<FileUploadValidation> {
             return localVarFp.uploadTwingraph(organizationId, datasetId, body, options).then((request) => request(axios, basePath));
         },
     };
@@ -6397,7 +6397,7 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addOrganizationAccessControl(organizationId: string, organizationAccessControl: OrganizationAccessControl, options?: any): AxiosPromise<OrganizationAccessControl> {
+        addOrganizationAccessControl(organizationId: string, organizationAccessControl: OrganizationAccessControl, options?: RawAxiosRequestConfig): AxiosPromise<OrganizationAccessControl> {
             return localVarFp.addOrganizationAccessControl(organizationId, organizationAccessControl, options).then((request) => request(axios, basePath));
         },
         /**
@@ -6408,7 +6408,7 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findAllOrganizations(page?: number, size?: number, options?: any): AxiosPromise<Array<Organization>> {
+        findAllOrganizations(page?: number, size?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<Organization>> {
             return localVarFp.findAllOrganizations(page, size, options).then((request) => request(axios, basePath));
         },
         /**
@@ -6418,7 +6418,7 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findOrganizationById(organizationId: string, options?: any): AxiosPromise<Organization> {
+        findOrganizationById(organizationId: string, options?: RawAxiosRequestConfig): AxiosPromise<Organization> {
             return localVarFp.findOrganizationById(organizationId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -6427,7 +6427,7 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAllPermissions(options?: any): AxiosPromise<Array<ComponentRolePermissions>> {
+        getAllPermissions(options?: RawAxiosRequestConfig): AxiosPromise<Array<ComponentRolePermissions>> {
             return localVarFp.getAllPermissions(options).then((request) => request(axios, basePath));
         },
         /**
@@ -6438,7 +6438,7 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOrganizationAccessControl(organizationId: string, identityId: string, options?: any): AxiosPromise<OrganizationAccessControl> {
+        getOrganizationAccessControl(organizationId: string, identityId: string, options?: RawAxiosRequestConfig): AxiosPromise<OrganizationAccessControl> {
             return localVarFp.getOrganizationAccessControl(organizationId, identityId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -6449,7 +6449,7 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOrganizationPermissions(organizationId: string, role: string, options?: any): AxiosPromise<Array<string>> {
+        getOrganizationPermissions(organizationId: string, role: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<string>> {
             return localVarFp.getOrganizationPermissions(organizationId, role, options).then((request) => request(axios, basePath));
         },
         /**
@@ -6459,7 +6459,7 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOrganizationSecurity(organizationId: string, options?: any): AxiosPromise<OrganizationSecurity> {
+        getOrganizationSecurity(organizationId: string, options?: RawAxiosRequestConfig): AxiosPromise<OrganizationSecurity> {
             return localVarFp.getOrganizationSecurity(organizationId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -6469,7 +6469,7 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOrganizationSecurityUsers(organizationId: string, options?: any): AxiosPromise<Array<string>> {
+        getOrganizationSecurityUsers(organizationId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<string>> {
             return localVarFp.getOrganizationSecurityUsers(organizationId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -6479,7 +6479,7 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        registerOrganization(organization: Organization, options?: any): AxiosPromise<Organization> {
+        registerOrganization(organization: Organization, options?: RawAxiosRequestConfig): AxiosPromise<Organization> {
             return localVarFp.registerOrganization(organization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -6490,7 +6490,7 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        removeOrganizationAccessControl(organizationId: string, identityId: string, options?: any): AxiosPromise<void> {
+        removeOrganizationAccessControl(organizationId: string, identityId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.removeOrganizationAccessControl(organizationId, identityId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -6501,7 +6501,7 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        setOrganizationDefaultSecurity(organizationId: string, organizationRole: OrganizationRole, options?: any): AxiosPromise<OrganizationSecurity> {
+        setOrganizationDefaultSecurity(organizationId: string, organizationRole: OrganizationRole, options?: RawAxiosRequestConfig): AxiosPromise<OrganizationSecurity> {
             return localVarFp.setOrganizationDefaultSecurity(organizationId, organizationRole, options).then((request) => request(axios, basePath));
         },
         /**
@@ -6511,7 +6511,7 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        unregisterOrganization(organizationId: string, options?: any): AxiosPromise<void> {
+        unregisterOrganization(organizationId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.unregisterOrganization(organizationId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -6522,7 +6522,7 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateOrganization(organizationId: string, organization: Organization, options?: any): AxiosPromise<Organization> {
+        updateOrganization(organizationId: string, organization: Organization, options?: RawAxiosRequestConfig): AxiosPromise<Organization> {
             return localVarFp.updateOrganization(organizationId, organization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -6534,7 +6534,7 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateOrganizationAccessControl(organizationId: string, identityId: string, organizationRole: OrganizationRole, options?: any): AxiosPromise<OrganizationAccessControl> {
+        updateOrganizationAccessControl(organizationId: string, identityId: string, organizationRole: OrganizationRole, options?: RawAxiosRequestConfig): AxiosPromise<OrganizationAccessControl> {
             return localVarFp.updateOrganizationAccessControl(organizationId, identityId, organizationRole, options).then((request) => request(axios, basePath));
         },
     };
@@ -7245,7 +7245,7 @@ export const RunApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteRun(organizationId: string, workspaceId: string, runnerId: string, runId: string, options?: any): AxiosPromise<void> {
+        deleteRun(organizationId: string, workspaceId: string, runnerId: string, runId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.deleteRun(organizationId, workspaceId, runnerId, runId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -7258,7 +7258,7 @@ export const RunApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRun(organizationId: string, workspaceId: string, runnerId: string, runId: string, options?: any): AxiosPromise<Run> {
+        getRun(organizationId: string, workspaceId: string, runnerId: string, runId: string, options?: RawAxiosRequestConfig): AxiosPromise<Run> {
             return localVarFp.getRun(organizationId, workspaceId, runnerId, runId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -7271,7 +7271,7 @@ export const RunApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRunLogs(organizationId: string, workspaceId: string, runnerId: string, runId: string, options?: any): AxiosPromise<RunLogs> {
+        getRunLogs(organizationId: string, workspaceId: string, runnerId: string, runId: string, options?: RawAxiosRequestConfig): AxiosPromise<RunLogs> {
             return localVarFp.getRunLogs(organizationId, workspaceId, runnerId, runId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -7284,7 +7284,7 @@ export const RunApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRunStatus(organizationId: string, workspaceId: string, runnerId: string, runId: string, options?: any): AxiosPromise<RunStatus> {
+        getRunStatus(organizationId: string, workspaceId: string, runnerId: string, runId: string, options?: RawAxiosRequestConfig): AxiosPromise<RunStatus> {
             return localVarFp.getRunStatus(organizationId, workspaceId, runnerId, runId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -7298,7 +7298,7 @@ export const RunApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listRuns(organizationId: string, workspaceId: string, runnerId: string, page?: number, size?: number, options?: any): AxiosPromise<Array<Run>> {
+        listRuns(organizationId: string, workspaceId: string, runnerId: string, page?: number, size?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<Run>> {
             return localVarFp.listRuns(organizationId, workspaceId, runnerId, page, size, options).then((request) => request(axios, basePath));
         },
         /**
@@ -7312,7 +7312,7 @@ export const RunApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        queryRunData(organizationId: string, workspaceId: string, runnerId: string, runId: string, runDataQuery: RunDataQuery, options?: any): AxiosPromise<QueryResult> {
+        queryRunData(organizationId: string, workspaceId: string, runnerId: string, runId: string, runDataQuery: RunDataQuery, options?: RawAxiosRequestConfig): AxiosPromise<QueryResult> {
             return localVarFp.queryRunData(organizationId, workspaceId, runnerId, runId, runDataQuery, options).then((request) => request(axios, basePath));
         },
         /**
@@ -7326,7 +7326,7 @@ export const RunApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        sendRunData(organizationId: string, workspaceId: string, runnerId: string, runId: string, sendRunDataRequest: SendRunDataRequest, options?: any): AxiosPromise<RunData> {
+        sendRunData(organizationId: string, workspaceId: string, runnerId: string, runId: string, sendRunDataRequest: SendRunDataRequest, options?: RawAxiosRequestConfig): AxiosPromise<RunData> {
             return localVarFp.sendRunData(organizationId, workspaceId, runnerId, runId, sendRunDataRequest, options).then((request) => request(axios, basePath));
         },
     };
@@ -8458,7 +8458,7 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, runnerAccessControl: RunnerAccessControl, options?: any): AxiosPromise<RunnerAccessControl> {
+        addRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, runnerAccessControl: RunnerAccessControl, options?: RawAxiosRequestConfig): AxiosPromise<RunnerAccessControl> {
             return localVarFp.addRunnerAccessControl(organizationId, workspaceId, runnerId, runnerAccessControl, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8470,7 +8470,7 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createRunner(organizationId: string, workspaceId: string, runner: Runner, options?: any): AxiosPromise<Runner> {
+        createRunner(organizationId: string, workspaceId: string, runner: Runner, options?: RawAxiosRequestConfig): AxiosPromise<Runner> {
             return localVarFp.createRunner(organizationId, workspaceId, runner, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8482,7 +8482,7 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteRunner(organizationId: string, workspaceId: string, runnerId: string, options?: any): AxiosPromise<void> {
+        deleteRunner(organizationId: string, workspaceId: string, runnerId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.deleteRunner(organizationId, workspaceId, runnerId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8494,7 +8494,7 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRunner(organizationId: string, workspaceId: string, runnerId: string, options?: any): AxiosPromise<Runner> {
+        getRunner(organizationId: string, workspaceId: string, runnerId: string, options?: RawAxiosRequestConfig): AxiosPromise<Runner> {
             return localVarFp.getRunner(organizationId, workspaceId, runnerId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8507,7 +8507,7 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, identityId: string, options?: any): AxiosPromise<RunnerAccessControl> {
+        getRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, identityId: string, options?: RawAxiosRequestConfig): AxiosPromise<RunnerAccessControl> {
             return localVarFp.getRunnerAccessControl(organizationId, workspaceId, runnerId, identityId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8520,7 +8520,7 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRunnerPermissions(organizationId: string, workspaceId: string, runnerId: string, role: string, options?: any): AxiosPromise<Array<string>> {
+        getRunnerPermissions(organizationId: string, workspaceId: string, runnerId: string, role: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<string>> {
             return localVarFp.getRunnerPermissions(organizationId, workspaceId, runnerId, role, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8532,7 +8532,7 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRunnerSecurity(organizationId: string, workspaceId: string, runnerId: string, options?: any): AxiosPromise<RunnerSecurity> {
+        getRunnerSecurity(organizationId: string, workspaceId: string, runnerId: string, options?: RawAxiosRequestConfig): AxiosPromise<RunnerSecurity> {
             return localVarFp.getRunnerSecurity(organizationId, workspaceId, runnerId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8544,7 +8544,7 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRunnerSecurityUsers(organizationId: string, workspaceId: string, runnerId: string, options?: any): AxiosPromise<Array<string>> {
+        getRunnerSecurityUsers(organizationId: string, workspaceId: string, runnerId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<string>> {
             return localVarFp.getRunnerSecurityUsers(organizationId, workspaceId, runnerId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8557,7 +8557,7 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listRunners(organizationId: string, workspaceId: string, page?: number, size?: number, options?: any): AxiosPromise<Array<Runner>> {
+        listRunners(organizationId: string, workspaceId: string, page?: number, size?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<Runner>> {
             return localVarFp.listRunners(organizationId, workspaceId, page, size, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8570,7 +8570,7 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        removeRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, identityId: string, options?: any): AxiosPromise<void> {
+        removeRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, identityId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.removeRunnerAccessControl(organizationId, workspaceId, runnerId, identityId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8583,7 +8583,7 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        setRunnerDefaultSecurity(organizationId: string, workspaceId: string, runnerId: string, runnerRole: RunnerRole, options?: any): AxiosPromise<RunnerSecurity> {
+        setRunnerDefaultSecurity(organizationId: string, workspaceId: string, runnerId: string, runnerRole: RunnerRole, options?: RawAxiosRequestConfig): AxiosPromise<RunnerSecurity> {
             return localVarFp.setRunnerDefaultSecurity(organizationId, workspaceId, runnerId, runnerRole, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8595,7 +8595,7 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        startRun(organizationId: string, workspaceId: string, runnerId: string, options?: any): AxiosPromise<CreatedRun> {
+        startRun(organizationId: string, workspaceId: string, runnerId: string, options?: RawAxiosRequestConfig): AxiosPromise<CreatedRun> {
             return localVarFp.startRun(organizationId, workspaceId, runnerId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8607,7 +8607,7 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        stopRun(organizationId: string, workspaceId: string, runnerId: string, options?: any): AxiosPromise<void> {
+        stopRun(organizationId: string, workspaceId: string, runnerId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.stopRun(organizationId, workspaceId, runnerId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8620,7 +8620,7 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateRunner(organizationId: string, workspaceId: string, runnerId: string, runner: Runner, options?: any): AxiosPromise<Runner> {
+        updateRunner(organizationId: string, workspaceId: string, runnerId: string, runner: Runner, options?: RawAxiosRequestConfig): AxiosPromise<Runner> {
             return localVarFp.updateRunner(organizationId, workspaceId, runnerId, runner, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8634,7 +8634,7 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, identityId: string, runnerRole: RunnerRole, options?: any): AxiosPromise<RunnerAccessControl> {
+        updateRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, identityId: string, runnerRole: RunnerRole, options?: RawAxiosRequestConfig): AxiosPromise<RunnerAccessControl> {
             return localVarFp.updateRunnerAccessControl(organizationId, workspaceId, runnerId, identityId, runnerRole, options).then((request) => request(axios, basePath));
         },
     };
@@ -10114,7 +10114,7 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addOrReplaceParameterGroups(organizationId: string, solutionId: string, runTemplateParameterGroup: Array<RunTemplateParameterGroup>, options?: any): AxiosPromise<Array<RunTemplateParameterGroup>> {
+        addOrReplaceParameterGroups(organizationId: string, solutionId: string, runTemplateParameterGroup: Array<RunTemplateParameterGroup>, options?: RawAxiosRequestConfig): AxiosPromise<Array<RunTemplateParameterGroup>> {
             return localVarFp.addOrReplaceParameterGroups(organizationId, solutionId, runTemplateParameterGroup, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10126,7 +10126,7 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addOrReplaceParameters(organizationId: string, solutionId: string, runTemplateParameter: Array<RunTemplateParameter>, options?: any): AxiosPromise<Array<RunTemplateParameter>> {
+        addOrReplaceParameters(organizationId: string, solutionId: string, runTemplateParameter: Array<RunTemplateParameter>, options?: RawAxiosRequestConfig): AxiosPromise<Array<RunTemplateParameter>> {
             return localVarFp.addOrReplaceParameters(organizationId, solutionId, runTemplateParameter, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10138,7 +10138,7 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addOrReplaceRunTemplates(organizationId: string, solutionId: string, runTemplate: Array<RunTemplate>, options?: any): AxiosPromise<Array<RunTemplate>> {
+        addOrReplaceRunTemplates(organizationId: string, solutionId: string, runTemplate: Array<RunTemplate>, options?: RawAxiosRequestConfig): AxiosPromise<Array<RunTemplate>> {
             return localVarFp.addOrReplaceRunTemplates(organizationId, solutionId, runTemplate, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10150,7 +10150,7 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addSolutionAccessControl(organizationId: string, solutionId: string, solutionAccessControl: SolutionAccessControl, options?: any): AxiosPromise<SolutionAccessControl> {
+        addSolutionAccessControl(organizationId: string, solutionId: string, solutionAccessControl: SolutionAccessControl, options?: RawAxiosRequestConfig): AxiosPromise<SolutionAccessControl> {
             return localVarFp.addSolutionAccessControl(organizationId, solutionId, solutionAccessControl, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10161,7 +10161,7 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createSolution(organizationId: string, solution: Solution, options?: any): AxiosPromise<Solution> {
+        createSolution(organizationId: string, solution: Solution, options?: RawAxiosRequestConfig): AxiosPromise<Solution> {
             return localVarFp.createSolution(organizationId, solution, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10172,7 +10172,7 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteSolution(organizationId: string, solutionId: string, options?: any): AxiosPromise<void> {
+        deleteSolution(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.deleteSolution(organizationId, solutionId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10184,7 +10184,7 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteSolutionRunTemplate(organizationId: string, solutionId: string, runTemplateId: string, options?: any): AxiosPromise<void> {
+        deleteSolutionRunTemplate(organizationId: string, solutionId: string, runTemplateId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.deleteSolutionRunTemplate(organizationId, solutionId, runTemplateId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10196,7 +10196,7 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findAllSolutions(organizationId: string, page?: number, size?: number, options?: any): AxiosPromise<Array<Solution>> {
+        findAllSolutions(organizationId: string, page?: number, size?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<Solution>> {
             return localVarFp.findAllSolutions(organizationId, page, size, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10207,7 +10207,7 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findSolutionById(organizationId: string, solutionId: string, options?: any): AxiosPromise<Solution> {
+        findSolutionById(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): AxiosPromise<Solution> {
             return localVarFp.findSolutionById(organizationId, solutionId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10219,7 +10219,7 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSolutionAccessControl(organizationId: string, solutionId: string, identityId: string, options?: any): AxiosPromise<SolutionAccessControl> {
+        getSolutionAccessControl(organizationId: string, solutionId: string, identityId: string, options?: RawAxiosRequestConfig): AxiosPromise<SolutionAccessControl> {
             return localVarFp.getSolutionAccessControl(organizationId, solutionId, identityId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10230,7 +10230,7 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSolutionSecurity(organizationId: string, solutionId: string, options?: any): AxiosPromise<SolutionSecurity> {
+        getSolutionSecurity(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): AxiosPromise<SolutionSecurity> {
             return localVarFp.getSolutionSecurity(organizationId, solutionId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10241,7 +10241,7 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSolutionSecurityUsers(organizationId: string, solutionId: string, options?: any): AxiosPromise<Array<string>> {
+        getSolutionSecurityUsers(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<string>> {
             return localVarFp.getSolutionSecurityUsers(organizationId, solutionId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10252,7 +10252,7 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        removeAllRunTemplates(organizationId: string, solutionId: string, options?: any): AxiosPromise<void> {
+        removeAllRunTemplates(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.removeAllRunTemplates(organizationId, solutionId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10263,7 +10263,7 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        removeAllSolutionParameterGroups(organizationId: string, solutionId: string, options?: any): AxiosPromise<void> {
+        removeAllSolutionParameterGroups(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.removeAllSolutionParameterGroups(organizationId, solutionId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10274,7 +10274,7 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        removeAllSolutionParameters(organizationId: string, solutionId: string, options?: any): AxiosPromise<void> {
+        removeAllSolutionParameters(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.removeAllSolutionParameters(organizationId, solutionId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10286,7 +10286,7 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        removeSolutionAccessControl(organizationId: string, solutionId: string, identityId: string, options?: any): AxiosPromise<void> {
+        removeSolutionAccessControl(organizationId: string, solutionId: string, identityId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.removeSolutionAccessControl(organizationId, solutionId, identityId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10298,7 +10298,7 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        setSolutionDefaultSecurity(organizationId: string, solutionId: string, solutionRole: SolutionRole, options?: any): AxiosPromise<SolutionSecurity> {
+        setSolutionDefaultSecurity(organizationId: string, solutionId: string, solutionRole: SolutionRole, options?: RawAxiosRequestConfig): AxiosPromise<SolutionSecurity> {
             return localVarFp.setSolutionDefaultSecurity(organizationId, solutionId, solutionRole, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10310,7 +10310,7 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateSolution(organizationId: string, solutionId: string, solution: Solution, options?: any): AxiosPromise<Solution> {
+        updateSolution(organizationId: string, solutionId: string, solution: Solution, options?: RawAxiosRequestConfig): AxiosPromise<Solution> {
             return localVarFp.updateSolution(organizationId, solutionId, solution, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10323,7 +10323,7 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateSolutionAccessControl(organizationId: string, solutionId: string, identityId: string, solutionRole: SolutionRole, options?: any): AxiosPromise<SolutionAccessControl> {
+        updateSolutionAccessControl(organizationId: string, solutionId: string, identityId: string, solutionRole: SolutionRole, options?: RawAxiosRequestConfig): AxiosPromise<SolutionAccessControl> {
             return localVarFp.updateSolutionAccessControl(organizationId, solutionId, identityId, solutionRole, options).then((request) => request(axios, basePath));
         },
         /**
@@ -10336,7 +10336,7 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateSolutionRunTemplate(organizationId: string, solutionId: string, runTemplateId: string, runTemplate: RunTemplate, options?: any): AxiosPromise<Array<RunTemplate>> {
+        updateSolutionRunTemplate(organizationId: string, solutionId: string, runTemplateId: string, runTemplate: RunTemplate, options?: RawAxiosRequestConfig): AxiosPromise<Array<RunTemplate>> {
             return localVarFp.updateSolutionRunTemplate(organizationId, solutionId, runTemplateId, runTemplate, options).then((request) => request(axios, basePath));
         },
     };
@@ -11543,7 +11543,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
 
 
             if (overwrite !== undefined) { 
-                localVarFormParams.append('overwrite', overwrite as any);
+                localVarFormParams.append('overwrite', String(overwrite) as any);
             }
     
             if (destination !== undefined) { 
@@ -11890,7 +11890,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addWorkspaceAccessControl(organizationId: string, workspaceId: string, workspaceAccessControl: WorkspaceAccessControl, options?: any): AxiosPromise<WorkspaceAccessControl> {
+        addWorkspaceAccessControl(organizationId: string, workspaceId: string, workspaceAccessControl: WorkspaceAccessControl, options?: RawAxiosRequestConfig): AxiosPromise<WorkspaceAccessControl> {
             return localVarFp.addWorkspaceAccessControl(organizationId, workspaceId, workspaceAccessControl, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11901,7 +11901,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createWorkspace(organizationId: string, workspace: Workspace, options?: any): AxiosPromise<Workspace> {
+        createWorkspace(organizationId: string, workspace: Workspace, options?: RawAxiosRequestConfig): AxiosPromise<Workspace> {
             return localVarFp.createWorkspace(organizationId, workspace, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11912,7 +11912,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteAllWorkspaceFiles(organizationId: string, workspaceId: string, options?: any): AxiosPromise<void> {
+        deleteAllWorkspaceFiles(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.deleteAllWorkspaceFiles(organizationId, workspaceId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11923,7 +11923,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteWorkspace(organizationId: string, workspaceId: string, options?: any): AxiosPromise<void> {
+        deleteWorkspace(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.deleteWorkspace(organizationId, workspaceId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11935,7 +11935,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteWorkspaceFile(organizationId: string, workspaceId: string, fileName: string, options?: any): AxiosPromise<void> {
+        deleteWorkspaceFile(organizationId: string, workspaceId: string, fileName: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.deleteWorkspaceFile(organizationId, workspaceId, fileName, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11947,7 +11947,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        downloadWorkspaceFile(organizationId: string, workspaceId: string, fileName: string, options?: any): AxiosPromise<File> {
+        downloadWorkspaceFile(organizationId: string, workspaceId: string, fileName: string, options?: RawAxiosRequestConfig): AxiosPromise<File> {
             return localVarFp.downloadWorkspaceFile(organizationId, workspaceId, fileName, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11958,7 +11958,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findAllWorkspaceFiles(organizationId: string, workspaceId: string, options?: any): AxiosPromise<Array<WorkspaceFile>> {
+        findAllWorkspaceFiles(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<WorkspaceFile>> {
             return localVarFp.findAllWorkspaceFiles(organizationId, workspaceId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11970,7 +11970,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findAllWorkspaces(organizationId: string, page?: number, size?: number, options?: any): AxiosPromise<Array<Workspace>> {
+        findAllWorkspaces(organizationId: string, page?: number, size?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<Workspace>> {
             return localVarFp.findAllWorkspaces(organizationId, page, size, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11981,7 +11981,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findWorkspaceById(organizationId: string, workspaceId: string, options?: any): AxiosPromise<Workspace> {
+        findWorkspaceById(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig): AxiosPromise<Workspace> {
             return localVarFp.findWorkspaceById(organizationId, workspaceId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -11993,7 +11993,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getWorkspaceAccessControl(organizationId: string, workspaceId: string, identityId: string, options?: any): AxiosPromise<WorkspaceAccessControl> {
+        getWorkspaceAccessControl(organizationId: string, workspaceId: string, identityId: string, options?: RawAxiosRequestConfig): AxiosPromise<WorkspaceAccessControl> {
             return localVarFp.getWorkspaceAccessControl(organizationId, workspaceId, identityId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -12005,7 +12005,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getWorkspacePermissions(organizationId: string, workspaceId: string, role: string, options?: any): AxiosPromise<Array<string>> {
+        getWorkspacePermissions(organizationId: string, workspaceId: string, role: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<string>> {
             return localVarFp.getWorkspacePermissions(organizationId, workspaceId, role, options).then((request) => request(axios, basePath));
         },
         /**
@@ -12016,7 +12016,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getWorkspaceSecurity(organizationId: string, workspaceId: string, options?: any): AxiosPromise<WorkspaceSecurity> {
+        getWorkspaceSecurity(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig): AxiosPromise<WorkspaceSecurity> {
             return localVarFp.getWorkspaceSecurity(organizationId, workspaceId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -12027,7 +12027,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getWorkspaceSecurityUsers(organizationId: string, workspaceId: string, options?: any): AxiosPromise<Array<string>> {
+        getWorkspaceSecurityUsers(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<string>> {
             return localVarFp.getWorkspaceSecurityUsers(organizationId, workspaceId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -12038,7 +12038,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        linkDataset(organizationId: string, workspaceId: string, datasetId: string, options?: any): AxiosPromise<Workspace> {
+        linkDataset(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig): AxiosPromise<Workspace> {
             return localVarFp.linkDataset(organizationId, workspaceId, datasetId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -12050,7 +12050,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        removeWorkspaceAccessControl(organizationId: string, workspaceId: string, identityId: string, options?: any): AxiosPromise<void> {
+        removeWorkspaceAccessControl(organizationId: string, workspaceId: string, identityId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.removeWorkspaceAccessControl(organizationId, workspaceId, identityId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -12062,7 +12062,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        setWorkspaceDefaultSecurity(organizationId: string, workspaceId: string, workspaceRole: WorkspaceRole, options?: any): AxiosPromise<WorkspaceSecurity> {
+        setWorkspaceDefaultSecurity(organizationId: string, workspaceId: string, workspaceRole: WorkspaceRole, options?: RawAxiosRequestConfig): AxiosPromise<WorkspaceSecurity> {
             return localVarFp.setWorkspaceDefaultSecurity(organizationId, workspaceId, workspaceRole, options).then((request) => request(axios, basePath));
         },
         /**
@@ -12073,7 +12073,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        unlinkDataset(organizationId: string, workspaceId: string, datasetId: string, options?: any): AxiosPromise<Workspace> {
+        unlinkDataset(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig): AxiosPromise<Workspace> {
             return localVarFp.unlinkDataset(organizationId, workspaceId, datasetId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -12085,7 +12085,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateWorkspace(organizationId: string, workspaceId: string, workspace: Workspace, options?: any): AxiosPromise<Workspace> {
+        updateWorkspace(organizationId: string, workspaceId: string, workspace: Workspace, options?: RawAxiosRequestConfig): AxiosPromise<Workspace> {
             return localVarFp.updateWorkspace(organizationId, workspaceId, workspace, options).then((request) => request(axios, basePath));
         },
         /**
@@ -12098,7 +12098,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateWorkspaceAccessControl(organizationId: string, workspaceId: string, identityId: string, workspaceRole: WorkspaceRole, options?: any): AxiosPromise<WorkspaceAccessControl> {
+        updateWorkspaceAccessControl(organizationId: string, workspaceId: string, identityId: string, workspaceRole: WorkspaceRole, options?: RawAxiosRequestConfig): AxiosPromise<WorkspaceAccessControl> {
             return localVarFp.updateWorkspaceAccessControl(organizationId, workspaceId, identityId, workspaceRole, options).then((request) => request(axios, basePath));
         },
         /**
@@ -12112,7 +12112,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadWorkspaceFile(organizationId: string, workspaceId: string, file: File, overwrite?: boolean, destination?: string, options?: any): AxiosPromise<WorkspaceFile> {
+        uploadWorkspaceFile(organizationId: string, workspaceId: string, file: File, overwrite?: boolean, destination?: string, options?: RawAxiosRequestConfig): AxiosPromise<WorkspaceFile> {
             return localVarFp.uploadWorkspaceFile(organizationId, workspaceId, file, overwrite, destination, options).then((request) => request(axios, basePath));
         },
     };
