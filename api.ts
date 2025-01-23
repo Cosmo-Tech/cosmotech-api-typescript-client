@@ -753,7 +753,7 @@ export interface Organization {
     'security'?: OrganizationSecurity;
 }
 /**
- * a Organization access control item
+ * Response object for organization access control
  * @export
  * @interface OrganizationAccessControl
  */
@@ -772,6 +772,25 @@ export interface OrganizationAccessControl {
     'role': string;
 }
 /**
+ * Request object for creating a new organization
+ * @export
+ * @interface OrganizationCreateRequest
+ */
+export interface OrganizationCreateRequest {
+    /**
+     * the Organization name
+     * @type {string}
+     * @memberof OrganizationCreateRequest
+     */
+    'name': string;
+    /**
+     * 
+     * @type {OrganizationSecurity}
+     * @memberof OrganizationCreateRequest
+     */
+    'security'?: OrganizationSecurity;
+}
+/**
  * the Organization Role
  * @export
  * @interface OrganizationRole
@@ -785,7 +804,7 @@ export interface OrganizationRole {
     'role': string;
 }
 /**
- * the Organization security information
+ * Response object for organization security information
  * @export
  * @interface OrganizationSecurity
  */
@@ -802,6 +821,19 @@ export interface OrganizationSecurity {
      * @memberof OrganizationSecurity
      */
     'accessControlList': Array<OrganizationAccessControl>;
+}
+/**
+ * Request object for updating an organization
+ * @export
+ * @interface OrganizationUpdateRequest
+ */
+export interface OrganizationUpdateRequest {
+    /**
+     * the Organization name
+     * @type {string}
+     * @memberof OrganizationUpdateRequest
+     */
+    'name'?: string;
 }
 /**
  * the result of a SQL Query
@@ -5594,17 +5626,57 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
     return {
         /**
          * 
+         * @summary Create a new organization
+         * @param {OrganizationCreateRequest} organizationCreateRequest the Organization to create
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createOrganization: async (organizationCreateRequest: OrganizationCreateRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationCreateRequest' is not null or undefined
+            assertParamExists('createOrganization', 'organizationCreateRequest', organizationCreateRequest)
+            const localVarPath = `/organizations`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(organizationCreateRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Add a control access to the Organization
          * @param {string} organizationId the Organization identifier
          * @param {OrganizationAccessControl} organizationAccessControl the new Organization security access to add.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addOrganizationAccessControl: async (organizationId: string, organizationAccessControl: OrganizationAccessControl, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createOrganizationAccessControl: async (organizationId: string, organizationAccessControl: OrganizationAccessControl, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('addOrganizationAccessControl', 'organizationId', organizationId)
+            assertParamExists('createOrganizationAccessControl', 'organizationId', organizationId)
             // verify required parameter 'organizationAccessControl' is not null or undefined
-            assertParamExists('addOrganizationAccessControl', 'organizationAccessControl', organizationAccessControl)
+            assertParamExists('createOrganizationAccessControl', 'organizationAccessControl', organizationAccessControl)
             const localVarPath = `/organizations/{organization_id}/security/access`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -5638,14 +5710,16 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
-         * @summary List all Organizations
-         * @param {number} [page] page number to query (first page is at index 0)
-         * @param {number} [size] amount of result by page
+         * @summary Delete an organization
+         * @param {string} organizationId the Organization identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findAllOrganizations: async (page?: number, size?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/organizations`;
+        deleteOrganization: async (organizationId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('deleteOrganization', 'organizationId', organizationId)
+            const localVarPath = `/organizations/{organization_id}`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -5653,7 +5727,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -5661,13 +5735,47 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-            if (page !== undefined) {
-                localVarQueryParameter['page'] = page;
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Remove the specified access from the given Organization
+         * @param {string} organizationId the Organization identifier
+         * @param {string} identityId the User identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteOrganizationAccessControl: async (organizationId: string, identityId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('deleteOrganizationAccessControl', 'organizationId', organizationId)
+            // verify required parameter 'identityId' is not null or undefined
+            assertParamExists('deleteOrganizationAccessControl', 'identityId', identityId)
+            const localVarPath = `/organizations/{organization_id}/security/access/{identity_id}`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
             }
 
-            if (size !== undefined) {
-                localVarQueryParameter['size'] = size;
-            }
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
 
     
@@ -5687,45 +5795,11 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findOrganizationById: async (organizationId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getOrganization: async (organizationId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('findOrganizationById', 'organizationId', organizationId)
+            assertParamExists('getOrganization', 'organizationId', organizationId)
             const localVarPath = `/organizations/{organization_id}`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get all permissions per components
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAllPermissions: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/organizations/permissions`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -5881,9 +5955,9 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOrganizationSecurityUsers: async (organizationId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listOrganizationSecurityUsers: async (organizationId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('getOrganizationSecurityUsers', 'organizationId', organizationId)
+            assertParamExists('listOrganizationSecurityUsers', 'organizationId', organizationId)
             const localVarPath = `/organizations/{organization_id}/security/users`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -5914,14 +5988,13 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
-         * @summary Register a new organization
-         * @param {Organization} organization the Organization to register
+         * @summary List all Organizations
+         * @param {number} [page] page number to query (first page is at index 0)
+         * @param {number} [size] amount of result by page
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        registerOrganization: async (organization: Organization, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organization' is not null or undefined
-            assertParamExists('registerOrganization', 'organization', organization)
+        listOrganizations: async (page?: number, size?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/organizations`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -5930,7 +6003,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -5938,50 +6011,13 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(organization, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Remove the specified access from the given Organization
-         * @param {string} organizationId the Organization identifier
-         * @param {string} identityId the User identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        removeOrganizationAccessControl: async (organizationId: string, identityId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('removeOrganizationAccessControl', 'organizationId', organizationId)
-            // verify required parameter 'identityId' is not null or undefined
-            assertParamExists('removeOrganizationAccessControl', 'identityId', identityId)
-            const localVarPath = `/organizations/{organization_id}/security/access/{identity_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
             }
 
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+            if (size !== undefined) {
+                localVarQueryParameter['size'] = size;
+            }
 
 
     
@@ -5996,19 +6032,12 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
-         * @summary Set the Organization default security
-         * @param {string} organizationId the Organization identifier
-         * @param {OrganizationRole} organizationRole This change the organization default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the organization.
+         * @summary Get all permissions per components
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        setOrganizationDefaultSecurity: async (organizationId: string, organizationRole: OrganizationRole, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('setOrganizationDefaultSecurity', 'organizationId', organizationId)
-            // verify required parameter 'organizationRole' is not null or undefined
-            assertParamExists('setOrganizationDefaultSecurity', 'organizationRole', organizationRole)
-            const localVarPath = `/organizations/{organization_id}/security/default`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
+        listPermissions: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/organizations/permissions`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -6016,48 +6045,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(organizationRole, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Unregister an organization
-         * @param {string} organizationId the Organization identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        unregisterOrganization: async (organizationId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('unregisterOrganization', 'organizationId', organizationId)
-            const localVarPath = `/organizations/{organization_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -6080,15 +6068,15 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
          * 
          * @summary Update an Organization
          * @param {string} organizationId the Organization identifier
-         * @param {Organization} organization the new Organization details. This endpoint can\&#39;t be used to update security
+         * @param {OrganizationUpdateRequest} organizationUpdateRequest the new Organization details. This endpoint can\&#39;t be used to update security
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateOrganization: async (organizationId: string, organization: Organization, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateOrganization: async (organizationId: string, organizationUpdateRequest: OrganizationUpdateRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('updateOrganization', 'organizationId', organizationId)
-            // verify required parameter 'organization' is not null or undefined
-            assertParamExists('updateOrganization', 'organization', organization)
+            // verify required parameter 'organizationUpdateRequest' is not null or undefined
+            assertParamExists('updateOrganization', 'organizationUpdateRequest', organizationUpdateRequest)
             const localVarPath = `/organizations/{organization_id}`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -6113,7 +6101,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(organization, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(organizationUpdateRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -6168,6 +6156,50 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @summary Update the Organization default security
+         * @param {string} organizationId the Organization identifier
+         * @param {OrganizationRole} organizationRole This change the organization default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the organization.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateOrganizationDefaultSecurity: async (organizationId: string, organizationRole: OrganizationRole, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('updateOrganizationDefaultSecurity', 'organizationId', organizationId)
+            // verify required parameter 'organizationRole' is not null or undefined
+            assertParamExists('updateOrganizationDefaultSecurity', 'organizationRole', organizationRole)
+            const localVarPath = `/organizations/{organization_id}/security/default`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(organizationRole, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -6180,30 +6212,56 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @summary Create a new organization
+         * @param {OrganizationCreateRequest} organizationCreateRequest the Organization to create
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createOrganization(organizationCreateRequest: OrganizationCreateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Organization>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createOrganization(organizationCreateRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OrganizationApi.createOrganization']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary Add a control access to the Organization
          * @param {string} organizationId the Organization identifier
          * @param {OrganizationAccessControl} organizationAccessControl the new Organization security access to add.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async addOrganizationAccessControl(organizationId: string, organizationAccessControl: OrganizationAccessControl, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrganizationAccessControl>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.addOrganizationAccessControl(organizationId, organizationAccessControl, options);
+        async createOrganizationAccessControl(organizationId: string, organizationAccessControl: OrganizationAccessControl, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrganizationAccessControl>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createOrganizationAccessControl(organizationId, organizationAccessControl, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['OrganizationApi.addOrganizationAccessControl']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['OrganizationApi.createOrganizationAccessControl']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
-         * @summary List all Organizations
-         * @param {number} [page] page number to query (first page is at index 0)
-         * @param {number} [size] amount of result by page
+         * @summary Delete an organization
+         * @param {string} organizationId the Organization identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findAllOrganizations(page?: number, size?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Organization>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.findAllOrganizations(page, size, options);
+        async deleteOrganization(organizationId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteOrganization(organizationId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['OrganizationApi.findAllOrganizations']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['OrganizationApi.deleteOrganization']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Remove the specified access from the given Organization
+         * @param {string} organizationId the Organization identifier
+         * @param {string} identityId the User identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteOrganizationAccessControl(organizationId: string, identityId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteOrganizationAccessControl(organizationId, identityId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OrganizationApi.deleteOrganizationAccessControl']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -6213,22 +6271,10 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findOrganizationById(organizationId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Organization>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.findOrganizationById(organizationId, options);
+        async getOrganization(organizationId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Organization>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getOrganization(organizationId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['OrganizationApi.findOrganizationById']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Get all permissions per components
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getAllPermissions(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ComponentRolePermissions>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllPermissions(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['OrganizationApi.getAllPermissions']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['OrganizationApi.getOrganization']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -6279,76 +6325,48 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getOrganizationSecurityUsers(organizationId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getOrganizationSecurityUsers(organizationId, options);
+        async listOrganizationSecurityUsers(organizationId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listOrganizationSecurityUsers(organizationId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['OrganizationApi.getOrganizationSecurityUsers']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['OrganizationApi.listOrganizationSecurityUsers']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
-         * @summary Register a new organization
-         * @param {Organization} organization the Organization to register
+         * @summary List all Organizations
+         * @param {number} [page] page number to query (first page is at index 0)
+         * @param {number} [size] amount of result by page
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async registerOrganization(organization: Organization, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Organization>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.registerOrganization(organization, options);
+        async listOrganizations(page?: number, size?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Organization>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listOrganizations(page, size, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['OrganizationApi.registerOrganization']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['OrganizationApi.listOrganizations']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
-         * @summary Remove the specified access from the given Organization
-         * @param {string} organizationId the Organization identifier
-         * @param {string} identityId the User identifier
+         * @summary Get all permissions per components
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async removeOrganizationAccessControl(organizationId: string, identityId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.removeOrganizationAccessControl(organizationId, identityId, options);
+        async listPermissions(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ComponentRolePermissions>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listPermissions(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['OrganizationApi.removeOrganizationAccessControl']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Set the Organization default security
-         * @param {string} organizationId the Organization identifier
-         * @param {OrganizationRole} organizationRole This change the organization default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the organization.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async setOrganizationDefaultSecurity(organizationId: string, organizationRole: OrganizationRole, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrganizationSecurity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setOrganizationDefaultSecurity(organizationId, organizationRole, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['OrganizationApi.setOrganizationDefaultSecurity']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Unregister an organization
-         * @param {string} organizationId the Organization identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async unregisterOrganization(organizationId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.unregisterOrganization(organizationId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['OrganizationApi.unregisterOrganization']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['OrganizationApi.listPermissions']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
          * @summary Update an Organization
          * @param {string} organizationId the Organization identifier
-         * @param {Organization} organization the new Organization details. This endpoint can\&#39;t be used to update security
+         * @param {OrganizationUpdateRequest} organizationUpdateRequest the new Organization details. This endpoint can\&#39;t be used to update security
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateOrganization(organizationId: string, organization: Organization, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Organization>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateOrganization(organizationId, organization, options);
+        async updateOrganization(organizationId: string, organizationUpdateRequest: OrganizationUpdateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Organization>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateOrganization(organizationId, organizationUpdateRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['OrganizationApi.updateOrganization']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -6368,6 +6386,20 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['OrganizationApi.updateOrganizationAccessControl']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * 
+         * @summary Update the Organization default security
+         * @param {string} organizationId the Organization identifier
+         * @param {OrganizationRole} organizationRole This change the organization default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the organization.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateOrganizationDefaultSecurity(organizationId: string, organizationRole: OrganizationRole, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrganizationSecurity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateOrganizationDefaultSecurity(organizationId, organizationRole, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OrganizationApi.updateOrganizationDefaultSecurity']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -6380,25 +6412,45 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
     return {
         /**
          * 
+         * @summary Create a new organization
+         * @param {OrganizationCreateRequest} organizationCreateRequest the Organization to create
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createOrganization(organizationCreateRequest: OrganizationCreateRequest, options?: RawAxiosRequestConfig): AxiosPromise<Organization> {
+            return localVarFp.createOrganization(organizationCreateRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Add a control access to the Organization
          * @param {string} organizationId the Organization identifier
          * @param {OrganizationAccessControl} organizationAccessControl the new Organization security access to add.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addOrganizationAccessControl(organizationId: string, organizationAccessControl: OrganizationAccessControl, options?: RawAxiosRequestConfig): AxiosPromise<OrganizationAccessControl> {
-            return localVarFp.addOrganizationAccessControl(organizationId, organizationAccessControl, options).then((request) => request(axios, basePath));
+        createOrganizationAccessControl(organizationId: string, organizationAccessControl: OrganizationAccessControl, options?: RawAxiosRequestConfig): AxiosPromise<OrganizationAccessControl> {
+            return localVarFp.createOrganizationAccessControl(organizationId, organizationAccessControl, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @summary List all Organizations
-         * @param {number} [page] page number to query (first page is at index 0)
-         * @param {number} [size] amount of result by page
+         * @summary Delete an organization
+         * @param {string} organizationId the Organization identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findAllOrganizations(page?: number, size?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<Organization>> {
-            return localVarFp.findAllOrganizations(page, size, options).then((request) => request(axios, basePath));
+        deleteOrganization(organizationId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteOrganization(organizationId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Remove the specified access from the given Organization
+         * @param {string} organizationId the Organization identifier
+         * @param {string} identityId the User identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteOrganizationAccessControl(organizationId: string, identityId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteOrganizationAccessControl(organizationId, identityId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -6407,17 +6459,8 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findOrganizationById(organizationId: string, options?: RawAxiosRequestConfig): AxiosPromise<Organization> {
-            return localVarFp.findOrganizationById(organizationId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get all permissions per components
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAllPermissions(options?: RawAxiosRequestConfig): AxiosPromise<Array<ComponentRolePermissions>> {
-            return localVarFp.getAllPermissions(options).then((request) => request(axios, basePath));
+        getOrganization(organizationId: string, options?: RawAxiosRequestConfig): AxiosPromise<Organization> {
+            return localVarFp.getOrganization(organizationId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -6458,61 +6501,39 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOrganizationSecurityUsers(organizationId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<string>> {
-            return localVarFp.getOrganizationSecurityUsers(organizationId, options).then((request) => request(axios, basePath));
+        listOrganizationSecurityUsers(organizationId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<string>> {
+            return localVarFp.listOrganizationSecurityUsers(organizationId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @summary Register a new organization
-         * @param {Organization} organization the Organization to register
+         * @summary List all Organizations
+         * @param {number} [page] page number to query (first page is at index 0)
+         * @param {number} [size] amount of result by page
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        registerOrganization(organization: Organization, options?: RawAxiosRequestConfig): AxiosPromise<Organization> {
-            return localVarFp.registerOrganization(organization, options).then((request) => request(axios, basePath));
+        listOrganizations(page?: number, size?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<Organization>> {
+            return localVarFp.listOrganizations(page, size, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @summary Remove the specified access from the given Organization
-         * @param {string} organizationId the Organization identifier
-         * @param {string} identityId the User identifier
+         * @summary Get all permissions per components
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        removeOrganizationAccessControl(organizationId: string, identityId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.removeOrganizationAccessControl(organizationId, identityId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Set the Organization default security
-         * @param {string} organizationId the Organization identifier
-         * @param {OrganizationRole} organizationRole This change the organization default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the organization.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        setOrganizationDefaultSecurity(organizationId: string, organizationRole: OrganizationRole, options?: RawAxiosRequestConfig): AxiosPromise<OrganizationSecurity> {
-            return localVarFp.setOrganizationDefaultSecurity(organizationId, organizationRole, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Unregister an organization
-         * @param {string} organizationId the Organization identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        unregisterOrganization(organizationId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.unregisterOrganization(organizationId, options).then((request) => request(axios, basePath));
+        listPermissions(options?: RawAxiosRequestConfig): AxiosPromise<Array<ComponentRolePermissions>> {
+            return localVarFp.listPermissions(options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary Update an Organization
          * @param {string} organizationId the Organization identifier
-         * @param {Organization} organization the new Organization details. This endpoint can\&#39;t be used to update security
+         * @param {OrganizationUpdateRequest} organizationUpdateRequest the new Organization details. This endpoint can\&#39;t be used to update security
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateOrganization(organizationId: string, organization: Organization, options?: RawAxiosRequestConfig): AxiosPromise<Organization> {
-            return localVarFp.updateOrganization(organizationId, organization, options).then((request) => request(axios, basePath));
+        updateOrganization(organizationId: string, organizationUpdateRequest: OrganizationUpdateRequest, options?: RawAxiosRequestConfig): AxiosPromise<Organization> {
+            return localVarFp.updateOrganization(organizationId, organizationUpdateRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -6526,6 +6547,17 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
         updateOrganizationAccessControl(organizationId: string, identityId: string, organizationRole: OrganizationRole, options?: RawAxiosRequestConfig): AxiosPromise<OrganizationAccessControl> {
             return localVarFp.updateOrganizationAccessControl(organizationId, identityId, organizationRole, options).then((request) => request(axios, basePath));
         },
+        /**
+         * 
+         * @summary Update the Organization default security
+         * @param {string} organizationId the Organization identifier
+         * @param {OrganizationRole} organizationRole This change the organization default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the organization.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateOrganizationDefaultSecurity(organizationId: string, organizationRole: OrganizationRole, options?: RawAxiosRequestConfig): AxiosPromise<OrganizationSecurity> {
+            return localVarFp.updateOrganizationDefaultSecurity(organizationId, organizationRole, options).then((request) => request(axios, basePath));
+        },
     };
 };
 
@@ -6538,6 +6570,18 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
 export class OrganizationApi extends BaseAPI {
     /**
      * 
+     * @summary Create a new organization
+     * @param {OrganizationCreateRequest} organizationCreateRequest the Organization to create
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OrganizationApi
+     */
+    public createOrganization(organizationCreateRequest: OrganizationCreateRequest, options?: RawAxiosRequestConfig) {
+        return OrganizationApiFp(this.configuration).createOrganization(organizationCreateRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary Add a control access to the Organization
      * @param {string} organizationId the Organization identifier
      * @param {OrganizationAccessControl} organizationAccessControl the new Organization security access to add.
@@ -6545,21 +6589,33 @@ export class OrganizationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OrganizationApi
      */
-    public addOrganizationAccessControl(organizationId: string, organizationAccessControl: OrganizationAccessControl, options?: RawAxiosRequestConfig) {
-        return OrganizationApiFp(this.configuration).addOrganizationAccessControl(organizationId, organizationAccessControl, options).then((request) => request(this.axios, this.basePath));
+    public createOrganizationAccessControl(organizationId: string, organizationAccessControl: OrganizationAccessControl, options?: RawAxiosRequestConfig) {
+        return OrganizationApiFp(this.configuration).createOrganizationAccessControl(organizationId, organizationAccessControl, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @summary List all Organizations
-     * @param {number} [page] page number to query (first page is at index 0)
-     * @param {number} [size] amount of result by page
+     * @summary Delete an organization
+     * @param {string} organizationId the Organization identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OrganizationApi
      */
-    public findAllOrganizations(page?: number, size?: number, options?: RawAxiosRequestConfig) {
-        return OrganizationApiFp(this.configuration).findAllOrganizations(page, size, options).then((request) => request(this.axios, this.basePath));
+    public deleteOrganization(organizationId: string, options?: RawAxiosRequestConfig) {
+        return OrganizationApiFp(this.configuration).deleteOrganization(organizationId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Remove the specified access from the given Organization
+     * @param {string} organizationId the Organization identifier
+     * @param {string} identityId the User identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OrganizationApi
+     */
+    public deleteOrganizationAccessControl(organizationId: string, identityId: string, options?: RawAxiosRequestConfig) {
+        return OrganizationApiFp(this.configuration).deleteOrganizationAccessControl(organizationId, identityId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6570,19 +6626,8 @@ export class OrganizationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OrganizationApi
      */
-    public findOrganizationById(organizationId: string, options?: RawAxiosRequestConfig) {
-        return OrganizationApiFp(this.configuration).findOrganizationById(organizationId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get all permissions per components
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof OrganizationApi
-     */
-    public getAllPermissions(options?: RawAxiosRequestConfig) {
-        return OrganizationApiFp(this.configuration).getAllPermissions(options).then((request) => request(this.axios, this.basePath));
+    public getOrganization(organizationId: string, options?: RawAxiosRequestConfig) {
+        return OrganizationApiFp(this.configuration).getOrganization(organizationId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6631,71 +6676,45 @@ export class OrganizationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OrganizationApi
      */
-    public getOrganizationSecurityUsers(organizationId: string, options?: RawAxiosRequestConfig) {
-        return OrganizationApiFp(this.configuration).getOrganizationSecurityUsers(organizationId, options).then((request) => request(this.axios, this.basePath));
+    public listOrganizationSecurityUsers(organizationId: string, options?: RawAxiosRequestConfig) {
+        return OrganizationApiFp(this.configuration).listOrganizationSecurityUsers(organizationId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @summary Register a new organization
-     * @param {Organization} organization the Organization to register
+     * @summary List all Organizations
+     * @param {number} [page] page number to query (first page is at index 0)
+     * @param {number} [size] amount of result by page
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OrganizationApi
      */
-    public registerOrganization(organization: Organization, options?: RawAxiosRequestConfig) {
-        return OrganizationApiFp(this.configuration).registerOrganization(organization, options).then((request) => request(this.axios, this.basePath));
+    public listOrganizations(page?: number, size?: number, options?: RawAxiosRequestConfig) {
+        return OrganizationApiFp(this.configuration).listOrganizations(page, size, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @summary Remove the specified access from the given Organization
-     * @param {string} organizationId the Organization identifier
-     * @param {string} identityId the User identifier
+     * @summary Get all permissions per components
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OrganizationApi
      */
-    public removeOrganizationAccessControl(organizationId: string, identityId: string, options?: RawAxiosRequestConfig) {
-        return OrganizationApiFp(this.configuration).removeOrganizationAccessControl(organizationId, identityId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Set the Organization default security
-     * @param {string} organizationId the Organization identifier
-     * @param {OrganizationRole} organizationRole This change the organization default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the organization.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof OrganizationApi
-     */
-    public setOrganizationDefaultSecurity(organizationId: string, organizationRole: OrganizationRole, options?: RawAxiosRequestConfig) {
-        return OrganizationApiFp(this.configuration).setOrganizationDefaultSecurity(organizationId, organizationRole, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Unregister an organization
-     * @param {string} organizationId the Organization identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof OrganizationApi
-     */
-    public unregisterOrganization(organizationId: string, options?: RawAxiosRequestConfig) {
-        return OrganizationApiFp(this.configuration).unregisterOrganization(organizationId, options).then((request) => request(this.axios, this.basePath));
+    public listPermissions(options?: RawAxiosRequestConfig) {
+        return OrganizationApiFp(this.configuration).listPermissions(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @summary Update an Organization
      * @param {string} organizationId the Organization identifier
-     * @param {Organization} organization the new Organization details. This endpoint can\&#39;t be used to update security
+     * @param {OrganizationUpdateRequest} organizationUpdateRequest the new Organization details. This endpoint can\&#39;t be used to update security
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OrganizationApi
      */
-    public updateOrganization(organizationId: string, organization: Organization, options?: RawAxiosRequestConfig) {
-        return OrganizationApiFp(this.configuration).updateOrganization(organizationId, organization, options).then((request) => request(this.axios, this.basePath));
+    public updateOrganization(organizationId: string, organizationUpdateRequest: OrganizationUpdateRequest, options?: RawAxiosRequestConfig) {
+        return OrganizationApiFp(this.configuration).updateOrganization(organizationId, organizationUpdateRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6710,6 +6729,19 @@ export class OrganizationApi extends BaseAPI {
      */
     public updateOrganizationAccessControl(organizationId: string, identityId: string, organizationRole: OrganizationRole, options?: RawAxiosRequestConfig) {
         return OrganizationApiFp(this.configuration).updateOrganizationAccessControl(organizationId, identityId, organizationRole, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Update the Organization default security
+     * @param {string} organizationId the Organization identifier
+     * @param {OrganizationRole} organizationRole This change the organization default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the organization.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OrganizationApi
+     */
+    public updateOrganizationDefaultSecurity(organizationId: string, organizationRole: OrganizationRole, options?: RawAxiosRequestConfig) {
+        return OrganizationApiFp(this.configuration).updateOrganizationDefaultSecurity(organizationId, organizationRole, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
