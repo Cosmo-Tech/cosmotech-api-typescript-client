@@ -33,13 +33,13 @@ export interface ComponentRolePermissions {
      * @type {string}
      * @memberof ComponentRolePermissions
      */
-    'component'?: string;
+    'component': string;
     /**
      * 
      * @type {{ [key: string]: Array<string>; }}
      * @memberof ComponentRolePermissions
      */
-    'roles'?: { [key: string]: Array<string>; };
+    'roles': { [key: string]: Array<string>; };
 }
 /**
  * a version of a Connector
@@ -732,25 +732,25 @@ export interface Organization {
      * @type {string}
      * @memberof Organization
      */
-    'id'?: string;
+    'id': string;
     /**
      * the Organization name
      * @type {string}
      * @memberof Organization
      */
-    'name'?: string;
+    'name': string;
     /**
      * the Owner User Id
      * @type {string}
      * @memberof Organization
      */
-    'ownerId'?: string;
+    'ownerId': string;
     /**
      * 
      * @type {OrganizationSecurity}
      * @memberof Organization
      */
-    'security'?: OrganizationSecurity;
+    'security': OrganizationSecurity;
 }
 /**
  * Response object for organization access control
@@ -833,7 +833,7 @@ export interface OrganizationUpdateRequest {
      * @type {string}
      * @memberof OrganizationUpdateRequest
      */
-    'name'?: string;
+    'name': string;
 }
 /**
  * the result of a SQL Query
