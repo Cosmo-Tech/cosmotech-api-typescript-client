@@ -12,6 +12,7 @@
  * Do not edit the class manually.
  */
 
+
 import type { Configuration } from './configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -542,6 +543,7 @@ export const DatasetSourceType = {
 
 export type DatasetSourceType = typeof DatasetSourceType[keyof typeof DatasetSourceType];
 
+
 /**
  * a twin graph hash
  * @export
@@ -708,6 +710,7 @@ export const IngestionStatusEnum = {
 
 export type IngestionStatusEnum = typeof IngestionStatusEnum[keyof typeof IngestionStatusEnum];
 
+
 /**
  * The read and write capabilities of connector
  * @export
@@ -720,6 +723,7 @@ export const IoTypesEnum = {
 } as const;
 
 export type IoTypesEnum = typeof IoTypesEnum[keyof typeof IoTypesEnum];
+
 
 /**
  * an Organization
@@ -1167,6 +1171,7 @@ export const RunState = {
 
 export type RunState = typeof RunState[keyof typeof RunState];
 
+
 /**
  * a Run status
  * @export
@@ -1566,6 +1571,7 @@ export const RunTemplateOrchestrator = {
 
 export type RunTemplateOrchestrator = typeof RunTemplateOrchestrator[keyof typeof RunTemplateOrchestrator];
 
+
 /**
  * a Run Template Parameter
  * @export
@@ -1722,6 +1728,7 @@ export const RunTemplateStepSource = {
 } as const;
 
 export type RunTemplateStepSource = typeof RunTemplateStepSource[keyof typeof RunTemplateStepSource];
+
 
 /**
  * a Runner with base information
@@ -1979,6 +1986,7 @@ export const RunnerValidationStatus = {
 } as const;
 
 export type RunnerValidationStatus = typeof RunnerValidationStatus[keyof typeof RunnerValidationStatus];
+
 
 /**
  * 
@@ -2258,6 +2266,7 @@ export const TwincacheStatusEnum = {
 } as const;
 
 export type TwincacheStatusEnum = typeof TwincacheStatusEnum[keyof typeof TwincacheStatusEnum];
+
 
 /**
  * a Workspace
@@ -2834,6 +2843,7 @@ export class ConnectorApi extends BaseAPI {
         return ConnectorApiFp(this.configuration).unregisterConnector(connectorId, options).then((request) => request(this.axios, this.basePath));
     }
 }
+
 
 
 /**
@@ -5618,6 +5628,7 @@ export const UpdateTwingraphEntitiesTypeEnum = {
 } as const;
 export type UpdateTwingraphEntitiesTypeEnum = typeof UpdateTwingraphEntitiesTypeEnum[keyof typeof UpdateTwingraphEntitiesTypeEnum];
 
+
 /**
  * OrganizationApi - axios parameter creator
  * @export
@@ -6746,6 +6757,7 @@ export class OrganizationApi extends BaseAPI {
 }
 
 
+
 /**
  * RunApi - axios parameter creator
  * @export
@@ -7467,6 +7479,7 @@ export class RunApi extends BaseAPI {
         return RunApiFp(this.configuration).sendRunData(organizationId, workspaceId, runnerId, runId, sendRunDataRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
+
 
 
 /**
@@ -8885,6 +8898,7 @@ export class RunnerApi extends BaseAPI {
         return RunnerApiFp(this.configuration).updateRunnerAccessControl(organizationId, workspaceId, runnerId, identityId, runnerRole, options).then((request) => request(this.axios, this.basePath));
     }
 }
+
 
 
 /**
@@ -10641,6 +10655,7 @@ export class SolutionApi extends BaseAPI {
         return SolutionApiFp(this.configuration).updateSolutionRunTemplate(organizationId, solutionId, runTemplateId, runTemplate, options).then((request) => request(this.axios, this.basePath));
     }
 }
+
 
 
 /**
@@ -12416,5 +12431,6 @@ export class WorkspaceApi extends BaseAPI {
         return WorkspaceApiFp(this.configuration).uploadWorkspaceFile(organizationId, workspaceId, file, overwrite, destination, options).then((request) => request(this.axios, this.basePath));
     }
 }
+
 
 
