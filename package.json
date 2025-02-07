@@ -1,6 +1,6 @@
 {
   "name": "@cosmotech/api-ts",
-  "version": "4.1.2-onprem",
+  "version": "3.3.3",
   "description": "OpenAPI client for @cosmotech/api-ts",
   "author": "OpenAPI-Generator Contributors",
   "repository": {
