@@ -837,7 +837,7 @@ export interface OrganizationUpdateRequest {
      * @type {string}
      * @memberof OrganizationUpdateRequest
      */
-    'name': string;
+    'name'?: string;
 }
 /**
  * the result of a SQL Query
