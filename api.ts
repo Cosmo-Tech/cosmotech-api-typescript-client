@@ -2279,13 +2279,13 @@ export interface Workspace {
      * @type {string}
      * @memberof Workspace
      */
-    'id'?: string;
+    'id': string;
     /**
      * Organization unique identifier under which the workspace resides
      * @type {string}
      * @memberof Workspace
      */
-    'organizationId'?: string;
+    'organizationId': string;
     /**
      * technical key for resource name convention and version grouping. Must be unique
      * @type {string}
@@ -2327,7 +2327,7 @@ export interface Workspace {
      * @type {string}
      * @memberof Workspace
      */
-    'ownerId'?: string;
+    'ownerId': string;
     /**
      * 
      * @type {WorkspaceSolution}
@@ -2341,42 +2341,6 @@ export interface Workspace {
      */
     'webApp'?: WorkspaceWebApp;
     /**
-     * default setting for all Scenarios and Run Templates to set whether or not the Dataset values and the input parameters values are send to the DataWarehouse prior to the ScenarioRun
-     * @type {boolean}
-     * @memberof Workspace
-     */
-    'sendInputToDataWarehouse'?: boolean;
-    /**
-     * Set this property to true to use a dedicated Azure Event Hub Namespace for this Workspace. The Event Hub Namespace must be named \\\'<organization_id\\>-<workspace_id\\>\\\' (in lower case). This Namespace must also contain two Event Hubs named \\\'probesmeasures\\\' and \\\'scenariorun\\\'.
-     * @type {boolean}
-     * @memberof Workspace
-     */
-    'useDedicatedEventHubNamespace'?: boolean;
-    /**
-     * the Dedicated Event Hub SAS key name, default to RootManageSharedAccessKey. Ask you DevOps Team to add the associated value to your Workspace Secret
-     * @type {string}
-     * @memberof Workspace
-     */
-    'dedicatedEventHubSasKeyName'?: string;
-    /**
-     * the Event Hub authentication strategy, SHARED_ACCESS_POLICY or TENANT_CLIENT_CREDENTIALS. Default to the one defined for the tenant.
-     * @type {string}
-     * @memberof Workspace
-     */
-    'dedicatedEventHubAuthenticationStrategy'?: string;
-    /**
-     * default setting for all Scenarios and Run Templates to set whether or not the ScenarioRun is send to the Event Hub
-     * @type {boolean}
-     * @memberof Workspace
-     */
-    'sendScenarioRunToEventHub'?: boolean;
-    /**
-     * Set this property to false to not send scenario metada to Azure Event Hub Namespace for this Workspace. The Event Hub Namespace must be named \\\'<organization_id\\>-<workspace_id\\>\\\' (in lower case). This Namespace must also contain two Event Hubs named \\\'scenariometadata\\\' and \\\'scenariorunmetadata\\\'.
-     * @type {boolean}
-     * @memberof Workspace
-     */
-    'sendScenarioMetadataToEventHub'?: boolean;
-    /**
      * Activate the copy of dataset on scenario creation, meaning that each scenario created in this workspace will make this copy. when false, scenario use directly the dataset specified.
      * @type {boolean}
      * @memberof Workspace
@@ -2387,7 +2351,7 @@ export interface Workspace {
      * @type {WorkspaceSecurity}
      * @memberof Workspace
      */
-    'security'?: WorkspaceSecurity;
+    'security': WorkspaceSecurity;
 }
 /**
  * a Workspace access control item
@@ -2409,6 +2373,67 @@ export interface WorkspaceAccessControl {
     'role': string;
 }
 /**
+ * Request object for creating a new workspace
+ * @export
+ * @interface WorkspaceCreateRequest
+ */
+export interface WorkspaceCreateRequest {
+    /**
+     * technical key for resource name convention and version grouping. Must be unique
+     * @type {string}
+     * @memberof WorkspaceCreateRequest
+     */
+    'key': string;
+    /**
+     * Workspace name. This name is display in the sample webApp
+     * @type {string}
+     * @memberof WorkspaceCreateRequest
+     */
+    'name': string;
+    /**
+     * the Workspace description
+     * @type {string}
+     * @memberof WorkspaceCreateRequest
+     */
+    'description'?: string;
+    /**
+     * the Workspace version MAJOR.MINOR.PATCH.
+     * @type {string}
+     * @memberof WorkspaceCreateRequest
+     */
+    'version'?: string;
+    /**
+     * the list of tags
+     * @type {Array<string>}
+     * @memberof WorkspaceCreateRequest
+     */
+    'tags'?: Array<string>;
+    /**
+     * 
+     * @type {WorkspaceSolution}
+     * @memberof WorkspaceCreateRequest
+     */
+    'solution': WorkspaceSolution;
+    /**
+     * 
+     * @type {WorkspaceWebApp}
+     * @memberof WorkspaceCreateRequest
+     */
+    'webApp'?: WorkspaceWebApp;
+    /**
+     * Activate the copy of dataset on scenario creation
+     * @type {boolean}
+     * @memberof WorkspaceCreateRequest
+     */
+    'datasetCopy'?: boolean;
+    /**
+     * 
+     * @type {WorkspaceSecurity}
+     * @memberof WorkspaceCreateRequest
+     */
+    'security'?: WorkspaceSecurity;
+}
+/**
  * a Workspace File resource
  * @export
  * @interface WorkspaceFile
@@ -2419,7 +2444,7 @@ export interface WorkspaceFile {
      * @type {string}
      * @memberof WorkspaceFile
      */
-    'fileName'?: string;
+    'fileName': string;
 }
 /**
  * the Workspace Role
@@ -2464,7 +2489,7 @@ export interface WorkspaceSolution {
      * @type {string}
      * @memberof WorkspaceSolution
      */
-    'solutionId'?: string;
+    'solutionId': string;
     /**
      * the list of Solution Run Template Id to filter
      * @type {Array<string>}
@@ -2477,6 +2502,55 @@ export interface WorkspaceSolution {
      * @memberof WorkspaceSolution
      */
     'defaultRunTemplateDataset'?: { [key: string]: any; };
+}
+/**
+ * Request object for updating a workspace
+ * @export
+ * @interface WorkspaceUpdateRequest
+ */
+export interface WorkspaceUpdateRequest {
+    /**
+     * technical key for resource name convention and version grouping. Must be unique
+     * @type {string}
+     * @memberof WorkspaceUpdateRequest
+     */
+    'key'?: string;
+    /**
+     * Workspace name
+     * @type {string}
+     * @memberof WorkspaceUpdateRequest
+     */
+    'name'?: string;
+    /**
+     * the Workspace description
+     * @type {string}
+     * @memberof WorkspaceUpdateRequest
+     */
+    'description'?: string;
+    /**
+     * the list of tags
+     * @type {Array<string>}
+     * @memberof WorkspaceUpdateRequest
+     */
+    'tags'?: Array<string>;
+    /**
+     * 
+     * @type {WorkspaceSolution}
+     * @memberof WorkspaceUpdateRequest
+     */
+    'solution'?: WorkspaceSolution;
+    /**
+     * 
+     * @type {WorkspaceWebApp}
+     * @memberof WorkspaceUpdateRequest
+     */
+    'webApp'?: WorkspaceWebApp;
+    /**
+     * Activate the copy of dataset on scenario creation
+     * @type {boolean}
+     * @memberof WorkspaceUpdateRequest
+     */
+    'datasetCopy'?: boolean;
 }
 /**
  * a Workspace Web Application
@@ -10666,6 +10740,98 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
     return {
         /**
          * 
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId dataset id to be linked to
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createDatasetLink: async (organizationId: string, workspaceId: string, datasetId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('createDatasetLink', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('createDatasetLink', 'workspaceId', workspaceId)
+            // verify required parameter 'datasetId' is not null or undefined
+            assertParamExists('createDatasetLink', 'datasetId', datasetId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/link`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+            if (datasetId !== undefined) {
+                localVarQueryParameter['datasetId'] = datasetId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Create a new workspace
+         * @param {string} organizationId the Organization identifier
+         * @param {WorkspaceCreateRequest} workspaceCreateRequest the Workspace to create
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createWorkspace: async (organizationId: string, workspaceCreateRequest: WorkspaceCreateRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('createWorkspace', 'organizationId', organizationId)
+            // verify required parameter 'workspaceCreateRequest' is not null or undefined
+            assertParamExists('createWorkspace', 'workspaceCreateRequest', workspaceCreateRequest)
+            const localVarPath = `/organizations/{organization_id}/workspaces`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(workspaceCreateRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Add a control access to the Workspace
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -10673,13 +10839,13 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addWorkspaceAccessControl: async (organizationId: string, workspaceId: string, workspaceAccessControl: WorkspaceAccessControl, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createWorkspaceAccessControl: async (organizationId: string, workspaceId: string, workspaceAccessControl: WorkspaceAccessControl, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('addWorkspaceAccessControl', 'organizationId', organizationId)
+            assertParamExists('createWorkspaceAccessControl', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('addWorkspaceAccessControl', 'workspaceId', workspaceId)
+            assertParamExists('createWorkspaceAccessControl', 'workspaceId', workspaceId)
             // verify required parameter 'workspaceAccessControl' is not null or undefined
-            assertParamExists('addWorkspaceAccessControl', 'workspaceAccessControl', workspaceAccessControl)
+            assertParamExists('createWorkspaceAccessControl', 'workspaceAccessControl', workspaceAccessControl)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/security/access`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
                 .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
@@ -10714,19 +10880,25 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary Create a new workspace
+         * @summary Upload a file for the Workspace
          * @param {string} organizationId the Organization identifier
-         * @param {Workspace} workspace the Workspace to create
+         * @param {string} workspaceId the Workspace identifier
+         * @param {File} file The file to upload
+         * @param {boolean} [overwrite] Whether to overwrite an existing file
+         * @param {string} [destination] Destination path. Must end with a \\\&#39;/\\\&#39; if specifying a folder. Note that paths may or may not start with a \\\&#39;/\\\&#39;, but they are always treated as relative to the Workspace root location. 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createWorkspace: async (organizationId: string, workspace: Workspace, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createWorkspaceFile: async (organizationId: string, workspaceId: string, file: File, overwrite?: boolean, destination?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('createWorkspace', 'organizationId', organizationId)
-            // verify required parameter 'workspace' is not null or undefined
-            assertParamExists('createWorkspace', 'workspace', workspace)
-            const localVarPath = `/organizations/{organization_id}/workspaces`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
+            assertParamExists('createWorkspaceFile', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('createWorkspaceFile', 'workspaceId', workspaceId)
+            // verify required parameter 'file' is not null or undefined
+            assertParamExists('createWorkspaceFile', 'file', file)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/files`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -10737,19 +10909,32 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
 
             // authentication oAuth2AuthCode required
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
 
+            if (overwrite !== undefined) { 
+                localVarFormParams.append('overwrite', String(overwrite) as any);
+            }
     
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
+            if (destination !== undefined) { 
+                localVarFormParams.append('destination', destination as any);
+            }
+    
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(workspace, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = localVarFormParams;
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -10758,18 +10943,66 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary Delete all Workspace files
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId dataset id to be linked to
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteDatasetLink: async (organizationId: string, workspaceId: string, datasetId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('deleteDatasetLink', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('deleteDatasetLink', 'workspaceId', workspaceId)
+            // verify required parameter 'datasetId' is not null or undefined
+            assertParamExists('deleteDatasetLink', 'datasetId', datasetId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/link`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+            if (datasetId !== undefined) {
+                localVarQueryParameter['datasetId'] = datasetId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Delete a workspace
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteAllWorkspaceFiles: async (organizationId: string, workspaceId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteWorkspace: async (organizationId: string, workspaceId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('deleteAllWorkspaceFiles', 'organizationId', organizationId)
+            assertParamExists('deleteWorkspace', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('deleteAllWorkspaceFiles', 'workspaceId', workspaceId)
-            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/files`
+            assertParamExists('deleteWorkspace', 'workspaceId', workspaceId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
                 .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -10800,20 +11033,24 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary Delete a workspace
+         * @summary Remove the specified access from the given Organization Workspace
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
+         * @param {string} identityId the User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteWorkspace: async (organizationId: string, workspaceId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteWorkspaceAccessControl: async (organizationId: string, workspaceId: string, identityId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('deleteWorkspace', 'organizationId', organizationId)
+            assertParamExists('deleteWorkspaceAccessControl', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('deleteWorkspace', 'workspaceId', workspaceId)
-            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}`
+            assertParamExists('deleteWorkspaceAccessControl', 'workspaceId', workspaceId)
+            // verify required parameter 'identityId' is not null or undefined
+            assertParamExists('deleteWorkspaceAccessControl', 'identityId', identityId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/security/access/{identity_id}`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -10891,66 +11128,17 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary Download the Workspace File specified
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} fileName the file name
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        downloadWorkspaceFile: async (organizationId: string, workspaceId: string, fileName: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('downloadWorkspaceFile', 'organizationId', organizationId)
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('downloadWorkspaceFile', 'workspaceId', workspaceId)
-            // verify required parameter 'fileName' is not null or undefined
-            assertParamExists('downloadWorkspaceFile', 'fileName', fileName)
-            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/files/download`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-            if (fileName !== undefined) {
-                localVarQueryParameter['file_name'] = fileName;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary List all Workspace files
+         * @summary Delete all Workspace files
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findAllWorkspaceFiles: async (organizationId: string, workspaceId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteWorkspaceFiles: async (organizationId: string, workspaceId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('findAllWorkspaceFiles', 'organizationId', organizationId)
+            assertParamExists('deleteWorkspaceFiles', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('findAllWorkspaceFiles', 'workspaceId', workspaceId)
+            assertParamExists('deleteWorkspaceFiles', 'workspaceId', workspaceId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/files`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
                 .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
@@ -10961,61 +11149,13 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
             // authentication oAuth2AuthCode required
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary List all Workspaces
-         * @param {string} organizationId the Organization identifier
-         * @param {number} [page] page number to query (first page is at index 0)
-         * @param {number} [size] amount of result by page
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        findAllWorkspaces: async (organizationId: string, page?: number, size?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('findAllWorkspaces', 'organizationId', organizationId)
-            const localVarPath = `/organizations/{organization_id}/workspaces`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-            if (page !== undefined) {
-                localVarQueryParameter['page'] = page;
-            }
-
-            if (size !== undefined) {
-                localVarQueryParameter['size'] = size;
-            }
 
 
     
@@ -11036,11 +11176,11 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findWorkspaceById: async (organizationId: string, workspaceId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getWorkspace: async (organizationId: string, workspaceId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('findWorkspaceById', 'organizationId', organizationId)
+            assertParamExists('getWorkspace', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('findWorkspaceById', 'workspaceId', workspaceId)
+            assertParamExists('getWorkspace', 'workspaceId', workspaceId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
                 .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
@@ -11118,24 +11258,23 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary Get the Workspace permission by given role
+         * @summary Download the Workspace File specified
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
-         * @param {string} role the Role
+         * @param {string} fileName the file name
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getWorkspacePermissions: async (organizationId: string, workspaceId: string, role: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getWorkspaceFile: async (organizationId: string, workspaceId: string, fileName: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('getWorkspacePermissions', 'organizationId', organizationId)
+            assertParamExists('getWorkspaceFile', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('getWorkspacePermissions', 'workspaceId', workspaceId)
-            // verify required parameter 'role' is not null or undefined
-            assertParamExists('getWorkspacePermissions', 'role', role)
-            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/permissions/{role}`
+            assertParamExists('getWorkspaceFile', 'workspaceId', workspaceId)
+            // verify required parameter 'fileName' is not null or undefined
+            assertParamExists('getWorkspaceFile', 'fileName', fileName)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/files/download`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"role"}}`, encodeURIComponent(String(role)));
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -11150,6 +11289,10 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             // authentication oAuth2AuthCode required
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+            if (fileName !== undefined) {
+                localVarQueryParameter['file_name'] = fileName;
+            }
 
 
     
@@ -11206,17 +11349,105 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
+         * @summary List all Workspace files
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listWorkspaceFiles: async (organizationId: string, workspaceId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('listWorkspaceFiles', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('listWorkspaceFiles', 'workspaceId', workspaceId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/files`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get the Workspace permission by given role
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} role the Role
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listWorkspaceRolePermissions: async (organizationId: string, workspaceId: string, role: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('listWorkspaceRolePermissions', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('listWorkspaceRolePermissions', 'workspaceId', workspaceId)
+            // verify required parameter 'role' is not null or undefined
+            assertParamExists('listWorkspaceRolePermissions', 'role', role)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/permissions/{role}`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"role"}}`, encodeURIComponent(String(role)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Get the Workspace security users list
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getWorkspaceSecurityUsers: async (organizationId: string, workspaceId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listWorkspaceSecurityUsers: async (organizationId: string, workspaceId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('getWorkspaceSecurityUsers', 'organizationId', organizationId)
+            assertParamExists('listWorkspaceSecurityUsers', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('getWorkspaceSecurityUsers', 'workspaceId', workspaceId)
+            assertParamExists('listWorkspaceSecurityUsers', 'workspaceId', workspaceId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/security/users`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
                 .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
@@ -11248,22 +11479,18 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
+         * @summary List all Workspaces
          * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} datasetId dataset id to be linked to
+         * @param {number} [page] page number to query (first page is at index 0)
+         * @param {number} [size] amount of result by page
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        linkDataset: async (organizationId: string, workspaceId: string, datasetId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listWorkspaces: async (organizationId: string, page?: number, size?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('linkDataset', 'organizationId', organizationId)
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('linkDataset', 'workspaceId', workspaceId)
-            // verify required parameter 'datasetId' is not null or undefined
-            assertParamExists('linkDataset', 'datasetId', datasetId)
-            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/link`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
+            assertParamExists('listWorkspaces', 'organizationId', organizationId)
+            const localVarPath = `/organizations/{organization_id}/workspaces`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -11271,7 +11498,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -11279,150 +11506,12 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-            if (datasetId !== undefined) {
-                localVarQueryParameter['datasetId'] = datasetId;
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
             }
 
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Remove the specified access from the given Organization Workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} identityId the User identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        removeWorkspaceAccessControl: async (organizationId: string, workspaceId: string, identityId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('removeWorkspaceAccessControl', 'organizationId', organizationId)
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('removeWorkspaceAccessControl', 'workspaceId', workspaceId)
-            // verify required parameter 'identityId' is not null or undefined
-            assertParamExists('removeWorkspaceAccessControl', 'identityId', identityId)
-            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/security/access/{identity_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Set the Workspace default security
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {WorkspaceRole} workspaceRole This change the workspace default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the workspace.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        setWorkspaceDefaultSecurity: async (organizationId: string, workspaceId: string, workspaceRole: WorkspaceRole, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('setWorkspaceDefaultSecurity', 'organizationId', organizationId)
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('setWorkspaceDefaultSecurity', 'workspaceId', workspaceId)
-            // verify required parameter 'workspaceRole' is not null or undefined
-            assertParamExists('setWorkspaceDefaultSecurity', 'workspaceRole', workspaceRole)
-            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/security/default`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(workspaceRole, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} datasetId dataset id to be linked to
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        unlinkDataset: async (organizationId: string, workspaceId: string, datasetId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('unlinkDataset', 'organizationId', organizationId)
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('unlinkDataset', 'workspaceId', workspaceId)
-            // verify required parameter 'datasetId' is not null or undefined
-            assertParamExists('unlinkDataset', 'datasetId', datasetId)
-            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/unlink`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-            if (datasetId !== undefined) {
-                localVarQueryParameter['datasetId'] = datasetId;
+            if (size !== undefined) {
+                localVarQueryParameter['size'] = size;
             }
 
 
@@ -11441,17 +11530,17 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
          * @summary Update a workspace
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
-         * @param {Workspace} workspace The new Workspace details. This endpoint can\&#39;t be used to update security
+         * @param {WorkspaceUpdateRequest} workspaceUpdateRequest The new Workspace details. This endpoint can\&#39;t be used to update security
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateWorkspace: async (organizationId: string, workspaceId: string, workspace: Workspace, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateWorkspace: async (organizationId: string, workspaceId: string, workspaceUpdateRequest: WorkspaceUpdateRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('updateWorkspace', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
             assertParamExists('updateWorkspace', 'workspaceId', workspaceId)
-            // verify required parameter 'workspace' is not null or undefined
-            assertParamExists('updateWorkspace', 'workspace', workspace)
+            // verify required parameter 'workspaceUpdateRequest' is not null or undefined
+            assertParamExists('updateWorkspace', 'workspaceUpdateRequest', workspaceUpdateRequest)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
                 .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
@@ -11477,7 +11566,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(workspace, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(workspaceUpdateRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -11538,23 +11627,21 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary Upload a file for the Workspace
+         * @summary Update the Workspace default security
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
-         * @param {File} file 
-         * @param {boolean} [overwrite] 
-         * @param {string} [destination] Destination path. Must end with a \\\&#39;/\\\&#39; if specifying a folder. Note that paths may or may not start with a \\\&#39;/\\\&#39;, but they are always treated as relative to the Workspace root location. 
+         * @param {WorkspaceRole} workspaceRole This change the workspace default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the workspace.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadWorkspaceFile: async (organizationId: string, workspaceId: string, file: File, overwrite?: boolean, destination?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateWorkspaceDefaultSecurity: async (organizationId: string, workspaceId: string, workspaceRole: WorkspaceRole, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('uploadWorkspaceFile', 'organizationId', organizationId)
+            assertParamExists('updateWorkspaceDefaultSecurity', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('uploadWorkspaceFile', 'workspaceId', workspaceId)
-            // verify required parameter 'file' is not null or undefined
-            assertParamExists('uploadWorkspaceFile', 'file', file)
-            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/files`
+            assertParamExists('updateWorkspaceDefaultSecurity', 'workspaceId', workspaceId)
+            // verify required parameter 'workspaceRole' is not null or undefined
+            assertParamExists('updateWorkspaceDefaultSecurity', 'workspaceRole', workspaceRole)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/security/default`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
                 .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -11564,35 +11651,22 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
 
             // authentication oAuth2AuthCode required
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
 
-            if (overwrite !== undefined) { 
-                localVarFormParams.append('overwrite', String(overwrite) as any);
-            }
     
-            if (destination !== undefined) { 
-                localVarFormParams.append('destination', destination as any);
-            }
-    
-            if (file !== undefined) { 
-                localVarFormParams.append('file', file as any);
-            }
-    
-    
-            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
-    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = localVarFormParams;
+            localVarRequestOptions.data = serializeDataIfNeeded(workspaceRole, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -11611,6 +11685,34 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId dataset id to be linked to
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createDatasetLink(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Workspace>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createDatasetLink(organizationId, workspaceId, datasetId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.createDatasetLink']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Create a new workspace
+         * @param {string} organizationId the Organization identifier
+         * @param {WorkspaceCreateRequest} workspaceCreateRequest the Workspace to create
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createWorkspace(organizationId: string, workspaceCreateRequest: WorkspaceCreateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Workspace>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createWorkspace(organizationId, workspaceCreateRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.createWorkspace']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary Add a control access to the Workspace
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -11618,38 +11720,41 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async addWorkspaceAccessControl(organizationId: string, workspaceId: string, workspaceAccessControl: WorkspaceAccessControl, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkspaceAccessControl>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.addWorkspaceAccessControl(organizationId, workspaceId, workspaceAccessControl, options);
+        async createWorkspaceAccessControl(organizationId: string, workspaceId: string, workspaceAccessControl: WorkspaceAccessControl, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkspaceAccessControl>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createWorkspaceAccessControl(organizationId, workspaceId, workspaceAccessControl, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.addWorkspaceAccessControl']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.createWorkspaceAccessControl']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
-         * @summary Create a new workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {Workspace} workspace the Workspace to create
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async createWorkspace(organizationId: string, workspace: Workspace, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Workspace>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createWorkspace(organizationId, workspace, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.createWorkspace']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Delete all Workspace files
+         * @summary Upload a file for the Workspace
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
+         * @param {File} file The file to upload
+         * @param {boolean} [overwrite] Whether to overwrite an existing file
+         * @param {string} [destination] Destination path. Must end with a \\\&#39;/\\\&#39; if specifying a folder. Note that paths may or may not start with a \\\&#39;/\\\&#39;, but they are always treated as relative to the Workspace root location. 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteAllWorkspaceFiles(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteAllWorkspaceFiles(organizationId, workspaceId, options);
+        async createWorkspaceFile(organizationId: string, workspaceId: string, file: File, overwrite?: boolean, destination?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkspaceFile>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createWorkspaceFile(organizationId, workspaceId, file, overwrite, destination, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.deleteAllWorkspaceFiles']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.createWorkspaceFile']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId dataset id to be linked to
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteDatasetLink(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteDatasetLink(organizationId, workspaceId, datasetId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.deleteDatasetLink']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -11664,6 +11769,21 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteWorkspace(organizationId, workspaceId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.deleteWorkspace']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Remove the specified access from the given Organization Workspace
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} identityId the User identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteWorkspaceAccessControl(organizationId: string, workspaceId: string, identityId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteWorkspaceAccessControl(organizationId, workspaceId, identityId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.deleteWorkspaceAccessControl']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -11683,46 +11803,16 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Download the Workspace File specified
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} fileName the file name
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async downloadWorkspaceFile(organizationId: string, workspaceId: string, fileName: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<File>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.downloadWorkspaceFile(organizationId, workspaceId, fileName, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.downloadWorkspaceFile']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary List all Workspace files
+         * @summary Delete all Workspace files
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findAllWorkspaceFiles(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<WorkspaceFile>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.findAllWorkspaceFiles(organizationId, workspaceId, options);
+        async deleteWorkspaceFiles(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteWorkspaceFiles(organizationId, workspaceId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.findAllWorkspaceFiles']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary List all Workspaces
-         * @param {string} organizationId the Organization identifier
-         * @param {number} [page] page number to query (first page is at index 0)
-         * @param {number} [size] amount of result by page
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async findAllWorkspaces(organizationId: string, page?: number, size?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Workspace>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.findAllWorkspaces(organizationId, page, size, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.findAllWorkspaces']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.deleteWorkspaceFiles']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -11733,10 +11823,10 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findWorkspaceById(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Workspace>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.findWorkspaceById(organizationId, workspaceId, options);
+        async getWorkspace(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Workspace>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getWorkspace(organizationId, workspaceId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.findWorkspaceById']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.getWorkspace']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -11756,17 +11846,17 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Get the Workspace permission by given role
+         * @summary Download the Workspace File specified
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
-         * @param {string} role the Role
+         * @param {string} fileName the file name
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getWorkspacePermissions(organizationId: string, workspaceId: string, role: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getWorkspacePermissions(organizationId, workspaceId, role, options);
+        async getWorkspaceFile(organizationId: string, workspaceId: string, fileName: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<File>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getWorkspaceFile(organizationId, workspaceId, fileName, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.getWorkspacePermissions']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.getWorkspaceFile']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -11785,74 +11875,60 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary List all Workspace files
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listWorkspaceFiles(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<WorkspaceFile>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listWorkspaceFiles(organizationId, workspaceId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.listWorkspaceFiles']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Get the Workspace permission by given role
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} role the Role
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listWorkspaceRolePermissions(organizationId: string, workspaceId: string, role: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listWorkspaceRolePermissions(organizationId, workspaceId, role, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.listWorkspaceRolePermissions']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary Get the Workspace security users list
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getWorkspaceSecurityUsers(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getWorkspaceSecurityUsers(organizationId, workspaceId, options);
+        async listWorkspaceSecurityUsers(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listWorkspaceSecurityUsers(organizationId, workspaceId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.getWorkspaceSecurityUsers']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.listWorkspaceSecurityUsers']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
+         * @summary List all Workspaces
          * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} datasetId dataset id to be linked to
+         * @param {number} [page] page number to query (first page is at index 0)
+         * @param {number} [size] amount of result by page
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async linkDataset(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Workspace>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.linkDataset(organizationId, workspaceId, datasetId, options);
+        async listWorkspaces(organizationId: string, page?: number, size?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Workspace>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listWorkspaces(organizationId, page, size, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.linkDataset']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Remove the specified access from the given Organization Workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} identityId the User identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async removeWorkspaceAccessControl(organizationId: string, workspaceId: string, identityId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.removeWorkspaceAccessControl(organizationId, workspaceId, identityId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.removeWorkspaceAccessControl']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Set the Workspace default security
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {WorkspaceRole} workspaceRole This change the workspace default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the workspace.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async setWorkspaceDefaultSecurity(organizationId: string, workspaceId: string, workspaceRole: WorkspaceRole, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkspaceSecurity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setWorkspaceDefaultSecurity(organizationId, workspaceId, workspaceRole, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.setWorkspaceDefaultSecurity']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} datasetId dataset id to be linked to
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async unlinkDataset(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Workspace>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.unlinkDataset(organizationId, workspaceId, datasetId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.unlinkDataset']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.listWorkspaces']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -11860,12 +11936,12 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
          * @summary Update a workspace
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
-         * @param {Workspace} workspace The new Workspace details. This endpoint can\&#39;t be used to update security
+         * @param {WorkspaceUpdateRequest} workspaceUpdateRequest The new Workspace details. This endpoint can\&#39;t be used to update security
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateWorkspace(organizationId: string, workspaceId: string, workspace: Workspace, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Workspace>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateWorkspace(organizationId, workspaceId, workspace, options);
+        async updateWorkspace(organizationId: string, workspaceId: string, workspaceUpdateRequest: WorkspaceUpdateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Workspace>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateWorkspace(organizationId, workspaceId, workspaceUpdateRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.updateWorkspace']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -11888,19 +11964,17 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Upload a file for the Workspace
+         * @summary Update the Workspace default security
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
-         * @param {File} file 
-         * @param {boolean} [overwrite] 
-         * @param {string} [destination] Destination path. Must end with a \\\&#39;/\\\&#39; if specifying a folder. Note that paths may or may not start with a \\\&#39;/\\\&#39;, but they are always treated as relative to the Workspace root location. 
+         * @param {WorkspaceRole} workspaceRole This change the workspace default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the workspace.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadWorkspaceFile(organizationId: string, workspaceId: string, file: File, overwrite?: boolean, destination?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkspaceFile>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadWorkspaceFile(organizationId, workspaceId, file, overwrite, destination, options);
+        async updateWorkspaceDefaultSecurity(organizationId: string, workspaceId: string, workspaceRole: WorkspaceRole, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkspaceSecurity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateWorkspaceDefaultSecurity(organizationId, workspaceId, workspaceRole, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.uploadWorkspaceFile']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.updateWorkspaceDefaultSecurity']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -11915,6 +11989,28 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
     return {
         /**
          * 
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId dataset id to be linked to
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createDatasetLink(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig): AxiosPromise<Workspace> {
+            return localVarFp.createDatasetLink(organizationId, workspaceId, datasetId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Create a new workspace
+         * @param {string} organizationId the Organization identifier
+         * @param {WorkspaceCreateRequest} workspaceCreateRequest the Workspace to create
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createWorkspace(organizationId: string, workspaceCreateRequest: WorkspaceCreateRequest, options?: RawAxiosRequestConfig): AxiosPromise<Workspace> {
+            return localVarFp.createWorkspace(organizationId, workspaceCreateRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Add a control access to the Workspace
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -11922,30 +12018,33 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addWorkspaceAccessControl(organizationId: string, workspaceId: string, workspaceAccessControl: WorkspaceAccessControl, options?: RawAxiosRequestConfig): AxiosPromise<WorkspaceAccessControl> {
-            return localVarFp.addWorkspaceAccessControl(organizationId, workspaceId, workspaceAccessControl, options).then((request) => request(axios, basePath));
+        createWorkspaceAccessControl(organizationId: string, workspaceId: string, workspaceAccessControl: WorkspaceAccessControl, options?: RawAxiosRequestConfig): AxiosPromise<WorkspaceAccessControl> {
+            return localVarFp.createWorkspaceAccessControl(organizationId, workspaceId, workspaceAccessControl, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @summary Create a new workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {Workspace} workspace the Workspace to create
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createWorkspace(organizationId: string, workspace: Workspace, options?: RawAxiosRequestConfig): AxiosPromise<Workspace> {
-            return localVarFp.createWorkspace(organizationId, workspace, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Delete all Workspace files
+         * @summary Upload a file for the Workspace
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
+         * @param {File} file The file to upload
+         * @param {boolean} [overwrite] Whether to overwrite an existing file
+         * @param {string} [destination] Destination path. Must end with a \\\&#39;/\\\&#39; if specifying a folder. Note that paths may or may not start with a \\\&#39;/\\\&#39;, but they are always treated as relative to the Workspace root location. 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteAllWorkspaceFiles(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.deleteAllWorkspaceFiles(organizationId, workspaceId, options).then((request) => request(axios, basePath));
+        createWorkspaceFile(organizationId: string, workspaceId: string, file: File, overwrite?: boolean, destination?: string, options?: RawAxiosRequestConfig): AxiosPromise<WorkspaceFile> {
+            return localVarFp.createWorkspaceFile(organizationId, workspaceId, file, overwrite, destination, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId dataset id to be linked to
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteDatasetLink(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteDatasetLink(organizationId, workspaceId, datasetId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -11957,6 +12056,18 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
          */
         deleteWorkspace(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.deleteWorkspace(organizationId, workspaceId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Remove the specified access from the given Organization Workspace
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} identityId the User identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteWorkspaceAccessControl(organizationId: string, workspaceId: string, identityId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteWorkspaceAccessControl(organizationId, workspaceId, identityId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -11972,38 +12083,14 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary Download the Workspace File specified
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} fileName the file name
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        downloadWorkspaceFile(organizationId: string, workspaceId: string, fileName: string, options?: RawAxiosRequestConfig): AxiosPromise<File> {
-            return localVarFp.downloadWorkspaceFile(organizationId, workspaceId, fileName, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary List all Workspace files
+         * @summary Delete all Workspace files
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findAllWorkspaceFiles(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<WorkspaceFile>> {
-            return localVarFp.findAllWorkspaceFiles(organizationId, workspaceId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary List all Workspaces
-         * @param {string} organizationId the Organization identifier
-         * @param {number} [page] page number to query (first page is at index 0)
-         * @param {number} [size] amount of result by page
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        findAllWorkspaces(organizationId: string, page?: number, size?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<Workspace>> {
-            return localVarFp.findAllWorkspaces(organizationId, page, size, options).then((request) => request(axios, basePath));
+        deleteWorkspaceFiles(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteWorkspaceFiles(organizationId, workspaceId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -12013,8 +12100,8 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findWorkspaceById(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig): AxiosPromise<Workspace> {
-            return localVarFp.findWorkspaceById(organizationId, workspaceId, options).then((request) => request(axios, basePath));
+        getWorkspace(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig): AxiosPromise<Workspace> {
+            return localVarFp.getWorkspace(organizationId, workspaceId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -12030,15 +12117,15 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary Get the Workspace permission by given role
+         * @summary Download the Workspace File specified
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
-         * @param {string} role the Role
+         * @param {string} fileName the file name
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getWorkspacePermissions(organizationId: string, workspaceId: string, role: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<string>> {
-            return localVarFp.getWorkspacePermissions(organizationId, workspaceId, role, options).then((request) => request(axios, basePath));
+        getWorkspaceFile(organizationId: string, workspaceId: string, fileName: string, options?: RawAxiosRequestConfig): AxiosPromise<File> {
+            return localVarFp.getWorkspaceFile(organizationId, workspaceId, fileName, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -12053,72 +12140,61 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
+         * @summary List all Workspace files
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listWorkspaceFiles(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<WorkspaceFile>> {
+            return localVarFp.listWorkspaceFiles(organizationId, workspaceId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get the Workspace permission by given role
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} role the Role
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listWorkspaceRolePermissions(organizationId: string, workspaceId: string, role: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<string>> {
+            return localVarFp.listWorkspaceRolePermissions(organizationId, workspaceId, role, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Get the Workspace security users list
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getWorkspaceSecurityUsers(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<string>> {
-            return localVarFp.getWorkspaceSecurityUsers(organizationId, workspaceId, options).then((request) => request(axios, basePath));
+        listWorkspaceSecurityUsers(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<string>> {
+            return localVarFp.listWorkspaceSecurityUsers(organizationId, workspaceId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
+         * @summary List all Workspaces
          * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} datasetId dataset id to be linked to
+         * @param {number} [page] page number to query (first page is at index 0)
+         * @param {number} [size] amount of result by page
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        linkDataset(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig): AxiosPromise<Workspace> {
-            return localVarFp.linkDataset(organizationId, workspaceId, datasetId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Remove the specified access from the given Organization Workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} identityId the User identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        removeWorkspaceAccessControl(organizationId: string, workspaceId: string, identityId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.removeWorkspaceAccessControl(organizationId, workspaceId, identityId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Set the Workspace default security
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {WorkspaceRole} workspaceRole This change the workspace default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the workspace.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        setWorkspaceDefaultSecurity(organizationId: string, workspaceId: string, workspaceRole: WorkspaceRole, options?: RawAxiosRequestConfig): AxiosPromise<WorkspaceSecurity> {
-            return localVarFp.setWorkspaceDefaultSecurity(organizationId, workspaceId, workspaceRole, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} datasetId dataset id to be linked to
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        unlinkDataset(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig): AxiosPromise<Workspace> {
-            return localVarFp.unlinkDataset(organizationId, workspaceId, datasetId, options).then((request) => request(axios, basePath));
+        listWorkspaces(organizationId: string, page?: number, size?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<Workspace>> {
+            return localVarFp.listWorkspaces(organizationId, page, size, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary Update a workspace
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
-         * @param {Workspace} workspace The new Workspace details. This endpoint can\&#39;t be used to update security
+         * @param {WorkspaceUpdateRequest} workspaceUpdateRequest The new Workspace details. This endpoint can\&#39;t be used to update security
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateWorkspace(organizationId: string, workspaceId: string, workspace: Workspace, options?: RawAxiosRequestConfig): AxiosPromise<Workspace> {
-            return localVarFp.updateWorkspace(organizationId, workspaceId, workspace, options).then((request) => request(axios, basePath));
+        updateWorkspace(organizationId: string, workspaceId: string, workspaceUpdateRequest: WorkspaceUpdateRequest, options?: RawAxiosRequestConfig): AxiosPromise<Workspace> {
+            return localVarFp.updateWorkspace(organizationId, workspaceId, workspaceUpdateRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -12135,17 +12211,15 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary Upload a file for the Workspace
+         * @summary Update the Workspace default security
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
-         * @param {File} file 
-         * @param {boolean} [overwrite] 
-         * @param {string} [destination] Destination path. Must end with a \\\&#39;/\\\&#39; if specifying a folder. Note that paths may or may not start with a \\\&#39;/\\\&#39;, but they are always treated as relative to the Workspace root location. 
+         * @param {WorkspaceRole} workspaceRole This change the workspace default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the workspace.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadWorkspaceFile(organizationId: string, workspaceId: string, file: File, overwrite?: boolean, destination?: string, options?: RawAxiosRequestConfig): AxiosPromise<WorkspaceFile> {
-            return localVarFp.uploadWorkspaceFile(organizationId, workspaceId, file, overwrite, destination, options).then((request) => request(axios, basePath));
+        updateWorkspaceDefaultSecurity(organizationId: string, workspaceId: string, workspaceRole: WorkspaceRole, options?: RawAxiosRequestConfig): AxiosPromise<WorkspaceSecurity> {
+            return localVarFp.updateWorkspaceDefaultSecurity(organizationId, workspaceId, workspaceRole, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -12159,6 +12233,32 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
 export class WorkspaceApi extends BaseAPI {
     /**
      * 
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} datasetId dataset id to be linked to
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof WorkspaceApi
+     */
+    public createDatasetLink(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig) {
+        return WorkspaceApiFp(this.configuration).createDatasetLink(organizationId, workspaceId, datasetId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Create a new workspace
+     * @param {string} organizationId the Organization identifier
+     * @param {WorkspaceCreateRequest} workspaceCreateRequest the Workspace to create
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof WorkspaceApi
+     */
+    public createWorkspace(organizationId: string, workspaceCreateRequest: WorkspaceCreateRequest, options?: RawAxiosRequestConfig) {
+        return WorkspaceApiFp(this.configuration).createWorkspace(organizationId, workspaceCreateRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary Add a control access to the Workspace
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
@@ -12167,34 +12267,37 @@ export class WorkspaceApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof WorkspaceApi
      */
-    public addWorkspaceAccessControl(organizationId: string, workspaceId: string, workspaceAccessControl: WorkspaceAccessControl, options?: RawAxiosRequestConfig) {
-        return WorkspaceApiFp(this.configuration).addWorkspaceAccessControl(organizationId, workspaceId, workspaceAccessControl, options).then((request) => request(this.axios, this.basePath));
+    public createWorkspaceAccessControl(organizationId: string, workspaceId: string, workspaceAccessControl: WorkspaceAccessControl, options?: RawAxiosRequestConfig) {
+        return WorkspaceApiFp(this.configuration).createWorkspaceAccessControl(organizationId, workspaceId, workspaceAccessControl, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @summary Create a new workspace
-     * @param {string} organizationId the Organization identifier
-     * @param {Workspace} workspace the Workspace to create
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof WorkspaceApi
-     */
-    public createWorkspace(organizationId: string, workspace: Workspace, options?: RawAxiosRequestConfig) {
-        return WorkspaceApiFp(this.configuration).createWorkspace(organizationId, workspace, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Delete all Workspace files
+     * @summary Upload a file for the Workspace
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
+     * @param {File} file The file to upload
+     * @param {boolean} [overwrite] Whether to overwrite an existing file
+     * @param {string} [destination] Destination path. Must end with a \\\&#39;/\\\&#39; if specifying a folder. Note that paths may or may not start with a \\\&#39;/\\\&#39;, but they are always treated as relative to the Workspace root location. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WorkspaceApi
      */
-    public deleteAllWorkspaceFiles(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig) {
-        return WorkspaceApiFp(this.configuration).deleteAllWorkspaceFiles(organizationId, workspaceId, options).then((request) => request(this.axios, this.basePath));
+    public createWorkspaceFile(organizationId: string, workspaceId: string, file: File, overwrite?: boolean, destination?: string, options?: RawAxiosRequestConfig) {
+        return WorkspaceApiFp(this.configuration).createWorkspaceFile(organizationId, workspaceId, file, overwrite, destination, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} datasetId dataset id to be linked to
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof WorkspaceApi
+     */
+    public deleteDatasetLink(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig) {
+        return WorkspaceApiFp(this.configuration).deleteDatasetLink(organizationId, workspaceId, datasetId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -12208,6 +12311,20 @@ export class WorkspaceApi extends BaseAPI {
      */
     public deleteWorkspace(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).deleteWorkspace(organizationId, workspaceId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Remove the specified access from the given Organization Workspace
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} identityId the User identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof WorkspaceApi
+     */
+    public deleteWorkspaceAccessControl(organizationId: string, workspaceId: string, identityId: string, options?: RawAxiosRequestConfig) {
+        return WorkspaceApiFp(this.configuration).deleteWorkspaceAccessControl(organizationId, workspaceId, identityId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -12226,43 +12343,15 @@ export class WorkspaceApi extends BaseAPI {
 
     /**
      * 
-     * @summary Download the Workspace File specified
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
-     * @param {string} fileName the file name
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof WorkspaceApi
-     */
-    public downloadWorkspaceFile(organizationId: string, workspaceId: string, fileName: string, options?: RawAxiosRequestConfig) {
-        return WorkspaceApiFp(this.configuration).downloadWorkspaceFile(organizationId, workspaceId, fileName, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary List all Workspace files
+     * @summary Delete all Workspace files
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WorkspaceApi
      */
-    public findAllWorkspaceFiles(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig) {
-        return WorkspaceApiFp(this.configuration).findAllWorkspaceFiles(organizationId, workspaceId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary List all Workspaces
-     * @param {string} organizationId the Organization identifier
-     * @param {number} [page] page number to query (first page is at index 0)
-     * @param {number} [size] amount of result by page
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof WorkspaceApi
-     */
-    public findAllWorkspaces(organizationId: string, page?: number, size?: number, options?: RawAxiosRequestConfig) {
-        return WorkspaceApiFp(this.configuration).findAllWorkspaces(organizationId, page, size, options).then((request) => request(this.axios, this.basePath));
+    public deleteWorkspaceFiles(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig) {
+        return WorkspaceApiFp(this.configuration).deleteWorkspaceFiles(organizationId, workspaceId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -12274,8 +12363,8 @@ export class WorkspaceApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof WorkspaceApi
      */
-    public findWorkspaceById(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig) {
-        return WorkspaceApiFp(this.configuration).findWorkspaceById(organizationId, workspaceId, options).then((request) => request(this.axios, this.basePath));
+    public getWorkspace(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig) {
+        return WorkspaceApiFp(this.configuration).getWorkspace(organizationId, workspaceId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -12294,16 +12383,16 @@ export class WorkspaceApi extends BaseAPI {
 
     /**
      * 
-     * @summary Get the Workspace permission by given role
+     * @summary Download the Workspace File specified
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
-     * @param {string} role the Role
+     * @param {string} fileName the file name
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WorkspaceApi
      */
-    public getWorkspacePermissions(organizationId: string, workspaceId: string, role: string, options?: RawAxiosRequestConfig) {
-        return WorkspaceApiFp(this.configuration).getWorkspacePermissions(organizationId, workspaceId, role, options).then((request) => request(this.axios, this.basePath));
+    public getWorkspaceFile(organizationId: string, workspaceId: string, fileName: string, options?: RawAxiosRequestConfig) {
+        return WorkspaceApiFp(this.configuration).getWorkspaceFile(organizationId, workspaceId, fileName, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -12321,6 +12410,33 @@ export class WorkspaceApi extends BaseAPI {
 
     /**
      * 
+     * @summary List all Workspace files
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof WorkspaceApi
+     */
+    public listWorkspaceFiles(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig) {
+        return WorkspaceApiFp(this.configuration).listWorkspaceFiles(organizationId, workspaceId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get the Workspace permission by given role
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} role the Role
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof WorkspaceApi
+     */
+    public listWorkspaceRolePermissions(organizationId: string, workspaceId: string, role: string, options?: RawAxiosRequestConfig) {
+        return WorkspaceApiFp(this.configuration).listWorkspaceRolePermissions(organizationId, workspaceId, role, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary Get the Workspace security users list
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
@@ -12328,62 +12444,22 @@ export class WorkspaceApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof WorkspaceApi
      */
-    public getWorkspaceSecurityUsers(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig) {
-        return WorkspaceApiFp(this.configuration).getWorkspaceSecurityUsers(organizationId, workspaceId, options).then((request) => request(this.axios, this.basePath));
+    public listWorkspaceSecurityUsers(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig) {
+        return WorkspaceApiFp(this.configuration).listWorkspaceSecurityUsers(organizationId, workspaceId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
+     * @summary List all Workspaces
      * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
-     * @param {string} datasetId dataset id to be linked to
+     * @param {number} [page] page number to query (first page is at index 0)
+     * @param {number} [size] amount of result by page
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WorkspaceApi
      */
-    public linkDataset(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig) {
-        return WorkspaceApiFp(this.configuration).linkDataset(organizationId, workspaceId, datasetId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Remove the specified access from the given Organization Workspace
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
-     * @param {string} identityId the User identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof WorkspaceApi
-     */
-    public removeWorkspaceAccessControl(organizationId: string, workspaceId: string, identityId: string, options?: RawAxiosRequestConfig) {
-        return WorkspaceApiFp(this.configuration).removeWorkspaceAccessControl(organizationId, workspaceId, identityId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Set the Workspace default security
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
-     * @param {WorkspaceRole} workspaceRole This change the workspace default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the workspace.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof WorkspaceApi
-     */
-    public setWorkspaceDefaultSecurity(organizationId: string, workspaceId: string, workspaceRole: WorkspaceRole, options?: RawAxiosRequestConfig) {
-        return WorkspaceApiFp(this.configuration).setWorkspaceDefaultSecurity(organizationId, workspaceId, workspaceRole, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
-     * @param {string} datasetId dataset id to be linked to
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof WorkspaceApi
-     */
-    public unlinkDataset(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig) {
-        return WorkspaceApiFp(this.configuration).unlinkDataset(organizationId, workspaceId, datasetId, options).then((request) => request(this.axios, this.basePath));
+    public listWorkspaces(organizationId: string, page?: number, size?: number, options?: RawAxiosRequestConfig) {
+        return WorkspaceApiFp(this.configuration).listWorkspaces(organizationId, page, size, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -12391,13 +12467,13 @@ export class WorkspaceApi extends BaseAPI {
      * @summary Update a workspace
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
-     * @param {Workspace} workspace The new Workspace details. This endpoint can\&#39;t be used to update security
+     * @param {WorkspaceUpdateRequest} workspaceUpdateRequest The new Workspace details. This endpoint can\&#39;t be used to update security
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WorkspaceApi
      */
-    public updateWorkspace(organizationId: string, workspaceId: string, workspace: Workspace, options?: RawAxiosRequestConfig) {
-        return WorkspaceApiFp(this.configuration).updateWorkspace(organizationId, workspaceId, workspace, options).then((request) => request(this.axios, this.basePath));
+    public updateWorkspace(organizationId: string, workspaceId: string, workspaceUpdateRequest: WorkspaceUpdateRequest, options?: RawAxiosRequestConfig) {
+        return WorkspaceApiFp(this.configuration).updateWorkspace(organizationId, workspaceId, workspaceUpdateRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -12417,18 +12493,16 @@ export class WorkspaceApi extends BaseAPI {
 
     /**
      * 
-     * @summary Upload a file for the Workspace
+     * @summary Update the Workspace default security
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
-     * @param {File} file 
-     * @param {boolean} [overwrite] 
-     * @param {string} [destination] Destination path. Must end with a \\\&#39;/\\\&#39; if specifying a folder. Note that paths may or may not start with a \\\&#39;/\\\&#39;, but they are always treated as relative to the Workspace root location. 
+     * @param {WorkspaceRole} workspaceRole This change the workspace default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the workspace.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WorkspaceApi
      */
-    public uploadWorkspaceFile(organizationId: string, workspaceId: string, file: File, overwrite?: boolean, destination?: string, options?: RawAxiosRequestConfig) {
-        return WorkspaceApiFp(this.configuration).uploadWorkspaceFile(organizationId, workspaceId, file, overwrite, destination, options).then((request) => request(this.axios, this.basePath));
+    public updateWorkspaceDefaultSecurity(organizationId: string, workspaceId: string, workspaceRole: WorkspaceRole, options?: RawAxiosRequestConfig) {
+        return WorkspaceApiFp(this.configuration).updateWorkspaceDefaultSecurity(organizationId, workspaceId, workspaceRole, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
