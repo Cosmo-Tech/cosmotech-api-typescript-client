@@ -596,31 +596,6 @@ export interface DatasetTwinGraphQuery {
     'query': string;
 }
 /**
- * Configuration of scenario runs deletion automatic mecanism
- * @export
- * @interface DeleteHistoricalData
- */
-export interface DeleteHistoricalData {
-    /**
-     * Activate or Deactivate historical data deletion
-     * @type {boolean}
-     * @memberof DeleteHistoricalData
-     */
-    'enable': boolean;
-    /**
-     * define the polling frequency of scenario run status (in millis)
-     * @type {number}
-     * @memberof DeleteHistoricalData
-     */
-    'pollFrequency'?: number;
-    /**
-     * define the polling timeout
-     * @type {number}
-     * @memberof DeleteHistoricalData
-     */
-    'timeOut'?: number;
-}
-/**
  * 
  * @export
  * @interface FileUploadMetadata
@@ -1345,22 +1320,21 @@ export interface RunStatusNode {
     'endTime'?: string;
 }
 /**
- * a Solution Run Template
+ * A Solution Run Template
  * @export
  * @interface RunTemplate
  */
 export interface RunTemplate {
     /**
-     * the Solution Run Template id
+     * The Solution Run Template id
      * @type {string}
      * @memberof RunTemplate
      */
     'id': string;
     /**
-     * the Run Template name
+     * The Run Template name
      * @type {string}
      * @memberof RunTemplate
-     * @deprecated
      */
     'name'?: string;
     /**
@@ -1370,25 +1344,25 @@ export interface RunTemplate {
      */
     'labels'?: { [key: string]: string; };
     /**
-     * the Run Template description
+     * The Run Template description
      * @type {string}
      * @memberof RunTemplate
      */
     'description'?: string;
     /**
-     * the Cosmo Tech simulation name. This information is send to the Engine. Mandatory information if no Engine is defined
+     * The Cosmo Tech simulation name
      * @type {string}
      * @memberof RunTemplate
      */
     'csmSimulation'?: string;
     /**
-     * the list of Run Template tags
+     * The list of Run Template tags
      * @type {Array<string>}
      * @memberof RunTemplate
      */
     'tags'?: Array<string>;
     /**
-     * the compute size needed for this Run Template. Standard sizes are basic and highcpu. Default is basic
+     * The compute size needed for this Run Template
      * @type {string}
      * @memberof RunTemplate
      */
@@ -1400,77 +1374,11 @@ export interface RunTemplate {
      */
     'runSizing'?: RunTemplateResourceSizing;
     /**
-     * set to true if the run template does not want to check data ingestion state (no probes or not control plane)
+     * Set to true if the run template does not want to check data ingestion state
      * @type {boolean}
      * @memberof RunTemplate
      */
     'noDataIngestionState'?: boolean;
-    /**
-     * whether or not the fetch dataset step is done
-     * @type {boolean}
-     * @memberof RunTemplate
-     */
-    'fetchDatasets'?: boolean;
-    /**
-     * whether or not the scenario data download transform step step is done
-     * @type {boolean}
-     * @memberof RunTemplate
-     */
-    'scenarioDataDownloadTransform'?: boolean;
-    /**
-     * whether or not the fetch parameters step is done
-     * @type {boolean}
-     * @memberof RunTemplate
-     */
-    'fetchScenarioParameters'?: boolean;
-    /**
-     * whether or not the apply parameter step is done
-     * @type {boolean}
-     * @memberof RunTemplate
-     */
-    'applyParameters'?: boolean;
-    /**
-     * whether or not the validate step is done
-     * @type {boolean}
-     * @memberof RunTemplate
-     */
-    'validateData'?: boolean;
-    /**
-     * whether or not the Datasets values are send to the DataWarehouse prior to Simulation Run. If not set follow the Workspace setting
-     * @type {boolean}
-     * @memberof RunTemplate
-     */
-    'sendDatasetsToDataWarehouse'?: boolean;
-    /**
-     * whether or not the input parameters values are send to the DataWarehouse prior to Simulation Run. If not set follow the Workspace setting
-     * @type {boolean}
-     * @memberof RunTemplate
-     */
-    'sendInputParametersToDataWarehouse'?: boolean;
-    /**
-     * whether or not the pre-run step is done
-     * @type {boolean}
-     * @memberof RunTemplate
-     */
-    'preRun'?: boolean;
-    /**
-     * whether or not the run step is done
-     * @type {boolean}
-     * @memberof RunTemplate
-     */
-    'run'?: boolean;
-    /**
-     * whether or not the post-run step is done
-     * @type {boolean}
-     * @memberof RunTemplate
-     */
-    'postRun'?: boolean;
-    /**
-     * whether or not to store the scenario parameters in json instead of csv
-     * @type {boolean}
-     * @memberof RunTemplate
-     */
-    'parametersJson'?: boolean;
     /**
      * 
      * @type {RunTemplateStepSource}
@@ -1508,72 +1416,46 @@ export interface RunTemplate {
      */
     'scenariodataTransformSource'?: RunTemplateStepSource;
     /**
-     * the ordered list of parameters groups for the Run Template
+     * The ordered list of parameters groups for the Run Template
      * @type {Array<string>}
      * @memberof RunTemplate
      */
     'parameterGroups'?: Array<string>;
     /**
-     * whether or not to stack adjacent scenario run steps in one container run which will chain steps
+     * Whether or not to stack adjacent scenario run steps
      * @type {boolean}
      * @memberof RunTemplate
      */
     'stackSteps'?: boolean;
     /**
-     * an optional URL to the git repository
+     * An optional URL to the git repository
      * @type {string}
      * @memberof RunTemplate
      */
     'gitRepositoryUrl'?: string;
     /**
-     * an optional git branch name
+     * An optional git branch name
      * @type {string}
      * @memberof RunTemplate
      */
     'gitBranchName'?: string;
     /**
-     * an optional directory where to find the run template source
+     * An optional directory where to find the run template source
      * @type {string}
      * @memberof RunTemplate
      */
     'runTemplateSourceDir'?: string;
     /**
-     * 
-     * @type {RunTemplateOrchestrator}
-     * @memberof RunTemplate
-     */
-    'orchestratorType'?: RunTemplateOrchestrator;
-    /**
-     * an optional duration in seconds in which a workflow is allowed to run
+     * An optional duration in seconds in which a workflow is allowed to run
      * @type {number}
      * @memberof RunTemplate
      */
     'executionTimeout'?: number;
-    /**
-     * 
-     * @type {DeleteHistoricalData}
-     * @memberof RunTemplate
-     */
-    'deleteHistoricalData'?: DeleteHistoricalData;
 }
 
 
 /**
- * the Orchestrator to use for the Run Template
- * @export
- * @enum {string}
- */
-
-export const RunTemplateOrchestrator = {
-    ArgoWorkflow: 'argoWorkflow',
-    CsmOrc: 'csmOrc'
-} as const;
-
-export type RunTemplateOrchestrator = typeof RunTemplateOrchestrator[keyof typeof RunTemplateOrchestrator];
-
-
-/**
- * a Run Template Parameter
+ * A Run Template Parameter
  * @export
  * @interface RunTemplateParameter
  */
@@ -1597,38 +1479,38 @@ export interface RunTemplateParameter {
      */
     'varType'?: string;
     /**
-     * the default value for this parameter
+     * The default value for this parameter
      * @type {string}
      * @memberof RunTemplateParameter
      */
     'defaultValue'?: string;
     /**
-     * the minimum value for this parameter
+     * The minimum value for this parameter
      * @type {string}
      * @memberof RunTemplateParameter
      */
     'minValue'?: string;
     /**
-     * the maximum value for this parameter
+     * The maximum value for this parameter
      * @type {string}
      * @memberof RunTemplateParameter
      */
     'maxValue'?: string;
     /**
-     * a regex to validate the value
+     * A regex to validate the value
      * @type {string}
      * @memberof RunTemplateParameter
      */
     'regexValidation'?: string;
     /**
-     * freeform options
+     * Freeform options
      * @type {{ [key: string]: any; }}
      * @memberof RunTemplateParameter
      */
     'options'?: { [key: string]: any; };
 }
 /**
- * a Parameter Group for a Run Template
+ * A Parameter Group for a Run Template
  * @export
  * @interface RunTemplateParameterGroup
  */
@@ -1646,25 +1528,25 @@ export interface RunTemplateParameterGroup {
      */
     'labels'?: { [key: string]: string; };
     /**
-     * does the group define a table
+     * Does the group define a table
      * @type {boolean}
      * @memberof RunTemplateParameterGroup
      */
     'isTable'?: boolean;
     /**
-     * freeform options
+     * Freeform options
      * @type {{ [key: string]: any; }}
      * @memberof RunTemplateParameterGroup
      */
     'options'?: { [key: string]: any; };
     /**
-     * the Run Template Group parent Id
+     * The Run Template Group parent Id
      * @type {string}
      * @memberof RunTemplateParameterGroup
      */
     'parentId'?: string;
     /**
-     * an ordered list of Run Template Parameters
+     * An ordered list of Run Template Parameters
      * @type {Array<string>}
      * @memberof RunTemplateParameterGroup
      */
@@ -1696,7 +1578,7 @@ export interface RunTemplateParameterValue {
     'value': string;
 }
 /**
- * a description object for resource requests and limits (default same configuration as basic sizing)
+ * A description object for resource requests and limits
  * @export
  * @interface RunTemplateResourceSizing
  */
@@ -1715,7 +1597,7 @@ export interface RunTemplateResourceSizing {
     'limits': ResourceSizeInfo;
 }
 /**
- * the source local, cloud or git repository
+ * The source local, cloud or git repository
  * @export
  * @enum {string}
  */
@@ -2008,103 +1890,103 @@ export interface SendRunDataRequest {
     'data'?: Array<{ [key: string]: any; }>;
 }
 /**
- * a version of a Solution
+ * A version of a Solution
  * @export
  * @interface Solution
  */
 export interface Solution {
     /**
-     * the Solution version unique identifier
+     * The Solution version unique identifier
      * @type {string}
      * @memberof Solution
      */
-    'id'?: string;
+    'id': string;
     /**
-     * the Organization unique identifier
+     * The Organization unique identifier
      * @type {string}
      * @memberof Solution
      */
-    'organizationId'?: string;
+    'organizationId': string;
     /**
-     * the Solution key which group Solution versions
+     * The Solution key which groups Solution versions
      * @type {string}
      * @memberof Solution
      */
-    'key'?: string;
+    'key': string;
     /**
-     * the Solution name
+     * The Solution name
      * @type {string}
      * @memberof Solution
      */
-    'name'?: string;
+    'name': string;
     /**
-     * the Solution description
+     * The Solution description
      * @type {string}
      * @memberof Solution
      */
     'description'?: string;
     /**
-     * the registry repository containing the image
+     * The registry repository containing the image
      * @type {string}
      * @memberof Solution
      */
-    'repository'?: string;
+    'repository': string;
     /**
-     * set to true if the runtemplate wants to always pull the image
+     * Set to true if the runtemplate wants to always pull the image
      * @type {boolean}
      * @memberof Solution
      */
     'alwaysPull'?: boolean;
     /**
-     * the main Cosmo Tech simulator name used in standard Run Template
+     * The main Cosmo Tech simulator name used in standard Run Template
      * @type {string}
      * @memberof Solution
      */
-    'csmSimulator'?: string;
+    'csmSimulator': string;
     /**
-     * the Solution version MAJOR.MINOR.PATCH. Must be aligned with an existing repository tag
+     * The Solution version MAJOR.MINOR.PATCH. Must be aligned with an existing repository tag
      * @type {string}
      * @memberof Solution
      */
-    'version'?: string;
+    'version': string;
     /**
-     * the User id which own this Solution
+     * The User id which owns this Solution
      * @type {string}
      * @memberof Solution
      */
-    'ownerId'?: string;
+    'ownerId': string;
     /**
-     * the MAJOR.MINOR version used to build this solution
+     * The MAJOR.MINOR version used to build this solution
      * @type {string}
      * @memberof Solution
      */
     'sdkVersion'?: string;
     /**
-     * an optional URL link to solution page
+     * An optional URL link to solution page
      * @type {string}
      * @memberof Solution
      */
     'url'?: string;
     /**
-     * the list of tags
+     * The list of tags
      * @type {Array<string>}
      * @memberof Solution
      */
     'tags'?: Array<string>;
     /**
-     * the list of Run Template Parameters
+     * The list of Run Template Parameters
      * @type {Array<RunTemplateParameter>}
      * @memberof Solution
      */
-    'parameters'?: Array<RunTemplateParameter>;
+    'parameters': Array<RunTemplateParameter>;
     /**
-     * the list of parameters groups for the Run Templates
+     * The list of parameters groups for the Run Templates
      * @type {Array<RunTemplateParameterGroup>}
      * @memberof Solution
      */
-    'parameterGroups'?: Array<RunTemplateParameterGroup>;
+    'parameterGroups': Array<RunTemplateParameterGroup>;
     /**
-     * list of Run Template
+     * List of Run Templates
      * @type {Array<RunTemplate>}
      * @memberof Solution
      */
@@ -2114,58 +1996,228 @@ export interface Solution {
      * @type {SolutionSecurity}
      * @memberof Solution
      */
-    'security'?: SolutionSecurity;
+    'security': SolutionSecurity;
 }
 /**
- * a Solution access control item
+ * A Solution access control item
  * @export
  * @interface SolutionAccessControl
  */
 export interface SolutionAccessControl {
     /**
-     * the identity id
+     * The identity id
      * @type {string}
      * @memberof SolutionAccessControl
      */
     'id': string;
     /**
-     * a role
+     * The assigned role
      * @type {string}
      * @memberof SolutionAccessControl
      */
     'role': string;
 }
 /**
- * the Solution Role
+ * Request object for creating a new solution
+ * @export
+ * @interface SolutionCreateRequest
+ */
+export interface SolutionCreateRequest {
+    /**
+     * technical key for resource name convention and version grouping. Must be unique
+     * @type {string}
+     * @memberof SolutionCreateRequest
+     */
+    'key': string;
+    /**
+     * Solution name. This name is displayed in the sample webApp
+     * @type {string}
+     * @memberof SolutionCreateRequest
+     */
+    'name': string;
+    /**
+     * The Solution description
+     * @type {string}
+     * @memberof SolutionCreateRequest
+     */
+    'description'?: string;
+    /**
+     * The registry repository containing the image
+     * @type {string}
+     * @memberof SolutionCreateRequest
+     */
+    'repository': string;
+    /**
+     * The Solution version MAJOR.MINOR.PATCH
+     * @type {string}
+     * @memberof SolutionCreateRequest
+     */
+    'version': string;
+    /**
+     * Set to true if the runtemplate wants to always pull the image
+     * @type {boolean}
+     * @memberof SolutionCreateRequest
+     */
+    'alwaysPull'?: boolean;
+    /**
+     * The main Cosmo Tech simulator name used in standard Run Template
+     * @type {string}
+     * @memberof SolutionCreateRequest
+     */
+    'csmSimulator': string;
+    /**
+     * The list of tags
+     * @type {Array<string>}
+     * @memberof SolutionCreateRequest
+     */
+    'tags'?: Array<string>;
+    /**
+     * The list of Run Template Parameters
+     * @type {Array<RunTemplateParameter>}
+     * @memberof SolutionCreateRequest
+     */
+    'parameters'?: Array<RunTemplateParameter>;
+    /**
+     * The list of parameters groups for the Run Templates
+     * @type {Array<RunTemplateParameterGroup>}
+     * @memberof SolutionCreateRequest
+     */
+    'parameterGroups'?: Array<RunTemplateParameterGroup>;
+    /**
+     * List of Run Templates
+     * @type {Array<RunTemplate>}
+     * @memberof SolutionCreateRequest
+     */
+    'runTemplates'?: Array<RunTemplate>;
+    /**
+     * The MAJOR.MINOR version used to build this solution
+     * @type {string}
+     * @memberof SolutionCreateRequest
+     */
+    'sdkVersion'?: string;
+    /**
+     * An optional URL link to solution page
+     * @type {string}
+     * @memberof SolutionCreateRequest
+     */
+    'url'?: string;
+    /**
+     * 
+     * @type {SolutionSecurity}
+     * @memberof SolutionCreateRequest
+     */
+    'security'?: SolutionSecurity;
+}
+/**
+ * The Solution Role
  * @export
  * @interface SolutionRole
  */
 export interface SolutionRole {
     /**
-     * the Solution Role
+     * The Solution Role
      * @type {string}
      * @memberof SolutionRole
      */
     'role': string;
 }
 /**
- * the Solution security information
+ * The Solution security information
  * @export
  * @interface SolutionSecurity
  */
 export interface SolutionSecurity {
     /**
-     * the role by default
+     * The role by default
      * @type {string}
      * @memberof SolutionSecurity
      */
     'default': string;
     /**
-     * the list which can access this Solution with detailed access control information
+     * The list which can access this Solution with detailed access control information
      * @type {Array<SolutionAccessControl>}
      * @memberof SolutionSecurity
      */
     'accessControlList': Array<SolutionAccessControl>;
+}
+/**
+ * Request object for updating a solution
+ * @export
+ * @interface SolutionUpdateRequest
+ */
+export interface SolutionUpdateRequest {
+    /**
+     * technical key for resource name convention and version grouping. Must be unique
+     * @type {string}
+     * @memberof SolutionUpdateRequest
+     */
+    'key'?: string;
+    /**
+     * The Solution name
+     * @type {string}
+     * @memberof SolutionUpdateRequest
+     */
+    'name'?: string;
+    /**
+     * The Solution description
+     * @type {string}
+     * @memberof SolutionUpdateRequest
+     */
+    'description'?: string;
+    /**
+     * The registry repository containing the image
+     * @type {string}
+     * @memberof SolutionUpdateRequest
+     */
+    'repository'?: string;
+    /**
+     * Set to true if the runtemplate wants to always pull the image
+     * @type {boolean}
+     * @memberof SolutionUpdateRequest
+     */
+    'alwaysPull'?: boolean;
+    /**
+     * The main Cosmo Tech simulator name used in standard Run Template
+     * @type {string}
+     * @memberof SolutionUpdateRequest
+     */
+    'csmSimulator'?: string;
+    /**
+     * The Solution version MAJOR.MINOR.PATCH. Must be aligned with an existing repository tag
+     * @type {string}
+     * @memberof SolutionUpdateRequest
+     */
+    'version'?: string;
+    /**
+     * The MAJOR.MINOR version used to build this solution
+     * @type {string}
+     * @memberof SolutionUpdateRequest
+     */
+    'sdkVersion'?: string;
+    /**
+     * An optional URL link to solution page
+     * @type {string}
+     * @memberof SolutionUpdateRequest
+     */
+    'url'?: string;
+    /**
+     * The list of tags
+     * @type {Array<string>}
+     * @memberof SolutionUpdateRequest
+     */
+    'tags'?: Array<string>;
+    /**
+     * The list of Run Template Parameters
+     * @type {Array<RunTemplateParameter>}
+     * @memberof SolutionUpdateRequest
+     */
+    'parameters'?: Array<RunTemplateParameter>;
+    /**
+     * The list of parameters groups for the Run Templates
+     * @type {Array<RunTemplateParameterGroup>}
+     * @memberof SolutionUpdateRequest
+     */
+    'parameterGroups'?: Array<RunTemplateParameterGroup>;
 }
 /**
  * Source job import information
@@ -2385,7 +2437,7 @@ export interface WorkspaceCreateRequest {
      */
     'key': string;
     /**
-     * Workspace name. This name is display in the sample webApp
+     * Workspace name. This name is displayed in the sample webApp
      * @type {string}
      * @memberof WorkspaceCreateRequest
      */
@@ -8983,23 +9035,19 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
     return {
         /**
          * 
-         * @summary Add Parameter Groups. Any item with the same ID will be overwritten
+         * @summary Create a new solution
          * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {Array<RunTemplateParameterGroup>} runTemplateParameterGroup the Parameter Groups
+         * @param {SolutionCreateRequest} solutionCreateRequest the Solution to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addOrReplaceParameterGroups: async (organizationId: string, solutionId: string, runTemplateParameterGroup: Array<RunTemplateParameterGroup>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createSolution: async (organizationId: string, solutionCreateRequest: SolutionCreateRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('addOrReplaceParameterGroups', 'organizationId', organizationId)
-            // verify required parameter 'solutionId' is not null or undefined
-            assertParamExists('addOrReplaceParameterGroups', 'solutionId', solutionId)
-            // verify required parameter 'runTemplateParameterGroup' is not null or undefined
-            assertParamExists('addOrReplaceParameterGroups', 'runTemplateParameterGroup', runTemplateParameterGroup)
-            const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/parameterGroups`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
+            assertParamExists('createSolution', 'organizationId', organizationId)
+            // verify required parameter 'solutionCreateRequest' is not null or undefined
+            assertParamExists('createSolution', 'solutionCreateRequest', solutionCreateRequest)
+            const localVarPath = `/organizations/{organization_id}/solutions`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -9022,7 +9070,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(runTemplateParameterGroup, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(solutionCreateRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -9031,116 +9079,20 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
-         * @summary Add Parameters. Any item with the same ID will be overwritten
+         * @summary Create solution access control
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
-         * @param {Array<RunTemplateParameter>} runTemplateParameter the Parameters
+         * @param {SolutionAccessControl} solutionAccessControl Access control to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addOrReplaceParameters: async (organizationId: string, solutionId: string, runTemplateParameter: Array<RunTemplateParameter>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createSolutionAccessControl: async (organizationId: string, solutionId: string, solutionAccessControl: SolutionAccessControl, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('addOrReplaceParameters', 'organizationId', organizationId)
+            assertParamExists('createSolutionAccessControl', 'organizationId', organizationId)
             // verify required parameter 'solutionId' is not null or undefined
-            assertParamExists('addOrReplaceParameters', 'solutionId', solutionId)
-            // verify required parameter 'runTemplateParameter' is not null or undefined
-            assertParamExists('addOrReplaceParameters', 'runTemplateParameter', runTemplateParameter)
-            const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/parameters`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(runTemplateParameter, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Add Run Templates. Any item with the same ID will be overwritten
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {Array<RunTemplate>} runTemplate the Run Templates
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        addOrReplaceRunTemplates: async (organizationId: string, solutionId: string, runTemplate: Array<RunTemplate>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('addOrReplaceRunTemplates', 'organizationId', organizationId)
-            // verify required parameter 'solutionId' is not null or undefined
-            assertParamExists('addOrReplaceRunTemplates', 'solutionId', solutionId)
-            // verify required parameter 'runTemplate' is not null or undefined
-            assertParamExists('addOrReplaceRunTemplates', 'runTemplate', runTemplate)
-            const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/runTemplates`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(runTemplate, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Add a control access to the Solution
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {SolutionAccessControl} solutionAccessControl the new Solution security access to add.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        addSolutionAccessControl: async (organizationId: string, solutionId: string, solutionAccessControl: SolutionAccessControl, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('addSolutionAccessControl', 'organizationId', organizationId)
-            // verify required parameter 'solutionId' is not null or undefined
-            assertParamExists('addSolutionAccessControl', 'solutionId', solutionId)
+            assertParamExists('createSolutionAccessControl', 'solutionId', solutionId)
             // verify required parameter 'solutionAccessControl' is not null or undefined
-            assertParamExists('addSolutionAccessControl', 'solutionAccessControl', solutionAccessControl)
+            assertParamExists('createSolutionAccessControl', 'solutionAccessControl', solutionAccessControl)
             const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/security/access`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
                 .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
@@ -9167,50 +9119,6 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(solutionAccessControl, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Register a new solution
-         * @param {string} organizationId the Organization identifier
-         * @param {Solution} solution the Solution to create
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createSolution: async (organizationId: string, solution: Solution, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('createSolution', 'organizationId', organizationId)
-            // verify required parameter 'solution' is not null or undefined
-            assertParamExists('createSolution', 'solution', solution)
-            const localVarPath = `/organizations/{organization_id}/solutions`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(solution, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -9261,7 +9169,137 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
-         * @summary Remove the specified Solution Run Template
+         * @summary Delete solution access control
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {string} identityId the User identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteSolutionAccessControl: async (organizationId: string, solutionId: string, identityId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('deleteSolutionAccessControl', 'organizationId', organizationId)
+            // verify required parameter 'solutionId' is not null or undefined
+            assertParamExists('deleteSolutionAccessControl', 'solutionId', solutionId)
+            // verify required parameter 'identityId' is not null or undefined
+            assertParamExists('deleteSolutionAccessControl', 'identityId', identityId)
+            const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/security/access/{identity_id}`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)))
+                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Delete all parameter groups from the solution
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteSolutionParameterGroups: async (organizationId: string, solutionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('deleteSolutionParameterGroups', 'organizationId', organizationId)
+            // verify required parameter 'solutionId' is not null or undefined
+            assertParamExists('deleteSolutionParameterGroups', 'solutionId', solutionId)
+            const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/parameterGroups`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Delete all parameters from the solution
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteSolutionParameters: async (organizationId: string, solutionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('deleteSolutionParameters', 'organizationId', organizationId)
+            // verify required parameter 'solutionId' is not null or undefined
+            assertParamExists('deleteSolutionParameters', 'solutionId', solutionId)
+            const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/parameters`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Delete a specific run template
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
          * @param {string} runTemplateId the Run Template identifier
@@ -9307,18 +9345,20 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
-         * @summary List all Solutions
+         * @summary Delete all run templates from the solution
          * @param {string} organizationId the Organization identifier
-         * @param {number} [page] page number to query (first page is at index 0)
-         * @param {number} [size] amount of result by page
+         * @param {string} solutionId the Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findAllSolutions: async (organizationId: string, page?: number, size?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteSolutionRunTemplates: async (organizationId: string, solutionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('findAllSolutions', 'organizationId', organizationId)
-            const localVarPath = `/organizations/{organization_id}/solutions`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
+            assertParamExists('deleteSolutionRunTemplates', 'organizationId', organizationId)
+            // verify required parameter 'solutionId' is not null or undefined
+            assertParamExists('deleteSolutionRunTemplates', 'solutionId', solutionId)
+            const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/runTemplates`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -9326,21 +9366,13 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
             // authentication oAuth2AuthCode required
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-            if (page !== undefined) {
-                localVarQueryParameter['page'] = page;
-            }
-
-            if (size !== undefined) {
-                localVarQueryParameter['size'] = size;
-            }
 
 
     
@@ -9361,11 +9393,11 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findSolutionById: async (organizationId: string, solutionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getSolution: async (organizationId: string, solutionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('findSolutionById', 'organizationId', organizationId)
+            assertParamExists('getSolution', 'organizationId', organizationId)
             // verify required parameter 'solutionId' is not null or undefined
-            assertParamExists('findSolutionById', 'solutionId', solutionId)
+            assertParamExists('getSolution', 'solutionId', solutionId)
             const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
                 .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
@@ -9397,7 +9429,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
-         * @summary Get a control access for the Solution
+         * @summary Get solution access control
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
          * @param {string} identityId the User identifier
@@ -9443,7 +9475,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
-         * @summary Get the Solution security information
+         * @summary Get solution security information
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
          * @param {*} [options] Override http request option.
@@ -9485,17 +9517,17 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
-         * @summary Get the Solution security users list
+         * @summary List solution security users
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSolutionSecurityUsers: async (organizationId: string, solutionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listSolutionSecurityUsers: async (organizationId: string, solutionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('getSolutionSecurityUsers', 'organizationId', organizationId)
+            assertParamExists('listSolutionSecurityUsers', 'organizationId', organizationId)
             // verify required parameter 'solutionId' is not null or undefined
-            assertParamExists('getSolutionSecurityUsers', 'solutionId', solutionId)
+            assertParamExists('listSolutionSecurityUsers', 'solutionId', solutionId)
             const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/security/users`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
                 .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
@@ -9527,20 +9559,18 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
-         * @summary Remove all Run Templates from the Solution specified
+         * @summary List all Solutions
          * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {number} [page] Page number to query (zero-based indexing)
+         * @param {number} [size] Number of records per page
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        removeAllRunTemplates: async (organizationId: string, solutionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listSolutions: async (organizationId: string, page?: number, size?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('removeAllRunTemplates', 'organizationId', organizationId)
-            // verify required parameter 'solutionId' is not null or undefined
-            assertParamExists('removeAllRunTemplates', 'solutionId', solutionId)
-            const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/runTemplates`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
+            assertParamExists('listSolutions', 'organizationId', organizationId)
+            const localVarPath = `/organizations/{organization_id}/solutions`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -9548,7 +9578,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -9556,189 +9586,19 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Remove all Parameter Groups from the Solution specified
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        removeAllSolutionParameterGroups: async (organizationId: string, solutionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('removeAllSolutionParameterGroups', 'organizationId', organizationId)
-            // verify required parameter 'solutionId' is not null or undefined
-            assertParamExists('removeAllSolutionParameterGroups', 'solutionId', solutionId)
-            const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/parameterGroups`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
             }
 
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Remove all Parameters from the Solution specified
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        removeAllSolutionParameters: async (organizationId: string, solutionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('removeAllSolutionParameters', 'organizationId', organizationId)
-            // verify required parameter 'solutionId' is not null or undefined
-            assertParamExists('removeAllSolutionParameters', 'solutionId', solutionId)
-            const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/parameters`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
+            if (size !== undefined) {
+                localVarQueryParameter['size'] = size;
             }
 
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Remove the specified access from the given Organization Solution
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} identityId the User identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        removeSolutionAccessControl: async (organizationId: string, solutionId: string, identityId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('removeSolutionAccessControl', 'organizationId', organizationId)
-            // verify required parameter 'solutionId' is not null or undefined
-            assertParamExists('removeSolutionAccessControl', 'solutionId', solutionId)
-            // verify required parameter 'identityId' is not null or undefined
-            assertParamExists('removeSolutionAccessControl', 'identityId', identityId)
-            const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/security/access/{identity_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)))
-                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Set the Solution default security
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {SolutionRole} solutionRole This change the solution default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the solution.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        setSolutionDefaultSecurity: async (organizationId: string, solutionId: string, solutionRole: SolutionRole, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('setSolutionDefaultSecurity', 'organizationId', organizationId)
-            // verify required parameter 'solutionId' is not null or undefined
-            assertParamExists('setSolutionDefaultSecurity', 'solutionId', solutionId)
-            // verify required parameter 'solutionRole' is not null or undefined
-            assertParamExists('setSolutionDefaultSecurity', 'solutionRole', solutionRole)
-            const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/security/default`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(solutionRole, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -9750,17 +9610,17 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
          * @summary Update a solution
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
-         * @param {Solution} solution the new Solution details. This endpoint can\&#39;t be used to update security
+         * @param {SolutionUpdateRequest} solutionUpdateRequest the new Solution details. This endpoint can\&#39;t be used to update security
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateSolution: async (organizationId: string, solutionId: string, solution: Solution, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateSolution: async (organizationId: string, solutionId: string, solutionUpdateRequest: SolutionUpdateRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('updateSolution', 'organizationId', organizationId)
             // verify required parameter 'solutionId' is not null or undefined
             assertParamExists('updateSolution', 'solutionId', solutionId)
-            // verify required parameter 'solution' is not null or undefined
-            assertParamExists('updateSolution', 'solution', solution)
+            // verify required parameter 'solutionUpdateRequest' is not null or undefined
+            assertParamExists('updateSolution', 'solutionUpdateRequest', solutionUpdateRequest)
             const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
                 .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
@@ -9786,7 +9646,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(solution, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(solutionUpdateRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -9795,11 +9655,11 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
-         * @summary Update the specified access to User for a Solution
+         * @summary Update solution access control
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
          * @param {string} identityId the User identifier
-         * @param {SolutionRole} solutionRole The new Solution Access Control
+         * @param {SolutionRole} solutionRole Access control updates
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -9847,11 +9707,155 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
-         * @summary Update the specified Solution Run Template
+         * @summary Update solution default security
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {SolutionRole} solutionRole This changes the solution default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the solution.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateSolutionDefaultSecurity: async (organizationId: string, solutionId: string, solutionRole: SolutionRole, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('updateSolutionDefaultSecurity', 'organizationId', organizationId)
+            // verify required parameter 'solutionId' is not null or undefined
+            assertParamExists('updateSolutionDefaultSecurity', 'solutionId', solutionId)
+            // verify required parameter 'solutionRole' is not null or undefined
+            assertParamExists('updateSolutionDefaultSecurity', 'solutionRole', solutionRole)
+            const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/security/default`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(solutionRole, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Update solution parameter groups
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {Array<RunTemplateParameterGroup>} runTemplateParameterGroup Parameter groups to update
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateSolutionParameterGroups: async (organizationId: string, solutionId: string, runTemplateParameterGroup: Array<RunTemplateParameterGroup>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('updateSolutionParameterGroups', 'organizationId', organizationId)
+            // verify required parameter 'solutionId' is not null or undefined
+            assertParamExists('updateSolutionParameterGroups', 'solutionId', solutionId)
+            // verify required parameter 'runTemplateParameterGroup' is not null or undefined
+            assertParamExists('updateSolutionParameterGroups', 'runTemplateParameterGroup', runTemplateParameterGroup)
+            const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/parameterGroups`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(runTemplateParameterGroup, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Update solution parameters
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {Array<RunTemplateParameter>} runTemplateParameter Parameters to update
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateSolutionParameters: async (organizationId: string, solutionId: string, runTemplateParameter: Array<RunTemplateParameter>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('updateSolutionParameters', 'organizationId', organizationId)
+            // verify required parameter 'solutionId' is not null or undefined
+            assertParamExists('updateSolutionParameters', 'solutionId', solutionId)
+            // verify required parameter 'runTemplateParameter' is not null or undefined
+            assertParamExists('updateSolutionParameters', 'runTemplateParameter', runTemplateParameter)
+            const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/parameters`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(runTemplateParameter, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Update a specific run template
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
          * @param {string} runTemplateId the Run Template identifier
-         * @param {RunTemplate} runTemplate the Run Templates
+         * @param {RunTemplate} runTemplate Run template updates
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -9897,6 +9901,54 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @summary Update solution run templates
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {Array<RunTemplate>} runTemplate Run templates to update
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateSolutionRunTemplates: async (organizationId: string, solutionId: string, runTemplate: Array<RunTemplate>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('updateSolutionRunTemplates', 'organizationId', organizationId)
+            // verify required parameter 'solutionId' is not null or undefined
+            assertParamExists('updateSolutionRunTemplates', 'solutionId', solutionId)
+            // verify required parameter 'runTemplate' is not null or undefined
+            assertParamExists('updateSolutionRunTemplates', 'runTemplate', runTemplate)
+            const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/runTemplates`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(runTemplate, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -9909,76 +9961,31 @@ export const SolutionApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary Add Parameter Groups. Any item with the same ID will be overwritten
+         * @summary Create a new solution
          * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {Array<RunTemplateParameterGroup>} runTemplateParameterGroup the Parameter Groups
+         * @param {SolutionCreateRequest} solutionCreateRequest the Solution to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async addOrReplaceParameterGroups(organizationId: string, solutionId: string, runTemplateParameterGroup: Array<RunTemplateParameterGroup>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<RunTemplateParameterGroup>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.addOrReplaceParameterGroups(organizationId, solutionId, runTemplateParameterGroup, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SolutionApi.addOrReplaceParameterGroups']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Add Parameters. Any item with the same ID will be overwritten
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {Array<RunTemplateParameter>} runTemplateParameter the Parameters
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async addOrReplaceParameters(organizationId: string, solutionId: string, runTemplateParameter: Array<RunTemplateParameter>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<RunTemplateParameter>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.addOrReplaceParameters(organizationId, solutionId, runTemplateParameter, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SolutionApi.addOrReplaceParameters']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Add Run Templates. Any item with the same ID will be overwritten
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {Array<RunTemplate>} runTemplate the Run Templates
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async addOrReplaceRunTemplates(organizationId: string, solutionId: string, runTemplate: Array<RunTemplate>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<RunTemplate>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.addOrReplaceRunTemplates(organizationId, solutionId, runTemplate, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SolutionApi.addOrReplaceRunTemplates']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Add a control access to the Solution
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {SolutionAccessControl} solutionAccessControl the new Solution security access to add.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async addSolutionAccessControl(organizationId: string, solutionId: string, solutionAccessControl: SolutionAccessControl, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SolutionAccessControl>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.addSolutionAccessControl(organizationId, solutionId, solutionAccessControl, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SolutionApi.addSolutionAccessControl']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Register a new solution
-         * @param {string} organizationId the Organization identifier
-         * @param {Solution} solution the Solution to create
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async createSolution(organizationId: string, solution: Solution, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Solution>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createSolution(organizationId, solution, options);
+        async createSolution(organizationId: string, solutionCreateRequest: SolutionCreateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Solution>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createSolution(organizationId, solutionCreateRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SolutionApi.createSolution']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Create solution access control
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {SolutionAccessControl} solutionAccessControl Access control to create
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createSolutionAccessControl(organizationId: string, solutionId: string, solutionAccessControl: SolutionAccessControl, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SolutionAccessControl>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createSolutionAccessControl(organizationId, solutionId, solutionAccessControl, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SolutionApi.createSolutionAccessControl']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -9997,7 +10004,50 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Remove the specified Solution Run Template
+         * @summary Delete solution access control
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {string} identityId the User identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteSolutionAccessControl(organizationId: string, solutionId: string, identityId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteSolutionAccessControl(organizationId, solutionId, identityId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SolutionApi.deleteSolutionAccessControl']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Delete all parameter groups from the solution
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteSolutionParameterGroups(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteSolutionParameterGroups(organizationId, solutionId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SolutionApi.deleteSolutionParameterGroups']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Delete all parameters from the solution
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteSolutionParameters(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteSolutionParameters(organizationId, solutionId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SolutionApi.deleteSolutionParameters']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Delete a specific run template
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
          * @param {string} runTemplateId the Run Template identifier
@@ -10012,17 +10062,16 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary List all Solutions
+         * @summary Delete all run templates from the solution
          * @param {string} organizationId the Organization identifier
-         * @param {number} [page] page number to query (first page is at index 0)
-         * @param {number} [size] amount of result by page
+         * @param {string} solutionId the Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findAllSolutions(organizationId: string, page?: number, size?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Solution>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.findAllSolutions(organizationId, page, size, options);
+        async deleteSolutionRunTemplates(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteSolutionRunTemplates(organizationId, solutionId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SolutionApi.findAllSolutions']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SolutionApi.deleteSolutionRunTemplates']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -10033,15 +10082,15 @@ export const SolutionApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findSolutionById(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Solution>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.findSolutionById(organizationId, solutionId, options);
+        async getSolution(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Solution>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getSolution(organizationId, solutionId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SolutionApi.findSolutionById']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SolutionApi.getSolution']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
-         * @summary Get a control access for the Solution
+         * @summary Get solution access control
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
          * @param {string} identityId the User identifier
@@ -10056,7 +10105,7 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Get the Solution security information
+         * @summary Get solution security information
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
          * @param {*} [options] Override http request option.
@@ -10070,88 +10119,31 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Get the Solution security users list
+         * @summary List solution security users
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getSolutionSecurityUsers(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getSolutionSecurityUsers(organizationId, solutionId, options);
+        async listSolutionSecurityUsers(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listSolutionSecurityUsers(organizationId, solutionId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SolutionApi.getSolutionSecurityUsers']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SolutionApi.listSolutionSecurityUsers']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
-         * @summary Remove all Run Templates from the Solution specified
+         * @summary List all Solutions
          * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {number} [page] Page number to query (zero-based indexing)
+         * @param {number} [size] Number of records per page
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async removeAllRunTemplates(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.removeAllRunTemplates(organizationId, solutionId, options);
+        async listSolutions(organizationId: string, page?: number, size?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Solution>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listSolutions(organizationId, page, size, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SolutionApi.removeAllRunTemplates']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Remove all Parameter Groups from the Solution specified
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async removeAllSolutionParameterGroups(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.removeAllSolutionParameterGroups(organizationId, solutionId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SolutionApi.removeAllSolutionParameterGroups']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Remove all Parameters from the Solution specified
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async removeAllSolutionParameters(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.removeAllSolutionParameters(organizationId, solutionId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SolutionApi.removeAllSolutionParameters']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Remove the specified access from the given Organization Solution
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} identityId the User identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async removeSolutionAccessControl(organizationId: string, solutionId: string, identityId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.removeSolutionAccessControl(organizationId, solutionId, identityId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SolutionApi.removeSolutionAccessControl']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Set the Solution default security
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {SolutionRole} solutionRole This change the solution default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the solution.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async setSolutionDefaultSecurity(organizationId: string, solutionId: string, solutionRole: SolutionRole, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SolutionSecurity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setSolutionDefaultSecurity(organizationId, solutionId, solutionRole, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SolutionApi.setSolutionDefaultSecurity']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SolutionApi.listSolutions']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -10159,23 +10151,23 @@ export const SolutionApiFp = function(configuration?: Configuration) {
          * @summary Update a solution
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
-         * @param {Solution} solution the new Solution details. This endpoint can\&#39;t be used to update security
+         * @param {SolutionUpdateRequest} solutionUpdateRequest the new Solution details. This endpoint can\&#39;t be used to update security
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateSolution(organizationId: string, solutionId: string, solution: Solution, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Solution>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateSolution(organizationId, solutionId, solution, options);
+        async updateSolution(organizationId: string, solutionId: string, solutionUpdateRequest: SolutionUpdateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Solution>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateSolution(organizationId, solutionId, solutionUpdateRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SolutionApi.updateSolution']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
-         * @summary Update the specified access to User for a Solution
+         * @summary Update solution access control
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
          * @param {string} identityId the User identifier
-         * @param {SolutionRole} solutionRole The new Solution Access Control
+         * @param {SolutionRole} solutionRole Access control updates
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10187,11 +10179,56 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Update the specified Solution Run Template
+         * @summary Update solution default security
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {SolutionRole} solutionRole This changes the solution default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the solution.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateSolutionDefaultSecurity(organizationId: string, solutionId: string, solutionRole: SolutionRole, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SolutionSecurity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateSolutionDefaultSecurity(organizationId, solutionId, solutionRole, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SolutionApi.updateSolutionDefaultSecurity']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Update solution parameter groups
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {Array<RunTemplateParameterGroup>} runTemplateParameterGroup Parameter groups to update
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateSolutionParameterGroups(organizationId: string, solutionId: string, runTemplateParameterGroup: Array<RunTemplateParameterGroup>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<RunTemplateParameterGroup>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateSolutionParameterGroups(organizationId, solutionId, runTemplateParameterGroup, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SolutionApi.updateSolutionParameterGroups']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Update solution parameters
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {Array<RunTemplateParameter>} runTemplateParameter Parameters to update
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateSolutionParameters(organizationId: string, solutionId: string, runTemplateParameter: Array<RunTemplateParameter>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<RunTemplateParameter>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateSolutionParameters(organizationId, solutionId, runTemplateParameter, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SolutionApi.updateSolutionParameters']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Update a specific run template
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
          * @param {string} runTemplateId the Run Template identifier
-         * @param {RunTemplate} runTemplate the Run Templates
+         * @param {RunTemplate} runTemplate Run template updates
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10199,6 +10236,21 @@ export const SolutionApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateSolutionRunTemplate(organizationId, solutionId, runTemplateId, runTemplate, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SolutionApi.updateSolutionRunTemplate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Update solution run templates
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {Array<RunTemplate>} runTemplate Run templates to update
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateSolutionRunTemplates(organizationId: string, solutionId: string, runTemplate: Array<RunTemplate>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<RunTemplate>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateSolutionRunTemplates(organizationId, solutionId, runTemplate, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SolutionApi.updateSolutionRunTemplates']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -10213,62 +10265,26 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
     return {
         /**
          * 
-         * @summary Add Parameter Groups. Any item with the same ID will be overwritten
+         * @summary Create a new solution
          * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {Array<RunTemplateParameterGroup>} runTemplateParameterGroup the Parameter Groups
+         * @param {SolutionCreateRequest} solutionCreateRequest the Solution to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addOrReplaceParameterGroups(organizationId: string, solutionId: string, runTemplateParameterGroup: Array<RunTemplateParameterGroup>, options?: RawAxiosRequestConfig): AxiosPromise<Array<RunTemplateParameterGroup>> {
-            return localVarFp.addOrReplaceParameterGroups(organizationId, solutionId, runTemplateParameterGroup, options).then((request) => request(axios, basePath));
+        createSolution(organizationId: string, solutionCreateRequest: SolutionCreateRequest, options?: RawAxiosRequestConfig): AxiosPromise<Solution> {
+            return localVarFp.createSolution(organizationId, solutionCreateRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @summary Add Parameters. Any item with the same ID will be overwritten
+         * @summary Create solution access control
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
-         * @param {Array<RunTemplateParameter>} runTemplateParameter the Parameters
+         * @param {SolutionAccessControl} solutionAccessControl Access control to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addOrReplaceParameters(organizationId: string, solutionId: string, runTemplateParameter: Array<RunTemplateParameter>, options?: RawAxiosRequestConfig): AxiosPromise<Array<RunTemplateParameter>> {
-            return localVarFp.addOrReplaceParameters(organizationId, solutionId, runTemplateParameter, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Add Run Templates. Any item with the same ID will be overwritten
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {Array<RunTemplate>} runTemplate the Run Templates
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        addOrReplaceRunTemplates(organizationId: string, solutionId: string, runTemplate: Array<RunTemplate>, options?: RawAxiosRequestConfig): AxiosPromise<Array<RunTemplate>> {
-            return localVarFp.addOrReplaceRunTemplates(organizationId, solutionId, runTemplate, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Add a control access to the Solution
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {SolutionAccessControl} solutionAccessControl the new Solution security access to add.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        addSolutionAccessControl(organizationId: string, solutionId: string, solutionAccessControl: SolutionAccessControl, options?: RawAxiosRequestConfig): AxiosPromise<SolutionAccessControl> {
-            return localVarFp.addSolutionAccessControl(organizationId, solutionId, solutionAccessControl, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Register a new solution
-         * @param {string} organizationId the Organization identifier
-         * @param {Solution} solution the Solution to create
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createSolution(organizationId: string, solution: Solution, options?: RawAxiosRequestConfig): AxiosPromise<Solution> {
-            return localVarFp.createSolution(organizationId, solution, options).then((request) => request(axios, basePath));
+        createSolutionAccessControl(organizationId: string, solutionId: string, solutionAccessControl: SolutionAccessControl, options?: RawAxiosRequestConfig): AxiosPromise<SolutionAccessControl> {
+            return localVarFp.createSolutionAccessControl(organizationId, solutionId, solutionAccessControl, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -10283,7 +10299,41 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * 
-         * @summary Remove the specified Solution Run Template
+         * @summary Delete solution access control
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {string} identityId the User identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteSolutionAccessControl(organizationId: string, solutionId: string, identityId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteSolutionAccessControl(organizationId, solutionId, identityId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Delete all parameter groups from the solution
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteSolutionParameterGroups(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteSolutionParameterGroups(organizationId, solutionId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Delete all parameters from the solution
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteSolutionParameters(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteSolutionParameters(organizationId, solutionId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Delete a specific run template
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
          * @param {string} runTemplateId the Run Template identifier
@@ -10295,15 +10345,14 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * 
-         * @summary List all Solutions
+         * @summary Delete all run templates from the solution
          * @param {string} organizationId the Organization identifier
-         * @param {number} [page] page number to query (first page is at index 0)
-         * @param {number} [size] amount of result by page
+         * @param {string} solutionId the Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findAllSolutions(organizationId: string, page?: number, size?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<Solution>> {
-            return localVarFp.findAllSolutions(organizationId, page, size, options).then((request) => request(axios, basePath));
+        deleteSolutionRunTemplates(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteSolutionRunTemplates(organizationId, solutionId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -10313,12 +10362,12 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findSolutionById(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): AxiosPromise<Solution> {
-            return localVarFp.findSolutionById(organizationId, solutionId, options).then((request) => request(axios, basePath));
+        getSolution(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): AxiosPromise<Solution> {
+            return localVarFp.getSolution(organizationId, solutionId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @summary Get a control access for the Solution
+         * @summary Get solution access control
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
          * @param {string} identityId the User identifier
@@ -10330,7 +10379,7 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * 
-         * @summary Get the Solution security information
+         * @summary Get solution security information
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
          * @param {*} [options] Override http request option.
@@ -10341,91 +10390,46 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * 
-         * @summary Get the Solution security users list
+         * @summary List solution security users
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSolutionSecurityUsers(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<string>> {
-            return localVarFp.getSolutionSecurityUsers(organizationId, solutionId, options).then((request) => request(axios, basePath));
+        listSolutionSecurityUsers(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<string>> {
+            return localVarFp.listSolutionSecurityUsers(organizationId, solutionId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @summary Remove all Run Templates from the Solution specified
+         * @summary List all Solutions
          * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {number} [page] Page number to query (zero-based indexing)
+         * @param {number} [size] Number of records per page
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        removeAllRunTemplates(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.removeAllRunTemplates(organizationId, solutionId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Remove all Parameter Groups from the Solution specified
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        removeAllSolutionParameterGroups(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.removeAllSolutionParameterGroups(organizationId, solutionId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Remove all Parameters from the Solution specified
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        removeAllSolutionParameters(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.removeAllSolutionParameters(organizationId, solutionId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Remove the specified access from the given Organization Solution
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} identityId the User identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        removeSolutionAccessControl(organizationId: string, solutionId: string, identityId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.removeSolutionAccessControl(organizationId, solutionId, identityId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Set the Solution default security
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {SolutionRole} solutionRole This change the solution default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the solution.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        setSolutionDefaultSecurity(organizationId: string, solutionId: string, solutionRole: SolutionRole, options?: RawAxiosRequestConfig): AxiosPromise<SolutionSecurity> {
-            return localVarFp.setSolutionDefaultSecurity(organizationId, solutionId, solutionRole, options).then((request) => request(axios, basePath));
+        listSolutions(organizationId: string, page?: number, size?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<Solution>> {
+            return localVarFp.listSolutions(organizationId, page, size, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary Update a solution
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
-         * @param {Solution} solution the new Solution details. This endpoint can\&#39;t be used to update security
+         * @param {SolutionUpdateRequest} solutionUpdateRequest the new Solution details. This endpoint can\&#39;t be used to update security
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateSolution(organizationId: string, solutionId: string, solution: Solution, options?: RawAxiosRequestConfig): AxiosPromise<Solution> {
-            return localVarFp.updateSolution(organizationId, solutionId, solution, options).then((request) => request(axios, basePath));
+        updateSolution(organizationId: string, solutionId: string, solutionUpdateRequest: SolutionUpdateRequest, options?: RawAxiosRequestConfig): AxiosPromise<Solution> {
+            return localVarFp.updateSolution(organizationId, solutionId, solutionUpdateRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @summary Update the specified access to User for a Solution
+         * @summary Update solution access control
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
          * @param {string} identityId the User identifier
-         * @param {SolutionRole} solutionRole The new Solution Access Control
+         * @param {SolutionRole} solutionRole Access control updates
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10434,16 +10438,64 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * 
-         * @summary Update the specified Solution Run Template
+         * @summary Update solution default security
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {SolutionRole} solutionRole This changes the solution default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the solution.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateSolutionDefaultSecurity(organizationId: string, solutionId: string, solutionRole: SolutionRole, options?: RawAxiosRequestConfig): AxiosPromise<SolutionSecurity> {
+            return localVarFp.updateSolutionDefaultSecurity(organizationId, solutionId, solutionRole, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Update solution parameter groups
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {Array<RunTemplateParameterGroup>} runTemplateParameterGroup Parameter groups to update
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateSolutionParameterGroups(organizationId: string, solutionId: string, runTemplateParameterGroup: Array<RunTemplateParameterGroup>, options?: RawAxiosRequestConfig): AxiosPromise<Array<RunTemplateParameterGroup>> {
+            return localVarFp.updateSolutionParameterGroups(organizationId, solutionId, runTemplateParameterGroup, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Update solution parameters
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {Array<RunTemplateParameter>} runTemplateParameter Parameters to update
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateSolutionParameters(organizationId: string, solutionId: string, runTemplateParameter: Array<RunTemplateParameter>, options?: RawAxiosRequestConfig): AxiosPromise<Array<RunTemplateParameter>> {
+            return localVarFp.updateSolutionParameters(organizationId, solutionId, runTemplateParameter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Update a specific run template
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
          * @param {string} runTemplateId the Run Template identifier
-         * @param {RunTemplate} runTemplate the Run Templates
+         * @param {RunTemplate} runTemplate Run template updates
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         updateSolutionRunTemplate(organizationId: string, solutionId: string, runTemplateId: string, runTemplate: RunTemplate, options?: RawAxiosRequestConfig): AxiosPromise<Array<RunTemplate>> {
             return localVarFp.updateSolutionRunTemplate(organizationId, solutionId, runTemplateId, runTemplate, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Update solution run templates
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {Array<RunTemplate>} runTemplate Run templates to update
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateSolutionRunTemplates(organizationId: string, solutionId: string, runTemplate: Array<RunTemplate>, options?: RawAxiosRequestConfig): AxiosPromise<Array<RunTemplate>> {
+            return localVarFp.updateSolutionRunTemplates(organizationId, solutionId, runTemplate, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -10457,71 +10509,29 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
 export class SolutionApi extends BaseAPI {
     /**
      * 
-     * @summary Add Parameter Groups. Any item with the same ID will be overwritten
+     * @summary Create a new solution
      * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
-     * @param {Array<RunTemplateParameterGroup>} runTemplateParameterGroup the Parameter Groups
+     * @param {SolutionCreateRequest} solutionCreateRequest the Solution to create
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
      */
-    public addOrReplaceParameterGroups(organizationId: string, solutionId: string, runTemplateParameterGroup: Array<RunTemplateParameterGroup>, options?: RawAxiosRequestConfig) {
-        return SolutionApiFp(this.configuration).addOrReplaceParameterGroups(organizationId, solutionId, runTemplateParameterGroup, options).then((request) => request(this.axios, this.basePath));
+    public createSolution(organizationId: string, solutionCreateRequest: SolutionCreateRequest, options?: RawAxiosRequestConfig) {
+        return SolutionApiFp(this.configuration).createSolution(organizationId, solutionCreateRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @summary Add Parameters. Any item with the same ID will be overwritten
+     * @summary Create solution access control
      * @param {string} organizationId the Organization identifier
      * @param {string} solutionId the Solution identifier
-     * @param {Array<RunTemplateParameter>} runTemplateParameter the Parameters
+     * @param {SolutionAccessControl} solutionAccessControl Access control to create
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
      */
-    public addOrReplaceParameters(organizationId: string, solutionId: string, runTemplateParameter: Array<RunTemplateParameter>, options?: RawAxiosRequestConfig) {
-        return SolutionApiFp(this.configuration).addOrReplaceParameters(organizationId, solutionId, runTemplateParameter, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Add Run Templates. Any item with the same ID will be overwritten
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
-     * @param {Array<RunTemplate>} runTemplate the Run Templates
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SolutionApi
-     */
-    public addOrReplaceRunTemplates(organizationId: string, solutionId: string, runTemplate: Array<RunTemplate>, options?: RawAxiosRequestConfig) {
-        return SolutionApiFp(this.configuration).addOrReplaceRunTemplates(organizationId, solutionId, runTemplate, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Add a control access to the Solution
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
-     * @param {SolutionAccessControl} solutionAccessControl the new Solution security access to add.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SolutionApi
-     */
-    public addSolutionAccessControl(organizationId: string, solutionId: string, solutionAccessControl: SolutionAccessControl, options?: RawAxiosRequestConfig) {
-        return SolutionApiFp(this.configuration).addSolutionAccessControl(organizationId, solutionId, solutionAccessControl, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Register a new solution
-     * @param {string} organizationId the Organization identifier
-     * @param {Solution} solution the Solution to create
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SolutionApi
-     */
-    public createSolution(organizationId: string, solution: Solution, options?: RawAxiosRequestConfig) {
-        return SolutionApiFp(this.configuration).createSolution(organizationId, solution, options).then((request) => request(this.axios, this.basePath));
+    public createSolutionAccessControl(organizationId: string, solutionId: string, solutionAccessControl: SolutionAccessControl, options?: RawAxiosRequestConfig) {
+        return SolutionApiFp(this.configuration).createSolutionAccessControl(organizationId, solutionId, solutionAccessControl, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -10539,7 +10549,47 @@ export class SolutionApi extends BaseAPI {
 
     /**
      * 
-     * @summary Remove the specified Solution Run Template
+     * @summary Delete solution access control
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
+     * @param {string} identityId the User identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SolutionApi
+     */
+    public deleteSolutionAccessControl(organizationId: string, solutionId: string, identityId: string, options?: RawAxiosRequestConfig) {
+        return SolutionApiFp(this.configuration).deleteSolutionAccessControl(organizationId, solutionId, identityId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Delete all parameter groups from the solution
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SolutionApi
+     */
+    public deleteSolutionParameterGroups(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig) {
+        return SolutionApiFp(this.configuration).deleteSolutionParameterGroups(organizationId, solutionId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Delete all parameters from the solution
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SolutionApi
+     */
+    public deleteSolutionParameters(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig) {
+        return SolutionApiFp(this.configuration).deleteSolutionParameters(organizationId, solutionId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Delete a specific run template
      * @param {string} organizationId the Organization identifier
      * @param {string} solutionId the Solution identifier
      * @param {string} runTemplateId the Run Template identifier
@@ -10553,16 +10603,15 @@ export class SolutionApi extends BaseAPI {
 
     /**
      * 
-     * @summary List all Solutions
+     * @summary Delete all run templates from the solution
      * @param {string} organizationId the Organization identifier
-     * @param {number} [page] page number to query (first page is at index 0)
-     * @param {number} [size] amount of result by page
+     * @param {string} solutionId the Solution identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
      */
-    public findAllSolutions(organizationId: string, page?: number, size?: number, options?: RawAxiosRequestConfig) {
-        return SolutionApiFp(this.configuration).findAllSolutions(organizationId, page, size, options).then((request) => request(this.axios, this.basePath));
+    public deleteSolutionRunTemplates(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig) {
+        return SolutionApiFp(this.configuration).deleteSolutionRunTemplates(organizationId, solutionId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -10574,13 +10623,13 @@ export class SolutionApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SolutionApi
      */
-    public findSolutionById(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig) {
-        return SolutionApiFp(this.configuration).findSolutionById(organizationId, solutionId, options).then((request) => request(this.axios, this.basePath));
+    public getSolution(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig) {
+        return SolutionApiFp(this.configuration).getSolution(organizationId, solutionId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @summary Get a control access for the Solution
+     * @summary Get solution access control
      * @param {string} organizationId the Organization identifier
      * @param {string} solutionId the Solution identifier
      * @param {string} identityId the User identifier
@@ -10594,7 +10643,7 @@ export class SolutionApi extends BaseAPI {
 
     /**
      * 
-     * @summary Get the Solution security information
+     * @summary Get solution security information
      * @param {string} organizationId the Organization identifier
      * @param {string} solutionId the Solution identifier
      * @param {*} [options] Override http request option.
@@ -10607,82 +10656,29 @@ export class SolutionApi extends BaseAPI {
 
     /**
      * 
-     * @summary Get the Solution security users list
+     * @summary List solution security users
      * @param {string} organizationId the Organization identifier
      * @param {string} solutionId the Solution identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
      */
-    public getSolutionSecurityUsers(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig) {
-        return SolutionApiFp(this.configuration).getSolutionSecurityUsers(organizationId, solutionId, options).then((request) => request(this.axios, this.basePath));
+    public listSolutionSecurityUsers(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig) {
+        return SolutionApiFp(this.configuration).listSolutionSecurityUsers(organizationId, solutionId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @summary Remove all Run Templates from the Solution specified
+     * @summary List all Solutions
      * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
+     * @param {number} [page] Page number to query (zero-based indexing)
+     * @param {number} [size] Number of records per page
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
      */
-    public removeAllRunTemplates(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig) {
-        return SolutionApiFp(this.configuration).removeAllRunTemplates(organizationId, solutionId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Remove all Parameter Groups from the Solution specified
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SolutionApi
-     */
-    public removeAllSolutionParameterGroups(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig) {
-        return SolutionApiFp(this.configuration).removeAllSolutionParameterGroups(organizationId, solutionId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Remove all Parameters from the Solution specified
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SolutionApi
-     */
-    public removeAllSolutionParameters(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig) {
-        return SolutionApiFp(this.configuration).removeAllSolutionParameters(organizationId, solutionId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Remove the specified access from the given Organization Solution
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
-     * @param {string} identityId the User identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SolutionApi
-     */
-    public removeSolutionAccessControl(organizationId: string, solutionId: string, identityId: string, options?: RawAxiosRequestConfig) {
-        return SolutionApiFp(this.configuration).removeSolutionAccessControl(organizationId, solutionId, identityId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Set the Solution default security
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
-     * @param {SolutionRole} solutionRole This change the solution default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the solution.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SolutionApi
-     */
-    public setSolutionDefaultSecurity(organizationId: string, solutionId: string, solutionRole: SolutionRole, options?: RawAxiosRequestConfig) {
-        return SolutionApiFp(this.configuration).setSolutionDefaultSecurity(organizationId, solutionId, solutionRole, options).then((request) => request(this.axios, this.basePath));
+    public listSolutions(organizationId: string, page?: number, size?: number, options?: RawAxiosRequestConfig) {
+        return SolutionApiFp(this.configuration).listSolutions(organizationId, page, size, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -10690,22 +10686,22 @@ export class SolutionApi extends BaseAPI {
      * @summary Update a solution
      * @param {string} organizationId the Organization identifier
      * @param {string} solutionId the Solution identifier
-     * @param {Solution} solution the new Solution details. This endpoint can\&#39;t be used to update security
+     * @param {SolutionUpdateRequest} solutionUpdateRequest the new Solution details. This endpoint can\&#39;t be used to update security
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
      */
-    public updateSolution(organizationId: string, solutionId: string, solution: Solution, options?: RawAxiosRequestConfig) {
-        return SolutionApiFp(this.configuration).updateSolution(organizationId, solutionId, solution, options).then((request) => request(this.axios, this.basePath));
+    public updateSolution(organizationId: string, solutionId: string, solutionUpdateRequest: SolutionUpdateRequest, options?: RawAxiosRequestConfig) {
+        return SolutionApiFp(this.configuration).updateSolution(organizationId, solutionId, solutionUpdateRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @summary Update the specified access to User for a Solution
+     * @summary Update solution access control
      * @param {string} organizationId the Organization identifier
      * @param {string} solutionId the Solution identifier
      * @param {string} identityId the User identifier
-     * @param {SolutionRole} solutionRole The new Solution Access Control
+     * @param {SolutionRole} solutionRole Access control updates
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
@@ -10716,17 +10712,73 @@ export class SolutionApi extends BaseAPI {
 
     /**
      * 
-     * @summary Update the specified Solution Run Template
+     * @summary Update solution default security
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
+     * @param {SolutionRole} solutionRole This changes the solution default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the solution.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SolutionApi
+     */
+    public updateSolutionDefaultSecurity(organizationId: string, solutionId: string, solutionRole: SolutionRole, options?: RawAxiosRequestConfig) {
+        return SolutionApiFp(this.configuration).updateSolutionDefaultSecurity(organizationId, solutionId, solutionRole, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Update solution parameter groups
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
+     * @param {Array<RunTemplateParameterGroup>} runTemplateParameterGroup Parameter groups to update
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SolutionApi
+     */
+    public updateSolutionParameterGroups(organizationId: string, solutionId: string, runTemplateParameterGroup: Array<RunTemplateParameterGroup>, options?: RawAxiosRequestConfig) {
+        return SolutionApiFp(this.configuration).updateSolutionParameterGroups(organizationId, solutionId, runTemplateParameterGroup, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Update solution parameters
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
+     * @param {Array<RunTemplateParameter>} runTemplateParameter Parameters to update
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SolutionApi
+     */
+    public updateSolutionParameters(organizationId: string, solutionId: string, runTemplateParameter: Array<RunTemplateParameter>, options?: RawAxiosRequestConfig) {
+        return SolutionApiFp(this.configuration).updateSolutionParameters(organizationId, solutionId, runTemplateParameter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Update a specific run template
      * @param {string} organizationId the Organization identifier
      * @param {string} solutionId the Solution identifier
      * @param {string} runTemplateId the Run Template identifier
-     * @param {RunTemplate} runTemplate the Run Templates
+     * @param {RunTemplate} runTemplate Run template updates
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
      */
     public updateSolutionRunTemplate(organizationId: string, solutionId: string, runTemplateId: string, runTemplate: RunTemplate, options?: RawAxiosRequestConfig) {
         return SolutionApiFp(this.configuration).updateSolutionRunTemplate(organizationId, solutionId, runTemplateId, runTemplate, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Update solution run templates
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
+     * @param {Array<RunTemplate>} runTemplate Run templates to update
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SolutionApi
+     */
+    public updateSolutionRunTemplates(organizationId: string, solutionId: string, runTemplate: Array<RunTemplate>, options?: RawAxiosRequestConfig) {
+        return SolutionApiFp(this.configuration).updateSolutionRunTemplates(organizationId, solutionId, runTemplate, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
