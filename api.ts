@@ -2206,18 +2206,6 @@ export interface SolutionUpdateRequest {
      * @memberof SolutionUpdateRequest
      */
     'tags'?: Array<string>;
-    /**
-     * The list of Run Template Parameters
-     * @type {Array<RunTemplateParameter>}
-     * @memberof SolutionUpdateRequest
-     */
-    'parameters'?: Array<RunTemplateParameter>;
-    /**
-     * The list of parameters groups for the Run Templates
-     * @type {Array<RunTemplateParameterGroup>}
-     * @memberof SolutionUpdateRequest
-     */
-    'parameterGroups'?: Array<RunTemplateParameterGroup>;
 }
 /**
  * Source job import information
@@ -6315,7 +6303,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
