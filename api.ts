@@ -1350,12 +1350,6 @@ export interface RunTemplate {
      */
     'description'?: string;
     /**
-     * The Cosmo Tech simulation name
-     * @type {string}
-     * @memberof RunTemplate
-     */
-    'csmSimulation'?: string;
-    /**
      * The list of Run Template tags
      * @type {Array<string>}
      * @memberof RunTemplate
@@ -1374,77 +1368,11 @@ export interface RunTemplate {
      */
     'runSizing'?: RunTemplateResourceSizing;
     /**
-     * Set to true if the run template does not want to check data ingestion state
-     * @type {boolean}
-     * @memberof RunTemplate
-     */
-    'noDataIngestionState'?: boolean;
-    /**
-     * 
-     * @type {RunTemplateStepSource}
-     * @memberof RunTemplate
-     */
-    'parametersHandlerSource'?: RunTemplateStepSource;
-    /**
-     * 
-     * @type {RunTemplateStepSource}
-     * @memberof RunTemplate
-     */
-    'datasetValidatorSource'?: RunTemplateStepSource;
-    /**
-     * 
-     * @type {RunTemplateStepSource}
-     * @memberof RunTemplate
-     */
-    'preRunSource'?: RunTemplateStepSource;
-    /**
-     * 
-     * @type {RunTemplateStepSource}
-     * @memberof RunTemplate
-     */
-    'runSource'?: RunTemplateStepSource;
-    /**
-     * 
-     * @type {RunTemplateStepSource}
-     * @memberof RunTemplate
-     */
-    'postRunSource'?: RunTemplateStepSource;
-    /**
-     * 
-     * @type {RunTemplateStepSource}
-     * @memberof RunTemplate
-     */
-    'scenariodataTransformSource'?: RunTemplateStepSource;
-    /**
      * The ordered list of parameters groups for the Run Template
      * @type {Array<string>}
      * @memberof RunTemplate
      */
     'parameterGroups'?: Array<string>;
-    /**
-     * Whether or not to stack adjacent scenario run steps
-     * @type {boolean}
-     * @memberof RunTemplate
-     */
-    'stackSteps'?: boolean;
-    /**
-     * An optional URL to the git repository
-     * @type {string}
-     * @memberof RunTemplate
-     */
-    'gitRepositoryUrl'?: string;
-    /**
-     * An optional git branch name
-     * @type {string}
-     * @memberof RunTemplate
-     */
-    'gitBranchName'?: string;
-    /**
-     * An optional directory where to find the run template source
-     * @type {string}
-     * @memberof RunTemplate
-     */
-    'runTemplateSourceDir'?: string;
     /**
      * An optional duration in seconds in which a workflow is allowed to run
      * @type {number}
@@ -1452,8 +1380,6 @@ export interface RunTemplate {
      */
     'executionTimeout'?: number;
 }
-
-
 /**
  * A Run Template Parameter
  * @export
@@ -1596,22 +1522,6 @@ export interface RunTemplateResourceSizing {
      */
     'limits': ResourceSizeInfo;
 }
-/**
- * The source local, cloud or git repository
- * @export
- * @enum {string}
- */
-
-export const RunTemplateStepSource = {
-    Cloud: 'cloud',
-    Git: 'git',
-    Local: 'local',
-    Platform: 'platform'
-} as const;
-
-export type RunTemplateStepSource = typeof RunTemplateStepSource[keyof typeof RunTemplateStepSource];
-
-
 /**
  * a Runner with base information
  * @export
