@@ -24,6 +24,68 @@ import type { RequestArgs } from './base';
 import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerMap } from './base';
 
 /**
+ * Misc information about the api
+ * @export
+ * @interface AboutInfo
+ */
+export interface AboutInfo {
+    /**
+     * 
+     * @type {AboutInfoVersion}
+     * @memberof AboutInfo
+     */
+    'version': AboutInfoVersion;
+}
+/**
+ * API version details
+ * @export
+ * @interface AboutInfoVersion
+ */
+export interface AboutInfoVersion {
+    /**
+     * Full version representation
+     * @type {string}
+     * @memberof AboutInfoVersion
+     */
+    'full': string;
+    /**
+     * Release main version representation
+     * @type {string}
+     * @memberof AboutInfoVersion
+     */
+    'release': string;
+    /**
+     * Major version number
+     * @type {number}
+     * @memberof AboutInfoVersion
+     */
+    'major': number;
+    /**
+     * Minor version number
+     * @type {number}
+     * @memberof AboutInfoVersion
+     */
+    'minor': number;
+    /**
+     * Patch version number
+     * @type {number}
+     * @memberof AboutInfoVersion
+     */
+    'patch': number;
+    /**
+     * Label version, may be empty
+     * @type {string}
+     * @memberof AboutInfoVersion
+     */
+    'label': string;
+    /**
+     * Build VCS id
+     * @type {string}
+     * @memberof AboutInfoVersion
+     */
+    'build': string;
+}
+/**
  * a RBAC by component
  * @export
  * @interface ComponentRolePermissions
@@ -5651,6 +5713,111 @@ export const UpdateTwingraphEntitiesTypeEnum = {
     Relationship: 'relationship'
 } as const;
 export type UpdateTwingraphEntitiesTypeEnum = typeof UpdateTwingraphEntitiesTypeEnum[keyof typeof UpdateTwingraphEntitiesTypeEnum];
+
+
+/**
+ * MetaApi - axios parameter creator
+ * @export
+ */
+export const MetaApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Get various information about the API
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        about: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/about`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * MetaApi - functional programming interface
+ * @export
+ */
+export const MetaApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = MetaApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary Get various information about the API
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async about(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AboutInfo>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.about(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['MetaApi.about']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * MetaApi - factory interface
+ * @export
+ */
+export const MetaApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = MetaApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary Get various information about the API
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        about(options?: RawAxiosRequestConfig): AxiosPromise<AboutInfo> {
+            return localVarFp.about(options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * MetaApi - object-oriented interface
+ * @export
+ * @class MetaApi
+ * @extends {BaseAPI}
+ */
+export class MetaApi extends BaseAPI {
+    /**
+     * 
+     * @summary Get various information about the API
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MetaApi
+     */
+    public about(options?: RawAxiosRequestConfig) {
+        return MetaApiFp(this.configuration).about(options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
 
 
 /**
