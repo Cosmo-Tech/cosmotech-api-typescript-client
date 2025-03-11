@@ -1585,7 +1585,7 @@ export interface RunTemplateResourceSizing {
     'limits': ResourceSizeInfo;
 }
 /**
- * a Runner with base information
+ * a Runner with complete information
  * @export
  * @interface Runner
  */
@@ -1595,13 +1595,13 @@ export interface Runner {
      * @type {string}
      * @memberof Runner
      */
-    'id'?: string;
+    'id': string;
     /**
      * the Runner name
      * @type {string}
      * @memberof Runner
      */
-    'name'?: string;
+    'name': string;
     /**
      * the Runner description
      * @type {string}
@@ -1625,7 +1625,7 @@ export interface Runner {
      * @type {string}
      * @memberof Runner
      */
-    'ownerId'?: string;
+    'ownerId': string;
     /**
      * the runner root id
      * @type {string}
@@ -1637,43 +1637,43 @@ export interface Runner {
      * @type {string}
      * @memberof Runner
      */
-    'solutionId'?: string;
+    'solutionId': string;
     /**
      * the Solution Run Template Id associated with this Runner
      * @type {string}
      * @memberof Runner
      */
-    'runTemplateId'?: string;
+    'runTemplateId': string;
     /**
      * the associated Organization Id
      * @type {string}
      * @memberof Runner
      */
-    'organizationId'?: string;
+    'organizationId': string;
     /**
      * the associated Workspace Id
      * @type {string}
      * @memberof Runner
      */
-    'workspaceId'?: string;
+    'workspaceId': string;
     /**
      * the Runner creation date
      * @type {number}
      * @memberof Runner
      */
-    'creationDate'?: number;
+    'creationDate': number;
     /**
      * the last time a Runner was updated
      * @type {number}
      * @memberof Runner
      */
-    'lastUpdate'?: number;
+    'lastUpdate': number;
     /**
      * the name of the owner
      * @type {string}
      * @memberof Runner
      */
-    'ownerName'?: string;
+    'ownerName': string;
     /**
      * the Solution name
      * @type {string}
@@ -1691,7 +1691,7 @@ export interface Runner {
      * @type {Array<string>}
      * @memberof Runner
      */
-    'datasetList'?: Array<string>;
+    'datasetList': Array<string>;
     /**
      * 
      * @type {RunnerResourceSizing}
@@ -1703,7 +1703,7 @@ export interface Runner {
      * @type {Array<RunnerRunTemplateParameterValue>}
      * @memberof Runner
      */
-    'parametersValues'?: Array<RunnerRunTemplateParameterValue>;
+    'parametersValues': Array<RunnerRunTemplateParameterValue>;
     /**
      * last run id from current runner
      * @type {string}
@@ -1715,13 +1715,13 @@ export interface Runner {
      * @type {RunnerValidationStatus}
      * @memberof Runner
      */
-    'validationStatus'?: RunnerValidationStatus;
+    'validationStatus': RunnerValidationStatus;
     /**
      * 
      * @type {RunnerSecurity}
      * @memberof Runner
      */
-    'security'?: RunnerSecurity;
+    'security': RunnerSecurity;
 }
 
 
@@ -1743,6 +1743,91 @@ export interface RunnerAccessControl {
      * @memberof RunnerAccessControl
      */
     'role': string;
+}
+/**
+ * Request object for creating a new runner
+ * @export
+ * @interface RunnerCreateRequest
+ */
+export interface RunnerCreateRequest {
+    /**
+     * the Runner name
+     * @type {string}
+     * @memberof RunnerCreateRequest
+     */
+    'name': string;
+    /**
+     * the Runner description
+     * @type {string}
+     * @memberof RunnerCreateRequest
+     */
+    'description'?: string;
+    /**
+     * the list of tags
+     * @type {Array<string>}
+     * @memberof RunnerCreateRequest
+     */
+    'tags'?: Array<string>;
+    /**
+     * the Solution Id associated with this Runner
+     * @type {string}
+     * @memberof RunnerCreateRequest
+     */
+    'solutionId': string;
+    /**
+     * the Runner parent id
+     * @type {string}
+     * @memberof RunnerCreateRequest
+     */
+    'parentId'?: string;
+    /**
+     * the Solution Run Template Id associated with this Runner
+     * @type {string}
+     * @memberof RunnerCreateRequest
+     */
+    'runTemplateId': string;
+    /**
+     * the list of Dataset Id associated to this Runner Run Template
+     * @type {Array<string>}
+     * @memberof RunnerCreateRequest
+     */
+    'datasetList'?: Array<string>;
+    /**
+     * 
+     * @type {RunnerResourceSizing}
+     * @memberof RunnerCreateRequest
+     */
+    'runSizing'?: RunnerResourceSizing;
+    /**
+     * the list of Solution Run Template parameters values
+     * @type {Array<RunnerRunTemplateParameterValue>}
+     * @memberof RunnerCreateRequest
+     */
+    'parametersValues'?: Array<RunnerRunTemplateParameterValue>;
+    /**
+     * the name of the owner
+     * @type {string}
+     * @memberof RunnerCreateRequest
+     */
+    'ownerName': string;
+    /**
+     * the Solution name
+     * @type {string}
+     * @memberof RunnerCreateRequest
+     */
+    'solutionName'?: string;
+    /**
+     * the Solution Run Template name associated with this Runner
+     * @type {string}
+     * @memberof RunnerCreateRequest
+     */
+    'runTemplateName'?: string;
+    /**
+     * 
+     * @type {RunnerSecurity}
+     * @memberof RunnerCreateRequest
+     */
+    'security'?: RunnerSecurity;
 }
 /**
  * a description object for resource requests and limits (default same configuration as basic sizing)
@@ -1825,6 +1910,73 @@ export interface RunnerSecurity {
      * @memberof RunnerSecurity
      */
     'accessControlList': Array<RunnerAccessControl>;
+}
+/**
+ * Request object for updating a runner
+ * @export
+ * @interface RunnerUpdateRequest
+ */
+export interface RunnerUpdateRequest {
+    /**
+     * the Runner name
+     * @type {string}
+     * @memberof RunnerUpdateRequest
+     */
+    'name'?: string;
+    /**
+     * the Runner description
+     * @type {string}
+     * @memberof RunnerUpdateRequest
+     */
+    'description'?: string;
+    /**
+     * the list of tags
+     * @type {Array<string>}
+     * @memberof RunnerUpdateRequest
+     */
+    'tags'?: Array<string>;
+    /**
+     * the Solution Run Template Id associated with this Runner
+     * @type {string}
+     * @memberof RunnerUpdateRequest
+     */
+    'runTemplateId'?: string;
+    /**
+     * the list of Dataset Id associated to this Runner Run Template
+     * @type {Array<string>}
+     * @memberof RunnerUpdateRequest
+     */
+    'datasetList'?: Array<string>;
+    /**
+     * 
+     * @type {RunnerResourceSizing}
+     * @memberof RunnerUpdateRequest
+     */
+    'runSizing'?: RunnerResourceSizing;
+    /**
+     * the list of Solution Run Template parameters values
+     * @type {Array<RunnerRunTemplateParameterValue>}
+     * @memberof RunnerUpdateRequest
+     */
+    'parametersValues'?: Array<RunnerRunTemplateParameterValue>;
+    /**
+     * the name of the owner
+     * @type {string}
+     * @memberof RunnerUpdateRequest
+     */
+    'ownerName'?: string;
+    /**
+     * the Solution name
+     * @type {string}
+     * @memberof RunnerUpdateRequest
+     */
+    'solutionName'?: string;
+    /**
+     * the Solution Run Template name associated with this Runner
+     * @type {string}
+     * @memberof RunnerUpdateRequest
+     */
+    'runTemplateName'?: string;
 }
 /**
  * the validation status of the runner
@@ -7681,6 +7833,54 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
     return {
         /**
          * 
+         * @summary Create a new Runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {RunnerCreateRequest} runnerCreateRequest the Runner to create
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createRunner: async (organizationId: string, workspaceId: string, runnerCreateRequest: RunnerCreateRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('createRunner', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('createRunner', 'workspaceId', workspaceId)
+            // verify required parameter 'runnerCreateRequest' is not null or undefined
+            assertParamExists('createRunner', 'runnerCreateRequest', runnerCreateRequest)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(runnerCreateRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Add a control access to the Runner
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -7689,15 +7889,15 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addRunnerAccessControl: async (organizationId: string, workspaceId: string, runnerId: string, runnerAccessControl: RunnerAccessControl, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createRunnerAccessControl: async (organizationId: string, workspaceId: string, runnerId: string, runnerAccessControl: RunnerAccessControl, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('addRunnerAccessControl', 'organizationId', organizationId)
+            assertParamExists('createRunnerAccessControl', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('addRunnerAccessControl', 'workspaceId', workspaceId)
+            assertParamExists('createRunnerAccessControl', 'workspaceId', workspaceId)
             // verify required parameter 'runnerId' is not null or undefined
-            assertParamExists('addRunnerAccessControl', 'runnerId', runnerId)
+            assertParamExists('createRunnerAccessControl', 'runnerId', runnerId)
             // verify required parameter 'runnerAccessControl' is not null or undefined
-            assertParamExists('addRunnerAccessControl', 'runnerAccessControl', runnerAccessControl)
+            assertParamExists('createRunnerAccessControl', 'runnerAccessControl', runnerAccessControl)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/security/access`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
                 .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
@@ -7733,54 +7933,6 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
-         * @summary Create a new Runner
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {Runner} runner the Runner to create
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createRunner: async (organizationId: string, workspaceId: string, runner: Runner, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('createRunner', 'organizationId', organizationId)
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('createRunner', 'workspaceId', workspaceId)
-            // verify required parameter 'runner' is not null or undefined
-            assertParamExists('createRunner', 'runner', runner)
-            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(runner, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @summary Delete a runner
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -7799,6 +7951,56 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
                 .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
                 .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Remove the specified access from the given Organization Runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} identityId the User identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteRunnerAccessControl: async (organizationId: string, workspaceId: string, runnerId: string, identityId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('deleteRunnerAccessControl', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('deleteRunnerAccessControl', 'workspaceId', workspaceId)
+            // verify required parameter 'runnerId' is not null or undefined
+            assertParamExists('deleteRunnerAccessControl', 'runnerId', runnerId)
+            // verify required parameter 'identityId' is not null or undefined
+            assertParamExists('deleteRunnerAccessControl', 'identityId', identityId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/security/access/{identity_id}`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)))
+                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -7923,56 +8125,6 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
-         * @summary Get the Runner permission by given role
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} runnerId the Runner identifier
-         * @param {string} role the Role
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getRunnerPermissions: async (organizationId: string, workspaceId: string, runnerId: string, role: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('getRunnerPermissions', 'organizationId', organizationId)
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('getRunnerPermissions', 'workspaceId', workspaceId)
-            // verify required parameter 'runnerId' is not null or undefined
-            assertParamExists('getRunnerPermissions', 'runnerId', runnerId)
-            // verify required parameter 'role' is not null or undefined
-            assertParamExists('getRunnerPermissions', 'role', role)
-            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/permissions/{role}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)))
-                .replace(`{${"role"}}`, encodeURIComponent(String(role)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @summary Get the Runner security information
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -8019,6 +8171,56 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
+         * @summary Get the Runner permission by given role
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} role the Role
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listRunnerPermissions: async (organizationId: string, workspaceId: string, runnerId: string, role: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('listRunnerPermissions', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('listRunnerPermissions', 'workspaceId', workspaceId)
+            // verify required parameter 'runnerId' is not null or undefined
+            assertParamExists('listRunnerPermissions', 'runnerId', runnerId)
+            // verify required parameter 'role' is not null or undefined
+            assertParamExists('listRunnerPermissions', 'role', role)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/permissions/{role}`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)))
+                .replace(`{${"role"}}`, encodeURIComponent(String(role)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Get the Runner security users list
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -8026,13 +8228,13 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRunnerSecurityUsers: async (organizationId: string, workspaceId: string, runnerId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listRunnerSecurityUsers: async (organizationId: string, workspaceId: string, runnerId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('getRunnerSecurityUsers', 'organizationId', organizationId)
+            assertParamExists('listRunnerSecurityUsers', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('getRunnerSecurityUsers', 'workspaceId', workspaceId)
+            assertParamExists('listRunnerSecurityUsers', 'workspaceId', workspaceId)
             // verify required parameter 'runnerId' is not null or undefined
-            assertParamExists('getRunnerSecurityUsers', 'runnerId', runnerId)
+            assertParamExists('listRunnerSecurityUsers', 'runnerId', runnerId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/security/users`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
                 .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
@@ -8109,108 +8311,6 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Remove the specified access from the given Organization Runner
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} runnerId the Runner identifier
-         * @param {string} identityId the User identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        removeRunnerAccessControl: async (organizationId: string, workspaceId: string, runnerId: string, identityId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('removeRunnerAccessControl', 'organizationId', organizationId)
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('removeRunnerAccessControl', 'workspaceId', workspaceId)
-            // verify required parameter 'runnerId' is not null or undefined
-            assertParamExists('removeRunnerAccessControl', 'runnerId', runnerId)
-            // verify required parameter 'identityId' is not null or undefined
-            assertParamExists('removeRunnerAccessControl', 'identityId', identityId)
-            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/security/access/{identity_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)))
-                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Set the Runner default security
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} runnerId the Runner identifier
-         * @param {RunnerRole} runnerRole This change the runner default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the runner.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        setRunnerDefaultSecurity: async (organizationId: string, workspaceId: string, runnerId: string, runnerRole: RunnerRole, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('setRunnerDefaultSecurity', 'organizationId', organizationId)
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('setRunnerDefaultSecurity', 'workspaceId', workspaceId)
-            // verify required parameter 'runnerId' is not null or undefined
-            assertParamExists('setRunnerDefaultSecurity', 'runnerId', runnerId)
-            // verify required parameter 'runnerRole' is not null or undefined
-            assertParamExists('setRunnerDefaultSecurity', 'runnerRole', runnerRole)
-            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/security/default`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(runnerRole, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -8315,19 +8415,19 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {string} runnerId the Runner identifier
-         * @param {Runner} runner the new Runner details. This endpoint can\&#39;t be used to update security
+         * @param {RunnerUpdateRequest} runnerUpdateRequest the new Runner details. This endpoint can\&#39;t be used to update security
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateRunner: async (organizationId: string, workspaceId: string, runnerId: string, runner: Runner, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateRunner: async (organizationId: string, workspaceId: string, runnerId: string, runnerUpdateRequest: RunnerUpdateRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('updateRunner', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
             assertParamExists('updateRunner', 'workspaceId', workspaceId)
             // verify required parameter 'runnerId' is not null or undefined
             assertParamExists('updateRunner', 'runnerId', runnerId)
-            // verify required parameter 'runner' is not null or undefined
-            assertParamExists('updateRunner', 'runner', runner)
+            // verify required parameter 'runnerUpdateRequest' is not null or undefined
+            assertParamExists('updateRunner', 'runnerUpdateRequest', runnerUpdateRequest)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
                 .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
@@ -8354,7 +8454,7 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(runner, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(runnerUpdateRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -8417,6 +8517,58 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @summary Set the Runner default security
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {RunnerRole} runnerRole This change the runner default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the runner.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateRunnerDefaultSecurity: async (organizationId: string, workspaceId: string, runnerId: string, runnerRole: RunnerRole, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('updateRunnerDefaultSecurity', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('updateRunnerDefaultSecurity', 'workspaceId', workspaceId)
+            // verify required parameter 'runnerId' is not null or undefined
+            assertParamExists('updateRunnerDefaultSecurity', 'runnerId', runnerId)
+            // verify required parameter 'runnerRole' is not null or undefined
+            assertParamExists('updateRunnerDefaultSecurity', 'runnerRole', runnerRole)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/security/default`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(runnerRole, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -8429,6 +8581,21 @@ export const RunnerApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @summary Create a new Runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {RunnerCreateRequest} runnerCreateRequest the Runner to create
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createRunner(organizationId: string, workspaceId: string, runnerCreateRequest: RunnerCreateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Runner>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createRunner(organizationId, workspaceId, runnerCreateRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RunnerApi.createRunner']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary Add a control access to the Runner
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -8437,25 +8604,10 @@ export const RunnerApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async addRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, runnerAccessControl: RunnerAccessControl, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RunnerAccessControl>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.addRunnerAccessControl(organizationId, workspaceId, runnerId, runnerAccessControl, options);
+        async createRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, runnerAccessControl: RunnerAccessControl, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RunnerAccessControl>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createRunnerAccessControl(organizationId, workspaceId, runnerId, runnerAccessControl, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RunnerApi.addRunnerAccessControl']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Create a new Runner
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {Runner} runner the Runner to create
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async createRunner(organizationId: string, workspaceId: string, runner: Runner, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Runner>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createRunner(organizationId, workspaceId, runner, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RunnerApi.createRunner']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RunnerApi.createRunnerAccessControl']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -8471,6 +8623,22 @@ export const RunnerApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteRunner(organizationId, workspaceId, runnerId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RunnerApi.deleteRunner']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Remove the specified access from the given Organization Runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} identityId the User identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, identityId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteRunnerAccessControl(organizationId, workspaceId, runnerId, identityId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RunnerApi.deleteRunnerAccessControl']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -8506,22 +8674,6 @@ export const RunnerApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Get the Runner permission by given role
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} runnerId the Runner identifier
-         * @param {string} role the Role
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getRunnerPermissions(organizationId: string, workspaceId: string, runnerId: string, role: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getRunnerPermissions(organizationId, workspaceId, runnerId, role, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RunnerApi.getRunnerPermissions']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
          * @summary Get the Runner security information
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -8537,6 +8689,22 @@ export const RunnerApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Get the Runner permission by given role
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} role the Role
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listRunnerPermissions(organizationId: string, workspaceId: string, runnerId: string, role: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listRunnerPermissions(organizationId, workspaceId, runnerId, role, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RunnerApi.listRunnerPermissions']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary Get the Runner security users list
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -8544,10 +8712,10 @@ export const RunnerApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getRunnerSecurityUsers(organizationId: string, workspaceId: string, runnerId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getRunnerSecurityUsers(organizationId, workspaceId, runnerId, options);
+        async listRunnerSecurityUsers(organizationId: string, workspaceId: string, runnerId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listRunnerSecurityUsers(organizationId, workspaceId, runnerId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RunnerApi.getRunnerSecurityUsers']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RunnerApi.listRunnerSecurityUsers']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -8564,38 +8732,6 @@ export const RunnerApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listRunners(organizationId, workspaceId, page, size, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RunnerApi.listRunners']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Remove the specified access from the given Organization Runner
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} runnerId the Runner identifier
-         * @param {string} identityId the User identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async removeRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, identityId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.removeRunnerAccessControl(organizationId, workspaceId, runnerId, identityId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RunnerApi.removeRunnerAccessControl']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Set the Runner default security
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} runnerId the Runner identifier
-         * @param {RunnerRole} runnerRole This change the runner default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the runner.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async setRunnerDefaultSecurity(organizationId: string, workspaceId: string, runnerId: string, runnerRole: RunnerRole, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RunnerSecurity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setRunnerDefaultSecurity(organizationId, workspaceId, runnerId, runnerRole, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RunnerApi.setRunnerDefaultSecurity']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -8634,12 +8770,12 @@ export const RunnerApiFp = function(configuration?: Configuration) {
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {string} runnerId the Runner identifier
-         * @param {Runner} runner the new Runner details. This endpoint can\&#39;t be used to update security
+         * @param {RunnerUpdateRequest} runnerUpdateRequest the new Runner details. This endpoint can\&#39;t be used to update security
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateRunner(organizationId: string, workspaceId: string, runnerId: string, runner: Runner, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Runner>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateRunner(organizationId, workspaceId, runnerId, runner, options);
+        async updateRunner(organizationId: string, workspaceId: string, runnerId: string, runnerUpdateRequest: RunnerUpdateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Runner>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateRunner(organizationId, workspaceId, runnerId, runnerUpdateRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RunnerApi.updateRunner']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -8661,6 +8797,22 @@ export const RunnerApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['RunnerApi.updateRunnerAccessControl']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * 
+         * @summary Set the Runner default security
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {RunnerRole} runnerRole This change the runner default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the runner.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateRunnerDefaultSecurity(organizationId: string, workspaceId: string, runnerId: string, runnerRole: RunnerRole, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RunnerSecurity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateRunnerDefaultSecurity(organizationId, workspaceId, runnerId, runnerRole, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RunnerApi.updateRunnerDefaultSecurity']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -8673,6 +8825,18 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
     return {
         /**
          * 
+         * @summary Create a new Runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {RunnerCreateRequest} runnerCreateRequest the Runner to create
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createRunner(organizationId: string, workspaceId: string, runnerCreateRequest: RunnerCreateRequest, options?: RawAxiosRequestConfig): AxiosPromise<Runner> {
+            return localVarFp.createRunner(organizationId, workspaceId, runnerCreateRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Add a control access to the Runner
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -8681,20 +8845,8 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, runnerAccessControl: RunnerAccessControl, options?: RawAxiosRequestConfig): AxiosPromise<RunnerAccessControl> {
-            return localVarFp.addRunnerAccessControl(organizationId, workspaceId, runnerId, runnerAccessControl, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Create a new Runner
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {Runner} runner the Runner to create
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createRunner(organizationId: string, workspaceId: string, runner: Runner, options?: RawAxiosRequestConfig): AxiosPromise<Runner> {
-            return localVarFp.createRunner(organizationId, workspaceId, runner, options).then((request) => request(axios, basePath));
+        createRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, runnerAccessControl: RunnerAccessControl, options?: RawAxiosRequestConfig): AxiosPromise<RunnerAccessControl> {
+            return localVarFp.createRunnerAccessControl(organizationId, workspaceId, runnerId, runnerAccessControl, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -8707,6 +8859,19 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
          */
         deleteRunner(organizationId: string, workspaceId: string, runnerId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.deleteRunner(organizationId, workspaceId, runnerId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Remove the specified access from the given Organization Runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} identityId the User identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, identityId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteRunnerAccessControl(organizationId, workspaceId, runnerId, identityId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -8735,19 +8900,6 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
         },
         /**
          * 
-         * @summary Get the Runner permission by given role
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} runnerId the Runner identifier
-         * @param {string} role the Role
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getRunnerPermissions(organizationId: string, workspaceId: string, runnerId: string, role: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<string>> {
-            return localVarFp.getRunnerPermissions(organizationId, workspaceId, runnerId, role, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @summary Get the Runner security information
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -8760,6 +8912,19 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
         },
         /**
          * 
+         * @summary Get the Runner permission by given role
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {string} role the Role
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listRunnerPermissions(organizationId: string, workspaceId: string, runnerId: string, role: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<string>> {
+            return localVarFp.listRunnerPermissions(organizationId, workspaceId, runnerId, role, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Get the Runner security users list
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -8767,8 +8932,8 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRunnerSecurityUsers(organizationId: string, workspaceId: string, runnerId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<string>> {
-            return localVarFp.getRunnerSecurityUsers(organizationId, workspaceId, runnerId, options).then((request) => request(axios, basePath));
+        listRunnerSecurityUsers(organizationId: string, workspaceId: string, runnerId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<string>> {
+            return localVarFp.listRunnerSecurityUsers(organizationId, workspaceId, runnerId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -8782,32 +8947,6 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
          */
         listRunners(organizationId: string, workspaceId: string, page?: number, size?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<Runner>> {
             return localVarFp.listRunners(organizationId, workspaceId, page, size, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Remove the specified access from the given Organization Runner
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} runnerId the Runner identifier
-         * @param {string} identityId the User identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        removeRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, identityId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.removeRunnerAccessControl(organizationId, workspaceId, runnerId, identityId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Set the Runner default security
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} runnerId the Runner identifier
-         * @param {RunnerRole} runnerRole This change the runner default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the runner.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        setRunnerDefaultSecurity(organizationId: string, workspaceId: string, runnerId: string, runnerRole: RunnerRole, options?: RawAxiosRequestConfig): AxiosPromise<RunnerSecurity> {
-            return localVarFp.setRunnerDefaultSecurity(organizationId, workspaceId, runnerId, runnerRole, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -8839,12 +8978,12 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {string} runnerId the Runner identifier
-         * @param {Runner} runner the new Runner details. This endpoint can\&#39;t be used to update security
+         * @param {RunnerUpdateRequest} runnerUpdateRequest the new Runner details. This endpoint can\&#39;t be used to update security
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateRunner(organizationId: string, workspaceId: string, runnerId: string, runner: Runner, options?: RawAxiosRequestConfig): AxiosPromise<Runner> {
-            return localVarFp.updateRunner(organizationId, workspaceId, runnerId, runner, options).then((request) => request(axios, basePath));
+        updateRunner(organizationId: string, workspaceId: string, runnerId: string, runnerUpdateRequest: RunnerUpdateRequest, options?: RawAxiosRequestConfig): AxiosPromise<Runner> {
+            return localVarFp.updateRunner(organizationId, workspaceId, runnerId, runnerUpdateRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -8860,6 +8999,19 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
         updateRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, identityId: string, runnerRole: RunnerRole, options?: RawAxiosRequestConfig): AxiosPromise<RunnerAccessControl> {
             return localVarFp.updateRunnerAccessControl(organizationId, workspaceId, runnerId, identityId, runnerRole, options).then((request) => request(axios, basePath));
         },
+        /**
+         * 
+         * @summary Set the Runner default security
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {RunnerRole} runnerRole This change the runner default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the runner.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateRunnerDefaultSecurity(organizationId: string, workspaceId: string, runnerId: string, runnerRole: RunnerRole, options?: RawAxiosRequestConfig): AxiosPromise<RunnerSecurity> {
+            return localVarFp.updateRunnerDefaultSecurity(organizationId, workspaceId, runnerId, runnerRole, options).then((request) => request(axios, basePath));
+        },
     };
 };
 
@@ -8872,6 +9024,20 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
 export class RunnerApi extends BaseAPI {
     /**
      * 
+     * @summary Create a new Runner
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {RunnerCreateRequest} runnerCreateRequest the Runner to create
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RunnerApi
+     */
+    public createRunner(organizationId: string, workspaceId: string, runnerCreateRequest: RunnerCreateRequest, options?: RawAxiosRequestConfig) {
+        return RunnerApiFp(this.configuration).createRunner(organizationId, workspaceId, runnerCreateRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary Add a control access to the Runner
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
@@ -8881,22 +9047,8 @@ export class RunnerApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof RunnerApi
      */
-    public addRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, runnerAccessControl: RunnerAccessControl, options?: RawAxiosRequestConfig) {
-        return RunnerApiFp(this.configuration).addRunnerAccessControl(organizationId, workspaceId, runnerId, runnerAccessControl, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Create a new Runner
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
-     * @param {Runner} runner the Runner to create
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RunnerApi
-     */
-    public createRunner(organizationId: string, workspaceId: string, runner: Runner, options?: RawAxiosRequestConfig) {
-        return RunnerApiFp(this.configuration).createRunner(organizationId, workspaceId, runner, options).then((request) => request(this.axios, this.basePath));
+    public createRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, runnerAccessControl: RunnerAccessControl, options?: RawAxiosRequestConfig) {
+        return RunnerApiFp(this.configuration).createRunnerAccessControl(organizationId, workspaceId, runnerId, runnerAccessControl, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -8911,6 +9063,21 @@ export class RunnerApi extends BaseAPI {
      */
     public deleteRunner(organizationId: string, workspaceId: string, runnerId: string, options?: RawAxiosRequestConfig) {
         return RunnerApiFp(this.configuration).deleteRunner(organizationId, workspaceId, runnerId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Remove the specified access from the given Organization Runner
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} runnerId the Runner identifier
+     * @param {string} identityId the User identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RunnerApi
+     */
+    public deleteRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, identityId: string, options?: RawAxiosRequestConfig) {
+        return RunnerApiFp(this.configuration).deleteRunnerAccessControl(organizationId, workspaceId, runnerId, identityId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -8944,21 +9111,6 @@ export class RunnerApi extends BaseAPI {
 
     /**
      * 
-     * @summary Get the Runner permission by given role
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
-     * @param {string} runnerId the Runner identifier
-     * @param {string} role the Role
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RunnerApi
-     */
-    public getRunnerPermissions(organizationId: string, workspaceId: string, runnerId: string, role: string, options?: RawAxiosRequestConfig) {
-        return RunnerApiFp(this.configuration).getRunnerPermissions(organizationId, workspaceId, runnerId, role, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
      * @summary Get the Runner security information
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
@@ -8973,6 +9125,21 @@ export class RunnerApi extends BaseAPI {
 
     /**
      * 
+     * @summary Get the Runner permission by given role
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} runnerId the Runner identifier
+     * @param {string} role the Role
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RunnerApi
+     */
+    public listRunnerPermissions(organizationId: string, workspaceId: string, runnerId: string, role: string, options?: RawAxiosRequestConfig) {
+        return RunnerApiFp(this.configuration).listRunnerPermissions(organizationId, workspaceId, runnerId, role, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary Get the Runner security users list
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
@@ -8981,8 +9148,8 @@ export class RunnerApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof RunnerApi
      */
-    public getRunnerSecurityUsers(organizationId: string, workspaceId: string, runnerId: string, options?: RawAxiosRequestConfig) {
-        return RunnerApiFp(this.configuration).getRunnerSecurityUsers(organizationId, workspaceId, runnerId, options).then((request) => request(this.axios, this.basePath));
+    public listRunnerSecurityUsers(organizationId: string, workspaceId: string, runnerId: string, options?: RawAxiosRequestConfig) {
+        return RunnerApiFp(this.configuration).listRunnerSecurityUsers(organizationId, workspaceId, runnerId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -8998,36 +9165,6 @@ export class RunnerApi extends BaseAPI {
      */
     public listRunners(organizationId: string, workspaceId: string, page?: number, size?: number, options?: RawAxiosRequestConfig) {
         return RunnerApiFp(this.configuration).listRunners(organizationId, workspaceId, page, size, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Remove the specified access from the given Organization Runner
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
-     * @param {string} runnerId the Runner identifier
-     * @param {string} identityId the User identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RunnerApi
-     */
-    public removeRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, identityId: string, options?: RawAxiosRequestConfig) {
-        return RunnerApiFp(this.configuration).removeRunnerAccessControl(organizationId, workspaceId, runnerId, identityId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Set the Runner default security
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
-     * @param {string} runnerId the Runner identifier
-     * @param {RunnerRole} runnerRole This change the runner default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the runner.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RunnerApi
-     */
-    public setRunnerDefaultSecurity(organizationId: string, workspaceId: string, runnerId: string, runnerRole: RunnerRole, options?: RawAxiosRequestConfig) {
-        return RunnerApiFp(this.configuration).setRunnerDefaultSecurity(organizationId, workspaceId, runnerId, runnerRole, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -9064,13 +9201,13 @@ export class RunnerApi extends BaseAPI {
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
      * @param {string} runnerId the Runner identifier
-     * @param {Runner} runner the new Runner details. This endpoint can\&#39;t be used to update security
+     * @param {RunnerUpdateRequest} runnerUpdateRequest the new Runner details. This endpoint can\&#39;t be used to update security
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RunnerApi
      */
-    public updateRunner(organizationId: string, workspaceId: string, runnerId: string, runner: Runner, options?: RawAxiosRequestConfig) {
-        return RunnerApiFp(this.configuration).updateRunner(organizationId, workspaceId, runnerId, runner, options).then((request) => request(this.axios, this.basePath));
+    public updateRunner(organizationId: string, workspaceId: string, runnerId: string, runnerUpdateRequest: RunnerUpdateRequest, options?: RawAxiosRequestConfig) {
+        return RunnerApiFp(this.configuration).updateRunner(organizationId, workspaceId, runnerId, runnerUpdateRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -9087,6 +9224,21 @@ export class RunnerApi extends BaseAPI {
      */
     public updateRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, identityId: string, runnerRole: RunnerRole, options?: RawAxiosRequestConfig) {
         return RunnerApiFp(this.configuration).updateRunnerAccessControl(organizationId, workspaceId, runnerId, identityId, runnerRole, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Set the Runner default security
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} runnerId the Runner identifier
+     * @param {RunnerRole} runnerRole This change the runner default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the runner.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RunnerApi
+     */
+    public updateRunnerDefaultSecurity(organizationId: string, workspaceId: string, runnerId: string, runnerRole: RunnerRole, options?: RawAxiosRequestConfig) {
+        return RunnerApiFp(this.configuration).updateRunnerDefaultSecurity(organizationId, workspaceId, runnerId, runnerRole, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
