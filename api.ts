@@ -2080,7 +2080,7 @@ export interface Solution {
      */
     'ownerId': string;
     /**
-     * The MAJOR.MINOR version used to build this solution
+     * The full SDK version used to build this solution, if available
      * @type {string}
      * @memberof Solution
      */
@@ -2214,12 +2214,6 @@ export interface SolutionCreateRequest {
      */
     'runTemplates'?: Array<RunTemplate>;
     /**
-     * The MAJOR.MINOR version used to build this solution
-     * @type {string}
-     * @memberof SolutionCreateRequest
-     */
-    'sdkVersion'?: string;
-    /**
      * An optional URL link to solution page
      * @type {string}
      * @memberof SolutionCreateRequest
@@ -2312,12 +2306,6 @@ export interface SolutionUpdateRequest {
      * @memberof SolutionUpdateRequest
      */
     'version'?: string;
-    /**
-     * The MAJOR.MINOR version used to build this solution
-     * @type {string}
-     * @memberof SolutionUpdateRequest
-     */
-    'sdkVersion'?: string;
     /**
      * An optional URL link to solution page
      * @type {string}
