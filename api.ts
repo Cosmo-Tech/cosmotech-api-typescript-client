@@ -1105,7 +1105,7 @@ export interface RunContainer {
     'runSizing'?: ContainerResourceSizing;
 }
 /**
- * Run Data to send
+ * Run Data stored
  * @export
  * @interface RunData
  */
@@ -2215,7 +2215,7 @@ export type RunnerValidationStatus = typeof RunnerValidationStatus[keyof typeof 
 
 
 /**
- * 
+ * Run Data to send
  * @export
  * @interface SendRunDataRequest
  */
@@ -4417,7 +4417,7 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Async batch update by loading a CSV file on a graph instance  Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
+         * Async batch update by loading a CSV file on a graph instance Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
          * @summary Async batch update by loading a CSV file on a graph instance 
          * @param {string} organizationId the Organization identifier
          * @param {string} datasetId the Dataset Identifier
@@ -4992,7 +4992,7 @@ export const DatasetApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getDatasetTwingraphStatus(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
+        async getDatasetTwingraphStatus(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IngestionStatusEnum>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getDatasetTwingraphStatus(organizationId, datasetId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['DatasetApi.getDatasetTwingraphStatus']?.[localVarOperationServerIndex]?.url;
@@ -5132,7 +5132,7 @@ export const DatasetApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Async batch update by loading a CSV file on a graph instance  Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
+         * Async batch update by loading a CSV file on a graph instance Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
          * @summary Async batch update by loading a CSV file on a graph instance 
          * @param {string} organizationId the Organization identifier
          * @param {string} datasetId the Dataset Identifier
@@ -5419,7 +5419,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getDatasetTwingraphStatus(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig): AxiosPromise<string> {
+        getDatasetTwingraphStatus(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig): AxiosPromise<IngestionStatusEnum> {
             return localVarFp.getDatasetTwingraphStatus(organizationId, datasetId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -5529,7 +5529,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.twingraphBatchQuery(organizationId, datasetId, datasetTwinGraphQuery, options).then((request) => request(axios, basePath));
         },
         /**
-         * Async batch update by loading a CSV file on a graph instance  Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
+         * Async batch update by loading a CSV file on a graph instance Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
          * @summary Async batch update by loading a CSV file on a graph instance 
          * @param {string} organizationId the Organization identifier
          * @param {string} datasetId the Dataset Identifier
@@ -5953,7 +5953,7 @@ export class DatasetApi extends BaseAPI {
     }
 
     /**
-     * Async batch update by loading a CSV file on a graph instance  Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
+     * Async batch update by loading a CSV file on a graph instance Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
      * @summary Async batch update by loading a CSV file on a graph instance 
      * @param {string} organizationId the Organization identifier
      * @param {string} datasetId the Dataset Identifier
