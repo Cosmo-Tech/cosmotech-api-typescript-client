@@ -1143,38 +1143,6 @@ export interface RunDataQuery {
     'query': string;
 }
 /**
- * the output logs of a run
- * @export
- * @interface RunLogs
- */
-export interface RunLogs {
-    /**
-     * the Run Id
-     * @type {string}
-     * @memberof RunLogs
-     */
-    'runId': string;
-    /**
-     * run log entries in chronological order
-     * @type {Array<RunLogsEntry>}
-     * @memberof RunLogs
-     */
-    'logs': Array<RunLogsEntry>;
-}
-/**
- * single run log entry
- * @export
- * @interface RunLogsEntry
- */
-export interface RunLogsEntry {
-    /**
-     * log line data
-     * @type {string}
-     * @memberof RunLogsEntry
-     */
-    'line': string;
-}
-/**
  * the memory and CPU requested by the pod
  * @export
  * @interface RunResourceRequested
@@ -7869,7 +7837,7 @@ export const RunApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getRunLogs(organizationId: string, workspaceId: string, runnerId: string, runId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RunLogs>> {
+        async getRunLogs(organizationId: string, workspaceId: string, runnerId: string, runId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRunLogs(organizationId, workspaceId, runnerId, runId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RunApi.getRunLogs']?.[localVarOperationServerIndex]?.url;
@@ -7988,7 +7956,7 @@ export const RunApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRunLogs(organizationId: string, workspaceId: string, runnerId: string, runId: string, options?: RawAxiosRequestConfig): AxiosPromise<RunLogs> {
+        getRunLogs(organizationId: string, workspaceId: string, runnerId: string, runId: string, options?: RawAxiosRequestConfig): AxiosPromise<string> {
             return localVarFp.getRunLogs(organizationId, workspaceId, runnerId, runId, options).then((request) => request(axios, basePath));
         },
         /**
