@@ -2366,12 +2366,6 @@ export interface Solution {
      */
     'alwaysPull'?: boolean;
     /**
-     * The main Cosmo Tech simulator name used in standard Run Template
-     * @type {string}
-     * @memberof Solution
-     */
-    'csmSimulator': string;
-    /**
      * The Solution version MAJOR.MINOR.PATCH. Must be aligned with an existing repository tag
      * @type {string}
      * @memberof Solution
@@ -2488,12 +2482,6 @@ export interface SolutionCreateRequest {
      */
     'alwaysPull'?: boolean;
     /**
-     * The main Cosmo Tech simulator name used in standard Run Template
-     * @type {string}
-     * @memberof SolutionCreateRequest
-     */
-    'csmSimulator': string;
-    /**
      * The list of tags
      * @type {Array<string>}
      * @memberof SolutionCreateRequest
@@ -2598,12 +2586,6 @@ export interface SolutionUpdateRequest {
      * @memberof SolutionUpdateRequest
      */
     'alwaysPull'?: boolean;
-    /**
-     * The main Cosmo Tech simulator name used in standard Run Template
-     * @type {string}
-     * @memberof SolutionUpdateRequest
-     */
-    'csmSimulator'?: string;
     /**
      * The Solution version MAJOR.MINOR.PATCH. Must be aligned with an existing repository tag
      * @type {string}
