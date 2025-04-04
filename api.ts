@@ -2309,13 +2309,13 @@ export interface SendRunDataRequest {
      * @type {string}
      * @memberof SendRunDataRequest
      */
-    'id'?: string;
+    'id': string;
     /**
      * 
      * @type {Array<{ [key: string]: any; }>}
      * @memberof SendRunDataRequest
      */
-    'data'?: Array<{ [key: string]: any; }>;
+    'data': Array<{ [key: string]: any; }>;
 }
 /**
  * A version of a Solution
