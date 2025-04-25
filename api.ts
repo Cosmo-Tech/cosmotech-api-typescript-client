@@ -86,7 +86,7 @@ export interface AboutInfoVersion {
     'build': string;
 }
 /**
- * a RBAC by component
+ * A RBAC by component
  * @export
  * @interface ComponentRolePermissions
  */
@@ -284,7 +284,7 @@ export interface ContainerResourceSizing {
     'limits': ContainerResourceSizeInfo;
 }
 /**
- * Newle created Run info
+ * Newly created Run info
  * @export
  * @interface CreatedRun
  */
@@ -763,29 +763,35 @@ export type IoTypesEnum = typeof IoTypesEnum[keyof typeof IoTypesEnum];
 
 
 /**
- * an Organization
+ * An Organization
  * @export
  * @interface Organization
  */
 export interface Organization {
     /**
-     * the Organization unique identifier
+     * The Organization unique identifier
      * @type {string}
      * @memberof Organization
      */
     'id': string;
     /**
-     * the Organization name
+     * The Organization name
      * @type {string}
      * @memberof Organization
      */
     'name': string;
     /**
-     * the Owner User Id
-     * @type {string}
+     * The details of the Organization creation
+     * @type {OrganizationEditInfo}
      * @memberof Organization
      */
-    'ownerId': string;
+    'createInfo': OrganizationEditInfo;
+    /**
+     * The details of the Organization last update
+     * @type {OrganizationEditInfo}
+     * @memberof Organization
+     */
+    'updateInfo': OrganizationEditInfo;
     /**
      * 
      * @type {OrganizationSecurity}
@@ -800,13 +806,13 @@ export interface Organization {
  */
 export interface OrganizationAccessControl {
     /**
-     * the identity id
+     * The identity id
      * @type {string}
      * @memberof OrganizationAccessControl
      */
     'id': string;
     /**
-     * a role
+     * A role
      * @type {string}
      * @memberof OrganizationAccessControl
      */
@@ -819,7 +825,7 @@ export interface OrganizationAccessControl {
  */
 export interface OrganizationCreateRequest {
     /**
-     * the Organization name
+     * The Organization name
      * @type {string}
      * @memberof OrganizationCreateRequest
      */
@@ -832,13 +838,32 @@ export interface OrganizationCreateRequest {
     'security'?: OrganizationSecurity;
 }
 /**
- * the Organization Role
+ * 
+ * @export
+ * @interface OrganizationEditInfo
+ */
+export interface OrganizationEditInfo {
+    /**
+     * The timestamp of the modification in millisecond
+     * @type {number}
+     * @memberof OrganizationEditInfo
+     */
+    'timestamp': number;
+    /**
+     * The id of the user who did the modification
+     * @type {string}
+     * @memberof OrganizationEditInfo
+     */
+    'userId': string;
+}
+/**
+ * The Organization Role
  * @export
  * @interface OrganizationRole
  */
 export interface OrganizationRole {
     /**
-     * the Organization Role
+     * The Organization Role
      * @type {string}
      * @memberof OrganizationRole
      */
@@ -851,13 +876,13 @@ export interface OrganizationRole {
  */
 export interface OrganizationSecurity {
     /**
-     * the role by default
+     * The role by default
      * @type {string}
      * @memberof OrganizationSecurity
      */
     'default': string;
     /**
-     * the list which can access this Organization with detailed access control information
+     * The list which can access this Organization with detailed access control information
      * @type {Array<OrganizationAccessControl>}
      * @memberof OrganizationSecurity
      */
@@ -870,7 +895,7 @@ export interface OrganizationSecurity {
  */
 export interface OrganizationUpdateRequest {
     /**
-     * the Organization name
+     * The Organization name
      * @type {string}
      * @memberof OrganizationUpdateRequest
      */
@@ -933,6 +958,12 @@ export interface Run {
      */
     'organizationId'?: string;
     /**
+     * The details of the Run creation
+     * @type {RunEditInfo}
+     * @memberof Run
+     */
+    'createInfo': RunEditInfo;
+    /**
      * the Cosmo Tech compute cluster Argo Workflow Id to search
      * @type {string}
      * @memberof Run
@@ -956,12 +987,6 @@ export interface Run {
      * @memberof Run
      */
     'workflowName'?: string;
-    /**
-     * the user id which own this run
-     * @type {string}
-     * @memberof Run
-     */
-    'ownerId'?: string;
     /**
      * the Workspace Id
      * @type {string}
@@ -998,12 +1023,6 @@ export interface Run {
      * @memberof Run
      */
     'computeSize'?: string;
-    /**
-     * the Run creation date
-     * @type {string}
-     * @memberof Run
-     */
-    'createdAt'?: string;
     /**
      * the list of Dataset Id associated to this Run
      * @type {Array<string>}
@@ -1143,6 +1162,25 @@ export interface RunDataQuery {
     'query': string;
 }
 /**
+ * 
+ * @export
+ * @interface RunEditInfo
+ */
+export interface RunEditInfo {
+    /**
+     * The timestamp of the modification in millisecond
+     * @type {number}
+     * @memberof RunEditInfo
+     */
+    'timestamp': number;
+    /**
+     * The id of the user who did the modification
+     * @type {string}
+     * @memberof RunEditInfo
+     */
+    'userId': string;
+}
+/**
  * the memory and CPU requested by the pod
  * @export
  * @interface RunResourceRequested
@@ -1219,6 +1257,12 @@ export interface RunStatus {
      * @memberof RunStatus
      */
     'workflowName'?: string;
+    /**
+     * The timestamp of the Run creation in milliseconds
+     * @type {RunEditInfo}
+     * @memberof RunStatus
+     */
+    'createInfo'?: RunEditInfo;
     /**
      * the Run start Date Time
      * @type {string}
@@ -1368,7 +1412,7 @@ export interface RunTemplate {
      */
     'name'?: string;
     /**
-     * a translated label with key as ISO 639-1 code
+     * A translated label with key as ISO 639-1 code
      * @type {{ [key: string]: string; }}
      * @memberof RunTemplate
      */
@@ -1429,7 +1473,7 @@ export interface RunTemplateCreateRequest {
      */
     'name'?: string;
     /**
-     * a translated label with key as ISO 639-1 code
+     * A translated label with key as ISO 639-1 code
      * @type {{ [key: string]: string; }}
      * @memberof RunTemplateCreateRequest
      */
@@ -1478,25 +1522,25 @@ export interface RunTemplateCreateRequest {
  */
 export interface RunTemplateParameter {
     /**
-     * the Parameter id
+     * The Parameter id
      * @type {string}
      * @memberof RunTemplateParameter
      */
     'id': string;
     /**
-     * the parameter description
+     * The parameter description
      * @type {string}
      * @memberof RunTemplateParameter
      */
     'description'?: string;
     /**
-     * a translated label with key as ISO 639-1 code
+     * A translated label with key as ISO 639-1 code
      * @type {{ [key: string]: string; }}
      * @memberof RunTemplateParameter
      */
     'labels'?: { [key: string]: string; };
     /**
-     * the variable type for the parameter. Basic types or special type %DATASETID%
+     * The variable type for the parameter. Basic types or special type %DATASETID%
      * @type {string}
      * @memberof RunTemplateParameter
      */
@@ -1539,25 +1583,25 @@ export interface RunTemplateParameter {
  */
 export interface RunTemplateParameterCreateRequest {
     /**
-     * the Parameter id
+     * The Parameter id
      * @type {string}
      * @memberof RunTemplateParameterCreateRequest
      */
     'id': string;
     /**
-     * the parameter description
+     * The parameter description
      * @type {string}
      * @memberof RunTemplateParameterCreateRequest
      */
     'description'?: string;
     /**
-     * a translated label with key as ISO 639-1 code
+     * A translated label with key as ISO 639-1 code
      * @type {{ [key: string]: string; }}
      * @memberof RunTemplateParameterCreateRequest
      */
     'labels'?: { [key: string]: string; };
     /**
-     * the variable type for the parameter. Basic types or special type %DATASETID%
+     * The variable type for the parameter. Basic types or special type %DATASETID%
      * @type {string}
      * @memberof RunTemplateParameterCreateRequest
      */
@@ -1600,7 +1644,7 @@ export interface RunTemplateParameterCreateRequest {
  */
 export interface RunTemplateParameterGroup {
     /**
-     * the Parameter Group id
+     * The Parameter Group id
      * @type {string}
      * @memberof RunTemplateParameterGroup
      */
@@ -1612,7 +1656,7 @@ export interface RunTemplateParameterGroup {
      */
     'description'?: string;
     /**
-     * a translated label with key as ISO 639-1 code
+     * A translated label with key as ISO 639-1 code
      * @type {{ [key: string]: string; }}
      * @memberof RunTemplateParameterGroup
      */
@@ -1649,7 +1693,7 @@ export interface RunTemplateParameterGroup {
  */
 export interface RunTemplateParameterGroupCreateRequest {
     /**
-     * the Parameter Group id
+     * The Parameter Group id
      * @type {string}
      * @memberof RunTemplateParameterGroupCreateRequest
      */
@@ -1661,7 +1705,7 @@ export interface RunTemplateParameterGroupCreateRequest {
      */
     'description'?: string;
     /**
-     * a translated label with key as ISO 639-1 code
+     * A translated label with key as ISO 639-1 code
      * @type {{ [key: string]: string; }}
      * @memberof RunTemplateParameterGroupCreateRequest
      */
@@ -1704,7 +1748,7 @@ export interface RunTemplateParameterGroupUpdateRequest {
      */
     'description'?: string;
     /**
-     * a translated label with key as ISO 639-1 code
+     * A translated label with key as ISO 639-1 code
      * @type {{ [key: string]: string; }}
      * @memberof RunTemplateParameterGroupUpdateRequest
      */
@@ -1741,19 +1785,19 @@ export interface RunTemplateParameterGroupUpdateRequest {
  */
 export interface RunTemplateParameterUpdateRequest {
     /**
-     * the parameter description
+     * The parameter description
      * @type {string}
      * @memberof RunTemplateParameterUpdateRequest
      */
     'description'?: string;
     /**
-     * a translated label with key as ISO 639-1 code
+     * A translated label with key as ISO 639-1 code
      * @type {{ [key: string]: string; }}
      * @memberof RunTemplateParameterUpdateRequest
      */
     'labels'?: { [key: string]: string; };
     /**
-     * the variable type for the parameter. Basic types or special type %DATASETID%
+     * The variable type for the parameter. Basic types or special type %DATASETID%
      * @type {string}
      * @memberof RunTemplateParameterUpdateRequest
      */
@@ -1846,7 +1890,7 @@ export interface RunTemplateUpdateRequest {
      */
     'name'?: string;
     /**
-     * a translated label with key as ISO 639-1 code
+     * A translated label with key as ISO 639-1 code
      * @type {{ [key: string]: string; }}
      * @memberof RunTemplateUpdateRequest
      */
@@ -1925,11 +1969,17 @@ export interface Runner {
      */
     'parentId'?: string;
     /**
-     * the user id which own this Runner
-     * @type {string}
+     * The details of the Runner creation
+     * @type {RunnerEditInfo}
      * @memberof Runner
      */
-    'ownerId': string;
+    'createInfo': RunnerEditInfo;
+    /**
+     * The details of the Runner last update
+     * @type {RunnerEditInfo}
+     * @memberof Runner
+     */
+    'updateInfo': RunnerEditInfo;
     /**
      * the runner root id
      * @type {string}
@@ -1960,18 +2010,6 @@ export interface Runner {
      * @memberof Runner
      */
     'workspaceId': string;
-    /**
-     * the Runner creation date
-     * @type {number}
-     * @memberof Runner
-     */
-    'creationDate': number;
-    /**
-     * the last time a Runner was updated
-     * @type {number}
-     * @memberof Runner
-     */
-    'lastUpdate': number;
     /**
      * the name of the owner
      * @type {string}
@@ -2132,6 +2170,25 @@ export interface RunnerCreateRequest {
      * @memberof RunnerCreateRequest
      */
     'security'?: RunnerSecurity;
+}
+/**
+ * 
+ * @export
+ * @interface RunnerEditInfo
+ */
+export interface RunnerEditInfo {
+    /**
+     * The timestamp of the modification in millisecond
+     * @type {number}
+     * @memberof RunnerEditInfo
+     */
+    'timestamp': number;
+    /**
+     * The id of the user who did the modification
+     * @type {string}
+     * @memberof RunnerEditInfo
+     */
+    'userId': string;
 }
 /**
  * a description object for resource requests and limits (default same configuration as basic sizing)
@@ -2372,11 +2429,17 @@ export interface Solution {
      */
     'version': string;
     /**
-     * The User id which owns this Solution
-     * @type {string}
+     * The details of the Solution creation
+     * @type {SolutionEditInfo}
      * @memberof Solution
      */
-    'ownerId': string;
+    'createInfo': SolutionEditInfo;
+    /**
+     * The details of the Solution last update
+     * @type {SolutionEditInfo}
+     * @memberof Solution
+     */
+    'updateInfo': SolutionEditInfo;
     /**
      * The full SDK version used to build this solution, if available
      * @type {string}
@@ -2446,7 +2509,7 @@ export interface SolutionAccessControl {
  */
 export interface SolutionCreateRequest {
     /**
-     * technical key for resource name convention and version grouping. Must be unique
+     * Technical key for resource name convention and version grouping. Must be unique
      * @type {string}
      * @memberof SolutionCreateRequest
      */
@@ -2519,6 +2582,25 @@ export interface SolutionCreateRequest {
     'security'?: SolutionSecurity;
 }
 /**
+ * 
+ * @export
+ * @interface SolutionEditInfo
+ */
+export interface SolutionEditInfo {
+    /**
+     * The timestamp of the modification in millisecond
+     * @type {number}
+     * @memberof SolutionEditInfo
+     */
+    'timestamp': number;
+    /**
+     * The id of the user who did the modification
+     * @type {string}
+     * @memberof SolutionEditInfo
+     */
+    'userId': string;
+}
+/**
  * The Solution Role
  * @export
  * @interface SolutionRole
@@ -2557,7 +2639,7 @@ export interface SolutionSecurity {
  */
 export interface SolutionUpdateRequest {
     /**
-     * technical key for resource name convention and version grouping. Must be unique
+     * Technical key for resource name convention and version grouping. Must be unique
      * @type {string}
      * @memberof SolutionUpdateRequest
      */
@@ -2725,7 +2807,7 @@ export type TwincacheStatusEnum = typeof TwincacheStatusEnum[keyof typeof Twinca
 
 
 /**
- * a Workspace
+ * A Workspace
  * @export
  * @interface Workspace
  */
@@ -2743,7 +2825,7 @@ export interface Workspace {
      */
     'organizationId': string;
     /**
-     * technical key for resource name convention and version grouping. Must be unique
+     * Technical key for resource name convention and version grouping. Must be unique
      * @type {string}
      * @memberof Workspace
      */
@@ -2755,7 +2837,7 @@ export interface Workspace {
      */
     'name': string;
     /**
-     * the Workspace description
+     * The Workspace description
      * @type {string}
      * @memberof Workspace
      */
@@ -2767,23 +2849,29 @@ export interface Workspace {
      */
     'linkedDatasetIdList'?: Array<string>;
     /**
-     * the Workspace version MAJOR.MINOR.PATCH.
+     * The Workspace version MAJOR.MINOR.PATCH.
      * @type {string}
      * @memberof Workspace
      */
     'version'?: string;
     /**
-     * the list of tags
+     * The list of tags
      * @type {Array<string>}
      * @memberof Workspace
      */
     'tags'?: Array<string>;
     /**
-     * the user id which own this workspace. set by the API from Authentification service receved id
-     * @type {string}
+     * The details of the Workspace creation
+     * @type {WorkspaceEditInfo}
      * @memberof Workspace
      */
-    'ownerId': string;
+    'createInfo': WorkspaceEditInfo;
+    /**
+     * The details of the Workspace last update
+     * @type {WorkspaceEditInfo}
+     * @memberof Workspace
+     */
+    'updateInfo': WorkspaceEditInfo;
     /**
      * 
      * @type {WorkspaceSolution}
@@ -2810,19 +2898,19 @@ export interface Workspace {
     'security': WorkspaceSecurity;
 }
 /**
- * a Workspace access control item
+ * A Workspace access control item
  * @export
  * @interface WorkspaceAccessControl
  */
 export interface WorkspaceAccessControl {
     /**
-     * the identity id
+     * The identity id
      * @type {string}
      * @memberof WorkspaceAccessControl
      */
     'id': string;
     /**
-     * a role
+     * A role
      * @type {string}
      * @memberof WorkspaceAccessControl
      */
@@ -2835,7 +2923,7 @@ export interface WorkspaceAccessControl {
  */
 export interface WorkspaceCreateRequest {
     /**
-     * technical key for resource name convention and version grouping. Must be unique
+     * Technical key for resource name convention and version grouping. Must be unique
      * @type {string}
      * @memberof WorkspaceCreateRequest
      */
@@ -2847,19 +2935,19 @@ export interface WorkspaceCreateRequest {
      */
     'name': string;
     /**
-     * the Workspace description
+     * The Workspace description
      * @type {string}
      * @memberof WorkspaceCreateRequest
      */
     'description'?: string;
     /**
-     * the Workspace version MAJOR.MINOR.PATCH.
+     * The Workspace version MAJOR.MINOR.PATCH.
      * @type {string}
      * @memberof WorkspaceCreateRequest
      */
     'version'?: string;
     /**
-     * the list of tags
+     * The list of tags
      * @type {Array<string>}
      * @memberof WorkspaceCreateRequest
      */
@@ -2890,70 +2978,89 @@ export interface WorkspaceCreateRequest {
     'security'?: WorkspaceSecurity;
 }
 /**
- * a Workspace File resource
+ * 
+ * @export
+ * @interface WorkspaceEditInfo
+ */
+export interface WorkspaceEditInfo {
+    /**
+     * The timestamp of the modification in millisecond
+     * @type {number}
+     * @memberof WorkspaceEditInfo
+     */
+    'timestamp': number;
+    /**
+     * The id of the user who did the modification
+     * @type {string}
+     * @memberof WorkspaceEditInfo
+     */
+    'userId': string;
+}
+/**
+ * A Workspace File resource
  * @export
  * @interface WorkspaceFile
  */
 export interface WorkspaceFile {
     /**
-     * the Workspace File name
+     * The Workspace File name
      * @type {string}
      * @memberof WorkspaceFile
      */
     'fileName': string;
 }
 /**
- * the Workspace Role
+ * The Workspace Role
  * @export
  * @interface WorkspaceRole
  */
 export interface WorkspaceRole {
     /**
-     * the Workspace Role
+     * The Workspace Role
      * @type {string}
      * @memberof WorkspaceRole
      */
     'role': string;
 }
 /**
- * the workspace security information
+ * The workspace security information
  * @export
  * @interface WorkspaceSecurity
  */
 export interface WorkspaceSecurity {
     /**
-     * the role by default
+     * The role by default
      * @type {string}
      * @memberof WorkspaceSecurity
      */
     'default': string;
     /**
-     * the list which can access this Workspace with detailed access control information
+     * The list which can access this Workspace with detailed access control information
      * @type {Array<WorkspaceAccessControl>}
      * @memberof WorkspaceSecurity
      */
     'accessControlList': Array<WorkspaceAccessControl>;
 }
 /**
- * the Workspace Solution configuration
+ * The Workspace Solution configuration
  * @export
  * @interface WorkspaceSolution
  */
 export interface WorkspaceSolution {
     /**
-     * the Solution Id attached to this workspace
+     * The Solution Id attached to this workspace
      * @type {string}
      * @memberof WorkspaceSolution
      */
     'solutionId': string;
     /**
-     * the list of Solution Run Template Id to filter
+     * The list of Solution Run Template Id to filter
      * @type {Array<string>}
      * @memberof WorkspaceSolution
      */
     'runTemplateFilter'?: Array<string>;
     /**
-     * a map of RunTemplateId/DatasetId to set a default dataset for a Run Template
+     * A map of RunTemplateId/DatasetId to set a default dataset for a Run Template
      * @type {{ [key: string]: any; }}
      * @memberof WorkspaceSolution
      */
@@ -2966,7 +3073,7 @@ export interface WorkspaceSolution {
  */
 export interface WorkspaceUpdateRequest {
     /**
-     * technical key for resource name convention and version grouping. Must be unique
+     * Technical key for resource name convention and version grouping. Must be unique
      * @type {string}
      * @memberof WorkspaceUpdateRequest
      */
@@ -2978,13 +3085,13 @@ export interface WorkspaceUpdateRequest {
      */
     'name'?: string;
     /**
-     * the Workspace description
+     * The Workspace description
      * @type {string}
      * @memberof WorkspaceUpdateRequest
      */
     'description'?: string;
     /**
-     * the list of tags
+     * The list of tags
      * @type {Array<string>}
      * @memberof WorkspaceUpdateRequest
      */
@@ -3009,19 +3116,19 @@ export interface WorkspaceUpdateRequest {
     'datasetCopy'?: boolean;
 }
 /**
- * a Workspace Web Application
+ * A Workspace Web Application
  * @export
  * @interface WorkspaceWebApp
  */
 export interface WorkspaceWebApp {
     /**
-     * the Workspace Web Application URL
+     * The Workspace Web Application URL
      * @type {string}
      * @memberof WorkspaceWebApp
      */
     'url': string;
     /**
-     * a map of iframeKey/iframeURL
+     * A map of iframeKey/iframeURL
      * @type {{ [key: string]: any; }}
      * @memberof WorkspaceWebApp
      */
@@ -6273,7 +6380,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
         /**
          * 
          * @summary Create a new organization
-         * @param {OrganizationCreateRequest} organizationCreateRequest the Organization to create
+         * @param {OrganizationCreateRequest} organizationCreateRequest The Organization to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6313,8 +6420,8 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
         /**
          * 
          * @summary Add a control access to the Organization
-         * @param {string} organizationId the Organization identifier
-         * @param {OrganizationAccessControl} organizationAccessControl the new Organization security access to add.
+         * @param {string} organizationId The Organization identifier
+         * @param {OrganizationAccessControl} organizationAccessControl The new Organization security access to add.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6357,7 +6464,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
         /**
          * 
          * @summary Delete an organization
-         * @param {string} organizationId the Organization identifier
+         * @param {string} organizationId The Organization identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6395,8 +6502,8 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
         /**
          * 
          * @summary Remove the specified access from the given Organization
-         * @param {string} organizationId the Organization identifier
-         * @param {string} identityId the User identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} identityId The User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6437,7 +6544,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
         /**
          * 
          * @summary Get the details of an Organization
-         * @param {string} organizationId the Organization identifier
+         * @param {string} organizationId The Organization identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6475,8 +6582,8 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
         /**
          * 
          * @summary Get a control access for the Organization
-         * @param {string} organizationId the Organization identifier
-         * @param {string} identityId the User identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} identityId The User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6517,8 +6624,8 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
         /**
          * 
          * @summary Get the Organization permissions by given role
-         * @param {string} organizationId the Organization identifier
-         * @param {string} role the Role
+         * @param {string} organizationId The Organization identifier
+         * @param {string} role The Role
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6559,7 +6666,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
         /**
          * 
          * @summary Get the Organization security information
-         * @param {string} organizationId the Organization identifier
+         * @param {string} organizationId The Organization identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6635,8 +6742,8 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
         /**
          * 
          * @summary List all Organizations
-         * @param {number} [page] page number to query (first page is at index 0)
-         * @param {number} [size] amount of result by page
+         * @param {number} [page] Page number to query (first page is at index 0)
+         * @param {number} [size] Amount of result by page
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6713,8 +6820,8 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
         /**
          * 
          * @summary Update an Organization
-         * @param {string} organizationId the Organization identifier
-         * @param {OrganizationUpdateRequest} organizationUpdateRequest the new Organization details. This endpoint can\&#39;t be used to update security
+         * @param {string} organizationId The Organization identifier
+         * @param {OrganizationUpdateRequest} organizationUpdateRequest The new Organization details. This endpoint can\&#39;t be used to update security
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6757,8 +6864,8 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
         /**
          * 
          * @summary Update the specified access to User for an Organization
-         * @param {string} organizationId the Organization identifier
-         * @param {string} identityId the User identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} identityId The User identifier
          * @param {OrganizationRole} organizationRole The new Organization Access Control
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -6805,7 +6912,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
         /**
          * 
          * @summary Update the Organization default security
-         * @param {string} organizationId the Organization identifier
+         * @param {string} organizationId The Organization identifier
          * @param {OrganizationRole} organizationRole This change the organization default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the organization.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -6859,7 +6966,7 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Create a new organization
-         * @param {OrganizationCreateRequest} organizationCreateRequest the Organization to create
+         * @param {OrganizationCreateRequest} organizationCreateRequest The Organization to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6872,8 +6979,8 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Add a control access to the Organization
-         * @param {string} organizationId the Organization identifier
-         * @param {OrganizationAccessControl} organizationAccessControl the new Organization security access to add.
+         * @param {string} organizationId The Organization identifier
+         * @param {OrganizationAccessControl} organizationAccessControl The new Organization security access to add.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6886,7 +6993,7 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Delete an organization
-         * @param {string} organizationId the Organization identifier
+         * @param {string} organizationId The Organization identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6899,8 +7006,8 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Remove the specified access from the given Organization
-         * @param {string} organizationId the Organization identifier
-         * @param {string} identityId the User identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} identityId The User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6913,7 +7020,7 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Get the details of an Organization
-         * @param {string} organizationId the Organization identifier
+         * @param {string} organizationId The Organization identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6926,8 +7033,8 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Get a control access for the Organization
-         * @param {string} organizationId the Organization identifier
-         * @param {string} identityId the User identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} identityId The User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6940,8 +7047,8 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Get the Organization permissions by given role
-         * @param {string} organizationId the Organization identifier
-         * @param {string} role the Role
+         * @param {string} organizationId The Organization identifier
+         * @param {string} role The Role
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6954,7 +7061,7 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Get the Organization security information
-         * @param {string} organizationId the Organization identifier
+         * @param {string} organizationId The Organization identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6980,8 +7087,8 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary List all Organizations
-         * @param {number} [page] page number to query (first page is at index 0)
-         * @param {number} [size] amount of result by page
+         * @param {number} [page] Page number to query (first page is at index 0)
+         * @param {number} [size] Amount of result by page
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -7006,8 +7113,8 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Update an Organization
-         * @param {string} organizationId the Organization identifier
-         * @param {OrganizationUpdateRequest} organizationUpdateRequest the new Organization details. This endpoint can\&#39;t be used to update security
+         * @param {string} organizationId The Organization identifier
+         * @param {OrganizationUpdateRequest} organizationUpdateRequest The new Organization details. This endpoint can\&#39;t be used to update security
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -7020,8 +7127,8 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Update the specified access to User for an Organization
-         * @param {string} organizationId the Organization identifier
-         * @param {string} identityId the User identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} identityId The User identifier
          * @param {OrganizationRole} organizationRole The new Organization Access Control
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -7035,7 +7142,7 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Update the Organization default security
-         * @param {string} organizationId the Organization identifier
+         * @param {string} organizationId The Organization identifier
          * @param {OrganizationRole} organizationRole This change the organization default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the organization.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -7059,7 +7166,7 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
         /**
          * 
          * @summary Create a new organization
-         * @param {OrganizationCreateRequest} organizationCreateRequest the Organization to create
+         * @param {OrganizationCreateRequest} organizationCreateRequest The Organization to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -7069,8 +7176,8 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
         /**
          * 
          * @summary Add a control access to the Organization
-         * @param {string} organizationId the Organization identifier
-         * @param {OrganizationAccessControl} organizationAccessControl the new Organization security access to add.
+         * @param {string} organizationId The Organization identifier
+         * @param {OrganizationAccessControl} organizationAccessControl The new Organization security access to add.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -7080,7 +7187,7 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
         /**
          * 
          * @summary Delete an organization
-         * @param {string} organizationId the Organization identifier
+         * @param {string} organizationId The Organization identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -7090,8 +7197,8 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
         /**
          * 
          * @summary Remove the specified access from the given Organization
-         * @param {string} organizationId the Organization identifier
-         * @param {string} identityId the User identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} identityId The User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -7101,7 +7208,7 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
         /**
          * 
          * @summary Get the details of an Organization
-         * @param {string} organizationId the Organization identifier
+         * @param {string} organizationId The Organization identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -7111,8 +7218,8 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
         /**
          * 
          * @summary Get a control access for the Organization
-         * @param {string} organizationId the Organization identifier
-         * @param {string} identityId the User identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} identityId The User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -7122,8 +7229,8 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
         /**
          * 
          * @summary Get the Organization permissions by given role
-         * @param {string} organizationId the Organization identifier
-         * @param {string} role the Role
+         * @param {string} organizationId The Organization identifier
+         * @param {string} role The Role
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -7133,7 +7240,7 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
         /**
          * 
          * @summary Get the Organization security information
-         * @param {string} organizationId the Organization identifier
+         * @param {string} organizationId The Organization identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -7153,8 +7260,8 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
         /**
          * 
          * @summary List all Organizations
-         * @param {number} [page] page number to query (first page is at index 0)
-         * @param {number} [size] amount of result by page
+         * @param {number} [page] Page number to query (first page is at index 0)
+         * @param {number} [size] Amount of result by page
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -7173,8 +7280,8 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
         /**
          * 
          * @summary Update an Organization
-         * @param {string} organizationId the Organization identifier
-         * @param {OrganizationUpdateRequest} organizationUpdateRequest the new Organization details. This endpoint can\&#39;t be used to update security
+         * @param {string} organizationId The Organization identifier
+         * @param {OrganizationUpdateRequest} organizationUpdateRequest The new Organization details. This endpoint can\&#39;t be used to update security
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -7184,8 +7291,8 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
         /**
          * 
          * @summary Update the specified access to User for an Organization
-         * @param {string} organizationId the Organization identifier
-         * @param {string} identityId the User identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} identityId The User identifier
          * @param {OrganizationRole} organizationRole The new Organization Access Control
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -7196,7 +7303,7 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
         /**
          * 
          * @summary Update the Organization default security
-         * @param {string} organizationId the Organization identifier
+         * @param {string} organizationId The Organization identifier
          * @param {OrganizationRole} organizationRole This change the organization default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the organization.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -7217,7 +7324,7 @@ export class OrganizationApi extends BaseAPI {
     /**
      * 
      * @summary Create a new organization
-     * @param {OrganizationCreateRequest} organizationCreateRequest the Organization to create
+     * @param {OrganizationCreateRequest} organizationCreateRequest The Organization to create
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OrganizationApi
@@ -7229,8 +7336,8 @@ export class OrganizationApi extends BaseAPI {
     /**
      * 
      * @summary Add a control access to the Organization
-     * @param {string} organizationId the Organization identifier
-     * @param {OrganizationAccessControl} organizationAccessControl the new Organization security access to add.
+     * @param {string} organizationId The Organization identifier
+     * @param {OrganizationAccessControl} organizationAccessControl The new Organization security access to add.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OrganizationApi
@@ -7242,7 +7349,7 @@ export class OrganizationApi extends BaseAPI {
     /**
      * 
      * @summary Delete an organization
-     * @param {string} organizationId the Organization identifier
+     * @param {string} organizationId The Organization identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OrganizationApi
@@ -7254,8 +7361,8 @@ export class OrganizationApi extends BaseAPI {
     /**
      * 
      * @summary Remove the specified access from the given Organization
-     * @param {string} organizationId the Organization identifier
-     * @param {string} identityId the User identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} identityId The User identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OrganizationApi
@@ -7267,7 +7374,7 @@ export class OrganizationApi extends BaseAPI {
     /**
      * 
      * @summary Get the details of an Organization
-     * @param {string} organizationId the Organization identifier
+     * @param {string} organizationId The Organization identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OrganizationApi
@@ -7279,8 +7386,8 @@ export class OrganizationApi extends BaseAPI {
     /**
      * 
      * @summary Get a control access for the Organization
-     * @param {string} organizationId the Organization identifier
-     * @param {string} identityId the User identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} identityId The User identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OrganizationApi
@@ -7292,8 +7399,8 @@ export class OrganizationApi extends BaseAPI {
     /**
      * 
      * @summary Get the Organization permissions by given role
-     * @param {string} organizationId the Organization identifier
-     * @param {string} role the Role
+     * @param {string} organizationId The Organization identifier
+     * @param {string} role The Role
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OrganizationApi
@@ -7305,7 +7412,7 @@ export class OrganizationApi extends BaseAPI {
     /**
      * 
      * @summary Get the Organization security information
-     * @param {string} organizationId the Organization identifier
+     * @param {string} organizationId The Organization identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OrganizationApi
@@ -7329,8 +7436,8 @@ export class OrganizationApi extends BaseAPI {
     /**
      * 
      * @summary List all Organizations
-     * @param {number} [page] page number to query (first page is at index 0)
-     * @param {number} [size] amount of result by page
+     * @param {number} [page] Page number to query (first page is at index 0)
+     * @param {number} [size] Amount of result by page
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OrganizationApi
@@ -7353,8 +7460,8 @@ export class OrganizationApi extends BaseAPI {
     /**
      * 
      * @summary Update an Organization
-     * @param {string} organizationId the Organization identifier
-     * @param {OrganizationUpdateRequest} organizationUpdateRequest the new Organization details. This endpoint can\&#39;t be used to update security
+     * @param {string} organizationId The Organization identifier
+     * @param {OrganizationUpdateRequest} organizationUpdateRequest The new Organization details. This endpoint can\&#39;t be used to update security
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OrganizationApi
@@ -7366,8 +7473,8 @@ export class OrganizationApi extends BaseAPI {
     /**
      * 
      * @summary Update the specified access to User for an Organization
-     * @param {string} organizationId the Organization identifier
-     * @param {string} identityId the User identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} identityId The User identifier
      * @param {OrganizationRole} organizationRole The new Organization Access Control
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -7380,7 +7487,7 @@ export class OrganizationApi extends BaseAPI {
     /**
      * 
      * @summary Update the Organization default security
-     * @param {string} organizationId the Organization identifier
+     * @param {string} organizationId The Organization identifier
      * @param {OrganizationRole} organizationRole This change the organization default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the organization.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -9545,8 +9652,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Create a new solution
-         * @param {string} organizationId the Organization identifier
-         * @param {SolutionCreateRequest} solutionCreateRequest the Solution to create
+         * @param {string} organizationId The Organization identifier
+         * @param {SolutionCreateRequest} solutionCreateRequest The Solution to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -9589,8 +9696,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Create solution access control
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
          * @param {SolutionAccessControl} solutionAccessControl Access control to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -9637,8 +9744,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Create solution parameter for a solution
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
          * @param {RunTemplateParameterCreateRequest} runTemplateParameterCreateRequest Parameter to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -9685,8 +9792,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Create a solution parameter group
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
          * @param {RunTemplateParameterGroupCreateRequest} runTemplateParameterGroupCreateRequest Parameter group to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -9733,8 +9840,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Create a solution run template
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
          * @param {RunTemplateCreateRequest} runTemplateCreateRequest Run template to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -9781,8 +9888,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Delete a solution
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -9823,9 +9930,9 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Delete solution access control
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} identityId the User identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} identityId The User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -9869,9 +9976,9 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Delete specific parameter from the solution
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} parameterId the solution parameter identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} parameterId The solution parameter identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -9915,9 +10022,9 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Delete a parameter group from the solution
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} parameterGroupId the parameter group identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} parameterGroupId The parameter group identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -9961,9 +10068,9 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Delete a specific run template
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} runTemplateId the Run Template identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} runTemplateId The Run Template identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10007,9 +10114,9 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Retrieve a solution run templates
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} runTemplateId the Run Template identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} runTemplateId The Run Template identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10053,8 +10160,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Get the details of a solution
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10095,9 +10202,9 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Get solution access control
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} identityId the User identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} identityId The User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10141,9 +10248,9 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Get the details of a solution parameter
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} parameterId the solution parameter identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} parameterId The solution parameter identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10187,9 +10294,9 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Get details of a solution parameter group
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} parameterGroupId the parameter group identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} parameterGroupId The parameter group identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10233,8 +10340,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Get solution security information
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10275,8 +10382,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary List all solution run templates
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10317,8 +10424,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary List all solution parameter groups
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10359,8 +10466,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary List all solution parameters
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10401,8 +10508,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary List solution security users
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10443,7 +10550,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary List all Solutions
-         * @param {string} organizationId the Organization identifier
+         * @param {string} organizationId The Organization identifier
          * @param {number} [page] Page number to query (zero-based indexing)
          * @param {number} [size] Number of records per page
          * @param {*} [options] Override http request option.
@@ -10491,9 +10598,9 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Update a solution
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {SolutionUpdateRequest} solutionUpdateRequest the new Solution details. This endpoint can\&#39;t be used to update security
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {SolutionUpdateRequest} solutionUpdateRequest The new Solution details. This endpoint can\&#39;t be used to update security
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10539,9 +10646,9 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Update solution access control
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} identityId the User identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} identityId The User identifier
          * @param {SolutionRole} solutionRole Access control updates
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -10639,9 +10746,9 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Update solution parameter
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} parameterId the solution parameter identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} parameterId The solution parameter identifier
          * @param {RunTemplateParameterUpdateRequest} runTemplateParameterUpdateRequest Parameter to update
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -10691,9 +10798,9 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Update a solution parameter group
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} parameterGroupId the parameter group identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} parameterGroupId The parameter group identifier
          * @param {RunTemplateParameterGroupUpdateRequest} runTemplateParameterGroupUpdateRequest Parameter groups to update
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -10743,9 +10850,9 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Update a specific run template
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} runTemplateId the Run Template identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} runTemplateId The Run Template identifier
          * @param {RunTemplateUpdateRequest} runTemplateUpdateRequest Run template updates
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -10805,8 +10912,8 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Create a new solution
-         * @param {string} organizationId the Organization identifier
-         * @param {SolutionCreateRequest} solutionCreateRequest the Solution to create
+         * @param {string} organizationId The Organization identifier
+         * @param {SolutionCreateRequest} solutionCreateRequest The Solution to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10819,8 +10926,8 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Create solution access control
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
          * @param {SolutionAccessControl} solutionAccessControl Access control to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -10834,8 +10941,8 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Create solution parameter for a solution
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
          * @param {RunTemplateParameterCreateRequest} runTemplateParameterCreateRequest Parameter to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -10849,8 +10956,8 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Create a solution parameter group
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
          * @param {RunTemplateParameterGroupCreateRequest} runTemplateParameterGroupCreateRequest Parameter group to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -10864,8 +10971,8 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Create a solution run template
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
          * @param {RunTemplateCreateRequest} runTemplateCreateRequest Run template to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -10879,8 +10986,8 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Delete a solution
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10893,9 +11000,9 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Delete solution access control
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} identityId the User identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} identityId The User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10908,9 +11015,9 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Delete specific parameter from the solution
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} parameterId the solution parameter identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} parameterId The solution parameter identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10923,9 +11030,9 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Delete a parameter group from the solution
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} parameterGroupId the parameter group identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} parameterGroupId The parameter group identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10938,9 +11045,9 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Delete a specific run template
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} runTemplateId the Run Template identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} runTemplateId The Run Template identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10953,9 +11060,9 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Retrieve a solution run templates
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} runTemplateId the Run Template identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} runTemplateId The Run Template identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10968,8 +11075,8 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Get the details of a solution
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10982,9 +11089,9 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Get solution access control
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} identityId the User identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} identityId The User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10997,9 +11104,9 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Get the details of a solution parameter
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} parameterId the solution parameter identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} parameterId The solution parameter identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11012,9 +11119,9 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Get details of a solution parameter group
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} parameterGroupId the parameter group identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} parameterGroupId The parameter group identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11027,8 +11134,8 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Get solution security information
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11041,8 +11148,8 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary List all solution run templates
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11055,8 +11162,8 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary List all solution parameter groups
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11069,8 +11176,8 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary List all solution parameters
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11083,8 +11190,8 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary List solution security users
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11097,7 +11204,7 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary List all Solutions
-         * @param {string} organizationId the Organization identifier
+         * @param {string} organizationId The Organization identifier
          * @param {number} [page] Page number to query (zero-based indexing)
          * @param {number} [size] Number of records per page
          * @param {*} [options] Override http request option.
@@ -11112,9 +11219,9 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Update a solution
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {SolutionUpdateRequest} solutionUpdateRequest the new Solution details. This endpoint can\&#39;t be used to update security
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {SolutionUpdateRequest} solutionUpdateRequest The new Solution details. This endpoint can\&#39;t be used to update security
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11127,9 +11234,9 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Update solution access control
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} identityId the User identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} identityId The User identifier
          * @param {SolutionRole} solutionRole Access control updates
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -11158,9 +11265,9 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Update solution parameter
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} parameterId the solution parameter identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} parameterId The solution parameter identifier
          * @param {RunTemplateParameterUpdateRequest} runTemplateParameterUpdateRequest Parameter to update
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -11174,9 +11281,9 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Update a solution parameter group
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} parameterGroupId the parameter group identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} parameterGroupId The parameter group identifier
          * @param {RunTemplateParameterGroupUpdateRequest} runTemplateParameterGroupUpdateRequest Parameter groups to update
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -11190,9 +11297,9 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Update a specific run template
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} runTemplateId the Run Template identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} runTemplateId The Run Template identifier
          * @param {RunTemplateUpdateRequest} runTemplateUpdateRequest Run template updates
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -11216,8 +11323,8 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Create a new solution
-         * @param {string} organizationId the Organization identifier
-         * @param {SolutionCreateRequest} solutionCreateRequest the Solution to create
+         * @param {string} organizationId The Organization identifier
+         * @param {SolutionCreateRequest} solutionCreateRequest The Solution to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11227,8 +11334,8 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Create solution access control
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
          * @param {SolutionAccessControl} solutionAccessControl Access control to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -11239,8 +11346,8 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Create solution parameter for a solution
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
          * @param {RunTemplateParameterCreateRequest} runTemplateParameterCreateRequest Parameter to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -11251,8 +11358,8 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Create a solution parameter group
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
          * @param {RunTemplateParameterGroupCreateRequest} runTemplateParameterGroupCreateRequest Parameter group to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -11263,8 +11370,8 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Create a solution run template
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
          * @param {RunTemplateCreateRequest} runTemplateCreateRequest Run template to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -11275,8 +11382,8 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Delete a solution
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11286,9 +11393,9 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Delete solution access control
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} identityId the User identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} identityId The User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11298,9 +11405,9 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Delete specific parameter from the solution
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} parameterId the solution parameter identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} parameterId The solution parameter identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11310,9 +11417,9 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Delete a parameter group from the solution
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} parameterGroupId the parameter group identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} parameterGroupId The parameter group identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11322,9 +11429,9 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Delete a specific run template
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} runTemplateId the Run Template identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} runTemplateId The Run Template identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11334,9 +11441,9 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Retrieve a solution run templates
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} runTemplateId the Run Template identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} runTemplateId The Run Template identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11346,8 +11453,8 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Get the details of a solution
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11357,9 +11464,9 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Get solution access control
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} identityId the User identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} identityId The User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11369,9 +11476,9 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Get the details of a solution parameter
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} parameterId the solution parameter identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} parameterId The solution parameter identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11381,9 +11488,9 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Get details of a solution parameter group
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} parameterGroupId the parameter group identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} parameterGroupId The parameter group identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11393,8 +11500,8 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Get solution security information
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11404,8 +11511,8 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary List all solution run templates
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11415,8 +11522,8 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary List all solution parameter groups
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11426,8 +11533,8 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary List all solution parameters
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11437,8 +11544,8 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary List solution security users
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11448,7 +11555,7 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary List all Solutions
-         * @param {string} organizationId the Organization identifier
+         * @param {string} organizationId The Organization identifier
          * @param {number} [page] Page number to query (zero-based indexing)
          * @param {number} [size] Number of records per page
          * @param {*} [options] Override http request option.
@@ -11460,9 +11567,9 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Update a solution
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {SolutionUpdateRequest} solutionUpdateRequest the new Solution details. This endpoint can\&#39;t be used to update security
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {SolutionUpdateRequest} solutionUpdateRequest The new Solution details. This endpoint can\&#39;t be used to update security
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -11472,9 +11579,9 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Update solution access control
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} identityId the User identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} identityId The User identifier
          * @param {SolutionRole} solutionRole Access control updates
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -11497,9 +11604,9 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Update solution parameter
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} parameterId the solution parameter identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} parameterId The solution parameter identifier
          * @param {RunTemplateParameterUpdateRequest} runTemplateParameterUpdateRequest Parameter to update
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -11510,9 +11617,9 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Update a solution parameter group
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} parameterGroupId the parameter group identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} parameterGroupId The parameter group identifier
          * @param {RunTemplateParameterGroupUpdateRequest} runTemplateParameterGroupUpdateRequest Parameter groups to update
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -11523,9 +11630,9 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Update a specific run template
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} runTemplateId the Run Template identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} solutionId The Solution identifier
+         * @param {string} runTemplateId The Run Template identifier
          * @param {RunTemplateUpdateRequest} runTemplateUpdateRequest Run template updates
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -11546,8 +11653,8 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Create a new solution
-     * @param {string} organizationId the Organization identifier
-     * @param {SolutionCreateRequest} solutionCreateRequest the Solution to create
+     * @param {string} organizationId The Organization identifier
+     * @param {SolutionCreateRequest} solutionCreateRequest The Solution to create
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
@@ -11559,8 +11666,8 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Create solution access control
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} solutionId The Solution identifier
      * @param {SolutionAccessControl} solutionAccessControl Access control to create
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -11573,8 +11680,8 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Create solution parameter for a solution
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} solutionId The Solution identifier
      * @param {RunTemplateParameterCreateRequest} runTemplateParameterCreateRequest Parameter to create
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -11587,8 +11694,8 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Create a solution parameter group
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} solutionId The Solution identifier
      * @param {RunTemplateParameterGroupCreateRequest} runTemplateParameterGroupCreateRequest Parameter group to create
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -11601,8 +11708,8 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Create a solution run template
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} solutionId The Solution identifier
      * @param {RunTemplateCreateRequest} runTemplateCreateRequest Run template to create
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -11615,8 +11722,8 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Delete a solution
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} solutionId The Solution identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
@@ -11628,9 +11735,9 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Delete solution access control
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
-     * @param {string} identityId the User identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} solutionId The Solution identifier
+     * @param {string} identityId The User identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
@@ -11642,9 +11749,9 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Delete specific parameter from the solution
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
-     * @param {string} parameterId the solution parameter identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} solutionId The Solution identifier
+     * @param {string} parameterId The solution parameter identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
@@ -11656,9 +11763,9 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Delete a parameter group from the solution
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
-     * @param {string} parameterGroupId the parameter group identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} solutionId The Solution identifier
+     * @param {string} parameterGroupId The parameter group identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
@@ -11670,9 +11777,9 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Delete a specific run template
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
-     * @param {string} runTemplateId the Run Template identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} solutionId The Solution identifier
+     * @param {string} runTemplateId The Run Template identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
@@ -11684,9 +11791,9 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Retrieve a solution run templates
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
-     * @param {string} runTemplateId the Run Template identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} solutionId The Solution identifier
+     * @param {string} runTemplateId The Run Template identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
@@ -11698,8 +11805,8 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Get the details of a solution
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} solutionId The Solution identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
@@ -11711,9 +11818,9 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Get solution access control
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
-     * @param {string} identityId the User identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} solutionId The Solution identifier
+     * @param {string} identityId The User identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
@@ -11725,9 +11832,9 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Get the details of a solution parameter
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
-     * @param {string} parameterId the solution parameter identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} solutionId The Solution identifier
+     * @param {string} parameterId The solution parameter identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
@@ -11739,9 +11846,9 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Get details of a solution parameter group
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
-     * @param {string} parameterGroupId the parameter group identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} solutionId The Solution identifier
+     * @param {string} parameterGroupId The parameter group identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
@@ -11753,8 +11860,8 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Get solution security information
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} solutionId The Solution identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
@@ -11766,8 +11873,8 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary List all solution run templates
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} solutionId The Solution identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
@@ -11779,8 +11886,8 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary List all solution parameter groups
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} solutionId The Solution identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
@@ -11792,8 +11899,8 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary List all solution parameters
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} solutionId The Solution identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
@@ -11805,8 +11912,8 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary List solution security users
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} solutionId The Solution identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
@@ -11818,7 +11925,7 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary List all Solutions
-     * @param {string} organizationId the Organization identifier
+     * @param {string} organizationId The Organization identifier
      * @param {number} [page] Page number to query (zero-based indexing)
      * @param {number} [size] Number of records per page
      * @param {*} [options] Override http request option.
@@ -11832,9 +11939,9 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Update a solution
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
-     * @param {SolutionUpdateRequest} solutionUpdateRequest the new Solution details. This endpoint can\&#39;t be used to update security
+     * @param {string} organizationId The Organization identifier
+     * @param {string} solutionId The Solution identifier
+     * @param {SolutionUpdateRequest} solutionUpdateRequest The new Solution details. This endpoint can\&#39;t be used to update security
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
@@ -11846,9 +11953,9 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Update solution access control
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
-     * @param {string} identityId the User identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} solutionId The Solution identifier
+     * @param {string} identityId The User identifier
      * @param {SolutionRole} solutionRole Access control updates
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -11875,9 +11982,9 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Update solution parameter
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
-     * @param {string} parameterId the solution parameter identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} solutionId The Solution identifier
+     * @param {string} parameterId The solution parameter identifier
      * @param {RunTemplateParameterUpdateRequest} runTemplateParameterUpdateRequest Parameter to update
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -11890,9 +11997,9 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Update a solution parameter group
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
-     * @param {string} parameterGroupId the parameter group identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} solutionId The Solution identifier
+     * @param {string} parameterGroupId The parameter group identifier
      * @param {RunTemplateParameterGroupUpdateRequest} runTemplateParameterGroupUpdateRequest Parameter groups to update
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -11905,9 +12012,9 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Update a specific run template
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
-     * @param {string} runTemplateId the Run Template identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} solutionId The Solution identifier
+     * @param {string} runTemplateId The Run Template identifier
      * @param {RunTemplateUpdateRequest} runTemplateUpdateRequest Run template updates
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -11928,8 +12035,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
     return {
         /**
          * 
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
          * @param {string} datasetId dataset id to be linked to
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -11977,8 +12084,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         /**
          * 
          * @summary Create a new workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {WorkspaceCreateRequest} workspaceCreateRequest the Workspace to create
+         * @param {string} organizationId The Organization identifier
+         * @param {WorkspaceCreateRequest} workspaceCreateRequest The Workspace to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -12021,9 +12128,9 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         /**
          * 
          * @summary Add a control access to the Workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {WorkspaceAccessControl} workspaceAccessControl the new Workspace security access to add.
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {WorkspaceAccessControl} workspaceAccessControl The new Workspace security access to add.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -12069,8 +12176,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         /**
          * 
          * @summary Upload a file for the Workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
          * @param {File} file The file to upload
          * @param {boolean} [overwrite] Whether to overwrite an existing file
          * @param {string} [destination] Destination path. Must end with a \\\&#39;/\\\&#39; if specifying a folder. Note that paths may or may not start with a \\\&#39;/\\\&#39;, but they are always treated as relative to the Workspace root location. 
@@ -12131,8 +12238,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
          * @param {string} datasetId dataset id to be linked to
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -12180,8 +12287,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         /**
          * 
          * @summary Delete a workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -12222,9 +12329,9 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         /**
          * 
          * @summary Remove the specified access from the given Organization Workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} identityId the User identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {string} identityId The User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -12268,9 +12375,9 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         /**
          * 
          * @summary Delete a workspace file
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} fileName the file name
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {string} fileName The file name
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -12317,8 +12424,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         /**
          * 
          * @summary Delete all Workspace files
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -12359,8 +12466,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         /**
          * 
          * @summary Get the details of an workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -12401,9 +12508,9 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         /**
          * 
          * @summary Get a control access for the Workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} identityId the User identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {string} identityId The User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -12447,9 +12554,9 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         /**
          * 
          * @summary Download the Workspace File specified
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} fileName the file name
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {string} fileName The file name
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -12496,8 +12603,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         /**
          * 
          * @summary Get the Workspace security information
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -12538,8 +12645,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         /**
          * 
          * @summary List all Workspace files
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -12580,9 +12687,9 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         /**
          * 
          * @summary Get the Workspace permission by given role
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} role the Role
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {string} role The Role
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -12626,8 +12733,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         /**
          * 
          * @summary Get the Workspace security users list
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -12668,9 +12775,9 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         /**
          * 
          * @summary List all Workspaces
-         * @param {string} organizationId the Organization identifier
+         * @param {string} organizationId The Organization identifier
          * @param {number} [page] page number to query (first page is at index 0)
-         * @param {number} [size] amount of result by page
+         * @param {number} [size] Amount of result by page
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -12716,8 +12823,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         /**
          * 
          * @summary Update a workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
          * @param {WorkspaceUpdateRequest} workspaceUpdateRequest The new Workspace details. This endpoint can\&#39;t be used to update security
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -12764,9 +12871,9 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         /**
          * 
          * @summary Update the specified access to User for a Workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} identityId the User identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {string} identityId The User identifier
          * @param {WorkspaceRole} workspaceRole The new Workspace Access Control
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -12816,8 +12923,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         /**
          * 
          * @summary Update the Workspace default security
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
          * @param {WorkspaceRole} workspaceRole This change the workspace default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the workspace.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -12873,8 +12980,8 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
          * @param {string} datasetId dataset id to be linked to
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -12888,8 +12995,8 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Create a new workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {WorkspaceCreateRequest} workspaceCreateRequest the Workspace to create
+         * @param {string} organizationId The Organization identifier
+         * @param {WorkspaceCreateRequest} workspaceCreateRequest The Workspace to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -12902,9 +13009,9 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Add a control access to the Workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {WorkspaceAccessControl} workspaceAccessControl the new Workspace security access to add.
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {WorkspaceAccessControl} workspaceAccessControl The new Workspace security access to add.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -12917,8 +13024,8 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Upload a file for the Workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
          * @param {File} file The file to upload
          * @param {boolean} [overwrite] Whether to overwrite an existing file
          * @param {string} [destination] Destination path. Must end with a \\\&#39;/\\\&#39; if specifying a folder. Note that paths may or may not start with a \\\&#39;/\\\&#39;, but they are always treated as relative to the Workspace root location. 
@@ -12933,8 +13040,8 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
          * @param {string} datasetId dataset id to be linked to
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -12948,8 +13055,8 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Delete a workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -12962,9 +13069,9 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Remove the specified access from the given Organization Workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} identityId the User identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {string} identityId The User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -12977,9 +13084,9 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Delete a workspace file
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} fileName the file name
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {string} fileName The file name
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -12992,8 +13099,8 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Delete all Workspace files
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -13006,8 +13113,8 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Get the details of an workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -13020,9 +13127,9 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Get a control access for the Workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} identityId the User identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {string} identityId The User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -13035,9 +13142,9 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Download the Workspace File specified
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} fileName the file name
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {string} fileName The file name
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -13050,8 +13157,8 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Get the Workspace security information
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -13064,8 +13171,8 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary List all Workspace files
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -13078,9 +13185,9 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Get the Workspace permission by given role
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} role the Role
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {string} role The Role
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -13093,8 +13200,8 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Get the Workspace security users list
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -13107,9 +13214,9 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary List all Workspaces
-         * @param {string} organizationId the Organization identifier
+         * @param {string} organizationId The Organization identifier
          * @param {number} [page] page number to query (first page is at index 0)
-         * @param {number} [size] amount of result by page
+         * @param {number} [size] Amount of result by page
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -13122,8 +13229,8 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Update a workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
          * @param {WorkspaceUpdateRequest} workspaceUpdateRequest The new Workspace details. This endpoint can\&#39;t be used to update security
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -13137,9 +13244,9 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Update the specified access to User for a Workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} identityId the User identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {string} identityId The User identifier
          * @param {WorkspaceRole} workspaceRole The new Workspace Access Control
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -13153,8 +13260,8 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Update the Workspace default security
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
          * @param {WorkspaceRole} workspaceRole This change the workspace default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the workspace.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -13177,8 +13284,8 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
     return {
         /**
          * 
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
          * @param {string} datasetId dataset id to be linked to
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -13189,8 +13296,8 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
         /**
          * 
          * @summary Create a new workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {WorkspaceCreateRequest} workspaceCreateRequest the Workspace to create
+         * @param {string} organizationId The Organization identifier
+         * @param {WorkspaceCreateRequest} workspaceCreateRequest The Workspace to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -13200,9 +13307,9 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
         /**
          * 
          * @summary Add a control access to the Workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {WorkspaceAccessControl} workspaceAccessControl the new Workspace security access to add.
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {WorkspaceAccessControl} workspaceAccessControl The new Workspace security access to add.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -13212,8 +13319,8 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
         /**
          * 
          * @summary Upload a file for the Workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
          * @param {File} file The file to upload
          * @param {boolean} [overwrite] Whether to overwrite an existing file
          * @param {string} [destination] Destination path. Must end with a \\\&#39;/\\\&#39; if specifying a folder. Note that paths may or may not start with a \\\&#39;/\\\&#39;, but they are always treated as relative to the Workspace root location. 
@@ -13225,8 +13332,8 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
          * @param {string} datasetId dataset id to be linked to
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -13237,8 +13344,8 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
         /**
          * 
          * @summary Delete a workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -13248,9 +13355,9 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
         /**
          * 
          * @summary Remove the specified access from the given Organization Workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} identityId the User identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {string} identityId The User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -13260,9 +13367,9 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
         /**
          * 
          * @summary Delete a workspace file
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} fileName the file name
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {string} fileName The file name
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -13272,8 +13379,8 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
         /**
          * 
          * @summary Delete all Workspace files
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -13283,8 +13390,8 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
         /**
          * 
          * @summary Get the details of an workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -13294,9 +13401,9 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
         /**
          * 
          * @summary Get a control access for the Workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} identityId the User identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {string} identityId The User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -13306,9 +13413,9 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
         /**
          * 
          * @summary Download the Workspace File specified
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} fileName the file name
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {string} fileName The file name
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -13318,8 +13425,8 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
         /**
          * 
          * @summary Get the Workspace security information
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -13329,8 +13436,8 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
         /**
          * 
          * @summary List all Workspace files
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -13340,9 +13447,9 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
         /**
          * 
          * @summary Get the Workspace permission by given role
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} role the Role
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {string} role The Role
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -13352,8 +13459,8 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
         /**
          * 
          * @summary Get the Workspace security users list
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -13363,9 +13470,9 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
         /**
          * 
          * @summary List all Workspaces
-         * @param {string} organizationId the Organization identifier
+         * @param {string} organizationId The Organization identifier
          * @param {number} [page] page number to query (first page is at index 0)
-         * @param {number} [size] amount of result by page
+         * @param {number} [size] Amount of result by page
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -13375,8 +13482,8 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
         /**
          * 
          * @summary Update a workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
          * @param {WorkspaceUpdateRequest} workspaceUpdateRequest The new Workspace details. This endpoint can\&#39;t be used to update security
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -13387,9 +13494,9 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
         /**
          * 
          * @summary Update the specified access to User for a Workspace
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} identityId the User identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {string} identityId The User identifier
          * @param {WorkspaceRole} workspaceRole The new Workspace Access Control
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -13400,8 +13507,8 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
         /**
          * 
          * @summary Update the Workspace default security
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
          * @param {WorkspaceRole} workspaceRole This change the workspace default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the workspace.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -13421,8 +13528,8 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
 export class WorkspaceApi extends BaseAPI {
     /**
      * 
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} workspaceId The Workspace identifier
      * @param {string} datasetId dataset id to be linked to
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -13435,8 +13542,8 @@ export class WorkspaceApi extends BaseAPI {
     /**
      * 
      * @summary Create a new workspace
-     * @param {string} organizationId the Organization identifier
-     * @param {WorkspaceCreateRequest} workspaceCreateRequest the Workspace to create
+     * @param {string} organizationId The Organization identifier
+     * @param {WorkspaceCreateRequest} workspaceCreateRequest The Workspace to create
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WorkspaceApi
@@ -13448,9 +13555,9 @@ export class WorkspaceApi extends BaseAPI {
     /**
      * 
      * @summary Add a control access to the Workspace
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
-     * @param {WorkspaceAccessControl} workspaceAccessControl the new Workspace security access to add.
+     * @param {string} organizationId The Organization identifier
+     * @param {string} workspaceId The Workspace identifier
+     * @param {WorkspaceAccessControl} workspaceAccessControl The new Workspace security access to add.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WorkspaceApi
@@ -13462,8 +13569,8 @@ export class WorkspaceApi extends BaseAPI {
     /**
      * 
      * @summary Upload a file for the Workspace
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} workspaceId The Workspace identifier
      * @param {File} file The file to upload
      * @param {boolean} [overwrite] Whether to overwrite an existing file
      * @param {string} [destination] Destination path. Must end with a \\\&#39;/\\\&#39; if specifying a folder. Note that paths may or may not start with a \\\&#39;/\\\&#39;, but they are always treated as relative to the Workspace root location. 
@@ -13477,8 +13584,8 @@ export class WorkspaceApi extends BaseAPI {
 
     /**
      * 
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} workspaceId The Workspace identifier
      * @param {string} datasetId dataset id to be linked to
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -13491,8 +13598,8 @@ export class WorkspaceApi extends BaseAPI {
     /**
      * 
      * @summary Delete a workspace
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} workspaceId The Workspace identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WorkspaceApi
@@ -13504,9 +13611,9 @@ export class WorkspaceApi extends BaseAPI {
     /**
      * 
      * @summary Remove the specified access from the given Organization Workspace
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
-     * @param {string} identityId the User identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} workspaceId The Workspace identifier
+     * @param {string} identityId The User identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WorkspaceApi
@@ -13518,9 +13625,9 @@ export class WorkspaceApi extends BaseAPI {
     /**
      * 
      * @summary Delete a workspace file
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
-     * @param {string} fileName the file name
+     * @param {string} organizationId The Organization identifier
+     * @param {string} workspaceId The Workspace identifier
+     * @param {string} fileName The file name
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WorkspaceApi
@@ -13532,8 +13639,8 @@ export class WorkspaceApi extends BaseAPI {
     /**
      * 
      * @summary Delete all Workspace files
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} workspaceId The Workspace identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WorkspaceApi
@@ -13545,8 +13652,8 @@ export class WorkspaceApi extends BaseAPI {
     /**
      * 
      * @summary Get the details of an workspace
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} workspaceId The Workspace identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WorkspaceApi
@@ -13558,9 +13665,9 @@ export class WorkspaceApi extends BaseAPI {
     /**
      * 
      * @summary Get a control access for the Workspace
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
-     * @param {string} identityId the User identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} workspaceId The Workspace identifier
+     * @param {string} identityId The User identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WorkspaceApi
@@ -13572,9 +13679,9 @@ export class WorkspaceApi extends BaseAPI {
     /**
      * 
      * @summary Download the Workspace File specified
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
-     * @param {string} fileName the file name
+     * @param {string} organizationId The Organization identifier
+     * @param {string} workspaceId The Workspace identifier
+     * @param {string} fileName The file name
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WorkspaceApi
@@ -13586,8 +13693,8 @@ export class WorkspaceApi extends BaseAPI {
     /**
      * 
      * @summary Get the Workspace security information
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} workspaceId The Workspace identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WorkspaceApi
@@ -13599,8 +13706,8 @@ export class WorkspaceApi extends BaseAPI {
     /**
      * 
      * @summary List all Workspace files
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} workspaceId The Workspace identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WorkspaceApi
@@ -13612,9 +13719,9 @@ export class WorkspaceApi extends BaseAPI {
     /**
      * 
      * @summary Get the Workspace permission by given role
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
-     * @param {string} role the Role
+     * @param {string} organizationId The Organization identifier
+     * @param {string} workspaceId The Workspace identifier
+     * @param {string} role The Role
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WorkspaceApi
@@ -13626,8 +13733,8 @@ export class WorkspaceApi extends BaseAPI {
     /**
      * 
      * @summary Get the Workspace security users list
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} workspaceId The Workspace identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WorkspaceApi
@@ -13639,9 +13746,9 @@ export class WorkspaceApi extends BaseAPI {
     /**
      * 
      * @summary List all Workspaces
-     * @param {string} organizationId the Organization identifier
+     * @param {string} organizationId The Organization identifier
      * @param {number} [page] page number to query (first page is at index 0)
-     * @param {number} [size] amount of result by page
+     * @param {number} [size] Amount of result by page
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WorkspaceApi
@@ -13653,8 +13760,8 @@ export class WorkspaceApi extends BaseAPI {
     /**
      * 
      * @summary Update a workspace
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} workspaceId The Workspace identifier
      * @param {WorkspaceUpdateRequest} workspaceUpdateRequest The new Workspace details. This endpoint can\&#39;t be used to update security
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -13667,9 +13774,9 @@ export class WorkspaceApi extends BaseAPI {
     /**
      * 
      * @summary Update the specified access to User for a Workspace
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
-     * @param {string} identityId the User identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} workspaceId The Workspace identifier
+     * @param {string} identityId The User identifier
      * @param {WorkspaceRole} workspaceRole The new Workspace Access Control
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -13682,8 +13789,8 @@ export class WorkspaceApi extends BaseAPI {
     /**
      * 
      * @summary Update the Workspace default security
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} workspaceId The Workspace identifier
      * @param {WorkspaceRole} workspaceRole This change the workspace default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the workspace.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
