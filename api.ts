@@ -105,147 +105,6 @@ export interface ComponentRolePermissions {
     'roles': { [key: string]: Array<string>; };
 }
 /**
- * a version of a Connector
- * @export
- * @interface Connector
- */
-export interface Connector {
-    /**
-     * the Connector version unique identifier
-     * @type {string}
-     * @memberof Connector
-     */
-    'id'?: string;
-    /**
-     * the Connector key which group Connector versions
-     * @type {string}
-     * @memberof Connector
-     */
-    'key'?: string;
-    /**
-     * the Connector name
-     * @type {string}
-     * @memberof Connector
-     */
-    'name'?: string;
-    /**
-     * the Connector description
-     * @type {string}
-     * @memberof Connector
-     */
-    'description'?: string;
-    /**
-     * the registry repository containing the image
-     * @type {string}
-     * @memberof Connector
-     */
-    'repository'?: string;
-    /**
-     * the Connector version MAJOR.MINOR.PATCH. Must be aligned with an existing repository tag
-     * @type {string}
-     * @memberof Connector
-     */
-    'version'?: string;
-    /**
-     * the list of tags
-     * @type {Array<string>}
-     * @memberof Connector
-     */
-    'tags'?: Array<string>;
-    /**
-     * the user id which own this connector version
-     * @type {string}
-     * @memberof Connector
-     */
-    'ownerId'?: string;
-    /**
-     * an optional URL link to connector page
-     * @type {string}
-     * @memberof Connector
-     */
-    'url'?: string;
-    /**
-     * 
-     * @type {Array<IoTypesEnum>}
-     * @memberof Connector
-     */
-    'ioTypes'?: Array<IoTypesEnum>;
-    /**
-     * the list of connector parameters groups
-     * @type {Array<ConnectorParameterGroup>}
-     * @memberof Connector
-     */
-    'parameterGroups'?: Array<ConnectorParameterGroup>;
-}
-/**
- * a connector parameter
- * @export
- * @interface ConnectorParameter
- */
-export interface ConnectorParameter {
-    /**
-     * the connector parameter id
-     * @type {string}
-     * @memberof ConnectorParameter
-     */
-    'id': string;
-    /**
-     * the list of translated parameter group labels
-     * @type {string}
-     * @memberof ConnectorParameter
-     */
-    'label': string;
-    /**
-     * the parameter value type
-     * @type {string}
-     * @memberof ConnectorParameter
-     */
-    'valueType'?: string;
-    /**
-     * the list of available and valid values for the parameter
-     * @type {Array<string>}
-     * @memberof ConnectorParameter
-     */
-    'options'?: Array<string>;
-    /**
-     * the default value
-     * @type {string}
-     * @memberof ConnectorParameter
-     */
-    'default'?: string;
-    /**
-     * associated environment variable in connector image
-     * @type {string}
-     * @memberof ConnectorParameter
-     */
-    'envVar'?: string;
-}
-/**
- * a connector parameters group
- * @export
- * @interface ConnectorParameterGroup
- */
-export interface ConnectorParameterGroup {
-    /**
-     * the connector parameter group id
-     * @type {string}
-     * @memberof ConnectorParameterGroup
-     */
-    'id': string;
-    /**
-     * the list of translated parameter group labels
-     * @type {string}
-     * @memberof ConnectorParameterGroup
-     */
-    'label': string;
-    /**
-     * the list of parameters
-     * @type {Array<ConnectorParameter>}
-     * @memberof ConnectorParameterGroup
-     */
-    'parameters': Array<ConnectorParameter>;
-}
-/**
  * define cpus and memory needs
  * @export
  * @interface ContainerResourceSizeInfo
@@ -284,6 +143,31 @@ export interface ContainerResourceSizing {
     'limits': ContainerResourceSizeInfo;
 }
 /**
+ * 
+ * @export
+ * @interface CreateInfo
+ */
+export interface CreateInfo {
+    /**
+     * The timestamp of the creation in millisecond
+     * @type {number}
+     * @memberof CreateInfo
+     */
+    'timestamp': number;
+    /**
+     * The id of the user who did the creation
+     * @type {string}
+     * @memberof CreateInfo
+     */
+    'userId': string;
+    /**
+     * The runner id which has created the dataset (nullable)
+     * @type {string}
+     * @memberof CreateInfo
+     */
+    'runnerId'?: string;
+}
+/**
  * Newly created Run info
  * @export
  * @interface CreatedRun
@@ -297,152 +181,72 @@ export interface CreatedRun {
     'id': string;
 }
 /**
- * a Dataset
+ * Dataset object
  * @export
  * @interface Dataset
  */
 export interface Dataset {
     /**
-     * the Dataset unique identifier
+     * 
      * @type {string}
      * @memberof Dataset
      */
-    'id'?: string;
+    'id': string;
     /**
-     * the Dataset name
+     * 
      * @type {string}
      * @memberof Dataset
      */
-    'name'?: string;
+    'name': string;
     /**
-     * the Dataset description
+     * 
      * @type {string}
      * @memberof Dataset
      */
     'description'?: string;
     /**
-     * the User id which own this Dataset
+     * the associated Organization Id
      * @type {string}
      * @memberof Dataset
      */
-    'ownerId'?: string;
+    'organizationId': string;
     /**
-     * the name of the owner
+     * the associated Workspace Id
      * @type {string}
      * @memberof Dataset
      */
-    'ownerName'?: string;
-    /**
-     * the Organization Id related to this Dataset
-     * @type {string}
-     * @memberof Dataset
-     */
-    'organizationId'?: string;
-    /**
-     * the Dataset id which is the parent of this Dataset
-     * @type {string}
-     * @memberof Dataset
-     */
-    'parentId'?: string;
-    /**
-     * list of workspace linked to this dataset
-     * @type {Array<string>}
-     * @memberof Dataset
-     */
-    'linkedWorkspaceIdList'?: Array<string>;
-    /**
-     * the twin graph id
-     * @type {string}
-     * @memberof Dataset
-     */
-    'twingraphId'?: string;
-    /**
-     * is this the main dataset
-     * @type {boolean}
-     * @memberof Dataset
-     */
-    'main'?: boolean;
-    /**
-     * the Dataset creation date
-     * @type {number}
-     * @memberof Dataset
-     */
-    'creationDate'?: number;
-    /**
-     * the last time a refresh was done
-     * @type {number}
-     * @memberof Dataset
-     */
-    'refreshDate'?: number;
-    /**
-     * 
-     * @type {DatasetSourceType}
-     * @memberof Dataset
-     */
-    'sourceType'?: DatasetSourceType;
-    /**
-     * 
-     * @type {SourceInfo}
-     * @memberof Dataset
-     */
-    'source'?: SourceInfo;
-    /**
-     * 
-     * @type {IngestionStatusEnum}
-     * @memberof Dataset
-     */
-    'ingestionStatus'?: IngestionStatusEnum | null;
-    /**
-     * 
-     * @type {TwincacheStatusEnum}
-     * @memberof Dataset
-     */
-    'twincacheStatus'?: TwincacheStatusEnum | null;
-    /**
-     * the list of queries
-     * @type {Array<string>}
-     * @memberof Dataset
-     */
-    'queries'?: Array<string>;
+    'workspaceId': string;
     /**
      * the list of tags
      * @type {Array<string>}
      * @memberof Dataset
      */
-    'tags'?: Array<string>;
+    'tags': Array<string>;
     /**
      * 
-     * @type {DatasetConnector}
+     * @type {Array<DatasetPart>}
      * @memberof Dataset
      */
-    'connector'?: DatasetConnector;
+    'parts': Array<DatasetPart>;
     /**
-     * the list of other Datasets ids to compose as fragments
-     * @type {Array<string>}
+     * The details of the Dataset creation
+     * @type {CreateInfo}
      * @memberof Dataset
      */
-    'fragmentsIds'?: Array<string>;
+    'createInfo': CreateInfo;
     /**
-     * the validator id
-     * @type {string}
+     * The details of the Dataset last update
+     * @type {EditInfo}
      * @memberof Dataset
      */
-    'validatorId'?: string;
-    /**
-     * the list of compatible Solutions versions
-     * @type {Array<DatasetCompatibility>}
-     * @memberof Dataset
-     */
-    'compatibility'?: Array<DatasetCompatibility>;
+    'updateInfo': EditInfo;
     /**
      * 
      * @type {DatasetSecurity}
      * @memberof Dataset
      */
-    'security'?: DatasetSecurity;
+    'security': DatasetSecurity;
 }
-
-
 /**
  * a Dataset access control item
  * @export
@@ -463,85 +267,194 @@ export interface DatasetAccessControl {
     'role': string;
 }
 /**
- * a Dataset compatibility constraint to a Solution version open range
+ * Dataset creation request
  * @export
- * @interface DatasetCompatibility
+ * @interface DatasetCreateRequest
  */
-export interface DatasetCompatibility {
-    /**
-     * the Solution key which group Solution versions
-     * @type {string}
-     * @memberof DatasetCompatibility
-     */
-    'solutionKey': string;
-    /**
-     * the Solution minimum version compatibility (version included)
-     * @type {string}
-     * @memberof DatasetCompatibility
-     */
-    'minimumVersion'?: string;
-    /**
-     * the Solution maximum version compatibility (version included)
-     * @type {string}
-     * @memberof DatasetCompatibility
-     */
-    'maximumVersion'?: string;
-}
-/**
- * the Connector setup bound to a Dataset
- * @export
- * @interface DatasetConnector
- */
-export interface DatasetConnector {
-    /**
-     * the Connector id
-     * @type {string}
-     * @memberof DatasetConnector
-     */
-    'id'?: string;
-    /**
-     * the Connector name
-     * @type {string}
-     * @memberof DatasetConnector
-     */
-    'name'?: string;
-    /**
-     * the Connector version
-     * @type {string}
-     * @memberof DatasetConnector
-     */
-    'version'?: string;
+export interface DatasetCreateRequest {
     /**
      * 
-     * @type {{ [key: string]: string; }}
-     * @memberof DatasetConnector
+     * @type {string}
+     * @memberof DatasetCreateRequest
      */
-    'parametersValues'?: { [key: string]: string; };
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DatasetCreateRequest
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof DatasetCreateRequest
+     */
+    'tags'?: Array<string>;
+    /**
+     * 
+     * @type {Array<DatasetPartCreateRequest>}
+     * @memberof DatasetCreateRequest
+     */
+    'parts'?: Array<DatasetPartCreateRequest>;
+    /**
+     * 
+     * @type {DatasetSecurity}
+     * @memberof DatasetCreateRequest
+     */
+    'security'?: DatasetSecurity;
+    /**
+     * 
+     * @type {string}
+     * @memberof DatasetCreateRequest
+     */
+    'runnerId'?: string;
 }
 /**
- * the Dataset Copy Parameters
+ * Dataset part object
  * @export
- * @interface DatasetCopyParameters
+ * @interface DatasetPart
  */
-export interface DatasetCopyParameters {
+export interface DatasetPart {
     /**
-     * the source Dataset id
+     * 
      * @type {string}
-     * @memberof DatasetCopyParameters
+     * @memberof DatasetPart
      */
-    'sourceId'?: string;
+    'id': string;
     /**
-     * the target Dataset id
+     * 
      * @type {string}
-     * @memberof DatasetCopyParameters
+     * @memberof DatasetPart
      */
-    'targetId'?: string;
+    'name': string;
     /**
-     * freeform options to path to connectors
-     * @type {{ [key: string]: any; }}
-     * @memberof DatasetCopyParameters
+     * the source data name (e.g. filename associated to the dataset part)
+     * @type {string}
+     * @memberof DatasetPart
      */
-    'options'?: { [key: string]: any; };
+    'sourceName': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DatasetPart
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof DatasetPart
+     */
+    'tags': Array<string>;
+    /**
+     * 
+     * @type {DatasetPartTypeEnum}
+     * @memberof DatasetPart
+     */
+    'type': DatasetPartTypeEnum;
+    /**
+     * the associated Organization Id
+     * @type {string}
+     * @memberof DatasetPart
+     */
+    'organizationId': string;
+    /**
+     * the associated Workspace Id
+     * @type {string}
+     * @memberof DatasetPart
+     */
+    'workspaceId': string;
+    /**
+     * the associated Dataset Id
+     * @type {string}
+     * @memberof DatasetPart
+     */
+    'datasetId': string;
+    /**
+     * The details of the Dataset creation
+     * @type {EditInfo}
+     * @memberof DatasetPart
+     */
+    'createInfo': EditInfo;
+    /**
+     * The details of the Dataset last update
+     * @type {EditInfo}
+     * @memberof DatasetPart
+     */
+    'updateInfo': EditInfo;
+}
+
+
+/**
+ * Dataset part create request object
+ * @export
+ * @interface DatasetPartCreateRequest
+ */
+export interface DatasetPartCreateRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof DatasetPartCreateRequest
+     */
+    'name': string;
+    /**
+     * the source data name (e.g. filename associated to the dataset part)
+     * @type {string}
+     * @memberof DatasetPartCreateRequest
+     */
+    'sourceName': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DatasetPartCreateRequest
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof DatasetPartCreateRequest
+     */
+    'tags'?: Array<string>;
+    /**
+     * 
+     * @type {DatasetPartTypeEnum}
+     * @memberof DatasetPartCreateRequest
+     */
+    'type'?: DatasetPartTypeEnum;
+}
+
+
+/**
+ * The dataset part Type
+ * @export
+ * @enum {string}
+ */
+
+export const DatasetPartTypeEnum = {
+    File: 'File',
+    Relational: 'Relational'
+} as const;
+
+export type DatasetPartTypeEnum = typeof DatasetPartTypeEnum[keyof typeof DatasetPartTypeEnum];
+
+
+/**
+ * Dataset part update request object
+ * @export
+ * @interface DatasetPartUpdateRequest
+ */
+export interface DatasetPartUpdateRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof DatasetPartUpdateRequest
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof DatasetPartUpdateRequest
+     */
+    'tags'?: Array<string>;
 }
 /**
  * the Dataset Role
@@ -555,19 +468,6 @@ export interface DatasetRole {
      * @memberof DatasetRole
      */
     'role': string;
-}
-/**
- * the search options
- * @export
- * @interface DatasetSearch
- */
-export interface DatasetSearch {
-    /**
-     * the dataset tag list to search
-     * @type {Array<string>}
-     * @memberof DatasetSearch
-     */
-    'datasetTags': Array<string>;
 }
 /**
  * the dataset security information
@@ -589,179 +489,61 @@ export interface DatasetSecurity {
     'accessControlList': Array<DatasetAccessControl>;
 }
 /**
- * the Dataset Source Type
+ * Dataset creation request
  * @export
- * @enum {string}
+ * @interface DatasetUpdateRequest
  */
-
-export const DatasetSourceType = {
-    Adt: 'ADT',
-    AzureStorage: 'AzureStorage',
-    File: 'File',
-    None: 'None',
-    Twincache: 'Twincache',
-    Etl: 'ETL'
-} as const;
-
-export type DatasetSourceType = typeof DatasetSourceType[keyof typeof DatasetSourceType];
-
-
-/**
- * a twin graph hash
- * @export
- * @interface DatasetTwinGraphHash
- */
-export interface DatasetTwinGraphHash {
-    /**
-     * the hash of the graph
-     * @type {string}
-     * @memberof DatasetTwinGraphHash
-     */
-    'hash'?: string;
-}
-/**
- * a twin graph query in cypher language
- * @export
- * @interface DatasetTwinGraphInfo
- */
-export interface DatasetTwinGraphInfo {
-    /**
-     * the import job id
-     * @type {string}
-     * @memberof DatasetTwinGraphInfo
-     */
-    'jobId'?: string;
-    /**
-     * the Dataset id
-     * @type {string}
-     * @memberof DatasetTwinGraphInfo
-     */
-    'datasetId'?: string;
-    /**
-     * Twingraph status
-     * @type {string}
-     * @memberof DatasetTwinGraphInfo
-     */
-    'status'?: string;
-}
-/**
- * a twin graph query in cypher language
- * @export
- * @interface DatasetTwinGraphQuery
- */
-export interface DatasetTwinGraphQuery {
-    /**
-     * the query in cypher language
-     * @type {string}
-     * @memberof DatasetTwinGraphQuery
-     */
-    'query': string;
-}
-/**
- * 
- * @export
- * @interface FileUploadMetadata
- */
-export interface FileUploadMetadata {
+export interface DatasetUpdateRequest {
     /**
      * 
      * @type {string}
-     * @memberof FileUploadMetadata
+     * @memberof DatasetUpdateRequest
      */
     'name'?: string;
     /**
      * 
+     * @type {string}
+     * @memberof DatasetUpdateRequest
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof DatasetUpdateRequest
+     */
+    'tags'?: Array<string>;
+    /**
+     * 
+     * @type {Array<DatasetPartCreateRequest>}
+     * @memberof DatasetUpdateRequest
+     */
+    'parts'?: Array<DatasetPartCreateRequest>;
+    /**
+     * 
+     * @type {DatasetSecurity}
+     * @memberof DatasetUpdateRequest
+     */
+    'security'?: DatasetSecurity;
+}
+/**
+ * 
+ * @export
+ * @interface EditInfo
+ */
+export interface EditInfo {
+    /**
+     * The timestamp of the modification in millisecond
      * @type {number}
-     * @memberof FileUploadMetadata
+     * @memberof EditInfo
      */
-    'size'?: number;
+    'timestamp': number;
+    /**
+     * The id of the user who did the modification
+     * @type {string}
+     * @memberof EditInfo
+     */
+    'userId': string;
 }
-/**
- * files read on upload
- * @export
- * @interface FileUploadValidation
- */
-export interface FileUploadValidation {
-    /**
-     * list of filename found on nodes folder
-     * @type {Array<FileUploadMetadata>}
-     * @memberof FileUploadValidation
-     */
-    'nodes'?: Array<FileUploadMetadata>;
-    /**
-     * list of filename found on edges folder
-     * @type {Array<FileUploadMetadata>}
-     * @memberof FileUploadValidation
-     */
-    'edges'?: Array<FileUploadMetadata>;
-}
-/**
- * 
- * @export
- * @interface GraphProperties
- */
-export interface GraphProperties {
-    /**
-     * the type of the relationship
-     * @type {string}
-     * @memberof GraphProperties
-     */
-    'type'?: string;
-    /**
-     * the source node of the relationship
-     * @type {string}
-     * @memberof GraphProperties
-     */
-    'source'?: string;
-    /**
-     * the target node of the relationship
-     * @type {string}
-     * @memberof GraphProperties
-     */
-    'target'?: string;
-    /**
-     * the name of the graph data object
-     * @type {string}
-     * @memberof GraphProperties
-     */
-    'name'?: string;
-    /**
-     * the parameters of the graph data object
-     * @type {string}
-     * @memberof GraphProperties
-     */
-    'params'?: string;
-}
-/**
- * the Dataset ingestion status
- * @export
- * @enum {string}
- */
-
-export const IngestionStatusEnum = {
-    None: 'NONE',
-    Pending: 'PENDING',
-    Error: 'ERROR',
-    Success: 'SUCCESS'
-} as const;
-
-export type IngestionStatusEnum = typeof IngestionStatusEnum[keyof typeof IngestionStatusEnum];
-
-
-/**
- * The read and write capabilities of connector
- * @export
- * @enum {string}
- */
-
-export const IoTypesEnum = {
-    Read: 'read',
-    Write: 'write'
-} as const;
-
-export type IoTypesEnum = typeof IoTypesEnum[keyof typeof IoTypesEnum];
-
-
 /**
  * last run info from current runner
  * @export
@@ -2737,107 +2519,6 @@ export interface SolutionUpdateRequest {
     'runTemplates'?: Array<RunTemplateCreateRequest>;
 }
 /**
- * Source job import information
- * @export
- * @interface SourceInfo
- */
-export interface SourceInfo {
-    /**
-     * the source name containing the files to import
-     * @type {string}
-     * @memberof SourceInfo
-     */
-    'name'?: string;
-    /**
-     * the source location containing the files to import
-     * @type {string}
-     * @memberof SourceInfo
-     */
-    'location': string;
-    /**
-     * the source location containing the files to import
-     * @type {string}
-     * @memberof SourceInfo
-     */
-    'path'?: string;
-    /**
-     * indicate the last import jobId
-     * @type {string}
-     * @memberof SourceInfo
-     */
-    'jobId'?: string;
-}
-/**
- * a twin graph query in cypher language
- * @export
- * @interface SubDatasetGraphQuery
- */
-export interface SubDatasetGraphQuery {
-    /**
-     * the name of the subdataset
-     * @type {string}
-     * @memberof SubDatasetGraphQuery
-     */
-    'name'?: string;
-    /**
-     * the description of the subdataset
-     * @type {string}
-     * @memberof SubDatasetGraphQuery
-     */
-    'description'?: string;
-    /**
-     * the query in cypher language
-     * @type {Array<string>}
-     * @memberof SubDatasetGraphQuery
-     */
-    'queries'?: Array<string>;
-    /**
-     * is this the main dataset
-     * @type {boolean}
-     * @memberof SubDatasetGraphQuery
-     */
-    'main'?: boolean;
-}
-/**
- * Processing result
- * @export
- * @interface TwinGraphBatchResult
- */
-export interface TwinGraphBatchResult {
-    /**
-     * 
-     * @type {number}
-     * @memberof TwinGraphBatchResult
-     */
-    'totalLines': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof TwinGraphBatchResult
-     */
-    'processedLines': number;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof TwinGraphBatchResult
-     */
-    'errors': Array<string>;
-}
-/**
- * the twincache data status
- * @export
- * @enum {string}
- */
-
-export const TwincacheStatusEnum = {
-    Empty: 'EMPTY',
-    Full: 'FULL'
-} as const;
-
-export type TwincacheStatusEnum = typeof TwincacheStatusEnum[keyof typeof TwincacheStatusEnum];
-
-
-/**
  * A Workspace
  * @export
  * @interface Workspace
@@ -2873,12 +2554,6 @@ export interface Workspace {
      * @memberof Workspace
      */
     'description'?: string;
-    /**
-     * list of dataset linked to this dataset
-     * @type {Array<string>}
-     * @memberof Workspace
-     */
-    'linkedDatasetIdList'?: Array<string>;
     /**
      * The Workspace version MAJOR.MINOR.PATCH.
      * @type {string}
@@ -3173,104 +2848,31 @@ export interface WorkspaceWebApp {
 }
 
 /**
- * ConnectorApi - axios parameter creator
+ * DatasetApi - axios parameter creator
  * @export
  */
-export const ConnectorApiAxiosParamCreator = function (configuration?: Configuration) {
+export const DatasetApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary List all Connectors
-         * @param {number} [page] page number to query (first page is at index 0)
-         * @param {number} [size] amount of result by page
+         * @summary Create a Dataset
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {DatasetCreateRequest} datasetCreateRequest 
+         * @param {Array<File>} [files] Notes:   - Each parts defined in dataset should have a file defined in this list   - Please ensure that upload files order match with data parts list defined     - First file uploaded will match with first dataset parts and so on 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findAllConnectors: async (page?: number, size?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/connectors`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-            if (page !== undefined) {
-                localVarQueryParameter['page'] = page;
-            }
-
-            if (size !== undefined) {
-                localVarQueryParameter['size'] = size;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get the details of a connector
-         * @param {string} connectorId the Connector identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        findConnectorById: async (connectorId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'connectorId' is not null or undefined
-            assertParamExists('findConnectorById', 'connectorId', connectorId)
-            const localVarPath = `/connectors/{connector_id}`
-                .replace(`{${"connector_id"}}`, encodeURIComponent(String(connectorId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Register a new connector
-         * @param {Connector} connector the Connector to register
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        registerConnector: async (connector: Connector, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'connector' is not null or undefined
-            assertParamExists('registerConnector', 'connector', connector)
-            const localVarPath = `/connectors`;
+        createDataset: async (organizationId: string, workspaceId: string, datasetCreateRequest: DatasetCreateRequest, files?: Array<File>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('createDataset', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('createDataset', 'workspaceId', workspaceId)
+            // verify required parameter 'datasetCreateRequest' is not null or undefined
+            assertParamExists('createDataset', 'datasetCreateRequest', datasetCreateRequest)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -3281,263 +2883,58 @@ export const ConnectorApiAxiosParamCreator = function (configuration?: Configura
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
 
             // authentication oAuth2AuthCode required
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(connector, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Unregister a connector
-         * @param {string} connectorId the Connector identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        unregisterConnector: async (connectorId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'connectorId' is not null or undefined
-            assertParamExists('unregisterConnector', 'connectorId', connectorId)
-            const localVarPath = `/connectors/{connector_id}`
-                .replace(`{${"connector_id"}}`, encodeURIComponent(String(connectorId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
+            if (files) {
+                files.forEach((element) => {
+                    localVarFormParams.append('files', element as any);
+                })
             }
 
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
+    
+            if (datasetCreateRequest !== undefined) { 
+                localVarFormParams.append('datasetCreateRequest', new Blob([JSON.stringify(datasetCreateRequest)], { type: "application/json", }));
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
 
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
             };
         },
-    }
-};
-
-/**
- * ConnectorApi - functional programming interface
- * @export
- */
-export const ConnectorApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = ConnectorApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @summary List all Connectors
-         * @param {number} [page] page number to query (first page is at index 0)
-         * @param {number} [size] amount of result by page
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async findAllConnectors(page?: number, size?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Connector>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.findAllConnectors(page, size, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ConnectorApi.findAllConnectors']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Get the details of a connector
-         * @param {string} connectorId the Connector identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async findConnectorById(connectorId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Connector>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.findConnectorById(connectorId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ConnectorApi.findConnectorById']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Register a new connector
-         * @param {Connector} connector the Connector to register
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async registerConnector(connector: Connector, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Connector>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.registerConnector(connector, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ConnectorApi.registerConnector']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Unregister a connector
-         * @param {string} connectorId the Connector identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async unregisterConnector(connectorId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.unregisterConnector(connectorId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ConnectorApi.unregisterConnector']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
-
-/**
- * ConnectorApi - factory interface
- * @export
- */
-export const ConnectorApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = ConnectorApiFp(configuration)
-    return {
-        /**
-         * 
-         * @summary List all Connectors
-         * @param {number} [page] page number to query (first page is at index 0)
-         * @param {number} [size] amount of result by page
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        findAllConnectors(page?: number, size?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<Connector>> {
-            return localVarFp.findAllConnectors(page, size, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get the details of a connector
-         * @param {string} connectorId the Connector identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        findConnectorById(connectorId: string, options?: RawAxiosRequestConfig): AxiosPromise<Connector> {
-            return localVarFp.findConnectorById(connectorId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Register a new connector
-         * @param {Connector} connector the Connector to register
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        registerConnector(connector: Connector, options?: RawAxiosRequestConfig): AxiosPromise<Connector> {
-            return localVarFp.registerConnector(connector, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Unregister a connector
-         * @param {string} connectorId the Connector identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        unregisterConnector(connectorId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.unregisterConnector(connectorId, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * ConnectorApi - object-oriented interface
- * @export
- * @class ConnectorApi
- * @extends {BaseAPI}
- */
-export class ConnectorApi extends BaseAPI {
-    /**
-     * 
-     * @summary List all Connectors
-     * @param {number} [page] page number to query (first page is at index 0)
-     * @param {number} [size] amount of result by page
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ConnectorApi
-     */
-    public findAllConnectors(page?: number, size?: number, options?: RawAxiosRequestConfig) {
-        return ConnectorApiFp(this.configuration).findAllConnectors(page, size, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get the details of a connector
-     * @param {string} connectorId the Connector identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ConnectorApi
-     */
-    public findConnectorById(connectorId: string, options?: RawAxiosRequestConfig) {
-        return ConnectorApiFp(this.configuration).findConnectorById(connectorId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Register a new connector
-     * @param {Connector} connector the Connector to register
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ConnectorApi
-     */
-    public registerConnector(connector: Connector, options?: RawAxiosRequestConfig) {
-        return ConnectorApiFp(this.configuration).registerConnector(connector, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Unregister a connector
-     * @param {string} connectorId the Connector identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ConnectorApi
-     */
-    public unregisterConnector(connectorId: string, options?: RawAxiosRequestConfig) {
-        return ConnectorApiFp(this.configuration).unregisterConnector(connectorId, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-
-/**
- * DatasetApi - axios parameter creator
- * @export
- */
-export const DatasetApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
         /**
          * 
          * @summary Add a control access to the Dataset
          * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
          * @param {string} datasetId the Dataset identifier
          * @param {DatasetAccessControl} datasetAccessControl the new Dataset security access to add.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addDatasetAccessControl: async (organizationId: string, datasetId: string, datasetAccessControl: DatasetAccessControl, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createDatasetAccessControl: async (organizationId: string, workspaceId: string, datasetId: string, datasetAccessControl: DatasetAccessControl, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('addDatasetAccessControl', 'organizationId', organizationId)
+            assertParamExists('createDatasetAccessControl', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('createDatasetAccessControl', 'workspaceId', workspaceId)
             // verify required parameter 'datasetId' is not null or undefined
-            assertParamExists('addDatasetAccessControl', 'datasetId', datasetId)
+            assertParamExists('createDatasetAccessControl', 'datasetId', datasetId)
             // verify required parameter 'datasetAccessControl' is not null or undefined
-            assertParamExists('addDatasetAccessControl', 'datasetAccessControl', datasetAccessControl)
-            const localVarPath = `/organizations/{organization_id}/datasets/{dataset_id}/security/access`
+            assertParamExists('createDatasetAccessControl', 'datasetAccessControl', datasetAccessControl)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/security/access`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
                 .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -3570,22 +2967,29 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary Add Dataset Compatibility elements.
+         * @summary Create a data part of a Dataset
          * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
          * @param {string} datasetId the Dataset identifier
-         * @param {Array<DatasetCompatibility>} datasetCompatibility the Dataset Compatibility elements
+         * @param {File} file Data file to upload
+         * @param {DatasetPartCreateRequest} datasetPartCreateRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addOrReplaceDatasetCompatibilityElements: async (organizationId: string, datasetId: string, datasetCompatibility: Array<DatasetCompatibility>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createDatasetPart: async (organizationId: string, workspaceId: string, datasetId: string, file: File, datasetPartCreateRequest: DatasetPartCreateRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('addOrReplaceDatasetCompatibilityElements', 'organizationId', organizationId)
+            assertParamExists('createDatasetPart', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('createDatasetPart', 'workspaceId', workspaceId)
             // verify required parameter 'datasetId' is not null or undefined
-            assertParamExists('addOrReplaceDatasetCompatibilityElements', 'datasetId', datasetId)
-            // verify required parameter 'datasetCompatibility' is not null or undefined
-            assertParamExists('addOrReplaceDatasetCompatibilityElements', 'datasetCompatibility', datasetCompatibility)
-            const localVarPath = `/organizations/{organization_id}/datasets/{dataset_id}/compatibility`
+            assertParamExists('createDatasetPart', 'datasetId', datasetId)
+            // verify required parameter 'file' is not null or undefined
+            assertParamExists('createDatasetPart', 'file', file)
+            // verify required parameter 'datasetPartCreateRequest' is not null or undefined
+            assertParamExists('createDatasetPart', 'datasetPartCreateRequest', datasetPartCreateRequest)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
                 .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -3597,107 +3001,28 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
 
             // authentication oAuth2AuthCode required
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
 
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(datasetCompatibility, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Not implemented!
-         * @summary Copy a Dataset to another Dataset.
-         * @param {string} organizationId the Organization identifier
-         * @param {DatasetCopyParameters} datasetCopyParameters the Dataset copy parameters
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        copyDataset: async (organizationId: string, datasetCopyParameters: DatasetCopyParameters, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('copyDataset', 'organizationId', organizationId)
-            // verify required parameter 'datasetCopyParameters' is not null or undefined
-            assertParamExists('copyDataset', 'datasetCopyParameters', datasetCopyParameters)
-            const localVarPath = `/organizations/{organization_id}/datasets/copy`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
             }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
     
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(datasetCopyParameters, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Create a new Dataset
-         * @param {string} organizationId the Organization identifier
-         * @param {Dataset} dataset the Dataset to create
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createDataset: async (organizationId: string, dataset: Dataset, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('createDataset', 'organizationId', organizationId)
-            // verify required parameter 'dataset' is not null or undefined
-            assertParamExists('createDataset', 'dataset', dataset)
-            const localVarPath = `/organizations/{organization_id}/datasets`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
+            if (datasetPartCreateRequest !== undefined) { 
+                localVarFormParams.append('datasetPartCreateRequest', new Blob([JSON.stringify(datasetPartCreateRequest)], { type: "application/json", }));
             }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
     
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(dataset, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = localVarFormParams;
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -3705,662 +3030,24 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Create a copy of the dataset using the results of the list of queries given in parameter. Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-         * @summary Create a sub-dataset from the dataset in parameter
+         * Delete a dataset
+         * @summary Delete a Dataset
          * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {SubDatasetGraphQuery} subDatasetGraphQuery the Cypher query to filter
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createSubDataset: async (organizationId: string, datasetId: string, subDatasetGraphQuery: SubDatasetGraphQuery, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('createSubDataset', 'organizationId', organizationId)
-            // verify required parameter 'datasetId' is not null or undefined
-            assertParamExists('createSubDataset', 'datasetId', datasetId)
-            // verify required parameter 'subDatasetGraphQuery' is not null or undefined
-            assertParamExists('createSubDataset', 'subDatasetGraphQuery', subDatasetGraphQuery)
-            const localVarPath = `/organizations/{organization_id}/datasets/{dataset_id}/subdataset`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(subDatasetGraphQuery, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Create new entities in a graph instance Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-         * @summary Create new entities in a graph instance
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset Identifier
-         * @param {CreateTwingraphEntitiesTypeEnum} type the entity model type
-         * @param {Array<GraphProperties>} graphProperties the entities to create
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createTwingraphEntities: async (organizationId: string, datasetId: string, type: CreateTwingraphEntitiesTypeEnum, graphProperties: Array<GraphProperties>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('createTwingraphEntities', 'organizationId', organizationId)
-            // verify required parameter 'datasetId' is not null or undefined
-            assertParamExists('createTwingraphEntities', 'datasetId', datasetId)
-            // verify required parameter 'type' is not null or undefined
-            assertParamExists('createTwingraphEntities', 'type', type)
-            // verify required parameter 'graphProperties' is not null or undefined
-            assertParamExists('createTwingraphEntities', 'graphProperties', graphProperties)
-            const localVarPath = `/organizations/{organization_id}/datasets/{dataset_id}/twingraph/{type}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)))
-                .replace(`{${"type"}}`, encodeURIComponent(String(type)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(graphProperties, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Delete a dataset
-         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
          * @param {string} datasetId the Dataset identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteDataset: async (organizationId: string, datasetId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteDataset: async (organizationId: string, workspaceId: string, datasetId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('deleteDataset', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('deleteDataset', 'workspaceId', workspaceId)
             // verify required parameter 'datasetId' is not null or undefined
             assertParamExists('deleteDataset', 'datasetId', datasetId)
-            const localVarPath = `/organizations/{organization_id}/datasets/{dataset_id}`
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Delete entities in a graph instance Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-         * @summary Delete entities in a graph instance
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset Identifier
-         * @param {DeleteTwingraphEntitiesTypeEnum} type the entity model type
-         * @param {Array<string>} ids the entities to delete
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        deleteTwingraphEntities: async (organizationId: string, datasetId: string, type: DeleteTwingraphEntitiesTypeEnum, ids: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('deleteTwingraphEntities', 'organizationId', organizationId)
-            // verify required parameter 'datasetId' is not null or undefined
-            assertParamExists('deleteTwingraphEntities', 'datasetId', datasetId)
-            // verify required parameter 'type' is not null or undefined
-            assertParamExists('deleteTwingraphEntities', 'type', type)
-            // verify required parameter 'ids' is not null or undefined
-            assertParamExists('deleteTwingraphEntities', 'ids', ids)
-            const localVarPath = `/organizations/{organization_id}/datasets/{dataset_id}/twingraph/{type}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)))
-                .replace(`{${"type"}}`, encodeURIComponent(String(type)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-            if (ids) {
-                localVarQueryParameter['ids'] = ids;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Download the compressed graph reference by the hash in a zip file Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-         * @summary Download a graph as a zip file
-         * @param {string} organizationId the Organization identifier
-         * @param {string} hash the Graph download identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        downloadTwingraph: async (organizationId: string, hash: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('downloadTwingraph', 'organizationId', organizationId)
-            // verify required parameter 'hash' is not null or undefined
-            assertParamExists('downloadTwingraph', 'hash', hash)
-            const localVarPath = `/organizations/{organization_id}/datasets/twingraph/download/{hash}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"hash"}}`, encodeURIComponent(String(hash)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary List all Datasets
-         * @param {string} organizationId the Organization identifier
-         * @param {number} [page] page number to query (first page is at index 0)
-         * @param {number} [size] amount of result by page
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        findAllDatasets: async (organizationId: string, page?: number, size?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('findAllDatasets', 'organizationId', organizationId)
-            const localVarPath = `/organizations/{organization_id}/datasets`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-            if (page !== undefined) {
-                localVarQueryParameter['page'] = page;
-            }
-
-            if (size !== undefined) {
-                localVarQueryParameter['size'] = size;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get the details of a Dataset
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        findDatasetById: async (organizationId: string, datasetId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('findDatasetById', 'organizationId', organizationId)
-            // verify required parameter 'datasetId' is not null or undefined
-            assertParamExists('findDatasetById', 'datasetId', datasetId)
-            const localVarPath = `/organizations/{organization_id}/datasets/{dataset_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get a control access for the Dataset
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {string} identityId the User identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getDatasetAccessControl: async (organizationId: string, datasetId: string, identityId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('getDatasetAccessControl', 'organizationId', organizationId)
-            // verify required parameter 'datasetId' is not null or undefined
-            assertParamExists('getDatasetAccessControl', 'datasetId', datasetId)
-            // verify required parameter 'identityId' is not null or undefined
-            assertParamExists('getDatasetAccessControl', 'identityId', identityId)
-            const localVarPath = `/organizations/{organization_id}/datasets/{dataset_id}/security/access/{identity_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)))
-                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get the Dataset security information
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getDatasetSecurity: async (organizationId: string, datasetId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('getDatasetSecurity', 'organizationId', organizationId)
-            // verify required parameter 'datasetId' is not null or undefined
-            assertParamExists('getDatasetSecurity', 'datasetId', datasetId)
-            const localVarPath = `/organizations/{organization_id}/datasets/{dataset_id}/security`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get the Dataset security users list
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getDatasetSecurityUsers: async (organizationId: string, datasetId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('getDatasetSecurityUsers', 'organizationId', organizationId)
-            // verify required parameter 'datasetId' is not null or undefined
-            assertParamExists('getDatasetSecurityUsers', 'datasetId', datasetId)
-            const localVarPath = `/organizations/{organization_id}/datasets/{dataset_id}/security/users`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Get the status of the import workflow lauch on the dataset\'s refresh. This endpoint needs to be called to update a dataset IngestionStatus or TwincacheStatus
-         * @summary Get the dataset\'s refresh job status
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the dataset identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getDatasetTwingraphStatus: async (organizationId: string, datasetId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('getDatasetTwingraphStatus', 'organizationId', organizationId)
-            // verify required parameter 'datasetId' is not null or undefined
-            assertParamExists('getDatasetTwingraphStatus', 'datasetId', datasetId)
-            const localVarPath = `/organizations/{organization_id}/datasets/{dataset_id}/status`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Get entities in a graph instance Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-         * @summary Get entities in a graph instance
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset Identifier
-         * @param {GetTwingraphEntitiesTypeEnum} type the entity model type
-         * @param {Array<string>} ids the entities to get
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getTwingraphEntities: async (organizationId: string, datasetId: string, type: GetTwingraphEntitiesTypeEnum, ids: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('getTwingraphEntities', 'organizationId', organizationId)
-            // verify required parameter 'datasetId' is not null or undefined
-            assertParamExists('getTwingraphEntities', 'datasetId', datasetId)
-            // verify required parameter 'type' is not null or undefined
-            assertParamExists('getTwingraphEntities', 'type', type)
-            // verify required parameter 'ids' is not null or undefined
-            assertParamExists('getTwingraphEntities', 'ids', ids)
-            const localVarPath = `/organizations/{organization_id}/datasets/{dataset_id}/twingraph/{type}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)))
-                .replace(`{${"type"}}`, encodeURIComponent(String(type)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-            if (ids) {
-                localVarQueryParameter['ids'] = ids;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {string} workspaceId workspace id to be linked to
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        linkWorkspace: async (organizationId: string, datasetId: string, workspaceId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('linkWorkspace', 'organizationId', organizationId)
-            // verify required parameter 'datasetId' is not null or undefined
-            assertParamExists('linkWorkspace', 'datasetId', datasetId)
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('linkWorkspace', 'workspaceId', workspaceId)
-            const localVarPath = `/organizations/{organization_id}/datasets/{dataset_id}/link`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-            if (workspaceId !== undefined) {
-                localVarQueryParameter['workspaceId'] = workspaceId;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Refresh dataset from parent source. At date, sources can be:      dataset (refresh from another dataset)      Azure Digital twin      Azure storage      Local File (import a new file)  During refresh, datas are overwritten Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-         * @summary Refresh data on dataset from dataset\'s source
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        refreshDataset: async (organizationId: string, datasetId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('refreshDataset', 'organizationId', organizationId)
-            // verify required parameter 'datasetId' is not null or undefined
-            assertParamExists('refreshDataset', 'datasetId', datasetId)
-            const localVarPath = `/organizations/{organization_id}/datasets/{dataset_id}/refresh`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Remove all Dataset Compatibility elements from the Dataset specified
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        removeAllDatasetCompatibilityElements: async (organizationId: string, datasetId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('removeAllDatasetCompatibilityElements', 'organizationId', organizationId)
-            // verify required parameter 'datasetId' is not null or undefined
-            assertParamExists('removeAllDatasetCompatibilityElements', 'datasetId', datasetId)
-            const localVarPath = `/organizations/{organization_id}/datasets/{dataset_id}/compatibility`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
                 .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4392,20 +3079,24 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
          * 
          * @summary Remove the specified access from the given Dataset
          * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
          * @param {string} datasetId the Dataset identifier
          * @param {string} identityId the User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        removeDatasetAccessControl: async (organizationId: string, datasetId: string, identityId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteDatasetAccessControl: async (organizationId: string, workspaceId: string, datasetId: string, identityId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('removeDatasetAccessControl', 'organizationId', organizationId)
+            assertParamExists('deleteDatasetAccessControl', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('deleteDatasetAccessControl', 'workspaceId', workspaceId)
             // verify required parameter 'datasetId' is not null or undefined
-            assertParamExists('removeDatasetAccessControl', 'datasetId', datasetId)
+            assertParamExists('deleteDatasetAccessControl', 'datasetId', datasetId)
             // verify required parameter 'identityId' is not null or undefined
-            assertParamExists('removeDatasetAccessControl', 'identityId', identityId)
-            const localVarPath = `/organizations/{organization_id}/datasets/{dataset_id}/security/access/{identity_id}`
+            assertParamExists('deleteDatasetAccessControl', 'identityId', identityId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/security/access/{identity_id}`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
                 .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)))
                 .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -4435,21 +3126,29 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Rollback the twingraph on a dataset after a failed refresh Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-         * @summary Rollback the dataset after a failed refresh
+         * Delete a dataset part
+         * @summary Delete a Dataset part
          * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
          * @param {string} datasetId the Dataset identifier
+         * @param {string} datasetPartId the Dataset part identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rollbackRefresh: async (organizationId: string, datasetId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteDatasetPart: async (organizationId: string, workspaceId: string, datasetId: string, datasetPartId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('rollbackRefresh', 'organizationId', organizationId)
+            assertParamExists('deleteDatasetPart', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('deleteDatasetPart', 'workspaceId', workspaceId)
             // verify required parameter 'datasetId' is not null or undefined
-            assertParamExists('rollbackRefresh', 'datasetId', datasetId)
-            const localVarPath = `/organizations/{organization_id}/datasets/{dataset_id}/refresh/rollback`
+            assertParamExists('deleteDatasetPart', 'datasetId', datasetId)
+            // verify required parameter 'datasetPartId' is not null or undefined
+            assertParamExists('deleteDatasetPart', 'datasetPartId', datasetPartId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts/{dataset_part_id}`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)))
+                .replace(`{${"dataset_part_id"}}`, encodeURIComponent(String(datasetPartId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -4457,7 +3156,7 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -4478,21 +3177,520 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary Search Datasets by tags
+         * @summary Download data from a dataset part
          * @param {string} organizationId the Organization identifier
-         * @param {DatasetSearch} datasetSearch the Dataset search parameters
-         * @param {number} [page] page number to query (first page is at index 0)
-         * @param {number} [size] amount of result by page
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {string} datasetPartId the Dataset part identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        searchDatasets: async (organizationId: string, datasetSearch: DatasetSearch, page?: number, size?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        downloadDatasetPart: async (organizationId: string, workspaceId: string, datasetId: string, datasetPartId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('searchDatasets', 'organizationId', organizationId)
-            // verify required parameter 'datasetSearch' is not null or undefined
-            assertParamExists('searchDatasets', 'datasetSearch', datasetSearch)
-            const localVarPath = `/organizations/{organization_id}/datasets/search`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
+            assertParamExists('downloadDatasetPart', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('downloadDatasetPart', 'workspaceId', workspaceId)
+            // verify required parameter 'datasetId' is not null or undefined
+            assertParamExists('downloadDatasetPart', 'datasetId', datasetId)
+            // verify required parameter 'datasetPartId' is not null or undefined
+            assertParamExists('downloadDatasetPart', 'datasetPartId', datasetPartId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts/{dataset_part_id}/download`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)))
+                .replace(`{${"dataset_part_id"}}`, encodeURIComponent(String(datasetPartId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Retrieve a dataset
+         * @summary Retrieve a Dataset
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getDataset: async (organizationId: string, workspaceId: string, datasetId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('getDataset', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('getDataset', 'workspaceId', workspaceId)
+            // verify required parameter 'datasetId' is not null or undefined
+            assertParamExists('getDataset', 'datasetId', datasetId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get a control access for the Dataset
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {string} identityId the User identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getDatasetAccessControl: async (organizationId: string, workspaceId: string, datasetId: string, identityId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('getDatasetAccessControl', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('getDatasetAccessControl', 'workspaceId', workspaceId)
+            // verify required parameter 'datasetId' is not null or undefined
+            assertParamExists('getDatasetAccessControl', 'datasetId', datasetId)
+            // verify required parameter 'identityId' is not null or undefined
+            assertParamExists('getDatasetAccessControl', 'identityId', identityId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/security/access/{identity_id}`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)))
+                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Retrieve a data part of a Dataset
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {string} datasetPartId the Dataset part identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getDatasetPart: async (organizationId: string, workspaceId: string, datasetId: string, datasetPartId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('getDatasetPart', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('getDatasetPart', 'workspaceId', workspaceId)
+            // verify required parameter 'datasetId' is not null or undefined
+            assertParamExists('getDatasetPart', 'datasetId', datasetId)
+            // verify required parameter 'datasetPartId' is not null or undefined
+            assertParamExists('getDatasetPart', 'datasetPartId', datasetPartId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts/{dataset_part_id}`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)))
+                .replace(`{${"dataset_part_id"}}`, encodeURIComponent(String(datasetPartId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Retrieve all dataset parts of a Dataset
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {number} [page] Page number to query (first page is at index 0)
+         * @param {number} [size] Amount of result by page
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listDatasetParts: async (organizationId: string, workspaceId: string, datasetId: string, page?: number, size?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('listDatasetParts', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('listDatasetParts', 'workspaceId', workspaceId)
+            // verify required parameter 'datasetId' is not null or undefined
+            assertParamExists('listDatasetParts', 'datasetId', datasetId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (size !== undefined) {
+                localVarQueryParameter['size'] = size;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get the Dataset security users list
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listDatasetSecurityUsers: async (organizationId: string, workspaceId: string, datasetId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('listDatasetSecurityUsers', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('listDatasetSecurityUsers', 'workspaceId', workspaceId)
+            // verify required parameter 'datasetId' is not null or undefined
+            assertParamExists('listDatasetSecurityUsers', 'datasetId', datasetId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/security/users`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * List all datasets
+         * @summary Retrieve a list of defined Dataset
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {number} [page] Page number to query (first page is at index 0)
+         * @param {number} [size] Amount of result by page
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listDatasets: async (organizationId: string, workspaceId: string, page?: number, size?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('listDatasets', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('listDatasets', 'workspaceId', workspaceId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (size !== undefined) {
+                localVarQueryParameter['size'] = size;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get data of a Dataset
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {string} datasetPartId the Dataset part identifier
+         * @param {Array<string>} [filters] Property names that should be part of the response data. You can specify a property name like:  - id  - stock  - quantity  - ... 
+         * @param {Array<string>} [sums] Property names to sum by
+         * @param {Array<string>} [counts] Property names to count by
+         * @param {number} [offset] The query offset
+         * @param {number} [limit] The query limit
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        queryData: async (organizationId: string, workspaceId: string, datasetId: string, datasetPartId: string, filters?: Array<string>, sums?: Array<string>, counts?: Array<string>, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('queryData', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('queryData', 'workspaceId', workspaceId)
+            // verify required parameter 'datasetId' is not null or undefined
+            assertParamExists('queryData', 'datasetId', datasetId)
+            // verify required parameter 'datasetPartId' is not null or undefined
+            assertParamExists('queryData', 'datasetPartId', datasetPartId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts/{dataset_part_id}/query`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)))
+                .replace(`{${"dataset_part_id"}}`, encodeURIComponent(String(datasetPartId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+            if (filters) {
+                localVarQueryParameter['filters'] = filters;
+            }
+
+            if (sums) {
+                localVarQueryParameter['sums'] = sums;
+            }
+
+            if (counts) {
+                localVarQueryParameter['counts'] = counts;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Replace existing dataset parts of a Dataset
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {string} datasetPartId the Dataset part identifier
+         * @param {File} file Data file to upload
+         * @param {DatasetPartUpdateRequest} [datasetPartUpdateRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        replaceDatasetPart: async (organizationId: string, workspaceId: string, datasetId: string, datasetPartId: string, file: File, datasetPartUpdateRequest?: DatasetPartUpdateRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('replaceDatasetPart', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('replaceDatasetPart', 'workspaceId', workspaceId)
+            // verify required parameter 'datasetId' is not null or undefined
+            assertParamExists('replaceDatasetPart', 'datasetId', datasetId)
+            // verify required parameter 'datasetPartId' is not null or undefined
+            assertParamExists('replaceDatasetPart', 'datasetPartId', datasetPartId)
+            // verify required parameter 'file' is not null or undefined
+            assertParamExists('replaceDatasetPart', 'file', file)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts/{dataset_part_id}`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)))
+                .replace(`{${"dataset_part_id"}}`, encodeURIComponent(String(datasetPartId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+    
+            if (datasetPartUpdateRequest !== undefined) { 
+                localVarFormParams.append('datasetPartUpdateRequest', new Blob([JSON.stringify(datasetPartUpdateRequest)], { type: "application/json", }));
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Search Dataset parts by tags
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {Array<string>} requestBody the Dataset parts search parameters
+         * @param {number} [page] Page number to query (first page is at index 0)
+         * @param {number} [size] Amount of result by page
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        searchDatasetParts: async (organizationId: string, workspaceId: string, datasetId: string, requestBody: Array<string>, page?: number, size?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('searchDatasetParts', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('searchDatasetParts', 'workspaceId', workspaceId)
+            // verify required parameter 'datasetId' is not null or undefined
+            assertParamExists('searchDatasetParts', 'datasetId', datasetId)
+            // verify required parameter 'requestBody' is not null or undefined
+            assertParamExists('searchDatasetParts', 'requestBody', requestBody)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts/search`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -4523,7 +3721,7 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(datasetSearch, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(requestBody, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -4532,223 +3730,25 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary Set the Dataset default security
+         * @summary Search Datasets by tags
          * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {DatasetRole} datasetRole This change the dataset default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the dataset.
+         * @param {string} workspaceId the Workspace identifier
+         * @param {Array<string>} requestBody the Dataset search parameters
+         * @param {number} [page] Page number to query (first page is at index 0)
+         * @param {number} [size] Amount of result by page
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        setDatasetDefaultSecurity: async (organizationId: string, datasetId: string, datasetRole: DatasetRole, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        searchDatasets: async (organizationId: string, workspaceId: string, requestBody: Array<string>, page?: number, size?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('setDatasetDefaultSecurity', 'organizationId', organizationId)
-            // verify required parameter 'datasetId' is not null or undefined
-            assertParamExists('setDatasetDefaultSecurity', 'datasetId', datasetId)
-            // verify required parameter 'datasetRole' is not null or undefined
-            assertParamExists('setDatasetDefaultSecurity', 'datasetRole', datasetRole)
-            const localVarPath = `/organizations/{organization_id}/datasets/{dataset_id}/security/default`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(datasetRole, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Run a query on a graph instance and return the result as a zip file in async mode Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-         * @summary Run a query on a graph instance and return the result as a zip file in async mode
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Graph Identifier
-         * @param {DatasetTwinGraphQuery} datasetTwinGraphQuery the query to run
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        twingraphBatchQuery: async (organizationId: string, datasetId: string, datasetTwinGraphQuery: DatasetTwinGraphQuery, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('twingraphBatchQuery', 'organizationId', organizationId)
-            // verify required parameter 'datasetId' is not null or undefined
-            assertParamExists('twingraphBatchQuery', 'datasetId', datasetId)
-            // verify required parameter 'datasetTwinGraphQuery' is not null or undefined
-            assertParamExists('twingraphBatchQuery', 'datasetTwinGraphQuery', datasetTwinGraphQuery)
-            const localVarPath = `/organizations/{organization_id}/datasets/{dataset_id}/batch-query`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(datasetTwinGraphQuery, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Async batch update by loading a CSV file on a graph instance Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-         * @summary Async batch update by loading a CSV file on a graph instance 
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset Identifier
-         * @param {DatasetTwinGraphQuery} twinGraphQuery 
-         * @param {File} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        twingraphBatchUpdate: async (organizationId: string, datasetId: string, twinGraphQuery: DatasetTwinGraphQuery, body: File, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('twingraphBatchUpdate', 'organizationId', organizationId)
-            // verify required parameter 'datasetId' is not null or undefined
-            assertParamExists('twingraphBatchUpdate', 'datasetId', datasetId)
-            // verify required parameter 'twinGraphQuery' is not null or undefined
-            assertParamExists('twingraphBatchUpdate', 'twinGraphQuery', twinGraphQuery)
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('twingraphBatchUpdate', 'body', body)
-            const localVarPath = `/organizations/{organization_id}/datasets/{dataset_id}/batch`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-            if (twinGraphQuery !== undefined) {
-                for (const [key, value] of Object.entries(twinGraphQuery)) {
-                    localVarQueryParameter[key] = value;
-                }
-            }
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'text/csv';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Run a query on a graph instance and return the result as a json Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-         * @summary Return the result of a query made on the graph instance as a json
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {DatasetTwinGraphQuery} datasetTwinGraphQuery the query to run
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        twingraphQuery: async (organizationId: string, datasetId: string, datasetTwinGraphQuery: DatasetTwinGraphQuery, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('twingraphQuery', 'organizationId', organizationId)
-            // verify required parameter 'datasetId' is not null or undefined
-            assertParamExists('twingraphQuery', 'datasetId', datasetId)
-            // verify required parameter 'datasetTwinGraphQuery' is not null or undefined
-            assertParamExists('twingraphQuery', 'datasetTwinGraphQuery', datasetTwinGraphQuery)
-            const localVarPath = `/organizations/{organization_id}/datasets/{dataset_id}/twingraph`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(datasetTwinGraphQuery, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {string} workspaceId workspace id to be linked to
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        unlinkWorkspace: async (organizationId: string, datasetId: string, workspaceId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('unlinkWorkspace', 'organizationId', organizationId)
-            // verify required parameter 'datasetId' is not null or undefined
-            assertParamExists('unlinkWorkspace', 'datasetId', datasetId)
+            assertParamExists('searchDatasets', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('unlinkWorkspace', 'workspaceId', workspaceId)
-            const localVarPath = `/organizations/{organization_id}/datasets/{dataset_id}/unlink`
+            assertParamExists('searchDatasets', 'workspaceId', workspaceId)
+            // verify required parameter 'requestBody' is not null or undefined
+            assertParamExists('searchDatasets', 'requestBody', requestBody)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/search`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -4764,15 +3764,22 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-            if (workspaceId !== undefined) {
-                localVarQueryParameter['workspaceId'] = workspaceId;
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (size !== undefined) {
+                localVarQueryParameter['size'] = size;
             }
 
 
     
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(requestBody, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -4780,23 +3787,28 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
-         * @summary Update a dataset
+         * Update a dataset
+         * @summary Update a Dataset
          * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
          * @param {string} datasetId the Dataset identifier
-         * @param {Dataset} dataset the new Dataset details. This endpoint can\&#39;t be used to update security
+         * @param {DatasetUpdateRequest} datasetUpdateRequest 
+         * @param {Array<File>} [files] Notes:   - Each parts defined in dataset should have a file defined in this list   - Please ensure that upload files order match with data parts list defined     - First file uploaded will match with first dataset parts and so on 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateDataset: async (organizationId: string, datasetId: string, dataset: Dataset, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateDataset: async (organizationId: string, workspaceId: string, datasetId: string, datasetUpdateRequest: DatasetUpdateRequest, files?: Array<File>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('updateDataset', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('updateDataset', 'workspaceId', workspaceId)
             // verify required parameter 'datasetId' is not null or undefined
             assertParamExists('updateDataset', 'datasetId', datasetId)
-            // verify required parameter 'dataset' is not null or undefined
-            assertParamExists('updateDataset', 'dataset', dataset)
-            const localVarPath = `/organizations/{organization_id}/datasets/{dataset_id}`
+            // verify required parameter 'datasetUpdateRequest' is not null or undefined
+            assertParamExists('updateDataset', 'datasetUpdateRequest', datasetUpdateRequest)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
                 .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4808,19 +3820,30 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
 
             // authentication oAuth2AuthCode required
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            if (files) {
+                files.forEach((element) => {
+                    localVarFormParams.append('files', element as any);
+                })
+            }
 
     
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
+            if (datasetUpdateRequest !== undefined) { 
+                localVarFormParams.append('datasetUpdateRequest', new Blob([JSON.stringify(datasetUpdateRequest)], { type: "application/json", }));
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(dataset, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = localVarFormParams;
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -4831,23 +3854,27 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
          * 
          * @summary Update the specified access to User for a Dataset
          * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
          * @param {string} datasetId the Dataset identifier
          * @param {string} identityId the User identifier
          * @param {DatasetRole} datasetRole The new Dataset Access Control
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateDatasetAccessControl: async (organizationId: string, datasetId: string, identityId: string, datasetRole: DatasetRole, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateDatasetAccessControl: async (organizationId: string, workspaceId: string, datasetId: string, identityId: string, datasetRole: DatasetRole, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('updateDatasetAccessControl', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('updateDatasetAccessControl', 'workspaceId', workspaceId)
             // verify required parameter 'datasetId' is not null or undefined
             assertParamExists('updateDatasetAccessControl', 'datasetId', datasetId)
             // verify required parameter 'identityId' is not null or undefined
             assertParamExists('updateDatasetAccessControl', 'identityId', identityId)
             // verify required parameter 'datasetRole' is not null or undefined
             assertParamExists('updateDatasetAccessControl', 'datasetRole', datasetRole)
-            const localVarPath = `/organizations/{organization_id}/datasets/{dataset_id}/security/access/{identity_id}`
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/security/access/{identity_id}`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
                 .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)))
                 .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -4880,28 +3907,28 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * update entities in a graph instance
-         * @summary Update entities in a graph instance
+         * 
+         * @summary Set the Dataset default security
          * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset Identifier
-         * @param {UpdateTwingraphEntitiesTypeEnum} type the entity model type
-         * @param {Array<GraphProperties>} graphProperties The entities to update Note: This endpoint is activated only if &#x60;csm.platform.twincache.useGraphModule&#x60; property is set to true 
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {DatasetRole} datasetRole This change the dataset default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the dataset.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateTwingraphEntities: async (organizationId: string, datasetId: string, type: UpdateTwingraphEntitiesTypeEnum, graphProperties: Array<GraphProperties>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateDatasetDefaultSecurity: async (organizationId: string, workspaceId: string, datasetId: string, datasetRole: DatasetRole, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('updateTwingraphEntities', 'organizationId', organizationId)
+            assertParamExists('updateDatasetDefaultSecurity', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('updateDatasetDefaultSecurity', 'workspaceId', workspaceId)
             // verify required parameter 'datasetId' is not null or undefined
-            assertParamExists('updateTwingraphEntities', 'datasetId', datasetId)
-            // verify required parameter 'type' is not null or undefined
-            assertParamExists('updateTwingraphEntities', 'type', type)
-            // verify required parameter 'graphProperties' is not null or undefined
-            assertParamExists('updateTwingraphEntities', 'graphProperties', graphProperties)
-            const localVarPath = `/organizations/{organization_id}/datasets/{dataset_id}/twingraph/{type}`
+            assertParamExists('updateDatasetDefaultSecurity', 'datasetId', datasetId)
+            // verify required parameter 'datasetRole' is not null or undefined
+            assertParamExists('updateDatasetDefaultSecurity', 'datasetRole', datasetRole)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/security/default`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)))
-                .replace(`{${"type"}}`, encodeURIComponent(String(type)));
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -4924,55 +3951,7 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(graphProperties, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * To create a new graph from flat files,  you need to create a Zip file. This Zip file must countain two folders named Edges and Nodes.  .zip hierarchy: *main_folder/Nodes *main_folder/Edges  In each folder you can place one or multiple csv files containing your Nodes or Edges data.  Your csv files must follow the following header (column name) requirements:  The Nodes CSVs requires at least one column (the 1st).Column name = \'id\'. It will represent the nodes ID Ids must be populated with string  The Edges CSVs require three columns named, in order, * source * target * id  those colomns represent * The source of the edge * The target of the edge * The id of the edge  All following columns content are up to you. Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-         * @summary Upload data from zip file to dataset\'s twingraph
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {File} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        uploadTwingraph: async (organizationId: string, datasetId: string, body: File, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('uploadTwingraph', 'organizationId', organizationId)
-            // verify required parameter 'datasetId' is not null or undefined
-            assertParamExists('uploadTwingraph', 'datasetId', datasetId)
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('uploadTwingraph', 'body', body)
-            const localVarPath = `/organizations/{organization_id}/datasets/{dataset_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/octet-stream';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(datasetRole, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -4991,412 +3970,298 @@ export const DatasetApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary Add a control access to the Dataset
+         * @summary Create a Dataset
          * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {DatasetAccessControl} datasetAccessControl the new Dataset security access to add.
+         * @param {string} workspaceId the Workspace identifier
+         * @param {DatasetCreateRequest} datasetCreateRequest 
+         * @param {Array<File>} [files] Notes:   - Each parts defined in dataset should have a file defined in this list   - Please ensure that upload files order match with data parts list defined     - First file uploaded will match with first dataset parts and so on 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async addDatasetAccessControl(organizationId: string, datasetId: string, datasetAccessControl: DatasetAccessControl, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DatasetAccessControl>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.addDatasetAccessControl(organizationId, datasetId, datasetAccessControl, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['DatasetApi.addDatasetAccessControl']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Add Dataset Compatibility elements.
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {Array<DatasetCompatibility>} datasetCompatibility the Dataset Compatibility elements
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async addOrReplaceDatasetCompatibilityElements(organizationId: string, datasetId: string, datasetCompatibility: Array<DatasetCompatibility>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<DatasetCompatibility>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.addOrReplaceDatasetCompatibilityElements(organizationId, datasetId, datasetCompatibility, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['DatasetApi.addOrReplaceDatasetCompatibilityElements']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Not implemented!
-         * @summary Copy a Dataset to another Dataset.
-         * @param {string} organizationId the Organization identifier
-         * @param {DatasetCopyParameters} datasetCopyParameters the Dataset copy parameters
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async copyDataset(organizationId: string, datasetCopyParameters: DatasetCopyParameters, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DatasetCopyParameters>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.copyDataset(organizationId, datasetCopyParameters, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['DatasetApi.copyDataset']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Create a new Dataset
-         * @param {string} organizationId the Organization identifier
-         * @param {Dataset} dataset the Dataset to create
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async createDataset(organizationId: string, dataset: Dataset, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Dataset>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createDataset(organizationId, dataset, options);
+        async createDataset(organizationId: string, workspaceId: string, datasetCreateRequest: DatasetCreateRequest, files?: Array<File>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Dataset>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createDataset(organizationId, workspaceId, datasetCreateRequest, files, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['DatasetApi.createDataset']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Create a copy of the dataset using the results of the list of queries given in parameter. Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-         * @summary Create a sub-dataset from the dataset in parameter
+         * 
+         * @summary Add a control access to the Dataset
          * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
          * @param {string} datasetId the Dataset identifier
-         * @param {SubDatasetGraphQuery} subDatasetGraphQuery the Cypher query to filter
+         * @param {DatasetAccessControl} datasetAccessControl the new Dataset security access to add.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createSubDataset(organizationId: string, datasetId: string, subDatasetGraphQuery: SubDatasetGraphQuery, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Dataset>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createSubDataset(organizationId, datasetId, subDatasetGraphQuery, options);
+        async createDatasetAccessControl(organizationId: string, workspaceId: string, datasetId: string, datasetAccessControl: DatasetAccessControl, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DatasetAccessControl>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createDatasetAccessControl(organizationId, workspaceId, datasetId, datasetAccessControl, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['DatasetApi.createSubDataset']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Create new entities in a graph instance Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-         * @summary Create new entities in a graph instance
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset Identifier
-         * @param {CreateTwingraphEntitiesTypeEnum} type the entity model type
-         * @param {Array<GraphProperties>} graphProperties the entities to create
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async createTwingraphEntities(organizationId: string, datasetId: string, type: CreateTwingraphEntitiesTypeEnum, graphProperties: Array<GraphProperties>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createTwingraphEntities(organizationId, datasetId, type, graphProperties, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['DatasetApi.createTwingraphEntities']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['DatasetApi.createDatasetAccessControl']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
-         * @summary Delete a dataset
+         * @summary Create a data part of a Dataset
          * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {File} file Data file to upload
+         * @param {DatasetPartCreateRequest} datasetPartCreateRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createDatasetPart(organizationId: string, workspaceId: string, datasetId: string, file: File, datasetPartCreateRequest: DatasetPartCreateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DatasetPart>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createDatasetPart(organizationId, workspaceId, datasetId, file, datasetPartCreateRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DatasetApi.createDatasetPart']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Delete a dataset
+         * @summary Delete a Dataset
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
          * @param {string} datasetId the Dataset identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteDataset(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteDataset(organizationId, datasetId, options);
+        async deleteDataset(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteDataset(organizationId, workspaceId, datasetId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['DatasetApi.deleteDataset']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Delete entities in a graph instance Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-         * @summary Delete entities in a graph instance
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset Identifier
-         * @param {DeleteTwingraphEntitiesTypeEnum} type the entity model type
-         * @param {Array<string>} ids the entities to delete
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async deleteTwingraphEntities(organizationId: string, datasetId: string, type: DeleteTwingraphEntitiesTypeEnum, ids: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteTwingraphEntities(organizationId, datasetId, type, ids, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['DatasetApi.deleteTwingraphEntities']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Download the compressed graph reference by the hash in a zip file Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-         * @summary Download a graph as a zip file
-         * @param {string} organizationId the Organization identifier
-         * @param {string} hash the Graph download identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async downloadTwingraph(organizationId: string, hash: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<File>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.downloadTwingraph(organizationId, hash, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['DatasetApi.downloadTwingraph']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary List all Datasets
-         * @param {string} organizationId the Organization identifier
-         * @param {number} [page] page number to query (first page is at index 0)
-         * @param {number} [size] amount of result by page
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async findAllDatasets(organizationId: string, page?: number, size?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Dataset>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.findAllDatasets(organizationId, page, size, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['DatasetApi.findAllDatasets']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Get the details of a Dataset
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async findDatasetById(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Dataset>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.findDatasetById(organizationId, datasetId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['DatasetApi.findDatasetById']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Get a control access for the Dataset
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {string} identityId the User identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getDatasetAccessControl(organizationId: string, datasetId: string, identityId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DatasetAccessControl>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getDatasetAccessControl(organizationId, datasetId, identityId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['DatasetApi.getDatasetAccessControl']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Get the Dataset security information
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getDatasetSecurity(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DatasetSecurity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getDatasetSecurity(organizationId, datasetId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['DatasetApi.getDatasetSecurity']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Get the Dataset security users list
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getDatasetSecurityUsers(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getDatasetSecurityUsers(organizationId, datasetId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['DatasetApi.getDatasetSecurityUsers']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Get the status of the import workflow lauch on the dataset\'s refresh. This endpoint needs to be called to update a dataset IngestionStatus or TwincacheStatus
-         * @summary Get the dataset\'s refresh job status
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the dataset identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getDatasetTwingraphStatus(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IngestionStatusEnum>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getDatasetTwingraphStatus(organizationId, datasetId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['DatasetApi.getDatasetTwingraphStatus']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Get entities in a graph instance Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-         * @summary Get entities in a graph instance
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset Identifier
-         * @param {GetTwingraphEntitiesTypeEnum} type the entity model type
-         * @param {Array<string>} ids the entities to get
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getTwingraphEntities(organizationId: string, datasetId: string, type: GetTwingraphEntitiesTypeEnum, ids: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getTwingraphEntities(organizationId, datasetId, type, ids, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['DatasetApi.getTwingraphEntities']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {string} workspaceId workspace id to be linked to
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async linkWorkspace(organizationId: string, datasetId: string, workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Dataset>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.linkWorkspace(organizationId, datasetId, workspaceId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['DatasetApi.linkWorkspace']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Refresh dataset from parent source. At date, sources can be:      dataset (refresh from another dataset)      Azure Digital twin      Azure storage      Local File (import a new file)  During refresh, datas are overwritten Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-         * @summary Refresh data on dataset from dataset\'s source
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async refreshDataset(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DatasetTwinGraphInfo>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.refreshDataset(organizationId, datasetId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['DatasetApi.refreshDataset']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Remove all Dataset Compatibility elements from the Dataset specified
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async removeAllDatasetCompatibilityElements(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.removeAllDatasetCompatibilityElements(organizationId, datasetId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['DatasetApi.removeAllDatasetCompatibilityElements']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
          * @summary Remove the specified access from the given Dataset
          * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
          * @param {string} datasetId the Dataset identifier
          * @param {string} identityId the User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async removeDatasetAccessControl(organizationId: string, datasetId: string, identityId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.removeDatasetAccessControl(organizationId, datasetId, identityId, options);
+        async deleteDatasetAccessControl(organizationId: string, workspaceId: string, datasetId: string, identityId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteDatasetAccessControl(organizationId, workspaceId, datasetId, identityId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['DatasetApi.removeDatasetAccessControl']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['DatasetApi.deleteDatasetAccessControl']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Rollback the twingraph on a dataset after a failed refresh Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-         * @summary Rollback the dataset after a failed refresh
+         * Delete a dataset part
+         * @summary Delete a Dataset part
          * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {string} datasetPartId the Dataset part identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteDatasetPart(organizationId: string, workspaceId: string, datasetId: string, datasetPartId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteDatasetPart(organizationId, workspaceId, datasetId, datasetPartId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DatasetApi.deleteDatasetPart']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Download data from a dataset part
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {string} datasetPartId the Dataset part identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async downloadDatasetPart(organizationId: string, workspaceId: string, datasetId: string, datasetPartId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<File>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.downloadDatasetPart(organizationId, workspaceId, datasetId, datasetPartId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DatasetApi.downloadDatasetPart']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Retrieve a dataset
+         * @summary Retrieve a Dataset
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
          * @param {string} datasetId the Dataset identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async rollbackRefresh(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.rollbackRefresh(organizationId, datasetId, options);
+        async getDataset(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Dataset>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getDataset(organizationId, workspaceId, datasetId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['DatasetApi.rollbackRefresh']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['DatasetApi.getDataset']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Get a control access for the Dataset
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {string} identityId the User identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getDatasetAccessControl(organizationId: string, workspaceId: string, datasetId: string, identityId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DatasetAccessControl>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getDatasetAccessControl(organizationId, workspaceId, datasetId, identityId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DatasetApi.getDatasetAccessControl']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Retrieve a data part of a Dataset
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {string} datasetPartId the Dataset part identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getDatasetPart(organizationId: string, workspaceId: string, datasetId: string, datasetPartId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DatasetPart>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getDatasetPart(organizationId, workspaceId, datasetId, datasetPartId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DatasetApi.getDatasetPart']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Retrieve all dataset parts of a Dataset
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {number} [page] Page number to query (first page is at index 0)
+         * @param {number} [size] Amount of result by page
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listDatasetParts(organizationId: string, workspaceId: string, datasetId: string, page?: number, size?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<DatasetPart>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listDatasetParts(organizationId, workspaceId, datasetId, page, size, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DatasetApi.listDatasetParts']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Get the Dataset security users list
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listDatasetSecurityUsers(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listDatasetSecurityUsers(organizationId, workspaceId, datasetId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DatasetApi.listDatasetSecurityUsers']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * List all datasets
+         * @summary Retrieve a list of defined Dataset
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {number} [page] Page number to query (first page is at index 0)
+         * @param {number} [size] Amount of result by page
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listDatasets(organizationId: string, workspaceId: string, page?: number, size?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Dataset>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listDatasets(organizationId, workspaceId, page, size, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DatasetApi.listDatasets']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Get data of a Dataset
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {string} datasetPartId the Dataset part identifier
+         * @param {Array<string>} [filters] Property names that should be part of the response data. You can specify a property name like:  - id  - stock  - quantity  - ... 
+         * @param {Array<string>} [sums] Property names to sum by
+         * @param {Array<string>} [counts] Property names to count by
+         * @param {number} [offset] The query offset
+         * @param {number} [limit] The query limit
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async queryData(organizationId: string, workspaceId: string, datasetId: string, datasetPartId: string, filters?: Array<string>, sums?: Array<string>, counts?: Array<string>, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<object>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.queryData(organizationId, workspaceId, datasetId, datasetPartId, filters, sums, counts, offset, limit, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DatasetApi.queryData']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Replace existing dataset parts of a Dataset
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {string} datasetPartId the Dataset part identifier
+         * @param {File} file Data file to upload
+         * @param {DatasetPartUpdateRequest} [datasetPartUpdateRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async replaceDatasetPart(organizationId: string, workspaceId: string, datasetId: string, datasetPartId: string, file: File, datasetPartUpdateRequest?: DatasetPartUpdateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DatasetPart>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.replaceDatasetPart(organizationId, workspaceId, datasetId, datasetPartId, file, datasetPartUpdateRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DatasetApi.replaceDatasetPart']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Search Dataset parts by tags
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {Array<string>} requestBody the Dataset parts search parameters
+         * @param {number} [page] Page number to query (first page is at index 0)
+         * @param {number} [size] Amount of result by page
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async searchDatasetParts(organizationId: string, workspaceId: string, datasetId: string, requestBody: Array<string>, page?: number, size?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<DatasetPart>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.searchDatasetParts(organizationId, workspaceId, datasetId, requestBody, page, size, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DatasetApi.searchDatasetParts']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
          * @summary Search Datasets by tags
          * @param {string} organizationId the Organization identifier
-         * @param {DatasetSearch} datasetSearch the Dataset search parameters
-         * @param {number} [page] page number to query (first page is at index 0)
-         * @param {number} [size] amount of result by page
+         * @param {string} workspaceId the Workspace identifier
+         * @param {Array<string>} requestBody the Dataset search parameters
+         * @param {number} [page] Page number to query (first page is at index 0)
+         * @param {number} [size] Amount of result by page
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async searchDatasets(organizationId: string, datasetSearch: DatasetSearch, page?: number, size?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Dataset>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.searchDatasets(organizationId, datasetSearch, page, size, options);
+        async searchDatasets(organizationId: string, workspaceId: string, requestBody: Array<string>, page?: number, size?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Dataset>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.searchDatasets(organizationId, workspaceId, requestBody, page, size, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['DatasetApi.searchDatasets']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
-         * @summary Set the Dataset default security
+         * Update a dataset
+         * @summary Update a Dataset
          * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
          * @param {string} datasetId the Dataset identifier
-         * @param {DatasetRole} datasetRole This change the dataset default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the dataset.
+         * @param {DatasetUpdateRequest} datasetUpdateRequest 
+         * @param {Array<File>} [files] Notes:   - Each parts defined in dataset should have a file defined in this list   - Please ensure that upload files order match with data parts list defined     - First file uploaded will match with first dataset parts and so on 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async setDatasetDefaultSecurity(organizationId: string, datasetId: string, datasetRole: DatasetRole, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DatasetSecurity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setDatasetDefaultSecurity(organizationId, datasetId, datasetRole, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['DatasetApi.setDatasetDefaultSecurity']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Run a query on a graph instance and return the result as a zip file in async mode Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-         * @summary Run a query on a graph instance and return the result as a zip file in async mode
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Graph Identifier
-         * @param {DatasetTwinGraphQuery} datasetTwinGraphQuery the query to run
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async twingraphBatchQuery(organizationId: string, datasetId: string, datasetTwinGraphQuery: DatasetTwinGraphQuery, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DatasetTwinGraphHash>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.twingraphBatchQuery(organizationId, datasetId, datasetTwinGraphQuery, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['DatasetApi.twingraphBatchQuery']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Async batch update by loading a CSV file on a graph instance Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-         * @summary Async batch update by loading a CSV file on a graph instance 
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset Identifier
-         * @param {DatasetTwinGraphQuery} twinGraphQuery 
-         * @param {File} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async twingraphBatchUpdate(organizationId: string, datasetId: string, twinGraphQuery: DatasetTwinGraphQuery, body: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TwinGraphBatchResult>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.twingraphBatchUpdate(organizationId, datasetId, twinGraphQuery, body, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['DatasetApi.twingraphBatchUpdate']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Run a query on a graph instance and return the result as a json Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-         * @summary Return the result of a query made on the graph instance as a json
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {DatasetTwinGraphQuery} datasetTwinGraphQuery the query to run
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async twingraphQuery(organizationId: string, datasetId: string, datasetTwinGraphQuery: DatasetTwinGraphQuery, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<object>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.twingraphQuery(organizationId, datasetId, datasetTwinGraphQuery, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['DatasetApi.twingraphQuery']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {string} workspaceId workspace id to be linked to
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async unlinkWorkspace(organizationId: string, datasetId: string, workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Dataset>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.unlinkWorkspace(organizationId, datasetId, workspaceId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['DatasetApi.unlinkWorkspace']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Update a dataset
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {Dataset} dataset the new Dataset details. This endpoint can\&#39;t be used to update security
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async updateDataset(organizationId: string, datasetId: string, dataset: Dataset, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Dataset>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateDataset(organizationId, datasetId, dataset, options);
+        async updateDataset(organizationId: string, workspaceId: string, datasetId: string, datasetUpdateRequest: DatasetUpdateRequest, files?: Array<File>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Dataset>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateDataset(organizationId, workspaceId, datasetId, datasetUpdateRequest, files, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['DatasetApi.updateDataset']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -5405,47 +4270,33 @@ export const DatasetApiFp = function(configuration?: Configuration) {
          * 
          * @summary Update the specified access to User for a Dataset
          * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
          * @param {string} datasetId the Dataset identifier
          * @param {string} identityId the User identifier
          * @param {DatasetRole} datasetRole The new Dataset Access Control
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateDatasetAccessControl(organizationId: string, datasetId: string, identityId: string, datasetRole: DatasetRole, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DatasetAccessControl>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateDatasetAccessControl(organizationId, datasetId, identityId, datasetRole, options);
+        async updateDatasetAccessControl(organizationId: string, workspaceId: string, datasetId: string, identityId: string, datasetRole: DatasetRole, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DatasetAccessControl>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateDatasetAccessControl(organizationId, workspaceId, datasetId, identityId, datasetRole, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['DatasetApi.updateDatasetAccessControl']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * update entities in a graph instance
-         * @summary Update entities in a graph instance
+         * 
+         * @summary Set the Dataset default security
          * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset Identifier
-         * @param {UpdateTwingraphEntitiesTypeEnum} type the entity model type
-         * @param {Array<GraphProperties>} graphProperties The entities to update Note: This endpoint is activated only if &#x60;csm.platform.twincache.useGraphModule&#x60; property is set to true 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async updateTwingraphEntities(organizationId: string, datasetId: string, type: UpdateTwingraphEntitiesTypeEnum, graphProperties: Array<GraphProperties>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateTwingraphEntities(organizationId, datasetId, type, graphProperties, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['DatasetApi.updateTwingraphEntities']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * To create a new graph from flat files,  you need to create a Zip file. This Zip file must countain two folders named Edges and Nodes.  .zip hierarchy: *main_folder/Nodes *main_folder/Edges  In each folder you can place one or multiple csv files containing your Nodes or Edges data.  Your csv files must follow the following header (column name) requirements:  The Nodes CSVs requires at least one column (the 1st).Column name = \'id\'. It will represent the nodes ID Ids must be populated with string  The Edges CSVs require three columns named, in order, * source * target * id  those colomns represent * The source of the edge * The target of the edge * The id of the edge  All following columns content are up to you. Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-         * @summary Upload data from zip file to dataset\'s twingraph
-         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
          * @param {string} datasetId the Dataset identifier
-         * @param {File} body 
+         * @param {DatasetRole} datasetRole This change the dataset default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the dataset.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadTwingraph(organizationId: string, datasetId: string, body: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileUploadValidation>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadTwingraph(organizationId, datasetId, body, options);
+        async updateDatasetDefaultSecurity(organizationId: string, workspaceId: string, datasetId: string, datasetRole: DatasetRole, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DatasetSecurity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateDatasetDefaultSecurity(organizationId, workspaceId, datasetId, datasetRole, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['DatasetApi.uploadTwingraph']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['DatasetApi.updateDatasetDefaultSecurity']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -5460,369 +4311,274 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
     return {
         /**
          * 
+         * @summary Create a Dataset
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {DatasetCreateRequest} datasetCreateRequest 
+         * @param {Array<File>} [files] Notes:   - Each parts defined in dataset should have a file defined in this list   - Please ensure that upload files order match with data parts list defined     - First file uploaded will match with first dataset parts and so on 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createDataset(organizationId: string, workspaceId: string, datasetCreateRequest: DatasetCreateRequest, files?: Array<File>, options?: RawAxiosRequestConfig): AxiosPromise<Dataset> {
+            return localVarFp.createDataset(organizationId, workspaceId, datasetCreateRequest, files, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Add a control access to the Dataset
          * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
          * @param {string} datasetId the Dataset identifier
          * @param {DatasetAccessControl} datasetAccessControl the new Dataset security access to add.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addDatasetAccessControl(organizationId: string, datasetId: string, datasetAccessControl: DatasetAccessControl, options?: RawAxiosRequestConfig): AxiosPromise<DatasetAccessControl> {
-            return localVarFp.addDatasetAccessControl(organizationId, datasetId, datasetAccessControl, options).then((request) => request(axios, basePath));
+        createDatasetAccessControl(organizationId: string, workspaceId: string, datasetId: string, datasetAccessControl: DatasetAccessControl, options?: RawAxiosRequestConfig): AxiosPromise<DatasetAccessControl> {
+            return localVarFp.createDatasetAccessControl(organizationId, workspaceId, datasetId, datasetAccessControl, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @summary Add Dataset Compatibility elements.
+         * @summary Create a data part of a Dataset
          * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
          * @param {string} datasetId the Dataset identifier
-         * @param {Array<DatasetCompatibility>} datasetCompatibility the Dataset Compatibility elements
+         * @param {File} file Data file to upload
+         * @param {DatasetPartCreateRequest} datasetPartCreateRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addOrReplaceDatasetCompatibilityElements(organizationId: string, datasetId: string, datasetCompatibility: Array<DatasetCompatibility>, options?: RawAxiosRequestConfig): AxiosPromise<Array<DatasetCompatibility>> {
-            return localVarFp.addOrReplaceDatasetCompatibilityElements(organizationId, datasetId, datasetCompatibility, options).then((request) => request(axios, basePath));
+        createDatasetPart(organizationId: string, workspaceId: string, datasetId: string, file: File, datasetPartCreateRequest: DatasetPartCreateRequest, options?: RawAxiosRequestConfig): AxiosPromise<DatasetPart> {
+            return localVarFp.createDatasetPart(organizationId, workspaceId, datasetId, file, datasetPartCreateRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Not implemented!
-         * @summary Copy a Dataset to another Dataset.
+         * Delete a dataset
+         * @summary Delete a Dataset
          * @param {string} organizationId the Organization identifier
-         * @param {DatasetCopyParameters} datasetCopyParameters the Dataset copy parameters
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        copyDataset(organizationId: string, datasetCopyParameters: DatasetCopyParameters, options?: RawAxiosRequestConfig): AxiosPromise<DatasetCopyParameters> {
-            return localVarFp.copyDataset(organizationId, datasetCopyParameters, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Create a new Dataset
-         * @param {string} organizationId the Organization identifier
-         * @param {Dataset} dataset the Dataset to create
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createDataset(organizationId: string, dataset: Dataset, options?: RawAxiosRequestConfig): AxiosPromise<Dataset> {
-            return localVarFp.createDataset(organizationId, dataset, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Create a copy of the dataset using the results of the list of queries given in parameter. Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-         * @summary Create a sub-dataset from the dataset in parameter
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {SubDatasetGraphQuery} subDatasetGraphQuery the Cypher query to filter
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createSubDataset(organizationId: string, datasetId: string, subDatasetGraphQuery: SubDatasetGraphQuery, options?: RawAxiosRequestConfig): AxiosPromise<Dataset> {
-            return localVarFp.createSubDataset(organizationId, datasetId, subDatasetGraphQuery, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Create new entities in a graph instance Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-         * @summary Create new entities in a graph instance
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset Identifier
-         * @param {CreateTwingraphEntitiesTypeEnum} type the entity model type
-         * @param {Array<GraphProperties>} graphProperties the entities to create
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createTwingraphEntities(organizationId: string, datasetId: string, type: CreateTwingraphEntitiesTypeEnum, graphProperties: Array<GraphProperties>, options?: RawAxiosRequestConfig): AxiosPromise<string> {
-            return localVarFp.createTwingraphEntities(organizationId, datasetId, type, graphProperties, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Delete a dataset
-         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
          * @param {string} datasetId the Dataset identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteDataset(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.deleteDataset(organizationId, datasetId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Delete entities in a graph instance Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-         * @summary Delete entities in a graph instance
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset Identifier
-         * @param {DeleteTwingraphEntitiesTypeEnum} type the entity model type
-         * @param {Array<string>} ids the entities to delete
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        deleteTwingraphEntities(organizationId: string, datasetId: string, type: DeleteTwingraphEntitiesTypeEnum, ids: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.deleteTwingraphEntities(organizationId, datasetId, type, ids, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Download the compressed graph reference by the hash in a zip file Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-         * @summary Download a graph as a zip file
-         * @param {string} organizationId the Organization identifier
-         * @param {string} hash the Graph download identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        downloadTwingraph(organizationId: string, hash: string, options?: RawAxiosRequestConfig): AxiosPromise<File> {
-            return localVarFp.downloadTwingraph(organizationId, hash, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary List all Datasets
-         * @param {string} organizationId the Organization identifier
-         * @param {number} [page] page number to query (first page is at index 0)
-         * @param {number} [size] amount of result by page
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        findAllDatasets(organizationId: string, page?: number, size?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<Dataset>> {
-            return localVarFp.findAllDatasets(organizationId, page, size, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get the details of a Dataset
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        findDatasetById(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig): AxiosPromise<Dataset> {
-            return localVarFp.findDatasetById(organizationId, datasetId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get a control access for the Dataset
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {string} identityId the User identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getDatasetAccessControl(organizationId: string, datasetId: string, identityId: string, options?: RawAxiosRequestConfig): AxiosPromise<DatasetAccessControl> {
-            return localVarFp.getDatasetAccessControl(organizationId, datasetId, identityId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get the Dataset security information
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getDatasetSecurity(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig): AxiosPromise<DatasetSecurity> {
-            return localVarFp.getDatasetSecurity(organizationId, datasetId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Get the Dataset security users list
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getDatasetSecurityUsers(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<string>> {
-            return localVarFp.getDatasetSecurityUsers(organizationId, datasetId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Get the status of the import workflow lauch on the dataset\'s refresh. This endpoint needs to be called to update a dataset IngestionStatus or TwincacheStatus
-         * @summary Get the dataset\'s refresh job status
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the dataset identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getDatasetTwingraphStatus(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig): AxiosPromise<IngestionStatusEnum> {
-            return localVarFp.getDatasetTwingraphStatus(organizationId, datasetId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Get entities in a graph instance Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-         * @summary Get entities in a graph instance
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset Identifier
-         * @param {GetTwingraphEntitiesTypeEnum} type the entity model type
-         * @param {Array<string>} ids the entities to get
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getTwingraphEntities(organizationId: string, datasetId: string, type: GetTwingraphEntitiesTypeEnum, ids: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<string> {
-            return localVarFp.getTwingraphEntities(organizationId, datasetId, type, ids, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {string} workspaceId workspace id to be linked to
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        linkWorkspace(organizationId: string, datasetId: string, workspaceId: string, options?: RawAxiosRequestConfig): AxiosPromise<Dataset> {
-            return localVarFp.linkWorkspace(organizationId, datasetId, workspaceId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Refresh dataset from parent source. At date, sources can be:      dataset (refresh from another dataset)      Azure Digital twin      Azure storage      Local File (import a new file)  During refresh, datas are overwritten Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-         * @summary Refresh data on dataset from dataset\'s source
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        refreshDataset(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig): AxiosPromise<DatasetTwinGraphInfo> {
-            return localVarFp.refreshDataset(organizationId, datasetId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Remove all Dataset Compatibility elements from the Dataset specified
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        removeAllDatasetCompatibilityElements(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.removeAllDatasetCompatibilityElements(organizationId, datasetId, options).then((request) => request(axios, basePath));
+        deleteDataset(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteDataset(organizationId, workspaceId, datasetId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary Remove the specified access from the given Dataset
          * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
          * @param {string} datasetId the Dataset identifier
          * @param {string} identityId the User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        removeDatasetAccessControl(organizationId: string, datasetId: string, identityId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.removeDatasetAccessControl(organizationId, datasetId, identityId, options).then((request) => request(axios, basePath));
+        deleteDatasetAccessControl(organizationId: string, workspaceId: string, datasetId: string, identityId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteDatasetAccessControl(organizationId, workspaceId, datasetId, identityId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Rollback the twingraph on a dataset after a failed refresh Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-         * @summary Rollback the dataset after a failed refresh
+         * Delete a dataset part
+         * @summary Delete a Dataset part
          * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {string} datasetPartId the Dataset part identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteDatasetPart(organizationId: string, workspaceId: string, datasetId: string, datasetPartId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteDatasetPart(organizationId, workspaceId, datasetId, datasetPartId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Download data from a dataset part
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {string} datasetPartId the Dataset part identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        downloadDatasetPart(organizationId: string, workspaceId: string, datasetId: string, datasetPartId: string, options?: RawAxiosRequestConfig): AxiosPromise<File> {
+            return localVarFp.downloadDatasetPart(organizationId, workspaceId, datasetId, datasetPartId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Retrieve a dataset
+         * @summary Retrieve a Dataset
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
          * @param {string} datasetId the Dataset identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rollbackRefresh(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig): AxiosPromise<string> {
-            return localVarFp.rollbackRefresh(organizationId, datasetId, options).then((request) => request(axios, basePath));
+        getDataset(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig): AxiosPromise<Dataset> {
+            return localVarFp.getDataset(organizationId, workspaceId, datasetId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get a control access for the Dataset
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {string} identityId the User identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getDatasetAccessControl(organizationId: string, workspaceId: string, datasetId: string, identityId: string, options?: RawAxiosRequestConfig): AxiosPromise<DatasetAccessControl> {
+            return localVarFp.getDatasetAccessControl(organizationId, workspaceId, datasetId, identityId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Retrieve a data part of a Dataset
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {string} datasetPartId the Dataset part identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getDatasetPart(organizationId: string, workspaceId: string, datasetId: string, datasetPartId: string, options?: RawAxiosRequestConfig): AxiosPromise<DatasetPart> {
+            return localVarFp.getDatasetPart(organizationId, workspaceId, datasetId, datasetPartId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Retrieve all dataset parts of a Dataset
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {number} [page] Page number to query (first page is at index 0)
+         * @param {number} [size] Amount of result by page
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listDatasetParts(organizationId: string, workspaceId: string, datasetId: string, page?: number, size?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<DatasetPart>> {
+            return localVarFp.listDatasetParts(organizationId, workspaceId, datasetId, page, size, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get the Dataset security users list
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listDatasetSecurityUsers(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<string>> {
+            return localVarFp.listDatasetSecurityUsers(organizationId, workspaceId, datasetId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * List all datasets
+         * @summary Retrieve a list of defined Dataset
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {number} [page] Page number to query (first page is at index 0)
+         * @param {number} [size] Amount of result by page
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listDatasets(organizationId: string, workspaceId: string, page?: number, size?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<Dataset>> {
+            return localVarFp.listDatasets(organizationId, workspaceId, page, size, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get data of a Dataset
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {string} datasetPartId the Dataset part identifier
+         * @param {Array<string>} [filters] Property names that should be part of the response data. You can specify a property name like:  - id  - stock  - quantity  - ... 
+         * @param {Array<string>} [sums] Property names to sum by
+         * @param {Array<string>} [counts] Property names to count by
+         * @param {number} [offset] The query offset
+         * @param {number} [limit] The query limit
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        queryData(organizationId: string, workspaceId: string, datasetId: string, datasetPartId: string, filters?: Array<string>, sums?: Array<string>, counts?: Array<string>, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<object>> {
+            return localVarFp.queryData(organizationId, workspaceId, datasetId, datasetPartId, filters, sums, counts, offset, limit, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Replace existing dataset parts of a Dataset
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {string} datasetPartId the Dataset part identifier
+         * @param {File} file Data file to upload
+         * @param {DatasetPartUpdateRequest} [datasetPartUpdateRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        replaceDatasetPart(organizationId: string, workspaceId: string, datasetId: string, datasetPartId: string, file: File, datasetPartUpdateRequest?: DatasetPartUpdateRequest, options?: RawAxiosRequestConfig): AxiosPromise<DatasetPart> {
+            return localVarFp.replaceDatasetPart(organizationId, workspaceId, datasetId, datasetPartId, file, datasetPartUpdateRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Search Dataset parts by tags
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {Array<string>} requestBody the Dataset parts search parameters
+         * @param {number} [page] Page number to query (first page is at index 0)
+         * @param {number} [size] Amount of result by page
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        searchDatasetParts(organizationId: string, workspaceId: string, datasetId: string, requestBody: Array<string>, page?: number, size?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<DatasetPart>> {
+            return localVarFp.searchDatasetParts(organizationId, workspaceId, datasetId, requestBody, page, size, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary Search Datasets by tags
          * @param {string} organizationId the Organization identifier
-         * @param {DatasetSearch} datasetSearch the Dataset search parameters
-         * @param {number} [page] page number to query (first page is at index 0)
-         * @param {number} [size] amount of result by page
+         * @param {string} workspaceId the Workspace identifier
+         * @param {Array<string>} requestBody the Dataset search parameters
+         * @param {number} [page] Page number to query (first page is at index 0)
+         * @param {number} [size] Amount of result by page
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        searchDatasets(organizationId: string, datasetSearch: DatasetSearch, page?: number, size?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<Dataset>> {
-            return localVarFp.searchDatasets(organizationId, datasetSearch, page, size, options).then((request) => request(axios, basePath));
+        searchDatasets(organizationId: string, workspaceId: string, requestBody: Array<string>, page?: number, size?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<Dataset>> {
+            return localVarFp.searchDatasets(organizationId, workspaceId, requestBody, page, size, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary Set the Dataset default security
+         * Update a dataset
+         * @summary Update a Dataset
          * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
          * @param {string} datasetId the Dataset identifier
-         * @param {DatasetRole} datasetRole This change the dataset default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the dataset.
+         * @param {DatasetUpdateRequest} datasetUpdateRequest 
+         * @param {Array<File>} [files] Notes:   - Each parts defined in dataset should have a file defined in this list   - Please ensure that upload files order match with data parts list defined     - First file uploaded will match with first dataset parts and so on 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        setDatasetDefaultSecurity(organizationId: string, datasetId: string, datasetRole: DatasetRole, options?: RawAxiosRequestConfig): AxiosPromise<DatasetSecurity> {
-            return localVarFp.setDatasetDefaultSecurity(organizationId, datasetId, datasetRole, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Run a query on a graph instance and return the result as a zip file in async mode Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-         * @summary Run a query on a graph instance and return the result as a zip file in async mode
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Graph Identifier
-         * @param {DatasetTwinGraphQuery} datasetTwinGraphQuery the query to run
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        twingraphBatchQuery(organizationId: string, datasetId: string, datasetTwinGraphQuery: DatasetTwinGraphQuery, options?: RawAxiosRequestConfig): AxiosPromise<DatasetTwinGraphHash> {
-            return localVarFp.twingraphBatchQuery(organizationId, datasetId, datasetTwinGraphQuery, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Async batch update by loading a CSV file on a graph instance Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-         * @summary Async batch update by loading a CSV file on a graph instance 
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset Identifier
-         * @param {DatasetTwinGraphQuery} twinGraphQuery 
-         * @param {File} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        twingraphBatchUpdate(organizationId: string, datasetId: string, twinGraphQuery: DatasetTwinGraphQuery, body: File, options?: RawAxiosRequestConfig): AxiosPromise<TwinGraphBatchResult> {
-            return localVarFp.twingraphBatchUpdate(organizationId, datasetId, twinGraphQuery, body, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Run a query on a graph instance and return the result as a json Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-         * @summary Return the result of a query made on the graph instance as a json
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {DatasetTwinGraphQuery} datasetTwinGraphQuery the query to run
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        twingraphQuery(organizationId: string, datasetId: string, datasetTwinGraphQuery: DatasetTwinGraphQuery, options?: RawAxiosRequestConfig): AxiosPromise<Array<object>> {
-            return localVarFp.twingraphQuery(organizationId, datasetId, datasetTwinGraphQuery, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {string} workspaceId workspace id to be linked to
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        unlinkWorkspace(organizationId: string, datasetId: string, workspaceId: string, options?: RawAxiosRequestConfig): AxiosPromise<Dataset> {
-            return localVarFp.unlinkWorkspace(organizationId, datasetId, workspaceId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Update a dataset
-         * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset identifier
-         * @param {Dataset} dataset the new Dataset details. This endpoint can\&#39;t be used to update security
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        updateDataset(organizationId: string, datasetId: string, dataset: Dataset, options?: RawAxiosRequestConfig): AxiosPromise<Dataset> {
-            return localVarFp.updateDataset(organizationId, datasetId, dataset, options).then((request) => request(axios, basePath));
+        updateDataset(organizationId: string, workspaceId: string, datasetId: string, datasetUpdateRequest: DatasetUpdateRequest, files?: Array<File>, options?: RawAxiosRequestConfig): AxiosPromise<Dataset> {
+            return localVarFp.updateDataset(organizationId, workspaceId, datasetId, datasetUpdateRequest, files, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary Update the specified access to User for a Dataset
          * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
          * @param {string} datasetId the Dataset identifier
          * @param {string} identityId the User identifier
          * @param {DatasetRole} datasetRole The new Dataset Access Control
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateDatasetAccessControl(organizationId: string, datasetId: string, identityId: string, datasetRole: DatasetRole, options?: RawAxiosRequestConfig): AxiosPromise<DatasetAccessControl> {
-            return localVarFp.updateDatasetAccessControl(organizationId, datasetId, identityId, datasetRole, options).then((request) => request(axios, basePath));
+        updateDatasetAccessControl(organizationId: string, workspaceId: string, datasetId: string, identityId: string, datasetRole: DatasetRole, options?: RawAxiosRequestConfig): AxiosPromise<DatasetAccessControl> {
+            return localVarFp.updateDatasetAccessControl(organizationId, workspaceId, datasetId, identityId, datasetRole, options).then((request) => request(axios, basePath));
         },
         /**
-         * update entities in a graph instance
-         * @summary Update entities in a graph instance
+         * 
+         * @summary Set the Dataset default security
          * @param {string} organizationId the Organization identifier
-         * @param {string} datasetId the Dataset Identifier
-         * @param {UpdateTwingraphEntitiesTypeEnum} type the entity model type
-         * @param {Array<GraphProperties>} graphProperties The entities to update Note: This endpoint is activated only if &#x60;csm.platform.twincache.useGraphModule&#x60; property is set to true 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        updateTwingraphEntities(organizationId: string, datasetId: string, type: UpdateTwingraphEntitiesTypeEnum, graphProperties: Array<GraphProperties>, options?: RawAxiosRequestConfig): AxiosPromise<string> {
-            return localVarFp.updateTwingraphEntities(organizationId, datasetId, type, graphProperties, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * To create a new graph from flat files,  you need to create a Zip file. This Zip file must countain two folders named Edges and Nodes.  .zip hierarchy: *main_folder/Nodes *main_folder/Edges  In each folder you can place one or multiple csv files containing your Nodes or Edges data.  Your csv files must follow the following header (column name) requirements:  The Nodes CSVs requires at least one column (the 1st).Column name = \'id\'. It will represent the nodes ID Ids must be populated with string  The Edges CSVs require three columns named, in order, * source * target * id  those colomns represent * The source of the edge * The target of the edge * The id of the edge  All following columns content are up to you. Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-         * @summary Upload data from zip file to dataset\'s twingraph
-         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
          * @param {string} datasetId the Dataset identifier
-         * @param {File} body 
+         * @param {DatasetRole} datasetRole This change the dataset default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the dataset.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadTwingraph(organizationId: string, datasetId: string, body: File, options?: RawAxiosRequestConfig): AxiosPromise<FileUploadValidation> {
-            return localVarFp.uploadTwingraph(organizationId, datasetId, body, options).then((request) => request(axios, basePath));
+        updateDatasetDefaultSecurity(organizationId: string, workspaceId: string, datasetId: string, datasetRole: DatasetRole, options?: RawAxiosRequestConfig): AxiosPromise<DatasetSecurity> {
+            return localVarFp.updateDatasetDefaultSecurity(organizationId, workspaceId, datasetId, datasetRole, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -5836,392 +4592,289 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
 export class DatasetApi extends BaseAPI {
     /**
      * 
+     * @summary Create a Dataset
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {DatasetCreateRequest} datasetCreateRequest 
+     * @param {Array<File>} [files] Notes:   - Each parts defined in dataset should have a file defined in this list   - Please ensure that upload files order match with data parts list defined     - First file uploaded will match with first dataset parts and so on 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DatasetApi
+     */
+    public createDataset(organizationId: string, workspaceId: string, datasetCreateRequest: DatasetCreateRequest, files?: Array<File>, options?: RawAxiosRequestConfig) {
+        return DatasetApiFp(this.configuration).createDataset(organizationId, workspaceId, datasetCreateRequest, files, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary Add a control access to the Dataset
      * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
      * @param {string} datasetId the Dataset identifier
      * @param {DatasetAccessControl} datasetAccessControl the new Dataset security access to add.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DatasetApi
      */
-    public addDatasetAccessControl(organizationId: string, datasetId: string, datasetAccessControl: DatasetAccessControl, options?: RawAxiosRequestConfig) {
-        return DatasetApiFp(this.configuration).addDatasetAccessControl(organizationId, datasetId, datasetAccessControl, options).then((request) => request(this.axios, this.basePath));
+    public createDatasetAccessControl(organizationId: string, workspaceId: string, datasetId: string, datasetAccessControl: DatasetAccessControl, options?: RawAxiosRequestConfig) {
+        return DatasetApiFp(this.configuration).createDatasetAccessControl(organizationId, workspaceId, datasetId, datasetAccessControl, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @summary Add Dataset Compatibility elements.
+     * @summary Create a data part of a Dataset
      * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
      * @param {string} datasetId the Dataset identifier
-     * @param {Array<DatasetCompatibility>} datasetCompatibility the Dataset Compatibility elements
+     * @param {File} file Data file to upload
+     * @param {DatasetPartCreateRequest} datasetPartCreateRequest 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DatasetApi
      */
-    public addOrReplaceDatasetCompatibilityElements(organizationId: string, datasetId: string, datasetCompatibility: Array<DatasetCompatibility>, options?: RawAxiosRequestConfig) {
-        return DatasetApiFp(this.configuration).addOrReplaceDatasetCompatibilityElements(organizationId, datasetId, datasetCompatibility, options).then((request) => request(this.axios, this.basePath));
+    public createDatasetPart(organizationId: string, workspaceId: string, datasetId: string, file: File, datasetPartCreateRequest: DatasetPartCreateRequest, options?: RawAxiosRequestConfig) {
+        return DatasetApiFp(this.configuration).createDatasetPart(organizationId, workspaceId, datasetId, file, datasetPartCreateRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Not implemented!
-     * @summary Copy a Dataset to another Dataset.
+     * Delete a dataset
+     * @summary Delete a Dataset
      * @param {string} organizationId the Organization identifier
-     * @param {DatasetCopyParameters} datasetCopyParameters the Dataset copy parameters
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DatasetApi
-     */
-    public copyDataset(organizationId: string, datasetCopyParameters: DatasetCopyParameters, options?: RawAxiosRequestConfig) {
-        return DatasetApiFp(this.configuration).copyDataset(organizationId, datasetCopyParameters, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Create a new Dataset
-     * @param {string} organizationId the Organization identifier
-     * @param {Dataset} dataset the Dataset to create
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DatasetApi
-     */
-    public createDataset(organizationId: string, dataset: Dataset, options?: RawAxiosRequestConfig) {
-        return DatasetApiFp(this.configuration).createDataset(organizationId, dataset, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Create a copy of the dataset using the results of the list of queries given in parameter. Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-     * @summary Create a sub-dataset from the dataset in parameter
-     * @param {string} organizationId the Organization identifier
-     * @param {string} datasetId the Dataset identifier
-     * @param {SubDatasetGraphQuery} subDatasetGraphQuery the Cypher query to filter
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DatasetApi
-     */
-    public createSubDataset(organizationId: string, datasetId: string, subDatasetGraphQuery: SubDatasetGraphQuery, options?: RawAxiosRequestConfig) {
-        return DatasetApiFp(this.configuration).createSubDataset(organizationId, datasetId, subDatasetGraphQuery, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Create new entities in a graph instance Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-     * @summary Create new entities in a graph instance
-     * @param {string} organizationId the Organization identifier
-     * @param {string} datasetId the Dataset Identifier
-     * @param {CreateTwingraphEntitiesTypeEnum} type the entity model type
-     * @param {Array<GraphProperties>} graphProperties the entities to create
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DatasetApi
-     */
-    public createTwingraphEntities(organizationId: string, datasetId: string, type: CreateTwingraphEntitiesTypeEnum, graphProperties: Array<GraphProperties>, options?: RawAxiosRequestConfig) {
-        return DatasetApiFp(this.configuration).createTwingraphEntities(organizationId, datasetId, type, graphProperties, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Delete a dataset
-     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
      * @param {string} datasetId the Dataset identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DatasetApi
      */
-    public deleteDataset(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig) {
-        return DatasetApiFp(this.configuration).deleteDataset(organizationId, datasetId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Delete entities in a graph instance Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-     * @summary Delete entities in a graph instance
-     * @param {string} organizationId the Organization identifier
-     * @param {string} datasetId the Dataset Identifier
-     * @param {DeleteTwingraphEntitiesTypeEnum} type the entity model type
-     * @param {Array<string>} ids the entities to delete
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DatasetApi
-     */
-    public deleteTwingraphEntities(organizationId: string, datasetId: string, type: DeleteTwingraphEntitiesTypeEnum, ids: Array<string>, options?: RawAxiosRequestConfig) {
-        return DatasetApiFp(this.configuration).deleteTwingraphEntities(organizationId, datasetId, type, ids, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Download the compressed graph reference by the hash in a zip file Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-     * @summary Download a graph as a zip file
-     * @param {string} organizationId the Organization identifier
-     * @param {string} hash the Graph download identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DatasetApi
-     */
-    public downloadTwingraph(organizationId: string, hash: string, options?: RawAxiosRequestConfig) {
-        return DatasetApiFp(this.configuration).downloadTwingraph(organizationId, hash, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary List all Datasets
-     * @param {string} organizationId the Organization identifier
-     * @param {number} [page] page number to query (first page is at index 0)
-     * @param {number} [size] amount of result by page
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DatasetApi
-     */
-    public findAllDatasets(organizationId: string, page?: number, size?: number, options?: RawAxiosRequestConfig) {
-        return DatasetApiFp(this.configuration).findAllDatasets(organizationId, page, size, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get the details of a Dataset
-     * @param {string} organizationId the Organization identifier
-     * @param {string} datasetId the Dataset identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DatasetApi
-     */
-    public findDatasetById(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig) {
-        return DatasetApiFp(this.configuration).findDatasetById(organizationId, datasetId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get a control access for the Dataset
-     * @param {string} organizationId the Organization identifier
-     * @param {string} datasetId the Dataset identifier
-     * @param {string} identityId the User identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DatasetApi
-     */
-    public getDatasetAccessControl(organizationId: string, datasetId: string, identityId: string, options?: RawAxiosRequestConfig) {
-        return DatasetApiFp(this.configuration).getDatasetAccessControl(organizationId, datasetId, identityId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get the Dataset security information
-     * @param {string} organizationId the Organization identifier
-     * @param {string} datasetId the Dataset identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DatasetApi
-     */
-    public getDatasetSecurity(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig) {
-        return DatasetApiFp(this.configuration).getDatasetSecurity(organizationId, datasetId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Get the Dataset security users list
-     * @param {string} organizationId the Organization identifier
-     * @param {string} datasetId the Dataset identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DatasetApi
-     */
-    public getDatasetSecurityUsers(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig) {
-        return DatasetApiFp(this.configuration).getDatasetSecurityUsers(organizationId, datasetId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Get the status of the import workflow lauch on the dataset\'s refresh. This endpoint needs to be called to update a dataset IngestionStatus or TwincacheStatus
-     * @summary Get the dataset\'s refresh job status
-     * @param {string} organizationId the Organization identifier
-     * @param {string} datasetId the dataset identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DatasetApi
-     */
-    public getDatasetTwingraphStatus(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig) {
-        return DatasetApiFp(this.configuration).getDatasetTwingraphStatus(organizationId, datasetId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Get entities in a graph instance Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-     * @summary Get entities in a graph instance
-     * @param {string} organizationId the Organization identifier
-     * @param {string} datasetId the Dataset Identifier
-     * @param {GetTwingraphEntitiesTypeEnum} type the entity model type
-     * @param {Array<string>} ids the entities to get
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DatasetApi
-     */
-    public getTwingraphEntities(organizationId: string, datasetId: string, type: GetTwingraphEntitiesTypeEnum, ids: Array<string>, options?: RawAxiosRequestConfig) {
-        return DatasetApiFp(this.configuration).getTwingraphEntities(organizationId, datasetId, type, ids, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} organizationId the Organization identifier
-     * @param {string} datasetId the Dataset identifier
-     * @param {string} workspaceId workspace id to be linked to
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DatasetApi
-     */
-    public linkWorkspace(organizationId: string, datasetId: string, workspaceId: string, options?: RawAxiosRequestConfig) {
-        return DatasetApiFp(this.configuration).linkWorkspace(organizationId, datasetId, workspaceId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Refresh dataset from parent source. At date, sources can be:      dataset (refresh from another dataset)      Azure Digital twin      Azure storage      Local File (import a new file)  During refresh, datas are overwritten Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-     * @summary Refresh data on dataset from dataset\'s source
-     * @param {string} organizationId the Organization identifier
-     * @param {string} datasetId the Dataset identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DatasetApi
-     */
-    public refreshDataset(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig) {
-        return DatasetApiFp(this.configuration).refreshDataset(organizationId, datasetId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Remove all Dataset Compatibility elements from the Dataset specified
-     * @param {string} organizationId the Organization identifier
-     * @param {string} datasetId the Dataset identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DatasetApi
-     */
-    public removeAllDatasetCompatibilityElements(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig) {
-        return DatasetApiFp(this.configuration).removeAllDatasetCompatibilityElements(organizationId, datasetId, options).then((request) => request(this.axios, this.basePath));
+    public deleteDataset(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig) {
+        return DatasetApiFp(this.configuration).deleteDataset(organizationId, workspaceId, datasetId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @summary Remove the specified access from the given Dataset
      * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
      * @param {string} datasetId the Dataset identifier
      * @param {string} identityId the User identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DatasetApi
      */
-    public removeDatasetAccessControl(organizationId: string, datasetId: string, identityId: string, options?: RawAxiosRequestConfig) {
-        return DatasetApiFp(this.configuration).removeDatasetAccessControl(organizationId, datasetId, identityId, options).then((request) => request(this.axios, this.basePath));
+    public deleteDatasetAccessControl(organizationId: string, workspaceId: string, datasetId: string, identityId: string, options?: RawAxiosRequestConfig) {
+        return DatasetApiFp(this.configuration).deleteDatasetAccessControl(organizationId, workspaceId, datasetId, identityId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Rollback the twingraph on a dataset after a failed refresh Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-     * @summary Rollback the dataset after a failed refresh
+     * Delete a dataset part
+     * @summary Delete a Dataset part
      * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} datasetId the Dataset identifier
+     * @param {string} datasetPartId the Dataset part identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DatasetApi
+     */
+    public deleteDatasetPart(organizationId: string, workspaceId: string, datasetId: string, datasetPartId: string, options?: RawAxiosRequestConfig) {
+        return DatasetApiFp(this.configuration).deleteDatasetPart(organizationId, workspaceId, datasetId, datasetPartId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Download data from a dataset part
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} datasetId the Dataset identifier
+     * @param {string} datasetPartId the Dataset part identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DatasetApi
+     */
+    public downloadDatasetPart(organizationId: string, workspaceId: string, datasetId: string, datasetPartId: string, options?: RawAxiosRequestConfig) {
+        return DatasetApiFp(this.configuration).downloadDatasetPart(organizationId, workspaceId, datasetId, datasetPartId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Retrieve a dataset
+     * @summary Retrieve a Dataset
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
      * @param {string} datasetId the Dataset identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DatasetApi
      */
-    public rollbackRefresh(organizationId: string, datasetId: string, options?: RawAxiosRequestConfig) {
-        return DatasetApiFp(this.configuration).rollbackRefresh(organizationId, datasetId, options).then((request) => request(this.axios, this.basePath));
+    public getDataset(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig) {
+        return DatasetApiFp(this.configuration).getDataset(organizationId, workspaceId, datasetId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get a control access for the Dataset
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} datasetId the Dataset identifier
+     * @param {string} identityId the User identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DatasetApi
+     */
+    public getDatasetAccessControl(organizationId: string, workspaceId: string, datasetId: string, identityId: string, options?: RawAxiosRequestConfig) {
+        return DatasetApiFp(this.configuration).getDatasetAccessControl(organizationId, workspaceId, datasetId, identityId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Retrieve a data part of a Dataset
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} datasetId the Dataset identifier
+     * @param {string} datasetPartId the Dataset part identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DatasetApi
+     */
+    public getDatasetPart(organizationId: string, workspaceId: string, datasetId: string, datasetPartId: string, options?: RawAxiosRequestConfig) {
+        return DatasetApiFp(this.configuration).getDatasetPart(organizationId, workspaceId, datasetId, datasetPartId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Retrieve all dataset parts of a Dataset
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} datasetId the Dataset identifier
+     * @param {number} [page] Page number to query (first page is at index 0)
+     * @param {number} [size] Amount of result by page
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DatasetApi
+     */
+    public listDatasetParts(organizationId: string, workspaceId: string, datasetId: string, page?: number, size?: number, options?: RawAxiosRequestConfig) {
+        return DatasetApiFp(this.configuration).listDatasetParts(organizationId, workspaceId, datasetId, page, size, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get the Dataset security users list
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} datasetId the Dataset identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DatasetApi
+     */
+    public listDatasetSecurityUsers(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig) {
+        return DatasetApiFp(this.configuration).listDatasetSecurityUsers(organizationId, workspaceId, datasetId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * List all datasets
+     * @summary Retrieve a list of defined Dataset
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {number} [page] Page number to query (first page is at index 0)
+     * @param {number} [size] Amount of result by page
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DatasetApi
+     */
+    public listDatasets(organizationId: string, workspaceId: string, page?: number, size?: number, options?: RawAxiosRequestConfig) {
+        return DatasetApiFp(this.configuration).listDatasets(organizationId, workspaceId, page, size, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get data of a Dataset
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} datasetId the Dataset identifier
+     * @param {string} datasetPartId the Dataset part identifier
+     * @param {Array<string>} [filters] Property names that should be part of the response data. You can specify a property name like:  - id  - stock  - quantity  - ... 
+     * @param {Array<string>} [sums] Property names to sum by
+     * @param {Array<string>} [counts] Property names to count by
+     * @param {number} [offset] The query offset
+     * @param {number} [limit] The query limit
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DatasetApi
+     */
+    public queryData(organizationId: string, workspaceId: string, datasetId: string, datasetPartId: string, filters?: Array<string>, sums?: Array<string>, counts?: Array<string>, offset?: number, limit?: number, options?: RawAxiosRequestConfig) {
+        return DatasetApiFp(this.configuration).queryData(organizationId, workspaceId, datasetId, datasetPartId, filters, sums, counts, offset, limit, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Replace existing dataset parts of a Dataset
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} datasetId the Dataset identifier
+     * @param {string} datasetPartId the Dataset part identifier
+     * @param {File} file Data file to upload
+     * @param {DatasetPartUpdateRequest} [datasetPartUpdateRequest] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DatasetApi
+     */
+    public replaceDatasetPart(organizationId: string, workspaceId: string, datasetId: string, datasetPartId: string, file: File, datasetPartUpdateRequest?: DatasetPartUpdateRequest, options?: RawAxiosRequestConfig) {
+        return DatasetApiFp(this.configuration).replaceDatasetPart(organizationId, workspaceId, datasetId, datasetPartId, file, datasetPartUpdateRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Search Dataset parts by tags
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} datasetId the Dataset identifier
+     * @param {Array<string>} requestBody the Dataset parts search parameters
+     * @param {number} [page] Page number to query (first page is at index 0)
+     * @param {number} [size] Amount of result by page
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DatasetApi
+     */
+    public searchDatasetParts(organizationId: string, workspaceId: string, datasetId: string, requestBody: Array<string>, page?: number, size?: number, options?: RawAxiosRequestConfig) {
+        return DatasetApiFp(this.configuration).searchDatasetParts(organizationId, workspaceId, datasetId, requestBody, page, size, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @summary Search Datasets by tags
      * @param {string} organizationId the Organization identifier
-     * @param {DatasetSearch} datasetSearch the Dataset search parameters
-     * @param {number} [page] page number to query (first page is at index 0)
-     * @param {number} [size] amount of result by page
+     * @param {string} workspaceId the Workspace identifier
+     * @param {Array<string>} requestBody the Dataset search parameters
+     * @param {number} [page] Page number to query (first page is at index 0)
+     * @param {number} [size] Amount of result by page
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DatasetApi
      */
-    public searchDatasets(organizationId: string, datasetSearch: DatasetSearch, page?: number, size?: number, options?: RawAxiosRequestConfig) {
-        return DatasetApiFp(this.configuration).searchDatasets(organizationId, datasetSearch, page, size, options).then((request) => request(this.axios, this.basePath));
+    public searchDatasets(organizationId: string, workspaceId: string, requestBody: Array<string>, page?: number, size?: number, options?: RawAxiosRequestConfig) {
+        return DatasetApiFp(this.configuration).searchDatasets(organizationId, workspaceId, requestBody, page, size, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * 
-     * @summary Set the Dataset default security
+     * Update a dataset
+     * @summary Update a Dataset
      * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
      * @param {string} datasetId the Dataset identifier
-     * @param {DatasetRole} datasetRole This change the dataset default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the dataset.
+     * @param {DatasetUpdateRequest} datasetUpdateRequest 
+     * @param {Array<File>} [files] Notes:   - Each parts defined in dataset should have a file defined in this list   - Please ensure that upload files order match with data parts list defined     - First file uploaded will match with first dataset parts and so on 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DatasetApi
      */
-    public setDatasetDefaultSecurity(organizationId: string, datasetId: string, datasetRole: DatasetRole, options?: RawAxiosRequestConfig) {
-        return DatasetApiFp(this.configuration).setDatasetDefaultSecurity(organizationId, datasetId, datasetRole, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Run a query on a graph instance and return the result as a zip file in async mode Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-     * @summary Run a query on a graph instance and return the result as a zip file in async mode
-     * @param {string} organizationId the Organization identifier
-     * @param {string} datasetId the Graph Identifier
-     * @param {DatasetTwinGraphQuery} datasetTwinGraphQuery the query to run
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DatasetApi
-     */
-    public twingraphBatchQuery(organizationId: string, datasetId: string, datasetTwinGraphQuery: DatasetTwinGraphQuery, options?: RawAxiosRequestConfig) {
-        return DatasetApiFp(this.configuration).twingraphBatchQuery(organizationId, datasetId, datasetTwinGraphQuery, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Async batch update by loading a CSV file on a graph instance Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-     * @summary Async batch update by loading a CSV file on a graph instance 
-     * @param {string} organizationId the Organization identifier
-     * @param {string} datasetId the Dataset Identifier
-     * @param {DatasetTwinGraphQuery} twinGraphQuery 
-     * @param {File} body 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DatasetApi
-     */
-    public twingraphBatchUpdate(organizationId: string, datasetId: string, twinGraphQuery: DatasetTwinGraphQuery, body: File, options?: RawAxiosRequestConfig) {
-        return DatasetApiFp(this.configuration).twingraphBatchUpdate(organizationId, datasetId, twinGraphQuery, body, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Run a query on a graph instance and return the result as a json Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-     * @summary Return the result of a query made on the graph instance as a json
-     * @param {string} organizationId the Organization identifier
-     * @param {string} datasetId the Dataset identifier
-     * @param {DatasetTwinGraphQuery} datasetTwinGraphQuery the query to run
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DatasetApi
-     */
-    public twingraphQuery(organizationId: string, datasetId: string, datasetTwinGraphQuery: DatasetTwinGraphQuery, options?: RawAxiosRequestConfig) {
-        return DatasetApiFp(this.configuration).twingraphQuery(organizationId, datasetId, datasetTwinGraphQuery, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} organizationId the Organization identifier
-     * @param {string} datasetId the Dataset identifier
-     * @param {string} workspaceId workspace id to be linked to
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DatasetApi
-     */
-    public unlinkWorkspace(organizationId: string, datasetId: string, workspaceId: string, options?: RawAxiosRequestConfig) {
-        return DatasetApiFp(this.configuration).unlinkWorkspace(organizationId, datasetId, workspaceId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Update a dataset
-     * @param {string} organizationId the Organization identifier
-     * @param {string} datasetId the Dataset identifier
-     * @param {Dataset} dataset the new Dataset details. This endpoint can\&#39;t be used to update security
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DatasetApi
-     */
-    public updateDataset(organizationId: string, datasetId: string, dataset: Dataset, options?: RawAxiosRequestConfig) {
-        return DatasetApiFp(this.configuration).updateDataset(organizationId, datasetId, dataset, options).then((request) => request(this.axios, this.basePath));
+    public updateDataset(organizationId: string, workspaceId: string, datasetId: string, datasetUpdateRequest: DatasetUpdateRequest, files?: Array<File>, options?: RawAxiosRequestConfig) {
+        return DatasetApiFp(this.configuration).updateDataset(organizationId, workspaceId, datasetId, datasetUpdateRequest, files, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @summary Update the specified access to User for a Dataset
      * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
      * @param {string} datasetId the Dataset identifier
      * @param {string} identityId the User identifier
      * @param {DatasetRole} datasetRole The new Dataset Access Control
@@ -6229,72 +4882,26 @@ export class DatasetApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DatasetApi
      */
-    public updateDatasetAccessControl(organizationId: string, datasetId: string, identityId: string, datasetRole: DatasetRole, options?: RawAxiosRequestConfig) {
-        return DatasetApiFp(this.configuration).updateDatasetAccessControl(organizationId, datasetId, identityId, datasetRole, options).then((request) => request(this.axios, this.basePath));
+    public updateDatasetAccessControl(organizationId: string, workspaceId: string, datasetId: string, identityId: string, datasetRole: DatasetRole, options?: RawAxiosRequestConfig) {
+        return DatasetApiFp(this.configuration).updateDatasetAccessControl(organizationId, workspaceId, datasetId, identityId, datasetRole, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * update entities in a graph instance
-     * @summary Update entities in a graph instance
+     * 
+     * @summary Set the Dataset default security
      * @param {string} organizationId the Organization identifier
-     * @param {string} datasetId the Dataset Identifier
-     * @param {UpdateTwingraphEntitiesTypeEnum} type the entity model type
-     * @param {Array<GraphProperties>} graphProperties The entities to update Note: This endpoint is activated only if &#x60;csm.platform.twincache.useGraphModule&#x60; property is set to true 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DatasetApi
-     */
-    public updateTwingraphEntities(organizationId: string, datasetId: string, type: UpdateTwingraphEntitiesTypeEnum, graphProperties: Array<GraphProperties>, options?: RawAxiosRequestConfig) {
-        return DatasetApiFp(this.configuration).updateTwingraphEntities(organizationId, datasetId, type, graphProperties, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * To create a new graph from flat files,  you need to create a Zip file. This Zip file must countain two folders named Edges and Nodes.  .zip hierarchy: *main_folder/Nodes *main_folder/Edges  In each folder you can place one or multiple csv files containing your Nodes or Edges data.  Your csv files must follow the following header (column name) requirements:  The Nodes CSVs requires at least one column (the 1st).Column name = \'id\'. It will represent the nodes ID Ids must be populated with string  The Edges CSVs require three columns named, in order, * source * target * id  those colomns represent * The source of the edge * The target of the edge * The id of the edge  All following columns content are up to you. Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-     * @summary Upload data from zip file to dataset\'s twingraph
-     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
      * @param {string} datasetId the Dataset identifier
-     * @param {File} body 
+     * @param {DatasetRole} datasetRole This change the dataset default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the dataset.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DatasetApi
      */
-    public uploadTwingraph(organizationId: string, datasetId: string, body: File, options?: RawAxiosRequestConfig) {
-        return DatasetApiFp(this.configuration).uploadTwingraph(organizationId, datasetId, body, options).then((request) => request(this.axios, this.basePath));
+    public updateDatasetDefaultSecurity(organizationId: string, workspaceId: string, datasetId: string, datasetRole: DatasetRole, options?: RawAxiosRequestConfig) {
+        return DatasetApiFp(this.configuration).updateDatasetDefaultSecurity(organizationId, workspaceId, datasetId, datasetRole, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
-/**
- * @export
- */
-export const CreateTwingraphEntitiesTypeEnum = {
-    Node: 'node',
-    Relationship: 'relationship'
-} as const;
-export type CreateTwingraphEntitiesTypeEnum = typeof CreateTwingraphEntitiesTypeEnum[keyof typeof CreateTwingraphEntitiesTypeEnum];
-/**
- * @export
- */
-export const DeleteTwingraphEntitiesTypeEnum = {
-    Node: 'node',
-    Relationship: 'relationship'
-} as const;
-export type DeleteTwingraphEntitiesTypeEnum = typeof DeleteTwingraphEntitiesTypeEnum[keyof typeof DeleteTwingraphEntitiesTypeEnum];
-/**
- * @export
- */
-export const GetTwingraphEntitiesTypeEnum = {
-    Node: 'node',
-    Relationship: 'relationship'
-} as const;
-export type GetTwingraphEntitiesTypeEnum = typeof GetTwingraphEntitiesTypeEnum[keyof typeof GetTwingraphEntitiesTypeEnum];
-/**
- * @export
- */
-export const UpdateTwingraphEntitiesTypeEnum = {
-    Node: 'node',
-    Relationship: 'relationship'
-} as const;
-export type UpdateTwingraphEntitiesTypeEnum = typeof UpdateTwingraphEntitiesTypeEnum[keyof typeof UpdateTwingraphEntitiesTypeEnum];
 
 
 /**
@@ -8409,7 +7016,7 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
-         * @summary Remove the specified access from the given Organization Runner
+         * @summary Remove the specified access from the given Runner
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {string} runnerId the Runner identifier
@@ -8459,7 +7066,7 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
-         * @summary Get the details of an runner
+         * @summary Get the details of a runner
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {string} runnerId the Runner identifier
@@ -9057,7 +7664,7 @@ export const RunnerApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Remove the specified access from the given Organization Runner
+         * @summary Remove the specified access from the given Runner
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {string} runnerId the Runner identifier
@@ -9073,7 +7680,7 @@ export const RunnerApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Get the details of an runner
+         * @summary Get the details of a runner
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {string} runnerId the Runner identifier
@@ -9292,7 +7899,7 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
         },
         /**
          * 
-         * @summary Remove the specified access from the given Organization Runner
+         * @summary Remove the specified access from the given Runner
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {string} runnerId the Runner identifier
@@ -9305,7 +7912,7 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
         },
         /**
          * 
-         * @summary Get the details of an runner
+         * @summary Get the details of a runner
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {string} runnerId the Runner identifier
@@ -9497,7 +8104,7 @@ export class RunnerApi extends BaseAPI {
 
     /**
      * 
-     * @summary Remove the specified access from the given Organization Runner
+     * @summary Remove the specified access from the given Runner
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
      * @param {string} runnerId the Runner identifier
@@ -9512,7 +8119,7 @@ export class RunnerApi extends BaseAPI {
 
     /**
      * 
-     * @summary Get the details of an runner
+     * @summary Get the details of a runner
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
      * @param {string} runnerId the Runner identifier
@@ -12066,54 +10673,6 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
     return {
         /**
          * 
-         * @param {string} organizationId The Organization identifier
-         * @param {string} workspaceId The Workspace identifier
-         * @param {string} datasetId dataset id to be linked to
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createDatasetLink: async (organizationId: string, workspaceId: string, datasetId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('createDatasetLink', 'organizationId', organizationId)
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('createDatasetLink', 'workspaceId', workspaceId)
-            // verify required parameter 'datasetId' is not null or undefined
-            assertParamExists('createDatasetLink', 'datasetId', datasetId)
-            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/link`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-            if (datasetId !== undefined) {
-                localVarQueryParameter['datasetId'] = datasetId;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @summary Create a new workspace
          * @param {string} organizationId The Organization identifier
          * @param {WorkspaceCreateRequest} workspaceCreateRequest The Workspace to create
@@ -12269,54 +10828,6 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @param {string} organizationId The Organization identifier
-         * @param {string} workspaceId The Workspace identifier
-         * @param {string} datasetId dataset id to be linked to
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        deleteDatasetLink: async (organizationId: string, workspaceId: string, datasetId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('deleteDatasetLink', 'organizationId', organizationId)
-            // verify required parameter 'workspaceId' is not null or undefined
-            assertParamExists('deleteDatasetLink', 'workspaceId', workspaceId)
-            // verify required parameter 'datasetId' is not null or undefined
-            assertParamExists('deleteDatasetLink', 'datasetId', datasetId)
-            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/link`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-            if (datasetId !== undefined) {
-                localVarQueryParameter['datasetId'] = datasetId;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @summary Delete a workspace
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
@@ -12359,7 +10870,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary Remove the specified access from the given Organization Workspace
+         * @summary Remove the specified access from the given Workspace
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
          * @param {string} identityId The User identifier
@@ -12496,7 +11007,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary Get the details of an workspace
+         * @summary Get the details of a workspace
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
          * @param {*} [options] Override http request option.
@@ -13011,20 +11522,6 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @param {string} organizationId The Organization identifier
-         * @param {string} workspaceId The Workspace identifier
-         * @param {string} datasetId dataset id to be linked to
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async createDatasetLink(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Workspace>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createDatasetLink(organizationId, workspaceId, datasetId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.createDatasetLink']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
          * @summary Create a new workspace
          * @param {string} organizationId The Organization identifier
          * @param {WorkspaceCreateRequest} workspaceCreateRequest The Workspace to create
@@ -13071,20 +11568,6 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {string} organizationId The Organization identifier
-         * @param {string} workspaceId The Workspace identifier
-         * @param {string} datasetId dataset id to be linked to
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async deleteDatasetLink(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteDatasetLink(organizationId, workspaceId, datasetId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.deleteDatasetLink']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
          * @summary Delete a workspace
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
@@ -13099,7 +11582,7 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Remove the specified access from the given Organization Workspace
+         * @summary Remove the specified access from the given Workspace
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
          * @param {string} identityId The User identifier
@@ -13143,7 +11626,7 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Get the details of an workspace
+         * @summary Get the details of a workspace
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
          * @param {*} [options] Override http request option.
@@ -13315,17 +11798,6 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
     return {
         /**
          * 
-         * @param {string} organizationId The Organization identifier
-         * @param {string} workspaceId The Workspace identifier
-         * @param {string} datasetId dataset id to be linked to
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createDatasetLink(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig): AxiosPromise<Workspace> {
-            return localVarFp.createDatasetLink(organizationId, workspaceId, datasetId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @summary Create a new workspace
          * @param {string} organizationId The Organization identifier
          * @param {WorkspaceCreateRequest} workspaceCreateRequest The Workspace to create
@@ -13363,17 +11835,6 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @param {string} organizationId The Organization identifier
-         * @param {string} workspaceId The Workspace identifier
-         * @param {string} datasetId dataset id to be linked to
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        deleteDatasetLink(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.deleteDatasetLink(organizationId, workspaceId, datasetId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @summary Delete a workspace
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
@@ -13385,7 +11846,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary Remove the specified access from the given Organization Workspace
+         * @summary Remove the specified access from the given Workspace
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
          * @param {string} identityId The User identifier
@@ -13420,7 +11881,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary Get the details of an workspace
+         * @summary Get the details of a workspace
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
          * @param {*} [options] Override http request option.
@@ -13559,19 +12020,6 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
 export class WorkspaceApi extends BaseAPI {
     /**
      * 
-     * @param {string} organizationId The Organization identifier
-     * @param {string} workspaceId The Workspace identifier
-     * @param {string} datasetId dataset id to be linked to
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof WorkspaceApi
-     */
-    public createDatasetLink(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig) {
-        return WorkspaceApiFp(this.configuration).createDatasetLink(organizationId, workspaceId, datasetId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
      * @summary Create a new workspace
      * @param {string} organizationId The Organization identifier
      * @param {WorkspaceCreateRequest} workspaceCreateRequest The Workspace to create
@@ -13615,19 +12063,6 @@ export class WorkspaceApi extends BaseAPI {
 
     /**
      * 
-     * @param {string} organizationId The Organization identifier
-     * @param {string} workspaceId The Workspace identifier
-     * @param {string} datasetId dataset id to be linked to
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof WorkspaceApi
-     */
-    public deleteDatasetLink(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig) {
-        return WorkspaceApiFp(this.configuration).deleteDatasetLink(organizationId, workspaceId, datasetId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
      * @summary Delete a workspace
      * @param {string} organizationId The Organization identifier
      * @param {string} workspaceId The Workspace identifier
@@ -13641,7 +12076,7 @@ export class WorkspaceApi extends BaseAPI {
 
     /**
      * 
-     * @summary Remove the specified access from the given Organization Workspace
+     * @summary Remove the specified access from the given Workspace
      * @param {string} organizationId The Organization identifier
      * @param {string} workspaceId The Workspace identifier
      * @param {string} identityId The User identifier
@@ -13682,7 +12117,7 @@ export class WorkspaceApi extends BaseAPI {
 
     /**
      * 
-     * @summary Get the details of an workspace
+     * @summary Get the details of a workspace
      * @param {string} organizationId The Organization identifier
      * @param {string} workspaceId The Workspace identifier
      * @param {*} [options] Override http request option.
