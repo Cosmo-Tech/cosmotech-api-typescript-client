@@ -75,6 +75,7 @@ docs/SolutionAccessControl.md
 docs/SolutionApi.md
 docs/SolutionCreateRequest.md
 docs/SolutionEditInfo.md
+docs/SolutionFile.md
 docs/SolutionRole.md
 docs/SolutionSecurity.md
 docs/SolutionUpdateRequest.md

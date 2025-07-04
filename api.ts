@@ -2414,6 +2414,19 @@ export interface SolutionEditInfo {
     'userId': string;
 }
 /**
+ * A Solution File resource
+ * @export
+ * @interface SolutionFile
+ */
+export interface SolutionFile {
+    /**
+     * The Solution File name
+     * @type {string}
+     * @memberof SolutionFile
+     */
+    'fileName': string;
+}
+/**
  * The Solution Role
  * @export
  * @interface SolutionRole
@@ -8290,7 +8303,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Create a new solution
-         * @param {string} organizationId The Organization identifier
+         * @param {string} organizationId the Organization identifier
          * @param {SolutionCreateRequest} solutionCreateRequest The Solution to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -8334,8 +8347,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Create solution access control
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {SolutionAccessControl} solutionAccessControl Access control to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -8381,9 +8394,72 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
+         * @summary Upload a file for the Solution
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {File} file The file to upload
+         * @param {boolean} [overwrite] Whether to overwrite an existing file
+         * @param {string} [destination] Destination path. Must end with a \\\&#39;/\\\&#39; if specifying a folder. Note that paths may or may not start with a \\\&#39;/\\\&#39;, but they are always treated as relative to the Solution root location. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createSolutionFile: async (organizationId: string, solutionId: string, file: File, overwrite?: boolean, destination?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('createSolutionFile', 'organizationId', organizationId)
+            // verify required parameter 'solutionId' is not null or undefined
+            assertParamExists('createSolutionFile', 'solutionId', solutionId)
+            // verify required parameter 'file' is not null or undefined
+            assertParamExists('createSolutionFile', 'file', file)
+            const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/files`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+            if (overwrite !== undefined) { 
+                localVarFormParams.append('overwrite', String(overwrite) as any);
+            }
+    
+            if (destination !== undefined) { 
+                localVarFormParams.append('destination', destination as any);
+            }
+    
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Create solution parameter for a solution
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {RunTemplateParameterCreateRequest} runTemplateParameterCreateRequest Parameter to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -8430,8 +8506,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Create a solution parameter group
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {RunTemplateParameterGroupCreateRequest} runTemplateParameterGroupCreateRequest Parameter group to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -8478,8 +8554,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Create a solution run template
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {RunTemplateCreateRequest} runTemplateCreateRequest Run template to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -8526,8 +8602,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Delete a solution
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -8568,8 +8644,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Delete solution access control
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} identityId The User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -8613,9 +8689,100 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
+         * @summary Delete a solution file
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {string} fileName The file name
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteSolutionFile: async (organizationId: string, solutionId: string, fileName: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('deleteSolutionFile', 'organizationId', organizationId)
+            // verify required parameter 'solutionId' is not null or undefined
+            assertParamExists('deleteSolutionFile', 'solutionId', solutionId)
+            // verify required parameter 'fileName' is not null or undefined
+            assertParamExists('deleteSolutionFile', 'fileName', fileName)
+            const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/files/delete`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+            if (fileName !== undefined) {
+                localVarQueryParameter['file_name'] = fileName;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Delete all Solution files
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteSolutionFiles: async (organizationId: string, solutionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('deleteSolutionFiles', 'organizationId', organizationId)
+            // verify required parameter 'solutionId' is not null or undefined
+            assertParamExists('deleteSolutionFiles', 'solutionId', solutionId)
+            const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/files`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Delete specific parameter from the solution
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} parameterId The solution parameter identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -8660,8 +8827,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Delete a parameter group from the solution
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} parameterGroupId The parameter group identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -8706,8 +8873,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Delete a specific run template
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} runTemplateId The Run Template identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -8752,8 +8919,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Retrieve a solution run templates
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} runTemplateId The Run Template identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -8798,8 +8965,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Get the details of a solution
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -8840,8 +9007,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Get solution access control
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} identityId The User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -8885,9 +9052,58 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
+         * @summary Download the Solution File specified
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {string} fileName The file name
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSolutionFile: async (organizationId: string, solutionId: string, fileName: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('getSolutionFile', 'organizationId', organizationId)
+            // verify required parameter 'solutionId' is not null or undefined
+            assertParamExists('getSolutionFile', 'solutionId', solutionId)
+            // verify required parameter 'fileName' is not null or undefined
+            assertParamExists('getSolutionFile', 'fileName', fileName)
+            const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/files/download`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+            if (fileName !== undefined) {
+                localVarQueryParameter['file_name'] = fileName;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Get the details of a solution parameter
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} parameterId The solution parameter identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -8932,8 +9148,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Get details of a solution parameter group
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} parameterGroupId The parameter group identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -8978,8 +9194,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Get solution security information
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -9020,8 +9236,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary List all solution run templates
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -9061,9 +9277,51 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
+         * @summary List all Solution files
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listSolutionFiles: async (organizationId: string, solutionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('listSolutionFiles', 'organizationId', organizationId)
+            // verify required parameter 'solutionId' is not null or undefined
+            assertParamExists('listSolutionFiles', 'solutionId', solutionId)
+            const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/files`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary List all solution parameter groups
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -9104,8 +9362,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary List all solution parameters
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -9146,8 +9404,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary List solution security users
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -9188,9 +9446,9 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary List all Solutions
-         * @param {string} organizationId The Organization identifier
-         * @param {number} [page] Page number to query (zero-based indexing)
-         * @param {number} [size] Number of records per page
+         * @param {string} organizationId the Organization identifier
+         * @param {number} [page] Page number to query (first page is at index 0)
+         * @param {number} [size] Amount of result by page
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -9236,8 +9494,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Update a solution
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {SolutionUpdateRequest} solutionUpdateRequest The new Solution details. This endpoint can\&#39;t be used to update security
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -9284,8 +9542,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Update solution access control
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} identityId The User identifier
          * @param {SolutionRole} solutionRole Access control updates
          * @param {*} [options] Override http request option.
@@ -9384,8 +9642,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Update solution parameter
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} parameterId The solution parameter identifier
          * @param {RunTemplateParameterUpdateRequest} runTemplateParameterUpdateRequest Parameter to update
          * @param {*} [options] Override http request option.
@@ -9436,8 +9694,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Update a solution parameter group
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} parameterGroupId The parameter group identifier
          * @param {RunTemplateParameterGroupUpdateRequest} runTemplateParameterGroupUpdateRequest Parameter groups to update
          * @param {*} [options] Override http request option.
@@ -9488,8 +9746,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @summary Update a specific run template
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} runTemplateId The Run Template identifier
          * @param {RunTemplateUpdateRequest} runTemplateUpdateRequest Run template updates
          * @param {*} [options] Override http request option.
@@ -9550,7 +9808,7 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Create a new solution
-         * @param {string} organizationId The Organization identifier
+         * @param {string} organizationId the Organization identifier
          * @param {SolutionCreateRequest} solutionCreateRequest The Solution to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -9564,8 +9822,8 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Create solution access control
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {SolutionAccessControl} solutionAccessControl Access control to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -9578,9 +9836,26 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Upload a file for the Solution
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {File} file The file to upload
+         * @param {boolean} [overwrite] Whether to overwrite an existing file
+         * @param {string} [destination] Destination path. Must end with a \\\&#39;/\\\&#39; if specifying a folder. Note that paths may or may not start with a \\\&#39;/\\\&#39;, but they are always treated as relative to the Solution root location. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createSolutionFile(organizationId: string, solutionId: string, file: File, overwrite?: boolean, destination?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SolutionFile>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createSolutionFile(organizationId, solutionId, file, overwrite, destination, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SolutionApi.createSolutionFile']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary Create solution parameter for a solution
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {RunTemplateParameterCreateRequest} runTemplateParameterCreateRequest Parameter to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -9594,8 +9869,8 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Create a solution parameter group
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {RunTemplateParameterGroupCreateRequest} runTemplateParameterGroupCreateRequest Parameter group to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -9609,8 +9884,8 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Create a solution run template
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {RunTemplateCreateRequest} runTemplateCreateRequest Run template to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -9624,8 +9899,8 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Delete a solution
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -9638,8 +9913,8 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Delete solution access control
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} identityId The User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -9652,9 +9927,38 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Delete a solution file
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {string} fileName The file name
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteSolutionFile(organizationId: string, solutionId: string, fileName: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteSolutionFile(organizationId, solutionId, fileName, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SolutionApi.deleteSolutionFile']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Delete all Solution files
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteSolutionFiles(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteSolutionFiles(organizationId, solutionId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SolutionApi.deleteSolutionFiles']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary Delete specific parameter from the solution
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} parameterId The solution parameter identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -9668,8 +9972,8 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Delete a parameter group from the solution
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} parameterGroupId The parameter group identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -9683,8 +9987,8 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Delete a specific run template
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} runTemplateId The Run Template identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -9698,8 +10002,8 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Retrieve a solution run templates
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} runTemplateId The Run Template identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -9713,8 +10017,8 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Get the details of a solution
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -9727,8 +10031,8 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Get solution access control
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} identityId The User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -9741,9 +10045,24 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Download the Solution File specified
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {string} fileName The file name
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getSolutionFile(organizationId: string, solutionId: string, fileName: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<File>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getSolutionFile(organizationId, solutionId, fileName, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SolutionApi.getSolutionFile']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary Get the details of a solution parameter
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} parameterId The solution parameter identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -9757,8 +10076,8 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Get details of a solution parameter group
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} parameterGroupId The parameter group identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -9772,8 +10091,8 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Get solution security information
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -9786,8 +10105,8 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary List all solution run templates
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -9799,9 +10118,23 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary List all Solution files
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listSolutionFiles(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SolutionFile>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listSolutionFiles(organizationId, solutionId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SolutionApi.listSolutionFiles']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary List all solution parameter groups
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -9814,8 +10147,8 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary List all solution parameters
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -9828,8 +10161,8 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary List solution security users
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -9842,9 +10175,9 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary List all Solutions
-         * @param {string} organizationId The Organization identifier
-         * @param {number} [page] Page number to query (zero-based indexing)
-         * @param {number} [size] Number of records per page
+         * @param {string} organizationId the Organization identifier
+         * @param {number} [page] Page number to query (first page is at index 0)
+         * @param {number} [size] Amount of result by page
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -9857,8 +10190,8 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Update a solution
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {SolutionUpdateRequest} solutionUpdateRequest The new Solution details. This endpoint can\&#39;t be used to update security
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -9872,8 +10205,8 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Update solution access control
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} identityId The User identifier
          * @param {SolutionRole} solutionRole Access control updates
          * @param {*} [options] Override http request option.
@@ -9903,8 +10236,8 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Update solution parameter
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} parameterId The solution parameter identifier
          * @param {RunTemplateParameterUpdateRequest} runTemplateParameterUpdateRequest Parameter to update
          * @param {*} [options] Override http request option.
@@ -9919,8 +10252,8 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Update a solution parameter group
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} parameterGroupId The parameter group identifier
          * @param {RunTemplateParameterGroupUpdateRequest} runTemplateParameterGroupUpdateRequest Parameter groups to update
          * @param {*} [options] Override http request option.
@@ -9935,8 +10268,8 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Update a specific run template
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} runTemplateId The Run Template identifier
          * @param {RunTemplateUpdateRequest} runTemplateUpdateRequest Run template updates
          * @param {*} [options] Override http request option.
@@ -9961,7 +10294,7 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Create a new solution
-         * @param {string} organizationId The Organization identifier
+         * @param {string} organizationId the Organization identifier
          * @param {SolutionCreateRequest} solutionCreateRequest The Solution to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -9972,8 +10305,8 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Create solution access control
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {SolutionAccessControl} solutionAccessControl Access control to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -9983,9 +10316,23 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * 
+         * @summary Upload a file for the Solution
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {File} file The file to upload
+         * @param {boolean} [overwrite] Whether to overwrite an existing file
+         * @param {string} [destination] Destination path. Must end with a \\\&#39;/\\\&#39; if specifying a folder. Note that paths may or may not start with a \\\&#39;/\\\&#39;, but they are always treated as relative to the Solution root location. 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createSolutionFile(organizationId: string, solutionId: string, file: File, overwrite?: boolean, destination?: string, options?: RawAxiosRequestConfig): AxiosPromise<SolutionFile> {
+            return localVarFp.createSolutionFile(organizationId, solutionId, file, overwrite, destination, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Create solution parameter for a solution
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {RunTemplateParameterCreateRequest} runTemplateParameterCreateRequest Parameter to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -9996,8 +10343,8 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Create a solution parameter group
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {RunTemplateParameterGroupCreateRequest} runTemplateParameterGroupCreateRequest Parameter group to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -10008,8 +10355,8 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Create a solution run template
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {RunTemplateCreateRequest} runTemplateCreateRequest Run template to create
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -10020,8 +10367,8 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Delete a solution
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10031,8 +10378,8 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Delete solution access control
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} identityId The User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -10042,9 +10389,32 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * 
+         * @summary Delete a solution file
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {string} fileName The file name
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteSolutionFile(organizationId: string, solutionId: string, fileName: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteSolutionFile(organizationId, solutionId, fileName, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Delete all Solution files
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteSolutionFiles(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteSolutionFiles(organizationId, solutionId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Delete specific parameter from the solution
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} parameterId The solution parameter identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -10055,8 +10425,8 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Delete a parameter group from the solution
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} parameterGroupId The parameter group identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -10067,8 +10437,8 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Delete a specific run template
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} runTemplateId The Run Template identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -10079,8 +10449,8 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Retrieve a solution run templates
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} runTemplateId The Run Template identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -10091,8 +10461,8 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Get the details of a solution
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10102,8 +10472,8 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Get solution access control
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} identityId The User identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -10113,9 +10483,21 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * 
+         * @summary Download the Solution File specified
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {string} fileName The file name
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSolutionFile(organizationId: string, solutionId: string, fileName: string, options?: RawAxiosRequestConfig): AxiosPromise<File> {
+            return localVarFp.getSolutionFile(organizationId, solutionId, fileName, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Get the details of a solution parameter
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} parameterId The solution parameter identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -10126,8 +10508,8 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Get details of a solution parameter group
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} parameterGroupId The parameter group identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -10138,8 +10520,8 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Get solution security information
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10149,8 +10531,8 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary List all solution run templates
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10159,9 +10541,20 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * 
+         * @summary List all Solution files
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listSolutionFiles(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<SolutionFile>> {
+            return localVarFp.listSolutionFiles(organizationId, solutionId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary List all solution parameter groups
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10171,8 +10564,8 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary List all solution parameters
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10182,8 +10575,8 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary List solution security users
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10193,9 +10586,9 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary List all Solutions
-         * @param {string} organizationId The Organization identifier
-         * @param {number} [page] Page number to query (zero-based indexing)
-         * @param {number} [size] Number of records per page
+         * @param {string} organizationId the Organization identifier
+         * @param {number} [page] Page number to query (first page is at index 0)
+         * @param {number} [size] Amount of result by page
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -10205,8 +10598,8 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Update a solution
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {SolutionUpdateRequest} solutionUpdateRequest The new Solution details. This endpoint can\&#39;t be used to update security
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -10217,8 +10610,8 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Update solution access control
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} identityId The User identifier
          * @param {SolutionRole} solutionRole Access control updates
          * @param {*} [options] Override http request option.
@@ -10242,8 +10635,8 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Update solution parameter
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} parameterId The solution parameter identifier
          * @param {RunTemplateParameterUpdateRequest} runTemplateParameterUpdateRequest Parameter to update
          * @param {*} [options] Override http request option.
@@ -10255,8 +10648,8 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Update a solution parameter group
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} parameterGroupId The parameter group identifier
          * @param {RunTemplateParameterGroupUpdateRequest} runTemplateParameterGroupUpdateRequest Parameter groups to update
          * @param {*} [options] Override http request option.
@@ -10268,8 +10661,8 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @summary Update a specific run template
-         * @param {string} organizationId The Organization identifier
-         * @param {string} solutionId The Solution identifier
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
          * @param {string} runTemplateId The Run Template identifier
          * @param {RunTemplateUpdateRequest} runTemplateUpdateRequest Run template updates
          * @param {*} [options] Override http request option.
@@ -10291,7 +10684,7 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Create a new solution
-     * @param {string} organizationId The Organization identifier
+     * @param {string} organizationId the Organization identifier
      * @param {SolutionCreateRequest} solutionCreateRequest The Solution to create
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -10304,8 +10697,8 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Create solution access control
-     * @param {string} organizationId The Organization identifier
-     * @param {string} solutionId The Solution identifier
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
      * @param {SolutionAccessControl} solutionAccessControl Access control to create
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -10317,9 +10710,25 @@ export class SolutionApi extends BaseAPI {
 
     /**
      * 
+     * @summary Upload a file for the Solution
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
+     * @param {File} file The file to upload
+     * @param {boolean} [overwrite] Whether to overwrite an existing file
+     * @param {string} [destination] Destination path. Must end with a \\\&#39;/\\\&#39; if specifying a folder. Note that paths may or may not start with a \\\&#39;/\\\&#39;, but they are always treated as relative to the Solution root location. 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SolutionApi
+     */
+    public createSolutionFile(organizationId: string, solutionId: string, file: File, overwrite?: boolean, destination?: string, options?: RawAxiosRequestConfig) {
+        return SolutionApiFp(this.configuration).createSolutionFile(organizationId, solutionId, file, overwrite, destination, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary Create solution parameter for a solution
-     * @param {string} organizationId The Organization identifier
-     * @param {string} solutionId The Solution identifier
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
      * @param {RunTemplateParameterCreateRequest} runTemplateParameterCreateRequest Parameter to create
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -10332,8 +10741,8 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Create a solution parameter group
-     * @param {string} organizationId The Organization identifier
-     * @param {string} solutionId The Solution identifier
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
      * @param {RunTemplateParameterGroupCreateRequest} runTemplateParameterGroupCreateRequest Parameter group to create
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -10346,8 +10755,8 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Create a solution run template
-     * @param {string} organizationId The Organization identifier
-     * @param {string} solutionId The Solution identifier
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
      * @param {RunTemplateCreateRequest} runTemplateCreateRequest Run template to create
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -10360,8 +10769,8 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Delete a solution
-     * @param {string} organizationId The Organization identifier
-     * @param {string} solutionId The Solution identifier
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
@@ -10373,8 +10782,8 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Delete solution access control
-     * @param {string} organizationId The Organization identifier
-     * @param {string} solutionId The Solution identifier
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
      * @param {string} identityId The User identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -10386,9 +10795,36 @@ export class SolutionApi extends BaseAPI {
 
     /**
      * 
+     * @summary Delete a solution file
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
+     * @param {string} fileName The file name
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SolutionApi
+     */
+    public deleteSolutionFile(organizationId: string, solutionId: string, fileName: string, options?: RawAxiosRequestConfig) {
+        return SolutionApiFp(this.configuration).deleteSolutionFile(organizationId, solutionId, fileName, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Delete all Solution files
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SolutionApi
+     */
+    public deleteSolutionFiles(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig) {
+        return SolutionApiFp(this.configuration).deleteSolutionFiles(organizationId, solutionId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary Delete specific parameter from the solution
-     * @param {string} organizationId The Organization identifier
-     * @param {string} solutionId The Solution identifier
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
      * @param {string} parameterId The solution parameter identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -10401,8 +10837,8 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Delete a parameter group from the solution
-     * @param {string} organizationId The Organization identifier
-     * @param {string} solutionId The Solution identifier
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
      * @param {string} parameterGroupId The parameter group identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -10415,8 +10851,8 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Delete a specific run template
-     * @param {string} organizationId The Organization identifier
-     * @param {string} solutionId The Solution identifier
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
      * @param {string} runTemplateId The Run Template identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -10429,8 +10865,8 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Retrieve a solution run templates
-     * @param {string} organizationId The Organization identifier
-     * @param {string} solutionId The Solution identifier
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
      * @param {string} runTemplateId The Run Template identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -10443,8 +10879,8 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Get the details of a solution
-     * @param {string} organizationId The Organization identifier
-     * @param {string} solutionId The Solution identifier
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
@@ -10456,8 +10892,8 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Get solution access control
-     * @param {string} organizationId The Organization identifier
-     * @param {string} solutionId The Solution identifier
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
      * @param {string} identityId The User identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -10469,9 +10905,23 @@ export class SolutionApi extends BaseAPI {
 
     /**
      * 
+     * @summary Download the Solution File specified
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
+     * @param {string} fileName The file name
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SolutionApi
+     */
+    public getSolutionFile(organizationId: string, solutionId: string, fileName: string, options?: RawAxiosRequestConfig) {
+        return SolutionApiFp(this.configuration).getSolutionFile(organizationId, solutionId, fileName, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary Get the details of a solution parameter
-     * @param {string} organizationId The Organization identifier
-     * @param {string} solutionId The Solution identifier
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
      * @param {string} parameterId The solution parameter identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -10484,8 +10934,8 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Get details of a solution parameter group
-     * @param {string} organizationId The Organization identifier
-     * @param {string} solutionId The Solution identifier
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
      * @param {string} parameterGroupId The parameter group identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -10498,8 +10948,8 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Get solution security information
-     * @param {string} organizationId The Organization identifier
-     * @param {string} solutionId The Solution identifier
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
@@ -10511,8 +10961,8 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary List all solution run templates
-     * @param {string} organizationId The Organization identifier
-     * @param {string} solutionId The Solution identifier
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
@@ -10523,9 +10973,22 @@ export class SolutionApi extends BaseAPI {
 
     /**
      * 
+     * @summary List all Solution files
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SolutionApi
+     */
+    public listSolutionFiles(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig) {
+        return SolutionApiFp(this.configuration).listSolutionFiles(organizationId, solutionId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary List all solution parameter groups
-     * @param {string} organizationId The Organization identifier
-     * @param {string} solutionId The Solution identifier
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
@@ -10537,8 +11000,8 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary List all solution parameters
-     * @param {string} organizationId The Organization identifier
-     * @param {string} solutionId The Solution identifier
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
@@ -10550,8 +11013,8 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary List solution security users
-     * @param {string} organizationId The Organization identifier
-     * @param {string} solutionId The Solution identifier
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
@@ -10563,9 +11026,9 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary List all Solutions
-     * @param {string} organizationId The Organization identifier
-     * @param {number} [page] Page number to query (zero-based indexing)
-     * @param {number} [size] Number of records per page
+     * @param {string} organizationId the Organization identifier
+     * @param {number} [page] Page number to query (first page is at index 0)
+     * @param {number} [size] Amount of result by page
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SolutionApi
@@ -10577,8 +11040,8 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Update a solution
-     * @param {string} organizationId The Organization identifier
-     * @param {string} solutionId The Solution identifier
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
      * @param {SolutionUpdateRequest} solutionUpdateRequest The new Solution details. This endpoint can\&#39;t be used to update security
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -10591,8 +11054,8 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Update solution access control
-     * @param {string} organizationId The Organization identifier
-     * @param {string} solutionId The Solution identifier
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
      * @param {string} identityId The User identifier
      * @param {SolutionRole} solutionRole Access control updates
      * @param {*} [options] Override http request option.
@@ -10620,8 +11083,8 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Update solution parameter
-     * @param {string} organizationId The Organization identifier
-     * @param {string} solutionId The Solution identifier
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
      * @param {string} parameterId The solution parameter identifier
      * @param {RunTemplateParameterUpdateRequest} runTemplateParameterUpdateRequest Parameter to update
      * @param {*} [options] Override http request option.
@@ -10635,8 +11098,8 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Update a solution parameter group
-     * @param {string} organizationId The Organization identifier
-     * @param {string} solutionId The Solution identifier
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
      * @param {string} parameterGroupId The parameter group identifier
      * @param {RunTemplateParameterGroupUpdateRequest} runTemplateParameterGroupUpdateRequest Parameter groups to update
      * @param {*} [options] Override http request option.
@@ -10650,8 +11113,8 @@ export class SolutionApi extends BaseAPI {
     /**
      * 
      * @summary Update a specific run template
-     * @param {string} organizationId The Organization identifier
-     * @param {string} solutionId The Solution identifier
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
      * @param {string} runTemplateId The Run Template identifier
      * @param {RunTemplateUpdateRequest} runTemplateUpdateRequest Run template updates
      * @param {*} [options] Override http request option.
