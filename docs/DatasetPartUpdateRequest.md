@@ -6,6 +6,7 @@ Dataset part update request object
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**sourceName** | **string** | the source data name (e.g. filename associated to the dataset part) | [optional] [default to undefined]
 **description** | **string** |  | [optional] [default to undefined]
 **tags** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
 
@@ -15,6 +16,7 @@ Name | Type | Description | Notes
 import { DatasetPartUpdateRequest } from '@cosmotech/api-ts';
 
 const instance: DatasetPartUpdateRequest = {
+    sourceName,
     description,
     tags,
 };

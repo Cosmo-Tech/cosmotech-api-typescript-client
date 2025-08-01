@@ -444,6 +444,12 @@ export type DatasetPartTypeEnum = typeof DatasetPartTypeEnum[keyof typeof Datase
  */
 export interface DatasetPartUpdateRequest {
     /**
+     * the source data name (e.g. filename associated to the dataset part)
+     * @type {string}
+     * @memberof DatasetPartUpdateRequest
+     */
+    'sourceName'?: string;
+    /**
      * 
      * @type {string}
      * @memberof DatasetPartUpdateRequest
