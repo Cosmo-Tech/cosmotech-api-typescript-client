@@ -62,6 +62,7 @@ docs/Runner.md
 docs/RunnerAccessControl.md
 docs/RunnerApi.md
 docs/RunnerCreateRequest.md
+docs/RunnerDatasets.md
 docs/RunnerEditInfo.md
 docs/RunnerResourceSizing.md
 docs/RunnerRole.md
@@ -75,7 +76,6 @@ docs/SolutionAccessControl.md
 docs/SolutionApi.md
 docs/SolutionCreateRequest.md
 docs/SolutionEditInfo.md
-docs/SolutionFile.md
 docs/SolutionRole.md
 docs/SolutionSecurity.md
 docs/SolutionUpdateRequest.md

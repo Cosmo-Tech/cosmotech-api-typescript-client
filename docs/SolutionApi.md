@@ -6,26 +6,21 @@ All URIs are relative to *http://localhost:8080*
 |------------- | ------------- | -------------|
 |[**createSolution**](#createsolution) | **POST** /organizations/{organization_id}/solutions | Create a new solution|
 |[**createSolutionAccessControl**](#createsolutionaccesscontrol) | **POST** /organizations/{organization_id}/solutions/{solution_id}/security/access | Create solution access control|
-|[**createSolutionFile**](#createsolutionfile) | **POST** /organizations/{organization_id}/solutions/{solution_id}/files | Upload a file for the Solution|
 |[**createSolutionParameter**](#createsolutionparameter) | **POST** /organizations/{organization_id}/solutions/{solution_id}/parameters | Create solution parameter for a solution|
 |[**createSolutionParameterGroup**](#createsolutionparametergroup) | **POST** /organizations/{organization_id}/solutions/{solution_id}/parameterGroups | Create a solution parameter group|
 |[**createSolutionRunTemplate**](#createsolutionruntemplate) | **POST** /organizations/{organization_id}/solutions/{solution_id}/runTemplates | Create a solution run template|
 |[**deleteSolution**](#deletesolution) | **DELETE** /organizations/{organization_id}/solutions/{solution_id} | Delete a solution|
 |[**deleteSolutionAccessControl**](#deletesolutionaccesscontrol) | **DELETE** /organizations/{organization_id}/solutions/{solution_id}/security/access/{identity_id} | Delete solution access control|
-|[**deleteSolutionFile**](#deletesolutionfile) | **DELETE** /organizations/{organization_id}/solutions/{solution_id}/files/delete | Delete a solution file|
-|[**deleteSolutionFiles**](#deletesolutionfiles) | **DELETE** /organizations/{organization_id}/solutions/{solution_id}/files | Delete all Solution files|
 |[**deleteSolutionParameter**](#deletesolutionparameter) | **DELETE** /organizations/{organization_id}/solutions/{solution_id}/parameters/{parameter_id} | Delete specific parameter from the solution|
 |[**deleteSolutionParameterGroup**](#deletesolutionparametergroup) | **DELETE** /organizations/{organization_id}/solutions/{solution_id}/parameterGroups/{parameter_group_id} | Delete a parameter group from the solution|
 |[**deleteSolutionRunTemplate**](#deletesolutionruntemplate) | **DELETE** /organizations/{organization_id}/solutions/{solution_id}/runTemplates/{run_template_id} | Delete a specific run template|
 |[**getRunTemplate**](#getruntemplate) | **GET** /organizations/{organization_id}/solutions/{solution_id}/runTemplates/{run_template_id} | Retrieve a solution run templates|
 |[**getSolution**](#getsolution) | **GET** /organizations/{organization_id}/solutions/{solution_id} | Get the details of a solution|
 |[**getSolutionAccessControl**](#getsolutionaccesscontrol) | **GET** /organizations/{organization_id}/solutions/{solution_id}/security/access/{identity_id} | Get solution access control|
-|[**getSolutionFile**](#getsolutionfile) | **GET** /organizations/{organization_id}/solutions/{solution_id}/files/download | Download the Solution File specified|
 |[**getSolutionParameter**](#getsolutionparameter) | **GET** /organizations/{organization_id}/solutions/{solution_id}/parameters/{parameter_id} | Get the details of a solution parameter|
 |[**getSolutionParameterGroup**](#getsolutionparametergroup) | **GET** /organizations/{organization_id}/solutions/{solution_id}/parameterGroups/{parameter_group_id} | Get details of a solution parameter group|
 |[**getSolutionSecurity**](#getsolutionsecurity) | **GET** /organizations/{organization_id}/solutions/{solution_id}/security | Get solution security information|
 |[**listRunTemplates**](#listruntemplates) | **GET** /organizations/{organization_id}/solutions/{solution_id}/runTemplates | List all solution run templates|
-|[**listSolutionFiles**](#listsolutionfiles) | **GET** /organizations/{organization_id}/solutions/{solution_id}/files | List all Solution files|
 |[**listSolutionParameterGroups**](#listsolutionparametergroups) | **GET** /organizations/{organization_id}/solutions/{solution_id}/parameterGroups | List all solution parameter groups|
 |[**listSolutionParameters**](#listsolutionparameters) | **GET** /organizations/{organization_id}/solutions/{solution_id}/parameters | List all solution parameters|
 |[**listSolutionSecurityUsers**](#listsolutionsecurityusers) | **GET** /organizations/{organization_id}/solutions/{solution_id}/security/users | List solution security users|
@@ -147,69 +142,6 @@ const { status, data } = await apiInstance.createSolutionAccessControl(
 |-------------|-------------|------------------|
 |**201** | Solution access control successfully created |  -  |
 |**404** | Solution not found or insufficient access rights |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **createSolutionFile**
-> SolutionFile createSolutionFile()
-
-
-### Example
-
-```typescript
-import {
-    SolutionApi,
-    Configuration
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new SolutionApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let solutionId: string; //the Solution identifier (default to undefined)
-let file: File; //The file to upload (default to undefined)
-let overwrite: boolean; //Whether to overwrite an existing file (optional) (default to false)
-let destination: string; //Destination path. Must end with a \\\'/\\\' if specifying a folder. Note that paths may or may not start with a \\\'/\\\', but they are always treated as relative to the Solution root location.  (optional) (default to undefined)
-
-const { status, data } = await apiInstance.createSolutionFile(
-    organizationId,
-    solutionId,
-    file,
-    overwrite,
-    destination
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
-| **file** | [**File**] | The file to upload | defaults to undefined|
-| **overwrite** | [**boolean**] | Whether to overwrite an existing file | (optional) defaults to false|
-| **destination** | [**string**] | Destination path. Must end with a \\\&#39;/\\\&#39; if specifying a folder. Note that paths may or may not start with a \\\&#39;/\\\&#39;, but they are always treated as relative to the Solution root location.  | (optional) defaults to undefined|
-
-
-### Return type
-
-**SolutionFile**
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json, application/yaml
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**201** | The file resource details |  -  |
-|**400** | Bad request |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -498,117 +430,6 @@ void (empty response body)
 |-------------|-------------|------------------|
 |**204** | Solution access control successfully deleted |  -  |
 |**404** | Solution or user not found or insufficient access rights |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **deleteSolutionFile**
-> deleteSolutionFile()
-
-
-### Example
-
-```typescript
-import {
-    SolutionApi,
-    Configuration
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new SolutionApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let solutionId: string; //the Solution identifier (default to undefined)
-let fileName: string; //The file name (default to undefined)
-
-const { status, data } = await apiInstance.deleteSolutionFile(
-    organizationId,
-    solutionId,
-    fileName
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
-| **fileName** | [**string**] | The file name | defaults to undefined|
-
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: Not defined
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**204** | Request succeeded |  -  |
-|**404** | The Solution or the file specified is unknown or you don\&#39;t have access to them |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **deleteSolutionFiles**
-> deleteSolutionFiles()
-
-
-### Example
-
-```typescript
-import {
-    SolutionApi,
-    Configuration
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new SolutionApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let solutionId: string; //the Solution identifier (default to undefined)
-
-const { status, data } = await apiInstance.deleteSolutionFiles(
-    organizationId,
-    solutionId
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
-
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: Not defined
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**204** | Request succeeded |  -  |
-|**404** | The Solution specified is unknown or you don\&#39;t have access to them |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -951,63 +772,6 @@ const { status, data } = await apiInstance.getSolutionAccessControl(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getSolutionFile**
-> File getSolutionFile()
-
-
-### Example
-
-```typescript
-import {
-    SolutionApi,
-    Configuration
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new SolutionApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let solutionId: string; //the Solution identifier (default to undefined)
-let fileName: string; //The file name (default to undefined)
-
-const { status, data } = await apiInstance.getSolutionFile(
-    organizationId,
-    solutionId,
-    fileName
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
-| **fileName** | [**string**] | The file name | defaults to undefined|
-
-
-### Return type
-
-**File**
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/octet-stream
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | The solution file as a resource |  -  |
-|**404** | The Solution file specified is unknown or you don\&#39;t have access to it |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **getSolutionParameter**
 > RunTemplateParameter getSolutionParameter()
 
@@ -1228,60 +992,6 @@ const { status, data } = await apiInstance.listRunTemplates(
 |-------------|-------------|------------------|
 |**200** | Run templates successfully listed |  -  |
 |**404** | Solution not found or insufficient access rights |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **listSolutionFiles**
-> Array<SolutionFile> listSolutionFiles()
-
-
-### Example
-
-```typescript
-import {
-    SolutionApi,
-    Configuration
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new SolutionApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let solutionId: string; //the Solution identifier (default to undefined)
-
-const { status, data } = await apiInstance.listSolutionFiles(
-    organizationId,
-    solutionId
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
-
-
-### Return type
-
-**Array<SolutionFile>**
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json, application/yaml
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | The solution files |  -  |
-|**404** | The Solution specified is unknown or you don\&#39;t have access to it |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

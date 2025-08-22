@@ -1848,11 +1848,11 @@ export interface Runner {
      */
     'runTemplateName'?: string;
     /**
-     * the list of Dataset Id associated to this Runner Run Template
-     * @type {Array<string>}
+     * 
+     * @type {RunnerDatasets}
      * @memberof Runner
      */
-    'datasetList': Array<string>;
+    'datasets': RunnerDatasets;
     /**
      * 
      * @type {RunnerResourceSizing}
@@ -1989,6 +1989,31 @@ export interface RunnerCreateRequest {
      * @memberof RunnerCreateRequest
      */
     'security'?: RunnerSecurity;
+}
+/**
+ * 
+ * @export
+ * @interface RunnerDatasets
+ */
+export interface RunnerDatasets {
+    /**
+     * a list of Dataset Id used to build the Runner
+     * @type {Array<string>}
+     * @memberof RunnerDatasets
+     */
+    'bases': Array<string>;
+    /**
+     * The dataset id used for dataset parameters on current Runner
+     * @type {string}
+     * @memberof RunnerDatasets
+     */
+    'parameter': string;
+    /**
+     * The dataset parts retrieved from the parameter property (programmatically fulfilled)
+     * @type {Array<object>}
+     * @memberof RunnerDatasets
+     */
+    'parameters'?: Array<object>;
 }
 /**
  * 
@@ -2420,19 +2445,6 @@ export interface SolutionEditInfo {
     'userId': string;
 }
 /**
- * A Solution File resource
- * @export
- * @interface SolutionFile
- */
-export interface SolutionFile {
-    /**
-     * The Solution File name
-     * @type {string}
-     * @memberof SolutionFile
-     */
-    'fileName': string;
-}
-/**
  * The Solution Role
  * @export
  * @interface SolutionRole
@@ -2778,6 +2790,18 @@ export interface WorkspaceSolution {
      * @memberof WorkspaceSolution
      */
     'solutionId': string;
+    /**
+     * The Dataset Id attached to this workspace. This dataset will be used to store default values for Solution parameters with file\'s varType. 
+     * @type {string}
+     * @memberof WorkspaceSolution
+     */
+    'datasetId'?: string;
+    /**
+     * A map of parameterId/value to set default values for Solution parameters with simple varType (int, string, ...)
+     * @type {{ [key: string]: string; }}
+     * @memberof WorkspaceSolution
+     */
+    'defaultParameterValues'?: { [key: string]: string; };
     /**
      * The list of Solution Run Template Id to filter
      * @type {Array<string>}
@@ -7326,8 +7350,8 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
          * @summary List all Runners
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
-         * @param {number} [page] page number to query (first page is at index 0)
-         * @param {number} [size] amount of result by page
+         * @param {number} [page] Page number to query (first page is at index 0)
+         * @param {number} [size] Amount of result by page
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -7779,8 +7803,8 @@ export const RunnerApiFp = function(configuration?: Configuration) {
          * @summary List all Runners
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
-         * @param {number} [page] page number to query (first page is at index 0)
-         * @param {number} [size] amount of result by page
+         * @param {number} [page] Page number to query (first page is at index 0)
+         * @param {number} [size] Amount of result by page
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -7996,8 +8020,8 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
          * @summary List all Runners
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
-         * @param {number} [page] page number to query (first page is at index 0)
-         * @param {number} [size] amount of result by page
+         * @param {number} [page] Page number to query (first page is at index 0)
+         * @param {number} [size] Amount of result by page
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -8213,8 +8237,8 @@ export class RunnerApi extends BaseAPI {
      * @summary List all Runners
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
-     * @param {number} [page] page number to query (first page is at index 0)
-     * @param {number} [size] amount of result by page
+     * @param {number} [page] Page number to query (first page is at index 0)
+     * @param {number} [size] Amount of result by page
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RunnerApi
@@ -8392,69 +8416,6 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(solutionAccessControl, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Upload a file for the Solution
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {File} file The file to upload
-         * @param {boolean} [overwrite] Whether to overwrite an existing file
-         * @param {string} [destination] Destination path. Must end with a \\\&#39;/\\\&#39; if specifying a folder. Note that paths may or may not start with a \\\&#39;/\\\&#39;, but they are always treated as relative to the Solution root location. 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createSolutionFile: async (organizationId: string, solutionId: string, file: File, overwrite?: boolean, destination?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('createSolutionFile', 'organizationId', organizationId)
-            // verify required parameter 'solutionId' is not null or undefined
-            assertParamExists('createSolutionFile', 'solutionId', solutionId)
-            // verify required parameter 'file' is not null or undefined
-            assertParamExists('createSolutionFile', 'file', file)
-            const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/files`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-            if (overwrite !== undefined) { 
-                localVarFormParams.append('overwrite', String(overwrite) as any);
-            }
-    
-            if (destination !== undefined) { 
-                localVarFormParams.append('destination', destination as any);
-            }
-    
-            if (file !== undefined) { 
-                localVarFormParams.append('file', file as any);
-            }
-    
-    
-            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = localVarFormParams;
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -8667,97 +8628,6 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
                 .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)))
                 .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Delete a solution file
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} fileName The file name
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        deleteSolutionFile: async (organizationId: string, solutionId: string, fileName: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('deleteSolutionFile', 'organizationId', organizationId)
-            // verify required parameter 'solutionId' is not null or undefined
-            assertParamExists('deleteSolutionFile', 'solutionId', solutionId)
-            // verify required parameter 'fileName' is not null or undefined
-            assertParamExists('deleteSolutionFile', 'fileName', fileName)
-            const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/files/delete`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-            if (fileName !== undefined) {
-                localVarQueryParameter['file_name'] = fileName;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Delete all Solution files
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        deleteSolutionFiles: async (organizationId: string, solutionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('deleteSolutionFiles', 'organizationId', organizationId)
-            // verify required parameter 'solutionId' is not null or undefined
-            assertParamExists('deleteSolutionFiles', 'solutionId', solutionId)
-            const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/files`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -9058,55 +8928,6 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
-         * @summary Download the Solution File specified
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} fileName The file name
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getSolutionFile: async (organizationId: string, solutionId: string, fileName: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('getSolutionFile', 'organizationId', organizationId)
-            // verify required parameter 'solutionId' is not null or undefined
-            assertParamExists('getSolutionFile', 'solutionId', solutionId)
-            // verify required parameter 'fileName' is not null or undefined
-            assertParamExists('getSolutionFile', 'fileName', fileName)
-            const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/files/download`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-            if (fileName !== undefined) {
-                localVarQueryParameter['file_name'] = fileName;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @summary Get the details of a solution parameter
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
@@ -9253,48 +9074,6 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'solutionId' is not null or undefined
             assertParamExists('listRunTemplates', 'solutionId', solutionId)
             const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/runTemplates`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuth2AuthCode required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary List all Solution files
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listSolutionFiles: async (organizationId: string, solutionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'organizationId' is not null or undefined
-            assertParamExists('listSolutionFiles', 'organizationId', organizationId)
-            // verify required parameter 'solutionId' is not null or undefined
-            assertParamExists('listSolutionFiles', 'solutionId', solutionId)
-            const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/files`
                 .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
                 .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -9842,23 +9621,6 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Upload a file for the Solution
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {File} file The file to upload
-         * @param {boolean} [overwrite] Whether to overwrite an existing file
-         * @param {string} [destination] Destination path. Must end with a \\\&#39;/\\\&#39; if specifying a folder. Note that paths may or may not start with a \\\&#39;/\\\&#39;, but they are always treated as relative to the Solution root location. 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async createSolutionFile(organizationId: string, solutionId: string, file: File, overwrite?: boolean, destination?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SolutionFile>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createSolutionFile(organizationId, solutionId, file, overwrite, destination, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SolutionApi.createSolutionFile']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
          * @summary Create solution parameter for a solution
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
@@ -9929,35 +9691,6 @@ export const SolutionApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteSolutionAccessControl(organizationId, solutionId, identityId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SolutionApi.deleteSolutionAccessControl']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Delete a solution file
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} fileName The file name
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async deleteSolutionFile(organizationId: string, solutionId: string, fileName: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteSolutionFile(organizationId, solutionId, fileName, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SolutionApi.deleteSolutionFile']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Delete all Solution files
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async deleteSolutionFiles(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteSolutionFiles(organizationId, solutionId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SolutionApi.deleteSolutionFiles']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -10051,21 +9784,6 @@ export const SolutionApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Download the Solution File specified
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} fileName The file name
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getSolutionFile(organizationId: string, solutionId: string, fileName: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<File>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getSolutionFile(organizationId, solutionId, fileName, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SolutionApi.getSolutionFile']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
          * @summary Get the details of a solution parameter
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
@@ -10120,20 +9838,6 @@ export const SolutionApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listRunTemplates(organizationId, solutionId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SolutionApi.listRunTemplates']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary List all Solution files
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async listSolutionFiles(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SolutionFile>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listSolutionFiles(organizationId, solutionId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SolutionApi.listSolutionFiles']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -10322,20 +10026,6 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * 
-         * @summary Upload a file for the Solution
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {File} file The file to upload
-         * @param {boolean} [overwrite] Whether to overwrite an existing file
-         * @param {string} [destination] Destination path. Must end with a \\\&#39;/\\\&#39; if specifying a folder. Note that paths may or may not start with a \\\&#39;/\\\&#39;, but they are always treated as relative to the Solution root location. 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createSolutionFile(organizationId: string, solutionId: string, file: File, overwrite?: boolean, destination?: string, options?: RawAxiosRequestConfig): AxiosPromise<SolutionFile> {
-            return localVarFp.createSolutionFile(organizationId, solutionId, file, overwrite, destination, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @summary Create solution parameter for a solution
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
@@ -10392,29 +10082,6 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
          */
         deleteSolutionAccessControl(organizationId: string, solutionId: string, identityId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.deleteSolutionAccessControl(organizationId, solutionId, identityId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Delete a solution file
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} fileName The file name
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        deleteSolutionFile(organizationId: string, solutionId: string, fileName: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.deleteSolutionFile(organizationId, solutionId, fileName, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Delete all Solution files
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        deleteSolutionFiles(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.deleteSolutionFiles(organizationId, solutionId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -10489,18 +10156,6 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * 
-         * @summary Download the Solution File specified
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {string} fileName The file name
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getSolutionFile(organizationId: string, solutionId: string, fileName: string, options?: RawAxiosRequestConfig): AxiosPromise<File> {
-            return localVarFp.getSolutionFile(organizationId, solutionId, fileName, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @summary Get the details of a solution parameter
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
@@ -10544,17 +10199,6 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
          */
         listRunTemplates(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<RunTemplate>> {
             return localVarFp.listRunTemplates(organizationId, solutionId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary List all Solution files
-         * @param {string} organizationId the Organization identifier
-         * @param {string} solutionId the Solution identifier
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listSolutionFiles(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<SolutionFile>> {
-            return localVarFp.listSolutionFiles(organizationId, solutionId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -10716,22 +10360,6 @@ export class SolutionApi extends BaseAPI {
 
     /**
      * 
-     * @summary Upload a file for the Solution
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
-     * @param {File} file The file to upload
-     * @param {boolean} [overwrite] Whether to overwrite an existing file
-     * @param {string} [destination] Destination path. Must end with a \\\&#39;/\\\&#39; if specifying a folder. Note that paths may or may not start with a \\\&#39;/\\\&#39;, but they are always treated as relative to the Solution root location. 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SolutionApi
-     */
-    public createSolutionFile(organizationId: string, solutionId: string, file: File, overwrite?: boolean, destination?: string, options?: RawAxiosRequestConfig) {
-        return SolutionApiFp(this.configuration).createSolutionFile(organizationId, solutionId, file, overwrite, destination, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
      * @summary Create solution parameter for a solution
      * @param {string} organizationId the Organization identifier
      * @param {string} solutionId the Solution identifier
@@ -10797,33 +10425,6 @@ export class SolutionApi extends BaseAPI {
      */
     public deleteSolutionAccessControl(organizationId: string, solutionId: string, identityId: string, options?: RawAxiosRequestConfig) {
         return SolutionApiFp(this.configuration).deleteSolutionAccessControl(organizationId, solutionId, identityId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Delete a solution file
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
-     * @param {string} fileName The file name
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SolutionApi
-     */
-    public deleteSolutionFile(organizationId: string, solutionId: string, fileName: string, options?: RawAxiosRequestConfig) {
-        return SolutionApiFp(this.configuration).deleteSolutionFile(organizationId, solutionId, fileName, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Delete all Solution files
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SolutionApi
-     */
-    public deleteSolutionFiles(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig) {
-        return SolutionApiFp(this.configuration).deleteSolutionFiles(organizationId, solutionId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -10911,20 +10512,6 @@ export class SolutionApi extends BaseAPI {
 
     /**
      * 
-     * @summary Download the Solution File specified
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
-     * @param {string} fileName The file name
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SolutionApi
-     */
-    public getSolutionFile(organizationId: string, solutionId: string, fileName: string, options?: RawAxiosRequestConfig) {
-        return SolutionApiFp(this.configuration).getSolutionFile(organizationId, solutionId, fileName, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
      * @summary Get the details of a solution parameter
      * @param {string} organizationId the Organization identifier
      * @param {string} solutionId the Solution identifier
@@ -10975,19 +10562,6 @@ export class SolutionApi extends BaseAPI {
      */
     public listRunTemplates(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig) {
         return SolutionApiFp(this.configuration).listRunTemplates(organizationId, solutionId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary List all Solution files
-     * @param {string} organizationId the Organization identifier
-     * @param {string} solutionId the Solution identifier
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SolutionApi
-     */
-    public listSolutionFiles(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig) {
-        return SolutionApiFp(this.configuration).listSolutionFiles(organizationId, solutionId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

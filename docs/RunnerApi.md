@@ -563,8 +563,8 @@ const apiInstance = new RunnerApi(configuration);
 
 let organizationId: string; //the Organization identifier (default to undefined)
 let workspaceId: string; //the Workspace identifier (default to undefined)
-let page: number; //page number to query (first page is at index 0) (optional) (default to undefined)
-let size: number; //amount of result by page (optional) (default to undefined)
+let page: number; //Page number to query (first page is at index 0) (optional) (default to undefined)
+let size: number; //Amount of result by page (optional) (default to undefined)
 
 const { status, data } = await apiInstance.listRunners(
     organizationId,
@@ -580,8 +580,8 @@ const { status, data } = await apiInstance.listRunners(
 |------------- | ------------- | ------------- | -------------|
 | **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
 | **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
-| **page** | [**number**] | page number to query (first page is at index 0) | (optional) defaults to undefined|
-| **size** | [**number**] | amount of result by page | (optional) defaults to undefined|
+| **page** | [**number**] | Page number to query (first page is at index 0) | (optional) defaults to undefined|
+| **size** | [**number**] | Amount of result by page | (optional) defaults to undefined|
 
 
 ### Return type

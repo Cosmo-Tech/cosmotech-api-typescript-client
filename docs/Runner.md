@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **ownerName** | **string** | the name of the owner | [readonly] [default to undefined]
 **solutionName** | **string** | the Solution name | [optional] [readonly] [default to undefined]
 **runTemplateName** | **string** | the Solution Run Template name associated with this Runner | [optional] [readonly] [default to undefined]
-**datasetList** | **Array&lt;string&gt;** | the list of Dataset Id associated to this Runner Run Template | [default to undefined]
+**datasets** | [**RunnerDatasets**](RunnerDatasets.md) |  | [default to undefined]
 **runSizing** | [**RunnerResourceSizing**](RunnerResourceSizing.md) |  | [optional] [default to undefined]
 **parametersValues** | [**Array&lt;RunnerRunTemplateParameterValue&gt;**](RunnerRunTemplateParameterValue.md) | the list of Solution Run Template parameters values | [default to undefined]
 **lastRunInfo** | [**LastRunInfo**](LastRunInfo.md) |  | [default to undefined]
@@ -49,7 +49,7 @@ const instance: Runner = {
     ownerName,
     solutionName,
     runTemplateName,
-    datasetList,
+    datasets,
     runSizing,
     parametersValues,
     lastRunInfo,
