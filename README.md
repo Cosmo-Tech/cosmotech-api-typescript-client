@@ -71,6 +71,7 @@ Class | Method | HTTP request | Description
 *DatasetApi* | [**updateDataset**](docs/DatasetApi.md#updatedataset) | **PATCH** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id} | Update a Dataset
 *DatasetApi* | [**updateDatasetAccessControl**](docs/DatasetApi.md#updatedatasetaccesscontrol) | **PATCH** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/security/access/{identity_id} | Update the specified access to User for a Dataset
 *DatasetApi* | [**updateDatasetDefaultSecurity**](docs/DatasetApi.md#updatedatasetdefaultsecurity) | **PATCH** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/security/default | Set the Dataset default security
+*DatasetApi* | [**updateDatasetPart**](docs/DatasetApi.md#updatedatasetpart) | **PATCH** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts/{dataset_part_id} | Update existing dataset parts information of a Dataset
 *MetaApi* | [**about**](docs/MetaApi.md#about) | **GET** /about | Get various information about the API
 *OrganizationApi* | [**createOrganization**](docs/OrganizationApi.md#createorganization) | **POST** /organizations | Create a new organization
 *OrganizationApi* | [**createOrganizationAccessControl**](docs/OrganizationApi.md#createorganizationaccesscontrol) | **POST** /organizations/{organization_id}/security/access | Add a control access to the Organization

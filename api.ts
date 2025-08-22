@@ -4001,6 +4001,62 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @summary Update existing dataset parts information of a Dataset
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {string} datasetPartId the Dataset part identifier
+         * @param {DatasetPartUpdateRequest} datasetPartUpdateRequest Dataset part information to update
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateDatasetPart: async (organizationId: string, workspaceId: string, datasetId: string, datasetPartId: string, datasetPartUpdateRequest: DatasetPartUpdateRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('updateDatasetPart', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('updateDatasetPart', 'workspaceId', workspaceId)
+            // verify required parameter 'datasetId' is not null or undefined
+            assertParamExists('updateDatasetPart', 'datasetId', datasetId)
+            // verify required parameter 'datasetPartId' is not null or undefined
+            assertParamExists('updateDatasetPart', 'datasetPartId', datasetPartId)
+            // verify required parameter 'datasetPartUpdateRequest' is not null or undefined
+            assertParamExists('updateDatasetPart', 'datasetPartUpdateRequest', datasetPartUpdateRequest)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts/{dataset_part_id}`
+                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
+                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
+                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)))
+                .replace(`{${"dataset_part_id"}}`, encodeURIComponent(String(datasetPartId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(datasetPartUpdateRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -4342,6 +4398,23 @@ export const DatasetApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['DatasetApi.updateDatasetDefaultSecurity']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * 
+         * @summary Update existing dataset parts information of a Dataset
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {string} datasetPartId the Dataset part identifier
+         * @param {DatasetPartUpdateRequest} datasetPartUpdateRequest Dataset part information to update
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateDatasetPart(organizationId: string, workspaceId: string, datasetId: string, datasetPartId: string, datasetPartUpdateRequest: DatasetPartUpdateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DatasetPart>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateDatasetPart(organizationId, workspaceId, datasetId, datasetPartId, datasetPartUpdateRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DatasetApi.updateDatasetPart']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -4622,6 +4695,20 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          */
         updateDatasetDefaultSecurity(organizationId: string, workspaceId: string, datasetId: string, datasetRole: DatasetRole, options?: RawAxiosRequestConfig): AxiosPromise<DatasetSecurity> {
             return localVarFp.updateDatasetDefaultSecurity(organizationId, workspaceId, datasetId, datasetRole, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Update existing dataset parts information of a Dataset
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {string} datasetPartId the Dataset part identifier
+         * @param {DatasetPartUpdateRequest} datasetPartUpdateRequest Dataset part information to update
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateDatasetPart(organizationId: string, workspaceId: string, datasetId: string, datasetPartId: string, datasetPartUpdateRequest: DatasetPartUpdateRequest, options?: RawAxiosRequestConfig): AxiosPromise<DatasetPart> {
+            return localVarFp.updateDatasetPart(organizationId, workspaceId, datasetId, datasetPartId, datasetPartUpdateRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -4942,6 +5029,22 @@ export class DatasetApi extends BaseAPI {
      */
     public updateDatasetDefaultSecurity(organizationId: string, workspaceId: string, datasetId: string, datasetRole: DatasetRole, options?: RawAxiosRequestConfig) {
         return DatasetApiFp(this.configuration).updateDatasetDefaultSecurity(organizationId, workspaceId, datasetId, datasetRole, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Update existing dataset parts information of a Dataset
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} datasetId the Dataset identifier
+     * @param {string} datasetPartId the Dataset part identifier
+     * @param {DatasetPartUpdateRequest} datasetPartUpdateRequest Dataset part information to update
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DatasetApi
+     */
+    public updateDatasetPart(organizationId: string, workspaceId: string, datasetId: string, datasetPartId: string, datasetPartUpdateRequest: DatasetPartUpdateRequest, options?: RawAxiosRequestConfig) {
+        return DatasetApiFp(this.configuration).updateDatasetPart(organizationId, workspaceId, datasetId, datasetPartId, datasetPartUpdateRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

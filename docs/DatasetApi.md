@@ -24,6 +24,7 @@ All URIs are relative to *http://localhost:8080*
 |[**updateDataset**](#updatedataset) | **PATCH** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id} | Update a Dataset|
 |[**updateDatasetAccessControl**](#updatedatasetaccesscontrol) | **PATCH** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/security/access/{identity_id} | Update the specified access to User for a Dataset|
 |[**updateDatasetDefaultSecurity**](#updatedatasetdefaultsecurity) | **PATCH** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/security/default | Set the Dataset default security|
+|[**updateDatasetPart**](#updatedatasetpart) | **PATCH** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts/{dataset_part_id} | Update existing dataset parts information of a Dataset|
 
 # **createDataset**
 > Dataset createDataset()
@@ -83,8 +84,8 @@ const { status, data } = await apiInstance.createDataset(
 |-------------|-------------|------------------|
 |**201** | Dataset successfully created |  -  |
 |**400** | Bad request |  -  |
-|**403** | Insufficient permissions on organization or workspace or dataset |  -  |
-|**404** | Organization or workspace specified is not found |  -  |
+|**403** | Insufficient permissions on organization, workspace or dataset |  -  |
+|**404** | Organization, workspace specified is not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -210,7 +211,7 @@ const { status, data } = await apiInstance.createDatasetPart(
 |-------------|-------------|------------------|
 |**201** | Dataset part successfully created |  -  |
 |**400** | Bad request - Dataset part cannot be created |  -  |
-|**403** | Insufficient permissions on organization or workspace or dataset |  -  |
+|**403** | Insufficient permissions on organization, workspace or dataset |  -  |
 |**404** | Dataset specified is not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -269,7 +270,7 @@ void (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**204** | Dataset successfully deleted |  -  |
-|**403** | Insufficient permissions on organization or workspace or dataset |  -  |
+|**403** | Insufficient permissions on organization, workspace or dataset |  -  |
 |**404** | Organization or workspace or dataset specified is not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -391,7 +392,7 @@ void (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**204** | Dataset part successfully deleted |  -  |
-|**403** | Insufficient permissions on organization or workspace or dataset |  -  |
+|**403** | Insufficient permissions on organization, workspace or dataset |  -  |
 |**404** | Dataset part specified is not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -452,7 +453,7 @@ const { status, data } = await apiInstance.downloadDatasetPart(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Dataset part successfully downloaded |  -  |
-|**403** | Insufficient permissions on organization or workspace or dataset |  -  |
+|**403** | Insufficient permissions on organization, workspace or dataset |  -  |
 |**404** | Dataset part specified is not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -511,8 +512,8 @@ const { status, data } = await apiInstance.getDataset(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Dataset successfully retrieved |  -  |
-|**403** | Insufficient permissions on organization or workspace or dataset |  -  |
-|**404** | Organization or workspace or dataset specified is not found |  -  |
+|**403** | Insufficient permissions on organization, workspace or dataset |  -  |
+|**404** | Organization, workspace or dataset specified is not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -632,7 +633,7 @@ const { status, data } = await apiInstance.getDatasetPart(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Dataset part successfully retrieved |  -  |
-|**403** | Insufficient permissions on organization or workspace or dataset |  -  |
+|**403** | Insufficient permissions on organization, workspace or dataset |  -  |
 |**404** | Dataset part specified is not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -696,7 +697,7 @@ const { status, data } = await apiInstance.listDatasetParts(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | List of dataset parts |  -  |
-|**403** | Insufficient permissions on organization or workspace or dataset |  -  |
+|**403** | Insufficient permissions on organization, workspace or dataset |  -  |
 |**404** | Dataset specified is not found |  -  |
 |**422** | Targeted dataset do not support requests |  -  |
 
@@ -816,8 +817,8 @@ const { status, data } = await apiInstance.listDatasets(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Datasets successfully retrieved |  -  |
-|**403** | Insufficient permissions on organization or workspace or dataset |  -  |
-|**404** | Organization or workspace or dataset specified is not found |  -  |
+|**403** | Insufficient permissions on organization, workspace or dataset |  -  |
+|**404** | Organization, workspace or dataset specified is not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -893,7 +894,7 @@ const { status, data } = await apiInstance.queryData(
 |-------------|-------------|------------------|
 |**200** | Data related to provided information |  -  |
 |**400** | Bad request - Data cannot be retrieved from provided information |  -  |
-|**403** | Insufficient permissions on organization or workspace or dataset |  -  |
+|**403** | Insufficient permissions on organization, workspace or dataset |  -  |
 |**404** | Dataset specified is not found or you don\&#39;t have access to it |  -  |
 |**422** | Targeted dataset do not support requests |  -  |
 
@@ -962,7 +963,7 @@ const { status, data } = await apiInstance.replaceDatasetPart(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Dataset part successfully replaced |  -  |
-|**403** | Insufficient permissions on organization or workspace or dataset |  -  |
+|**403** | Insufficient permissions on organization, workspace or dataset |  -  |
 |**404** | Dataset part specified is not found |  -  |
 |**422** | Targeted dataset do not support requests |  -  |
 
@@ -1157,8 +1158,8 @@ const { status, data } = await apiInstance.updateDataset(
 |-------------|-------------|------------------|
 |**200** | Dataset successfully updated |  -  |
 |**400** | Bad request |  -  |
-|**403** | Insufficient permissions on organization or workspace or dataset |  -  |
-|**404** | Organization or workspace or dataset specified is not found |  -  |
+|**403** | Insufficient permissions on organization, workspace or dataset |  -  |
+|**404** | Organization, workspace or dataset specified is not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1284,6 +1285,72 @@ const { status, data } = await apiInstance.updateDatasetDefaultSecurity(
 |-------------|-------------|------------------|
 |**201** | The Dataset default visibility |  -  |
 |**404** | the Dataset specified is unknown or you don\&#39;t have access to it |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **updateDatasetPart**
+> DatasetPart updateDatasetPart(datasetPartUpdateRequest)
+
+
+### Example
+
+```typescript
+import {
+    DatasetApi,
+    Configuration,
+    DatasetPartUpdateRequest
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new DatasetApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let workspaceId: string; //the Workspace identifier (default to undefined)
+let datasetId: string; //the Dataset identifier (default to undefined)
+let datasetPartId: string; //the Dataset part identifier (default to undefined)
+let datasetPartUpdateRequest: DatasetPartUpdateRequest; //Dataset part information to update
+
+const { status, data } = await apiInstance.updateDatasetPart(
+    organizationId,
+    workspaceId,
+    datasetId,
+    datasetPartId,
+    datasetPartUpdateRequest
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **datasetPartUpdateRequest** | **DatasetPartUpdateRequest**| Dataset part information to update | |
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
+| **datasetId** | [**string**] | the Dataset identifier | defaults to undefined|
+| **datasetPartId** | [**string**] | the Dataset part identifier | defaults to undefined|
+
+
+### Return type
+
+**DatasetPart**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, application/yaml
+ - **Accept**: application/json, application/yaml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Dataset part information successfully updated |  -  |
+|**403** | Insufficient permissions on organization, workspace or dataset |  -  |
+|**404** | Dataset part specified is not found |  -  |
+|**422** | Targeted dataset do not support requests |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
