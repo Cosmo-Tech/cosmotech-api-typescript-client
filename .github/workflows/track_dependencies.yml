@@ -1,0 +1,28 @@
+name: Track Dependencies
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+jobs:
+  dependency_track:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+      - name: Install generator
+        run: |
+          npm install --global @cyclonedx/cyclonedx-npm
+      - name: Install project dependencies
+        run: npm install
+      - name: Generate BOM
+        run: cyclonedx-npm --mc-type library -o sbom.json
+      - name: Upload BOM to Dependency Track
+        uses: DependencyTrack/gh-upload-sbom@v3
+        with:
+          serverhostname: ${{ secrets.DEPENDENCY_TRACK_SERVER_HOSTNAME }}
+          apikey: ${{ secrets.DEPENDENCY_TRACK_API_KEY }}
+          project: 'd15fd01c-3d8b-42d4-a83a-ce9a5d95d72e'
+          bomfilename: 'sbom.json'
