@@ -12,9 +12,8 @@ jobs:
       with:
         node-version: '14.x'
         registry-url: 'https://registry.npmjs.org'
-        scope: '@cosmotech' 
+        scope: '@cosmotech'
     - run: yarn
-    - run: git config --global user.email "vincent.carluer@cosmotech.com" && git config --global user.name "Vincent Carluer"
     - run: npm version ${{ github.event.release.tag_name }} --allow-same-version
     - run: npm publish
       env:
