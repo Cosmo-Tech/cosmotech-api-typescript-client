@@ -1,13 +1,13 @@
 # SolutionAccessControl
 
-A Solution access control item
+a Solution access control item
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | The identity id | [default to undefined]
-**role** | **string** | The assigned role | [default to undefined]
+**id** | **string** | the identity id | [default to undefined]
+**role** | **string** | a role | [default to undefined]
 
 ## Example
 

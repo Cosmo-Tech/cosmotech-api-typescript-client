@@ -1,16 +1,14 @@
 # WorkspaceSolution
 
-The Workspace Solution configuration
+the Workspace Solution configuration
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**solutionId** | **string** | The Solution Id attached to this workspace | [default to undefined]
-**datasetId** | **string** | The Dataset Id attached to this workspace. This dataset will be used to store default values for Solution parameters with file\&#39;s varType.  | [optional] [default to undefined]
-**defaultParameterValues** | **{ [key: string]: string; }** | A map of parameterId/value to set default values for Solution parameters with simple varType (int, string, ...) | [optional] [default to undefined]
-**runTemplateFilter** | **Array&lt;string&gt;** | The list of Solution Run Template Id to filter | [optional] [default to undefined]
-**defaultRunTemplateDataset** | **{ [key: string]: any; }** | A map of RunTemplateId/DatasetId to set a default dataset for a Run Template | [optional] [default to undefined]
+**solutionId** | **string** | the Solution Id attached to this workspace | [optional] [default to undefined]
+**runTemplateFilter** | **Array&lt;string&gt;** | the list of Solution Run Template Id to filter | [optional] [default to undefined]
+**defaultRunTemplateDataset** | **{ [key: string]: any; }** | a map of RunTemplateId/DatasetId to set a default dataset for a Run Template | [optional] [default to undefined]
 
 ## Example
 
@@ -19,8 +17,6 @@ import { WorkspaceSolution } from '@cosmotech/api-ts';
 
 const instance: WorkspaceSolution = {
     solutionId,
-    datasetId,
-    defaultParameterValues,
     runTemplateFilter,
     defaultRunTemplateDataset,
 };
