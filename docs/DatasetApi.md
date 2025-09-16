@@ -1,43 +1,96 @@
 # DatasetApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost:8080*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**addDatasetAccessControl**](#adddatasetaccesscontrol) | **POST** /organizations/{organization_id}/datasets/{dataset_id}/security/access | Add a control access to the Dataset|
-|[**addOrReplaceDatasetCompatibilityElements**](#addorreplacedatasetcompatibilityelements) | **POST** /organizations/{organization_id}/datasets/{dataset_id}/compatibility | Add Dataset Compatibility elements.|
-|[**copyDataset**](#copydataset) | **POST** /organizations/{organization_id}/datasets/copy | Copy a Dataset to another Dataset.|
-|[**createDataset**](#createdataset) | **POST** /organizations/{organization_id}/datasets | Create a new Dataset|
-|[**createSubDataset**](#createsubdataset) | **POST** /organizations/{organization_id}/datasets/{dataset_id}/subdataset | Create a sub-dataset from the dataset in parameter|
-|[**createTwingraphEntities**](#createtwingraphentities) | **POST** /organizations/{organization_id}/datasets/{dataset_id}/twingraph/{type} | Create new entities in a graph instance|
-|[**deleteDataset**](#deletedataset) | **DELETE** /organizations/{organization_id}/datasets/{dataset_id} | Delete a dataset|
-|[**deleteTwingraphEntities**](#deletetwingraphentities) | **DELETE** /organizations/{organization_id}/datasets/{dataset_id}/twingraph/{type} | Delete entities in a graph instance|
-|[**downloadTwingraph**](#downloadtwingraph) | **GET** /organizations/{organization_id}/datasets/twingraph/download/{hash} | Download a graph as a zip file|
-|[**findAllDatasets**](#findalldatasets) | **GET** /organizations/{organization_id}/datasets | List all Datasets|
-|[**findDatasetById**](#finddatasetbyid) | **GET** /organizations/{organization_id}/datasets/{dataset_id} | Get the details of a Dataset|
-|[**getDatasetAccessControl**](#getdatasetaccesscontrol) | **GET** /organizations/{organization_id}/datasets/{dataset_id}/security/access/{identity_id} | Get a control access for the Dataset|
-|[**getDatasetSecurity**](#getdatasetsecurity) | **GET** /organizations/{organization_id}/datasets/{dataset_id}/security | Get the Dataset security information|
-|[**getDatasetSecurityUsers**](#getdatasetsecurityusers) | **GET** /organizations/{organization_id}/datasets/{dataset_id}/security/users | Get the Dataset security users list|
-|[**getDatasetTwingraphStatus**](#getdatasettwingraphstatus) | **GET** /organizations/{organization_id}/datasets/{dataset_id}/status | Get the dataset\&#39;s refresh job status|
-|[**getTwingraphEntities**](#gettwingraphentities) | **GET** /organizations/{organization_id}/datasets/{dataset_id}/twingraph/{type} | Get entities in a graph instance|
-|[**linkWorkspace**](#linkworkspace) | **POST** /organizations/{organization_id}/datasets/{dataset_id}/link | |
-|[**refreshDataset**](#refreshdataset) | **POST** /organizations/{organization_id}/datasets/{dataset_id}/refresh | Refresh data on dataset from dataset\&#39;s source|
-|[**removeAllDatasetCompatibilityElements**](#removealldatasetcompatibilityelements) | **DELETE** /organizations/{organization_id}/datasets/{dataset_id}/compatibility | Remove all Dataset Compatibility elements from the Dataset specified|
-|[**removeDatasetAccessControl**](#removedatasetaccesscontrol) | **DELETE** /organizations/{organization_id}/datasets/{dataset_id}/security/access/{identity_id} | Remove the specified access from the given Dataset|
-|[**rollbackRefresh**](#rollbackrefresh) | **POST** /organizations/{organization_id}/datasets/{dataset_id}/refresh/rollback | Rollback the dataset after a failed refresh|
-|[**searchDatasets**](#searchdatasets) | **POST** /organizations/{organization_id}/datasets/search | Search Datasets by tags|
-|[**setDatasetDefaultSecurity**](#setdatasetdefaultsecurity) | **POST** /organizations/{organization_id}/datasets/{dataset_id}/security/default | Set the Dataset default security|
-|[**twingraphBatchQuery**](#twingraphbatchquery) | **POST** /organizations/{organization_id}/datasets/{dataset_id}/batch-query | Run a query on a graph instance and return the result as a zip file in async mode|
-|[**twingraphBatchUpdate**](#twingraphbatchupdate) | **POST** /organizations/{organization_id}/datasets/{dataset_id}/batch | Async batch update by loading a CSV file on a graph instance |
-|[**twingraphQuery**](#twingraphquery) | **POST** /organizations/{organization_id}/datasets/{dataset_id}/twingraph | Return the result of a query made on the graph instance as a json|
-|[**unlinkWorkspace**](#unlinkworkspace) | **POST** /organizations/{organization_id}/datasets/{dataset_id}/unlink | |
-|[**updateDataset**](#updatedataset) | **PATCH** /organizations/{organization_id}/datasets/{dataset_id} | Update a dataset|
-|[**updateDatasetAccessControl**](#updatedatasetaccesscontrol) | **PATCH** /organizations/{organization_id}/datasets/{dataset_id}/security/access/{identity_id} | Update the specified access to User for a Dataset|
-|[**updateTwingraphEntities**](#updatetwingraphentities) | **PATCH** /organizations/{organization_id}/datasets/{dataset_id}/twingraph/{type} | Update entities in a graph instance|
-|[**uploadTwingraph**](#uploadtwingraph) | **POST** /organizations/{organization_id}/datasets/{dataset_id} | Upload data from zip file to dataset\&#39;s twingraph|
+|[**createDataset**](#createdataset) | **POST** /organizations/{organization_id}/workspaces/{workspace_id}/datasets | Create a Dataset|
+|[**createDatasetAccessControl**](#createdatasetaccesscontrol) | **POST** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/security/access | Add a control access to the Dataset|
+|[**createDatasetPart**](#createdatasetpart) | **POST** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts | Create a data part of a Dataset|
+|[**deleteDataset**](#deletedataset) | **DELETE** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id} | Delete a Dataset|
+|[**deleteDatasetAccessControl**](#deletedatasetaccesscontrol) | **DELETE** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/security/access/{identity_id} | Remove the specified access from the given Dataset|
+|[**deleteDatasetPart**](#deletedatasetpart) | **DELETE** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts/{dataset_part_id} | Delete a Dataset part|
+|[**downloadDatasetPart**](#downloaddatasetpart) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts/{dataset_part_id}/download | Download data from a dataset part|
+|[**getDataset**](#getdataset) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id} | Retrieve a Dataset|
+|[**getDatasetAccessControl**](#getdatasetaccesscontrol) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/security/access/{identity_id} | Get a control access for the Dataset|
+|[**getDatasetPart**](#getdatasetpart) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts/{dataset_part_id} | Retrieve a data part of a Dataset|
+|[**listDatasetParts**](#listdatasetparts) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts | Retrieve all dataset parts of a Dataset|
+|[**listDatasetSecurityUsers**](#listdatasetsecurityusers) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/security/users | Get the Dataset security users list|
+|[**listDatasets**](#listdatasets) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/datasets | Retrieve a list of defined Dataset|
+|[**queryData**](#querydata) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts/{dataset_part_id}/query | Get data of a Dataset|
+|[**replaceDatasetPart**](#replacedatasetpart) | **PUT** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts/{dataset_part_id} | Replace existing dataset parts of a Dataset|
+|[**searchDatasetParts**](#searchdatasetparts) | **POST** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts/search | Search Dataset parts by tags|
+|[**searchDatasets**](#searchdatasets) | **POST** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/search | Search Datasets by tags|
+|[**updateDataset**](#updatedataset) | **PATCH** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id} | Update a Dataset|
+|[**updateDatasetAccessControl**](#updatedatasetaccesscontrol) | **PATCH** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/security/access/{identity_id} | Update the specified access to User for a Dataset|
+|[**updateDatasetDefaultSecurity**](#updatedatasetdefaultsecurity) | **PATCH** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/security/default | Set the Dataset default security|
+|[**updateDatasetPart**](#updatedatasetpart) | **PATCH** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts/{dataset_part_id} | Update existing dataset parts information of a Dataset|
 
-# **addDatasetAccessControl**
-> DatasetAccessControl addDatasetAccessControl(datasetAccessControl)
+# **createDataset**
+> Dataset createDataset()
+
+
+### Example
+
+```typescript
+import {
+    DatasetApi,
+    Configuration,
+    DatasetCreateRequest
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new DatasetApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let workspaceId: string; //the Workspace identifier (default to undefined)
+let datasetCreateRequest: DatasetCreateRequest; // (default to undefined)
+let files: Array<File>; //Notes:   - Each parts defined in dataset should have a file defined in this list   - Please ensure that upload files order match with data parts list defined     - First file uploaded will match with first dataset parts and so on  (optional) (default to undefined)
+
+const { status, data } = await apiInstance.createDataset(
+    organizationId,
+    workspaceId,
+    datasetCreateRequest,
+    files
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
+| **datasetCreateRequest** | **DatasetCreateRequest** |  | defaults to undefined|
+| **files** | **Array&lt;File&gt;** | Notes:   - Each parts defined in dataset should have a file defined in this list   - Please ensure that upload files order match with data parts list defined     - First file uploaded will match with first dataset parts and so on  | (optional) defaults to undefined|
+
+
+### Return type
+
+**Dataset**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json, application/yaml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**201** | Dataset successfully created |  -  |
+|**400** | Bad request |  -  |
+|**403** | Insufficient permissions on organization, workspace or dataset |  -  |
+|**404** | Organization, workspace specified is not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **createDatasetAccessControl**
+> DatasetAccessControl createDatasetAccessControl(datasetAccessControl)
 
 
 ### Example
@@ -53,11 +106,13 @@ const configuration = new Configuration();
 const apiInstance = new DatasetApi(configuration);
 
 let organizationId: string; //the Organization identifier (default to undefined)
+let workspaceId: string; //the Workspace identifier (default to undefined)
 let datasetId: string; //the Dataset identifier (default to undefined)
 let datasetAccessControl: DatasetAccessControl; //the new Dataset security access to add.
 
-const { status, data } = await apiInstance.addDatasetAccessControl(
+const { status, data } = await apiInstance.createDatasetAccessControl(
     organizationId,
+    workspaceId,
     datasetId,
     datasetAccessControl
 );
@@ -69,6 +124,7 @@ const { status, data } = await apiInstance.addDatasetAccessControl(
 |------------- | ------------- | ------------- | -------------|
 | **datasetAccessControl** | **DatasetAccessControl**| the new Dataset security access to add. | |
 | **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
 | **datasetId** | [**string**] | the Dataset identifier | defaults to undefined|
 
 
@@ -83,7 +139,7 @@ const { status, data } = await apiInstance.addDatasetAccessControl(
 ### HTTP request headers
 
  - **Content-Type**: application/json, application/yaml
- - **Accept**: application/json
+ - **Accept**: application/json, application/yaml
 
 
 ### HTTP response details
@@ -94,8 +150,8 @@ const { status, data } = await apiInstance.addDatasetAccessControl(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **addOrReplaceDatasetCompatibilityElements**
-> Array<DatasetCompatibility> addOrReplaceDatasetCompatibilityElements(datasetCompatibility)
+# **createDatasetPart**
+> DatasetPart createDatasetPart()
 
 
 ### Example
@@ -103,20 +159,25 @@ const { status, data } = await apiInstance.addDatasetAccessControl(
 ```typescript
 import {
     DatasetApi,
-    Configuration
+    Configuration,
+    DatasetPartCreateRequest
 } from '@cosmotech/api-ts';
 
 const configuration = new Configuration();
 const apiInstance = new DatasetApi(configuration);
 
 let organizationId: string; //the Organization identifier (default to undefined)
+let workspaceId: string; //the Workspace identifier (default to undefined)
 let datasetId: string; //the Dataset identifier (default to undefined)
-let datasetCompatibility: Array<DatasetCompatibility>; //the Dataset Compatibility elements
+let file: File; //Data file to upload (default to undefined)
+let datasetPartCreateRequest: DatasetPartCreateRequest; // (default to undefined)
 
-const { status, data } = await apiInstance.addOrReplaceDatasetCompatibilityElements(
+const { status, data } = await apiInstance.createDatasetPart(
     organizationId,
+    workspaceId,
     datasetId,
-    datasetCompatibility
+    file,
+    datasetPartCreateRequest
 );
 ```
 
@@ -124,14 +185,16 @@ const { status, data } = await apiInstance.addOrReplaceDatasetCompatibilityEleme
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **datasetCompatibility** | **Array<DatasetCompatibility>**| the Dataset Compatibility elements | |
 | **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
 | **datasetId** | [**string**] | the Dataset identifier | defaults to undefined|
+| **file** | [**File**] | Data file to upload | defaults to undefined|
+| **datasetPartCreateRequest** | **DatasetPartCreateRequest** |  | defaults to undefined|
 
 
 ### Return type
 
-**Array<DatasetCompatibility>**
+**DatasetPart**
 
 ### Authorization
 
@@ -139,252 +202,24 @@ const { status, data } = await apiInstance.addOrReplaceDatasetCompatibilityEleme
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json, application/yaml
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**201** | the Dataset Compatibility elements |  -  |
-|**400** | Bad request |  -  |
-|**404** | the Dataset specified is unknown or you don\&#39;t have access to it |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **copyDataset**
-> DatasetCopyParameters copyDataset(datasetCopyParameters)
-
-Not implemented!
-
-### Example
-
-```typescript
-import {
-    DatasetApi,
-    Configuration,
-    DatasetCopyParameters
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new DatasetApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let datasetCopyParameters: DatasetCopyParameters; //the Dataset copy parameters
-
-const { status, data } = await apiInstance.copyDataset(
-    organizationId,
-    datasetCopyParameters
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **datasetCopyParameters** | **DatasetCopyParameters**| the Dataset copy parameters | |
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-
-
-### Return type
-
-**DatasetCopyParameters**
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: application/json, application/yaml
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**201** | the Dataset copy operation parameters |  -  |
-|**400** | Bad request |  -  |
-|**404** | the Dataset specified as Source or Target is unknown or you don\&#39;t have access to it |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **createDataset**
-> Dataset createDataset(dataset)
-
-
-### Example
-
-```typescript
-import {
-    DatasetApi,
-    Configuration,
-    Dataset
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new DatasetApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let dataset: Dataset; //the Dataset to create
-
-const { status, data } = await apiInstance.createDataset(
-    organizationId,
-    dataset
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **dataset** | **Dataset**| the Dataset to create | |
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-
-
-### Return type
-
-**Dataset**
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: application/json, application/yaml
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**201** | the dataset details |  -  |
-|**400** | Bad request |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **createSubDataset**
-> Dataset createSubDataset(subDatasetGraphQuery)
-
-Create a copy of the dataset using the results of the list of queries given in parameter. Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-
-### Example
-
-```typescript
-import {
-    DatasetApi,
-    Configuration,
-    SubDatasetGraphQuery
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new DatasetApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let datasetId: string; //the Dataset identifier (default to undefined)
-let subDatasetGraphQuery: SubDatasetGraphQuery; //the Cypher query to filter
-
-const { status, data } = await apiInstance.createSubDataset(
-    organizationId,
-    datasetId,
-    subDatasetGraphQuery
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **subDatasetGraphQuery** | **SubDatasetGraphQuery**| the Cypher query to filter | |
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **datasetId** | [**string**] | the Dataset identifier | defaults to undefined|
-
-
-### Return type
-
-**Dataset**
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Successful response |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **createTwingraphEntities**
-> string createTwingraphEntities(graphProperties)
-
-Create new entities in a graph instance Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-
-### Example
-
-```typescript
-import {
-    DatasetApi,
-    Configuration
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new DatasetApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let datasetId: string; //the Dataset Identifier (default to undefined)
-let type: 'node' | 'relationship'; //the entity model type (default to undefined)
-let graphProperties: Array<GraphProperties>; //the entities to create
-
-const { status, data } = await apiInstance.createTwingraphEntities(
-    organizationId,
-    datasetId,
-    type,
-    graphProperties
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **graphProperties** | **Array<GraphProperties>**| the entities to create | |
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **datasetId** | [**string**] | the Dataset Identifier | defaults to undefined|
-| **type** | [**&#39;node&#39; | &#39;relationship&#39;**]**Array<&#39;node&#39; &#124; &#39;relationship&#39;>** | the entity model type | defaults to undefined|
-
-
-### Return type
-
-**string**
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Successful response |  -  |
+|**201** | Dataset part successfully created |  -  |
+|**400** | Bad request - Dataset part cannot be created |  -  |
+|**403** | Insufficient permissions on organization, workspace or dataset |  -  |
+|**404** | Dataset specified is not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deleteDataset**
 > deleteDataset()
 
+Delete a dataset
 
 ### Example
 
@@ -398,10 +233,12 @@ const configuration = new Configuration();
 const apiInstance = new DatasetApi(configuration);
 
 let organizationId: string; //the Organization identifier (default to undefined)
+let workspaceId: string; //the Workspace identifier (default to undefined)
 let datasetId: string; //the Dataset identifier (default to undefined)
 
 const { status, data } = await apiInstance.deleteDataset(
     organizationId,
+    workspaceId,
     datasetId
 );
 ```
@@ -411,6 +248,7 @@ const { status, data } = await apiInstance.deleteDataset(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
 | **datasetId** | [**string**] | the Dataset identifier | defaults to undefined|
 
 
@@ -431,127 +269,14 @@ void (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**204** | Request successful |  -  |
-|**404** | the Dataset specified is unknown or you don\&#39;t have access to it |  -  |
+|**204** | Dataset successfully deleted |  -  |
+|**403** | Insufficient permissions on organization, workspace or dataset |  -  |
+|**404** | Organization or workspace or dataset specified is not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **deleteTwingraphEntities**
-> deleteTwingraphEntities()
-
-Delete entities in a graph instance Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-
-### Example
-
-```typescript
-import {
-    DatasetApi,
-    Configuration
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new DatasetApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let datasetId: string; //the Dataset Identifier (default to undefined)
-let type: 'node' | 'relationship'; //the entity model type (default to undefined)
-let ids: Array<string>; //the entities to delete (default to undefined)
-
-const { status, data } = await apiInstance.deleteTwingraphEntities(
-    organizationId,
-    datasetId,
-    type,
-    ids
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **datasetId** | [**string**] | the Dataset Identifier | defaults to undefined|
-| **type** | [**&#39;node&#39; | &#39;relationship&#39;**]**Array<&#39;node&#39; &#124; &#39;relationship&#39;>** | the entity model type | defaults to undefined|
-| **ids** | **Array&lt;string&gt;** | the entities to delete | defaults to undefined|
-
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: Not defined
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**204** | Successful response |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **downloadTwingraph**
-> File downloadTwingraph()
-
-Download the compressed graph reference by the hash in a zip file Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-
-### Example
-
-```typescript
-import {
-    DatasetApi,
-    Configuration
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new DatasetApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let hash: string; //the Graph download identifier (default to undefined)
-
-const { status, data } = await apiInstance.downloadTwingraph(
-    organizationId,
-    hash
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **hash** | [**string**] | the Graph download identifier | defaults to undefined|
-
-
-### Return type
-
-**File**
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/octet-stream
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Successful response |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **findAllDatasets**
-> Array<Dataset> findAllDatasets()
+# **deleteDatasetAccessControl**
+> deleteDatasetAccessControl()
 
 
 ### Example
@@ -566,121 +291,13 @@ const configuration = new Configuration();
 const apiInstance = new DatasetApi(configuration);
 
 let organizationId: string; //the Organization identifier (default to undefined)
-let page: number; //page number to query (first page is at index 0) (optional) (default to undefined)
-let size: number; //amount of result by page (optional) (default to undefined)
-
-const { status, data } = await apiInstance.findAllDatasets(
-    organizationId,
-    page,
-    size
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **page** | [**number**] | page number to query (first page is at index 0) | (optional) defaults to undefined|
-| **size** | [**number**] | amount of result by page | (optional) defaults to undefined|
-
-
-### Return type
-
-**Array<Dataset>**
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | the list of Datasets |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **findDatasetById**
-> Dataset findDatasetById()
-
-
-### Example
-
-```typescript
-import {
-    DatasetApi,
-    Configuration
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new DatasetApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let datasetId: string; //the Dataset identifier (default to undefined)
-
-const { status, data } = await apiInstance.findDatasetById(
-    organizationId,
-    datasetId
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **datasetId** | [**string**] | the Dataset identifier | defaults to undefined|
-
-
-### Return type
-
-**Dataset**
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | the Dataset details |  -  |
-|**404** | the Dataset specified is unknown or you don\&#39;t have access to it |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **getDatasetAccessControl**
-> DatasetAccessControl getDatasetAccessControl()
-
-
-### Example
-
-```typescript
-import {
-    DatasetApi,
-    Configuration
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new DatasetApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
+let workspaceId: string; //the Workspace identifier (default to undefined)
 let datasetId: string; //the Dataset identifier (default to undefined)
 let identityId: string; //the User identifier (default to undefined)
 
-const { status, data } = await apiInstance.getDatasetAccessControl(
+const { status, data } = await apiInstance.deleteDatasetAccessControl(
     organizationId,
+    workspaceId,
     datasetId,
     identityId
 );
@@ -691,451 +308,7 @@ const { status, data } = await apiInstance.getDatasetAccessControl(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **datasetId** | [**string**] | the Dataset identifier | defaults to undefined|
-| **identityId** | [**string**] | the User identifier | defaults to undefined|
-
-
-### Return type
-
-**DatasetAccessControl**
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | The Dataset access |  -  |
-|**404** | The Dataset or user specified is unknown or you don\&#39;t have access to it |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **getDatasetSecurity**
-> DatasetSecurity getDatasetSecurity()
-
-
-### Example
-
-```typescript
-import {
-    DatasetApi,
-    Configuration
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new DatasetApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let datasetId: string; //the Dataset identifier (default to undefined)
-
-const { status, data } = await apiInstance.getDatasetSecurity(
-    organizationId,
-    datasetId
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **datasetId** | [**string**] | the Dataset identifier | defaults to undefined|
-
-
-### Return type
-
-**DatasetSecurity**
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | The Dataset security |  -  |
-|**404** | the Dataset specified is unknown or you don\&#39;t have access to it |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **getDatasetSecurityUsers**
-> Array<string> getDatasetSecurityUsers()
-
-
-### Example
-
-```typescript
-import {
-    DatasetApi,
-    Configuration
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new DatasetApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let datasetId: string; //the Dataset identifier (default to undefined)
-
-const { status, data } = await apiInstance.getDatasetSecurityUsers(
-    organizationId,
-    datasetId
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **datasetId** | [**string**] | the Dataset identifier | defaults to undefined|
-
-
-### Return type
-
-**Array<string>**
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | The Dataset security users list |  -  |
-|**404** | the Dataset or the User specified is unknown or you don\&#39;t have access to them |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **getDatasetTwingraphStatus**
-> string getDatasetTwingraphStatus()
-
-Get the status of the import workflow lauch on the dataset\'s refresh. This endpoint needs to be called to update a dataset IngestionStatus or TwincacheStatus
-
-### Example
-
-```typescript
-import {
-    DatasetApi,
-    Configuration
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new DatasetApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let datasetId: string; //the dataset identifier (default to undefined)
-
-const { status, data } = await apiInstance.getDatasetTwingraphStatus(
-    organizationId,
-    datasetId
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **datasetId** | [**string**] | the dataset identifier | defaults to undefined|
-
-
-### Return type
-
-**string**
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/yaml, application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Successful response |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **getTwingraphEntities**
-> string getTwingraphEntities()
-
-Get entities in a graph instance Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-
-### Example
-
-```typescript
-import {
-    DatasetApi,
-    Configuration
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new DatasetApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let datasetId: string; //the Dataset Identifier (default to undefined)
-let type: 'node' | 'relationship'; //the entity model type (default to undefined)
-let ids: Array<string>; //the entities to get (default to undefined)
-
-const { status, data } = await apiInstance.getTwingraphEntities(
-    organizationId,
-    datasetId,
-    type,
-    ids
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **datasetId** | [**string**] | the Dataset Identifier | defaults to undefined|
-| **type** | [**&#39;node&#39; | &#39;relationship&#39;**]**Array<&#39;node&#39; &#124; &#39;relationship&#39;>** | the entity model type | defaults to undefined|
-| **ids** | **Array&lt;string&gt;** | the entities to get | defaults to undefined|
-
-
-### Return type
-
-**string**
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Successful response |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **linkWorkspace**
-> Dataset linkWorkspace()
-
-
-### Example
-
-```typescript
-import {
-    DatasetApi,
-    Configuration
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new DatasetApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let datasetId: string; //the Dataset identifier (default to undefined)
-let workspaceId: string; //workspace id to be linked to (default to undefined)
-
-const { status, data } = await apiInstance.linkWorkspace(
-    organizationId,
-    datasetId,
-    workspaceId
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **datasetId** | [**string**] | the Dataset identifier | defaults to undefined|
-| **workspaceId** | [**string**] | workspace id to be linked to | defaults to undefined|
-
-
-### Return type
-
-**Dataset**
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | the dataset details |  -  |
-|**400** | Bad request |  -  |
-|**404** | the Dataset specified is unknown or you don\&#39;t have access to it |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **refreshDataset**
-> DatasetTwinGraphInfo refreshDataset()
-
-Refresh dataset from parent source. At date, sources can be:      dataset (refresh from another dataset)      Azure Digital twin      Azure storage      Local File (import a new file)  During refresh, datas are overwritten Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-
-### Example
-
-```typescript
-import {
-    DatasetApi,
-    Configuration
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new DatasetApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let datasetId: string; //the Dataset identifier (default to undefined)
-
-const { status, data } = await apiInstance.refreshDataset(
-    organizationId,
-    datasetId
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **datasetId** | [**string**] | the Dataset identifier | defaults to undefined|
-
-
-### Return type
-
-**DatasetTwinGraphInfo**
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Successful response |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **removeAllDatasetCompatibilityElements**
-> removeAllDatasetCompatibilityElements()
-
-
-### Example
-
-```typescript
-import {
-    DatasetApi,
-    Configuration
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new DatasetApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let datasetId: string; //the Dataset identifier (default to undefined)
-
-const { status, data } = await apiInstance.removeAllDatasetCompatibilityElements(
-    organizationId,
-    datasetId
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **datasetId** | [**string**] | the Dataset identifier | defaults to undefined|
-
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: Not defined
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**204** | the operation succeeded |  -  |
-|**404** | the Dataset specified is unknown or you don\&#39;t have access to it |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **removeDatasetAccessControl**
-> removeDatasetAccessControl()
-
-
-### Example
-
-```typescript
-import {
-    DatasetApi,
-    Configuration
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new DatasetApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let datasetId: string; //the Dataset identifier (default to undefined)
-let identityId: string; //the User identifier (default to undefined)
-
-const { status, data } = await apiInstance.removeDatasetAccessControl(
-    organizationId,
-    datasetId,
-    identityId
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
 | **datasetId** | [**string**] | the Dataset identifier | defaults to undefined|
 | **identityId** | [**string**] | the User identifier | defaults to undefined|
 
@@ -1162,10 +335,10 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **rollbackRefresh**
-> string rollbackRefresh()
+# **deleteDatasetPart**
+> deleteDatasetPart()
 
-Rollback the twingraph on a dataset after a failed refresh Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
+Delete a dataset part
 
 ### Example
 
@@ -1179,10 +352,135 @@ const configuration = new Configuration();
 const apiInstance = new DatasetApi(configuration);
 
 let organizationId: string; //the Organization identifier (default to undefined)
+let workspaceId: string; //the Workspace identifier (default to undefined)
+let datasetId: string; //the Dataset identifier (default to undefined)
+let datasetPartId: string; //the Dataset part identifier (default to undefined)
+
+const { status, data } = await apiInstance.deleteDatasetPart(
+    organizationId,
+    workspaceId,
+    datasetId,
+    datasetPartId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
+| **datasetId** | [**string**] | the Dataset identifier | defaults to undefined|
+| **datasetPartId** | [**string**] | the Dataset part identifier | defaults to undefined|
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**204** | Dataset part successfully deleted |  -  |
+|**403** | Insufficient permissions on organization, workspace or dataset |  -  |
+|**404** | Dataset part specified is not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **downloadDatasetPart**
+> File downloadDatasetPart()
+
+
+### Example
+
+```typescript
+import {
+    DatasetApi,
+    Configuration
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new DatasetApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let workspaceId: string; //the Workspace identifier (default to undefined)
+let datasetId: string; //the Dataset identifier (default to undefined)
+let datasetPartId: string; //the Dataset part identifier (default to undefined)
+
+const { status, data } = await apiInstance.downloadDatasetPart(
+    organizationId,
+    workspaceId,
+    datasetId,
+    datasetPartId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
+| **datasetId** | [**string**] | the Dataset identifier | defaults to undefined|
+| **datasetPartId** | [**string**] | the Dataset part identifier | defaults to undefined|
+
+
+### Return type
+
+**File**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/octet-stream
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Dataset part successfully downloaded |  -  |
+|**403** | Insufficient permissions on organization, workspace or dataset |  -  |
+|**404** | Dataset part specified is not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getDataset**
+> Dataset getDataset()
+
+Retrieve a dataset
+
+### Example
+
+```typescript
+import {
+    DatasetApi,
+    Configuration
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new DatasetApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let workspaceId: string; //the Workspace identifier (default to undefined)
 let datasetId: string; //the Dataset identifier (default to undefined)
 
-const { status, data } = await apiInstance.rollbackRefresh(
+const { status, data } = await apiInstance.getDataset(
     organizationId,
+    workspaceId,
     datasetId
 );
 ```
@@ -1192,12 +490,257 @@ const { status, data } = await apiInstance.rollbackRefresh(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
 | **datasetId** | [**string**] | the Dataset identifier | defaults to undefined|
 
 
 ### Return type
 
-**string**
+**Dataset**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/yaml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Dataset successfully retrieved |  -  |
+|**403** | Insufficient permissions on organization, workspace or dataset |  -  |
+|**404** | Organization, workspace or dataset specified is not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getDatasetAccessControl**
+> DatasetAccessControl getDatasetAccessControl()
+
+
+### Example
+
+```typescript
+import {
+    DatasetApi,
+    Configuration
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new DatasetApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let workspaceId: string; //the Workspace identifier (default to undefined)
+let datasetId: string; //the Dataset identifier (default to undefined)
+let identityId: string; //the User identifier (default to undefined)
+
+const { status, data } = await apiInstance.getDatasetAccessControl(
+    organizationId,
+    workspaceId,
+    datasetId,
+    identityId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
+| **datasetId** | [**string**] | the Dataset identifier | defaults to undefined|
+| **identityId** | [**string**] | the User identifier | defaults to undefined|
+
+
+### Return type
+
+**DatasetAccessControl**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/yaml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The Dataset access |  -  |
+|**404** | The Dataset or user specified is unknown or you don\&#39;t have access to it |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getDatasetPart**
+> DatasetPart getDatasetPart()
+
+
+### Example
+
+```typescript
+import {
+    DatasetApi,
+    Configuration
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new DatasetApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let workspaceId: string; //the Workspace identifier (default to undefined)
+let datasetId: string; //the Dataset identifier (default to undefined)
+let datasetPartId: string; //the Dataset part identifier (default to undefined)
+
+const { status, data } = await apiInstance.getDatasetPart(
+    organizationId,
+    workspaceId,
+    datasetId,
+    datasetPartId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
+| **datasetId** | [**string**] | the Dataset identifier | defaults to undefined|
+| **datasetPartId** | [**string**] | the Dataset part identifier | defaults to undefined|
+
+
+### Return type
+
+**DatasetPart**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/yaml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Dataset part successfully retrieved |  -  |
+|**403** | Insufficient permissions on organization, workspace or dataset |  -  |
+|**404** | Dataset part specified is not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **listDatasetParts**
+> Array<DatasetPart> listDatasetParts()
+
+
+### Example
+
+```typescript
+import {
+    DatasetApi,
+    Configuration
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new DatasetApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let workspaceId: string; //the Workspace identifier (default to undefined)
+let datasetId: string; //the Dataset identifier (default to undefined)
+let page: number; //Page number to query (first page is at index 0) (optional) (default to undefined)
+let size: number; //Amount of result by page (optional) (default to undefined)
+
+const { status, data } = await apiInstance.listDatasetParts(
+    organizationId,
+    workspaceId,
+    datasetId,
+    page,
+    size
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
+| **datasetId** | [**string**] | the Dataset identifier | defaults to undefined|
+| **page** | [**number**] | Page number to query (first page is at index 0) | (optional) defaults to undefined|
+| **size** | [**number**] | Amount of result by page | (optional) defaults to undefined|
+
+
+### Return type
+
+**Array<DatasetPart>**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/yaml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | List of dataset parts |  -  |
+|**403** | Insufficient permissions on organization, workspace or dataset |  -  |
+|**404** | Dataset specified is not found |  -  |
+|**422** | Targeted dataset do not support requests |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **listDatasetSecurityUsers**
+> Array<string> listDatasetSecurityUsers()
+
+
+### Example
+
+```typescript
+import {
+    DatasetApi,
+    Configuration
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new DatasetApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let workspaceId: string; //the Workspace identifier (default to undefined)
+let datasetId: string; //the Dataset identifier (default to undefined)
+
+const { status, data } = await apiInstance.listDatasetSecurityUsers(
+    organizationId,
+    workspaceId,
+    datasetId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
+| **datasetId** | [**string**] | the Dataset identifier | defaults to undefined|
+
+
+### Return type
+
+**Array<string>**
 
 ### Authorization
 
@@ -1212,34 +755,35 @@ const { status, data } = await apiInstance.rollbackRefresh(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Successful response |  -  |
+|**200** | The Dataset security users list |  -  |
+|**404** | the Dataset or the User specified is unknown or you don\&#39;t have access to them |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **searchDatasets**
-> Array<Dataset> searchDatasets(datasetSearch)
+# **listDatasets**
+> Array<Dataset> listDatasets()
 
+List all datasets
 
 ### Example
 
 ```typescript
 import {
     DatasetApi,
-    Configuration,
-    DatasetSearch
+    Configuration
 } from '@cosmotech/api-ts';
 
 const configuration = new Configuration();
 const apiInstance = new DatasetApi(configuration);
 
 let organizationId: string; //the Organization identifier (default to undefined)
-let datasetSearch: DatasetSearch; //the Dataset search parameters
-let page: number; //page number to query (first page is at index 0) (optional) (default to undefined)
-let size: number; //amount of result by page (optional) (default to undefined)
+let workspaceId: string; //the Workspace identifier (default to undefined)
+let page: number; //Page number to query (first page is at index 0) (optional) (default to undefined)
+let size: number; //Amount of result by page (optional) (default to undefined)
 
-const { status, data } = await apiInstance.searchDatasets(
+const { status, data } = await apiInstance.listDatasets(
     organizationId,
-    datasetSearch,
+    workspaceId,
     page,
     size
 );
@@ -1249,10 +793,286 @@ const { status, data } = await apiInstance.searchDatasets(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **datasetSearch** | **DatasetSearch**| the Dataset search parameters | |
 | **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **page** | [**number**] | page number to query (first page is at index 0) | (optional) defaults to undefined|
-| **size** | [**number**] | amount of result by page | (optional) defaults to undefined|
+| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
+| **page** | [**number**] | Page number to query (first page is at index 0) | (optional) defaults to undefined|
+| **size** | [**number**] | Amount of result by page | (optional) defaults to undefined|
+
+
+### Return type
+
+**Array<Dataset>**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/yaml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Datasets successfully retrieved |  -  |
+|**403** | Insufficient permissions on organization, workspace or dataset |  -  |
+|**404** | Organization, workspace or dataset specified is not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **queryData**
+> Array<object> queryData()
+
+
+### Example
+
+```typescript
+import {
+    DatasetApi,
+    Configuration
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new DatasetApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let workspaceId: string; //the Workspace identifier (default to undefined)
+let datasetId: string; //the Dataset identifier (default to undefined)
+let datasetPartId: string; //the Dataset part identifier (default to undefined)
+let filters: Array<string>; //Property names that should be part of the response data. You can specify a property name like:  - id  - stock  - quantity  - ...  (optional) (default to undefined)
+let sums: Array<string>; //Property names to sum by (optional) (default to undefined)
+let counts: Array<string>; //Property names to count by (optional) (default to undefined)
+let offset: number; //The query offset (optional) (default to undefined)
+let limit: number; //The query limit (optional) (default to undefined)
+
+const { status, data } = await apiInstance.queryData(
+    organizationId,
+    workspaceId,
+    datasetId,
+    datasetPartId,
+    filters,
+    sums,
+    counts,
+    offset,
+    limit
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
+| **datasetId** | [**string**] | the Dataset identifier | defaults to undefined|
+| **datasetPartId** | [**string**] | the Dataset part identifier | defaults to undefined|
+| **filters** | **Array&lt;string&gt;** | Property names that should be part of the response data. You can specify a property name like:  - id  - stock  - quantity  - ...  | (optional) defaults to undefined|
+| **sums** | **Array&lt;string&gt;** | Property names to sum by | (optional) defaults to undefined|
+| **counts** | **Array&lt;string&gt;** | Property names to count by | (optional) defaults to undefined|
+| **offset** | [**number**] | The query offset | (optional) defaults to undefined|
+| **limit** | [**number**] | The query limit | (optional) defaults to undefined|
+
+
+### Return type
+
+**Array<object>**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/yaml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Data related to provided information |  -  |
+|**400** | Bad request - Data cannot be retrieved from provided information |  -  |
+|**403** | Insufficient permissions on organization, workspace or dataset |  -  |
+|**404** | Dataset specified is not found or you don\&#39;t have access to it |  -  |
+|**422** | Targeted dataset do not support requests |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **replaceDatasetPart**
+> DatasetPart replaceDatasetPart()
+
+
+### Example
+
+```typescript
+import {
+    DatasetApi,
+    Configuration,
+    DatasetPartUpdateRequest
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new DatasetApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let workspaceId: string; //the Workspace identifier (default to undefined)
+let datasetId: string; //the Dataset identifier (default to undefined)
+let datasetPartId: string; //the Dataset part identifier (default to undefined)
+let file: File; //Data file to upload (default to undefined)
+let datasetPartUpdateRequest: DatasetPartUpdateRequest; // (optional) (default to undefined)
+
+const { status, data } = await apiInstance.replaceDatasetPart(
+    organizationId,
+    workspaceId,
+    datasetId,
+    datasetPartId,
+    file,
+    datasetPartUpdateRequest
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
+| **datasetId** | [**string**] | the Dataset identifier | defaults to undefined|
+| **datasetPartId** | [**string**] | the Dataset part identifier | defaults to undefined|
+| **file** | [**File**] | Data file to upload | defaults to undefined|
+| **datasetPartUpdateRequest** | **DatasetPartUpdateRequest** |  | (optional) defaults to undefined|
+
+
+### Return type
+
+**DatasetPart**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json, application/yaml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Dataset part successfully replaced |  -  |
+|**403** | Insufficient permissions on organization, workspace or dataset |  -  |
+|**404** | Dataset part specified is not found |  -  |
+|**422** | Targeted dataset do not support requests |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **searchDatasetParts**
+> Array<DatasetPart> searchDatasetParts(requestBody)
+
+
+### Example
+
+```typescript
+import {
+    DatasetApi,
+    Configuration
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new DatasetApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let workspaceId: string; //the Workspace identifier (default to undefined)
+let datasetId: string; //the Dataset identifier (default to undefined)
+let requestBody: Array<string>; //the Dataset parts search parameters
+let page: number; //Page number to query (first page is at index 0) (optional) (default to undefined)
+let size: number; //Amount of result by page (optional) (default to undefined)
+
+const { status, data } = await apiInstance.searchDatasetParts(
+    organizationId,
+    workspaceId,
+    datasetId,
+    requestBody,
+    page,
+    size
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **requestBody** | **Array<string>**| the Dataset parts search parameters | |
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
+| **datasetId** | [**string**] | the Dataset identifier | defaults to undefined|
+| **page** | [**number**] | Page number to query (first page is at index 0) | (optional) defaults to undefined|
+| **size** | [**number**] | Amount of result by page | (optional) defaults to undefined|
+
+
+### Return type
+
+**Array<DatasetPart>**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, application/yaml
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Dataset part list containing tags |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **searchDatasets**
+> Array<Dataset> searchDatasets(requestBody)
+
+
+### Example
+
+```typescript
+import {
+    DatasetApi,
+    Configuration
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new DatasetApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let workspaceId: string; //the Workspace identifier (default to undefined)
+let requestBody: Array<string>; //the Dataset search parameters
+let page: number; //Page number to query (first page is at index 0) (optional) (default to undefined)
+let size: number; //Amount of result by page (optional) (default to undefined)
+
+const { status, data } = await apiInstance.searchDatasets(
+    organizationId,
+    workspaceId,
+    requestBody,
+    page,
+    size
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **requestBody** | **Array<string>**| the Dataset search parameters | |
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
+| **page** | [**number**] | Page number to query (first page is at index 0) | (optional) defaults to undefined|
+| **size** | [**number**] | Amount of result by page | (optional) defaults to undefined|
 
 
 ### Return type
@@ -1272,12 +1092,79 @@ const { status, data } = await apiInstance.searchDatasets(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | the list of Datasets |  -  |
+|**200** | Dataset list containing tags |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **setDatasetDefaultSecurity**
-> DatasetSecurity setDatasetDefaultSecurity(datasetRole)
+# **updateDataset**
+> Dataset updateDataset()
+
+Update a dataset
+
+### Example
+
+```typescript
+import {
+    DatasetApi,
+    Configuration,
+    DatasetUpdateRequest
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new DatasetApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let workspaceId: string; //the Workspace identifier (default to undefined)
+let datasetId: string; //the Dataset identifier (default to undefined)
+let datasetUpdateRequest: DatasetUpdateRequest; // (default to undefined)
+let files: Array<File>; //Notes:   - Each parts defined in dataset should have a file defined in this list   - Please ensure that upload files order match with data parts list defined     - First file uploaded will match with first dataset parts and so on  (optional) (default to undefined)
+
+const { status, data } = await apiInstance.updateDataset(
+    organizationId,
+    workspaceId,
+    datasetId,
+    datasetUpdateRequest,
+    files
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
+| **datasetId** | [**string**] | the Dataset identifier | defaults to undefined|
+| **datasetUpdateRequest** | **DatasetUpdateRequest** |  | defaults to undefined|
+| **files** | **Array&lt;File&gt;** | Notes:   - Each parts defined in dataset should have a file defined in this list   - Please ensure that upload files order match with data parts list defined     - First file uploaded will match with first dataset parts and so on  | (optional) defaults to undefined|
+
+
+### Return type
+
+**Dataset**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json, application/yaml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Dataset successfully updated |  -  |
+|**400** | Bad request |  -  |
+|**403** | Insufficient permissions on organization, workspace or dataset |  -  |
+|**404** | Organization, workspace or dataset specified is not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **updateDatasetAccessControl**
+> DatasetAccessControl updateDatasetAccessControl(datasetRole)
 
 
 ### Example
@@ -1293,11 +1180,77 @@ const configuration = new Configuration();
 const apiInstance = new DatasetApi(configuration);
 
 let organizationId: string; //the Organization identifier (default to undefined)
+let workspaceId: string; //the Workspace identifier (default to undefined)
+let datasetId: string; //the Dataset identifier (default to undefined)
+let identityId: string; //the User identifier (default to undefined)
+let datasetRole: DatasetRole; //The new Dataset Access Control
+
+const { status, data } = await apiInstance.updateDatasetAccessControl(
+    organizationId,
+    workspaceId,
+    datasetId,
+    identityId,
+    datasetRole
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **datasetRole** | **DatasetRole**| The new Dataset Access Control | |
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
+| **datasetId** | [**string**] | the Dataset identifier | defaults to undefined|
+| **identityId** | [**string**] | the User identifier | defaults to undefined|
+
+
+### Return type
+
+**DatasetAccessControl**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, application/yaml
+ - **Accept**: application/json, application/yaml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The Dataset access |  -  |
+|**404** | The Dataset specified is unknown or you don\&#39;t have access to it |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **updateDatasetDefaultSecurity**
+> DatasetSecurity updateDatasetDefaultSecurity(datasetRole)
+
+
+### Example
+
+```typescript
+import {
+    DatasetApi,
+    Configuration,
+    DatasetRole
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new DatasetApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let workspaceId: string; //the Workspace identifier (default to undefined)
 let datasetId: string; //the Dataset identifier (default to undefined)
 let datasetRole: DatasetRole; //This change the dataset default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the dataset.
 
-const { status, data } = await apiInstance.setDatasetDefaultSecurity(
+const { status, data } = await apiInstance.updateDatasetDefaultSecurity(
     organizationId,
+    workspaceId,
     datasetId,
     datasetRole
 );
@@ -1309,6 +1262,7 @@ const { status, data } = await apiInstance.setDatasetDefaultSecurity(
 |------------- | ------------- | ------------- | -------------|
 | **datasetRole** | **DatasetRole**| This change the dataset default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the dataset. | |
 | **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
 | **datasetId** | [**string**] | the Dataset identifier | defaults to undefined|
 
 
@@ -1334,10 +1288,9 @@ const { status, data } = await apiInstance.setDatasetDefaultSecurity(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **twingraphBatchQuery**
-> DatasetTwinGraphHash twingraphBatchQuery(datasetTwinGraphQuery)
+# **updateDatasetPart**
+> DatasetPart updateDatasetPart(datasetPartUpdateRequest)
 
-Run a query on a graph instance and return the result as a zip file in async mode Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
 
 ### Example
 
@@ -1345,140 +1298,24 @@ Run a query on a graph instance and return the result as a zip file in async mod
 import {
     DatasetApi,
     Configuration,
-    DatasetTwinGraphQuery
+    DatasetPartUpdateRequest
 } from '@cosmotech/api-ts';
 
 const configuration = new Configuration();
 const apiInstance = new DatasetApi(configuration);
 
 let organizationId: string; //the Organization identifier (default to undefined)
-let datasetId: string; //the Graph Identifier (default to undefined)
-let datasetTwinGraphQuery: DatasetTwinGraphQuery; //the query to run
-
-const { status, data } = await apiInstance.twingraphBatchQuery(
-    organizationId,
-    datasetId,
-    datasetTwinGraphQuery
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **datasetTwinGraphQuery** | **DatasetTwinGraphQuery**| the query to run | |
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **datasetId** | [**string**] | the Graph Identifier | defaults to undefined|
-
-
-### Return type
-
-**DatasetTwinGraphHash**
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Successful response |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **twingraphBatchUpdate**
-> TwinGraphBatchResult twingraphBatchUpdate(body)
-
-Async batch update by loading a CSV file on a graph instance  Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-
-### Example
-
-```typescript
-import {
-    DatasetApi,
-    Configuration,
-    DatasetTwinGraphQuery
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new DatasetApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let datasetId: string; //the Dataset Identifier (default to undefined)
-let twinGraphQuery: DatasetTwinGraphQuery; // (default to undefined)
-let body: File; //
-
-const { status, data } = await apiInstance.twingraphBatchUpdate(
-    organizationId,
-    datasetId,
-    twinGraphQuery,
-    body
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **body** | **File**|  | |
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **datasetId** | [**string**] | the Dataset Identifier | defaults to undefined|
-| **twinGraphQuery** | **DatasetTwinGraphQuery** |  | defaults to undefined|
-
-
-### Return type
-
-**TwinGraphBatchResult**
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: text/csv, application/octet-stream
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | csv file processed |  -  |
-|**400** | Bad request |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **twingraphQuery**
-> Array<object> twingraphQuery(datasetTwinGraphQuery)
-
-Run a query on a graph instance and return the result as a json Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-
-### Example
-
-```typescript
-import {
-    DatasetApi,
-    Configuration,
-    DatasetTwinGraphQuery
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new DatasetApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
+let workspaceId: string; //the Workspace identifier (default to undefined)
 let datasetId: string; //the Dataset identifier (default to undefined)
-let datasetTwinGraphQuery: DatasetTwinGraphQuery; //the query to run
+let datasetPartId: string; //the Dataset part identifier (default to undefined)
+let datasetPartUpdateRequest: DatasetPartUpdateRequest; //Dataset part information to update
 
-const { status, data } = await apiInstance.twingraphQuery(
+const { status, data } = await apiInstance.updateDatasetPart(
     organizationId,
+    workspaceId,
     datasetId,
-    datasetTwinGraphQuery
+    datasetPartId,
+    datasetPartUpdateRequest
 );
 ```
 
@@ -1486,129 +1323,16 @@ const { status, data } = await apiInstance.twingraphQuery(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **datasetTwinGraphQuery** | **DatasetTwinGraphQuery**| the query to run | |
+| **datasetPartUpdateRequest** | **DatasetPartUpdateRequest**| Dataset part information to update | |
 | **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
 | **datasetId** | [**string**] | the Dataset identifier | defaults to undefined|
+| **datasetPartId** | [**string**] | the Dataset part identifier | defaults to undefined|
 
 
 ### Return type
 
-**Array<object>**
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Successful response |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **unlinkWorkspace**
-> Dataset unlinkWorkspace()
-
-
-### Example
-
-```typescript
-import {
-    DatasetApi,
-    Configuration
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new DatasetApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let datasetId: string; //the Dataset identifier (default to undefined)
-let workspaceId: string; //workspace id to be linked to (default to undefined)
-
-const { status, data } = await apiInstance.unlinkWorkspace(
-    organizationId,
-    datasetId,
-    workspaceId
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **datasetId** | [**string**] | the Dataset identifier | defaults to undefined|
-| **workspaceId** | [**string**] | workspace id to be linked to | defaults to undefined|
-
-
-### Return type
-
-**Dataset**
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | the dataset details |  -  |
-|**400** | Bad request |  -  |
-|**404** | the Dataset specified is unknown or you don\&#39;t have access to it |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **updateDataset**
-> Dataset updateDataset(dataset)
-
-
-### Example
-
-```typescript
-import {
-    DatasetApi,
-    Configuration,
-    Dataset
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new DatasetApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let datasetId: string; //the Dataset identifier (default to undefined)
-let dataset: Dataset; //the new Dataset details. This endpoint can\'t be used to update security
-
-const { status, data } = await apiInstance.updateDataset(
-    organizationId,
-    datasetId,
-    dataset
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **dataset** | **Dataset**| the new Dataset details. This endpoint can\&#39;t be used to update security | |
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **datasetId** | [**string**] | the Dataset identifier | defaults to undefined|
-
-
-### Return type
-
-**Dataset**
+**DatasetPart**
 
 ### Authorization
 
@@ -1617,193 +1341,16 @@ const { status, data } = await apiInstance.updateDataset(
 ### HTTP request headers
 
  - **Content-Type**: application/json, application/yaml
- - **Accept**: application/json
+ - **Accept**: application/json, application/yaml
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | the dataset details |  -  |
-|**400** | Bad request |  -  |
-|**404** | the Dataset specified is unknown or you don\&#39;t have access to it |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **updateDatasetAccessControl**
-> DatasetAccessControl updateDatasetAccessControl(datasetRole)
-
-
-### Example
-
-```typescript
-import {
-    DatasetApi,
-    Configuration,
-    DatasetRole
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new DatasetApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let datasetId: string; //the Dataset identifier (default to undefined)
-let identityId: string; //the User identifier (default to undefined)
-let datasetRole: DatasetRole; //The new Dataset Access Control
-
-const { status, data } = await apiInstance.updateDatasetAccessControl(
-    organizationId,
-    datasetId,
-    identityId,
-    datasetRole
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **datasetRole** | **DatasetRole**| The new Dataset Access Control | |
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **datasetId** | [**string**] | the Dataset identifier | defaults to undefined|
-| **identityId** | [**string**] | the User identifier | defaults to undefined|
-
-
-### Return type
-
-**DatasetAccessControl**
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | The Dataset access |  -  |
-|**404** | The Dataset specified is unknown or you don\&#39;t have access to it |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **updateTwingraphEntities**
-> string updateTwingraphEntities(graphProperties)
-
-update entities in a graph instance
-
-### Example
-
-```typescript
-import {
-    DatasetApi,
-    Configuration
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new DatasetApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let datasetId: string; //the Dataset Identifier (default to undefined)
-let type: 'node' | 'relationship'; //the entity model type (default to undefined)
-let graphProperties: Array<GraphProperties>; //The entities to update Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-
-const { status, data } = await apiInstance.updateTwingraphEntities(
-    organizationId,
-    datasetId,
-    type,
-    graphProperties
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **graphProperties** | **Array<GraphProperties>**| The entities to update Note: This endpoint is activated only if &#x60;csm.platform.twincache.useGraphModule&#x60; property is set to true  | |
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **datasetId** | [**string**] | the Dataset Identifier | defaults to undefined|
-| **type** | [**&#39;node&#39; | &#39;relationship&#39;**]**Array<&#39;node&#39; &#124; &#39;relationship&#39;>** | the entity model type | defaults to undefined|
-
-
-### Return type
-
-**string**
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Successful response |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **uploadTwingraph**
-> FileUploadValidation uploadTwingraph(body)
-
-To create a new graph from flat files,  you need to create a Zip file. This Zip file must countain two folders named Edges and Nodes.  .zip hierarchy: *main_folder/Nodes *main_folder/Edges  In each folder you can place one or multiple csv files containing your Nodes or Edges data.  Your csv files must follow the following header (column name) requirements:  The Nodes CSVs requires at least one column (the 1st).Column name = \'id\'. It will represent the nodes ID Ids must be populated with string  The Edges CSVs require three columns named, in order, * source * target * id  those colomns represent * The source of the edge * The target of the edge * The id of the edge  All following columns content are up to you. Note: This endpoint is activated only if `csm.platform.twincache.useGraphModule` property is set to true 
-
-### Example
-
-```typescript
-import {
-    DatasetApi,
-    Configuration
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new DatasetApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let datasetId: string; //the Dataset identifier (default to undefined)
-let body: File; //
-
-const { status, data } = await apiInstance.uploadTwingraph(
-    organizationId,
-    datasetId,
-    body
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **body** | **File**|  | |
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **datasetId** | [**string**] | the Dataset identifier | defaults to undefined|
-
-
-### Return type
-
-**FileUploadValidation**
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: application/octet-stream
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**202** | File uploaded successfully. Processing... |  -  |
+|**200** | Dataset part information successfully updated |  -  |
+|**403** | Insufficient permissions on organization, workspace or dataset |  -  |
+|**404** | Dataset part specified is not found |  -  |
+|**422** | Targeted dataset do not support requests |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

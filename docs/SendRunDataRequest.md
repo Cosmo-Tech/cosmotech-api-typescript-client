@@ -1,12 +1,13 @@
 # SendRunDataRequest
 
+Run Data to send
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** |  | [optional] [default to undefined]
-**data** | **Array&lt;{ [key: string]: any; }&gt;** |  | [optional] [default to undefined]
+**id** | **string** |  | [default to undefined]
+**data** | **Array&lt;{ [key: string]: any; }&gt;** |  | [default to undefined]
 
 ## Example
 

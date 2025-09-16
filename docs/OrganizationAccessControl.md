@@ -1,13 +1,13 @@
 # OrganizationAccessControl
 
-a Organization access control item
+Response object for organization access control
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | the identity id | [default to undefined]
-**role** | **string** | a role | [default to undefined]
+**id** | **string** | The identity id | [default to undefined]
+**role** | **string** | A role | [default to undefined]
 
 ## Example
 
