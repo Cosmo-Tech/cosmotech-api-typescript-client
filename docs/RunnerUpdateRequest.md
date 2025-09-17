@@ -14,8 +14,8 @@ Name | Type | Description | Notes
 **runSizing** | [**RunnerResourceSizing**](RunnerResourceSizing.md) |  | [optional] [default to undefined]
 **parametersValues** | [**Array&lt;RunnerRunTemplateParameterValue&gt;**](RunnerRunTemplateParameterValue.md) | the list of Solution Run Template parameters values | [optional] [default to undefined]
 **ownerName** | **string** | the name of the owner | [optional] [default to undefined]
-**solutionName** | **string** | the Solution name | [optional] [readonly] [default to undefined]
-**runTemplateName** | **string** | the Solution Run Template name associated with this Runner | [optional] [readonly] [default to undefined]
+**solutionName** | **string** | the Solution name | [optional] [default to undefined]
+**runTemplateName** | **string** | the Solution Run Template name associated with this Runner | [optional] [default to undefined]
 
 ## Example
 
