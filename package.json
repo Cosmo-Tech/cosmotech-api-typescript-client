@@ -1,11 +1,11 @@
 {
   "name": "@cosmotech/api-ts",
-  "version": "5.0.1-SNAPSHOT",
+  "version": "3.3.5",
   "description": "OpenAPI client for @cosmotech/api-ts",
   "author": "OpenAPI-Generator Contributors",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Cosmo-Tech/cosmotech-api-typescript-client.git"
+    "url": "https://github.com/GIT_USER_ID/GIT_REPO_ID.git"
   },
   "keywords": [
     "axios",
