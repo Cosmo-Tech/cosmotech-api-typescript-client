@@ -35,13 +35,10 @@ docs/OrganizationEditInfo.md
 docs/OrganizationRole.md
 docs/OrganizationSecurity.md
 docs/OrganizationUpdateRequest.md
-docs/QueryResult.md
 docs/ResourceSizeInfo.md
 docs/Run.md
 docs/RunApi.md
 docs/RunContainer.md
-docs/RunData.md
-docs/RunDataQuery.md
 docs/RunEditInfo.md
 docs/RunResourceRequested.md
 docs/RunState.md
@@ -70,7 +67,6 @@ docs/RunnerRunTemplateParameterValue.md
 docs/RunnerSecurity.md
 docs/RunnerUpdateRequest.md
 docs/RunnerValidationStatus.md
-docs/SendRunDataRequest.md
 docs/Solution.md
 docs/SolutionAccessControl.md
 docs/SolutionApi.md
