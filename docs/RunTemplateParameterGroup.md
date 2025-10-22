@@ -1,18 +1,17 @@
 # RunTemplateParameterGroup
 
-A Parameter Group for a Run Template
+a Parameter Group for a Run Template
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | The Parameter Group id | [default to undefined]
-**description** | **string** | A description of the parameter group | [optional] [default to undefined]
-**labels** | **{ [key: string]: string; }** | A translated label with key as ISO 639-1 code | [optional] [default to undefined]
-**isTable** | **boolean** | Does the group define a table | [default to undefined]
-**_options** | **{ [key: string]: any; }** | Freeform options | [optional] [default to undefined]
-**parentId** | **string** | The Run Template Group parent Id | [optional] [default to undefined]
-**parameters** | **Array&lt;string&gt;** | An ordered list of Run Template Parameters | [default to undefined]
+**id** | **string** | the Parameter Group id | [default to undefined]
+**labels** | **{ [key: string]: string; }** | a translated label with key as ISO 639-1 code | [optional] [default to undefined]
+**isTable** | **boolean** | does the group define a table | [optional] [default to undefined]
+**_options** | **{ [key: string]: any; }** | freeform options | [optional] [default to undefined]
+**parentId** | **string** | the Run Template Group parent Id | [optional] [default to undefined]
+**parameters** | **Array&lt;string&gt;** | an ordered list of Run Template Parameters | [optional] [default to undefined]
 
 ## Example
 
@@ -21,7 +20,6 @@ import { RunTemplateParameterGroup } from '@cosmotech/api-ts';
 
 const instance: RunTemplateParameterGroup = {
     id,
-    description,
     labels,
     isTable,
     _options,

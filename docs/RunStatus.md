@@ -12,7 +12,6 @@ Name | Type | Description | Notes
 **runnerId** | **string** | the Runner id | [optional] [default to undefined]
 **workflowId** | **string** | the Cosmo Tech compute cluster Argo Workflow Id to search | [optional] [default to undefined]
 **workflowName** | **string** | the Cosmo Tech compute cluster Argo Workflow Name | [optional] [default to undefined]
-**createInfo** | [**RunEditInfo**](RunEditInfo.md) | The timestamp of the Run creation in milliseconds | [optional] [default to undefined]
 **startTime** | **string** | the Run start Date Time | [optional] [default to undefined]
 **endTime** | **string** | the Run end Date Time | [optional] [default to undefined]
 **phase** | **string** | high-level summary of where the workflow is in its lifecycle | [optional] [default to undefined]
@@ -34,7 +33,6 @@ const instance: RunStatus = {
     runnerId,
     workflowId,
     workflowName,
-    createInfo,
     startTime,
     endTime,
     phase,

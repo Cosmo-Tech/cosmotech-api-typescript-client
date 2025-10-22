@@ -1,6 +1,6 @@
 # RunApi
 
-All URIs are relative to *http://localhost:8080*
+All URIs are relative to *http://localhost*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
@@ -9,6 +9,8 @@ All URIs are relative to *http://localhost:8080*
 |[**getRunLogs**](#getrunlogs) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/runs/{run_id}/logs | get the logs for the Run|
 |[**getRunStatus**](#getrunstatus) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/runs/{run_id}/status | get the status for the Run|
 |[**listRuns**](#listruns) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/runs | get the list of Runs for the Runner|
+|[**queryRunData**](#queryrundata) | **POST** /organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/runs/{run_id}/data/query | query the run data|
+|[**sendRunData**](#sendrundata) | **POST** /organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/runs/{run_id}/data/send | Send data associated to a run|
 
 # **deleteRun**
 > deleteRun()
@@ -120,7 +122,7 @@ const { status, data } = await apiInstance.getRun(
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json, application/yaml
+ - **Accept**: application/json
 
 
 ### HTTP response details
@@ -132,7 +134,7 @@ const { status, data } = await apiInstance.getRun(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getRunLogs**
-> string getRunLogs()
+> RunLogs getRunLogs()
 
 
 ### Example
@@ -171,7 +173,7 @@ const { status, data } = await apiInstance.getRunLogs(
 
 ### Return type
 
-**string**
+**RunLogs**
 
 ### Authorization
 
@@ -180,7 +182,7 @@ const { status, data } = await apiInstance.getRunLogs(
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: application/json
 
 
 ### HTTP response details
@@ -239,7 +241,7 @@ const { status, data } = await apiInstance.getRunStatus(
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json, application/yaml
+ - **Accept**: application/json
 
 
 ### HTTP response details
@@ -301,13 +303,140 @@ const { status, data } = await apiInstance.listRuns(
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json, application/yaml
+ - **Accept**: application/json
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | the run details list |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **queryRunData**
+> QueryResult queryRunData(runDataQuery)
+
+
+### Example
+
+```typescript
+import {
+    RunApi,
+    Configuration,
+    RunDataQuery
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new RunApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let workspaceId: string; //the Workspace identifier (default to undefined)
+let runnerId: string; //the Runner identifier (default to undefined)
+let runId: string; //the Run identifier (default to undefined)
+let runDataQuery: RunDataQuery; //the query to run
+
+const { status, data } = await apiInstance.queryRunData(
+    organizationId,
+    workspaceId,
+    runnerId,
+    runId,
+    runDataQuery
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **runDataQuery** | **RunDataQuery**| the query to run | |
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
+| **runnerId** | [**string**] | the Runner identifier | defaults to undefined|
+| **runId** | [**string**] | the Run identifier | defaults to undefined|
+
+
+### Return type
+
+**QueryResult**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | the query response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **sendRunData**
+> RunData sendRunData(sendRunDataRequest)
+
+
+### Example
+
+```typescript
+import {
+    RunApi,
+    Configuration,
+    SendRunDataRequest
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new RunApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let workspaceId: string; //the Workspace identifier (default to undefined)
+let runnerId: string; //the Runner identifier (default to undefined)
+let runId: string; //the Run identifier (default to undefined)
+let sendRunDataRequest: SendRunDataRequest; //Custom data to register
+
+const { status, data } = await apiInstance.sendRunData(
+    organizationId,
+    workspaceId,
+    runnerId,
+    runId,
+    sendRunDataRequest
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **sendRunDataRequest** | **SendRunDataRequest**| Custom data to register | |
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
+| **runnerId** | [**string**] | the Runner identifier | defaults to undefined|
+| **runId** | [**string**] | the Run identifier | defaults to undefined|
+
+
+### Return type
+
+**RunData**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**201** | Data stored |  -  |
+|**400** | Data sent format is malformed |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

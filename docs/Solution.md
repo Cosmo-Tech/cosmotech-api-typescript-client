@@ -1,28 +1,28 @@
 # Solution
 
-A version of a Solution
+a version of a Solution
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | The Solution version unique identifier | [default to undefined]
-**organizationId** | **string** | The Organization unique identifier | [default to undefined]
-**key** | **string** | The Solution key which groups Solution versions | [default to undefined]
-**name** | **string** | The Solution name | [default to undefined]
-**description** | **string** | The Solution description | [optional] [default to undefined]
-**repository** | **string** | The registry repository containing the image | [default to undefined]
-**alwaysPull** | **boolean** | Set to true if the runtemplate wants to always pull the image | [optional] [default to false]
-**version** | **string** | The Solution version MAJOR.MINOR.PATCH. Must be aligned with an existing repository tag | [default to undefined]
-**createInfo** | [**SolutionEditInfo**](SolutionEditInfo.md) | The details of the Solution creation | [default to undefined]
-**updateInfo** | [**SolutionEditInfo**](SolutionEditInfo.md) | The details of the Solution last update | [default to undefined]
-**sdkVersion** | **string** | The full SDK version used to build this solution, if available | [optional] [default to undefined]
-**url** | **string** | An optional URL link to solution page | [optional] [default to undefined]
-**tags** | **Array&lt;string&gt;** | The list of tags | [optional] [default to undefined]
-**parameters** | [**Array&lt;RunTemplateParameter&gt;**](RunTemplateParameter.md) | The list of Run Template Parameters | [default to undefined]
-**parameterGroups** | [**Array&lt;RunTemplateParameterGroup&gt;**](RunTemplateParameterGroup.md) | The list of parameters groups for the Run Templates | [default to undefined]
-**runTemplates** | [**Array&lt;RunTemplate&gt;**](RunTemplate.md) | List of Run Templates | [default to undefined]
-**security** | [**SolutionSecurity**](SolutionSecurity.md) |  | [default to undefined]
+**id** | **string** | the Solution version unique identifier | [optional] [readonly] [default to undefined]
+**organizationId** | **string** | the Organization unique identifier | [optional] [readonly] [default to undefined]
+**key** | **string** | the Solution key which group Solution versions | [optional] [default to undefined]
+**name** | **string** | the Solution name | [optional] [default to undefined]
+**description** | **string** | the Solution description | [optional] [default to undefined]
+**repository** | **string** | the registry repository containing the image | [optional] [default to undefined]
+**alwaysPull** | **boolean** | set to true if the runtemplate wants to always pull the image | [optional] [default to false]
+**csmSimulator** | **string** | the main Cosmo Tech simulator name used in standard Run Template | [optional] [default to undefined]
+**version** | **string** | the Solution version MAJOR.MINOR.PATCH. Must be aligned with an existing repository tag | [optional] [default to undefined]
+**ownerId** | **string** | the User id which own this Solution | [optional] [readonly] [default to undefined]
+**sdkVersion** | **string** | the MAJOR.MINOR version used to build this solution | [optional] [default to undefined]
+**url** | **string** | an optional URL link to solution page | [optional] [default to undefined]
+**tags** | **Array&lt;string&gt;** | the list of tags | [optional] [default to undefined]
+**parameters** | [**Array&lt;RunTemplateParameter&gt;**](RunTemplateParameter.md) | the list of Run Template Parameters | [optional] [default to undefined]
+**parameterGroups** | [**Array&lt;RunTemplateParameterGroup&gt;**](RunTemplateParameterGroup.md) | the list of parameters groups for the Run Templates | [optional] [default to undefined]
+**runTemplates** | [**Array&lt;RunTemplate&gt;**](RunTemplate.md) | list of Run Template | [default to undefined]
+**security** | [**SolutionSecurity**](SolutionSecurity.md) |  | [optional] [default to undefined]
 
 ## Example
 
@@ -37,9 +37,9 @@ const instance: Solution = {
     description,
     repository,
     alwaysPull,
+    csmSimulator,
     version,
-    createInfo,
-    updateInfo,
+    ownerId,
     sdkVersion,
     url,
     tags,
