@@ -1,19 +1,20 @@
 # RunTemplateParameter
 
-a Run Template Parameter
+A Run Template Parameter
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | the Parameter id | [default to undefined]
-**labels** | **{ [key: string]: string; }** | a translated label with key as ISO 639-1 code | [optional] [default to undefined]
-**varType** | **string** | the variable type for the parameter. Basic types or special type %DATASETID% | [optional] [default to undefined]
-**defaultValue** | **string** | the default value for this parameter | [optional] [default to undefined]
-**minValue** | **string** | the minimum value for this parameter | [optional] [default to undefined]
-**maxValue** | **string** | the maximum value for this parameter | [optional] [default to undefined]
-**regexValidation** | **string** | a regex to validate the value | [optional] [default to undefined]
-**_options** | **{ [key: string]: any; }** | freeform options | [optional] [default to undefined]
+**id** | **string** | The Parameter id | [default to undefined]
+**description** | **string** | The parameter description | [optional] [default to undefined]
+**labels** | **{ [key: string]: string; }** | A translated label with key as ISO 639-1 code | [optional] [default to undefined]
+**varType** | **string** | The variable type for the parameter. Basic types or special type %DATASETID% | [default to undefined]
+**defaultValue** | **string** | The default value for this parameter | [optional] [default to undefined]
+**minValue** | **string** | The minimum value for this parameter | [optional] [default to undefined]
+**maxValue** | **string** | The maximum value for this parameter | [optional] [default to undefined]
+**regexValidation** | **string** | A regex to validate the value | [optional] [default to undefined]
+**_options** | **{ [key: string]: any; }** | Freeform options | [optional] [default to undefined]
 
 ## Example
 
@@ -22,6 +23,7 @@ import { RunTemplateParameter } from '@cosmotech/api-ts';
 
 const instance: RunTemplateParameter = {
     id,
+    description,
     labels,
     varType,
     defaultValue,

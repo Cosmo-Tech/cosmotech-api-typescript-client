@@ -1,13 +1,13 @@
 # WorkspaceAccessControl
 
-a Workspace access control item
+A Workspace access control item
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | the identity id | [default to undefined]
-**role** | **string** | a role | [default to undefined]
+**id** | **string** | The identity id | [default to undefined]
+**role** | **string** | A role | [default to undefined]
 
 ## Example
 

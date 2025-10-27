@@ -1,26 +1,78 @@
 # OrganizationApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost:8080*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**addOrganizationAccessControl**](#addorganizationaccesscontrol) | **POST** /organizations/{organization_id}/security/access | Add a control access to the Organization|
-|[**findAllOrganizations**](#findallorganizations) | **GET** /organizations | List all Organizations|
-|[**findOrganizationById**](#findorganizationbyid) | **GET** /organizations/{organization_id} | Get the details of an Organization|
-|[**getAllPermissions**](#getallpermissions) | **GET** /organizations/permissions | Get all permissions per components|
+|[**createOrganization**](#createorganization) | **POST** /organizations | Create a new organization|
+|[**createOrganizationAccessControl**](#createorganizationaccesscontrol) | **POST** /organizations/{organization_id}/security/access | Add a control access to the Organization|
+|[**deleteOrganization**](#deleteorganization) | **DELETE** /organizations/{organization_id} | Delete an organization|
+|[**deleteOrganizationAccessControl**](#deleteorganizationaccesscontrol) | **DELETE** /organizations/{organization_id}/security/access/{identity_id} | Remove the specified access from the given Organization|
+|[**getOrganization**](#getorganization) | **GET** /organizations/{organization_id} | Get the details of an Organization|
 |[**getOrganizationAccessControl**](#getorganizationaccesscontrol) | **GET** /organizations/{organization_id}/security/access/{identity_id} | Get a control access for the Organization|
 |[**getOrganizationPermissions**](#getorganizationpermissions) | **GET** /organizations/{organization_id}/permissions/{role} | Get the Organization permissions by given role|
 |[**getOrganizationSecurity**](#getorganizationsecurity) | **GET** /organizations/{organization_id}/security | Get the Organization security information|
-|[**getOrganizationSecurityUsers**](#getorganizationsecurityusers) | **GET** /organizations/{organization_id}/security/users | Get the Organization security users list|
-|[**registerOrganization**](#registerorganization) | **POST** /organizations | Register a new organization|
-|[**removeOrganizationAccessControl**](#removeorganizationaccesscontrol) | **DELETE** /organizations/{organization_id}/security/access/{identity_id} | Remove the specified access from the given Organization|
-|[**setOrganizationDefaultSecurity**](#setorganizationdefaultsecurity) | **POST** /organizations/{organization_id}/security/default | Set the Organization default security|
-|[**unregisterOrganization**](#unregisterorganization) | **DELETE** /organizations/{organization_id} | Unregister an organization|
+|[**listOrganizationSecurityUsers**](#listorganizationsecurityusers) | **GET** /organizations/{organization_id}/security/users | Get the Organization security users list|
+|[**listOrganizations**](#listorganizations) | **GET** /organizations | List all Organizations|
+|[**listPermissions**](#listpermissions) | **GET** /organizations/permissions | Get all permissions per components|
 |[**updateOrganization**](#updateorganization) | **PATCH** /organizations/{organization_id} | Update an Organization|
 |[**updateOrganizationAccessControl**](#updateorganizationaccesscontrol) | **PATCH** /organizations/{organization_id}/security/access/{identity_id} | Update the specified access to User for an Organization|
+|[**updateOrganizationDefaultSecurity**](#updateorganizationdefaultsecurity) | **PATCH** /organizations/{organization_id}/security/default | Update the Organization default security|
 
-# **addOrganizationAccessControl**
-> OrganizationAccessControl addOrganizationAccessControl(organizationAccessControl)
+# **createOrganization**
+> Organization createOrganization(organizationCreateRequest)
+
+
+### Example
+
+```typescript
+import {
+    OrganizationApi,
+    Configuration,
+    OrganizationCreateRequest
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new OrganizationApi(configuration);
+
+let organizationCreateRequest: OrganizationCreateRequest; //The Organization to create
+
+const { status, data } = await apiInstance.createOrganization(
+    organizationCreateRequest
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organizationCreateRequest** | **OrganizationCreateRequest**| The Organization to create | |
+
+
+### Return type
+
+**Organization**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, application/yaml
+ - **Accept**: application/json, application/yaml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**201** | The Organization details |  -  |
+|**400** | Bad request |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **createOrganizationAccessControl**
+> OrganizationAccessControl createOrganizationAccessControl(organizationAccessControl)
 
 
 ### Example
@@ -35,10 +87,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new OrganizationApi(configuration);
 
-let organizationId: string; //the Organization identifier (default to undefined)
-let organizationAccessControl: OrganizationAccessControl; //the new Organization security access to add.
+let organizationId: string; //The Organization identifier (default to undefined)
+let organizationAccessControl: OrganizationAccessControl; //The new Organization security access to add.
 
-const { status, data } = await apiInstance.addOrganizationAccessControl(
+const { status, data } = await apiInstance.createOrganizationAccessControl(
     organizationId,
     organizationAccessControl
 );
@@ -48,8 +100,8 @@ const { status, data } = await apiInstance.addOrganizationAccessControl(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **organizationAccessControl** | **OrganizationAccessControl**| the new Organization security access to add. | |
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **organizationAccessControl** | **OrganizationAccessControl**| The new Organization security access to add. | |
+| **organizationId** | [**string**] | The Organization identifier | defaults to undefined|
 
 
 ### Return type
@@ -63,19 +115,19 @@ const { status, data } = await apiInstance.addOrganizationAccessControl(
 ### HTTP request headers
 
  - **Content-Type**: application/json, application/yaml
- - **Accept**: application/json
+ - **Accept**: application/json, application/yaml
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**201** | The Organization access |  -  |
-|**404** | the Organization specified is unknown or you don\&#39;t have access to it |  -  |
+|**404** | The Organization specified is unknown or you don\&#39;t have access to it |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **findAllOrganizations**
-> Array<Organization> findAllOrganizations()
+# **deleteOrganization**
+> deleteOrganization()
 
 
 ### Example
@@ -89,62 +141,9 @@ import {
 const configuration = new Configuration();
 const apiInstance = new OrganizationApi(configuration);
 
-let page: number; //page number to query (first page is at index 0) (optional) (default to undefined)
-let size: number; //amount of result by page (optional) (default to undefined)
+let organizationId: string; //The Organization identifier (default to undefined)
 
-const { status, data } = await apiInstance.findAllOrganizations(
-    page,
-    size
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **page** | [**number**] | page number to query (first page is at index 0) | (optional) defaults to undefined|
-| **size** | [**number**] | amount of result by page | (optional) defaults to undefined|
-
-
-### Return type
-
-**Array<Organization>**
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | the list of Organizations |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **findOrganizationById**
-> Organization findOrganizationById()
-
-
-### Example
-
-```typescript
-import {
-    OrganizationApi,
-    Configuration
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new OrganizationApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-
-const { status, data } = await apiInstance.findOrganizationById(
+const { status, data } = await apiInstance.deleteOrganization(
     organizationId
 );
 ```
@@ -153,7 +152,112 @@ const { status, data } = await apiInstance.findOrganizationById(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **organizationId** | [**string**] | The Organization identifier | defaults to undefined|
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**204** | Request succeeded |  -  |
+|**404** | The Organization specified is unknown or you don\&#39;t have access to it |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **deleteOrganizationAccessControl**
+> deleteOrganizationAccessControl()
+
+
+### Example
+
+```typescript
+import {
+    OrganizationApi,
+    Configuration
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new OrganizationApi(configuration);
+
+let organizationId: string; //The Organization identifier (default to undefined)
+let identityId: string; //The User identifier (default to undefined)
+
+const { status, data } = await apiInstance.deleteOrganizationAccessControl(
+    organizationId,
+    identityId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | [**string**] | The Organization identifier | defaults to undefined|
+| **identityId** | [**string**] | The User identifier | defaults to undefined|
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**204** | Request succeeded |  -  |
+|**404** | The Organization or the user specified is unknown or you don\&#39;t have access to them |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getOrganization**
+> Organization getOrganization()
+
+
+### Example
+
+```typescript
+import {
+    OrganizationApi,
+    Configuration
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new OrganizationApi(configuration);
+
+let organizationId: string; //The Organization identifier (default to undefined)
+
+const { status, data } = await apiInstance.getOrganization(
+    organizationId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | [**string**] | The Organization identifier | defaults to undefined|
 
 
 ### Return type
@@ -167,57 +271,14 @@ const { status, data } = await apiInstance.findOrganizationById(
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/json, application/yaml
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | the Organization details |  -  |
-|**404** | the Organization specified is unknown or you don\&#39;t have access to it |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **getAllPermissions**
-> Array<ComponentRolePermissions> getAllPermissions()
-
-
-### Example
-
-```typescript
-import {
-    OrganizationApi,
-    Configuration
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new OrganizationApi(configuration);
-
-const { status, data } = await apiInstance.getAllPermissions();
-```
-
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**Array<ComponentRolePermissions>**
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | The security permission list |  -  |
+|**200** | The Organization details |  -  |
+|**404** | The Organization specified is unknown or you don\&#39;t have access to it |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -236,8 +297,8 @@ import {
 const configuration = new Configuration();
 const apiInstance = new OrganizationApi(configuration);
 
-let organizationId: string; //the Organization identifier (default to undefined)
-let identityId: string; //the User identifier (default to undefined)
+let organizationId: string; //The Organization identifier (default to undefined)
+let identityId: string; //The User identifier (default to undefined)
 
 const { status, data } = await apiInstance.getOrganizationAccessControl(
     organizationId,
@@ -249,8 +310,8 @@ const { status, data } = await apiInstance.getOrganizationAccessControl(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **identityId** | [**string**] | the User identifier | defaults to undefined|
+| **organizationId** | [**string**] | The Organization identifier | defaults to undefined|
+| **identityId** | [**string**] | The User identifier | defaults to undefined|
 
 
 ### Return type
@@ -264,7 +325,7 @@ const { status, data } = await apiInstance.getOrganizationAccessControl(
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/json, application/yaml
 
 
 ### HTTP response details
@@ -290,8 +351,8 @@ import {
 const configuration = new Configuration();
 const apiInstance = new OrganizationApi(configuration);
 
-let organizationId: string; //the Organization identifier (default to undefined)
-let role: string; //the Role (default to undefined)
+let organizationId: string; //The Organization identifier (default to undefined)
+let role: string; //The Role (default to undefined)
 
 const { status, data } = await apiInstance.getOrganizationPermissions(
     organizationId,
@@ -303,8 +364,8 @@ const { status, data } = await apiInstance.getOrganizationPermissions(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **role** | [**string**] | the Role | defaults to undefined|
+| **organizationId** | [**string**] | The Organization identifier | defaults to undefined|
+| **role** | [**string**] | The Role | defaults to undefined|
 
 
 ### Return type
@@ -318,7 +379,7 @@ const { status, data } = await apiInstance.getOrganizationPermissions(
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/json, application/yaml
 
 
 ### HTTP response details
@@ -343,7 +404,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new OrganizationApi(configuration);
 
-let organizationId: string; //the Organization identifier (default to undefined)
+let organizationId: string; //The Organization identifier (default to undefined)
 
 const { status, data } = await apiInstance.getOrganizationSecurity(
     organizationId
@@ -354,7 +415,7 @@ const { status, data } = await apiInstance.getOrganizationSecurity(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **organizationId** | [**string**] | The Organization identifier | defaults to undefined|
 
 
 ### Return type
@@ -368,19 +429,19 @@ const { status, data } = await apiInstance.getOrganizationSecurity(
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/json, application/yaml
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The Organization security |  -  |
-|**404** | the Organization specified is unknown or you don\&#39;t have access to it |  -  |
+|**404** | The Organization specified is unknown or you don\&#39;t have access to it |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getOrganizationSecurityUsers**
-> Array<string> getOrganizationSecurityUsers()
+# **listOrganizationSecurityUsers**
+> Array<string> listOrganizationSecurityUsers()
 
 
 ### Example
@@ -396,7 +457,7 @@ const apiInstance = new OrganizationApi(configuration);
 
 let organizationId: string; //The Organization identifier (default to undefined)
 
-const { status, data } = await apiInstance.getOrganizationSecurityUsers(
+const { status, data } = await apiInstance.listOrganizationSecurityUsers(
     organizationId
 );
 ```
@@ -419,71 +480,19 @@ const { status, data } = await apiInstance.getOrganizationSecurityUsers(
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/json, application/yaml
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The Organization security users list |  -  |
-|**404** | the Organization specified is unknown or you don\&#39;t have access to it |  -  |
+|**404** | The Organization specified is unknown or you don\&#39;t have access to it |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **registerOrganization**
-> Organization registerOrganization(organization)
-
-
-### Example
-
-```typescript
-import {
-    OrganizationApi,
-    Configuration,
-    Organization
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new OrganizationApi(configuration);
-
-let organization: Organization; //the Organization to register
-
-const { status, data } = await apiInstance.registerOrganization(
-    organization
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **organization** | **Organization**| the Organization to register | |
-
-
-### Return type
-
-**Organization**
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: application/json, application/yaml
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**201** | the Organization details |  -  |
-|**400** | Bad request |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **removeOrganizationAccessControl**
-> removeOrganizationAccessControl()
+# **listOrganizations**
+> Array<Organization> listOrganizations()
 
 
 ### Example
@@ -497,12 +506,12 @@ import {
 const configuration = new Configuration();
 const apiInstance = new OrganizationApi(configuration);
 
-let organizationId: string; //the Organization identifier (default to undefined)
-let identityId: string; //the User identifier (default to undefined)
+let page: number; //Page number to query (first page is at index 0) (optional) (default to undefined)
+let size: number; //Amount of result by page (optional) (default to undefined)
 
-const { status, data } = await apiInstance.removeOrganizationAccessControl(
-    organizationId,
-    identityId
+const { status, data } = await apiInstance.listOrganizations(
+    page,
+    size
 );
 ```
 
@@ -510,13 +519,13 @@ const { status, data } = await apiInstance.removeOrganizationAccessControl(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **identityId** | [**string**] | the User identifier | defaults to undefined|
+| **page** | [**number**] | Page number to query (first page is at index 0) | (optional) defaults to undefined|
+| **size** | [**number**] | Amount of result by page | (optional) defaults to undefined|
 
 
 ### Return type
 
-void (empty response body)
+**Array<Organization>**
 
 ### Authorization
 
@@ -525,74 +534,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json, application/yaml
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**204** | Request succeeded |  -  |
-|**404** | the Organization or the user specified is unknown or you don\&#39;t have access to them |  -  |
+|**200** | The list of Organizations |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **setOrganizationDefaultSecurity**
-> OrganizationSecurity setOrganizationDefaultSecurity(organizationRole)
-
-
-### Example
-
-```typescript
-import {
-    OrganizationApi,
-    Configuration,
-    OrganizationRole
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new OrganizationApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let organizationRole: OrganizationRole; //This change the organization default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the organization.
-
-const { status, data } = await apiInstance.setOrganizationDefaultSecurity(
-    organizationId,
-    organizationRole
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **organizationRole** | **OrganizationRole**| This change the organization default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the organization. | |
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-
-
-### Return type
-
-**OrganizationSecurity**
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: application/json, application/yaml
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**201** | The Organization default visibility |  -  |
-|**404** | the Organization specified is unknown or you don\&#39;t have access to it |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **unregisterOrganization**
-> unregisterOrganization()
+# **listPermissions**
+> Array<ComponentRolePermissions> listPermissions()
 
 
 ### Example
@@ -606,23 +559,16 @@ import {
 const configuration = new Configuration();
 const apiInstance = new OrganizationApi(configuration);
 
-let organizationId: string; //the Organization identifier (default to undefined)
-
-const { status, data } = await apiInstance.unregisterOrganization(
-    organizationId
-);
+const { status, data } = await apiInstance.listPermissions();
 ```
 
 ### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+This endpoint does not have any parameters.
 
 
 ### Return type
 
-void (empty response body)
+**Array<ComponentRolePermissions>**
 
 ### Authorization
 
@@ -631,19 +577,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json, application/yaml
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**204** | Request succeeded |  -  |
-|**404** | the Organization specified is unknown or you don\&#39;t have access to it |  -  |
+|**200** | The security permission list |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **updateOrganization**
-> Organization updateOrganization(organization)
+> Organization updateOrganization(organizationUpdateRequest)
 
 
 ### Example
@@ -652,18 +597,18 @@ void (empty response body)
 import {
     OrganizationApi,
     Configuration,
-    Organization
+    OrganizationUpdateRequest
 } from '@cosmotech/api-ts';
 
 const configuration = new Configuration();
 const apiInstance = new OrganizationApi(configuration);
 
-let organizationId: string; //the Organization identifier (default to undefined)
-let organization: Organization; //the new Organization details. This endpoint can\'t be used to update security
+let organizationId: string; //The Organization identifier (default to undefined)
+let organizationUpdateRequest: OrganizationUpdateRequest; //The new Organization details. This endpoint can\'t be used to update security
 
 const { status, data } = await apiInstance.updateOrganization(
     organizationId,
-    organization
+    organizationUpdateRequest
 );
 ```
 
@@ -671,8 +616,8 @@ const { status, data } = await apiInstance.updateOrganization(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **organization** | **Organization**| the new Organization details. This endpoint can\&#39;t be used to update security | |
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **organizationUpdateRequest** | **OrganizationUpdateRequest**| The new Organization details. This endpoint can\&#39;t be used to update security | |
+| **organizationId** | [**string**] | The Organization identifier | defaults to undefined|
 
 
 ### Return type
@@ -686,15 +631,15 @@ const { status, data } = await apiInstance.updateOrganization(
 ### HTTP request headers
 
  - **Content-Type**: application/json, application/yaml
- - **Accept**: application/json
+ - **Accept**: application/json, application/yaml
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | the organization details |  -  |
+|**200** | The organization details |  -  |
 |**400** | Bad request |  -  |
-|**404** | the Organization specified is unknown or you don\&#39;t have access to it |  -  |
+|**404** | The Organization specified is unknown or you don\&#39;t have access to it |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -714,8 +659,8 @@ import {
 const configuration = new Configuration();
 const apiInstance = new OrganizationApi(configuration);
 
-let organizationId: string; //the Organization identifier (default to undefined)
-let identityId: string; //the User identifier (default to undefined)
+let organizationId: string; //The Organization identifier (default to undefined)
+let identityId: string; //The User identifier (default to undefined)
 let organizationRole: OrganizationRole; //The new Organization Access Control
 
 const { status, data } = await apiInstance.updateOrganizationAccessControl(
@@ -730,8 +675,8 @@ const { status, data } = await apiInstance.updateOrganizationAccessControl(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **organizationRole** | **OrganizationRole**| The new Organization Access Control | |
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **identityId** | [**string**] | the User identifier | defaults to undefined|
+| **organizationId** | [**string**] | The Organization identifier | defaults to undefined|
+| **identityId** | [**string**] | The User identifier | defaults to undefined|
 
 
 ### Return type
@@ -744,14 +689,69 @@ const { status, data } = await apiInstance.updateOrganizationAccessControl(
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+ - **Content-Type**: application/json, application/yaml
+ - **Accept**: application/json, application/yaml
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The Organization access |  -  |
+|**404** | The Organization specified is unknown or you don\&#39;t have access to it |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **updateOrganizationDefaultSecurity**
+> OrganizationSecurity updateOrganizationDefaultSecurity(organizationRole)
+
+
+### Example
+
+```typescript
+import {
+    OrganizationApi,
+    Configuration,
+    OrganizationRole
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new OrganizationApi(configuration);
+
+let organizationId: string; //The Organization identifier (default to undefined)
+let organizationRole: OrganizationRole; //This change the organization default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the organization.
+
+const { status, data } = await apiInstance.updateOrganizationDefaultSecurity(
+    organizationId,
+    organizationRole
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organizationRole** | **OrganizationRole**| This change the organization default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the organization. | |
+| **organizationId** | [**string**] | The Organization identifier | defaults to undefined|
+
+
+### Return type
+
+**OrganizationSecurity**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, application/yaml
+ - **Accept**: application/json, application/yaml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**201** | The Organization default visibility |  -  |
 |**404** | The Organization specified is unknown or you don\&#39;t have access to it |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

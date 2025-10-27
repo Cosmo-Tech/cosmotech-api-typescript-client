@@ -1,33 +1,32 @@
 # Runner
 
-a Runner with base information
+a Runner with complete information
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | the Runner unique identifier | [optional] [readonly] [default to undefined]
-**name** | **string** | the Runner name | [optional] [default to undefined]
+**id** | **string** | the Runner unique identifier | [readonly] [default to undefined]
+**name** | **string** | the Runner name | [default to undefined]
 **description** | **string** | the Runner description | [optional] [default to undefined]
 **tags** | **Array&lt;string&gt;** | the list of tags | [optional] [default to undefined]
 **parentId** | **string** | the Runner parent id | [optional] [default to undefined]
-**ownerId** | **string** | the user id which own this Runner | [optional] [readonly] [default to undefined]
+**createInfo** | [**RunnerEditInfo**](RunnerEditInfo.md) | The details of the Runner creation | [default to undefined]
+**updateInfo** | [**RunnerEditInfo**](RunnerEditInfo.md) | The details of the Runner last update | [default to undefined]
 **rootId** | **string** | the runner root id | [optional] [readonly] [default to undefined]
-**solutionId** | **string** | the Solution Id associated with this Runner | [optional] [readonly] [default to undefined]
-**runTemplateId** | **string** | the Solution Run Template Id associated with this Runner | [optional] [default to undefined]
-**organizationId** | **string** | the associated Organization Id | [optional] [readonly] [default to undefined]
-**workspaceId** | **string** | the associated Workspace Id | [optional] [readonly] [default to undefined]
-**creationDate** | **number** | the Runner creation date | [optional] [readonly] [default to undefined]
-**lastUpdate** | **number** | the last time a Runner was updated | [optional] [readonly] [default to undefined]
-**ownerName** | **string** | the name of the owner | [optional] [readonly] [default to undefined]
+**solutionId** | **string** | the Solution Id associated with this Runner | [readonly] [default to undefined]
+**runTemplateId** | **string** | the Solution Run Template Id associated with this Runner | [default to undefined]
+**organizationId** | **string** | the associated Organization Id | [readonly] [default to undefined]
+**workspaceId** | **string** | the associated Workspace Id | [readonly] [default to undefined]
+**ownerName** | **string** | the name of the owner | [readonly] [default to undefined]
 **solutionName** | **string** | the Solution name | [optional] [readonly] [default to undefined]
 **runTemplateName** | **string** | the Solution Run Template name associated with this Runner | [optional] [readonly] [default to undefined]
-**datasetList** | **Array&lt;string&gt;** | the list of Dataset Id associated to this Runner Run Template | [optional] [default to undefined]
+**datasets** | [**RunnerDatasets**](RunnerDatasets.md) |  | [default to undefined]
 **runSizing** | [**RunnerResourceSizing**](RunnerResourceSizing.md) |  | [optional] [default to undefined]
-**parametersValues** | [**Array&lt;RunnerRunTemplateParameterValue&gt;**](RunnerRunTemplateParameterValue.md) | the list of Solution Run Template parameters values | [optional] [default to undefined]
-**lastRunId** | **string** | last run id from current runner | [optional] [default to undefined]
-**validationStatus** | [**RunnerValidationStatus**](RunnerValidationStatus.md) |  | [optional] [default to undefined]
-**security** | [**RunnerSecurity**](RunnerSecurity.md) |  | [optional] [default to undefined]
+**parametersValues** | [**Array&lt;RunnerRunTemplateParameterValue&gt;**](RunnerRunTemplateParameterValue.md) | the list of Solution Run Template parameters values | [default to undefined]
+**lastRunInfo** | [**LastRunInfo**](LastRunInfo.md) |  | [default to undefined]
+**validationStatus** | [**RunnerValidationStatus**](RunnerValidationStatus.md) |  | [default to undefined]
+**security** | [**RunnerSecurity**](RunnerSecurity.md) |  | [default to undefined]
 
 ## Example
 
@@ -40,21 +39,20 @@ const instance: Runner = {
     description,
     tags,
     parentId,
-    ownerId,
+    createInfo,
+    updateInfo,
     rootId,
     solutionId,
     runTemplateId,
     organizationId,
     workspaceId,
-    creationDate,
-    lastUpdate,
     ownerName,
     solutionName,
     runTemplateName,
-    datasetList,
+    datasets,
     runSizing,
     parametersValues,
-    lastRunId,
+    lastRunInfo,
     validationStatus,
     security,
 };
