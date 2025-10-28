@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **version** | **string** | The Workspace version MAJOR.MINOR.PATCH. | [optional] [default to undefined]
 **tags** | **Array&lt;string&gt;** | The list of tags | [optional] [default to undefined]
 **solution** | [**WorkspaceSolution**](WorkspaceSolution.md) |  | [default to undefined]
-**webApp** | [**WorkspaceWebApp**](WorkspaceWebApp.md) |  | [optional] [default to undefined]
+**additionalData** | **{ [key: string]: any; }** | Free form additional data | [optional] [default to undefined]
 **datasetCopy** | **boolean** | Activate the copy of dataset on scenario creation | [optional] [default to true]
 **security** | [**WorkspaceSecurity**](WorkspaceSecurity.md) |  | [optional] [default to undefined]
 
@@ -28,7 +28,7 @@ const instance: WorkspaceCreateRequest = {
     version,
     tags,
     solution,
-    webApp,
+    additionalData,
     datasetCopy,
     security,
 };

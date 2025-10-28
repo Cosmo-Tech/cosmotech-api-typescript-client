@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **name** | **string** |  | [default to undefined]
 **description** | **string** |  | [optional] [default to undefined]
 **tags** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
+**additionalData** | **{ [key: string]: any; }** | Free form additional data | [optional] [default to undefined]
 **parts** | [**Array&lt;DatasetPartCreateRequest&gt;**](DatasetPartCreateRequest.md) |  | [optional] [default to undefined]
 **security** | [**DatasetSecurity**](DatasetSecurity.md) |  | [optional] [default to undefined]
 **runnerId** | **string** |  | [optional] [default to undefined]
@@ -22,6 +23,7 @@ const instance: DatasetCreateRequest = {
     name,
     description,
     tags,
+    additionalData,
     parts,
     security,
     runnerId,

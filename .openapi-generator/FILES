@@ -85,7 +85,6 @@ docs/WorkspaceRole.md
 docs/WorkspaceSecurity.md
 docs/WorkspaceSolution.md
 docs/WorkspaceUpdateRequest.md
-docs/WorkspaceWebApp.md
 git_push.sh
 index.ts
 package.json

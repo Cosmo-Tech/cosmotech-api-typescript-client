@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **organizationId** | **string** | the associated Organization Id | [readonly] [default to undefined]
 **workspaceId** | **string** | the associated Workspace Id | [readonly] [default to undefined]
 **tags** | **Array&lt;string&gt;** | the list of tags | [default to undefined]
+**additionalData** | **{ [key: string]: any; }** | Free form additional data | [optional] [default to undefined]
 **parts** | [**Array&lt;DatasetPart&gt;**](DatasetPart.md) |  | [default to undefined]
 **createInfo** | [**CreateInfo**](CreateInfo.md) | The details of the Dataset creation | [default to undefined]
 **updateInfo** | [**EditInfo**](EditInfo.md) | The details of the Dataset last update | [default to undefined]
@@ -29,6 +30,7 @@ const instance: Dataset = {
     organizationId,
     workspaceId,
     tags,
+    additionalData,
     parts,
     createInfo,
     updateInfo,

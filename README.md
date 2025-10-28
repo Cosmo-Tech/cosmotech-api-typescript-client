@@ -228,7 +228,6 @@ Class | Method | HTTP request | Description
  - [WorkspaceSecurity](docs/WorkspaceSecurity.md)
  - [WorkspaceSolution](docs/WorkspaceSolution.md)
  - [WorkspaceUpdateRequest](docs/WorkspaceUpdateRequest.md)
- - [WorkspaceWebApp](docs/WorkspaceWebApp.md)
 
 
 <a id="documentation-for-authorization"></a>

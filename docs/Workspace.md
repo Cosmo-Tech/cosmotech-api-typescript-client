@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **createInfo** | [**WorkspaceEditInfo**](WorkspaceEditInfo.md) | The details of the Workspace creation | [default to undefined]
 **updateInfo** | [**WorkspaceEditInfo**](WorkspaceEditInfo.md) | The details of the Workspace last update | [default to undefined]
 **solution** | [**WorkspaceSolution**](WorkspaceSolution.md) |  | [default to undefined]
-**webApp** | [**WorkspaceWebApp**](WorkspaceWebApp.md) |  | [optional] [default to undefined]
+**additionalData** | **{ [key: string]: any; }** | Free form additional data | [optional] [default to undefined]
 **datasetCopy** | **boolean** | Activate the copy of dataset on scenario creation, meaning that each scenario created in this workspace will make this copy. when false, scenario use directly the dataset specified. | [optional] [default to true]
 **security** | [**WorkspaceSecurity**](WorkspaceSecurity.md) |  | [default to undefined]
 
@@ -36,7 +36,7 @@ const instance: Workspace = {
     createInfo,
     updateInfo,
     solution,
-    webApp,
+    additionalData,
     datasetCopy,
     security,
 };

@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **sourceName** | **string** | the source data name (e.g. filename associated to the dataset part) | [default to undefined]
 **description** | **string** |  | [optional] [default to undefined]
 **tags** | **Array&lt;string&gt;** |  | [default to undefined]
+**additionalData** | **{ [key: string]: any; }** | Free form additional data | [optional] [default to undefined]
 **type** | [**DatasetPartTypeEnum**](DatasetPartTypeEnum.md) |  | [default to undefined]
 **organizationId** | **string** | the associated Organization Id | [readonly] [default to undefined]
 **workspaceId** | **string** | the associated Workspace Id | [readonly] [default to undefined]
@@ -29,6 +30,7 @@ const instance: DatasetPart = {
     sourceName,
     description,
     tags,
+    additionalData,
     type,
     organizationId,
     workspaceId,

@@ -223,6 +223,12 @@ export interface Dataset {
      */
     'tags': Array<string>;
     /**
+     * Free form additional data
+     * @type {{ [key: string]: any; }}
+     * @memberof Dataset
+     */
+    'additionalData'?: { [key: string]: any; };
+    /**
      * 
      * @type {Array<DatasetPart>}
      * @memberof Dataset
@@ -291,6 +297,12 @@ export interface DatasetCreateRequest {
      */
     'tags'?: Array<string>;
     /**
+     * Free form additional data
+     * @type {{ [key: string]: any; }}
+     * @memberof DatasetCreateRequest
+     */
+    'additionalData'?: { [key: string]: any; };
+    /**
      * 
      * @type {Array<DatasetPartCreateRequest>}
      * @memberof DatasetCreateRequest
@@ -345,6 +357,12 @@ export interface DatasetPart {
      * @memberof DatasetPart
      */
     'tags': Array<string>;
+    /**
+     * Free form additional data
+     * @type {{ [key: string]: any; }}
+     * @memberof DatasetPart
+     */
+    'additionalData'?: { [key: string]: any; };
     /**
      * 
      * @type {DatasetPartTypeEnum}
@@ -415,6 +433,12 @@ export interface DatasetPartCreateRequest {
      */
     'tags'?: Array<string>;
     /**
+     * Free form additional data
+     * @type {{ [key: string]: any; }}
+     * @memberof DatasetPartCreateRequest
+     */
+    'additionalData'?: { [key: string]: any; };
+    /**
      * 
      * @type {DatasetPartTypeEnum}
      * @memberof DatasetPartCreateRequest
@@ -461,6 +485,12 @@ export interface DatasetPartUpdateRequest {
      * @memberof DatasetPartUpdateRequest
      */
     'tags'?: Array<string>;
+    /**
+     * Free form additional data
+     * @type {{ [key: string]: any; }}
+     * @memberof DatasetPartUpdateRequest
+     */
+    'additionalData'?: { [key: string]: any; };
 }
 /**
  * the Dataset Role
@@ -518,6 +548,12 @@ export interface DatasetUpdateRequest {
      * @memberof DatasetUpdateRequest
      */
     'tags'?: Array<string>;
+    /**
+     * Free form additional data
+     * @type {{ [key: string]: any; }}
+     * @memberof DatasetUpdateRequest
+     */
+    'additionalData'?: { [key: string]: any; };
     /**
      * 
      * @type {Array<DatasetPartCreateRequest>}
@@ -1338,11 +1374,11 @@ export interface RunTemplateParameter {
      */
     'regexValidation'?: string;
     /**
-     * Freeform options
+     * Free form additional data
      * @type {{ [key: string]: any; }}
      * @memberof RunTemplateParameter
      */
-    'options'?: { [key: string]: any; };
+    'additionalData'?: { [key: string]: any; };
 }
 /**
  * A Run Template Parameter for creation
@@ -1399,11 +1435,11 @@ export interface RunTemplateParameterCreateRequest {
      */
     'regexValidation'?: string;
     /**
-     * Freeform options
+     * Free form additional data
      * @type {{ [key: string]: any; }}
      * @memberof RunTemplateParameterCreateRequest
      */
-    'options'?: { [key: string]: any; };
+    'additionalData'?: { [key: string]: any; };
 }
 /**
  * A Parameter Group for a Run Template
@@ -1436,11 +1472,11 @@ export interface RunTemplateParameterGroup {
      */
     'isTable': boolean;
     /**
-     * Freeform options
+     * Free form additional data
      * @type {{ [key: string]: any; }}
      * @memberof RunTemplateParameterGroup
      */
-    'options'?: { [key: string]: any; };
+    'additionalData'?: { [key: string]: any; };
     /**
      * The Run Template Group parent Id
      * @type {string}
@@ -1485,11 +1521,11 @@ export interface RunTemplateParameterGroupCreateRequest {
      */
     'isTable'?: boolean;
     /**
-     * Freeform options
+     * Free form additional data
      * @type {{ [key: string]: any; }}
      * @memberof RunTemplateParameterGroupCreateRequest
      */
-    'options'?: { [key: string]: any; };
+    'additionalData'?: { [key: string]: any; };
     /**
      * The Run Template Group parent Id
      * @type {string}
@@ -1528,11 +1564,11 @@ export interface RunTemplateParameterGroupUpdateRequest {
      */
     'isTable'?: boolean;
     /**
-     * Freeform options
+     * Free form additional data
      * @type {{ [key: string]: any; }}
      * @memberof RunTemplateParameterGroupUpdateRequest
      */
-    'options'?: { [key: string]: any; };
+    'additionalData'?: { [key: string]: any; };
     /**
      * The Run Template Group parent Id
      * @type {string}
@@ -1595,11 +1631,11 @@ export interface RunTemplateParameterUpdateRequest {
      */
     'regexValidation'?: string;
     /**
-     * Freeform options
+     * Free form additional data
      * @type {{ [key: string]: any; }}
      * @memberof RunTemplateParameterUpdateRequest
      */
-    'options'?: { [key: string]: any; };
+    'additionalData'?: { [key: string]: any; };
 }
 /**
  * the value of Analysis parameter for a Runner for this Run
@@ -2546,11 +2582,11 @@ export interface Workspace {
      */
     'solution': WorkspaceSolution;
     /**
-     * 
-     * @type {WorkspaceWebApp}
+     * Free form additional data
+     * @type {{ [key: string]: any; }}
      * @memberof Workspace
      */
-    'webApp'?: WorkspaceWebApp;
+    'additionalData'?: { [key: string]: any; };
     /**
      * Activate the copy of dataset on scenario creation, meaning that each scenario created in this workspace will make this copy. when false, scenario use directly the dataset specified.
      * @type {boolean}
@@ -2626,11 +2662,11 @@ export interface WorkspaceCreateRequest {
      */
     'solution': WorkspaceSolution;
     /**
-     * 
-     * @type {WorkspaceWebApp}
+     * Free form additional data
+     * @type {{ [key: string]: any; }}
      * @memberof WorkspaceCreateRequest
      */
-    'webApp'?: WorkspaceWebApp;
+    'additionalData'?: { [key: string]: any; };
     /**
      * Activate the copy of dataset on scenario creation
      * @type {boolean}
@@ -2782,42 +2818,17 @@ export interface WorkspaceUpdateRequest {
      */
     'solution'?: WorkspaceSolution;
     /**
-     * 
-     * @type {WorkspaceWebApp}
+     * Free form additional data
+     * @type {{ [key: string]: any; }}
      * @memberof WorkspaceUpdateRequest
      */
-    'webApp'?: WorkspaceWebApp;
+    'additionalData'?: { [key: string]: any; };
     /**
      * Activate the copy of dataset on scenario creation
      * @type {boolean}
      * @memberof WorkspaceUpdateRequest
      */
     'datasetCopy'?: boolean;
-}
-/**
- * A Workspace Web Application
- * @export
- * @interface WorkspaceWebApp
- */
-export interface WorkspaceWebApp {
-    /**
-     * The Workspace Web Application URL
-     * @type {string}
-     * @memberof WorkspaceWebApp
-     */
-    'url': string;
-    /**
-     * A map of iframeKey/iframeURL
-     * @type {{ [key: string]: any; }}
-     * @memberof WorkspaceWebApp
-     */
-    'iframes'?: { [key: string]: any; };
-    /**
-     * free form options for Web Application
-     * @type {{ [key: string]: any; }}
-     * @memberof WorkspaceWebApp
-     */
-    'options'?: { [key: string]: any; };
 }
 
 /**

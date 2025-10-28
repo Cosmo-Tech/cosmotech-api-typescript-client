@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **minValue** | **string** | The minimum value for this parameter | [optional] [default to undefined]
 **maxValue** | **string** | The maximum value for this parameter | [optional] [default to undefined]
 **regexValidation** | **string** | A regex to validate the value | [optional] [default to undefined]
-**_options** | **{ [key: string]: any; }** | Freeform options | [optional] [default to undefined]
+**additionalData** | **{ [key: string]: any; }** | Free form additional data | [optional] [default to undefined]
 
 ## Example
 
@@ -30,7 +30,7 @@ const instance: RunTemplateParameterCreateRequest = {
     minValue,
     maxValue,
     regexValidation,
-    _options,
+    additionalData,
 };
 ```
 
