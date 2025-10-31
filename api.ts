@@ -2768,18 +2768,6 @@ export interface WorkspaceSolution {
      * @memberof WorkspaceSolution
      */
     'defaultParameterValues'?: { [key: string]: string; };
-    /**
-     * The list of Solution Run Template Id to filter
-     * @type {Array<string>}
-     * @memberof WorkspaceSolution
-     */
-    'runTemplateFilter'?: Array<string>;
-    /**
-     * A map of RunTemplateId/DatasetId to set a default dataset for a Run Template
-     * @type {{ [key: string]: any; }}
-     * @memberof WorkspaceSolution
-     */
-    'defaultRunTemplateDataset'?: { [key: string]: any; };
 }
 /**
  * Request object for updating a workspace
