@@ -16,8 +16,8 @@ Name | Type | Description | Notes
 **organizationId** | **string** | the associated Organization Id | [readonly] [default to undefined]
 **workspaceId** | **string** | the associated Workspace Id | [readonly] [default to undefined]
 **datasetId** | **string** | the associated Dataset Id | [readonly] [default to undefined]
-**createInfo** | [**EditInfo**](EditInfo.md) | The details of the Dataset creation | [default to undefined]
-**updateInfo** | [**EditInfo**](EditInfo.md) | The details of the Dataset last update | [default to undefined]
+**createInfo** | [**DatasetEditInfo**](DatasetEditInfo.md) | The details of the Dataset creation | [default to undefined]
+**updateInfo** | [**DatasetEditInfo**](DatasetEditInfo.md) | The details of the Dataset last update | [default to undefined]
 
 ## Example
 

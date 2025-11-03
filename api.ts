@@ -143,31 +143,6 @@ export interface ContainerResourceSizing {
     'limits': ContainerResourceSizeInfo;
 }
 /**
- * 
- * @export
- * @interface CreateInfo
- */
-export interface CreateInfo {
-    /**
-     * The timestamp of the creation in millisecond
-     * @type {number}
-     * @memberof CreateInfo
-     */
-    'timestamp': number;
-    /**
-     * The id of the user who did the creation
-     * @type {string}
-     * @memberof CreateInfo
-     */
-    'userId': string;
-    /**
-     * The runner id which has created the dataset (nullable)
-     * @type {string}
-     * @memberof CreateInfo
-     */
-    'runnerId'?: string;
-}
-/**
  * Newly created Run info
  * @export
  * @interface CreatedRun
@@ -236,16 +211,16 @@ export interface Dataset {
     'parts': Array<DatasetPart>;
     /**
      * The details of the Dataset creation
-     * @type {CreateInfo}
+     * @type {DatasetCreateInfo}
      * @memberof Dataset
      */
-    'createInfo': CreateInfo;
+    'createInfo': DatasetCreateInfo;
     /**
      * The details of the Dataset last update
-     * @type {EditInfo}
+     * @type {DatasetEditInfo}
      * @memberof Dataset
      */
-    'updateInfo': EditInfo;
+    'updateInfo': DatasetEditInfo;
     /**
      * 
      * @type {DatasetSecurity}
@@ -271,6 +246,31 @@ export interface DatasetAccessControl {
      * @memberof DatasetAccessControl
      */
     'role': string;
+}
+/**
+ * 
+ * @export
+ * @interface DatasetCreateInfo
+ */
+export interface DatasetCreateInfo {
+    /**
+     * The timestamp of the creation in millisecond
+     * @type {number}
+     * @memberof DatasetCreateInfo
+     */
+    'timestamp': number;
+    /**
+     * The id of the user who did the creation
+     * @type {string}
+     * @memberof DatasetCreateInfo
+     */
+    'userId': string;
+    /**
+     * The runner id which has created the dataset (nullable)
+     * @type {string}
+     * @memberof DatasetCreateInfo
+     */
+    'runnerId'?: string;
 }
 /**
  * Dataset creation request
@@ -320,6 +320,25 @@ export interface DatasetCreateRequest {
      * @memberof DatasetCreateRequest
      */
     'runnerId'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface DatasetEditInfo
+ */
+export interface DatasetEditInfo {
+    /**
+     * The timestamp of the modification in millisecond
+     * @type {number}
+     * @memberof DatasetEditInfo
+     */
+    'timestamp': number;
+    /**
+     * The id of the user who did the modification
+     * @type {string}
+     * @memberof DatasetEditInfo
+     */
+    'userId': string;
 }
 /**
  * Dataset part object
@@ -389,16 +408,16 @@ export interface DatasetPart {
     'datasetId': string;
     /**
      * The details of the Dataset creation
-     * @type {EditInfo}
+     * @type {DatasetEditInfo}
      * @memberof DatasetPart
      */
-    'createInfo': EditInfo;
+    'createInfo': DatasetEditInfo;
     /**
      * The details of the Dataset last update
-     * @type {EditInfo}
+     * @type {DatasetEditInfo}
      * @memberof DatasetPart
      */
-    'updateInfo': EditInfo;
+    'updateInfo': DatasetEditInfo;
 }
 
 
@@ -566,25 +585,6 @@ export interface DatasetUpdateRequest {
      * @memberof DatasetUpdateRequest
      */
     'security'?: DatasetSecurity;
-}
-/**
- * 
- * @export
- * @interface EditInfo
- */
-export interface EditInfo {
-    /**
-     * The timestamp of the modification in millisecond
-     * @type {number}
-     * @memberof EditInfo
-     */
-    'timestamp': number;
-    /**
-     * The id of the user who did the modification
-     * @type {string}
-     * @memberof EditInfo
-     */
-    'userId': string;
 }
 /**
  * last run info from current runner
@@ -1368,12 +1368,6 @@ export interface RunTemplateParameter {
      */
     'maxValue'?: string;
     /**
-     * A regex to validate the value
-     * @type {string}
-     * @memberof RunTemplateParameter
-     */
-    'regexValidation'?: string;
-    /**
      * Free form additional data
      * @type {{ [key: string]: any; }}
      * @memberof RunTemplateParameter
@@ -1429,12 +1423,6 @@ export interface RunTemplateParameterCreateRequest {
      */
     'maxValue'?: string;
     /**
-     * A regex to validate the value
-     * @type {string}
-     * @memberof RunTemplateParameterCreateRequest
-     */
-    'regexValidation'?: string;
-    /**
      * Free form additional data
      * @type {{ [key: string]: any; }}
      * @memberof RunTemplateParameterCreateRequest
@@ -1466,23 +1454,11 @@ export interface RunTemplateParameterGroup {
      */
     'labels'?: { [key: string]: string; };
     /**
-     * Does the group define a table
-     * @type {boolean}
-     * @memberof RunTemplateParameterGroup
-     */
-    'isTable': boolean;
-    /**
      * Free form additional data
      * @type {{ [key: string]: any; }}
      * @memberof RunTemplateParameterGroup
      */
     'additionalData'?: { [key: string]: any; };
-    /**
-     * The Run Template Group parent Id
-     * @type {string}
-     * @memberof RunTemplateParameterGroup
-     */
-    'parentId'?: string;
     /**
      * An ordered list of Run Template Parameters
      * @type {Array<string>}
@@ -1515,23 +1491,11 @@ export interface RunTemplateParameterGroupCreateRequest {
      */
     'labels'?: { [key: string]: string; };
     /**
-     * Does the group define a table
-     * @type {boolean}
-     * @memberof RunTemplateParameterGroupCreateRequest
-     */
-    'isTable'?: boolean;
-    /**
      * Free form additional data
      * @type {{ [key: string]: any; }}
      * @memberof RunTemplateParameterGroupCreateRequest
      */
     'additionalData'?: { [key: string]: any; };
-    /**
-     * The Run Template Group parent Id
-     * @type {string}
-     * @memberof RunTemplateParameterGroupCreateRequest
-     */
-    'parentId'?: string;
     /**
      * An ordered list of Run Template Parameters
      * @type {Array<string>}
@@ -1558,23 +1522,11 @@ export interface RunTemplateParameterGroupUpdateRequest {
      */
     'labels'?: { [key: string]: string; };
     /**
-     * Does the group define a table
-     * @type {boolean}
-     * @memberof RunTemplateParameterGroupUpdateRequest
-     */
-    'isTable'?: boolean;
-    /**
      * Free form additional data
      * @type {{ [key: string]: any; }}
      * @memberof RunTemplateParameterGroupUpdateRequest
      */
     'additionalData'?: { [key: string]: any; };
-    /**
-     * The Run Template Group parent Id
-     * @type {string}
-     * @memberof RunTemplateParameterGroupUpdateRequest
-     */
-    'parentId'?: string;
     /**
      * An ordered list of Run Template Parameters
      * @type {Array<string>}
@@ -1624,12 +1576,6 @@ export interface RunTemplateParameterUpdateRequest {
      * @memberof RunTemplateParameterUpdateRequest
      */
     'maxValue'?: string;
-    /**
-     * A regex to validate the value
-     * @type {string}
-     * @memberof RunTemplateParameterUpdateRequest
-     */
-    'regexValidation'?: string;
     /**
      * Free form additional data
      * @type {{ [key: string]: any; }}

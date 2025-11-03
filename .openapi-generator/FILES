@@ -11,12 +11,13 @@ docs/AboutInfoVersion.md
 docs/ComponentRolePermissions.md
 docs/ContainerResourceSizeInfo.md
 docs/ContainerResourceSizing.md
-docs/CreateInfo.md
 docs/CreatedRun.md
 docs/Dataset.md
 docs/DatasetAccessControl.md
 docs/DatasetApi.md
+docs/DatasetCreateInfo.md
 docs/DatasetCreateRequest.md
+docs/DatasetEditInfo.md
 docs/DatasetPart.md
 docs/DatasetPartCreateRequest.md
 docs/DatasetPartTypeEnum.md
@@ -24,7 +25,6 @@ docs/DatasetPartUpdateRequest.md
 docs/DatasetRole.md
 docs/DatasetSecurity.md
 docs/DatasetUpdateRequest.md
-docs/EditInfo.md
 docs/LastRunInfo.md
 docs/MetaApi.md
 docs/Organization.md
