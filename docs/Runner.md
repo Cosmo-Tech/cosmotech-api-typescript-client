@@ -18,9 +18,9 @@ Name | Type | Description | Notes
 **runTemplateId** | **string** | the Solution Run Template Id associated with this Runner | [default to undefined]
 **organizationId** | **string** | the associated Organization Id | [readonly] [default to undefined]
 **workspaceId** | **string** | the associated Workspace Id | [readonly] [default to undefined]
-**ownerName** | **string** | the name of the owner | [readonly] [default to undefined]
 **solutionName** | **string** | the Solution name | [optional] [readonly] [default to undefined]
 **runTemplateName** | **string** | the Solution Run Template name associated with this Runner | [optional] [readonly] [default to undefined]
+**additionalData** | **{ [key: string]: any; }** | Free form additional data | [optional] [default to undefined]
 **datasets** | [**RunnerDatasets**](RunnerDatasets.md) |  | [default to undefined]
 **runSizing** | [**RunnerResourceSizing**](RunnerResourceSizing.md) |  | [optional] [default to undefined]
 **parametersValues** | [**Array&lt;RunnerRunTemplateParameterValue&gt;**](RunnerRunTemplateParameterValue.md) | the list of Solution Run Template parameters values | [default to undefined]
@@ -46,9 +46,9 @@ const instance: Runner = {
     runTemplateId,
     organizationId,
     workspaceId,
-    ownerName,
     solutionName,
     runTemplateName,
+    additionalData,
     datasets,
     runSizing,
     parametersValues,

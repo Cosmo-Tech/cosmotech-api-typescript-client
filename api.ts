@@ -1761,12 +1761,6 @@ export interface Runner {
      */
     'workspaceId': string;
     /**
-     * the name of the owner
-     * @type {string}
-     * @memberof Runner
-     */
-    'ownerName': string;
-    /**
      * the Solution name
      * @type {string}
      * @memberof Runner
@@ -1778,6 +1772,12 @@ export interface Runner {
      * @memberof Runner
      */
     'runTemplateName'?: string;
+    /**
+     * Free form additional data
+     * @type {{ [key: string]: any; }}
+     * @memberof Runner
+     */
+    'additionalData'?: { [key: string]: any; };
     /**
      * 
      * @type {RunnerDatasets}
@@ -1897,11 +1897,11 @@ export interface RunnerCreateRequest {
      */
     'parametersValues'?: Array<RunnerRunTemplateParameterValue>;
     /**
-     * the name of the owner
-     * @type {string}
+     * Free form additional data
+     * @type {{ [key: string]: any; }}
      * @memberof RunnerCreateRequest
      */
-    'ownerName': string;
+    'additionalData'?: { [key: string]: any; };
     /**
      * the Solution name
      * @type {string}
@@ -2096,11 +2096,11 @@ export interface RunnerUpdateRequest {
      */
     'parametersValues'?: Array<RunnerRunTemplateParameterValue>;
     /**
-     * the name of the owner
-     * @type {string}
+     * Free form additional data
+     * @type {{ [key: string]: any; }}
      * @memberof RunnerUpdateRequest
      */
-    'ownerName'?: string;
+    'additionalData'?: { [key: string]: any; };
     /**
      * the Solution name
      * @type {string}

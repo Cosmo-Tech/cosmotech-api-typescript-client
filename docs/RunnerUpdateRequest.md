@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **datasetList** | **Array&lt;string&gt;** | the list of Dataset Id associated to this Runner Run Template | [optional] [default to undefined]
 **runSizing** | [**RunnerResourceSizing**](RunnerResourceSizing.md) |  | [optional] [default to undefined]
 **parametersValues** | [**Array&lt;RunnerRunTemplateParameterValue&gt;**](RunnerRunTemplateParameterValue.md) | the list of Solution Run Template parameters values | [optional] [default to undefined]
-**ownerName** | **string** | the name of the owner | [optional] [default to undefined]
+**additionalData** | **{ [key: string]: any; }** | Free form additional data | [optional] [default to undefined]
 **solutionName** | **string** | the Solution name | [optional] [default to undefined]
 **runTemplateName** | **string** | the Solution Run Template name associated with this Runner | [optional] [default to undefined]
 
@@ -30,7 +30,7 @@ const instance: RunnerUpdateRequest = {
     datasetList,
     runSizing,
     parametersValues,
-    ownerName,
+    additionalData,
     solutionName,
     runTemplateName,
 };
