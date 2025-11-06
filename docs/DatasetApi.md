@@ -840,12 +840,12 @@ let organizationId: string; //the Organization identifier (default to undefined)
 let workspaceId: string; //the Workspace identifier (default to undefined)
 let datasetId: string; //the Dataset identifier (default to undefined)
 let datasetPartId: string; //the Dataset part identifier (default to undefined)
-let selects: Array<string>; //Column names that should be part of the response data. You can specify a column name like:  - id  - stock  - quantity  - ... If you want to select only distinct columns, add a \'*\' at the end of the column name (e.g. stock*).  (optional) (default to undefined)
-let sums: Array<string>; //Column names to sum by. If you want to sum only distinct columns, add a \'*\' at the end of the column name (e.g. stock*).  (optional) (default to undefined)
-let avgs: Array<string>; //Column names to average by. If you want to apply \'average\' only on distinct columns, add a \'*\' at the end of the column name (e.g. stock*).  (optional) (default to undefined)
-let counts: Array<string>; //Column names to count by. If you want to count only distinct columns, add a \'*\' at the end of the column name (e.g. stock*).  (optional) (default to undefined)
-let mins: Array<string>; //Column names to min by. If you want to apply \'min\' only on distinct columns, add a \'*\' at the end of the column name (e.g. stock*).  (optional) (default to undefined)
-let maxs: Array<string>; //Column names to max by. If you want to apply \'max\' only on distinct columns, add a \'*\' at the end of the column name (e.g. stock*).  (optional) (default to undefined)
+let selects: Array<string>; //Column names that should be part of the response data. You can specify a column name like:  - id  - stock  - quantity  - ... If you want to select only distinct columns, add a * at the end of the column name (e.g. stock*).  (optional) (default to undefined)
+let sums: Array<string>; //Column names to sum by. If you want to sum only distinct columns, add a * at the end of the column name (e.g. stock*).  (optional) (default to undefined)
+let avgs: Array<string>; //Column names to average by. If you want to apply \'average\' only on distinct columns, add a * at the end of the column name (e.g. stock*).  (optional) (default to undefined)
+let counts: Array<string>; //Column names to count by. If you want to count only distinct columns, add a * at the end of the column name (e.g. stock*).  (optional) (default to undefined)
+let mins: Array<string>; //Column names to min by. If you want to apply \'min\' only on distinct columns, add a * at the end of the column name (e.g. stock*).  (optional) (default to undefined)
+let maxs: Array<string>; //Column names to max by. If you want to apply \'max\' only on distinct columns, add a * at the end of the column name (e.g. stock*).  (optional) (default to undefined)
 let offset: number; //The query offset (optional) (default to undefined)
 let limit: number; //The query limit (optional) (default to undefined)
 let groupBys: Array<string>; //Column names to group by (optional) (default to undefined)
@@ -877,12 +877,12 @@ const { status, data } = await apiInstance.queryData(
 | **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
 | **datasetId** | [**string**] | the Dataset identifier | defaults to undefined|
 | **datasetPartId** | [**string**] | the Dataset part identifier | defaults to undefined|
-| **selects** | **Array&lt;string&gt;** | Column names that should be part of the response data. You can specify a column name like:  - id  - stock  - quantity  - ... If you want to select only distinct columns, add a \&#39;*\&#39; at the end of the column name (e.g. stock*).  | (optional) defaults to undefined|
-| **sums** | **Array&lt;string&gt;** | Column names to sum by. If you want to sum only distinct columns, add a \&#39;*\&#39; at the end of the column name (e.g. stock*).  | (optional) defaults to undefined|
-| **avgs** | **Array&lt;string&gt;** | Column names to average by. If you want to apply \&#39;average\&#39; only on distinct columns, add a \&#39;*\&#39; at the end of the column name (e.g. stock*).  | (optional) defaults to undefined|
-| **counts** | **Array&lt;string&gt;** | Column names to count by. If you want to count only distinct columns, add a \&#39;*\&#39; at the end of the column name (e.g. stock*).  | (optional) defaults to undefined|
-| **mins** | **Array&lt;string&gt;** | Column names to min by. If you want to apply \&#39;min\&#39; only on distinct columns, add a \&#39;*\&#39; at the end of the column name (e.g. stock*).  | (optional) defaults to undefined|
-| **maxs** | **Array&lt;string&gt;** | Column names to max by. If you want to apply \&#39;max\&#39; only on distinct columns, add a \&#39;*\&#39; at the end of the column name (e.g. stock*).  | (optional) defaults to undefined|
+| **selects** | **Array&lt;string&gt;** | Column names that should be part of the response data. You can specify a column name like:  - id  - stock  - quantity  - ... If you want to select only distinct columns, add a * at the end of the column name (e.g. stock*).  | (optional) defaults to undefined|
+| **sums** | **Array&lt;string&gt;** | Column names to sum by. If you want to sum only distinct columns, add a * at the end of the column name (e.g. stock*).  | (optional) defaults to undefined|
+| **avgs** | **Array&lt;string&gt;** | Column names to average by. If you want to apply \&#39;average\&#39; only on distinct columns, add a * at the end of the column name (e.g. stock*).  | (optional) defaults to undefined|
+| **counts** | **Array&lt;string&gt;** | Column names to count by. If you want to count only distinct columns, add a * at the end of the column name (e.g. stock*).  | (optional) defaults to undefined|
+| **mins** | **Array&lt;string&gt;** | Column names to min by. If you want to apply \&#39;min\&#39; only on distinct columns, add a * at the end of the column name (e.g. stock*).  | (optional) defaults to undefined|
+| **maxs** | **Array&lt;string&gt;** | Column names to max by. If you want to apply \&#39;max\&#39; only on distinct columns, add a * at the end of the column name (e.g. stock*).  | (optional) defaults to undefined|
 | **offset** | [**number**] | The query offset | (optional) defaults to undefined|
 | **limit** | [**number**] | The query limit | (optional) defaults to undefined|
 | **groupBys** | **Array&lt;string&gt;** | Column names to group by | (optional) defaults to undefined|

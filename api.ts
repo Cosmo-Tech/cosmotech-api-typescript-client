@@ -3450,12 +3450,12 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} workspaceId the Workspace identifier
          * @param {string} datasetId the Dataset identifier
          * @param {string} datasetPartId the Dataset part identifier
-         * @param {Array<string>} [selects] Column names that should be part of the response data. You can specify a column name like:  - id  - stock  - quantity  - ... If you want to select only distinct columns, add a \&#39;*\&#39; at the end of the column name (e.g. stock*). 
-         * @param {Array<string>} [sums] Column names to sum by. If you want to sum only distinct columns, add a \&#39;*\&#39; at the end of the column name (e.g. stock*). 
-         * @param {Array<string>} [avgs] Column names to average by. If you want to apply \&#39;average\&#39; only on distinct columns, add a \&#39;*\&#39; at the end of the column name (e.g. stock*). 
-         * @param {Array<string>} [counts] Column names to count by. If you want to count only distinct columns, add a \&#39;*\&#39; at the end of the column name (e.g. stock*). 
-         * @param {Array<string>} [mins] Column names to min by. If you want to apply \&#39;min\&#39; only on distinct columns, add a \&#39;*\&#39; at the end of the column name (e.g. stock*). 
-         * @param {Array<string>} [maxs] Column names to max by. If you want to apply \&#39;max\&#39; only on distinct columns, add a \&#39;*\&#39; at the end of the column name (e.g. stock*). 
+         * @param {Array<string>} [selects] Column names that should be part of the response data. You can specify a column name like:  - id  - stock  - quantity  - ... If you want to select only distinct columns, add a * at the end of the column name (e.g. stock*). 
+         * @param {Array<string>} [sums] Column names to sum by. If you want to sum only distinct columns, add a * at the end of the column name (e.g. stock*). 
+         * @param {Array<string>} [avgs] Column names to average by. If you want to apply \&#39;average\&#39; only on distinct columns, add a * at the end of the column name (e.g. stock*). 
+         * @param {Array<string>} [counts] Column names to count by. If you want to count only distinct columns, add a * at the end of the column name (e.g. stock*). 
+         * @param {Array<string>} [mins] Column names to min by. If you want to apply \&#39;min\&#39; only on distinct columns, add a * at the end of the column name (e.g. stock*). 
+         * @param {Array<string>} [maxs] Column names to max by. If you want to apply \&#39;max\&#39; only on distinct columns, add a * at the end of the column name (e.g. stock*). 
          * @param {number} [offset] The query offset
          * @param {number} [limit] The query limit
          * @param {Array<string>} [groupBys] Column names to group by
@@ -4181,12 +4181,12 @@ export const DatasetApiFp = function(configuration?: Configuration) {
          * @param {string} workspaceId the Workspace identifier
          * @param {string} datasetId the Dataset identifier
          * @param {string} datasetPartId the Dataset part identifier
-         * @param {Array<string>} [selects] Column names that should be part of the response data. You can specify a column name like:  - id  - stock  - quantity  - ... If you want to select only distinct columns, add a \&#39;*\&#39; at the end of the column name (e.g. stock*). 
-         * @param {Array<string>} [sums] Column names to sum by. If you want to sum only distinct columns, add a \&#39;*\&#39; at the end of the column name (e.g. stock*). 
-         * @param {Array<string>} [avgs] Column names to average by. If you want to apply \&#39;average\&#39; only on distinct columns, add a \&#39;*\&#39; at the end of the column name (e.g. stock*). 
-         * @param {Array<string>} [counts] Column names to count by. If you want to count only distinct columns, add a \&#39;*\&#39; at the end of the column name (e.g. stock*). 
-         * @param {Array<string>} [mins] Column names to min by. If you want to apply \&#39;min\&#39; only on distinct columns, add a \&#39;*\&#39; at the end of the column name (e.g. stock*). 
-         * @param {Array<string>} [maxs] Column names to max by. If you want to apply \&#39;max\&#39; only on distinct columns, add a \&#39;*\&#39; at the end of the column name (e.g. stock*). 
+         * @param {Array<string>} [selects] Column names that should be part of the response data. You can specify a column name like:  - id  - stock  - quantity  - ... If you want to select only distinct columns, add a * at the end of the column name (e.g. stock*). 
+         * @param {Array<string>} [sums] Column names to sum by. If you want to sum only distinct columns, add a * at the end of the column name (e.g. stock*). 
+         * @param {Array<string>} [avgs] Column names to average by. If you want to apply \&#39;average\&#39; only on distinct columns, add a * at the end of the column name (e.g. stock*). 
+         * @param {Array<string>} [counts] Column names to count by. If you want to count only distinct columns, add a * at the end of the column name (e.g. stock*). 
+         * @param {Array<string>} [mins] Column names to min by. If you want to apply \&#39;min\&#39; only on distinct columns, add a * at the end of the column name (e.g. stock*). 
+         * @param {Array<string>} [maxs] Column names to max by. If you want to apply \&#39;max\&#39; only on distinct columns, add a * at the end of the column name (e.g. stock*). 
          * @param {number} [offset] The query offset
          * @param {number} [limit] The query limit
          * @param {Array<string>} [groupBys] Column names to group by
@@ -4505,12 +4505,12 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {string} workspaceId the Workspace identifier
          * @param {string} datasetId the Dataset identifier
          * @param {string} datasetPartId the Dataset part identifier
-         * @param {Array<string>} [selects] Column names that should be part of the response data. You can specify a column name like:  - id  - stock  - quantity  - ... If you want to select only distinct columns, add a \&#39;*\&#39; at the end of the column name (e.g. stock*). 
-         * @param {Array<string>} [sums] Column names to sum by. If you want to sum only distinct columns, add a \&#39;*\&#39; at the end of the column name (e.g. stock*). 
-         * @param {Array<string>} [avgs] Column names to average by. If you want to apply \&#39;average\&#39; only on distinct columns, add a \&#39;*\&#39; at the end of the column name (e.g. stock*). 
-         * @param {Array<string>} [counts] Column names to count by. If you want to count only distinct columns, add a \&#39;*\&#39; at the end of the column name (e.g. stock*). 
-         * @param {Array<string>} [mins] Column names to min by. If you want to apply \&#39;min\&#39; only on distinct columns, add a \&#39;*\&#39; at the end of the column name (e.g. stock*). 
-         * @param {Array<string>} [maxs] Column names to max by. If you want to apply \&#39;max\&#39; only on distinct columns, add a \&#39;*\&#39; at the end of the column name (e.g. stock*). 
+         * @param {Array<string>} [selects] Column names that should be part of the response data. You can specify a column name like:  - id  - stock  - quantity  - ... If you want to select only distinct columns, add a * at the end of the column name (e.g. stock*). 
+         * @param {Array<string>} [sums] Column names to sum by. If you want to sum only distinct columns, add a * at the end of the column name (e.g. stock*). 
+         * @param {Array<string>} [avgs] Column names to average by. If you want to apply \&#39;average\&#39; only on distinct columns, add a * at the end of the column name (e.g. stock*). 
+         * @param {Array<string>} [counts] Column names to count by. If you want to count only distinct columns, add a * at the end of the column name (e.g. stock*). 
+         * @param {Array<string>} [mins] Column names to min by. If you want to apply \&#39;min\&#39; only on distinct columns, add a * at the end of the column name (e.g. stock*). 
+         * @param {Array<string>} [maxs] Column names to max by. If you want to apply \&#39;max\&#39; only on distinct columns, add a * at the end of the column name (e.g. stock*). 
          * @param {number} [offset] The query offset
          * @param {number} [limit] The query limit
          * @param {Array<string>} [groupBys] Column names to group by
@@ -4831,12 +4831,12 @@ export class DatasetApi extends BaseAPI {
      * @param {string} workspaceId the Workspace identifier
      * @param {string} datasetId the Dataset identifier
      * @param {string} datasetPartId the Dataset part identifier
-     * @param {Array<string>} [selects] Column names that should be part of the response data. You can specify a column name like:  - id  - stock  - quantity  - ... If you want to select only distinct columns, add a \&#39;*\&#39; at the end of the column name (e.g. stock*). 
-     * @param {Array<string>} [sums] Column names to sum by. If you want to sum only distinct columns, add a \&#39;*\&#39; at the end of the column name (e.g. stock*). 
-     * @param {Array<string>} [avgs] Column names to average by. If you want to apply \&#39;average\&#39; only on distinct columns, add a \&#39;*\&#39; at the end of the column name (e.g. stock*). 
-     * @param {Array<string>} [counts] Column names to count by. If you want to count only distinct columns, add a \&#39;*\&#39; at the end of the column name (e.g. stock*). 
-     * @param {Array<string>} [mins] Column names to min by. If you want to apply \&#39;min\&#39; only on distinct columns, add a \&#39;*\&#39; at the end of the column name (e.g. stock*). 
-     * @param {Array<string>} [maxs] Column names to max by. If you want to apply \&#39;max\&#39; only on distinct columns, add a \&#39;*\&#39; at the end of the column name (e.g. stock*). 
+     * @param {Array<string>} [selects] Column names that should be part of the response data. You can specify a column name like:  - id  - stock  - quantity  - ... If you want to select only distinct columns, add a * at the end of the column name (e.g. stock*). 
+     * @param {Array<string>} [sums] Column names to sum by. If you want to sum only distinct columns, add a * at the end of the column name (e.g. stock*). 
+     * @param {Array<string>} [avgs] Column names to average by. If you want to apply \&#39;average\&#39; only on distinct columns, add a * at the end of the column name (e.g. stock*). 
+     * @param {Array<string>} [counts] Column names to count by. If you want to count only distinct columns, add a * at the end of the column name (e.g. stock*). 
+     * @param {Array<string>} [mins] Column names to min by. If you want to apply \&#39;min\&#39; only on distinct columns, add a * at the end of the column name (e.g. stock*). 
+     * @param {Array<string>} [maxs] Column names to max by. If you want to apply \&#39;max\&#39; only on distinct columns, add a * at the end of the column name (e.g. stock*). 
      * @param {number} [offset] The query offset
      * @param {number} [limit] The query limit
      * @param {Array<string>} [groupBys] Column names to group by
