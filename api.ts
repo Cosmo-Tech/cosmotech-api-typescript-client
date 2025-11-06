@@ -1779,7 +1779,7 @@ export interface Runner {
      */
     'additionalData'?: { [key: string]: any; };
     /**
-     * 
+     * definition of datasets used by the runner
      * @type {RunnerDatasets}
      * @memberof Runner
      */
