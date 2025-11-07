@@ -211,10 +211,10 @@ export interface Dataset {
     'parts': Array<DatasetPart>;
     /**
      * The details of the Dataset creation
-     * @type {DatasetCreateInfo}
+     * @type {DatasetEditInfo}
      * @memberof Dataset
      */
-    'createInfo': DatasetCreateInfo;
+    'createInfo': DatasetEditInfo;
     /**
      * The details of the Dataset last update
      * @type {DatasetEditInfo}
@@ -246,31 +246,6 @@ export interface DatasetAccessControl {
      * @memberof DatasetAccessControl
      */
     'role': string;
-}
-/**
- * 
- * @export
- * @interface DatasetCreateInfo
- */
-export interface DatasetCreateInfo {
-    /**
-     * The timestamp of the creation in millisecond
-     * @type {number}
-     * @memberof DatasetCreateInfo
-     */
-    'timestamp': number;
-    /**
-     * The id of the user who did the creation
-     * @type {string}
-     * @memberof DatasetCreateInfo
-     */
-    'userId': string;
-    /**
-     * The runner id which has created the dataset (nullable)
-     * @type {string}
-     * @memberof DatasetCreateInfo
-     */
-    'runnerId'?: string;
 }
 /**
  * Dataset creation request
@@ -314,12 +289,6 @@ export interface DatasetCreateRequest {
      * @memberof DatasetCreateRequest
      */
     'security'?: DatasetSecurity;
-    /**
-     * 
-     * @type {string}
-     * @memberof DatasetCreateRequest
-     */
-    'runnerId'?: string;
 }
 /**
  * 
