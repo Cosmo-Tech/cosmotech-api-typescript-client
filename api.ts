@@ -548,12 +548,6 @@ export interface DatasetUpdateRequest {
      * @memberof DatasetUpdateRequest
      */
     'parts'?: Array<DatasetPartCreateRequest>;
-    /**
-     * 
-     * @type {DatasetSecurity}
-     * @memberof DatasetUpdateRequest
-     */
-    'security'?: DatasetSecurity;
 }
 /**
  * last run info from current runner
