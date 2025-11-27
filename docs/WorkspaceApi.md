@@ -824,7 +824,7 @@ const configuration = new Configuration();
 const apiInstance = new WorkspaceApi(configuration);
 
 let organizationId: string; //The Organization identifier (default to undefined)
-let page: number; //page number to query (first page is at index 0) (optional) (default to undefined)
+let page: number; //Page number to query (first page is at index 0) (optional) (default to undefined)
 let size: number; //Amount of result by page (optional) (default to undefined)
 
 const { status, data } = await apiInstance.listWorkspaces(
@@ -839,7 +839,7 @@ const { status, data } = await apiInstance.listWorkspaces(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **organizationId** | [**string**] | The Organization identifier | defaults to undefined|
-| **page** | [**number**] | page number to query (first page is at index 0) | (optional) defaults to undefined|
+| **page** | [**number**] | Page number to query (first page is at index 0) | (optional) defaults to undefined|
 | **size** | [**number**] | Amount of result by page | (optional) defaults to undefined|
 
 

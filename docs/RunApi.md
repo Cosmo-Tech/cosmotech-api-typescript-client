@@ -25,10 +25,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new RunApi(configuration);
 
-let organizationId: string; //the Organization identifier (default to undefined)
-let workspaceId: string; //the Workspace identifier (default to undefined)
-let runnerId: string; //the Runner identifier (default to undefined)
-let runId: string; //the Run identifier (default to undefined)
+let organizationId: string; //The Organization identifier (default to undefined)
+let workspaceId: string; //The Workspace identifier (default to undefined)
+let runnerId: string; //The Runner identifier (default to undefined)
+let runId: string; //The Run identifier (default to undefined)
 
 const { status, data } = await apiInstance.deleteRun(
     organizationId,
@@ -42,10 +42,10 @@ const { status, data } = await apiInstance.deleteRun(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
-| **runnerId** | [**string**] | the Runner identifier | defaults to undefined|
-| **runId** | [**string**] | the Run identifier | defaults to undefined|
+| **organizationId** | [**string**] | The Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | The Workspace identifier | defaults to undefined|
+| **runnerId** | [**string**] | The Runner identifier | defaults to undefined|
+| **runId** | [**string**] | The Run identifier | defaults to undefined|
 
 
 ### Return type
@@ -86,10 +86,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new RunApi(configuration);
 
-let organizationId: string; //the Organization identifier (default to undefined)
-let workspaceId: string; //the Workspace identifier (default to undefined)
-let runnerId: string; //the Runner identifier (default to undefined)
-let runId: string; //the Run identifier (default to undefined)
+let organizationId: string; //The Organization identifier (default to undefined)
+let workspaceId: string; //The Workspace identifier (default to undefined)
+let runnerId: string; //The Runner identifier (default to undefined)
+let runId: string; //The Run identifier (default to undefined)
 
 const { status, data } = await apiInstance.getRun(
     organizationId,
@@ -103,10 +103,10 @@ const { status, data } = await apiInstance.getRun(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
-| **runnerId** | [**string**] | the Runner identifier | defaults to undefined|
-| **runId** | [**string**] | the Run identifier | defaults to undefined|
+| **organizationId** | [**string**] | The Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | The Workspace identifier | defaults to undefined|
+| **runnerId** | [**string**] | The Runner identifier | defaults to undefined|
+| **runId** | [**string**] | The Run identifier | defaults to undefined|
 
 
 ### Return type
@@ -146,10 +146,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new RunApi(configuration);
 
-let organizationId: string; //the Organization identifier (default to undefined)
-let workspaceId: string; //the Workspace identifier (default to undefined)
-let runnerId: string; //the Runner identifier (default to undefined)
-let runId: string; //the Run identifier (default to undefined)
+let organizationId: string; //The Organization identifier (default to undefined)
+let workspaceId: string; //The Workspace identifier (default to undefined)
+let runnerId: string; //The Runner identifier (default to undefined)
+let runId: string; //The Run identifier (default to undefined)
 
 const { status, data } = await apiInstance.getRunLogs(
     organizationId,
@@ -163,10 +163,10 @@ const { status, data } = await apiInstance.getRunLogs(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
-| **runnerId** | [**string**] | the Runner identifier | defaults to undefined|
-| **runId** | [**string**] | the Run identifier | defaults to undefined|
+| **organizationId** | [**string**] | The Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | The Workspace identifier | defaults to undefined|
+| **runnerId** | [**string**] | The Runner identifier | defaults to undefined|
+| **runId** | [**string**] | The Run identifier | defaults to undefined|
 
 
 ### Return type
@@ -205,10 +205,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new RunApi(configuration);
 
-let organizationId: string; //the Organization identifier (default to undefined)
-let workspaceId: string; //the Workspace identifier (default to undefined)
-let runnerId: string; //the Runner identifier (default to undefined)
-let runId: string; //the Run identifier (default to undefined)
+let organizationId: string; //The Organization identifier (default to undefined)
+let workspaceId: string; //The Workspace identifier (default to undefined)
+let runnerId: string; //The Runner identifier (default to undefined)
+let runId: string; //The Run identifier (default to undefined)
 
 const { status, data } = await apiInstance.getRunStatus(
     organizationId,
@@ -222,10 +222,10 @@ const { status, data } = await apiInstance.getRunStatus(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
-| **runnerId** | [**string**] | the Runner identifier | defaults to undefined|
-| **runId** | [**string**] | the Run identifier | defaults to undefined|
+| **organizationId** | [**string**] | The Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | The Workspace identifier | defaults to undefined|
+| **runnerId** | [**string**] | The Runner identifier | defaults to undefined|
+| **runId** | [**string**] | The Run identifier | defaults to undefined|
 
 
 ### Return type
@@ -264,9 +264,9 @@ import {
 const configuration = new Configuration();
 const apiInstance = new RunApi(configuration);
 
-let organizationId: string; //the Organization identifier (default to undefined)
-let workspaceId: string; //the Workspace identifier (default to undefined)
-let runnerId: string; //the Runner identifier (default to undefined)
+let organizationId: string; //The Organization identifier (default to undefined)
+let workspaceId: string; //The Workspace identifier (default to undefined)
+let runnerId: string; //The Runner identifier (default to undefined)
 let page: number; //page number to query (first page is at index 0) (optional) (default to undefined)
 let size: number; //amount of result by page (optional) (default to undefined)
 
@@ -283,9 +283,9 @@ const { status, data } = await apiInstance.listRuns(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
-| **runnerId** | [**string**] | the Runner identifier | defaults to undefined|
+| **organizationId** | [**string**] | The Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | The Workspace identifier | defaults to undefined|
+| **runnerId** | [**string**] | The Runner identifier | defaults to undefined|
 | **page** | [**number**] | page number to query (first page is at index 0) | (optional) defaults to undefined|
 | **size** | [**number**] | amount of result by page | (optional) defaults to undefined|
 

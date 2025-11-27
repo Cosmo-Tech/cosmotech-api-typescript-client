@@ -6177,10 +6177,10 @@ export const RunApiAxiosParamCreator = function (configuration?: Configuration) 
         /**
          * 
          * @summary Delete a run
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} runnerId the Runner identifier
-         * @param {string} runId the Run identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {string} runnerId The Runner identifier
+         * @param {string} runId The Run identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6227,10 +6227,10 @@ export const RunApiAxiosParamCreator = function (configuration?: Configuration) 
         /**
          * 
          * @summary Get the details of a run
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} runnerId the Runner identifier
-         * @param {string} runId the Run identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {string} runnerId The Runner identifier
+         * @param {string} runId The Run identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6277,10 +6277,10 @@ export const RunApiAxiosParamCreator = function (configuration?: Configuration) 
         /**
          * 
          * @summary get the logs for the Run
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} runnerId the Runner identifier
-         * @param {string} runId the Run identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {string} runnerId The Runner identifier
+         * @param {string} runId The Run identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6327,10 +6327,10 @@ export const RunApiAxiosParamCreator = function (configuration?: Configuration) 
         /**
          * 
          * @summary get the status for the Run
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} runnerId the Runner identifier
-         * @param {string} runId the Run identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {string} runnerId The Runner identifier
+         * @param {string} runId The Run identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6377,9 +6377,9 @@ export const RunApiAxiosParamCreator = function (configuration?: Configuration) 
         /**
          * 
          * @summary get the list of Runs for the Runner
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} runnerId the Runner identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {string} runnerId The Runner identifier
          * @param {number} [page] page number to query (first page is at index 0)
          * @param {number} [size] amount of result by page
          * @param {*} [options] Override http request option.
@@ -6443,10 +6443,10 @@ export const RunApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Delete a run
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} runnerId the Runner identifier
-         * @param {string} runId the Run identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {string} runnerId The Runner identifier
+         * @param {string} runId The Run identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6459,10 +6459,10 @@ export const RunApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Get the details of a run
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} runnerId the Runner identifier
-         * @param {string} runId the Run identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {string} runnerId The Runner identifier
+         * @param {string} runId The Run identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6475,10 +6475,10 @@ export const RunApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary get the logs for the Run
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} runnerId the Runner identifier
-         * @param {string} runId the Run identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {string} runnerId The Runner identifier
+         * @param {string} runId The Run identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6491,10 +6491,10 @@ export const RunApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary get the status for the Run
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} runnerId the Runner identifier
-         * @param {string} runId the Run identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {string} runnerId The Runner identifier
+         * @param {string} runId The Run identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6507,9 +6507,9 @@ export const RunApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary get the list of Runs for the Runner
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} runnerId the Runner identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {string} runnerId The Runner identifier
          * @param {number} [page] page number to query (first page is at index 0)
          * @param {number} [size] amount of result by page
          * @param {*} [options] Override http request option.
@@ -6534,10 +6534,10 @@ export const RunApiFactory = function (configuration?: Configuration, basePath?:
         /**
          * 
          * @summary Delete a run
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} runnerId the Runner identifier
-         * @param {string} runId the Run identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {string} runnerId The Runner identifier
+         * @param {string} runId The Run identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6547,10 +6547,10 @@ export const RunApiFactory = function (configuration?: Configuration, basePath?:
         /**
          * 
          * @summary Get the details of a run
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} runnerId the Runner identifier
-         * @param {string} runId the Run identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {string} runnerId The Runner identifier
+         * @param {string} runId The Run identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6560,10 +6560,10 @@ export const RunApiFactory = function (configuration?: Configuration, basePath?:
         /**
          * 
          * @summary get the logs for the Run
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} runnerId the Runner identifier
-         * @param {string} runId the Run identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {string} runnerId The Runner identifier
+         * @param {string} runId The Run identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6573,10 +6573,10 @@ export const RunApiFactory = function (configuration?: Configuration, basePath?:
         /**
          * 
          * @summary get the status for the Run
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} runnerId the Runner identifier
-         * @param {string} runId the Run identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {string} runnerId The Runner identifier
+         * @param {string} runId The Run identifier
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6586,9 +6586,9 @@ export const RunApiFactory = function (configuration?: Configuration, basePath?:
         /**
          * 
          * @summary get the list of Runs for the Runner
-         * @param {string} organizationId the Organization identifier
-         * @param {string} workspaceId the Workspace identifier
-         * @param {string} runnerId the Runner identifier
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {string} runnerId The Runner identifier
          * @param {number} [page] page number to query (first page is at index 0)
          * @param {number} [size] amount of result by page
          * @param {*} [options] Override http request option.
@@ -6610,10 +6610,10 @@ export class RunApi extends BaseAPI {
     /**
      * 
      * @summary Delete a run
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
-     * @param {string} runnerId the Runner identifier
-     * @param {string} runId the Run identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} workspaceId The Workspace identifier
+     * @param {string} runnerId The Runner identifier
+     * @param {string} runId The Run identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RunApi
@@ -6625,10 +6625,10 @@ export class RunApi extends BaseAPI {
     /**
      * 
      * @summary Get the details of a run
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
-     * @param {string} runnerId the Runner identifier
-     * @param {string} runId the Run identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} workspaceId The Workspace identifier
+     * @param {string} runnerId The Runner identifier
+     * @param {string} runId The Run identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RunApi
@@ -6640,10 +6640,10 @@ export class RunApi extends BaseAPI {
     /**
      * 
      * @summary get the logs for the Run
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
-     * @param {string} runnerId the Runner identifier
-     * @param {string} runId the Run identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} workspaceId The Workspace identifier
+     * @param {string} runnerId The Runner identifier
+     * @param {string} runId The Run identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RunApi
@@ -6655,10 +6655,10 @@ export class RunApi extends BaseAPI {
     /**
      * 
      * @summary get the status for the Run
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
-     * @param {string} runnerId the Runner identifier
-     * @param {string} runId the Run identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} workspaceId The Workspace identifier
+     * @param {string} runnerId The Runner identifier
+     * @param {string} runId The Run identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RunApi
@@ -6670,9 +6670,9 @@ export class RunApi extends BaseAPI {
     /**
      * 
      * @summary get the list of Runs for the Runner
-     * @param {string} organizationId the Organization identifier
-     * @param {string} workspaceId the Workspace identifier
-     * @param {string} runnerId the Runner identifier
+     * @param {string} organizationId The Organization identifier
+     * @param {string} workspaceId The Workspace identifier
+     * @param {string} runnerId The Runner identifier
      * @param {number} [page] page number to query (first page is at index 0)
      * @param {number} [size] amount of result by page
      * @param {*} [options] Override http request option.
@@ -11142,7 +11142,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
          * 
          * @summary List all Workspaces
          * @param {string} organizationId The Organization identifier
-         * @param {number} [page] page number to query (first page is at index 0)
+         * @param {number} [page] Page number to query (first page is at index 0)
          * @param {number} [size] Amount of result by page
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -11553,7 +11553,7 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
          * 
          * @summary List all Workspaces
          * @param {string} organizationId The Organization identifier
-         * @param {number} [page] page number to query (first page is at index 0)
+         * @param {number} [page] Page number to query (first page is at index 0)
          * @param {number} [size] Amount of result by page
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -11787,7 +11787,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
          * 
          * @summary List all Workspaces
          * @param {string} organizationId The Organization identifier
-         * @param {number} [page] page number to query (first page is at index 0)
+         * @param {number} [page] Page number to query (first page is at index 0)
          * @param {number} [size] Amount of result by page
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -12037,7 +12037,7 @@ export class WorkspaceApi extends BaseAPI {
      * 
      * @summary List all Workspaces
      * @param {string} organizationId The Organization identifier
-     * @param {number} [page] page number to query (first page is at index 0)
+     * @param {number} [page] Page number to query (first page is at index 0)
      * @param {number} [size] Amount of result by page
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
