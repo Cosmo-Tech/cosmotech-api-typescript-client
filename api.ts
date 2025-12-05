@@ -12,6 +12,7 @@
  * Do not edit the class manually.
  */
 
+
 import type { Configuration } from './configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -24,366 +25,185 @@ import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerM
 
 /**
  * Misc information about the api
- * @export
- * @interface AboutInfo
  */
 export interface AboutInfo {
-    /**
-     * 
-     * @type {AboutInfoVersion}
-     * @memberof AboutInfo
-     */
     'version': AboutInfoVersion;
 }
 /**
  * API version details
- * @export
- * @interface AboutInfoVersion
  */
 export interface AboutInfoVersion {
     /**
      * Full version representation
-     * @type {string}
-     * @memberof AboutInfoVersion
      */
     'full': string;
     /**
      * Release main version representation
-     * @type {string}
-     * @memberof AboutInfoVersion
      */
     'release': string;
     /**
      * Major version number
-     * @type {number}
-     * @memberof AboutInfoVersion
      */
     'major': number;
     /**
      * Minor version number
-     * @type {number}
-     * @memberof AboutInfoVersion
      */
     'minor': number;
     /**
      * Patch version number
-     * @type {number}
-     * @memberof AboutInfoVersion
      */
     'patch': number;
     /**
      * Label version, may be empty
-     * @type {string}
-     * @memberof AboutInfoVersion
      */
     'label': string;
     /**
      * Build VCS id
-     * @type {string}
-     * @memberof AboutInfoVersion
      */
     'build': string;
 }
 /**
  * A RBAC by component
- * @export
- * @interface ComponentRolePermissions
  */
 export interface ComponentRolePermissions {
-    /**
-     * 
-     * @type {string}
-     * @memberof ComponentRolePermissions
-     */
     'component': string;
-    /**
-     * 
-     * @type {{ [key: string]: Array<string>; }}
-     * @memberof ComponentRolePermissions
-     */
     'roles': { [key: string]: Array<string>; };
 }
 /**
  * define cpus and memory needs
- * @export
- * @interface ContainerResourceSizeInfo
  */
 export interface ContainerResourceSizeInfo {
     /**
      * define cpu needs
-     * @type {string}
-     * @memberof ContainerResourceSizeInfo
      */
     'cpu': string;
     /**
      * define memory needs
-     * @type {string}
-     * @memberof ContainerResourceSizeInfo
      */
     'memory': string;
 }
 /**
  * a description object for resource requests and limits (default same configuration as basic sizing)
- * @export
- * @interface ContainerResourceSizing
  */
 export interface ContainerResourceSizing {
-    /**
-     * 
-     * @type {ContainerResourceSizeInfo}
-     * @memberof ContainerResourceSizing
-     */
     'requests': ContainerResourceSizeInfo;
-    /**
-     * 
-     * @type {ContainerResourceSizeInfo}
-     * @memberof ContainerResourceSizing
-     */
     'limits': ContainerResourceSizeInfo;
 }
 /**
  * Newly created Run info
- * @export
- * @interface CreatedRun
  */
 export interface CreatedRun {
     /**
      * Run id
-     * @type {string}
-     * @memberof CreatedRun
      */
     'id': string;
 }
 /**
  * Dataset object
- * @export
- * @interface Dataset
  */
 export interface Dataset {
-    /**
-     * 
-     * @type {string}
-     * @memberof Dataset
-     */
     'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Dataset
-     */
     'name': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Dataset
-     */
     'description'?: string;
     /**
      * the associated Organization Id
-     * @type {string}
-     * @memberof Dataset
      */
     'organizationId': string;
     /**
      * the associated Workspace Id
-     * @type {string}
-     * @memberof Dataset
      */
     'workspaceId': string;
     /**
      * the list of tags
-     * @type {Array<string>}
-     * @memberof Dataset
      */
     'tags': Array<string>;
     /**
      * Free form additional data
-     * @type {{ [key: string]: any; }}
-     * @memberof Dataset
      */
     'additionalData'?: { [key: string]: any; };
-    /**
-     * 
-     * @type {Array<DatasetPart>}
-     * @memberof Dataset
-     */
     'parts': Array<DatasetPart>;
     /**
      * The details of the Dataset creation
-     * @type {DatasetEditInfo}
-     * @memberof Dataset
      */
     'createInfo': DatasetEditInfo;
     /**
      * The details of the Dataset last update
-     * @type {DatasetEditInfo}
-     * @memberof Dataset
      */
     'updateInfo': DatasetEditInfo;
-    /**
-     * 
-     * @type {DatasetSecurity}
-     * @memberof Dataset
-     */
     'security': DatasetSecurity;
 }
 /**
  * a Dataset access control item
- * @export
- * @interface DatasetAccessControl
  */
 export interface DatasetAccessControl {
     /**
      * the identity id
-     * @type {string}
-     * @memberof DatasetAccessControl
      */
     'id': string;
     /**
      * a role
-     * @type {string}
-     * @memberof DatasetAccessControl
      */
     'role': string;
 }
 /**
  * Dataset creation request
- * @export
- * @interface DatasetCreateRequest
  */
 export interface DatasetCreateRequest {
-    /**
-     * 
-     * @type {string}
-     * @memberof DatasetCreateRequest
-     */
     'name': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof DatasetCreateRequest
-     */
     'description'?: string;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof DatasetCreateRequest
-     */
     'tags'?: Array<string>;
     /**
      * Free form additional data
-     * @type {{ [key: string]: any; }}
-     * @memberof DatasetCreateRequest
      */
     'additionalData'?: { [key: string]: any; };
-    /**
-     * 
-     * @type {Array<DatasetPartCreateRequest>}
-     * @memberof DatasetCreateRequest
-     */
     'parts'?: Array<DatasetPartCreateRequest>;
-    /**
-     * 
-     * @type {DatasetSecurity}
-     * @memberof DatasetCreateRequest
-     */
     'security'?: DatasetSecurity;
 }
-/**
- * 
- * @export
- * @interface DatasetEditInfo
- */
 export interface DatasetEditInfo {
     /**
      * The timestamp of the modification in millisecond
-     * @type {number}
-     * @memberof DatasetEditInfo
      */
     'timestamp': number;
     /**
      * The id of the user who did the modification
-     * @type {string}
-     * @memberof DatasetEditInfo
      */
     'userId': string;
 }
 /**
  * Dataset part object
- * @export
- * @interface DatasetPart
  */
 export interface DatasetPart {
-    /**
-     * 
-     * @type {string}
-     * @memberof DatasetPart
-     */
     'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof DatasetPart
-     */
     'name': string;
     /**
      * the source data name (e.g. filename associated to the dataset part)
-     * @type {string}
-     * @memberof DatasetPart
      */
     'sourceName': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof DatasetPart
-     */
     'description'?: string;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof DatasetPart
-     */
     'tags': Array<string>;
     /**
      * Free form additional data
-     * @type {{ [key: string]: any; }}
-     * @memberof DatasetPart
      */
     'additionalData'?: { [key: string]: any; };
-    /**
-     * 
-     * @type {DatasetPartTypeEnum}
-     * @memberof DatasetPart
-     */
     'type': DatasetPartTypeEnum;
     /**
      * the associated Organization Id
-     * @type {string}
-     * @memberof DatasetPart
      */
     'organizationId': string;
     /**
      * the associated Workspace Id
-     * @type {string}
-     * @memberof DatasetPart
      */
     'workspaceId': string;
     /**
      * the associated Dataset Id
-     * @type {string}
-     * @memberof DatasetPart
      */
     'datasetId': string;
     /**
      * The details of the Dataset creation
-     * @type {DatasetEditInfo}
-     * @memberof DatasetPart
      */
     'createInfo': DatasetEditInfo;
     /**
      * The details of the Dataset last update
-     * @type {DatasetEditInfo}
-     * @memberof DatasetPart
      */
     'updateInfo': DatasetEditInfo;
 }
@@ -391,53 +211,25 @@ export interface DatasetPart {
 
 /**
  * Dataset part create request object
- * @export
- * @interface DatasetPartCreateRequest
  */
 export interface DatasetPartCreateRequest {
-    /**
-     * 
-     * @type {string}
-     * @memberof DatasetPartCreateRequest
-     */
     'name': string;
     /**
      * the source data name (e.g. filename associated to the dataset part)
-     * @type {string}
-     * @memberof DatasetPartCreateRequest
      */
     'sourceName': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof DatasetPartCreateRequest
-     */
     'description'?: string;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof DatasetPartCreateRequest
-     */
     'tags'?: Array<string>;
     /**
      * Free form additional data
-     * @type {{ [key: string]: any; }}
-     * @memberof DatasetPartCreateRequest
      */
     'additionalData'?: { [key: string]: any; };
-    /**
-     * 
-     * @type {DatasetPartTypeEnum}
-     * @memberof DatasetPartCreateRequest
-     */
     'type'?: DatasetPartTypeEnum;
 }
 
 
 /**
  * The dataset part Type
- * @export
- * @enum {string}
  */
 
 export const DatasetPartTypeEnum = {
@@ -447,122 +239,67 @@ export const DatasetPartTypeEnum = {
 
 export type DatasetPartTypeEnum = typeof DatasetPartTypeEnum[keyof typeof DatasetPartTypeEnum];
 
+
 /**
  * Dataset part update request object
- * @export
- * @interface DatasetPartUpdateRequest
  */
 export interface DatasetPartUpdateRequest {
     /**
      * the source data name (e.g. filename associated to the dataset part)
-     * @type {string}
-     * @memberof DatasetPartUpdateRequest
      */
     'sourceName'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof DatasetPartUpdateRequest
-     */
     'description'?: string;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof DatasetPartUpdateRequest
-     */
     'tags'?: Array<string>;
     /**
      * Free form additional data
-     * @type {{ [key: string]: any; }}
-     * @memberof DatasetPartUpdateRequest
      */
     'additionalData'?: { [key: string]: any; };
 }
 /**
  * the Dataset Role
- * @export
- * @interface DatasetRole
  */
 export interface DatasetRole {
     /**
      * the Dataset Role
-     * @type {string}
-     * @memberof DatasetRole
      */
     'role': string;
 }
 /**
  * the dataset security information
- * @export
- * @interface DatasetSecurity
  */
 export interface DatasetSecurity {
     /**
      * the role by default
-     * @type {string}
-     * @memberof DatasetSecurity
      */
     'default': string;
     /**
      * the list which can access this Dataset with detailed access control information
-     * @type {Array<DatasetAccessControl>}
-     * @memberof DatasetSecurity
      */
     'accessControlList': Array<DatasetAccessControl>;
 }
 /**
  * Dataset creation request
- * @export
- * @interface DatasetUpdateRequest
  */
 export interface DatasetUpdateRequest {
-    /**
-     * 
-     * @type {string}
-     * @memberof DatasetUpdateRequest
-     */
     'name'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof DatasetUpdateRequest
-     */
     'description'?: string;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof DatasetUpdateRequest
-     */
     'tags'?: Array<string>;
     /**
      * Free form additional data
-     * @type {{ [key: string]: any; }}
-     * @memberof DatasetUpdateRequest
      */
     'additionalData'?: { [key: string]: any; };
-    /**
-     * 
-     * @type {Array<DatasetPartCreateRequest>}
-     * @memberof DatasetUpdateRequest
-     */
     'parts'?: Array<DatasetPartCreateRequest>;
 }
 /**
  * last run info from current runner
- * @export
- * @interface LastRunInfo
  */
 export interface LastRunInfo {
     /**
      * last run id from current runner
-     * @type {string}
-     * @memberof LastRunInfo
      */
     'lastRunId'?: string;
     /**
      * last run status from current runner
-     * @type {string}
-     * @memberof LastRunInfo
      */
     'lastRunStatus'?: LastRunInfoLastRunStatusEnum;
 }
@@ -579,274 +316,174 @@ export type LastRunInfoLastRunStatusEnum = typeof LastRunInfoLastRunStatusEnum[k
 
 /**
  * An Organization
- * @export
- * @interface Organization
  */
 export interface Organization {
     /**
      * The Organization unique identifier
-     * @type {string}
-     * @memberof Organization
      */
     'id': string;
     /**
      * The Organization name
-     * @type {string}
-     * @memberof Organization
      */
     'name': string;
     /**
      * The details of the Organization creation
-     * @type {OrganizationEditInfo}
-     * @memberof Organization
      */
     'createInfo': OrganizationEditInfo;
     /**
      * The details of the Organization last update
-     * @type {OrganizationEditInfo}
-     * @memberof Organization
      */
     'updateInfo': OrganizationEditInfo;
-    /**
-     * 
-     * @type {OrganizationSecurity}
-     * @memberof Organization
-     */
     'security': OrganizationSecurity;
 }
 /**
  * Response object for organization access control
- * @export
- * @interface OrganizationAccessControl
  */
 export interface OrganizationAccessControl {
     /**
      * The identity id
-     * @type {string}
-     * @memberof OrganizationAccessControl
      */
     'id': string;
     /**
      * A role
-     * @type {string}
-     * @memberof OrganizationAccessControl
      */
     'role': string;
 }
 /**
  * Request object for creating a new organization
- * @export
- * @interface OrganizationCreateRequest
  */
 export interface OrganizationCreateRequest {
     /**
      * The Organization name
-     * @type {string}
-     * @memberof OrganizationCreateRequest
      */
     'name': string;
-    /**
-     * 
-     * @type {OrganizationSecurity}
-     * @memberof OrganizationCreateRequest
-     */
     'security'?: OrganizationSecurity;
 }
-/**
- * 
- * @export
- * @interface OrganizationEditInfo
- */
 export interface OrganizationEditInfo {
     /**
      * The timestamp of the modification in millisecond
-     * @type {number}
-     * @memberof OrganizationEditInfo
      */
     'timestamp': number;
     /**
      * The id of the user who did the modification
-     * @type {string}
-     * @memberof OrganizationEditInfo
      */
     'userId': string;
 }
 /**
  * The Organization Role
- * @export
- * @interface OrganizationRole
  */
 export interface OrganizationRole {
     /**
      * The Organization Role
-     * @type {string}
-     * @memberof OrganizationRole
      */
     'role': string;
 }
 /**
  * Response object for organization security information
- * @export
- * @interface OrganizationSecurity
  */
 export interface OrganizationSecurity {
     /**
      * The role by default
-     * @type {string}
-     * @memberof OrganizationSecurity
      */
     'default': string;
     /**
      * The list which can access this Organization with detailed access control information
-     * @type {Array<OrganizationAccessControl>}
-     * @memberof OrganizationSecurity
      */
     'accessControlList': Array<OrganizationAccessControl>;
 }
 /**
  * Request object for updating an organization
- * @export
- * @interface OrganizationUpdateRequest
  */
 export interface OrganizationUpdateRequest {
     /**
      * The Organization name
-     * @type {string}
-     * @memberof OrganizationUpdateRequest
      */
     'name'?: string;
 }
 /**
  * define cpus and memory needs
- * @export
- * @interface ResourceSizeInfo
  */
 export interface ResourceSizeInfo {
     /**
      * define cpu needs
-     * @type {string}
-     * @memberof ResourceSizeInfo
      */
     'cpu': string;
     /**
      * define memory needs
-     * @type {string}
-     * @memberof ResourceSizeInfo
      */
     'memory': string;
 }
 /**
  * a Run with only base properties
- * @export
- * @interface Run
  */
 export interface Run {
     /**
      * the Run
-     * @type {string}
-     * @memberof Run
      */
     'id'?: string;
-    /**
-     * 
-     * @type {RunState}
-     * @memberof Run
-     */
     'state'?: RunState;
     /**
      * the Organization id
-     * @type {string}
-     * @memberof Run
      */
     'organizationId'?: string;
     /**
      * The details of the Run creation
-     * @type {RunEditInfo}
-     * @memberof Run
      */
     'createInfo': RunEditInfo;
     /**
      * the Cosmo Tech compute cluster Argo Workflow Id to search
-     * @type {string}
-     * @memberof Run
      */
     'workflowId'?: string;
     /**
      * the Cosmo Tech Simulation Run Id
-     * @type {string}
-     * @memberof Run
      */
     'csmSimulationRun'?: string;
     /**
      * the base name for workflow name generation
-     * @type {string}
-     * @memberof Run
      */
     'generateName'?: string;
     /**
      * the Cosmo Tech compute cluster Argo Workflow Name
-     * @type {string}
-     * @memberof Run
      */
     'workflowName'?: string;
     /**
      * the Workspace Id
-     * @type {string}
-     * @memberof Run
      */
     'workspaceId'?: string;
     /**
      * technical key for resource name convention and version grouping. Must be unique
-     * @type {string}
-     * @memberof Run
      */
     'workspaceKey'?: string;
     /**
      * the Runner Id
-     * @type {string}
-     * @memberof Run
      */
     'runnerId'?: string;
     /**
      * the Solution Id
-     * @type {string}
-     * @memberof Run
      */
     'solutionId'?: string;
     /**
      * the Solution Run Template id
-     * @type {string}
-     * @memberof Run
      */
     'runTemplateId'?: string;
     /**
      * the compute size needed for this Analysis. Standard sizes are basic and highcpu. Default is basic
-     * @type {string}
-     * @memberof Run
      */
     'computeSize'?: string;
     /**
      * the list of Dataset Id associated to this Run
-     * @type {Array<string>}
-     * @memberof Run
      */
     'datasetList'?: Array<string>;
     /**
      * the list of Run Template parameters values
-     * @type {Array<RunTemplateParameterValue>}
-     * @memberof Run
      */
     'parametersValues'?: Array<RunTemplateParameterValue>;
     /**
      * the node label request
-     * @type {string}
-     * @memberof Run
      */
     'nodeLabel'?: string;
     /**
      * the containers list. This information is not returned by the API.
-     * @type {Array<RunContainer>}
-     * @memberof Run
      */
     'containers'?: Array<RunContainer>;
 }
@@ -854,119 +491,75 @@ export interface Run {
 
 /**
  * a Run container description
- * @export
- * @interface RunContainer
  */
 export interface RunContainer {
     /**
      * the container Id
-     * @type {string}
-     * @memberof RunContainer
      */
     'id'?: string;
     /**
      * the container name
-     * @type {string}
-     * @memberof RunContainer
      */
     'name': string;
     /**
      * the metadata labels
-     * @type {{ [key: string]: string; }}
-     * @memberof RunContainer
      */
     'labels'?: { [key: string]: string; };
     /**
      * environment variable map
-     * @type {{ [key: string]: string; }}
-     * @memberof RunContainer
      */
     'envVars'?: { [key: string]: string; };
     /**
      * the container image URI
-     * @type {string}
-     * @memberof RunContainer
      */
     'image': string;
     /**
      * the container entry point
-     * @type {string}
-     * @memberof RunContainer
      */
     'entrypoint'?: string;
     /**
      * the list of run arguments for the container
-     * @type {Array<string>}
-     * @memberof RunContainer
      */
     'runArgs'?: Array<string>;
     /**
      * the list of dependencies container name to run this container
-     * @type {Array<string>}
-     * @memberof RunContainer
      */
     'dependencies'?: Array<string>;
     /**
      * whether or not this container is a Cosmo Tech solution container
-     * @type {boolean}
-     * @memberof RunContainer
      */
     'solutionContainer'?: boolean;
     /**
      * the node label request
-     * @type {string}
-     * @memberof RunContainer
      */
     'nodeLabel'?: string;
-    /**
-     * 
-     * @type {ContainerResourceSizing}
-     * @memberof RunContainer
-     */
     'runSizing'?: ContainerResourceSizing;
 }
-/**
- * 
- * @export
- * @interface RunEditInfo
- */
 export interface RunEditInfo {
     /**
      * The timestamp of the modification in millisecond
-     * @type {number}
-     * @memberof RunEditInfo
      */
     'timestamp': number;
     /**
      * The id of the user who did the modification
-     * @type {string}
-     * @memberof RunEditInfo
      */
     'userId': string;
 }
 /**
  * the memory and CPU requested by the pod
- * @export
- * @interface RunResourceRequested
  */
 export interface RunResourceRequested {
     /**
      * the cpu requested
-     * @type {number}
-     * @memberof RunResourceRequested
      */
     'cpu'?: number;
     /**
      * the memory requested
-     * @type {number}
-     * @memberof RunResourceRequested
      */
     'memory'?: number;
 }
 /**
  * the Run end-to-end state
- * @export
- * @enum {string}
  */
 
 export const RunState = {
@@ -979,1105 +572,694 @@ export const RunState = {
 
 export type RunState = typeof RunState[keyof typeof RunState];
 
+
 /**
  * a Run status
- * @export
- * @interface RunStatus
  */
 export interface RunStatus {
     /**
      * the Run id
-     * @type {string}
-     * @memberof RunStatus
      */
     'id'?: string;
     /**
      * the Organization id
-     * @type {string}
-     * @memberof RunStatus
      */
     'organizationId'?: string;
     /**
      * the Workspace id
-     * @type {string}
-     * @memberof RunStatus
      */
     'workspaceId'?: string;
     /**
      * the Runner id
-     * @type {string}
-     * @memberof RunStatus
      */
     'runnerId'?: string;
     /**
      * the Cosmo Tech compute cluster Argo Workflow Id to search
-     * @type {string}
-     * @memberof RunStatus
      */
     'workflowId'?: string;
     /**
      * the Cosmo Tech compute cluster Argo Workflow Name
-     * @type {string}
-     * @memberof RunStatus
      */
     'workflowName'?: string;
     /**
      * The timestamp of the Run creation in milliseconds
-     * @type {RunEditInfo}
-     * @memberof RunStatus
      */
     'createInfo'?: RunEditInfo;
     /**
      * the Run start Date Time
-     * @type {string}
-     * @memberof RunStatus
      */
     'startTime'?: string;
     /**
      * the Run end Date Time
-     * @type {string}
-     * @memberof RunStatus
      */
     'endTime'?: string;
     /**
      * high-level summary of where the workflow is in its lifecycle
-     * @type {string}
-     * @memberof RunStatus
      */
     'phase'?: string;
     /**
      * progress to completion
-     * @type {string}
-     * @memberof RunStatus
      */
     'progress'?: string;
     /**
      * a  human readable message indicating details about why the workflow is in this condition
-     * @type {string}
-     * @memberof RunStatus
      */
     'message'?: string;
     /**
      * estimatedDuration in seconds
-     * @type {number}
-     * @memberof RunStatus
      */
     'estimatedDuration'?: number;
     /**
      * status of Run nodes
-     * @type {Array<RunStatusNode>}
-     * @memberof RunStatus
      */
     'nodes'?: Array<RunStatusNode>;
-    /**
-     * 
-     * @type {RunState}
-     * @memberof RunStatus
-     */
     'state'?: RunState;
 }
 
 
 /**
  * status of a Run Node
- * @export
- * @interface RunStatusNode
  */
 export interface RunStatusNode {
     /**
      * the node id
-     * @type {string}
-     * @memberof RunStatusNode
      */
     'id'?: string;
     /**
      * the node unique name
-     * @type {string}
-     * @memberof RunStatusNode
      */
     'name'?: string;
     /**
      * the Run container name
-     * @type {string}
-     * @memberof RunStatusNode
      */
     'containerName'?: string;
     /**
      * the list of outbound nodes
-     * @type {Array<string>}
-     * @memberof RunStatusNode
      */
     'outboundNodes'?: Array<string>;
-    /**
-     * 
-     * @type {RunResourceRequested}
-     * @memberof RunStatusNode
-     */
     'resourcesDuration'?: RunResourceRequested;
     /**
      * estimatedDuration in seconds
-     * @type {number}
-     * @memberof RunStatusNode
      */
     'estimatedDuration'?: number;
     /**
      * HostNodeName name of the Kubernetes node on which the Pod is running, if applicable
-     * @type {string}
-     * @memberof RunStatusNode
      */
     'hostNodeName'?: string;
     /**
      * a human readable message indicating details about why the node is in this condition
-     * @type {string}
-     * @memberof RunStatusNode
      */
     'message'?: string;
     /**
      * high-level summary of where the node is in its lifecycle
-     * @type {string}
-     * @memberof RunStatusNode
      */
     'phase'?: string;
     /**
      * progress to completion
-     * @type {string}
-     * @memberof RunStatusNode
      */
     'progress'?: string;
     /**
      * the node start time
-     * @type {string}
-     * @memberof RunStatusNode
      */
     'startTime'?: string;
     /**
      * the node end time
-     * @type {string}
-     * @memberof RunStatusNode
      */
     'endTime'?: string;
 }
 /**
  * A Solution Run Template
- * @export
- * @interface RunTemplate
  */
 export interface RunTemplate {
     /**
      * The Solution Run Template id
-     * @type {string}
-     * @memberof RunTemplate
      */
     'id': string;
     /**
      * The Run Template name
-     * @type {string}
-     * @memberof RunTemplate
      */
     'name'?: string;
     /**
      * A translated label with key as ISO 639-1 code
-     * @type {{ [key: string]: string; }}
-     * @memberof RunTemplate
      */
     'labels'?: { [key: string]: string; };
     /**
      * The Run Template description
-     * @type {string}
-     * @memberof RunTemplate
      */
     'description'?: string;
     /**
      * The list of Run Template tags
-     * @type {Array<string>}
-     * @memberof RunTemplate
      */
     'tags'?: Array<string>;
     /**
      * The compute size needed for this Run Template
-     * @type {string}
-     * @memberof RunTemplate
      */
     'computeSize'?: string;
-    /**
-     * 
-     * @type {RunTemplateResourceSizing}
-     * @memberof RunTemplate
-     */
     'runSizing'?: RunTemplateResourceSizing;
     /**
      * The ordered list of parameters groups for the Run Template
-     * @type {Array<string>}
-     * @memberof RunTemplate
      */
     'parameterGroups': Array<string>;
     /**
      * An optional duration in seconds in which a workflow is allowed to run
-     * @type {number}
-     * @memberof RunTemplate
      */
     'executionTimeout'?: number;
 }
 /**
  * A Solution Run Template Create Request
- * @export
- * @interface RunTemplateCreateRequest
  */
 export interface RunTemplateCreateRequest {
     /**
      * The Solution Run Template id
-     * @type {string}
-     * @memberof RunTemplateCreateRequest
      */
     'id': string;
     /**
      * The Run Template name
-     * @type {string}
-     * @memberof RunTemplateCreateRequest
      */
     'name'?: string;
     /**
      * A translated label with key as ISO 639-1 code
-     * @type {{ [key: string]: string; }}
-     * @memberof RunTemplateCreateRequest
      */
     'labels'?: { [key: string]: string; };
     /**
      * The Run Template description
-     * @type {string}
-     * @memberof RunTemplateCreateRequest
      */
     'description'?: string;
     /**
      * The list of Run Template tags
-     * @type {Array<string>}
-     * @memberof RunTemplateCreateRequest
      */
     'tags'?: Array<string>;
     /**
      * The compute size needed for this Run Template
-     * @type {string}
-     * @memberof RunTemplateCreateRequest
      */
     'computeSize'?: string;
-    /**
-     * 
-     * @type {RunTemplateResourceSizing}
-     * @memberof RunTemplateCreateRequest
-     */
     'runSizing'?: RunTemplateResourceSizing;
     /**
      * The ordered list of parameters groups for the Run Template
-     * @type {Array<string>}
-     * @memberof RunTemplateCreateRequest
      */
     'parameterGroups'?: Array<string>;
     /**
      * An optional duration in seconds in which a workflow is allowed to run
-     * @type {number}
-     * @memberof RunTemplateCreateRequest
      */
     'executionTimeout'?: number;
 }
 /**
  * A Run Template Parameter
- * @export
- * @interface RunTemplateParameter
  */
 export interface RunTemplateParameter {
     /**
      * The Parameter id
-     * @type {string}
-     * @memberof RunTemplateParameter
      */
     'id': string;
     /**
      * The parameter description
-     * @type {string}
-     * @memberof RunTemplateParameter
      */
     'description'?: string;
     /**
      * A translated label with key as ISO 639-1 code
-     * @type {{ [key: string]: string; }}
-     * @memberof RunTemplateParameter
      */
     'labels'?: { [key: string]: string; };
     /**
      * The variable type for the parameter. Basic types or special type %DATASETID%
-     * @type {string}
-     * @memberof RunTemplateParameter
      */
     'varType': string;
     /**
      * The default value for this parameter
-     * @type {string}
-     * @memberof RunTemplateParameter
      */
     'defaultValue'?: string;
     /**
      * The minimum value for this parameter
-     * @type {string}
-     * @memberof RunTemplateParameter
      */
     'minValue'?: string;
     /**
      * The maximum value for this parameter
-     * @type {string}
-     * @memberof RunTemplateParameter
      */
     'maxValue'?: string;
     /**
      * Free form additional data
-     * @type {{ [key: string]: any; }}
-     * @memberof RunTemplateParameter
      */
     'additionalData'?: { [key: string]: any; };
 }
 /**
  * A Run Template Parameter for creation
- * @export
- * @interface RunTemplateParameterCreateRequest
  */
 export interface RunTemplateParameterCreateRequest {
     /**
      * The Parameter id
-     * @type {string}
-     * @memberof RunTemplateParameterCreateRequest
      */
     'id': string;
     /**
      * The parameter description
-     * @type {string}
-     * @memberof RunTemplateParameterCreateRequest
      */
     'description'?: string;
     /**
      * A translated label with key as ISO 639-1 code
-     * @type {{ [key: string]: string; }}
-     * @memberof RunTemplateParameterCreateRequest
      */
     'labels'?: { [key: string]: string; };
     /**
      * The variable type for the parameter. Basic types or special type %DATASETID%
-     * @type {string}
-     * @memberof RunTemplateParameterCreateRequest
      */
     'varType': string;
     /**
      * The default value for this parameter
-     * @type {string}
-     * @memberof RunTemplateParameterCreateRequest
      */
     'defaultValue'?: string;
     /**
      * The minimum value for this parameter
-     * @type {string}
-     * @memberof RunTemplateParameterCreateRequest
      */
     'minValue'?: string;
     /**
      * The maximum value for this parameter
-     * @type {string}
-     * @memberof RunTemplateParameterCreateRequest
      */
     'maxValue'?: string;
     /**
      * Free form additional data
-     * @type {{ [key: string]: any; }}
-     * @memberof RunTemplateParameterCreateRequest
      */
     'additionalData'?: { [key: string]: any; };
 }
 /**
  * A Parameter Group for a Run Template
- * @export
- * @interface RunTemplateParameterGroup
  */
 export interface RunTemplateParameterGroup {
     /**
      * The Parameter Group id
-     * @type {string}
-     * @memberof RunTemplateParameterGroup
      */
     'id': string;
     /**
      * A description of the parameter group
-     * @type {string}
-     * @memberof RunTemplateParameterGroup
      */
     'description'?: string;
     /**
      * A translated label with key as ISO 639-1 code
-     * @type {{ [key: string]: string; }}
-     * @memberof RunTemplateParameterGroup
      */
     'labels'?: { [key: string]: string; };
     /**
      * Free form additional data
-     * @type {{ [key: string]: any; }}
-     * @memberof RunTemplateParameterGroup
      */
     'additionalData'?: { [key: string]: any; };
     /**
      * An ordered list of Run Template Parameters
-     * @type {Array<string>}
-     * @memberof RunTemplateParameterGroup
      */
     'parameters': Array<string>;
 }
 /**
  * A Parameter Group Create Request for a Run Template
- * @export
- * @interface RunTemplateParameterGroupCreateRequest
  */
 export interface RunTemplateParameterGroupCreateRequest {
     /**
      * The Parameter Group id
-     * @type {string}
-     * @memberof RunTemplateParameterGroupCreateRequest
      */
     'id': string;
     /**
      * A description of the parameter group
-     * @type {string}
-     * @memberof RunTemplateParameterGroupCreateRequest
      */
     'description'?: string;
     /**
      * A translated label with key as ISO 639-1 code
-     * @type {{ [key: string]: string; }}
-     * @memberof RunTemplateParameterGroupCreateRequest
      */
     'labels'?: { [key: string]: string; };
     /**
      * Free form additional data
-     * @type {{ [key: string]: any; }}
-     * @memberof RunTemplateParameterGroupCreateRequest
      */
     'additionalData'?: { [key: string]: any; };
     /**
      * An ordered list of Run Template Parameters
-     * @type {Array<string>}
-     * @memberof RunTemplateParameterGroupCreateRequest
      */
     'parameters'?: Array<string>;
 }
 /**
  * A Parameter Group Update Request for a Run Template
- * @export
- * @interface RunTemplateParameterGroupUpdateRequest
  */
 export interface RunTemplateParameterGroupUpdateRequest {
     /**
      * A description of the parameter group
-     * @type {string}
-     * @memberof RunTemplateParameterGroupUpdateRequest
      */
     'description'?: string;
     /**
      * A translated label with key as ISO 639-1 code
-     * @type {{ [key: string]: string; }}
-     * @memberof RunTemplateParameterGroupUpdateRequest
      */
     'labels'?: { [key: string]: string; };
     /**
      * Free form additional data
-     * @type {{ [key: string]: any; }}
-     * @memberof RunTemplateParameterGroupUpdateRequest
      */
     'additionalData'?: { [key: string]: any; };
     /**
      * An ordered list of Run Template Parameters
-     * @type {Array<string>}
-     * @memberof RunTemplateParameterGroupUpdateRequest
      */
     'parameters'?: Array<string>;
 }
 /**
  * A Run Template Parameter for update parameter
- * @export
- * @interface RunTemplateParameterUpdateRequest
  */
 export interface RunTemplateParameterUpdateRequest {
     /**
      * The parameter description
-     * @type {string}
-     * @memberof RunTemplateParameterUpdateRequest
      */
     'description'?: string;
     /**
      * A translated label with key as ISO 639-1 code
-     * @type {{ [key: string]: string; }}
-     * @memberof RunTemplateParameterUpdateRequest
      */
     'labels'?: { [key: string]: string; };
     /**
      * The variable type for the parameter. Basic types or special type %DATASETID%
-     * @type {string}
-     * @memberof RunTemplateParameterUpdateRequest
      */
     'varType'?: string;
     /**
      * The default value for this parameter
-     * @type {string}
-     * @memberof RunTemplateParameterUpdateRequest
      */
     'defaultValue'?: string;
     /**
      * The minimum value for this parameter
-     * @type {string}
-     * @memberof RunTemplateParameterUpdateRequest
      */
     'minValue'?: string;
     /**
      * The maximum value for this parameter
-     * @type {string}
-     * @memberof RunTemplateParameterUpdateRequest
      */
     'maxValue'?: string;
     /**
      * Free form additional data
-     * @type {{ [key: string]: any; }}
-     * @memberof RunTemplateParameterUpdateRequest
      */
     'additionalData'?: { [key: string]: any; };
 }
 /**
  * the value of Analysis parameter for a Runner for this Run
- * @export
- * @interface RunTemplateParameterValue
  */
 export interface RunTemplateParameterValue {
     /**
      * the parameter Id
-     * @type {string}
-     * @memberof RunTemplateParameterValue
      */
     'parameterId': string;
     /**
      * the parameter value type
-     * @type {string}
-     * @memberof RunTemplateParameterValue
      */
     'varType'?: string;
     /**
      * the parameter value
-     * @type {string}
-     * @memberof RunTemplateParameterValue
      */
     'value': string;
 }
 /**
  * A description object for resource requests and limits
- * @export
- * @interface RunTemplateResourceSizing
  */
 export interface RunTemplateResourceSizing {
-    /**
-     * 
-     * @type {ResourceSizeInfo}
-     * @memberof RunTemplateResourceSizing
-     */
     'requests': ResourceSizeInfo;
-    /**
-     * 
-     * @type {ResourceSizeInfo}
-     * @memberof RunTemplateResourceSizing
-     */
     'limits': ResourceSizeInfo;
 }
 /**
  * A Solution Run Template Create Request
- * @export
- * @interface RunTemplateUpdateRequest
  */
 export interface RunTemplateUpdateRequest {
     /**
      * The Run Template name
-     * @type {string}
-     * @memberof RunTemplateUpdateRequest
      */
     'name'?: string;
     /**
      * A translated label with key as ISO 639-1 code
-     * @type {{ [key: string]: string; }}
-     * @memberof RunTemplateUpdateRequest
      */
     'labels'?: { [key: string]: string; };
     /**
      * The Run Template description
-     * @type {string}
-     * @memberof RunTemplateUpdateRequest
      */
     'description'?: string;
     /**
      * The list of Run Template tags
-     * @type {Array<string>}
-     * @memberof RunTemplateUpdateRequest
      */
     'tags'?: Array<string>;
     /**
      * The compute size needed for this Run Template
-     * @type {string}
-     * @memberof RunTemplateUpdateRequest
      */
     'computeSize'?: string;
-    /**
-     * 
-     * @type {RunTemplateResourceSizing}
-     * @memberof RunTemplateUpdateRequest
-     */
     'runSizing'?: RunTemplateResourceSizing;
     /**
      * The ordered list of parameters groups for the Run Template
-     * @type {Array<string>}
-     * @memberof RunTemplateUpdateRequest
      */
     'parameterGroups'?: Array<string>;
     /**
      * An optional duration in seconds in which a workflow is allowed to run
-     * @type {number}
-     * @memberof RunTemplateUpdateRequest
      */
     'executionTimeout'?: number;
 }
 /**
  * a Runner with complete information
- * @export
- * @interface Runner
  */
 export interface Runner {
     /**
      * the Runner unique identifier
-     * @type {string}
-     * @memberof Runner
      */
     'id': string;
     /**
      * the Runner name
-     * @type {string}
-     * @memberof Runner
      */
     'name': string;
     /**
      * the Runner description
-     * @type {string}
-     * @memberof Runner
      */
     'description'?: string;
     /**
      * the list of tags
-     * @type {Array<string>}
-     * @memberof Runner
      */
     'tags'?: Array<string>;
     /**
      * the Runner parent id
-     * @type {string}
-     * @memberof Runner
      */
     'parentId'?: string;
     /**
      * The details of the Runner creation
-     * @type {RunnerEditInfo}
-     * @memberof Runner
      */
     'createInfo': RunnerEditInfo;
     /**
      * The details of the Runner last update
-     * @type {RunnerEditInfo}
-     * @memberof Runner
      */
     'updateInfo': RunnerEditInfo;
     /**
      * the runner root id
-     * @type {string}
-     * @memberof Runner
      */
     'rootId'?: string;
     /**
      * the Solution Id associated with this Runner
-     * @type {string}
-     * @memberof Runner
      */
     'solutionId': string;
     /**
      * the Solution Run Template Id associated with this Runner
-     * @type {string}
-     * @memberof Runner
      */
     'runTemplateId': string;
     /**
      * the associated Organization Id
-     * @type {string}
-     * @memberof Runner
      */
     'organizationId': string;
     /**
      * the associated Workspace Id
-     * @type {string}
-     * @memberof Runner
      */
     'workspaceId': string;
     /**
      * the Solution name
-     * @type {string}
-     * @memberof Runner
      */
     'solutionName'?: string;
     /**
      * the Solution Run Template name associated with this Runner
-     * @type {string}
-     * @memberof Runner
      */
     'runTemplateName'?: string;
     /**
      * Free form additional data
-     * @type {{ [key: string]: any; }}
-     * @memberof Runner
      */
     'additionalData'?: { [key: string]: any; };
     /**
      * definition of datasets used by the runner
-     * @type {RunnerDatasets}
-     * @memberof Runner
      */
     'datasets': RunnerDatasets;
-    /**
-     * 
-     * @type {RunnerResourceSizing}
-     * @memberof Runner
-     */
     'runSizing'?: RunnerResourceSizing;
     /**
      * the list of Solution Run Template parameters values
-     * @type {Array<RunnerRunTemplateParameterValue>}
-     * @memberof Runner
      */
     'parametersValues': Array<RunnerRunTemplateParameterValue>;
-    /**
-     * 
-     * @type {LastRunInfo}
-     * @memberof Runner
-     */
     'lastRunInfo': LastRunInfo;
-    /**
-     * 
-     * @type {RunnerValidationStatus}
-     * @memberof Runner
-     */
     'validationStatus': RunnerValidationStatus;
-    /**
-     * 
-     * @type {RunnerSecurity}
-     * @memberof Runner
-     */
     'security': RunnerSecurity;
 }
 
 
 /**
  * a Runner access control item
- * @export
- * @interface RunnerAccessControl
  */
 export interface RunnerAccessControl {
     /**
      * the identity id
-     * @type {string}
-     * @memberof RunnerAccessControl
      */
     'id': string;
     /**
      * a role
-     * @type {string}
-     * @memberof RunnerAccessControl
      */
     'role': string;
 }
 /**
  * Request object for creating a new runner
- * @export
- * @interface RunnerCreateRequest
  */
 export interface RunnerCreateRequest {
     /**
      * the Runner name
-     * @type {string}
-     * @memberof RunnerCreateRequest
      */
     'name': string;
     /**
      * the Runner description
-     * @type {string}
-     * @memberof RunnerCreateRequest
      */
     'description'?: string;
     /**
      * the list of tags
-     * @type {Array<string>}
-     * @memberof RunnerCreateRequest
      */
     'tags'?: Array<string>;
     /**
      * the Solution Id associated with this Runner
-     * @type {string}
-     * @memberof RunnerCreateRequest
      */
     'solutionId': string;
     /**
      * the Runner parent id
-     * @type {string}
-     * @memberof RunnerCreateRequest
      */
     'parentId'?: string;
     /**
      * the Solution Run Template Id associated with this Runner
-     * @type {string}
-     * @memberof RunnerCreateRequest
      */
     'runTemplateId': string;
     /**
      * the list of Dataset Id associated to this Runner Run Template
-     * @type {Array<string>}
-     * @memberof RunnerCreateRequest
      */
     'datasetList'?: Array<string>;
-    /**
-     * 
-     * @type {RunnerResourceSizing}
-     * @memberof RunnerCreateRequest
-     */
     'runSizing'?: RunnerResourceSizing;
     /**
      * the list of Solution Run Template parameters values
-     * @type {Array<RunnerRunTemplateParameterValue>}
-     * @memberof RunnerCreateRequest
      */
     'parametersValues'?: Array<RunnerRunTemplateParameterValue>;
     /**
      * Free form additional data
-     * @type {{ [key: string]: any; }}
-     * @memberof RunnerCreateRequest
      */
     'additionalData'?: { [key: string]: any; };
     /**
      * the Solution name
-     * @type {string}
-     * @memberof RunnerCreateRequest
      */
     'solutionName'?: string;
     /**
      * the Solution Run Template name associated with this Runner
-     * @type {string}
-     * @memberof RunnerCreateRequest
      */
     'runTemplateName'?: string;
-    /**
-     * 
-     * @type {RunnerSecurity}
-     * @memberof RunnerCreateRequest
-     */
     'security'?: RunnerSecurity;
 }
-/**
- * 
- * @export
- * @interface RunnerDatasets
- */
 export interface RunnerDatasets {
     /**
      * a list of Dataset Id used to build the Runner
-     * @type {Array<string>}
-     * @memberof RunnerDatasets
      */
     'bases': Array<string>;
     /**
      * The dataset id used for dataset parameters on current Runner
-     * @type {string}
-     * @memberof RunnerDatasets
      */
     'parameter': string;
     /**
      * The dataset parts retrieved from the parameter property (programmatically fulfilled)
-     * @type {Array<object>}
-     * @memberof RunnerDatasets
      */
     'parameters'?: Array<object>;
 }
-/**
- * 
- * @export
- * @interface RunnerEditInfo
- */
 export interface RunnerEditInfo {
     /**
      * The timestamp of the modification in millisecond
-     * @type {number}
-     * @memberof RunnerEditInfo
      */
     'timestamp': number;
     /**
      * The id of the user who did the modification
-     * @type {string}
-     * @memberof RunnerEditInfo
      */
     'userId': string;
 }
 /**
  * a description object for resource requests and limits (default same configuration as basic sizing)
- * @export
- * @interface RunnerResourceSizing
  */
 export interface RunnerResourceSizing {
-    /**
-     * 
-     * @type {ResourceSizeInfo}
-     * @memberof RunnerResourceSizing
-     */
     'requests': ResourceSizeInfo;
-    /**
-     * 
-     * @type {ResourceSizeInfo}
-     * @memberof RunnerResourceSizing
-     */
     'limits': ResourceSizeInfo;
 }
 /**
  * the Runner Role
- * @export
- * @interface RunnerRole
  */
 export interface RunnerRole {
     /**
      * the Runner Role
-     * @type {string}
-     * @memberof RunnerRole
      */
     'role': string;
 }
 /**
  * the value of a Solution Run Template parameter for a Runner
- * @export
- * @interface RunnerRunTemplateParameterValue
  */
 export interface RunnerRunTemplateParameterValue {
     /**
      * the parameter Id
-     * @type {string}
-     * @memberof RunnerRunTemplateParameterValue
      */
     'parameterId': string;
     /**
      * the parameter value type
-     * @type {string}
-     * @memberof RunnerRunTemplateParameterValue
      */
     'varType'?: string;
     /**
      * the parameter value
-     * @type {string}
-     * @memberof RunnerRunTemplateParameterValue
      */
     'value': string;
     /**
      * whether or not the value is inherited from parent or has been changed
-     * @type {boolean}
-     * @memberof RunnerRunTemplateParameterValue
      */
     'isInherited'?: boolean;
 }
 /**
  * the Runner security information
- * @export
- * @interface RunnerSecurity
  */
 export interface RunnerSecurity {
     /**
      * the role by default
-     * @type {string}
-     * @memberof RunnerSecurity
      */
     'default': string;
     /**
      * the list which can access this Runner with detailed access control information
-     * @type {Array<RunnerAccessControl>}
-     * @memberof RunnerSecurity
      */
     'accessControlList': Array<RunnerAccessControl>;
 }
 /**
  * Request object for updating a runner
- * @export
- * @interface RunnerUpdateRequest
  */
 export interface RunnerUpdateRequest {
     /**
      * the Runner name
-     * @type {string}
-     * @memberof RunnerUpdateRequest
      */
     'name'?: string;
     /**
      * the Runner description
-     * @type {string}
-     * @memberof RunnerUpdateRequest
      */
     'description'?: string;
     /**
      * the list of tags
-     * @type {Array<string>}
-     * @memberof RunnerUpdateRequest
      */
     'tags'?: Array<string>;
     /**
      * the Solution Run Template Id associated with this Runner
-     * @type {string}
-     * @memberof RunnerUpdateRequest
      */
     'runTemplateId'?: string;
     /**
      * the list of Dataset Id associated to this Runner Run Template
-     * @type {Array<string>}
-     * @memberof RunnerUpdateRequest
      */
     'datasetList'?: Array<string>;
-    /**
-     * 
-     * @type {RunnerResourceSizing}
-     * @memberof RunnerUpdateRequest
-     */
     'runSizing'?: RunnerResourceSizing;
     /**
      * the list of Solution Run Template parameters values
-     * @type {Array<RunnerRunTemplateParameterValue>}
-     * @memberof RunnerUpdateRequest
      */
     'parametersValues'?: Array<RunnerRunTemplateParameterValue>;
     /**
      * Free form additional data
-     * @type {{ [key: string]: any; }}
-     * @memberof RunnerUpdateRequest
      */
     'additionalData'?: { [key: string]: any; };
     /**
      * the Solution name
-     * @type {string}
-     * @memberof RunnerUpdateRequest
      */
     'solutionName'?: string;
     /**
      * the Solution Run Template name associated with this Runner
-     * @type {string}
-     * @memberof RunnerUpdateRequest
      */
     'runTemplateName'?: string;
 }
 /**
  * the validation status of the runner
- * @export
- * @enum {string}
  */
 
 export const RunnerValidationStatus = {
@@ -2089,644 +1271,411 @@ export const RunnerValidationStatus = {
 
 export type RunnerValidationStatus = typeof RunnerValidationStatus[keyof typeof RunnerValidationStatus];
 
+
 /**
  * A version of a Solution
- * @export
- * @interface Solution
  */
 export interface Solution {
     /**
      * The Solution version unique identifier
-     * @type {string}
-     * @memberof Solution
      */
     'id': string;
     /**
      * The Organization unique identifier
-     * @type {string}
-     * @memberof Solution
      */
     'organizationId': string;
     /**
      * The Solution key which groups Solution versions
-     * @type {string}
-     * @memberof Solution
      */
     'key': string;
     /**
      * The Solution name
-     * @type {string}
-     * @memberof Solution
      */
     'name': string;
     /**
      * The Solution description
-     * @type {string}
-     * @memberof Solution
      */
     'description'?: string;
     /**
      * The registry repository containing the image
-     * @type {string}
-     * @memberof Solution
      */
     'repository': string;
     /**
      * Set to true if the runtemplate wants to always pull the image
-     * @type {boolean}
-     * @memberof Solution
      */
     'alwaysPull'?: boolean;
     /**
      * The Solution version MAJOR.MINOR.PATCH. Must be aligned with an existing repository tag
-     * @type {string}
-     * @memberof Solution
      */
     'version': string;
     /**
      * The details of the Solution creation
-     * @type {SolutionEditInfo}
-     * @memberof Solution
      */
     'createInfo': SolutionEditInfo;
     /**
      * The details of the Solution last update
-     * @type {SolutionEditInfo}
-     * @memberof Solution
      */
     'updateInfo': SolutionEditInfo;
     /**
      * The full SDK version used to build this solution, if available
-     * @type {string}
-     * @memberof Solution
      */
     'sdkVersion'?: string;
     /**
      * An optional URL link to solution page
-     * @type {string}
-     * @memberof Solution
      */
     'url'?: string;
     /**
      * The list of tags
-     * @type {Array<string>}
-     * @memberof Solution
      */
     'tags'?: Array<string>;
     /**
      * The list of Run Template Parameters
-     * @type {Array<RunTemplateParameter>}
-     * @memberof Solution
      */
     'parameters': Array<RunTemplateParameter>;
     /**
      * The list of parameters groups for the Run Templates
-     * @type {Array<RunTemplateParameterGroup>}
-     * @memberof Solution
      */
     'parameterGroups': Array<RunTemplateParameterGroup>;
     /**
      * List of Run Templates
-     * @type {Array<RunTemplate>}
-     * @memberof Solution
      */
     'runTemplates': Array<RunTemplate>;
-    /**
-     * 
-     * @type {SolutionSecurity}
-     * @memberof Solution
-     */
     'security': SolutionSecurity;
 }
 /**
  * A Solution access control item
- * @export
- * @interface SolutionAccessControl
  */
 export interface SolutionAccessControl {
     /**
      * The identity id
-     * @type {string}
-     * @memberof SolutionAccessControl
      */
     'id': string;
     /**
      * The assigned role
-     * @type {string}
-     * @memberof SolutionAccessControl
      */
     'role': string;
 }
 /**
  * Request object for creating a new solution
- * @export
- * @interface SolutionCreateRequest
  */
 export interface SolutionCreateRequest {
     /**
      * Technical key for resource name convention and version grouping. Must be unique
-     * @type {string}
-     * @memberof SolutionCreateRequest
      */
     'key': string;
     /**
      * Solution name. This name is displayed in the sample webApp
-     * @type {string}
-     * @memberof SolutionCreateRequest
      */
     'name': string;
     /**
      * The Solution description
-     * @type {string}
-     * @memberof SolutionCreateRequest
      */
     'description'?: string;
     /**
      * The registry repository containing the image
-     * @type {string}
-     * @memberof SolutionCreateRequest
      */
     'repository': string;
     /**
      * The Solution version MAJOR.MINOR.PATCH
-     * @type {string}
-     * @memberof SolutionCreateRequest
      */
     'version': string;
     /**
      * Set to true if the runtemplate wants to always pull the image
-     * @type {boolean}
-     * @memberof SolutionCreateRequest
      */
     'alwaysPull'?: boolean;
     /**
      * The list of tags
-     * @type {Array<string>}
-     * @memberof SolutionCreateRequest
      */
     'tags'?: Array<string>;
     /**
      * The list of Run Template Parameters
-     * @type {Array<RunTemplateParameterCreateRequest>}
-     * @memberof SolutionCreateRequest
      */
     'parameters'?: Array<RunTemplateParameterCreateRequest>;
     /**
      * The list of parameters groups for the Run Templates
-     * @type {Array<RunTemplateParameterGroupCreateRequest>}
-     * @memberof SolutionCreateRequest
      */
     'parameterGroups'?: Array<RunTemplateParameterGroupCreateRequest>;
     /**
      * List of Run Templates
-     * @type {Array<RunTemplateCreateRequest>}
-     * @memberof SolutionCreateRequest
      */
     'runTemplates'?: Array<RunTemplateCreateRequest>;
     /**
      * An optional URL link to solution page
-     * @type {string}
-     * @memberof SolutionCreateRequest
      */
     'url'?: string;
-    /**
-     * 
-     * @type {SolutionSecurity}
-     * @memberof SolutionCreateRequest
-     */
     'security'?: SolutionSecurity;
 }
-/**
- * 
- * @export
- * @interface SolutionEditInfo
- */
 export interface SolutionEditInfo {
     /**
      * The timestamp of the modification in millisecond
-     * @type {number}
-     * @memberof SolutionEditInfo
      */
     'timestamp': number;
     /**
      * The id of the user who did the modification
-     * @type {string}
-     * @memberof SolutionEditInfo
      */
     'userId': string;
 }
 /**
  * The Solution Role
- * @export
- * @interface SolutionRole
  */
 export interface SolutionRole {
     /**
      * The Solution Role
-     * @type {string}
-     * @memberof SolutionRole
      */
     'role': string;
 }
 /**
  * The Solution security information
- * @export
- * @interface SolutionSecurity
  */
 export interface SolutionSecurity {
     /**
      * The role by default
-     * @type {string}
-     * @memberof SolutionSecurity
      */
     'default': string;
     /**
      * The list which can access this Solution with detailed access control information
-     * @type {Array<SolutionAccessControl>}
-     * @memberof SolutionSecurity
      */
     'accessControlList': Array<SolutionAccessControl>;
 }
 /**
  * Request object for updating a solution
- * @export
- * @interface SolutionUpdateRequest
  */
 export interface SolutionUpdateRequest {
     /**
      * Technical key for resource name convention and version grouping. Must be unique
-     * @type {string}
-     * @memberof SolutionUpdateRequest
      */
     'key'?: string;
     /**
      * The Solution name
-     * @type {string}
-     * @memberof SolutionUpdateRequest
      */
     'name'?: string;
     /**
      * The Solution description
-     * @type {string}
-     * @memberof SolutionUpdateRequest
      */
     'description'?: string;
     /**
      * The registry repository containing the image
-     * @type {string}
-     * @memberof SolutionUpdateRequest
      */
     'repository'?: string;
     /**
      * Set to true if the runtemplate wants to always pull the image
-     * @type {boolean}
-     * @memberof SolutionUpdateRequest
      */
     'alwaysPull'?: boolean;
     /**
      * The Solution version MAJOR.MINOR.PATCH. Must be aligned with an existing repository tag
-     * @type {string}
-     * @memberof SolutionUpdateRequest
      */
     'version'?: string;
     /**
      * An optional URL link to solution page
-     * @type {string}
-     * @memberof SolutionUpdateRequest
      */
     'url'?: string;
     /**
      * The list of tags
-     * @type {Array<string>}
-     * @memberof SolutionUpdateRequest
      */
     'tags'?: Array<string>;
     /**
      * The list of Run Template Parameters
-     * @type {Array<RunTemplateParameterCreateRequest>}
-     * @memberof SolutionUpdateRequest
      */
     'parameters'?: Array<RunTemplateParameterCreateRequest>;
     /**
      * The list of parameters groups for the Run Templates
-     * @type {Array<RunTemplateParameterGroupCreateRequest>}
-     * @memberof SolutionUpdateRequest
      */
     'parameterGroups'?: Array<RunTemplateParameterGroupCreateRequest>;
     /**
      * List of Run Templates
-     * @type {Array<RunTemplateCreateRequest>}
-     * @memberof SolutionUpdateRequest
      */
     'runTemplates'?: Array<RunTemplateCreateRequest>;
 }
 /**
  * A Workspace
- * @export
- * @interface Workspace
  */
 export interface Workspace {
     /**
      * Workspace unique identifier generated by the API
-     * @type {string}
-     * @memberof Workspace
      */
     'id': string;
     /**
      * Organization unique identifier under which the workspace resides
-     * @type {string}
-     * @memberof Workspace
      */
     'organizationId': string;
     /**
      * Technical key for resource name convention and version grouping. Must be unique
-     * @type {string}
-     * @memberof Workspace
      */
     'key': string;
     /**
      * Workspace name. This name is display in the sample webApp
-     * @type {string}
-     * @memberof Workspace
      */
     'name': string;
     /**
      * The Workspace description
-     * @type {string}
-     * @memberof Workspace
      */
     'description'?: string;
     /**
      * The Workspace version MAJOR.MINOR.PATCH.
-     * @type {string}
-     * @memberof Workspace
      */
     'version'?: string;
     /**
      * The list of tags
-     * @type {Array<string>}
-     * @memberof Workspace
      */
     'tags'?: Array<string>;
     /**
      * The details of the Workspace creation
-     * @type {WorkspaceEditInfo}
-     * @memberof Workspace
      */
     'createInfo': WorkspaceEditInfo;
     /**
      * The details of the Workspace last update
-     * @type {WorkspaceEditInfo}
-     * @memberof Workspace
      */
     'updateInfo': WorkspaceEditInfo;
-    /**
-     * 
-     * @type {WorkspaceSolution}
-     * @memberof Workspace
-     */
     'solution': WorkspaceSolution;
     /**
      * Free form additional data
-     * @type {{ [key: string]: any; }}
-     * @memberof Workspace
      */
     'additionalData'?: { [key: string]: any; };
     /**
      * Activate the copy of dataset on scenario creation, meaning that each scenario created in this workspace will make this copy. when false, scenario use directly the dataset specified.
-     * @type {boolean}
-     * @memberof Workspace
      */
     'datasetCopy'?: boolean;
-    /**
-     * 
-     * @type {WorkspaceSecurity}
-     * @memberof Workspace
-     */
     'security': WorkspaceSecurity;
 }
 /**
  * A Workspace access control item
- * @export
- * @interface WorkspaceAccessControl
  */
 export interface WorkspaceAccessControl {
     /**
      * The identity id
-     * @type {string}
-     * @memberof WorkspaceAccessControl
      */
     'id': string;
     /**
      * A role
-     * @type {string}
-     * @memberof WorkspaceAccessControl
      */
     'role': string;
 }
 /**
  * Request object for creating a new workspace
- * @export
- * @interface WorkspaceCreateRequest
  */
 export interface WorkspaceCreateRequest {
     /**
      * Technical key for resource name convention and version grouping. Must be unique
-     * @type {string}
-     * @memberof WorkspaceCreateRequest
      */
     'key': string;
     /**
      * Workspace name. This name is displayed in the sample webApp
-     * @type {string}
-     * @memberof WorkspaceCreateRequest
      */
     'name': string;
     /**
      * The Workspace description
-     * @type {string}
-     * @memberof WorkspaceCreateRequest
      */
     'description'?: string;
     /**
      * The Workspace version MAJOR.MINOR.PATCH.
-     * @type {string}
-     * @memberof WorkspaceCreateRequest
      */
     'version'?: string;
     /**
      * The list of tags
-     * @type {Array<string>}
-     * @memberof WorkspaceCreateRequest
      */
     'tags'?: Array<string>;
-    /**
-     * 
-     * @type {WorkspaceSolution}
-     * @memberof WorkspaceCreateRequest
-     */
     'solution': WorkspaceSolution;
     /**
      * Free form additional data
-     * @type {{ [key: string]: any; }}
-     * @memberof WorkspaceCreateRequest
      */
     'additionalData'?: { [key: string]: any; };
     /**
      * Activate the copy of dataset on scenario creation
-     * @type {boolean}
-     * @memberof WorkspaceCreateRequest
      */
     'datasetCopy'?: boolean;
-    /**
-     * 
-     * @type {WorkspaceSecurity}
-     * @memberof WorkspaceCreateRequest
-     */
     'security'?: WorkspaceSecurity;
 }
-/**
- * 
- * @export
- * @interface WorkspaceEditInfo
- */
 export interface WorkspaceEditInfo {
     /**
      * The timestamp of the modification in millisecond
-     * @type {number}
-     * @memberof WorkspaceEditInfo
      */
     'timestamp': number;
     /**
      * The id of the user who did the modification
-     * @type {string}
-     * @memberof WorkspaceEditInfo
      */
     'userId': string;
 }
 /**
  * A Workspace File resource
- * @export
- * @interface WorkspaceFile
  */
 export interface WorkspaceFile {
     /**
      * The Workspace File name
-     * @type {string}
-     * @memberof WorkspaceFile
      */
     'fileName': string;
 }
 /**
  * The Workspace Role
- * @export
- * @interface WorkspaceRole
  */
 export interface WorkspaceRole {
     /**
      * The Workspace Role
-     * @type {string}
-     * @memberof WorkspaceRole
      */
     'role': string;
 }
 /**
  * The workspace security information
- * @export
- * @interface WorkspaceSecurity
  */
 export interface WorkspaceSecurity {
     /**
      * The role by default
-     * @type {string}
-     * @memberof WorkspaceSecurity
      */
     'default': string;
     /**
      * The list which can access this Workspace with detailed access control information
-     * @type {Array<WorkspaceAccessControl>}
-     * @memberof WorkspaceSecurity
      */
     'accessControlList': Array<WorkspaceAccessControl>;
 }
 /**
  * The Workspace Solution configuration
- * @export
- * @interface WorkspaceSolution
  */
 export interface WorkspaceSolution {
     /**
      * The Solution Id attached to this workspace
-     * @type {string}
-     * @memberof WorkspaceSolution
      */
     'solutionId': string;
     /**
      * The Dataset Id attached to this workspace. This dataset will be used to store default values for Solution parameters with file\'s varType. 
-     * @type {string}
-     * @memberof WorkspaceSolution
      */
     'datasetId'?: string;
     /**
      * A map of parameterId/value to set default values for Solution parameters with simple varType (int, string, ...)
-     * @type {{ [key: string]: string; }}
-     * @memberof WorkspaceSolution
      */
     'defaultParameterValues'?: { [key: string]: string; };
 }
 /**
  * Request object for updating a workspace
- * @export
- * @interface WorkspaceUpdateRequest
  */
 export interface WorkspaceUpdateRequest {
     /**
      * Technical key for resource name convention and version grouping. Must be unique
-     * @type {string}
-     * @memberof WorkspaceUpdateRequest
      */
     'key'?: string;
     /**
      * Workspace name
-     * @type {string}
-     * @memberof WorkspaceUpdateRequest
      */
     'name'?: string;
     /**
      * The Workspace description
-     * @type {string}
-     * @memberof WorkspaceUpdateRequest
      */
     'description'?: string;
     /**
      * The list of tags
-     * @type {Array<string>}
-     * @memberof WorkspaceUpdateRequest
      */
     'tags'?: Array<string>;
-    /**
-     * 
-     * @type {WorkspaceSolution}
-     * @memberof WorkspaceUpdateRequest
-     */
     'solution'?: WorkspaceSolution;
     /**
      * Free form additional data
-     * @type {{ [key: string]: any; }}
-     * @memberof WorkspaceUpdateRequest
      */
     'additionalData'?: { [key: string]: any; };
     /**
      * Activate the copy of dataset on scenario creation
-     * @type {boolean}
-     * @memberof WorkspaceUpdateRequest
      */
     'datasetCopy'?: boolean;
 }
 
 /**
  * DatasetApi - axios parameter creator
- * @export
  */
 export const DatasetApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -3921,7 +2870,6 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
 
 /**
  * DatasetApi - functional programming interface
- * @export
  */
 export const DatasetApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = DatasetApiAxiosParamCreator(configuration)
@@ -4284,7 +3232,6 @@ export const DatasetApiFp = function(configuration?: Configuration) {
 
 /**
  * DatasetApi - factory interface
- * @export
  */
 export const DatasetApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = DatasetApiFp(configuration)
@@ -4584,9 +3531,6 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
 
 /**
  * DatasetApi - object-oriented interface
- * @export
- * @class DatasetApi
- * @extends {BaseAPI}
  */
 export class DatasetApi extends BaseAPI {
     /**
@@ -4598,7 +3542,6 @@ export class DatasetApi extends BaseAPI {
      * @param {Array<File>} [files] Notes:   - Each parts defined in dataset should have a file defined in this list   - Please ensure that upload files order match with data parts list defined     - First file uploaded will match with first dataset parts and so on 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DatasetApi
      */
     public createDataset(organizationId: string, workspaceId: string, datasetCreateRequest: DatasetCreateRequest, files?: Array<File>, options?: RawAxiosRequestConfig) {
         return DatasetApiFp(this.configuration).createDataset(organizationId, workspaceId, datasetCreateRequest, files, options).then((request) => request(this.axios, this.basePath));
@@ -4613,7 +3556,6 @@ export class DatasetApi extends BaseAPI {
      * @param {DatasetAccessControl} datasetAccessControl the new Dataset security access to add.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DatasetApi
      */
     public createDatasetAccessControl(organizationId: string, workspaceId: string, datasetId: string, datasetAccessControl: DatasetAccessControl, options?: RawAxiosRequestConfig) {
         return DatasetApiFp(this.configuration).createDatasetAccessControl(organizationId, workspaceId, datasetId, datasetAccessControl, options).then((request) => request(this.axios, this.basePath));
@@ -4629,7 +3571,6 @@ export class DatasetApi extends BaseAPI {
      * @param {DatasetPartCreateRequest} datasetPartCreateRequest 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DatasetApi
      */
     public createDatasetPart(organizationId: string, workspaceId: string, datasetId: string, file: File, datasetPartCreateRequest: DatasetPartCreateRequest, options?: RawAxiosRequestConfig) {
         return DatasetApiFp(this.configuration).createDatasetPart(organizationId, workspaceId, datasetId, file, datasetPartCreateRequest, options).then((request) => request(this.axios, this.basePath));
@@ -4643,7 +3584,6 @@ export class DatasetApi extends BaseAPI {
      * @param {string} datasetId the Dataset identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DatasetApi
      */
     public deleteDataset(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig) {
         return DatasetApiFp(this.configuration).deleteDataset(organizationId, workspaceId, datasetId, options).then((request) => request(this.axios, this.basePath));
@@ -4658,7 +3598,6 @@ export class DatasetApi extends BaseAPI {
      * @param {string} identityId the User identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DatasetApi
      */
     public deleteDatasetAccessControl(organizationId: string, workspaceId: string, datasetId: string, identityId: string, options?: RawAxiosRequestConfig) {
         return DatasetApiFp(this.configuration).deleteDatasetAccessControl(organizationId, workspaceId, datasetId, identityId, options).then((request) => request(this.axios, this.basePath));
@@ -4673,7 +3612,6 @@ export class DatasetApi extends BaseAPI {
      * @param {string} datasetPartId the Dataset part identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DatasetApi
      */
     public deleteDatasetPart(organizationId: string, workspaceId: string, datasetId: string, datasetPartId: string, options?: RawAxiosRequestConfig) {
         return DatasetApiFp(this.configuration).deleteDatasetPart(organizationId, workspaceId, datasetId, datasetPartId, options).then((request) => request(this.axios, this.basePath));
@@ -4688,7 +3626,6 @@ export class DatasetApi extends BaseAPI {
      * @param {string} datasetPartId the Dataset part identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DatasetApi
      */
     public downloadDatasetPart(organizationId: string, workspaceId: string, datasetId: string, datasetPartId: string, options?: RawAxiosRequestConfig) {
         return DatasetApiFp(this.configuration).downloadDatasetPart(organizationId, workspaceId, datasetId, datasetPartId, options).then((request) => request(this.axios, this.basePath));
@@ -4702,7 +3639,6 @@ export class DatasetApi extends BaseAPI {
      * @param {string} datasetId the Dataset identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DatasetApi
      */
     public getDataset(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig) {
         return DatasetApiFp(this.configuration).getDataset(organizationId, workspaceId, datasetId, options).then((request) => request(this.axios, this.basePath));
@@ -4717,7 +3653,6 @@ export class DatasetApi extends BaseAPI {
      * @param {string} identityId the User identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DatasetApi
      */
     public getDatasetAccessControl(organizationId: string, workspaceId: string, datasetId: string, identityId: string, options?: RawAxiosRequestConfig) {
         return DatasetApiFp(this.configuration).getDatasetAccessControl(organizationId, workspaceId, datasetId, identityId, options).then((request) => request(this.axios, this.basePath));
@@ -4732,7 +3667,6 @@ export class DatasetApi extends BaseAPI {
      * @param {string} datasetPartId the Dataset part identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DatasetApi
      */
     public getDatasetPart(organizationId: string, workspaceId: string, datasetId: string, datasetPartId: string, options?: RawAxiosRequestConfig) {
         return DatasetApiFp(this.configuration).getDatasetPart(organizationId, workspaceId, datasetId, datasetPartId, options).then((request) => request(this.axios, this.basePath));
@@ -4748,7 +3682,6 @@ export class DatasetApi extends BaseAPI {
      * @param {number} [size] Amount of result by page
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DatasetApi
      */
     public listDatasetParts(organizationId: string, workspaceId: string, datasetId: string, page?: number, size?: number, options?: RawAxiosRequestConfig) {
         return DatasetApiFp(this.configuration).listDatasetParts(organizationId, workspaceId, datasetId, page, size, options).then((request) => request(this.axios, this.basePath));
@@ -4762,7 +3695,6 @@ export class DatasetApi extends BaseAPI {
      * @param {string} datasetId the Dataset identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DatasetApi
      */
     public listDatasetSecurityUsers(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig) {
         return DatasetApiFp(this.configuration).listDatasetSecurityUsers(organizationId, workspaceId, datasetId, options).then((request) => request(this.axios, this.basePath));
@@ -4777,7 +3709,6 @@ export class DatasetApi extends BaseAPI {
      * @param {number} [size] Amount of result by page
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DatasetApi
      */
     public listDatasets(organizationId: string, workspaceId: string, page?: number, size?: number, options?: RawAxiosRequestConfig) {
         return DatasetApiFp(this.configuration).listDatasets(organizationId, workspaceId, page, size, options).then((request) => request(this.axios, this.basePath));
@@ -4802,7 +3733,6 @@ export class DatasetApi extends BaseAPI {
      * @param {Array<string>} [orderBys] Column names to order by. Default order is ascending. If you want to specify \&#39;descending\&#39; order, add a \&#39;!\&#39; at the beginning of the column name (e.g. !stock). 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DatasetApi
      */
     public queryData(organizationId: string, workspaceId: string, datasetId: string, datasetPartId: string, selects?: Array<string>, sums?: Array<string>, avgs?: Array<string>, counts?: Array<string>, mins?: Array<string>, maxs?: Array<string>, offset?: number, limit?: number, groupBys?: Array<string>, orderBys?: Array<string>, options?: RawAxiosRequestConfig) {
         return DatasetApiFp(this.configuration).queryData(organizationId, workspaceId, datasetId, datasetPartId, selects, sums, avgs, counts, mins, maxs, offset, limit, groupBys, orderBys, options).then((request) => request(this.axios, this.basePath));
@@ -4819,7 +3749,6 @@ export class DatasetApi extends BaseAPI {
      * @param {DatasetPartUpdateRequest} [datasetPartUpdateRequest] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DatasetApi
      */
     public replaceDatasetPart(organizationId: string, workspaceId: string, datasetId: string, datasetPartId: string, file: File, datasetPartUpdateRequest?: DatasetPartUpdateRequest, options?: RawAxiosRequestConfig) {
         return DatasetApiFp(this.configuration).replaceDatasetPart(organizationId, workspaceId, datasetId, datasetPartId, file, datasetPartUpdateRequest, options).then((request) => request(this.axios, this.basePath));
@@ -4836,7 +3765,6 @@ export class DatasetApi extends BaseAPI {
      * @param {number} [size] Amount of result by page
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DatasetApi
      */
     public searchDatasetParts(organizationId: string, workspaceId: string, datasetId: string, requestBody: Array<string>, page?: number, size?: number, options?: RawAxiosRequestConfig) {
         return DatasetApiFp(this.configuration).searchDatasetParts(organizationId, workspaceId, datasetId, requestBody, page, size, options).then((request) => request(this.axios, this.basePath));
@@ -4852,7 +3780,6 @@ export class DatasetApi extends BaseAPI {
      * @param {number} [size] Amount of result by page
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DatasetApi
      */
     public searchDatasets(organizationId: string, workspaceId: string, requestBody: Array<string>, page?: number, size?: number, options?: RawAxiosRequestConfig) {
         return DatasetApiFp(this.configuration).searchDatasets(organizationId, workspaceId, requestBody, page, size, options).then((request) => request(this.axios, this.basePath));
@@ -4868,7 +3795,6 @@ export class DatasetApi extends BaseAPI {
      * @param {Array<File>} [files] Notes:   - Each parts defined in dataset should have a file defined in this list   - Please ensure that upload files order match with data parts list defined     - First file uploaded will match with first dataset parts and so on 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DatasetApi
      */
     public updateDataset(organizationId: string, workspaceId: string, datasetId: string, datasetUpdateRequest: DatasetUpdateRequest, files?: Array<File>, options?: RawAxiosRequestConfig) {
         return DatasetApiFp(this.configuration).updateDataset(organizationId, workspaceId, datasetId, datasetUpdateRequest, files, options).then((request) => request(this.axios, this.basePath));
@@ -4884,7 +3810,6 @@ export class DatasetApi extends BaseAPI {
      * @param {DatasetRole} datasetRole The new Dataset Access Control
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DatasetApi
      */
     public updateDatasetAccessControl(organizationId: string, workspaceId: string, datasetId: string, identityId: string, datasetRole: DatasetRole, options?: RawAxiosRequestConfig) {
         return DatasetApiFp(this.configuration).updateDatasetAccessControl(organizationId, workspaceId, datasetId, identityId, datasetRole, options).then((request) => request(this.axios, this.basePath));
@@ -4899,7 +3824,6 @@ export class DatasetApi extends BaseAPI {
      * @param {DatasetRole} datasetRole This change the dataset default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the dataset.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DatasetApi
      */
     public updateDatasetDefaultSecurity(organizationId: string, workspaceId: string, datasetId: string, datasetRole: DatasetRole, options?: RawAxiosRequestConfig) {
         return DatasetApiFp(this.configuration).updateDatasetDefaultSecurity(organizationId, workspaceId, datasetId, datasetRole, options).then((request) => request(this.axios, this.basePath));
@@ -4915,7 +3839,6 @@ export class DatasetApi extends BaseAPI {
      * @param {DatasetPartUpdateRequest} datasetPartUpdateRequest Dataset part information to update
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DatasetApi
      */
     public updateDatasetPart(organizationId: string, workspaceId: string, datasetId: string, datasetPartId: string, datasetPartUpdateRequest: DatasetPartUpdateRequest, options?: RawAxiosRequestConfig) {
         return DatasetApiFp(this.configuration).updateDatasetPart(organizationId, workspaceId, datasetId, datasetPartId, datasetPartUpdateRequest, options).then((request) => request(this.axios, this.basePath));
@@ -4923,9 +3846,9 @@ export class DatasetApi extends BaseAPI {
 }
 
 
+
 /**
  * MetaApi - axios parameter creator
- * @export
  */
 export const MetaApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -4968,7 +3891,6 @@ export const MetaApiAxiosParamCreator = function (configuration?: Configuration)
 
 /**
  * MetaApi - functional programming interface
- * @export
  */
 export const MetaApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = MetaApiAxiosParamCreator(configuration)
@@ -4990,7 +3912,6 @@ export const MetaApiFp = function(configuration?: Configuration) {
 
 /**
  * MetaApi - factory interface
- * @export
  */
 export const MetaApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = MetaApiFp(configuration)
@@ -5009,9 +3930,6 @@ export const MetaApiFactory = function (configuration?: Configuration, basePath?
 
 /**
  * MetaApi - object-oriented interface
- * @export
- * @class MetaApi
- * @extends {BaseAPI}
  */
 export class MetaApi extends BaseAPI {
     /**
@@ -5019,7 +3937,6 @@ export class MetaApi extends BaseAPI {
      * @summary Get various information about the API
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof MetaApi
      */
     public about(options?: RawAxiosRequestConfig) {
         return MetaApiFp(this.configuration).about(options).then((request) => request(this.axios, this.basePath));
@@ -5027,9 +3944,9 @@ export class MetaApi extends BaseAPI {
 }
 
 
+
 /**
  * OrganizationApi - axios parameter creator
- * @export
  */
 export const OrganizationApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -5614,7 +4531,6 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
 
 /**
  * OrganizationApi - functional programming interface
- * @export
  */
 export const OrganizationApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = OrganizationApiAxiosParamCreator(configuration)
@@ -5814,7 +4730,6 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
 
 /**
  * OrganizationApi - factory interface
- * @export
  */
 export const OrganizationApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = OrganizationApiFp(configuration)
@@ -5972,9 +4887,6 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
 
 /**
  * OrganizationApi - object-oriented interface
- * @export
- * @class OrganizationApi
- * @extends {BaseAPI}
  */
 export class OrganizationApi extends BaseAPI {
     /**
@@ -5983,7 +4895,6 @@ export class OrganizationApi extends BaseAPI {
      * @param {OrganizationCreateRequest} organizationCreateRequest The Organization to create
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof OrganizationApi
      */
     public createOrganization(organizationCreateRequest: OrganizationCreateRequest, options?: RawAxiosRequestConfig) {
         return OrganizationApiFp(this.configuration).createOrganization(organizationCreateRequest, options).then((request) => request(this.axios, this.basePath));
@@ -5996,7 +4907,6 @@ export class OrganizationApi extends BaseAPI {
      * @param {OrganizationAccessControl} organizationAccessControl The new Organization security access to add.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof OrganizationApi
      */
     public createOrganizationAccessControl(organizationId: string, organizationAccessControl: OrganizationAccessControl, options?: RawAxiosRequestConfig) {
         return OrganizationApiFp(this.configuration).createOrganizationAccessControl(organizationId, organizationAccessControl, options).then((request) => request(this.axios, this.basePath));
@@ -6008,7 +4918,6 @@ export class OrganizationApi extends BaseAPI {
      * @param {string} organizationId The Organization identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof OrganizationApi
      */
     public deleteOrganization(organizationId: string, options?: RawAxiosRequestConfig) {
         return OrganizationApiFp(this.configuration).deleteOrganization(organizationId, options).then((request) => request(this.axios, this.basePath));
@@ -6021,7 +4930,6 @@ export class OrganizationApi extends BaseAPI {
      * @param {string} identityId The User identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof OrganizationApi
      */
     public deleteOrganizationAccessControl(organizationId: string, identityId: string, options?: RawAxiosRequestConfig) {
         return OrganizationApiFp(this.configuration).deleteOrganizationAccessControl(organizationId, identityId, options).then((request) => request(this.axios, this.basePath));
@@ -6033,7 +4941,6 @@ export class OrganizationApi extends BaseAPI {
      * @param {string} organizationId The Organization identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof OrganizationApi
      */
     public getOrganization(organizationId: string, options?: RawAxiosRequestConfig) {
         return OrganizationApiFp(this.configuration).getOrganization(organizationId, options).then((request) => request(this.axios, this.basePath));
@@ -6046,7 +4953,6 @@ export class OrganizationApi extends BaseAPI {
      * @param {string} identityId The User identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof OrganizationApi
      */
     public getOrganizationAccessControl(organizationId: string, identityId: string, options?: RawAxiosRequestConfig) {
         return OrganizationApiFp(this.configuration).getOrganizationAccessControl(organizationId, identityId, options).then((request) => request(this.axios, this.basePath));
@@ -6059,7 +4965,6 @@ export class OrganizationApi extends BaseAPI {
      * @param {string} role The Role
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof OrganizationApi
      */
     public getOrganizationPermissions(organizationId: string, role: string, options?: RawAxiosRequestConfig) {
         return OrganizationApiFp(this.configuration).getOrganizationPermissions(organizationId, role, options).then((request) => request(this.axios, this.basePath));
@@ -6071,7 +4976,6 @@ export class OrganizationApi extends BaseAPI {
      * @param {string} organizationId The Organization identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof OrganizationApi
      */
     public getOrganizationSecurity(organizationId: string, options?: RawAxiosRequestConfig) {
         return OrganizationApiFp(this.configuration).getOrganizationSecurity(organizationId, options).then((request) => request(this.axios, this.basePath));
@@ -6083,7 +4987,6 @@ export class OrganizationApi extends BaseAPI {
      * @param {string} organizationId The Organization identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof OrganizationApi
      */
     public listOrganizationSecurityUsers(organizationId: string, options?: RawAxiosRequestConfig) {
         return OrganizationApiFp(this.configuration).listOrganizationSecurityUsers(organizationId, options).then((request) => request(this.axios, this.basePath));
@@ -6096,7 +4999,6 @@ export class OrganizationApi extends BaseAPI {
      * @param {number} [size] Amount of result by page
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof OrganizationApi
      */
     public listOrganizations(page?: number, size?: number, options?: RawAxiosRequestConfig) {
         return OrganizationApiFp(this.configuration).listOrganizations(page, size, options).then((request) => request(this.axios, this.basePath));
@@ -6107,7 +5009,6 @@ export class OrganizationApi extends BaseAPI {
      * @summary Get all permissions per components
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof OrganizationApi
      */
     public listPermissions(options?: RawAxiosRequestConfig) {
         return OrganizationApiFp(this.configuration).listPermissions(options).then((request) => request(this.axios, this.basePath));
@@ -6120,7 +5021,6 @@ export class OrganizationApi extends BaseAPI {
      * @param {OrganizationUpdateRequest} organizationUpdateRequest The new Organization details. This endpoint can\&#39;t be used to update security
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof OrganizationApi
      */
     public updateOrganization(organizationId: string, organizationUpdateRequest: OrganizationUpdateRequest, options?: RawAxiosRequestConfig) {
         return OrganizationApiFp(this.configuration).updateOrganization(organizationId, organizationUpdateRequest, options).then((request) => request(this.axios, this.basePath));
@@ -6134,7 +5034,6 @@ export class OrganizationApi extends BaseAPI {
      * @param {OrganizationRole} organizationRole The new Organization Access Control
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof OrganizationApi
      */
     public updateOrganizationAccessControl(organizationId: string, identityId: string, organizationRole: OrganizationRole, options?: RawAxiosRequestConfig) {
         return OrganizationApiFp(this.configuration).updateOrganizationAccessControl(organizationId, identityId, organizationRole, options).then((request) => request(this.axios, this.basePath));
@@ -6147,7 +5046,6 @@ export class OrganizationApi extends BaseAPI {
      * @param {OrganizationRole} organizationRole This change the organization default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the organization.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof OrganizationApi
      */
     public updateOrganizationDefaultSecurity(organizationId: string, organizationRole: OrganizationRole, options?: RawAxiosRequestConfig) {
         return OrganizationApiFp(this.configuration).updateOrganizationDefaultSecurity(organizationId, organizationRole, options).then((request) => request(this.axios, this.basePath));
@@ -6155,9 +5053,9 @@ export class OrganizationApi extends BaseAPI {
 }
 
 
+
 /**
  * RunApi - axios parameter creator
- * @export
  */
 export const RunApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -6422,7 +5320,6 @@ export const RunApiAxiosParamCreator = function (configuration?: Configuration) 
 
 /**
  * RunApi - functional programming interface
- * @export
  */
 export const RunApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = RunApiAxiosParamCreator(configuration)
@@ -6513,7 +5410,6 @@ export const RunApiFp = function(configuration?: Configuration) {
 
 /**
  * RunApi - factory interface
- * @export
  */
 export const RunApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = RunApiFp(configuration)
@@ -6589,9 +5485,6 @@ export const RunApiFactory = function (configuration?: Configuration, basePath?:
 
 /**
  * RunApi - object-oriented interface
- * @export
- * @class RunApi
- * @extends {BaseAPI}
  */
 export class RunApi extends BaseAPI {
     /**
@@ -6603,7 +5496,6 @@ export class RunApi extends BaseAPI {
      * @param {string} runId The Run identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RunApi
      */
     public deleteRun(organizationId: string, workspaceId: string, runnerId: string, runId: string, options?: RawAxiosRequestConfig) {
         return RunApiFp(this.configuration).deleteRun(organizationId, workspaceId, runnerId, runId, options).then((request) => request(this.axios, this.basePath));
@@ -6618,7 +5510,6 @@ export class RunApi extends BaseAPI {
      * @param {string} runId The Run identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RunApi
      */
     public getRun(organizationId: string, workspaceId: string, runnerId: string, runId: string, options?: RawAxiosRequestConfig) {
         return RunApiFp(this.configuration).getRun(organizationId, workspaceId, runnerId, runId, options).then((request) => request(this.axios, this.basePath));
@@ -6633,7 +5524,6 @@ export class RunApi extends BaseAPI {
      * @param {string} runId The Run identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RunApi
      */
     public getRunLogs(organizationId: string, workspaceId: string, runnerId: string, runId: string, options?: RawAxiosRequestConfig) {
         return RunApiFp(this.configuration).getRunLogs(organizationId, workspaceId, runnerId, runId, options).then((request) => request(this.axios, this.basePath));
@@ -6648,7 +5538,6 @@ export class RunApi extends BaseAPI {
      * @param {string} runId The Run identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RunApi
      */
     public getRunStatus(organizationId: string, workspaceId: string, runnerId: string, runId: string, options?: RawAxiosRequestConfig) {
         return RunApiFp(this.configuration).getRunStatus(organizationId, workspaceId, runnerId, runId, options).then((request) => request(this.axios, this.basePath));
@@ -6664,7 +5553,6 @@ export class RunApi extends BaseAPI {
      * @param {number} [size] amount of result by page
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RunApi
      */
     public listRuns(organizationId: string, workspaceId: string, runnerId: string, page?: number, size?: number, options?: RawAxiosRequestConfig) {
         return RunApiFp(this.configuration).listRuns(organizationId, workspaceId, runnerId, page, size, options).then((request) => request(this.axios, this.basePath));
@@ -6672,9 +5560,9 @@ export class RunApi extends BaseAPI {
 }
 
 
+
 /**
  * RunnerApi - axios parameter creator
- * @export
  */
 export const RunnerApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -7421,7 +6309,6 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
 
 /**
  * RunnerApi - functional programming interface
- * @export
  */
 export const RunnerApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = RunnerApiAxiosParamCreator(configuration)
@@ -7665,7 +6552,6 @@ export const RunnerApiFp = function(configuration?: Configuration) {
 
 /**
  * RunnerApi - factory interface
- * @export
  */
 export const RunnerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = RunnerApiFp(configuration)
@@ -7864,9 +6750,6 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
 
 /**
  * RunnerApi - object-oriented interface
- * @export
- * @class RunnerApi
- * @extends {BaseAPI}
  */
 export class RunnerApi extends BaseAPI {
     /**
@@ -7877,7 +6760,6 @@ export class RunnerApi extends BaseAPI {
      * @param {RunnerCreateRequest} runnerCreateRequest the Runner to create
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RunnerApi
      */
     public createRunner(organizationId: string, workspaceId: string, runnerCreateRequest: RunnerCreateRequest, options?: RawAxiosRequestConfig) {
         return RunnerApiFp(this.configuration).createRunner(organizationId, workspaceId, runnerCreateRequest, options).then((request) => request(this.axios, this.basePath));
@@ -7892,7 +6774,6 @@ export class RunnerApi extends BaseAPI {
      * @param {RunnerAccessControl} runnerAccessControl the new Runner security access to add.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RunnerApi
      */
     public createRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, runnerAccessControl: RunnerAccessControl, options?: RawAxiosRequestConfig) {
         return RunnerApiFp(this.configuration).createRunnerAccessControl(organizationId, workspaceId, runnerId, runnerAccessControl, options).then((request) => request(this.axios, this.basePath));
@@ -7906,7 +6787,6 @@ export class RunnerApi extends BaseAPI {
      * @param {string} runnerId the Runner identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RunnerApi
      */
     public deleteRunner(organizationId: string, workspaceId: string, runnerId: string, options?: RawAxiosRequestConfig) {
         return RunnerApiFp(this.configuration).deleteRunner(organizationId, workspaceId, runnerId, options).then((request) => request(this.axios, this.basePath));
@@ -7921,7 +6801,6 @@ export class RunnerApi extends BaseAPI {
      * @param {string} identityId the User identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RunnerApi
      */
     public deleteRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, identityId: string, options?: RawAxiosRequestConfig) {
         return RunnerApiFp(this.configuration).deleteRunnerAccessControl(organizationId, workspaceId, runnerId, identityId, options).then((request) => request(this.axios, this.basePath));
@@ -7935,7 +6814,6 @@ export class RunnerApi extends BaseAPI {
      * @param {string} runnerId the Runner identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RunnerApi
      */
     public getRunner(organizationId: string, workspaceId: string, runnerId: string, options?: RawAxiosRequestConfig) {
         return RunnerApiFp(this.configuration).getRunner(organizationId, workspaceId, runnerId, options).then((request) => request(this.axios, this.basePath));
@@ -7950,7 +6828,6 @@ export class RunnerApi extends BaseAPI {
      * @param {string} identityId the User identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RunnerApi
      */
     public getRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, identityId: string, options?: RawAxiosRequestConfig) {
         return RunnerApiFp(this.configuration).getRunnerAccessControl(organizationId, workspaceId, runnerId, identityId, options).then((request) => request(this.axios, this.basePath));
@@ -7964,7 +6841,6 @@ export class RunnerApi extends BaseAPI {
      * @param {string} runnerId the Runner identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RunnerApi
      */
     public getRunnerSecurity(organizationId: string, workspaceId: string, runnerId: string, options?: RawAxiosRequestConfig) {
         return RunnerApiFp(this.configuration).getRunnerSecurity(organizationId, workspaceId, runnerId, options).then((request) => request(this.axios, this.basePath));
@@ -7979,7 +6855,6 @@ export class RunnerApi extends BaseAPI {
      * @param {string} role the Role
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RunnerApi
      */
     public listRunnerPermissions(organizationId: string, workspaceId: string, runnerId: string, role: string, options?: RawAxiosRequestConfig) {
         return RunnerApiFp(this.configuration).listRunnerPermissions(organizationId, workspaceId, runnerId, role, options).then((request) => request(this.axios, this.basePath));
@@ -7993,7 +6868,6 @@ export class RunnerApi extends BaseAPI {
      * @param {string} runnerId the Runner identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RunnerApi
      */
     public listRunnerSecurityUsers(organizationId: string, workspaceId: string, runnerId: string, options?: RawAxiosRequestConfig) {
         return RunnerApiFp(this.configuration).listRunnerSecurityUsers(organizationId, workspaceId, runnerId, options).then((request) => request(this.axios, this.basePath));
@@ -8008,7 +6882,6 @@ export class RunnerApi extends BaseAPI {
      * @param {number} [size] Amount of result by page
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RunnerApi
      */
     public listRunners(organizationId: string, workspaceId: string, page?: number, size?: number, options?: RawAxiosRequestConfig) {
         return RunnerApiFp(this.configuration).listRunners(organizationId, workspaceId, page, size, options).then((request) => request(this.axios, this.basePath));
@@ -8022,7 +6895,6 @@ export class RunnerApi extends BaseAPI {
      * @param {string} runnerId the Runner identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RunnerApi
      */
     public startRun(organizationId: string, workspaceId: string, runnerId: string, options?: RawAxiosRequestConfig) {
         return RunnerApiFp(this.configuration).startRun(organizationId, workspaceId, runnerId, options).then((request) => request(this.axios, this.basePath));
@@ -8036,7 +6908,6 @@ export class RunnerApi extends BaseAPI {
      * @param {string} runnerId the Runner identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RunnerApi
      */
     public stopRun(organizationId: string, workspaceId: string, runnerId: string, options?: RawAxiosRequestConfig) {
         return RunnerApiFp(this.configuration).stopRun(organizationId, workspaceId, runnerId, options).then((request) => request(this.axios, this.basePath));
@@ -8051,7 +6922,6 @@ export class RunnerApi extends BaseAPI {
      * @param {RunnerUpdateRequest} runnerUpdateRequest the new Runner details. This endpoint can\&#39;t be used to update security
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RunnerApi
      */
     public updateRunner(organizationId: string, workspaceId: string, runnerId: string, runnerUpdateRequest: RunnerUpdateRequest, options?: RawAxiosRequestConfig) {
         return RunnerApiFp(this.configuration).updateRunner(organizationId, workspaceId, runnerId, runnerUpdateRequest, options).then((request) => request(this.axios, this.basePath));
@@ -8067,7 +6937,6 @@ export class RunnerApi extends BaseAPI {
      * @param {RunnerRole} runnerRole The new Runner Access Control
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RunnerApi
      */
     public updateRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, identityId: string, runnerRole: RunnerRole, options?: RawAxiosRequestConfig) {
         return RunnerApiFp(this.configuration).updateRunnerAccessControl(organizationId, workspaceId, runnerId, identityId, runnerRole, options).then((request) => request(this.axios, this.basePath));
@@ -8082,7 +6951,6 @@ export class RunnerApi extends BaseAPI {
      * @param {RunnerRole} runnerRole This change the runner default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the runner.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof RunnerApi
      */
     public updateRunnerDefaultSecurity(organizationId: string, workspaceId: string, runnerId: string, runnerRole: RunnerRole, options?: RawAxiosRequestConfig) {
         return RunnerApiFp(this.configuration).updateRunnerDefaultSecurity(organizationId, workspaceId, runnerId, runnerRole, options).then((request) => request(this.axios, this.basePath));
@@ -8090,9 +6958,9 @@ export class RunnerApi extends BaseAPI {
 }
 
 
+
 /**
  * SolutionApi - axios parameter creator
- * @export
  */
 export const SolutionApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -9351,7 +8219,6 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
 
 /**
  * SolutionApi - functional programming interface
- * @export
  */
 export const SolutionApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = SolutionApiAxiosParamCreator(configuration)
@@ -9762,7 +8629,6 @@ export const SolutionApiFp = function(configuration?: Configuration) {
 
 /**
  * SolutionApi - factory interface
- * @export
  */
 export const SolutionApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = SolutionApiFp(configuration)
@@ -10092,9 +8958,6 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
 
 /**
  * SolutionApi - object-oriented interface
- * @export
- * @class SolutionApi
- * @extends {BaseAPI}
  */
 export class SolutionApi extends BaseAPI {
     /**
@@ -10104,7 +8967,6 @@ export class SolutionApi extends BaseAPI {
      * @param {SolutionCreateRequest} solutionCreateRequest The Solution to create
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SolutionApi
      */
     public createSolution(organizationId: string, solutionCreateRequest: SolutionCreateRequest, options?: RawAxiosRequestConfig) {
         return SolutionApiFp(this.configuration).createSolution(organizationId, solutionCreateRequest, options).then((request) => request(this.axios, this.basePath));
@@ -10118,7 +8980,6 @@ export class SolutionApi extends BaseAPI {
      * @param {SolutionAccessControl} solutionAccessControl Access control to create
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SolutionApi
      */
     public createSolutionAccessControl(organizationId: string, solutionId: string, solutionAccessControl: SolutionAccessControl, options?: RawAxiosRequestConfig) {
         return SolutionApiFp(this.configuration).createSolutionAccessControl(organizationId, solutionId, solutionAccessControl, options).then((request) => request(this.axios, this.basePath));
@@ -10132,7 +8993,6 @@ export class SolutionApi extends BaseAPI {
      * @param {RunTemplateParameterCreateRequest} runTemplateParameterCreateRequest Parameter to create
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SolutionApi
      */
     public createSolutionParameter(organizationId: string, solutionId: string, runTemplateParameterCreateRequest: RunTemplateParameterCreateRequest, options?: RawAxiosRequestConfig) {
         return SolutionApiFp(this.configuration).createSolutionParameter(organizationId, solutionId, runTemplateParameterCreateRequest, options).then((request) => request(this.axios, this.basePath));
@@ -10146,7 +9006,6 @@ export class SolutionApi extends BaseAPI {
      * @param {RunTemplateParameterGroupCreateRequest} runTemplateParameterGroupCreateRequest Parameter group to create
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SolutionApi
      */
     public createSolutionParameterGroup(organizationId: string, solutionId: string, runTemplateParameterGroupCreateRequest: RunTemplateParameterGroupCreateRequest, options?: RawAxiosRequestConfig) {
         return SolutionApiFp(this.configuration).createSolutionParameterGroup(organizationId, solutionId, runTemplateParameterGroupCreateRequest, options).then((request) => request(this.axios, this.basePath));
@@ -10160,7 +9019,6 @@ export class SolutionApi extends BaseAPI {
      * @param {RunTemplateCreateRequest} runTemplateCreateRequest Run template to create
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SolutionApi
      */
     public createSolutionRunTemplate(organizationId: string, solutionId: string, runTemplateCreateRequest: RunTemplateCreateRequest, options?: RawAxiosRequestConfig) {
         return SolutionApiFp(this.configuration).createSolutionRunTemplate(organizationId, solutionId, runTemplateCreateRequest, options).then((request) => request(this.axios, this.basePath));
@@ -10173,7 +9031,6 @@ export class SolutionApi extends BaseAPI {
      * @param {string} solutionId the Solution identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SolutionApi
      */
     public deleteSolution(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig) {
         return SolutionApiFp(this.configuration).deleteSolution(organizationId, solutionId, options).then((request) => request(this.axios, this.basePath));
@@ -10187,7 +9044,6 @@ export class SolutionApi extends BaseAPI {
      * @param {string} identityId The User identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SolutionApi
      */
     public deleteSolutionAccessControl(organizationId: string, solutionId: string, identityId: string, options?: RawAxiosRequestConfig) {
         return SolutionApiFp(this.configuration).deleteSolutionAccessControl(organizationId, solutionId, identityId, options).then((request) => request(this.axios, this.basePath));
@@ -10201,7 +9057,6 @@ export class SolutionApi extends BaseAPI {
      * @param {string} parameterId The solution parameter identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SolutionApi
      */
     public deleteSolutionParameter(organizationId: string, solutionId: string, parameterId: string, options?: RawAxiosRequestConfig) {
         return SolutionApiFp(this.configuration).deleteSolutionParameter(organizationId, solutionId, parameterId, options).then((request) => request(this.axios, this.basePath));
@@ -10215,7 +9070,6 @@ export class SolutionApi extends BaseAPI {
      * @param {string} parameterGroupId The parameter group identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SolutionApi
      */
     public deleteSolutionParameterGroup(organizationId: string, solutionId: string, parameterGroupId: string, options?: RawAxiosRequestConfig) {
         return SolutionApiFp(this.configuration).deleteSolutionParameterGroup(organizationId, solutionId, parameterGroupId, options).then((request) => request(this.axios, this.basePath));
@@ -10229,7 +9083,6 @@ export class SolutionApi extends BaseAPI {
      * @param {string} runTemplateId The Run Template identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SolutionApi
      */
     public deleteSolutionRunTemplate(organizationId: string, solutionId: string, runTemplateId: string, options?: RawAxiosRequestConfig) {
         return SolutionApiFp(this.configuration).deleteSolutionRunTemplate(organizationId, solutionId, runTemplateId, options).then((request) => request(this.axios, this.basePath));
@@ -10243,7 +9096,6 @@ export class SolutionApi extends BaseAPI {
      * @param {string} runTemplateId The Run Template identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SolutionApi
      */
     public getRunTemplate(organizationId: string, solutionId: string, runTemplateId: string, options?: RawAxiosRequestConfig) {
         return SolutionApiFp(this.configuration).getRunTemplate(organizationId, solutionId, runTemplateId, options).then((request) => request(this.axios, this.basePath));
@@ -10256,7 +9108,6 @@ export class SolutionApi extends BaseAPI {
      * @param {string} solutionId the Solution identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SolutionApi
      */
     public getSolution(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig) {
         return SolutionApiFp(this.configuration).getSolution(organizationId, solutionId, options).then((request) => request(this.axios, this.basePath));
@@ -10270,7 +9121,6 @@ export class SolutionApi extends BaseAPI {
      * @param {string} identityId The User identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SolutionApi
      */
     public getSolutionAccessControl(organizationId: string, solutionId: string, identityId: string, options?: RawAxiosRequestConfig) {
         return SolutionApiFp(this.configuration).getSolutionAccessControl(organizationId, solutionId, identityId, options).then((request) => request(this.axios, this.basePath));
@@ -10284,7 +9134,6 @@ export class SolutionApi extends BaseAPI {
      * @param {string} parameterId The solution parameter identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SolutionApi
      */
     public getSolutionParameter(organizationId: string, solutionId: string, parameterId: string, options?: RawAxiosRequestConfig) {
         return SolutionApiFp(this.configuration).getSolutionParameter(organizationId, solutionId, parameterId, options).then((request) => request(this.axios, this.basePath));
@@ -10298,7 +9147,6 @@ export class SolutionApi extends BaseAPI {
      * @param {string} parameterGroupId The parameter group identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SolutionApi
      */
     public getSolutionParameterGroup(organizationId: string, solutionId: string, parameterGroupId: string, options?: RawAxiosRequestConfig) {
         return SolutionApiFp(this.configuration).getSolutionParameterGroup(organizationId, solutionId, parameterGroupId, options).then((request) => request(this.axios, this.basePath));
@@ -10311,7 +9159,6 @@ export class SolutionApi extends BaseAPI {
      * @param {string} solutionId the Solution identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SolutionApi
      */
     public getSolutionSecurity(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig) {
         return SolutionApiFp(this.configuration).getSolutionSecurity(organizationId, solutionId, options).then((request) => request(this.axios, this.basePath));
@@ -10324,7 +9171,6 @@ export class SolutionApi extends BaseAPI {
      * @param {string} solutionId the Solution identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SolutionApi
      */
     public listRunTemplates(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig) {
         return SolutionApiFp(this.configuration).listRunTemplates(organizationId, solutionId, options).then((request) => request(this.axios, this.basePath));
@@ -10337,7 +9183,6 @@ export class SolutionApi extends BaseAPI {
      * @param {string} solutionId the Solution identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SolutionApi
      */
     public listSolutionParameterGroups(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig) {
         return SolutionApiFp(this.configuration).listSolutionParameterGroups(organizationId, solutionId, options).then((request) => request(this.axios, this.basePath));
@@ -10350,7 +9195,6 @@ export class SolutionApi extends BaseAPI {
      * @param {string} solutionId the Solution identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SolutionApi
      */
     public listSolutionParameters(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig) {
         return SolutionApiFp(this.configuration).listSolutionParameters(organizationId, solutionId, options).then((request) => request(this.axios, this.basePath));
@@ -10363,7 +9207,6 @@ export class SolutionApi extends BaseAPI {
      * @param {string} solutionId the Solution identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SolutionApi
      */
     public listSolutionSecurityUsers(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig) {
         return SolutionApiFp(this.configuration).listSolutionSecurityUsers(organizationId, solutionId, options).then((request) => request(this.axios, this.basePath));
@@ -10377,7 +9220,6 @@ export class SolutionApi extends BaseAPI {
      * @param {number} [size] Amount of result by page
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SolutionApi
      */
     public listSolutions(organizationId: string, page?: number, size?: number, options?: RawAxiosRequestConfig) {
         return SolutionApiFp(this.configuration).listSolutions(organizationId, page, size, options).then((request) => request(this.axios, this.basePath));
@@ -10391,7 +9233,6 @@ export class SolutionApi extends BaseAPI {
      * @param {SolutionUpdateRequest} solutionUpdateRequest The new Solution details. This endpoint can\&#39;t be used to update security
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SolutionApi
      */
     public updateSolution(organizationId: string, solutionId: string, solutionUpdateRequest: SolutionUpdateRequest, options?: RawAxiosRequestConfig) {
         return SolutionApiFp(this.configuration).updateSolution(organizationId, solutionId, solutionUpdateRequest, options).then((request) => request(this.axios, this.basePath));
@@ -10406,7 +9247,6 @@ export class SolutionApi extends BaseAPI {
      * @param {SolutionRole} solutionRole Access control updates
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SolutionApi
      */
     public updateSolutionAccessControl(organizationId: string, solutionId: string, identityId: string, solutionRole: SolutionRole, options?: RawAxiosRequestConfig) {
         return SolutionApiFp(this.configuration).updateSolutionAccessControl(organizationId, solutionId, identityId, solutionRole, options).then((request) => request(this.axios, this.basePath));
@@ -10420,7 +9260,6 @@ export class SolutionApi extends BaseAPI {
      * @param {SolutionRole} solutionRole This changes the solution default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the solution.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SolutionApi
      */
     public updateSolutionDefaultSecurity(organizationId: string, solutionId: string, solutionRole: SolutionRole, options?: RawAxiosRequestConfig) {
         return SolutionApiFp(this.configuration).updateSolutionDefaultSecurity(organizationId, solutionId, solutionRole, options).then((request) => request(this.axios, this.basePath));
@@ -10435,7 +9274,6 @@ export class SolutionApi extends BaseAPI {
      * @param {RunTemplateParameterUpdateRequest} runTemplateParameterUpdateRequest Parameter to update
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SolutionApi
      */
     public updateSolutionParameter(organizationId: string, solutionId: string, parameterId: string, runTemplateParameterUpdateRequest: RunTemplateParameterUpdateRequest, options?: RawAxiosRequestConfig) {
         return SolutionApiFp(this.configuration).updateSolutionParameter(organizationId, solutionId, parameterId, runTemplateParameterUpdateRequest, options).then((request) => request(this.axios, this.basePath));
@@ -10450,7 +9288,6 @@ export class SolutionApi extends BaseAPI {
      * @param {RunTemplateParameterGroupUpdateRequest} runTemplateParameterGroupUpdateRequest Parameter groups to update
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SolutionApi
      */
     public updateSolutionParameterGroup(organizationId: string, solutionId: string, parameterGroupId: string, runTemplateParameterGroupUpdateRequest: RunTemplateParameterGroupUpdateRequest, options?: RawAxiosRequestConfig) {
         return SolutionApiFp(this.configuration).updateSolutionParameterGroup(organizationId, solutionId, parameterGroupId, runTemplateParameterGroupUpdateRequest, options).then((request) => request(this.axios, this.basePath));
@@ -10465,7 +9302,6 @@ export class SolutionApi extends BaseAPI {
      * @param {RunTemplateUpdateRequest} runTemplateUpdateRequest Run template updates
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof SolutionApi
      */
     public updateSolutionRunTemplate(organizationId: string, solutionId: string, runTemplateId: string, runTemplateUpdateRequest: RunTemplateUpdateRequest, options?: RawAxiosRequestConfig) {
         return SolutionApiFp(this.configuration).updateSolutionRunTemplate(organizationId, solutionId, runTemplateId, runTemplateUpdateRequest, options).then((request) => request(this.axios, this.basePath));
@@ -10473,9 +9309,9 @@ export class SolutionApi extends BaseAPI {
 }
 
 
+
 /**
  * WorkspaceApi - axios parameter creator
- * @export
  */
 export const WorkspaceApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -11323,7 +10159,6 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
 
 /**
  * WorkspaceApi - functional programming interface
- * @export
  */
 export const WorkspaceApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = WorkspaceApiAxiosParamCreator(configuration)
@@ -11599,7 +10434,6 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
 
 /**
  * WorkspaceApi - factory interface
- * @export
  */
 export const WorkspaceApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = WorkspaceApiFp(configuration)
@@ -11821,9 +10655,6 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
 
 /**
  * WorkspaceApi - object-oriented interface
- * @export
- * @class WorkspaceApi
- * @extends {BaseAPI}
  */
 export class WorkspaceApi extends BaseAPI {
     /**
@@ -11833,7 +10664,6 @@ export class WorkspaceApi extends BaseAPI {
      * @param {WorkspaceCreateRequest} workspaceCreateRequest The Workspace to create
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof WorkspaceApi
      */
     public createWorkspace(organizationId: string, workspaceCreateRequest: WorkspaceCreateRequest, options?: RawAxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).createWorkspace(organizationId, workspaceCreateRequest, options).then((request) => request(this.axios, this.basePath));
@@ -11847,7 +10677,6 @@ export class WorkspaceApi extends BaseAPI {
      * @param {WorkspaceAccessControl} workspaceAccessControl The new Workspace security access to add.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof WorkspaceApi
      */
     public createWorkspaceAccessControl(organizationId: string, workspaceId: string, workspaceAccessControl: WorkspaceAccessControl, options?: RawAxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).createWorkspaceAccessControl(organizationId, workspaceId, workspaceAccessControl, options).then((request) => request(this.axios, this.basePath));
@@ -11863,7 +10692,6 @@ export class WorkspaceApi extends BaseAPI {
      * @param {string} [destination] Destination path. Must end with a \\\&#39;/\\\&#39; if specifying a folder. Note that paths may or may not start with a \\\&#39;/\\\&#39;, but they are always treated as relative to the Workspace root location. 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof WorkspaceApi
      */
     public createWorkspaceFile(organizationId: string, workspaceId: string, file: File, overwrite?: boolean, destination?: string, options?: RawAxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).createWorkspaceFile(organizationId, workspaceId, file, overwrite, destination, options).then((request) => request(this.axios, this.basePath));
@@ -11876,7 +10704,6 @@ export class WorkspaceApi extends BaseAPI {
      * @param {string} workspaceId The Workspace identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof WorkspaceApi
      */
     public deleteWorkspace(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).deleteWorkspace(organizationId, workspaceId, options).then((request) => request(this.axios, this.basePath));
@@ -11890,7 +10717,6 @@ export class WorkspaceApi extends BaseAPI {
      * @param {string} identityId The User identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof WorkspaceApi
      */
     public deleteWorkspaceAccessControl(organizationId: string, workspaceId: string, identityId: string, options?: RawAxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).deleteWorkspaceAccessControl(organizationId, workspaceId, identityId, options).then((request) => request(this.axios, this.basePath));
@@ -11904,7 +10730,6 @@ export class WorkspaceApi extends BaseAPI {
      * @param {string} fileName The file name
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof WorkspaceApi
      */
     public deleteWorkspaceFile(organizationId: string, workspaceId: string, fileName: string, options?: RawAxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).deleteWorkspaceFile(organizationId, workspaceId, fileName, options).then((request) => request(this.axios, this.basePath));
@@ -11917,7 +10742,6 @@ export class WorkspaceApi extends BaseAPI {
      * @param {string} workspaceId The Workspace identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof WorkspaceApi
      */
     public deleteWorkspaceFiles(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).deleteWorkspaceFiles(organizationId, workspaceId, options).then((request) => request(this.axios, this.basePath));
@@ -11930,7 +10754,6 @@ export class WorkspaceApi extends BaseAPI {
      * @param {string} workspaceId The Workspace identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof WorkspaceApi
      */
     public getWorkspace(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).getWorkspace(organizationId, workspaceId, options).then((request) => request(this.axios, this.basePath));
@@ -11944,7 +10767,6 @@ export class WorkspaceApi extends BaseAPI {
      * @param {string} identityId The User identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof WorkspaceApi
      */
     public getWorkspaceAccessControl(organizationId: string, workspaceId: string, identityId: string, options?: RawAxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).getWorkspaceAccessControl(organizationId, workspaceId, identityId, options).then((request) => request(this.axios, this.basePath));
@@ -11958,7 +10780,6 @@ export class WorkspaceApi extends BaseAPI {
      * @param {string} fileName The file name
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof WorkspaceApi
      */
     public getWorkspaceFile(organizationId: string, workspaceId: string, fileName: string, options?: RawAxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).getWorkspaceFile(organizationId, workspaceId, fileName, options).then((request) => request(this.axios, this.basePath));
@@ -11971,7 +10792,6 @@ export class WorkspaceApi extends BaseAPI {
      * @param {string} workspaceId The Workspace identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof WorkspaceApi
      */
     public getWorkspaceSecurity(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).getWorkspaceSecurity(organizationId, workspaceId, options).then((request) => request(this.axios, this.basePath));
@@ -11984,7 +10804,6 @@ export class WorkspaceApi extends BaseAPI {
      * @param {string} workspaceId The Workspace identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof WorkspaceApi
      */
     public listWorkspaceFiles(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).listWorkspaceFiles(organizationId, workspaceId, options).then((request) => request(this.axios, this.basePath));
@@ -11998,7 +10817,6 @@ export class WorkspaceApi extends BaseAPI {
      * @param {string} role The Role
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof WorkspaceApi
      */
     public listWorkspaceRolePermissions(organizationId: string, workspaceId: string, role: string, options?: RawAxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).listWorkspaceRolePermissions(organizationId, workspaceId, role, options).then((request) => request(this.axios, this.basePath));
@@ -12011,7 +10829,6 @@ export class WorkspaceApi extends BaseAPI {
      * @param {string} workspaceId The Workspace identifier
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof WorkspaceApi
      */
     public listWorkspaceSecurityUsers(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).listWorkspaceSecurityUsers(organizationId, workspaceId, options).then((request) => request(this.axios, this.basePath));
@@ -12025,7 +10842,6 @@ export class WorkspaceApi extends BaseAPI {
      * @param {number} [size] Amount of result by page
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof WorkspaceApi
      */
     public listWorkspaces(organizationId: string, page?: number, size?: number, options?: RawAxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).listWorkspaces(organizationId, page, size, options).then((request) => request(this.axios, this.basePath));
@@ -12039,7 +10855,6 @@ export class WorkspaceApi extends BaseAPI {
      * @param {WorkspaceUpdateRequest} workspaceUpdateRequest The new Workspace details. This endpoint can\&#39;t be used to update security
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof WorkspaceApi
      */
     public updateWorkspace(organizationId: string, workspaceId: string, workspaceUpdateRequest: WorkspaceUpdateRequest, options?: RawAxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).updateWorkspace(organizationId, workspaceId, workspaceUpdateRequest, options).then((request) => request(this.axios, this.basePath));
@@ -12054,7 +10869,6 @@ export class WorkspaceApi extends BaseAPI {
      * @param {WorkspaceRole} workspaceRole The new Workspace Access Control
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof WorkspaceApi
      */
     public updateWorkspaceAccessControl(organizationId: string, workspaceId: string, identityId: string, workspaceRole: WorkspaceRole, options?: RawAxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).updateWorkspaceAccessControl(organizationId, workspaceId, identityId, workspaceRole, options).then((request) => request(this.axios, this.basePath));
@@ -12068,11 +10882,11 @@ export class WorkspaceApi extends BaseAPI {
      * @param {WorkspaceRole} workspaceRole This change the workspace default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the workspace.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof WorkspaceApi
      */
     public updateWorkspaceDefaultSecurity(organizationId: string, workspaceId: string, workspaceRole: WorkspaceRole, options?: RawAxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).updateWorkspaceDefaultSecurity(organizationId, workspaceId, workspaceRole, options).then((request) => request(this.axios, this.basePath));
     }
 }
+
 
 
