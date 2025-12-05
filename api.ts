@@ -12,7 +12,6 @@
  * Do not edit the class manually.
  */
 
-
 import type { Configuration } from './configuration';
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
@@ -447,7 +446,6 @@ export const DatasetPartTypeEnum = {
 } as const;
 
 export type DatasetPartTypeEnum = typeof DatasetPartTypeEnum[keyof typeof DatasetPartTypeEnum];
-
 
 /**
  * Dataset part update request object
@@ -980,7 +978,6 @@ export const RunState = {
 } as const;
 
 export type RunState = typeof RunState[keyof typeof RunState];
-
 
 /**
  * a Run status
@@ -2091,7 +2088,6 @@ export const RunnerValidationStatus = {
 } as const;
 
 export type RunnerValidationStatus = typeof RunnerValidationStatus[keyof typeof RunnerValidationStatus];
-
 
 /**
  * A version of a Solution
@@ -4927,7 +4923,6 @@ export class DatasetApi extends BaseAPI {
 }
 
 
-
 /**
  * MetaApi - axios parameter creator
  * @export
@@ -5030,7 +5025,6 @@ export class MetaApi extends BaseAPI {
         return MetaApiFp(this.configuration).about(options).then((request) => request(this.axios, this.basePath));
     }
 }
-
 
 
 /**
@@ -6161,7 +6155,6 @@ export class OrganizationApi extends BaseAPI {
 }
 
 
-
 /**
  * RunApi - axios parameter creator
  * @export
@@ -6677,7 +6670,6 @@ export class RunApi extends BaseAPI {
         return RunApiFp(this.configuration).listRuns(organizationId, workspaceId, runnerId, page, size, options).then((request) => request(this.axios, this.basePath));
     }
 }
-
 
 
 /**
@@ -8096,7 +8088,6 @@ export class RunnerApi extends BaseAPI {
         return RunnerApiFp(this.configuration).updateRunnerDefaultSecurity(organizationId, workspaceId, runnerId, runnerRole, options).then((request) => request(this.axios, this.basePath));
     }
 }
-
 
 
 /**
@@ -10482,7 +10473,6 @@ export class SolutionApi extends BaseAPI {
 }
 
 
-
 /**
  * WorkspaceApi - axios parameter creator
  * @export
@@ -12084,6 +12074,5 @@ export class WorkspaceApi extends BaseAPI {
         return WorkspaceApiFp(this.configuration).updateWorkspaceDefaultSecurity(organizationId, workspaceId, workspaceRole, options).then((request) => request(this.axios, this.basePath));
     }
 }
-
 
 
