@@ -1685,11 +1685,11 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {DatasetCreateRequest} datasetCreateRequest 
-         * @param {Array<File>} [files] Notes:   - Each parts defined in dataset should have a file defined in this list   - Please ensure that upload files order match with data parts list defined     - First file uploaded will match with first dataset parts and so on 
+         * @param {Array<File> | null} [files] Notes:   - Each parts defined in dataset should have a file defined in this list   - Please ensure that upload files order match with data parts list defined     - First file uploaded will match with first dataset parts and so on 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createDataset: async (organizationId: string, workspaceId: string, datasetCreateRequest: DatasetCreateRequest, files?: Array<File>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createDataset: async (organizationId: string, workspaceId: string, datasetCreateRequest: DatasetCreateRequest, files?: Array<File> | null, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('createDataset', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
@@ -2644,11 +2644,11 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} workspaceId the Workspace identifier
          * @param {string} datasetId the Dataset identifier
          * @param {DatasetUpdateRequest} datasetUpdateRequest 
-         * @param {Array<File>} [files] Notes:   - Each parts defined in dataset should have a file defined in this list   - Please ensure that upload files order match with data parts list defined     - First file uploaded will match with first dataset parts and so on 
+         * @param {Array<File> | null} [files] Notes:   - Each parts defined in dataset should have a file defined in this list   - Please ensure that upload files order match with data parts list defined     - First file uploaded will match with first dataset parts and so on 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateDataset: async (organizationId: string, workspaceId: string, datasetId: string, datasetUpdateRequest: DatasetUpdateRequest, files?: Array<File>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateDataset: async (organizationId: string, workspaceId: string, datasetId: string, datasetUpdateRequest: DatasetUpdateRequest, files?: Array<File> | null, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('updateDataset', 'organizationId', organizationId)
             // verify required parameter 'workspaceId' is not null or undefined
@@ -2880,11 +2880,11 @@ export const DatasetApiFp = function(configuration?: Configuration) {
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {DatasetCreateRequest} datasetCreateRequest 
-         * @param {Array<File>} [files] Notes:   - Each parts defined in dataset should have a file defined in this list   - Please ensure that upload files order match with data parts list defined     - First file uploaded will match with first dataset parts and so on 
+         * @param {Array<File> | null} [files] Notes:   - Each parts defined in dataset should have a file defined in this list   - Please ensure that upload files order match with data parts list defined     - First file uploaded will match with first dataset parts and so on 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createDataset(organizationId: string, workspaceId: string, datasetCreateRequest: DatasetCreateRequest, files?: Array<File>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Dataset>> {
+        async createDataset(organizationId: string, workspaceId: string, datasetCreateRequest: DatasetCreateRequest, files?: Array<File> | null, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Dataset>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createDataset(organizationId, workspaceId, datasetCreateRequest, files, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['DatasetApi.createDataset']?.[localVarOperationServerIndex]?.url;
@@ -3167,11 +3167,11 @@ export const DatasetApiFp = function(configuration?: Configuration) {
          * @param {string} workspaceId the Workspace identifier
          * @param {string} datasetId the Dataset identifier
          * @param {DatasetUpdateRequest} datasetUpdateRequest 
-         * @param {Array<File>} [files] Notes:   - Each parts defined in dataset should have a file defined in this list   - Please ensure that upload files order match with data parts list defined     - First file uploaded will match with first dataset parts and so on 
+         * @param {Array<File> | null} [files] Notes:   - Each parts defined in dataset should have a file defined in this list   - Please ensure that upload files order match with data parts list defined     - First file uploaded will match with first dataset parts and so on 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateDataset(organizationId: string, workspaceId: string, datasetId: string, datasetUpdateRequest: DatasetUpdateRequest, files?: Array<File>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Dataset>> {
+        async updateDataset(organizationId: string, workspaceId: string, datasetId: string, datasetUpdateRequest: DatasetUpdateRequest, files?: Array<File> | null, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Dataset>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateDataset(organizationId, workspaceId, datasetId, datasetUpdateRequest, files, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['DatasetApi.updateDataset']?.[localVarOperationServerIndex]?.url;
@@ -3242,11 +3242,11 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
          * @param {DatasetCreateRequest} datasetCreateRequest 
-         * @param {Array<File>} [files] Notes:   - Each parts defined in dataset should have a file defined in this list   - Please ensure that upload files order match with data parts list defined     - First file uploaded will match with first dataset parts and so on 
+         * @param {Array<File> | null} [files] Notes:   - Each parts defined in dataset should have a file defined in this list   - Please ensure that upload files order match with data parts list defined     - First file uploaded will match with first dataset parts and so on 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createDataset(organizationId: string, workspaceId: string, datasetCreateRequest: DatasetCreateRequest, files?: Array<File>, options?: RawAxiosRequestConfig): AxiosPromise<Dataset> {
+        createDataset(organizationId: string, workspaceId: string, datasetCreateRequest: DatasetCreateRequest, files?: Array<File> | null, options?: RawAxiosRequestConfig): AxiosPromise<Dataset> {
             return localVarFp.createDataset(organizationId, workspaceId, datasetCreateRequest, files, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3478,11 +3478,11 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
          * @param {string} workspaceId the Workspace identifier
          * @param {string} datasetId the Dataset identifier
          * @param {DatasetUpdateRequest} datasetUpdateRequest 
-         * @param {Array<File>} [files] Notes:   - Each parts defined in dataset should have a file defined in this list   - Please ensure that upload files order match with data parts list defined     - First file uploaded will match with first dataset parts and so on 
+         * @param {Array<File> | null} [files] Notes:   - Each parts defined in dataset should have a file defined in this list   - Please ensure that upload files order match with data parts list defined     - First file uploaded will match with first dataset parts and so on 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateDataset(organizationId: string, workspaceId: string, datasetId: string, datasetUpdateRequest: DatasetUpdateRequest, files?: Array<File>, options?: RawAxiosRequestConfig): AxiosPromise<Dataset> {
+        updateDataset(organizationId: string, workspaceId: string, datasetId: string, datasetUpdateRequest: DatasetUpdateRequest, files?: Array<File> | null, options?: RawAxiosRequestConfig): AxiosPromise<Dataset> {
             return localVarFp.updateDataset(organizationId, workspaceId, datasetId, datasetUpdateRequest, files, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3539,11 +3539,11 @@ export class DatasetApi extends BaseAPI {
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
      * @param {DatasetCreateRequest} datasetCreateRequest 
-     * @param {Array<File>} [files] Notes:   - Each parts defined in dataset should have a file defined in this list   - Please ensure that upload files order match with data parts list defined     - First file uploaded will match with first dataset parts and so on 
+     * @param {Array<File> | null} [files] Notes:   - Each parts defined in dataset should have a file defined in this list   - Please ensure that upload files order match with data parts list defined     - First file uploaded will match with first dataset parts and so on 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public createDataset(organizationId: string, workspaceId: string, datasetCreateRequest: DatasetCreateRequest, files?: Array<File>, options?: RawAxiosRequestConfig) {
+    public createDataset(organizationId: string, workspaceId: string, datasetCreateRequest: DatasetCreateRequest, files?: Array<File> | null, options?: RawAxiosRequestConfig) {
         return DatasetApiFp(this.configuration).createDataset(organizationId, workspaceId, datasetCreateRequest, files, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -3792,11 +3792,11 @@ export class DatasetApi extends BaseAPI {
      * @param {string} workspaceId the Workspace identifier
      * @param {string} datasetId the Dataset identifier
      * @param {DatasetUpdateRequest} datasetUpdateRequest 
-     * @param {Array<File>} [files] Notes:   - Each parts defined in dataset should have a file defined in this list   - Please ensure that upload files order match with data parts list defined     - First file uploaded will match with first dataset parts and so on 
+     * @param {Array<File> | null} [files] Notes:   - Each parts defined in dataset should have a file defined in this list   - Please ensure that upload files order match with data parts list defined     - First file uploaded will match with first dataset parts and so on 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public updateDataset(organizationId: string, workspaceId: string, datasetId: string, datasetUpdateRequest: DatasetUpdateRequest, files?: Array<File>, options?: RawAxiosRequestConfig) {
+    public updateDataset(organizationId: string, workspaceId: string, datasetId: string, datasetUpdateRequest: DatasetUpdateRequest, files?: Array<File> | null, options?: RawAxiosRequestConfig) {
         return DatasetApiFp(this.configuration).updateDataset(organizationId, workspaceId, datasetId, datasetUpdateRequest, files, options).then((request) => request(this.axios, this.basePath));
     }
 
