@@ -22,9 +22,9 @@ Name | Type | Description | Notes
 **runTemplateName** | **string** | the Solution Run Template name associated with this Runner | [optional] [readonly] [default to undefined]
 **additionalData** | **{ [key: string]: any; }** | Free form additional data | [optional] [default to undefined]
 **datasets** | [**RunnerDatasets**](RunnerDatasets.md) | definition of datasets used by the runner | [default to undefined]
-**runSizing** | [**RunnerResourceSizing**](RunnerResourceSizing.md) |  | [optional] [default to undefined]
+**runSizing** | [**RunnerResourceSizing**](RunnerResourceSizing.md) | definition of resources needed for the runner run | [optional] [default to undefined]
 **parametersValues** | [**Array&lt;RunnerRunTemplateParameterValue&gt;**](RunnerRunTemplateParameterValue.md) | the list of Solution Run Template parameters values | [default to undefined]
-**lastRunInfo** | [**LastRunInfo**](LastRunInfo.md) |  | [default to undefined]
+**lastRunInfo** | [**LastRunInfo**](LastRunInfo.md) | last run info from current runner | [default to undefined]
 **validationStatus** | [**RunnerValidationStatus**](RunnerValidationStatus.md) |  | [default to undefined]
 **security** | [**RunnerSecurity**](RunnerSecurity.md) |  | [default to undefined]
 

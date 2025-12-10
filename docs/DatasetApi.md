@@ -748,7 +748,7 @@ const { status, data } = await apiInstance.listDatasetSecurityUsers(
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/json, application/yaml
 
 
 ### HTTP response details
@@ -1038,7 +1038,7 @@ const { status, data } = await apiInstance.searchDatasetParts(
 ### HTTP request headers
 
  - **Content-Type**: application/json, application/yaml
- - **Accept**: application/json
+ - **Accept**: application/json, application/yaml
 
 
 ### HTTP response details
@@ -1103,7 +1103,7 @@ const { status, data } = await apiInstance.searchDatasets(
 ### HTTP request headers
 
  - **Content-Type**: application/json, application/yaml
- - **Accept**: application/json
+ - **Accept**: application/json, application/yaml
 
 
 ### HTTP response details
@@ -1296,7 +1296,7 @@ const { status, data } = await apiInstance.updateDatasetDefaultSecurity(
 ### HTTP request headers
 
  - **Content-Type**: application/json, application/yaml
- - **Accept**: application/json
+ - **Accept**: application/json, application/yaml
 
 
 ### HTTP response details
