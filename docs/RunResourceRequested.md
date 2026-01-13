@@ -6,8 +6,8 @@ the memory and CPU requested by the pod
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**cpu** | **number** | the cpu requested | [optional] [default to undefined]
-**memory** | **number** | the memory requested | [optional] [default to undefined]
+**cpu** | **number** | Define cpu needs | [optional] [default to undefined]
+**memory** | **number** | Define memory needs | [optional] [default to undefined]
 
 ## Example
 
