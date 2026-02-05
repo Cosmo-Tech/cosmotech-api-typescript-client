@@ -74,6 +74,7 @@ void (empty response body)
 # **getRun**
 > Run getRun()
 
+Retrieve detailed information about a specific run.
 
 ### Example
 
@@ -134,6 +135,7 @@ const { status, data } = await apiInstance.getRun(
 # **getRunLogs**
 > string getRunLogs()
 
+Retrieve execution logs for a run as plain text. Logs are aggregated from all containers. May be truncated for long-running simulations.
 
 ### Example
 
@@ -193,6 +195,7 @@ const { status, data } = await apiInstance.getRunLogs(
 # **getRunStatus**
 > RunStatus getRunStatus()
 
+Retrieve detailed execution status of a run.
 
 ### Example
 
@@ -252,6 +255,7 @@ const { status, data } = await apiInstance.getRunStatus(
 # **listRuns**
 > Array<Run> listRuns()
 
+Retrieve a paginated list of all runs for a specific runner.
 
 ### Example
 

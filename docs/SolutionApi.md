@@ -35,6 +35,7 @@ All URIs are relative to *http://localhost:8080*
 # **createSolution**
 > Solution createSolution(solutionCreateRequest)
 
+Create a new solution with optional run templates and parameter definitions.
 
 ### Example
 
@@ -90,6 +91,7 @@ const { status, data } = await apiInstance.createSolution(
 # **createSolutionAccessControl**
 > SolutionAccessControl createSolutionAccessControl(solutionAccessControl)
 
+Grant access to a solution for a user or group.
 
 ### Example
 
@@ -664,6 +666,7 @@ const { status, data } = await apiInstance.getRunTemplate(
 # **getSolution**
 > Solution getSolution()
 
+Retrieve detailed information about a solution.
 
 ### Example
 
@@ -1161,6 +1164,7 @@ const { status, data } = await apiInstance.listSolutionSecurityUsers(
 # **listSolutions**
 > Array<Solution> listSolutions()
 
+Retrieve a paginated list of all solutions in an organization that the user has permission to view.
 
 ### Example
 

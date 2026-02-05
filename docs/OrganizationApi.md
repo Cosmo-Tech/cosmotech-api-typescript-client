@@ -22,6 +22,7 @@ All URIs are relative to *http://localhost:8080*
 # **createOrganization**
 > Organization createOrganization(organizationCreateRequest)
 
+Create a new organization.
 
 ### Example
 
@@ -35,7 +36,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new OrganizationApi(configuration);
 
-let organizationCreateRequest: OrganizationCreateRequest; //The Organization to create
+let organizationCreateRequest: OrganizationCreateRequest; //
 
 const { status, data } = await apiInstance.createOrganization(
     organizationCreateRequest
@@ -46,7 +47,7 @@ const { status, data } = await apiInstance.createOrganization(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **organizationCreateRequest** | **OrganizationCreateRequest**| The Organization to create | |
+| **organizationCreateRequest** | **OrganizationCreateRequest**|  | |
 
 
 ### Return type
@@ -74,6 +75,7 @@ const { status, data } = await apiInstance.createOrganization(
 # **createOrganizationAccessControl**
 > OrganizationAccessControl createOrganizationAccessControl(organizationAccessControl)
 
+Grant access to an organization for a user or group.
 
 ### Example
 
@@ -129,6 +131,7 @@ const { status, data } = await apiInstance.createOrganizationAccessControl(
 # **deleteOrganization**
 > deleteOrganization()
 
+Permanently delete an organization. This operation cannot be undone.
 
 ### Example
 
@@ -234,6 +237,7 @@ void (empty response body)
 # **getOrganization**
 > Organization getOrganization()
 
+Retrieve detailed information about an organization.
 
 ### Example
 
@@ -494,6 +498,7 @@ const { status, data } = await apiInstance.listOrganizationSecurityUsers(
 # **listOrganizations**
 > Array<Organization> listOrganizations()
 
+Retrieve a paginated list of all organizations the authenticated user has permission to view. Use \'page\' and \'size\' query parameters for pagination.
 
 ### Example
 

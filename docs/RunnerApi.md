@@ -23,6 +23,7 @@ All URIs are relative to *http://localhost:8080*
 # **createRunner**
 > Runner createRunner(runnerCreateRequest)
 
+Create a new runner for executing simulations. Use parentId to create a child runner that inherits configuration from a parent.
 
 ### Example
 
@@ -81,6 +82,7 @@ const { status, data } = await apiInstance.createRunner(
 # **createRunnerAccessControl**
 > RunnerAccessControl createRunnerAccessControl(runnerAccessControl)
 
+Grant access to a runner for a user or group. Valid roles: viewer, editor, validator (can validate runs), admin.
 
 ### Example
 
@@ -142,6 +144,7 @@ const { status, data } = await apiInstance.createRunnerAccessControl(
 # **deleteRunner**
 > deleteRunner()
 
+Delete a runner. Cannot delete while runs are in progress. Note: Child runners that reference this runner are not deleted automatically.
 
 ### Example
 
@@ -259,6 +262,7 @@ void (empty response body)
 # **getRunner**
 > Runner getRunner()
 
+Retrieve detailed information about a runner.
 
 ### Example
 
@@ -549,6 +553,7 @@ const { status, data } = await apiInstance.listRunnerSecurityUsers(
 # **listRunners**
 > Array<Runner> listRunners()
 
+Retrieve a paginated list of all runners in a workspace.
 
 ### Example
 
@@ -608,6 +613,7 @@ const { status, data } = await apiInstance.listRunners(
 # **startRun**
 > CreatedRun startRun()
 
+Start a new simulation run using the runner\'s current configuration. Returns the run Id. The run executes asynchronously - use the run status endpoint to monitor progress
 
 ### Example
 
@@ -665,6 +671,7 @@ const { status, data } = await apiInstance.startRun(
 # **stopRun**
 > stopRun()
 
+Stop the currently executing run for this runner. The stop operation is asynchronous - the run may continue briefly before stopping.
 
 ### Example
 

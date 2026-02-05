@@ -26,6 +26,7 @@ All URIs are relative to *http://localhost:8080*
 # **createWorkspace**
 > Workspace createWorkspace(workspaceCreateRequest)
 
+Create a new workspace.
 
 ### Example
 
@@ -81,6 +82,7 @@ const { status, data } = await apiInstance.createWorkspace(
 # **createWorkspaceAccessControl**
 > WorkspaceAccessControl createWorkspaceAccessControl(workspaceAccessControl)
 
+Grant access to a workspace for a user or group.
 
 ### Example
 
@@ -139,6 +141,7 @@ const { status, data } = await apiInstance.createWorkspaceAccessControl(
 # **createWorkspaceFile**
 > WorkspaceFile createWorkspaceFile()
 
+Upload a file to workspace storage. Use \'destination\' to specify path, \'overwrite\' to replace existing files.
 
 ### Example
 
@@ -202,6 +205,7 @@ const { status, data } = await apiInstance.createWorkspaceFile(
 # **deleteWorkspace**
 > deleteWorkspace()
 
+Permanently delete a workspace.
 
 ### Example
 
@@ -257,6 +261,7 @@ void (empty response body)
 # **deleteWorkspaceAccessControl**
 > deleteWorkspaceAccessControl()
 
+Remove a user\'s access to a workspace. Cannot remove the last administrator.
 
 ### Example
 
@@ -425,6 +430,7 @@ void (empty response body)
 # **getWorkspace**
 > Workspace getWorkspace()
 
+Retrieve detailed information about a workspace.
 
 ### Example
 
@@ -536,6 +542,7 @@ const { status, data } = await apiInstance.getWorkspaceAccessControl(
 # **getWorkspaceFile**
 > File getWorkspaceFile()
 
+Download a specific file from workspace storage. Returns file as binary stream.
 
 ### Example
 
@@ -811,6 +818,7 @@ const { status, data } = await apiInstance.listWorkspaceSecurityUsers(
 # **listWorkspaces**
 > Array<Workspace> listWorkspaces()
 
+Retrieve a paginated list of all workspaces in an organization that the user has permission to view.
 
 ### Example
 

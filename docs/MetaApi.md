@@ -9,6 +9,7 @@ All URIs are relative to *http://localhost:8080*
 # **about**
 > AboutInfo about()
 
+Retrieve API version information and build details.
 
 ### Example
 

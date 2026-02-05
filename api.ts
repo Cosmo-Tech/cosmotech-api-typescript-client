@@ -1692,7 +1692,7 @@ export interface WorkspaceUpdateRequest {
 export const DatasetApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * 
+         * Create a new dataset in the workspace. The dataset is initialized with specified parts (can be empty). The dataset can also be populated through dataset parts.
          * @summary Create a Dataset
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -1804,7 +1804,7 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
+         * Create a new data part within a dataset. Specify type as \'File\' for file storage or \'DB\' for database storage. Returns the created part.
          * @summary Create a data part of a Dataset
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -1868,7 +1868,7 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Delete a dataset
+         * Permanently delete a dataset and all its data parts. This operation cannot be undone.
          * @summary Delete a Dataset
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -1914,7 +1914,7 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
+         * Remove a user or group\'s access to a dataset. Cannot remove the last administrator - at least one admin must remain.
          * @summary Remove the specified access from the given Dataset
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -2014,7 +2014,7 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
+         * Download the file content from a dataset part. Returns the file as an application/octet-stream.
          * @summary Download data from a dataset part
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -2064,7 +2064,7 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Retrieve a dataset
+         * Retrieve complete information about a specific dataset including dataset parts.
          * @summary Retrieve a Dataset
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -2210,7 +2210,7 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
+         * Retrieve all data parts associated with a dataset.
          * @summary Retrieve all dataset parts of a Dataset
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -2312,7 +2312,7 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * List all datasets
+         * Retrieve a paginated list of all datasets in the specified workspace. Supports pagination via \'page\' and \'size\' query parameters. Returns datasets based on user permissions.
          * @summary Retrieve a list of defined Dataset
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -2364,7 +2364,7 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
+         * Execute a query against a dataset part. Results are returned as plain-text CSV. Only available for parts with type=DB.
          * @summary Query data of a Dataset part. This endpoint is only available for dataset parts that support queries (type == DB). 
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -2650,7 +2650,7 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Update a dataset
+         * Update dataset information and return the updated dataset.
          * @summary Update a Dataset
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -2887,7 +2887,7 @@ export const DatasetApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = DatasetApiAxiosParamCreator(configuration)
     return {
         /**
-         * 
+         * Create a new dataset in the workspace. The dataset is initialized with specified parts (can be empty). The dataset can also be populated through dataset parts.
          * @summary Create a Dataset
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -2919,7 +2919,7 @@ export const DatasetApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Create a new data part within a dataset. Specify type as \'File\' for file storage or \'DB\' for database storage. Returns the created part.
          * @summary Create a data part of a Dataset
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -2936,7 +2936,7 @@ export const DatasetApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Delete a dataset
+         * Permanently delete a dataset and all its data parts. This operation cannot be undone.
          * @summary Delete a Dataset
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -2951,7 +2951,7 @@ export const DatasetApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Remove a user or group\'s access to a dataset. Cannot remove the last administrator - at least one admin must remain.
          * @summary Remove the specified access from the given Dataset
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -2983,7 +2983,7 @@ export const DatasetApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Download the file content from a dataset part. Returns the file as an application/octet-stream.
          * @summary Download data from a dataset part
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -2999,7 +2999,7 @@ export const DatasetApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Retrieve a dataset
+         * Retrieve complete information about a specific dataset including dataset parts.
          * @summary Retrieve a Dataset
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -3046,7 +3046,7 @@ export const DatasetApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Retrieve all data parts associated with a dataset.
          * @summary Retrieve all dataset parts of a Dataset
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -3078,7 +3078,7 @@ export const DatasetApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * List all datasets
+         * Retrieve a paginated list of all datasets in the specified workspace. Supports pagination via \'page\' and \'size\' query parameters. Returns datasets based on user permissions.
          * @summary Retrieve a list of defined Dataset
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -3094,7 +3094,7 @@ export const DatasetApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Execute a query against a dataset part. Results are returned as plain-text CSV. Only available for parts with type=DB.
          * @summary Query data of a Dataset part. This endpoint is only available for dataset parts that support queries (type == DB). 
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -3173,7 +3173,7 @@ export const DatasetApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Update a dataset
+         * Update dataset information and return the updated dataset.
          * @summary Update a Dataset
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -3249,7 +3249,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
     const localVarFp = DatasetApiFp(configuration)
     return {
         /**
-         * 
+         * Create a new dataset in the workspace. The dataset is initialized with specified parts (can be empty). The dataset can also be populated through dataset parts.
          * @summary Create a Dataset
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -3275,7 +3275,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.createDatasetAccessControl(organizationId, workspaceId, datasetId, datasetAccessControl, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Create a new data part within a dataset. Specify type as \'File\' for file storage or \'DB\' for database storage. Returns the created part.
          * @summary Create a data part of a Dataset
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -3289,7 +3289,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.createDatasetPart(organizationId, workspaceId, datasetId, file, datasetPartCreateRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Delete a dataset
+         * Permanently delete a dataset and all its data parts. This operation cannot be undone.
          * @summary Delete a Dataset
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -3301,7 +3301,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.deleteDataset(organizationId, workspaceId, datasetId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Remove a user or group\'s access to a dataset. Cannot remove the last administrator - at least one admin must remain.
          * @summary Remove the specified access from the given Dataset
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -3327,7 +3327,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.deleteDatasetPart(organizationId, workspaceId, datasetId, datasetPartId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Download the file content from a dataset part. Returns the file as an application/octet-stream.
          * @summary Download data from a dataset part
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -3340,7 +3340,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.downloadDatasetPart(organizationId, workspaceId, datasetId, datasetPartId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Retrieve a dataset
+         * Retrieve complete information about a specific dataset including dataset parts.
          * @summary Retrieve a Dataset
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -3378,7 +3378,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getDatasetPart(organizationId, workspaceId, datasetId, datasetPartId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Retrieve all data parts associated with a dataset.
          * @summary Retrieve all dataset parts of a Dataset
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -3404,7 +3404,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.listDatasetSecurityUsers(organizationId, workspaceId, datasetId, options).then((request) => request(axios, basePath));
         },
         /**
-         * List all datasets
+         * Retrieve a paginated list of all datasets in the specified workspace. Supports pagination via \'page\' and \'size\' query parameters. Returns datasets based on user permissions.
          * @summary Retrieve a list of defined Dataset
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -3417,7 +3417,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.listDatasets(organizationId, workspaceId, page, size, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Execute a query against a dataset part. Results are returned as plain-text CSV. Only available for parts with type=DB.
          * @summary Query data of a Dataset part. This endpoint is only available for dataset parts that support queries (type == DB). 
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -3484,7 +3484,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.searchDatasets(organizationId, workspaceId, requestBody, page, size, options).then((request) => request(axios, basePath));
         },
         /**
-         * Update a dataset
+         * Update dataset information and return the updated dataset.
          * @summary Update a Dataset
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -3546,7 +3546,7 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
  */
 export class DatasetApi extends BaseAPI {
     /**
-     * 
+     * Create a new dataset in the workspace. The dataset is initialized with specified parts (can be empty). The dataset can also be populated through dataset parts.
      * @summary Create a Dataset
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
@@ -3574,7 +3574,7 @@ export class DatasetApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Create a new data part within a dataset. Specify type as \'File\' for file storage or \'DB\' for database storage. Returns the created part.
      * @summary Create a data part of a Dataset
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
@@ -3589,7 +3589,7 @@ export class DatasetApi extends BaseAPI {
     }
 
     /**
-     * Delete a dataset
+     * Permanently delete a dataset and all its data parts. This operation cannot be undone.
      * @summary Delete a Dataset
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
@@ -3602,7 +3602,7 @@ export class DatasetApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Remove a user or group\'s access to a dataset. Cannot remove the last administrator - at least one admin must remain.
      * @summary Remove the specified access from the given Dataset
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
@@ -3630,7 +3630,7 @@ export class DatasetApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Download the file content from a dataset part. Returns the file as an application/octet-stream.
      * @summary Download data from a dataset part
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
@@ -3644,7 +3644,7 @@ export class DatasetApi extends BaseAPI {
     }
 
     /**
-     * Retrieve a dataset
+     * Retrieve complete information about a specific dataset including dataset parts.
      * @summary Retrieve a Dataset
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
@@ -3685,7 +3685,7 @@ export class DatasetApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Retrieve all data parts associated with a dataset.
      * @summary Retrieve all dataset parts of a Dataset
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
@@ -3713,7 +3713,7 @@ export class DatasetApi extends BaseAPI {
     }
 
     /**
-     * List all datasets
+     * Retrieve a paginated list of all datasets in the specified workspace. Supports pagination via \'page\' and \'size\' query parameters. Returns datasets based on user permissions.
      * @summary Retrieve a list of defined Dataset
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
@@ -3727,7 +3727,7 @@ export class DatasetApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Execute a query against a dataset part. Results are returned as plain-text CSV. Only available for parts with type=DB.
      * @summary Query data of a Dataset part. This endpoint is only available for dataset parts that support queries (type == DB). 
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
@@ -3798,7 +3798,7 @@ export class DatasetApi extends BaseAPI {
     }
 
     /**
-     * Update a dataset
+     * Update dataset information and return the updated dataset.
      * @summary Update a Dataset
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
@@ -3865,7 +3865,7 @@ export class DatasetApi extends BaseAPI {
 export const MetaApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * 
+         * Retrieve API version information and build details.
          * @summary Get various information about the API
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -3908,7 +3908,7 @@ export const MetaApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = MetaApiAxiosParamCreator(configuration)
     return {
         /**
-         * 
+         * Retrieve API version information and build details.
          * @summary Get various information about the API
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -3929,7 +3929,7 @@ export const MetaApiFactory = function (configuration?: Configuration, basePath?
     const localVarFp = MetaApiFp(configuration)
     return {
         /**
-         * 
+         * Retrieve API version information and build details.
          * @summary Get various information about the API
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -3945,7 +3945,7 @@ export const MetaApiFactory = function (configuration?: Configuration, basePath?
  */
 export class MetaApi extends BaseAPI {
     /**
-     * 
+     * Retrieve API version information and build details.
      * @summary Get various information about the API
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -3963,9 +3963,9 @@ export class MetaApi extends BaseAPI {
 export const OrganizationApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * 
+         * Create a new organization.
          * @summary Create a new organization
-         * @param {OrganizationCreateRequest} organizationCreateRequest The Organization to create
+         * @param {OrganizationCreateRequest} organizationCreateRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -4003,7 +4003,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             };
         },
         /**
-         * 
+         * Grant access to an organization for a user or group.
          * @summary Add a control access to the Organization
          * @param {string} organizationId The Organization identifier
          * @param {OrganizationAccessControl} organizationAccessControl The new Organization security access to add.
@@ -4047,7 +4047,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             };
         },
         /**
-         * 
+         * Permanently delete an organization. This operation cannot be undone.
          * @summary Delete an organization
          * @param {string} organizationId The Organization identifier
          * @param {*} [options] Override http request option.
@@ -4127,7 +4127,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             };
         },
         /**
-         * 
+         * Retrieve detailed information about an organization.
          * @summary Get the details of an Organization
          * @param {string} organizationId The Organization identifier
          * @param {*} [options] Override http request option.
@@ -4325,7 +4325,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             };
         },
         /**
-         * 
+         * Retrieve a paginated list of all organizations the authenticated user has permission to view. Use \'page\' and \'size\' query parameters for pagination.
          * @summary List all Organizations
          * @param {number} [page] Page number to query (first page is at index 0)
          * @param {number} [size] Amount of result by page
@@ -4548,9 +4548,9 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = OrganizationApiAxiosParamCreator(configuration)
     return {
         /**
-         * 
+         * Create a new organization.
          * @summary Create a new organization
-         * @param {OrganizationCreateRequest} organizationCreateRequest The Organization to create
+         * @param {OrganizationCreateRequest} organizationCreateRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -4561,7 +4561,7 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Grant access to an organization for a user or group.
          * @summary Add a control access to the Organization
          * @param {string} organizationId The Organization identifier
          * @param {OrganizationAccessControl} organizationAccessControl The new Organization security access to add.
@@ -4575,7 +4575,7 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Permanently delete an organization. This operation cannot be undone.
          * @summary Delete an organization
          * @param {string} organizationId The Organization identifier
          * @param {*} [options] Override http request option.
@@ -4602,7 +4602,7 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Retrieve detailed information about an organization.
          * @summary Get the details of an Organization
          * @param {string} organizationId The Organization identifier
          * @param {*} [options] Override http request option.
@@ -4669,7 +4669,7 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Retrieve a paginated list of all organizations the authenticated user has permission to view. Use \'page\' and \'size\' query parameters for pagination.
          * @summary List all Organizations
          * @param {number} [page] Page number to query (first page is at index 0)
          * @param {number} [size] Amount of result by page
@@ -4747,9 +4747,9 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
     const localVarFp = OrganizationApiFp(configuration)
     return {
         /**
-         * 
+         * Create a new organization.
          * @summary Create a new organization
-         * @param {OrganizationCreateRequest} organizationCreateRequest The Organization to create
+         * @param {OrganizationCreateRequest} organizationCreateRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -4757,7 +4757,7 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
             return localVarFp.createOrganization(organizationCreateRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Grant access to an organization for a user or group.
          * @summary Add a control access to the Organization
          * @param {string} organizationId The Organization identifier
          * @param {OrganizationAccessControl} organizationAccessControl The new Organization security access to add.
@@ -4768,7 +4768,7 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
             return localVarFp.createOrganizationAccessControl(organizationId, organizationAccessControl, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Permanently delete an organization. This operation cannot be undone.
          * @summary Delete an organization
          * @param {string} organizationId The Organization identifier
          * @param {*} [options] Override http request option.
@@ -4789,7 +4789,7 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
             return localVarFp.deleteOrganizationAccessControl(organizationId, identityId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Retrieve detailed information about an organization.
          * @summary Get the details of an Organization
          * @param {string} organizationId The Organization identifier
          * @param {*} [options] Override http request option.
@@ -4841,7 +4841,7 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
             return localVarFp.listOrganizationSecurityUsers(organizationId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Retrieve a paginated list of all organizations the authenticated user has permission to view. Use \'page\' and \'size\' query parameters for pagination.
          * @summary List all Organizations
          * @param {number} [page] Page number to query (first page is at index 0)
          * @param {number} [size] Amount of result by page
@@ -4902,9 +4902,9 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
  */
 export class OrganizationApi extends BaseAPI {
     /**
-     * 
+     * Create a new organization.
      * @summary Create a new organization
-     * @param {OrganizationCreateRequest} organizationCreateRequest The Organization to create
+     * @param {OrganizationCreateRequest} organizationCreateRequest 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
@@ -4913,7 +4913,7 @@ export class OrganizationApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Grant access to an organization for a user or group.
      * @summary Add a control access to the Organization
      * @param {string} organizationId The Organization identifier
      * @param {OrganizationAccessControl} organizationAccessControl The new Organization security access to add.
@@ -4925,7 +4925,7 @@ export class OrganizationApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Permanently delete an organization. This operation cannot be undone.
      * @summary Delete an organization
      * @param {string} organizationId The Organization identifier
      * @param {*} [options] Override http request option.
@@ -4948,7 +4948,7 @@ export class OrganizationApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Retrieve detailed information about an organization.
      * @summary Get the details of an Organization
      * @param {string} organizationId The Organization identifier
      * @param {*} [options] Override http request option.
@@ -5005,7 +5005,7 @@ export class OrganizationApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Retrieve a paginated list of all organizations the authenticated user has permission to view. Use \'page\' and \'size\' query parameters for pagination.
      * @summary List all Organizations
      * @param {number} [page] Page number to query (first page is at index 0)
      * @param {number} [size] Amount of result by page
@@ -5122,7 +5122,7 @@ export const RunApiAxiosParamCreator = function (configuration?: Configuration) 
             };
         },
         /**
-         * 
+         * Retrieve detailed information about a specific run.
          * @summary Get the details of a run
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
@@ -5172,7 +5172,7 @@ export const RunApiAxiosParamCreator = function (configuration?: Configuration) 
             };
         },
         /**
-         * 
+         * Retrieve execution logs for a run as plain text. Logs are aggregated from all containers. May be truncated for long-running simulations.
          * @summary get the logs for the Run
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
@@ -5222,7 +5222,7 @@ export const RunApiAxiosParamCreator = function (configuration?: Configuration) 
             };
         },
         /**
-         * 
+         * Retrieve detailed execution status of a run.
          * @summary get the status for the Run
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
@@ -5272,7 +5272,7 @@ export const RunApiAxiosParamCreator = function (configuration?: Configuration) 
             };
         },
         /**
-         * 
+         * Retrieve a paginated list of all runs for a specific runner.
          * @summary get the list of Runs for the Runner
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
@@ -5353,7 +5353,7 @@ export const RunApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Retrieve detailed information about a specific run.
          * @summary Get the details of a run
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
@@ -5369,7 +5369,7 @@ export const RunApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Retrieve execution logs for a run as plain text. Logs are aggregated from all containers. May be truncated for long-running simulations.
          * @summary get the logs for the Run
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
@@ -5385,7 +5385,7 @@ export const RunApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Retrieve detailed execution status of a run.
          * @summary get the status for the Run
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
@@ -5401,7 +5401,7 @@ export const RunApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Retrieve a paginated list of all runs for a specific runner.
          * @summary get the list of Runs for the Runner
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
@@ -5440,7 +5440,7 @@ export const RunApiFactory = function (configuration?: Configuration, basePath?:
             return localVarFp.deleteRun(organizationId, workspaceId, runnerId, runId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Retrieve detailed information about a specific run.
          * @summary Get the details of a run
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
@@ -5453,7 +5453,7 @@ export const RunApiFactory = function (configuration?: Configuration, basePath?:
             return localVarFp.getRun(organizationId, workspaceId, runnerId, runId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Retrieve execution logs for a run as plain text. Logs are aggregated from all containers. May be truncated for long-running simulations.
          * @summary get the logs for the Run
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
@@ -5466,7 +5466,7 @@ export const RunApiFactory = function (configuration?: Configuration, basePath?:
             return localVarFp.getRunLogs(organizationId, workspaceId, runnerId, runId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Retrieve detailed execution status of a run.
          * @summary get the status for the Run
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
@@ -5479,7 +5479,7 @@ export const RunApiFactory = function (configuration?: Configuration, basePath?:
             return localVarFp.getRunStatus(organizationId, workspaceId, runnerId, runId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Retrieve a paginated list of all runs for a specific runner.
          * @summary get the list of Runs for the Runner
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
@@ -5514,7 +5514,7 @@ export class RunApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Retrieve detailed information about a specific run.
      * @summary Get the details of a run
      * @param {string} organizationId The Organization identifier
      * @param {string} workspaceId The Workspace identifier
@@ -5528,7 +5528,7 @@ export class RunApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Retrieve execution logs for a run as plain text. Logs are aggregated from all containers. May be truncated for long-running simulations.
      * @summary get the logs for the Run
      * @param {string} organizationId The Organization identifier
      * @param {string} workspaceId The Workspace identifier
@@ -5542,7 +5542,7 @@ export class RunApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Retrieve detailed execution status of a run.
      * @summary get the status for the Run
      * @param {string} organizationId The Organization identifier
      * @param {string} workspaceId The Workspace identifier
@@ -5556,7 +5556,7 @@ export class RunApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Retrieve a paginated list of all runs for a specific runner.
      * @summary get the list of Runs for the Runner
      * @param {string} organizationId The Organization identifier
      * @param {string} workspaceId The Workspace identifier
@@ -5579,7 +5579,7 @@ export class RunApi extends BaseAPI {
 export const RunnerApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * 
+         * Create a new runner for executing simulations. Use parentId to create a child runner that inherits configuration from a parent.
          * @summary Create a new Runner
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -5627,7 +5627,7 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
-         * 
+         * Grant access to a runner for a user or group. Valid roles: viewer, editor, validator (can validate runs), admin.
          * @summary Add a control access to the Runner
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -5679,7 +5679,7 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
-         * 
+         * Delete a runner. Cannot delete while runs are in progress. Note: Child runners that reference this runner are not deleted automatically.
          * @summary Delete a runner
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -5775,7 +5775,7 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
-         * 
+         * Retrieve detailed information about a runner.
          * @summary Get the details of a runner
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -6013,7 +6013,7 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
-         * 
+         * Retrieve a paginated list of all runners in a workspace.
          * @summary List all Runners
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -6065,7 +6065,7 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
-         * 
+         * Start a new simulation run using the runner\'s current configuration. Returns the run Id. The run executes asynchronously - use the run status endpoint to monitor progress
          * @summary Start a run with runner parameters
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -6111,7 +6111,7 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
-         * 
+         * Stop the currently executing run for this runner. The stop operation is asynchronous - the run may continue briefly before stopping.
          * @summary Stop the last run
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -6326,7 +6326,7 @@ export const RunnerApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = RunnerApiAxiosParamCreator(configuration)
     return {
         /**
-         * 
+         * Create a new runner for executing simulations. Use parentId to create a child runner that inherits configuration from a parent.
          * @summary Create a new Runner
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -6341,7 +6341,7 @@ export const RunnerApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Grant access to a runner for a user or group. Valid roles: viewer, editor, validator (can validate runs), admin.
          * @summary Add a control access to the Runner
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -6357,7 +6357,7 @@ export const RunnerApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Delete a runner. Cannot delete while runs are in progress. Note: Child runners that reference this runner are not deleted automatically.
          * @summary Delete a runner
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -6388,7 +6388,7 @@ export const RunnerApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Retrieve detailed information about a runner.
          * @summary Get the details of a runner
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -6465,7 +6465,7 @@ export const RunnerApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Retrieve a paginated list of all runners in a workspace.
          * @summary List all Runners
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -6481,7 +6481,7 @@ export const RunnerApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Start a new simulation run using the runner\'s current configuration. Returns the run Id. The run executes asynchronously - use the run status endpoint to monitor progress
          * @summary Start a run with runner parameters
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -6496,7 +6496,7 @@ export const RunnerApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Stop the currently executing run for this runner. The stop operation is asynchronous - the run may continue briefly before stopping.
          * @summary Stop the last run
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -6569,7 +6569,7 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
     const localVarFp = RunnerApiFp(configuration)
     return {
         /**
-         * 
+         * Create a new runner for executing simulations. Use parentId to create a child runner that inherits configuration from a parent.
          * @summary Create a new Runner
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -6581,7 +6581,7 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
             return localVarFp.createRunner(organizationId, workspaceId, runnerCreateRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Grant access to a runner for a user or group. Valid roles: viewer, editor, validator (can validate runs), admin.
          * @summary Add a control access to the Runner
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -6594,7 +6594,7 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
             return localVarFp.createRunnerAccessControl(organizationId, workspaceId, runnerId, runnerAccessControl, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Delete a runner. Cannot delete while runs are in progress. Note: Child runners that reference this runner are not deleted automatically.
          * @summary Delete a runner
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -6619,7 +6619,7 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
             return localVarFp.deleteRunnerAccessControl(organizationId, workspaceId, runnerId, identityId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Retrieve detailed information about a runner.
          * @summary Get the details of a runner
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -6681,7 +6681,7 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
             return localVarFp.listRunnerSecurityUsers(organizationId, workspaceId, runnerId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Retrieve a paginated list of all runners in a workspace.
          * @summary List all Runners
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -6694,7 +6694,7 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
             return localVarFp.listRunners(organizationId, workspaceId, page, size, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Start a new simulation run using the runner\'s current configuration. Returns the run Id. The run executes asynchronously - use the run status endpoint to monitor progress
          * @summary Start a run with runner parameters
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -6706,7 +6706,7 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
             return localVarFp.startRun(organizationId, workspaceId, runnerId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Stop the currently executing run for this runner. The stop operation is asynchronous - the run may continue briefly before stopping.
          * @summary Stop the last run
          * @param {string} organizationId the Organization identifier
          * @param {string} workspaceId the Workspace identifier
@@ -6765,7 +6765,7 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
  */
 export class RunnerApi extends BaseAPI {
     /**
-     * 
+     * Create a new runner for executing simulations. Use parentId to create a child runner that inherits configuration from a parent.
      * @summary Create a new Runner
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
@@ -6778,7 +6778,7 @@ export class RunnerApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Grant access to a runner for a user or group. Valid roles: viewer, editor, validator (can validate runs), admin.
      * @summary Add a control access to the Runner
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
@@ -6792,7 +6792,7 @@ export class RunnerApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Delete a runner. Cannot delete while runs are in progress. Note: Child runners that reference this runner are not deleted automatically.
      * @summary Delete a runner
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
@@ -6819,7 +6819,7 @@ export class RunnerApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Retrieve detailed information about a runner.
      * @summary Get the details of a runner
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
@@ -6886,7 +6886,7 @@ export class RunnerApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Retrieve a paginated list of all runners in a workspace.
      * @summary List all Runners
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
@@ -6900,7 +6900,7 @@ export class RunnerApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Start a new simulation run using the runner\'s current configuration. Returns the run Id. The run executes asynchronously - use the run status endpoint to monitor progress
      * @summary Start a run with runner parameters
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
@@ -6913,7 +6913,7 @@ export class RunnerApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Stop the currently executing run for this runner. The stop operation is asynchronous - the run may continue briefly before stopping.
      * @summary Stop the last run
      * @param {string} organizationId the Organization identifier
      * @param {string} workspaceId the Workspace identifier
@@ -6977,7 +6977,7 @@ export class RunnerApi extends BaseAPI {
 export const SolutionApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * 
+         * Create a new solution with optional run templates and parameter definitions.
          * @summary Create a new solution
          * @param {string} organizationId the Organization identifier
          * @param {SolutionCreateRequest} solutionCreateRequest The Solution to create
@@ -7021,7 +7021,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * 
+         * Grant access to a solution for a user or group.
          * @summary Create solution access control
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
@@ -7485,7 +7485,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * 
+         * Retrieve detailed information about a solution.
          * @summary Get the details of a solution
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
@@ -7875,7 +7875,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * 
+         * Retrieve a paginated list of all solutions in an organization that the user has permission to view.
          * @summary List all Solutions
          * @param {string} organizationId the Organization identifier
          * @param {number} [page] Page number to query (first page is at index 0)
@@ -8236,7 +8236,7 @@ export const SolutionApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = SolutionApiAxiosParamCreator(configuration)
     return {
         /**
-         * 
+         * Create a new solution with optional run templates and parameter definitions.
          * @summary Create a new solution
          * @param {string} organizationId the Organization identifier
          * @param {SolutionCreateRequest} solutionCreateRequest The Solution to create
@@ -8250,7 +8250,7 @@ export const SolutionApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Grant access to a solution for a user or group.
          * @summary Create solution access control
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
@@ -8399,7 +8399,7 @@ export const SolutionApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Retrieve detailed information about a solution.
          * @summary Get the details of a solution
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
@@ -8528,7 +8528,7 @@ export const SolutionApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Retrieve a paginated list of all solutions in an organization that the user has permission to view.
          * @summary List all Solutions
          * @param {string} organizationId the Organization identifier
          * @param {number} [page] Page number to query (first page is at index 0)
@@ -8646,7 +8646,7 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
     const localVarFp = SolutionApiFp(configuration)
     return {
         /**
-         * 
+         * Create a new solution with optional run templates and parameter definitions.
          * @summary Create a new solution
          * @param {string} organizationId the Organization identifier
          * @param {SolutionCreateRequest} solutionCreateRequest The Solution to create
@@ -8657,7 +8657,7 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.createSolution(organizationId, solutionCreateRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Grant access to a solution for a user or group.
          * @summary Create solution access control
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
@@ -8776,7 +8776,7 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.getRunTemplate(organizationId, solutionId, runTemplateId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Retrieve detailed information about a solution.
          * @summary Get the details of a solution
          * @param {string} organizationId the Organization identifier
          * @param {string} solutionId the Solution identifier
@@ -8878,7 +8878,7 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.listSolutionSecurityUsers(organizationId, solutionId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Retrieve a paginated list of all solutions in an organization that the user has permission to view.
          * @summary List all Solutions
          * @param {string} organizationId the Organization identifier
          * @param {number} [page] Page number to query (first page is at index 0)
@@ -8973,7 +8973,7 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
  */
 export class SolutionApi extends BaseAPI {
     /**
-     * 
+     * Create a new solution with optional run templates and parameter definitions.
      * @summary Create a new solution
      * @param {string} organizationId the Organization identifier
      * @param {SolutionCreateRequest} solutionCreateRequest The Solution to create
@@ -8985,7 +8985,7 @@ export class SolutionApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Grant access to a solution for a user or group.
      * @summary Create solution access control
      * @param {string} organizationId the Organization identifier
      * @param {string} solutionId the Solution identifier
@@ -9114,7 +9114,7 @@ export class SolutionApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Retrieve detailed information about a solution.
      * @summary Get the details of a solution
      * @param {string} organizationId the Organization identifier
      * @param {string} solutionId the Solution identifier
@@ -9225,7 +9225,7 @@ export class SolutionApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Retrieve a paginated list of all solutions in an organization that the user has permission to view.
      * @summary List all Solutions
      * @param {string} organizationId the Organization identifier
      * @param {number} [page] Page number to query (first page is at index 0)
@@ -9328,7 +9328,7 @@ export class SolutionApi extends BaseAPI {
 export const WorkspaceApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * 
+         * Create a new workspace.
          * @summary Create a new workspace
          * @param {string} organizationId The Organization identifier
          * @param {WorkspaceCreateRequest} workspaceCreateRequest The Workspace to create
@@ -9372,7 +9372,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * 
+         * Grant access to a workspace for a user or group.
          * @summary Add a control access to the Workspace
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
@@ -9420,7 +9420,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * 
+         * Upload a file to workspace storage. Use \'destination\' to specify path, \'overwrite\' to replace existing files.
          * @summary Upload a file for the Workspace
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
@@ -9483,7 +9483,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * 
+         * Permanently delete a workspace.
          * @summary Delete a workspace
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
@@ -9525,7 +9525,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * 
+         * Remove a user\'s access to a workspace. Cannot remove the last administrator.
          * @summary Remove the specified access from the given Workspace
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
@@ -9662,7 +9662,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * 
+         * Retrieve detailed information about a workspace.
          * @summary Get the details of a workspace
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
@@ -9750,7 +9750,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * 
+         * Download a specific file from workspace storage. Returns file as binary stream.
          * @summary Download the Workspace File specified
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
@@ -9971,7 +9971,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * 
+         * Retrieve a paginated list of all workspaces in an organization that the user has permission to view.
          * @summary List all Workspaces
          * @param {string} organizationId The Organization identifier
          * @param {number} [page] Page number to query (first page is at index 0)
@@ -10176,7 +10176,7 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = WorkspaceApiAxiosParamCreator(configuration)
     return {
         /**
-         * 
+         * Create a new workspace.
          * @summary Create a new workspace
          * @param {string} organizationId The Organization identifier
          * @param {WorkspaceCreateRequest} workspaceCreateRequest The Workspace to create
@@ -10190,7 +10190,7 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Grant access to a workspace for a user or group.
          * @summary Add a control access to the Workspace
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
@@ -10205,7 +10205,7 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Upload a file to workspace storage. Use \'destination\' to specify path, \'overwrite\' to replace existing files.
          * @summary Upload a file for the Workspace
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
@@ -10222,7 +10222,7 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Permanently delete a workspace.
          * @summary Delete a workspace
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
@@ -10236,7 +10236,7 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Remove a user\'s access to a workspace. Cannot remove the last administrator.
          * @summary Remove the specified access from the given Workspace
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
@@ -10280,7 +10280,7 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Retrieve detailed information about a workspace.
          * @summary Get the details of a workspace
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
@@ -10309,7 +10309,7 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Download a specific file from workspace storage. Returns file as binary stream.
          * @summary Download the Workspace File specified
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
@@ -10381,7 +10381,7 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Retrieve a paginated list of all workspaces in an organization that the user has permission to view.
          * @summary List all Workspaces
          * @param {string} organizationId The Organization identifier
          * @param {number} [page] Page number to query (first page is at index 0)
@@ -10451,7 +10451,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
     const localVarFp = WorkspaceApiFp(configuration)
     return {
         /**
-         * 
+         * Create a new workspace.
          * @summary Create a new workspace
          * @param {string} organizationId The Organization identifier
          * @param {WorkspaceCreateRequest} workspaceCreateRequest The Workspace to create
@@ -10462,7 +10462,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
             return localVarFp.createWorkspace(organizationId, workspaceCreateRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Grant access to a workspace for a user or group.
          * @summary Add a control access to the Workspace
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
@@ -10474,7 +10474,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
             return localVarFp.createWorkspaceAccessControl(organizationId, workspaceId, workspaceAccessControl, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Upload a file to workspace storage. Use \'destination\' to specify path, \'overwrite\' to replace existing files.
          * @summary Upload a file for the Workspace
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
@@ -10488,7 +10488,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
             return localVarFp.createWorkspaceFile(organizationId, workspaceId, file, overwrite, destination, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Permanently delete a workspace.
          * @summary Delete a workspace
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
@@ -10499,7 +10499,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
             return localVarFp.deleteWorkspace(organizationId, workspaceId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Remove a user\'s access to a workspace. Cannot remove the last administrator.
          * @summary Remove the specified access from the given Workspace
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
@@ -10534,7 +10534,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
             return localVarFp.deleteWorkspaceFiles(organizationId, workspaceId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Retrieve detailed information about a workspace.
          * @summary Get the details of a workspace
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
@@ -10557,7 +10557,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
             return localVarFp.getWorkspaceAccessControl(organizationId, workspaceId, identityId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Download a specific file from workspace storage. Returns file as binary stream.
          * @summary Download the Workspace File specified
          * @param {string} organizationId The Organization identifier
          * @param {string} workspaceId The Workspace identifier
@@ -10614,7 +10614,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
             return localVarFp.listWorkspaceSecurityUsers(organizationId, workspaceId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Retrieve a paginated list of all workspaces in an organization that the user has permission to view.
          * @summary List all Workspaces
          * @param {string} organizationId The Organization identifier
          * @param {number} [page] Page number to query (first page is at index 0)
@@ -10670,7 +10670,7 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
  */
 export class WorkspaceApi extends BaseAPI {
     /**
-     * 
+     * Create a new workspace.
      * @summary Create a new workspace
      * @param {string} organizationId The Organization identifier
      * @param {WorkspaceCreateRequest} workspaceCreateRequest The Workspace to create
@@ -10682,7 +10682,7 @@ export class WorkspaceApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Grant access to a workspace for a user or group.
      * @summary Add a control access to the Workspace
      * @param {string} organizationId The Organization identifier
      * @param {string} workspaceId The Workspace identifier
@@ -10695,7 +10695,7 @@ export class WorkspaceApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Upload a file to workspace storage. Use \'destination\' to specify path, \'overwrite\' to replace existing files.
      * @summary Upload a file for the Workspace
      * @param {string} organizationId The Organization identifier
      * @param {string} workspaceId The Workspace identifier
@@ -10710,7 +10710,7 @@ export class WorkspaceApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Permanently delete a workspace.
      * @summary Delete a workspace
      * @param {string} organizationId The Organization identifier
      * @param {string} workspaceId The Workspace identifier
@@ -10722,7 +10722,7 @@ export class WorkspaceApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Remove a user\'s access to a workspace. Cannot remove the last administrator.
      * @summary Remove the specified access from the given Workspace
      * @param {string} organizationId The Organization identifier
      * @param {string} workspaceId The Workspace identifier
@@ -10760,7 +10760,7 @@ export class WorkspaceApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Retrieve detailed information about a workspace.
      * @summary Get the details of a workspace
      * @param {string} organizationId The Organization identifier
      * @param {string} workspaceId The Workspace identifier
@@ -10785,7 +10785,7 @@ export class WorkspaceApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Download a specific file from workspace storage. Returns file as binary stream.
      * @summary Download the Workspace File specified
      * @param {string} organizationId The Organization identifier
      * @param {string} workspaceId The Workspace identifier
@@ -10847,7 +10847,7 @@ export class WorkspaceApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Retrieve a paginated list of all workspaces in an organization that the user has permission to view.
      * @summary List all Workspaces
      * @param {string} organizationId The Organization identifier
      * @param {number} [page] Page number to query (first page is at index 0)

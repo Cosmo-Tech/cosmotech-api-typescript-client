@@ -29,6 +29,7 @@ All URIs are relative to *http://localhost:8080*
 # **createDataset**
 > Dataset createDataset()
 
+Create a new dataset in the workspace. The dataset is initialized with specified parts (can be empty). The dataset can also be populated through dataset parts.
 
 ### Example
 
@@ -153,6 +154,7 @@ const { status, data } = await apiInstance.createDatasetAccessControl(
 # **createDatasetPart**
 > DatasetPart createDatasetPart()
 
+Create a new data part within a dataset. Specify type as \'File\' for file storage or \'DB\' for database storage. Returns the created part.
 
 ### Example
 
@@ -219,7 +221,7 @@ const { status, data } = await apiInstance.createDatasetPart(
 # **deleteDataset**
 > deleteDataset()
 
-Delete a dataset
+Permanently delete a dataset and all its data parts. This operation cannot be undone.
 
 ### Example
 
@@ -278,6 +280,7 @@ void (empty response body)
 # **deleteDatasetAccessControl**
 > deleteDatasetAccessControl()
 
+Remove a user or group\'s access to a dataset. Cannot remove the last administrator - at least one admin must remain.
 
 ### Example
 
@@ -400,6 +403,7 @@ void (empty response body)
 # **downloadDatasetPart**
 > File downloadDatasetPart()
 
+Download the file content from a dataset part. Returns the file as an application/octet-stream.
 
 ### Example
 
@@ -461,7 +465,7 @@ const { status, data } = await apiInstance.downloadDatasetPart(
 # **getDataset**
 > Dataset getDataset()
 
-Retrieve a dataset
+Retrieve complete information about a specific dataset including dataset parts.
 
 ### Example
 
@@ -641,6 +645,7 @@ const { status, data } = await apiInstance.getDatasetPart(
 # **listDatasetParts**
 > Array<DatasetPart> listDatasetParts()
 
+Retrieve all data parts associated with a dataset.
 
 ### Example
 
@@ -762,7 +767,7 @@ const { status, data } = await apiInstance.listDatasetSecurityUsers(
 # **listDatasets**
 > Array<Dataset> listDatasets()
 
-List all datasets
+Retrieve a paginated list of all datasets in the specified workspace. Supports pagination via \'page\' and \'size\' query parameters. Returns datasets based on user permissions.
 
 ### Example
 
@@ -824,6 +829,7 @@ const { status, data } = await apiInstance.listDatasets(
 # **queryData**
 > File queryData()
 
+Execute a query against a dataset part. Results are returned as plain-text CSV. Only available for parts with type=DB.
 
 ### Example
 
@@ -1118,7 +1124,7 @@ const { status, data } = await apiInstance.searchDatasets(
 # **updateDataset**
 > Dataset updateDataset()
 
-Update a dataset
+Update dataset information and return the updated dataset.
 
 ### Example
 
