@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **additionalData** | **{ [key: string]: any; }** | Free form additional data | [optional] [default to undefined]
 **solutionName** | **string** | the Solution name | [optional] [default to undefined]
 **runTemplateName** | **string** | the Solution Run Template name associated with this Runner | [optional] [default to undefined]
+**validationStatus** | [**RunnerValidationStatus**](RunnerValidationStatus.md) |  | [optional] [default to undefined]
 
 ## Example
 
@@ -33,6 +34,7 @@ const instance: RunnerUpdateRequest = {
     additionalData,
     solutionName,
     runTemplateName,
+    validationStatus,
 };
 ```
 
