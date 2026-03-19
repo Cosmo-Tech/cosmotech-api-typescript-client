@@ -1546,10 +1546,6 @@ export interface Workspace {
      * Free form additional data
      */
     'additionalData'?: { [key: string]: any; };
-    /**
-     * Activate the copy of dataset on scenario creation, meaning that each scenario created in this workspace will make this copy. when false, scenario use directly the dataset specified.
-     */
-    'datasetCopy'?: boolean;
     'security': WorkspaceSecurity;
 }
 /**
@@ -1594,10 +1590,6 @@ export interface WorkspaceCreateRequest {
      * Free form additional data
      */
     'additionalData'?: { [key: string]: any; };
-    /**
-     * Activate the copy of dataset on scenario creation
-     */
-    'datasetCopy'?: boolean;
     'security'?: WorkspaceSecurity;
 }
 export interface WorkspaceEditInfo {
@@ -1683,10 +1675,6 @@ export interface WorkspaceUpdateRequest {
      * Free form additional data
      */
     'additionalData'?: { [key: string]: any; };
-    /**
-     * Activate the copy of dataset on scenario creation
-     */
-    'datasetCopy'?: boolean;
 }
 
 /**

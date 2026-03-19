@@ -12,7 +12,6 @@ Name | Type | Description | Notes
 **tags** | **Array&lt;string&gt;** | The list of tags | [optional] [default to undefined]
 **solution** | [**WorkspaceSolution**](WorkspaceSolution.md) |  | [optional] [default to undefined]
 **additionalData** | **{ [key: string]: any; }** | Free form additional data | [optional] [default to undefined]
-**datasetCopy** | **boolean** | Activate the copy of dataset on scenario creation | [optional] [default to undefined]
 
 ## Example
 
@@ -26,7 +25,6 @@ const instance: WorkspaceUpdateRequest = {
     tags,
     solution,
     additionalData,
-    datasetCopy,
 };
 ```
 
