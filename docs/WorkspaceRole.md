@@ -1,12 +1,12 @@
 # WorkspaceRole
 
-the Workspace Role
+The Workspace Role
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**role** | **string** | the Workspace Role | [default to undefined]
+**role** | **string** | The Workspace Role | [default to undefined]
 
 ## Example
 

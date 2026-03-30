@@ -1,12 +1,12 @@
 # WorkspaceFile
 
-a Workspace File resource
+A Workspace File resource
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**fileName** | **string** | the Workspace File name | [optional] [default to undefined]
+**fileName** | **string** | The Workspace File name | [default to undefined]
 
 ## Example
 

@@ -1,13 +1,13 @@
 # OrganizationSecurity
 
-the Organization security information
+Response object for organization security information
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**_default** | **string** | the role by default | [default to undefined]
-**accessControlList** | [**Array&lt;OrganizationAccessControl&gt;**](OrganizationAccessControl.md) | the list which can access this Organization with detailed access control information | [default to undefined]
+**_default** | **string** | The role by default | [default to undefined]
+**accessControlList** | [**Array&lt;OrganizationAccessControl&gt;**](OrganizationAccessControl.md) | The list which can access this Organization with detailed access control information | [default to undefined]
 
 ## Example
 
