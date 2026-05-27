@@ -1,6 +1,6 @@
 # RunApi
 
-All URIs are relative to *http://localhost:8080*
+All URIs are relative to *http://localhost*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
@@ -9,6 +9,8 @@ All URIs are relative to *http://localhost:8080*
 |[**getRunLogs**](#getrunlogs) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/runs/{run_id}/logs | get the logs for the Run|
 |[**getRunStatus**](#getrunstatus) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/runs/{run_id}/status | get the status for the Run|
 |[**listRuns**](#listruns) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/runs | get the list of Runs for the Runner|
+|[**queryRunData**](#queryrundata) | **POST** /organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/runs/{run_id}/data/query | query the run data|
+|[**sendRunData**](#sendrundata) | **POST** /organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/runs/{run_id}/data/send | Send data associated to a run|
 
 # **deleteRun**
 > deleteRun()
@@ -25,10 +27,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new RunApi(configuration);
 
-let organizationId: string; //The Organization identifier (default to undefined)
-let workspaceId: string; //The Workspace identifier (default to undefined)
-let runnerId: string; //The Runner identifier (default to undefined)
-let runId: string; //The Run identifier (default to undefined)
+let organizationId: string; //the Organization identifier (default to undefined)
+let workspaceId: string; //the Workspace identifier (default to undefined)
+let runnerId: string; //the Runner identifier (default to undefined)
+let runId: string; //the Run identifier (default to undefined)
 
 const { status, data } = await apiInstance.deleteRun(
     organizationId,
@@ -42,10 +44,10 @@ const { status, data } = await apiInstance.deleteRun(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | The Organization identifier | defaults to undefined|
-| **workspaceId** | [**string**] | The Workspace identifier | defaults to undefined|
-| **runnerId** | [**string**] | The Runner identifier | defaults to undefined|
-| **runId** | [**string**] | The Run identifier | defaults to undefined|
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
+| **runnerId** | [**string**] | the Runner identifier | defaults to undefined|
+| **runId** | [**string**] | the Run identifier | defaults to undefined|
 
 
 ### Return type
@@ -74,7 +76,6 @@ void (empty response body)
 # **getRun**
 > Run getRun()
 
-Retrieve detailed information about a specific run.
 
 ### Example
 
@@ -87,10 +88,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new RunApi(configuration);
 
-let organizationId: string; //The Organization identifier (default to undefined)
-let workspaceId: string; //The Workspace identifier (default to undefined)
-let runnerId: string; //The Runner identifier (default to undefined)
-let runId: string; //The Run identifier (default to undefined)
+let organizationId: string; //the Organization identifier (default to undefined)
+let workspaceId: string; //the Workspace identifier (default to undefined)
+let runnerId: string; //the Runner identifier (default to undefined)
+let runId: string; //the Run identifier (default to undefined)
 
 const { status, data } = await apiInstance.getRun(
     organizationId,
@@ -104,10 +105,10 @@ const { status, data } = await apiInstance.getRun(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | The Organization identifier | defaults to undefined|
-| **workspaceId** | [**string**] | The Workspace identifier | defaults to undefined|
-| **runnerId** | [**string**] | The Runner identifier | defaults to undefined|
-| **runId** | [**string**] | The Run identifier | defaults to undefined|
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
+| **runnerId** | [**string**] | the Runner identifier | defaults to undefined|
+| **runId** | [**string**] | the Run identifier | defaults to undefined|
 
 
 ### Return type
@@ -121,7 +122,7 @@ const { status, data } = await apiInstance.getRun(
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json, application/yaml
+ - **Accept**: application/json
 
 
 ### HTTP response details
@@ -133,9 +134,8 @@ const { status, data } = await apiInstance.getRun(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getRunLogs**
-> string getRunLogs()
+> RunLogs getRunLogs()
 
-Retrieve execution logs for a run as plain text. Logs are aggregated from all containers. May be truncated for long-running simulations.
 
 ### Example
 
@@ -148,10 +148,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new RunApi(configuration);
 
-let organizationId: string; //The Organization identifier (default to undefined)
-let workspaceId: string; //The Workspace identifier (default to undefined)
-let runnerId: string; //The Runner identifier (default to undefined)
-let runId: string; //The Run identifier (default to undefined)
+let organizationId: string; //the Organization identifier (default to undefined)
+let workspaceId: string; //the Workspace identifier (default to undefined)
+let runnerId: string; //the Runner identifier (default to undefined)
+let runId: string; //the Run identifier (default to undefined)
 
 const { status, data } = await apiInstance.getRunLogs(
     organizationId,
@@ -165,15 +165,15 @@ const { status, data } = await apiInstance.getRunLogs(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | The Organization identifier | defaults to undefined|
-| **workspaceId** | [**string**] | The Workspace identifier | defaults to undefined|
-| **runnerId** | [**string**] | The Runner identifier | defaults to undefined|
-| **runId** | [**string**] | The Run identifier | defaults to undefined|
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
+| **runnerId** | [**string**] | the Runner identifier | defaults to undefined|
+| **runId** | [**string**] | the Run identifier | defaults to undefined|
 
 
 ### Return type
 
-**string**
+**RunLogs**
 
 ### Authorization
 
@@ -182,7 +182,7 @@ const { status, data } = await apiInstance.getRunLogs(
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain
+ - **Accept**: application/json
 
 
 ### HTTP response details
@@ -195,7 +195,6 @@ const { status, data } = await apiInstance.getRunLogs(
 # **getRunStatus**
 > RunStatus getRunStatus()
 
-Retrieve detailed execution status of a run.
 
 ### Example
 
@@ -208,10 +207,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new RunApi(configuration);
 
-let organizationId: string; //The Organization identifier (default to undefined)
-let workspaceId: string; //The Workspace identifier (default to undefined)
-let runnerId: string; //The Runner identifier (default to undefined)
-let runId: string; //The Run identifier (default to undefined)
+let organizationId: string; //the Organization identifier (default to undefined)
+let workspaceId: string; //the Workspace identifier (default to undefined)
+let runnerId: string; //the Runner identifier (default to undefined)
+let runId: string; //the Run identifier (default to undefined)
 
 const { status, data } = await apiInstance.getRunStatus(
     organizationId,
@@ -225,10 +224,10 @@ const { status, data } = await apiInstance.getRunStatus(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | The Organization identifier | defaults to undefined|
-| **workspaceId** | [**string**] | The Workspace identifier | defaults to undefined|
-| **runnerId** | [**string**] | The Runner identifier | defaults to undefined|
-| **runId** | [**string**] | The Run identifier | defaults to undefined|
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
+| **runnerId** | [**string**] | the Runner identifier | defaults to undefined|
+| **runId** | [**string**] | the Run identifier | defaults to undefined|
 
 
 ### Return type
@@ -242,7 +241,7 @@ const { status, data } = await apiInstance.getRunStatus(
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json, application/yaml
+ - **Accept**: application/json
 
 
 ### HTTP response details
@@ -255,7 +254,6 @@ const { status, data } = await apiInstance.getRunStatus(
 # **listRuns**
 > Array<Run> listRuns()
 
-Retrieve a paginated list of all runs for a specific runner.
 
 ### Example
 
@@ -268,9 +266,9 @@ import {
 const configuration = new Configuration();
 const apiInstance = new RunApi(configuration);
 
-let organizationId: string; //The Organization identifier (default to undefined)
-let workspaceId: string; //The Workspace identifier (default to undefined)
-let runnerId: string; //The Runner identifier (default to undefined)
+let organizationId: string; //the Organization identifier (default to undefined)
+let workspaceId: string; //the Workspace identifier (default to undefined)
+let runnerId: string; //the Runner identifier (default to undefined)
 let page: number; //page number to query (first page is at index 0) (optional) (default to undefined)
 let size: number; //amount of result by page (optional) (default to undefined)
 
@@ -287,9 +285,9 @@ const { status, data } = await apiInstance.listRuns(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | The Organization identifier | defaults to undefined|
-| **workspaceId** | [**string**] | The Workspace identifier | defaults to undefined|
-| **runnerId** | [**string**] | The Runner identifier | defaults to undefined|
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
+| **runnerId** | [**string**] | the Runner identifier | defaults to undefined|
 | **page** | [**number**] | page number to query (first page is at index 0) | (optional) defaults to undefined|
 | **size** | [**number**] | amount of result by page | (optional) defaults to undefined|
 
@@ -305,13 +303,140 @@ const { status, data } = await apiInstance.listRuns(
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json, application/yaml
+ - **Accept**: application/json
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | the run details list |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **queryRunData**
+> QueryResult queryRunData(runDataQuery)
+
+
+### Example
+
+```typescript
+import {
+    RunApi,
+    Configuration,
+    RunDataQuery
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new RunApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let workspaceId: string; //the Workspace identifier (default to undefined)
+let runnerId: string; //the Runner identifier (default to undefined)
+let runId: string; //the Run identifier (default to undefined)
+let runDataQuery: RunDataQuery; //the query to run
+
+const { status, data } = await apiInstance.queryRunData(
+    organizationId,
+    workspaceId,
+    runnerId,
+    runId,
+    runDataQuery
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **runDataQuery** | **RunDataQuery**| the query to run | |
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
+| **runnerId** | [**string**] | the Runner identifier | defaults to undefined|
+| **runId** | [**string**] | the Run identifier | defaults to undefined|
+
+
+### Return type
+
+**QueryResult**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | the query response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **sendRunData**
+> RunData sendRunData(sendRunDataRequest)
+
+
+### Example
+
+```typescript
+import {
+    RunApi,
+    Configuration,
+    SendRunDataRequest
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new RunApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let workspaceId: string; //the Workspace identifier (default to undefined)
+let runnerId: string; //the Runner identifier (default to undefined)
+let runId: string; //the Run identifier (default to undefined)
+let sendRunDataRequest: SendRunDataRequest; //Custom data to register
+
+const { status, data } = await apiInstance.sendRunData(
+    organizationId,
+    workspaceId,
+    runnerId,
+    runId,
+    sendRunDataRequest
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **sendRunDataRequest** | **SendRunDataRequest**| Custom data to register | |
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
+| **runnerId** | [**string**] | the Runner identifier | defaults to undefined|
+| **runId** | [**string**] | the Run identifier | defaults to undefined|
+
+
+### Return type
+
+**RunData**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**201** | Data stored |  -  |
+|**400** | Data sent format is malformed |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
