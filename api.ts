@@ -18,7 +18,7 @@ import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from './common';
+import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, replaceWithSerializableTypeIfNeeded } from './common';
 import type { RequestArgs } from './base';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerMap } from './base';
@@ -234,7 +234,7 @@ export interface DatasetPartCreateRequest {
 
 export const DatasetPartTypeEnum = {
     File: 'File',
-    Db: 'DB'
+    Db: 'DB',
 } as const;
 
 export type DatasetPartTypeEnum = typeof DatasetPartTypeEnum[keyof typeof DatasetPartTypeEnum];
@@ -309,7 +309,7 @@ export const LastRunInfoLastRunStatusEnum = {
     Running: 'Running',
     Successful: 'Successful',
     Failed: 'Failed',
-    Unknown: 'Unknown'
+    Unknown: 'Unknown',
 } as const;
 
 export type LastRunInfoLastRunStatusEnum = typeof LastRunInfoLastRunStatusEnum[keyof typeof LastRunInfoLastRunStatusEnum];
@@ -567,7 +567,7 @@ export const RunState = {
     Successful: 'Successful',
     Failed: 'Failed',
     Unknown: 'Unknown',
-    NotStarted: 'NotStarted'
+    NotStarted: 'NotStarted',
 } as const;
 
 export type RunState = typeof RunState[keyof typeof RunState];
@@ -1281,7 +1281,7 @@ export const RunnerValidationStatus = {
     Draft: 'Draft',
     Rejected: 'Rejected',
     Unknown: 'Unknown',
-    Validated: 'Validated'
+    Validated: 'Validated',
 } as const;
 
 export type RunnerValidationStatus = typeof RunnerValidationStatus[keyof typeof RunnerValidationStatus];
@@ -1700,8 +1700,8 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'datasetCreateRequest' is not null or undefined
             assertParamExists('createDataset', 'datasetCreateRequest', datasetCreateRequest)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1724,14 +1724,13 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
                 })
             }
 
-    
+
             if (datasetCreateRequest !== undefined) { 
-                localVarFormParams.append('datasetCreateRequest', new Blob([JSON.stringify(datasetCreateRequest)], { type: "application/json", }));
+                localVarFormParams.append('datasetCreateRequest', new Blob([JSON.stringify(datasetCreateRequest, replaceWithSerializableTypeIfNeeded)], { type: "application/json", }));
             }
-    
-    
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
-    
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -1762,9 +1761,9 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'datasetAccessControl' is not null or undefined
             assertParamExists('createDatasetAccessControl', 'datasetAccessControl', datasetAccessControl)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/security/access`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{dataset_id}', encodeURIComponent(String(datasetId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1780,9 +1779,8 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -1817,9 +1815,9 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'datasetPartCreateRequest' is not null or undefined
             assertParamExists('createDatasetPart', 'datasetPartCreateRequest', datasetPartCreateRequest)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{dataset_id}', encodeURIComponent(String(datasetId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1840,14 +1838,13 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             if (file !== undefined) { 
                 localVarFormParams.append('file', file as any);
             }
-    
+
             if (datasetPartCreateRequest !== undefined) { 
-                localVarFormParams.append('datasetPartCreateRequest', new Blob([JSON.stringify(datasetPartCreateRequest)], { type: "application/json", }));
+                localVarFormParams.append('datasetPartCreateRequest', new Blob([JSON.stringify(datasetPartCreateRequest, replaceWithSerializableTypeIfNeeded)], { type: "application/json", }));
             }
-    
-    
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
-    
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -1875,9 +1872,9 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'datasetId' is not null or undefined
             assertParamExists('deleteDataset', 'datasetId', datasetId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{dataset_id}', encodeURIComponent(String(datasetId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1894,7 +1891,6 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -1924,10 +1920,10 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'identityId' is not null or undefined
             assertParamExists('deleteDatasetAccessControl', 'identityId', identityId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/security/access/{identity_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)))
-                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{dataset_id}', encodeURIComponent(String(datasetId)))
+                .replace('{identity_id}', encodeURIComponent(String(identityId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1944,7 +1940,6 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -1974,10 +1969,10 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'datasetPartId' is not null or undefined
             assertParamExists('deleteDatasetPart', 'datasetPartId', datasetPartId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts/{dataset_part_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)))
-                .replace(`{${"dataset_part_id"}}`, encodeURIComponent(String(datasetPartId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{dataset_id}', encodeURIComponent(String(datasetId)))
+                .replace('{dataset_part_id}', encodeURIComponent(String(datasetPartId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1994,7 +1989,6 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -2024,10 +2018,10 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'datasetPartId' is not null or undefined
             assertParamExists('downloadDatasetPart', 'datasetPartId', datasetPartId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts/{dataset_part_id}/download`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)))
-                .replace(`{${"dataset_part_id"}}`, encodeURIComponent(String(datasetPartId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{dataset_id}', encodeURIComponent(String(datasetId)))
+                .replace('{dataset_part_id}', encodeURIComponent(String(datasetPartId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -2043,8 +2037,8 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/octet-stream';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -2071,9 +2065,9 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'datasetId' is not null or undefined
             assertParamExists('getDataset', 'datasetId', datasetId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{dataset_id}', encodeURIComponent(String(datasetId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -2089,8 +2083,8 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -2120,10 +2114,10 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'identityId' is not null or undefined
             assertParamExists('getDatasetAccessControl', 'identityId', identityId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/security/access/{identity_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)))
-                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{dataset_id}', encodeURIComponent(String(datasetId)))
+                .replace('{identity_id}', encodeURIComponent(String(identityId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -2139,8 +2133,8 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -2170,10 +2164,10 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'datasetPartId' is not null or undefined
             assertParamExists('getDatasetPart', 'datasetPartId', datasetPartId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts/{dataset_part_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)))
-                .replace(`{${"dataset_part_id"}}`, encodeURIComponent(String(datasetPartId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{dataset_id}', encodeURIComponent(String(datasetId)))
+                .replace('{dataset_part_id}', encodeURIComponent(String(datasetPartId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -2189,8 +2183,8 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -2219,9 +2213,9 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'datasetId' is not null or undefined
             assertParamExists('listDatasetParts', 'datasetId', datasetId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{dataset_id}', encodeURIComponent(String(datasetId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -2245,8 +2239,8 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['size'] = size;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -2273,9 +2267,9 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'datasetId' is not null or undefined
             assertParamExists('listDatasetSecurityUsers', 'datasetId', datasetId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/security/users`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{dataset_id}', encodeURIComponent(String(datasetId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -2291,8 +2285,8 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -2318,8 +2312,8 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'workspaceId' is not null or undefined
             assertParamExists('listDatasets', 'workspaceId', workspaceId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -2343,8 +2337,8 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['size'] = size;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -2384,10 +2378,10 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'datasetPartId' is not null or undefined
             assertParamExists('queryData', 'datasetPartId', datasetPartId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts/{dataset_part_id}/query`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)))
-                .replace(`{${"dataset_part_id"}}`, encodeURIComponent(String(datasetPartId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{dataset_id}', encodeURIComponent(String(datasetId)))
+                .replace('{dataset_part_id}', encodeURIComponent(String(datasetPartId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -2443,8 +2437,8 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['orderBys'] = orderBys;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/octet-stream';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -2478,10 +2472,10 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'file' is not null or undefined
             assertParamExists('replaceDatasetPart', 'file', file)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts/{dataset_part_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)))
-                .replace(`{${"dataset_part_id"}}`, encodeURIComponent(String(datasetPartId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{dataset_id}', encodeURIComponent(String(datasetId)))
+                .replace('{dataset_part_id}', encodeURIComponent(String(datasetPartId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -2502,14 +2496,13 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             if (file !== undefined) { 
                 localVarFormParams.append('file', file as any);
             }
-    
+
             if (datasetPartUpdateRequest !== undefined) { 
-                localVarFormParams.append('datasetPartUpdateRequest', new Blob([JSON.stringify(datasetPartUpdateRequest)], { type: "application/json", }));
+                localVarFormParams.append('datasetPartUpdateRequest', new Blob([JSON.stringify(datasetPartUpdateRequest, replaceWithSerializableTypeIfNeeded)], { type: "application/json", }));
             }
-    
-    
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
-    
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -2542,9 +2535,9 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'requestBody' is not null or undefined
             assertParamExists('searchDatasetParts', 'requestBody', requestBody)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts/search`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{dataset_id}', encodeURIComponent(String(datasetId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -2568,9 +2561,8 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['size'] = size;
             }
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -2601,8 +2593,8 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'requestBody' is not null or undefined
             assertParamExists('searchDatasets', 'requestBody', requestBody)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/search`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -2626,9 +2618,8 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['size'] = size;
             }
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -2661,9 +2652,9 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'datasetUpdateRequest' is not null or undefined
             assertParamExists('updateDataset', 'datasetUpdateRequest', datasetUpdateRequest)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{dataset_id}', encodeURIComponent(String(datasetId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -2686,14 +2677,13 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
                 })
             }
 
-    
+
             if (datasetUpdateRequest !== undefined) { 
-                localVarFormParams.append('datasetUpdateRequest', new Blob([JSON.stringify(datasetUpdateRequest)], { type: "application/json", }));
+                localVarFormParams.append('datasetUpdateRequest', new Blob([JSON.stringify(datasetUpdateRequest, replaceWithSerializableTypeIfNeeded)], { type: "application/json", }));
             }
-    
-    
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
-    
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -2727,10 +2717,10 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'datasetRole' is not null or undefined
             assertParamExists('updateDatasetAccessControl', 'datasetRole', datasetRole)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/security/access/{identity_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)))
-                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{dataset_id}', encodeURIComponent(String(datasetId)))
+                .replace('{identity_id}', encodeURIComponent(String(identityId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -2746,9 +2736,8 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -2780,9 +2769,9 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'datasetRole' is not null or undefined
             assertParamExists('updateDatasetDefaultSecurity', 'datasetRole', datasetRole)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/security/default`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{dataset_id}', encodeURIComponent(String(datasetId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -2798,9 +2787,8 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -2835,10 +2823,10 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             // verify required parameter 'datasetPartUpdateRequest' is not null or undefined
             assertParamExists('updateDatasetPart', 'datasetPartUpdateRequest', datasetPartUpdateRequest)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts/{dataset_part_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"dataset_id"}}`, encodeURIComponent(String(datasetId)))
-                .replace(`{${"dataset_part_id"}}`, encodeURIComponent(String(datasetPartId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{dataset_id}', encodeURIComponent(String(datasetId)))
+                .replace('{dataset_part_id}', encodeURIComponent(String(datasetPartId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -2854,9 +2842,8 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -3878,8 +3865,8 @@ export const MetaApiAxiosParamCreator = function (configuration?: Configuration)
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -3979,9 +3966,8 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -4007,7 +3993,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             // verify required parameter 'organizationAccessControl' is not null or undefined
             assertParamExists('createOrganizationAccessControl', 'organizationAccessControl', organizationAccessControl)
             const localVarPath = `/organizations/{organization_id}/security/access`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -4023,9 +4009,8 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -4048,7 +4033,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('deleteOrganization', 'organizationId', organizationId)
             const localVarPath = `/organizations/{organization_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -4065,7 +4050,6 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -4089,8 +4073,8 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             // verify required parameter 'identityId' is not null or undefined
             assertParamExists('deleteOrganizationAccessControl', 'identityId', identityId)
             const localVarPath = `/organizations/{organization_id}/security/access/{identity_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{identity_id}', encodeURIComponent(String(identityId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -4107,7 +4091,6 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -4128,7 +4111,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('getOrganization', 'organizationId', organizationId)
             const localVarPath = `/organizations/{organization_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -4144,8 +4127,8 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -4169,8 +4152,8 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             // verify required parameter 'identityId' is not null or undefined
             assertParamExists('getOrganizationAccessControl', 'identityId', identityId)
             const localVarPath = `/organizations/{organization_id}/security/access/{identity_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{identity_id}', encodeURIComponent(String(identityId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -4186,8 +4169,8 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -4211,8 +4194,8 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             // verify required parameter 'role' is not null or undefined
             assertParamExists('getOrganizationPermissions', 'role', role)
             const localVarPath = `/organizations/{organization_id}/permissions/{role}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"role"}}`, encodeURIComponent(String(role)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{role}', encodeURIComponent(String(role)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -4228,8 +4211,8 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -4250,7 +4233,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('getOrganizationSecurity', 'organizationId', organizationId)
             const localVarPath = `/organizations/{organization_id}/security`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -4266,8 +4249,8 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -4288,7 +4271,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('listOrganizationSecurityUsers', 'organizationId', organizationId)
             const localVarPath = `/organizations/{organization_id}/security/users`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -4304,8 +4287,8 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -4348,8 +4331,8 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
                 localVarQueryParameter['size'] = size;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -4382,8 +4365,8 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -4407,7 +4390,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             // verify required parameter 'organizationUpdateRequest' is not null or undefined
             assertParamExists('updateOrganization', 'organizationUpdateRequest', organizationUpdateRequest)
             const localVarPath = `/organizations/{organization_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -4423,9 +4406,8 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -4454,8 +4436,8 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             // verify required parameter 'organizationRole' is not null or undefined
             assertParamExists('updateOrganizationAccessControl', 'organizationRole', organizationRole)
             const localVarPath = `/organizations/{organization_id}/security/access/{identity_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{identity_id}', encodeURIComponent(String(identityId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -4471,9 +4453,8 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -4499,7 +4480,7 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             // verify required parameter 'organizationRole' is not null or undefined
             assertParamExists('updateOrganizationDefaultSecurity', 'organizationRole', organizationRole)
             const localVarPath = `/organizations/{organization_id}/security/default`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -4515,9 +4496,8 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -5082,10 +5062,10 @@ export const RunApiAxiosParamCreator = function (configuration?: Configuration) 
             // verify required parameter 'runId' is not null or undefined
             assertParamExists('deleteRun', 'runId', runId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/runs/{run_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)))
-                .replace(`{${"run_id"}}`, encodeURIComponent(String(runId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{runner_id}', encodeURIComponent(String(runnerId)))
+                .replace('{run_id}', encodeURIComponent(String(runId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -5102,7 +5082,6 @@ export const RunApiAxiosParamCreator = function (configuration?: Configuration) 
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -5132,10 +5111,10 @@ export const RunApiAxiosParamCreator = function (configuration?: Configuration) 
             // verify required parameter 'runId' is not null or undefined
             assertParamExists('getRun', 'runId', runId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/runs/{run_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)))
-                .replace(`{${"run_id"}}`, encodeURIComponent(String(runId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{runner_id}', encodeURIComponent(String(runnerId)))
+                .replace('{run_id}', encodeURIComponent(String(runId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -5151,8 +5130,8 @@ export const RunApiAxiosParamCreator = function (configuration?: Configuration) 
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -5182,10 +5161,10 @@ export const RunApiAxiosParamCreator = function (configuration?: Configuration) 
             // verify required parameter 'runId' is not null or undefined
             assertParamExists('getRunLogs', 'runId', runId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/runs/{run_id}/logs`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)))
-                .replace(`{${"run_id"}}`, encodeURIComponent(String(runId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{runner_id}', encodeURIComponent(String(runnerId)))
+                .replace('{run_id}', encodeURIComponent(String(runId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -5201,8 +5180,8 @@ export const RunApiAxiosParamCreator = function (configuration?: Configuration) 
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'text/plain';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -5232,10 +5211,10 @@ export const RunApiAxiosParamCreator = function (configuration?: Configuration) 
             // verify required parameter 'runId' is not null or undefined
             assertParamExists('getRunStatus', 'runId', runId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/runs/{run_id}/status`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)))
-                .replace(`{${"run_id"}}`, encodeURIComponent(String(runId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{runner_id}', encodeURIComponent(String(runnerId)))
+                .replace('{run_id}', encodeURIComponent(String(runId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -5251,8 +5230,8 @@ export const RunApiAxiosParamCreator = function (configuration?: Configuration) 
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -5281,9 +5260,9 @@ export const RunApiAxiosParamCreator = function (configuration?: Configuration) 
             // verify required parameter 'runnerId' is not null or undefined
             assertParamExists('listRuns', 'runnerId', runnerId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/runs`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{runner_id}', encodeURIComponent(String(runnerId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -5307,8 +5286,8 @@ export const RunApiAxiosParamCreator = function (configuration?: Configuration) 
                 localVarQueryParameter['size'] = size;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -5586,8 +5565,8 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             // verify required parameter 'runnerCreateRequest' is not null or undefined
             assertParamExists('createRunner', 'runnerCreateRequest', runnerCreateRequest)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -5603,9 +5582,8 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -5637,9 +5615,9 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             // verify required parameter 'runnerAccessControl' is not null or undefined
             assertParamExists('createRunnerAccessControl', 'runnerAccessControl', runnerAccessControl)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/security/access`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{runner_id}', encodeURIComponent(String(runnerId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -5655,9 +5633,8 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -5686,9 +5663,9 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             // verify required parameter 'runnerId' is not null or undefined
             assertParamExists('deleteRunner', 'runnerId', runnerId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{runner_id}', encodeURIComponent(String(runnerId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -5705,7 +5682,6 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -5735,10 +5711,10 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             // verify required parameter 'identityId' is not null or undefined
             assertParamExists('deleteRunnerAccessControl', 'identityId', identityId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/security/access/{identity_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)))
-                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{runner_id}', encodeURIComponent(String(runnerId)))
+                .replace('{identity_id}', encodeURIComponent(String(identityId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -5755,7 +5731,6 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -5782,9 +5757,9 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             // verify required parameter 'runnerId' is not null or undefined
             assertParamExists('getRunner', 'runnerId', runnerId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{runner_id}', encodeURIComponent(String(runnerId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -5800,8 +5775,8 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -5831,10 +5806,10 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             // verify required parameter 'identityId' is not null or undefined
             assertParamExists('getRunnerAccessControl', 'identityId', identityId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/security/access/{identity_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)))
-                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{runner_id}', encodeURIComponent(String(runnerId)))
+                .replace('{identity_id}', encodeURIComponent(String(identityId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -5850,8 +5825,8 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -5878,9 +5853,9 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             // verify required parameter 'runnerId' is not null or undefined
             assertParamExists('getRunnerSecurity', 'runnerId', runnerId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/security`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{runner_id}', encodeURIComponent(String(runnerId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -5896,8 +5871,8 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -5927,10 +5902,10 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             // verify required parameter 'role' is not null or undefined
             assertParamExists('listRunnerPermissions', 'role', role)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/permissions/{role}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)))
-                .replace(`{${"role"}}`, encodeURIComponent(String(role)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{runner_id}', encodeURIComponent(String(runnerId)))
+                .replace('{role}', encodeURIComponent(String(role)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -5946,8 +5921,8 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -5974,9 +5949,9 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             // verify required parameter 'runnerId' is not null or undefined
             assertParamExists('listRunnerSecurityUsers', 'runnerId', runnerId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/security/users`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{runner_id}', encodeURIComponent(String(runnerId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -5992,8 +5967,8 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -6019,8 +5994,8 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             // verify required parameter 'workspaceId' is not null or undefined
             assertParamExists('listRunners', 'workspaceId', workspaceId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -6044,8 +6019,8 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
                 localVarQueryParameter['size'] = size;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -6072,9 +6047,9 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             // verify required parameter 'runnerId' is not null or undefined
             assertParamExists('startRun', 'runnerId', runnerId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/start`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{runner_id}', encodeURIComponent(String(runnerId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -6090,8 +6065,8 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -6118,9 +6093,9 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             // verify required parameter 'runnerId' is not null or undefined
             assertParamExists('stopRun', 'runnerId', runnerId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/stop`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{runner_id}', encodeURIComponent(String(runnerId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -6137,7 +6112,6 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -6167,9 +6141,9 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             // verify required parameter 'runnerUpdateRequest' is not null or undefined
             assertParamExists('updateRunner', 'runnerUpdateRequest', runnerUpdateRequest)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{runner_id}', encodeURIComponent(String(runnerId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -6185,9 +6159,8 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -6222,10 +6195,10 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             // verify required parameter 'runnerRole' is not null or undefined
             assertParamExists('updateRunnerAccessControl', 'runnerRole', runnerRole)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/security/access/{identity_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)))
-                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{runner_id}', encodeURIComponent(String(runnerId)))
+                .replace('{identity_id}', encodeURIComponent(String(identityId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -6241,9 +6214,8 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -6275,9 +6247,9 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             // verify required parameter 'runnerRole' is not null or undefined
             assertParamExists('updateRunnerDefaultSecurity', 'runnerRole', runnerRole)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/security/default`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"runner_id"}}`, encodeURIComponent(String(runnerId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{runner_id}', encodeURIComponent(String(runnerId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -6293,9 +6265,8 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -6981,7 +6952,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'solutionCreateRequest' is not null or undefined
             assertParamExists('createSolution', 'solutionCreateRequest', solutionCreateRequest)
             const localVarPath = `/organizations/{organization_id}/solutions`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -6997,9 +6968,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -7028,8 +6998,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'solutionAccessControl' is not null or undefined
             assertParamExists('createSolutionAccessControl', 'solutionAccessControl', solutionAccessControl)
             const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/security/access`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{solution_id}', encodeURIComponent(String(solutionId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -7045,9 +7015,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -7076,8 +7045,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'runTemplateParameterCreateRequest' is not null or undefined
             assertParamExists('createSolutionParameter', 'runTemplateParameterCreateRequest', runTemplateParameterCreateRequest)
             const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/parameters`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{solution_id}', encodeURIComponent(String(solutionId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -7093,9 +7062,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -7124,8 +7092,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'runTemplateParameterGroupCreateRequest' is not null or undefined
             assertParamExists('createSolutionParameterGroup', 'runTemplateParameterGroupCreateRequest', runTemplateParameterGroupCreateRequest)
             const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/parameterGroups`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{solution_id}', encodeURIComponent(String(solutionId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -7141,9 +7109,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -7172,8 +7139,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'runTemplateCreateRequest' is not null or undefined
             assertParamExists('createSolutionRunTemplate', 'runTemplateCreateRequest', runTemplateCreateRequest)
             const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/runTemplates`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{solution_id}', encodeURIComponent(String(solutionId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -7189,9 +7156,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -7217,8 +7183,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'solutionId' is not null or undefined
             assertParamExists('deleteSolution', 'solutionId', solutionId)
             const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{solution_id}', encodeURIComponent(String(solutionId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -7235,7 +7201,6 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -7262,9 +7227,9 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'identityId' is not null or undefined
             assertParamExists('deleteSolutionAccessControl', 'identityId', identityId)
             const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/security/access/{identity_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)))
-                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{solution_id}', encodeURIComponent(String(solutionId)))
+                .replace('{identity_id}', encodeURIComponent(String(identityId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -7281,7 +7246,6 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -7308,9 +7272,9 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'parameterId' is not null or undefined
             assertParamExists('deleteSolutionParameter', 'parameterId', parameterId)
             const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/parameters/{parameter_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)))
-                .replace(`{${"parameter_id"}}`, encodeURIComponent(String(parameterId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{solution_id}', encodeURIComponent(String(solutionId)))
+                .replace('{parameter_id}', encodeURIComponent(String(parameterId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -7327,7 +7291,6 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -7354,9 +7317,9 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'parameterGroupId' is not null or undefined
             assertParamExists('deleteSolutionParameterGroup', 'parameterGroupId', parameterGroupId)
             const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/parameterGroups/{parameter_group_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)))
-                .replace(`{${"parameter_group_id"}}`, encodeURIComponent(String(parameterGroupId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{solution_id}', encodeURIComponent(String(solutionId)))
+                .replace('{parameter_group_id}', encodeURIComponent(String(parameterGroupId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -7373,7 +7336,6 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -7400,9 +7362,9 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'runTemplateId' is not null or undefined
             assertParamExists('deleteSolutionRunTemplate', 'runTemplateId', runTemplateId)
             const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/runTemplates/{run_template_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)))
-                .replace(`{${"run_template_id"}}`, encodeURIComponent(String(runTemplateId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{solution_id}', encodeURIComponent(String(solutionId)))
+                .replace('{run_template_id}', encodeURIComponent(String(runTemplateId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -7419,7 +7381,6 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -7446,9 +7407,9 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'runTemplateId' is not null or undefined
             assertParamExists('getRunTemplate', 'runTemplateId', runTemplateId)
             const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/runTemplates/{run_template_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)))
-                .replace(`{${"run_template_id"}}`, encodeURIComponent(String(runTemplateId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{solution_id}', encodeURIComponent(String(solutionId)))
+                .replace('{run_template_id}', encodeURIComponent(String(runTemplateId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -7464,8 +7425,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -7489,8 +7450,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'solutionId' is not null or undefined
             assertParamExists('getSolution', 'solutionId', solutionId)
             const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{solution_id}', encodeURIComponent(String(solutionId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -7506,8 +7467,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -7534,9 +7495,9 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'identityId' is not null or undefined
             assertParamExists('getSolutionAccessControl', 'identityId', identityId)
             const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/security/access/{identity_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)))
-                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{solution_id}', encodeURIComponent(String(solutionId)))
+                .replace('{identity_id}', encodeURIComponent(String(identityId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -7552,8 +7513,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -7580,9 +7541,9 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'parameterId' is not null or undefined
             assertParamExists('getSolutionParameter', 'parameterId', parameterId)
             const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/parameters/{parameter_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)))
-                .replace(`{${"parameter_id"}}`, encodeURIComponent(String(parameterId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{solution_id}', encodeURIComponent(String(solutionId)))
+                .replace('{parameter_id}', encodeURIComponent(String(parameterId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -7598,8 +7559,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -7626,9 +7587,9 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'parameterGroupId' is not null or undefined
             assertParamExists('getSolutionParameterGroup', 'parameterGroupId', parameterGroupId)
             const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/parameterGroups/{parameter_group_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)))
-                .replace(`{${"parameter_group_id"}}`, encodeURIComponent(String(parameterGroupId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{solution_id}', encodeURIComponent(String(solutionId)))
+                .replace('{parameter_group_id}', encodeURIComponent(String(parameterGroupId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -7644,8 +7605,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -7669,8 +7630,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'solutionId' is not null or undefined
             assertParamExists('getSolutionSecurity', 'solutionId', solutionId)
             const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/security`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{solution_id}', encodeURIComponent(String(solutionId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -7686,8 +7647,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -7711,8 +7672,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'solutionId' is not null or undefined
             assertParamExists('listRunTemplates', 'solutionId', solutionId)
             const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/runTemplates`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{solution_id}', encodeURIComponent(String(solutionId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -7728,8 +7689,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -7753,8 +7714,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'solutionId' is not null or undefined
             assertParamExists('listSolutionParameterGroups', 'solutionId', solutionId)
             const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/parameterGroups`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{solution_id}', encodeURIComponent(String(solutionId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -7770,8 +7731,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -7795,8 +7756,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'solutionId' is not null or undefined
             assertParamExists('listSolutionParameters', 'solutionId', solutionId)
             const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/parameters`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{solution_id}', encodeURIComponent(String(solutionId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -7812,8 +7773,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -7837,8 +7798,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'solutionId' is not null or undefined
             assertParamExists('listSolutionSecurityUsers', 'solutionId', solutionId)
             const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/security/users`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{solution_id}', encodeURIComponent(String(solutionId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -7854,8 +7815,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -7878,7 +7839,7 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('listSolutions', 'organizationId', organizationId)
             const localVarPath = `/organizations/{organization_id}/solutions`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -7902,8 +7863,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
                 localVarQueryParameter['size'] = size;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -7930,8 +7891,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'solutionUpdateRequest' is not null or undefined
             assertParamExists('updateSolution', 'solutionUpdateRequest', solutionUpdateRequest)
             const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{solution_id}', encodeURIComponent(String(solutionId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -7947,9 +7908,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -7981,9 +7941,9 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'solutionRole' is not null or undefined
             assertParamExists('updateSolutionAccessControl', 'solutionRole', solutionRole)
             const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/security/access/{identity_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)))
-                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{solution_id}', encodeURIComponent(String(solutionId)))
+                .replace('{identity_id}', encodeURIComponent(String(identityId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -7999,9 +7959,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -8030,8 +7989,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'solutionRole' is not null or undefined
             assertParamExists('updateSolutionDefaultSecurity', 'solutionRole', solutionRole)
             const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/security/default`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{solution_id}', encodeURIComponent(String(solutionId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -8047,9 +8006,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -8081,9 +8039,9 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'runTemplateParameterUpdateRequest' is not null or undefined
             assertParamExists('updateSolutionParameter', 'runTemplateParameterUpdateRequest', runTemplateParameterUpdateRequest)
             const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/parameters/{parameter_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)))
-                .replace(`{${"parameter_id"}}`, encodeURIComponent(String(parameterId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{solution_id}', encodeURIComponent(String(solutionId)))
+                .replace('{parameter_id}', encodeURIComponent(String(parameterId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -8099,9 +8057,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -8133,9 +8090,9 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'runTemplateParameterGroupUpdateRequest' is not null or undefined
             assertParamExists('updateSolutionParameterGroup', 'runTemplateParameterGroupUpdateRequest', runTemplateParameterGroupUpdateRequest)
             const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/parameterGroups/{parameter_group_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)))
-                .replace(`{${"parameter_group_id"}}`, encodeURIComponent(String(parameterGroupId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{solution_id}', encodeURIComponent(String(solutionId)))
+                .replace('{parameter_group_id}', encodeURIComponent(String(parameterGroupId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -8151,9 +8108,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -8185,9 +8141,9 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'runTemplateUpdateRequest' is not null or undefined
             assertParamExists('updateSolutionRunTemplate', 'runTemplateUpdateRequest', runTemplateUpdateRequest)
             const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/runTemplates/{run_template_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"solution_id"}}`, encodeURIComponent(String(solutionId)))
-                .replace(`{${"run_template_id"}}`, encodeURIComponent(String(runTemplateId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{solution_id}', encodeURIComponent(String(solutionId)))
+                .replace('{run_template_id}', encodeURIComponent(String(runTemplateId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -8203,9 +8159,8 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -9332,7 +9287,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             // verify required parameter 'workspaceCreateRequest' is not null or undefined
             assertParamExists('createWorkspace', 'workspaceCreateRequest', workspaceCreateRequest)
             const localVarPath = `/organizations/{organization_id}/workspaces`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -9348,9 +9303,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -9379,8 +9333,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             // verify required parameter 'workspaceAccessControl' is not null or undefined
             assertParamExists('createWorkspaceAccessControl', 'workspaceAccessControl', workspaceAccessControl)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/security/access`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -9396,9 +9350,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -9429,8 +9382,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             // verify required parameter 'file' is not null or undefined
             assertParamExists('createWorkspaceFile', 'file', file)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/files`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -9451,18 +9404,17 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             if (overwrite !== undefined) { 
                 localVarFormParams.append('overwrite', String(overwrite) as any);
             }
-    
+
             if (destination !== undefined) { 
                 localVarFormParams.append('destination', destination as any);
             }
-    
+
             if (file !== undefined) { 
                 localVarFormParams.append('file', file as any);
             }
-    
-    
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
-    
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -9487,8 +9439,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             // verify required parameter 'workspaceId' is not null or undefined
             assertParamExists('deleteWorkspace', 'workspaceId', workspaceId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -9505,7 +9457,6 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -9532,9 +9483,9 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             // verify required parameter 'identityId' is not null or undefined
             assertParamExists('deleteWorkspaceAccessControl', 'identityId', identityId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/security/access/{identity_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{identity_id}', encodeURIComponent(String(identityId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -9551,7 +9502,6 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -9578,8 +9528,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             // verify required parameter 'fileName' is not null or undefined
             assertParamExists('deleteWorkspaceFile', 'fileName', fileName)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/files/delete`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -9600,7 +9550,6 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             }
 
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -9624,8 +9573,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             // verify required parameter 'workspaceId' is not null or undefined
             assertParamExists('deleteWorkspaceFiles', 'workspaceId', workspaceId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/files`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -9642,7 +9591,6 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -9666,8 +9614,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             // verify required parameter 'workspaceId' is not null or undefined
             assertParamExists('getWorkspace', 'workspaceId', workspaceId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -9683,8 +9631,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -9711,9 +9659,9 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             // verify required parameter 'identityId' is not null or undefined
             assertParamExists('getWorkspaceAccessControl', 'identityId', identityId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/security/access/{identity_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{identity_id}', encodeURIComponent(String(identityId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -9729,8 +9677,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -9757,8 +9705,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             // verify required parameter 'fileName' is not null or undefined
             assertParamExists('getWorkspaceFile', 'fileName', fileName)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/files/download`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -9778,8 +9726,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
                 localVarQueryParameter['file_name'] = fileName;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/octet-stream';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -9803,8 +9751,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             // verify required parameter 'workspaceId' is not null or undefined
             assertParamExists('getWorkspaceSecurity', 'workspaceId', workspaceId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/security`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -9820,8 +9768,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -9845,8 +9793,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             // verify required parameter 'workspaceId' is not null or undefined
             assertParamExists('listWorkspaceFiles', 'workspaceId', workspaceId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/files`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -9862,8 +9810,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -9890,9 +9838,9 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             // verify required parameter 'role' is not null or undefined
             assertParamExists('listWorkspaceRolePermissions', 'role', role)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/permissions/{role}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"role"}}`, encodeURIComponent(String(role)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{role}', encodeURIComponent(String(role)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -9908,8 +9856,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -9933,8 +9881,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             // verify required parameter 'workspaceId' is not null or undefined
             assertParamExists('listWorkspaceSecurityUsers', 'workspaceId', workspaceId)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/security/users`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -9950,8 +9898,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -9974,7 +9922,7 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             // verify required parameter 'organizationId' is not null or undefined
             assertParamExists('listWorkspaces', 'organizationId', organizationId)
             const localVarPath = `/organizations/{organization_id}/workspaces`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -9998,8 +9946,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
                 localVarQueryParameter['size'] = size;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -10026,8 +9974,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             // verify required parameter 'workspaceUpdateRequest' is not null or undefined
             assertParamExists('updateWorkspace', 'workspaceUpdateRequest', workspaceUpdateRequest)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -10043,9 +9991,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -10077,9 +10024,9 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             // verify required parameter 'workspaceRole' is not null or undefined
             assertParamExists('updateWorkspaceAccessControl', 'workspaceRole', workspaceRole)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/security/access/{identity_id}`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)))
-                .replace(`{${"identity_id"}}`, encodeURIComponent(String(identityId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{identity_id}', encodeURIComponent(String(identityId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -10095,9 +10042,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -10126,8 +10072,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             // verify required parameter 'workspaceRole' is not null or undefined
             assertParamExists('updateWorkspaceDefaultSecurity', 'workspaceRole', workspaceRole)
             const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/security/default`
-                .replace(`{${"organization_id"}}`, encodeURIComponent(String(organizationId)))
-                .replace(`{${"workspace_id"}}`, encodeURIComponent(String(workspaceId)));
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -10143,9 +10089,8 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
