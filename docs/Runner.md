@@ -25,6 +25,7 @@ Name | Type | Description | Notes
 **runSizing** | [**RunnerResourceSizing**](RunnerResourceSizing.md) | definition of resources needed for the runner run | [optional] [default to undefined]
 **parametersValues** | [**Array&lt;RunnerRunTemplateParameterValue&gt;**](RunnerRunTemplateParameterValue.md) | the list of Solution Run Template parameters values | [default to undefined]
 **lastRunInfo** | [**LastRunInfo**](LastRunInfo.md) | last run info from current runner | [default to undefined]
+**status** | [**RunnerStatus**](RunnerStatus.md) |  | [default to undefined]
 **validationStatus** | [**RunnerValidationStatus**](RunnerValidationStatus.md) |  | [default to undefined]
 **security** | [**RunnerSecurity**](RunnerSecurity.md) |  | [default to undefined]
 
@@ -53,6 +54,7 @@ const instance: Runner = {
     runSizing,
     parametersValues,
     lastRunInfo,
+    status,
     validationStatus,
     security,
 };

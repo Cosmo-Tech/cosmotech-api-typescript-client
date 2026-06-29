@@ -1079,6 +1079,7 @@ export interface Runner {
      * last run info from current runner
      */
     'lastRunInfo': LastRunInfo;
+    'status': RunnerStatus;
     'validationStatus': RunnerValidationStatus;
     'security': RunnerSecurity;
 }
@@ -1225,6 +1226,18 @@ export interface RunnerSecurity {
      */
     'accessControlList': Array<RunnerAccessControl>;
 }
+/**
+ * the status of the runner
+ */
+
+export const RunnerStatus = {
+    Ok: 'Ok',
+    Archived: 'Archived',
+} as const;
+
+export type RunnerStatus = typeof RunnerStatus[keyof typeof RunnerStatus];
+
+
 /**
  * Request object for updating a runner
  */
