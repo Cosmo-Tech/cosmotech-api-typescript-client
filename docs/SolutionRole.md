@@ -1,12 +1,12 @@
 # SolutionRole
 
-The Solution Role
+the Solution Role
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**role** | **string** | The Solution Role | [default to undefined]
+**role** | **string** | the Solution Role | [default to undefined]
 
 ## Example
 
