@@ -1,11 +1,11 @@
 {
   "name": "@cosmotech/api-ts",
-  "version": "4.2.4-onprem",
+  "version": "5.1.0-rc1",
   "description": "OpenAPI client for @cosmotech/api-ts",
   "author": "OpenAPI-Generator Contributors",
   "repository": {
     "type": "git",
-    "url": "https://github.com/GIT_USER_ID/GIT_REPO_ID.git"
+    "url": "https://github.com/Cosmo-Tech/cosmotech-api-typescript-client.git"
   },
   "keywords": [
     "axios",
@@ -22,7 +22,7 @@
     "prepare": "npm run build"
   },
   "dependencies": {
-    "axios": "^1.6.1"
+    "axios": "^1.16.0"
   },
   "devDependencies": {
     "@types/node": "12.11.5 - 12.20.42",
