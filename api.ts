@@ -170,6 +170,49 @@ export interface DatasetEditInfo {
     'userId': string;
 }
 /**
+ * A group member of the dataset
+ */
+export interface DatasetMemberGroup {
+    /**
+     * The group id
+     */
+    'id': string;
+    /**
+     * The group role in the dataset
+     */
+    'role': string;
+    /**
+     * The list of users in the group
+     */
+    'users': Array<string>;
+}
+/**
+ * A user member of the dataset
+ */
+export interface DatasetMemberUser {
+    /**
+     * The user id
+     */
+    'id': string;
+    /**
+     * The user role in the dataset
+     */
+    'role': string;
+}
+/**
+ * The Dataset members, including users and groups
+ */
+export interface DatasetMembers {
+    /**
+     * The list of users in the dataset
+     */
+    'users': Array<DatasetMemberUser>;
+    /**
+     * The list of groups in the dataset
+     */
+    'groups': Array<DatasetMemberGroup>;
+}
+/**
  * Dataset part object
  */
 export interface DatasetPart {
@@ -315,6 +358,49 @@ export const LastRunInfoLastRunStatusEnum = {
 export type LastRunInfoLastRunStatusEnum = typeof LastRunInfoLastRunStatusEnum[keyof typeof LastRunInfoLastRunStatusEnum];
 
 /**
+ * A group member of the IAM
+ */
+export interface MemberGroup {
+    /**
+     * The group id
+     */
+    'id': string;
+    /**
+     * The user role in the IAM
+     */
+    'role': string;
+    /**
+     * The list of users in the group
+     */
+    'users': Array<string>;
+}
+/**
+ * A user member of the IAM
+ */
+export interface MemberUser {
+    /**
+     * The user id
+     */
+    'id': string;
+    /**
+     * The user role in the IAM
+     */
+    'role': string;
+}
+/**
+ * The members, including users and groups
+ */
+export interface Members {
+    /**
+     * The list of users in the IAM
+     */
+    'users': Array<MemberUser>;
+    /**
+     * The list of groups in the IAM
+     */
+    'groups': Array<MemberGroup>;
+}
+/**
  * An Organization
  */
 export interface Organization {
@@ -368,6 +454,49 @@ export interface OrganizationEditInfo {
      * The id of the user who did the modification
      */
     'userId': string;
+}
+/**
+ * A group member of the organization
+ */
+export interface OrganizationMemberGroup {
+    /**
+     * The group id
+     */
+    'id': string;
+    /**
+     * The user role in the organization
+     */
+    'role': string;
+    /**
+     * The list of users in the group
+     */
+    'users': Array<string>;
+}
+/**
+ * A user member of the organization
+ */
+export interface OrganizationMemberUser {
+    /**
+     * The user id
+     */
+    'id': string;
+    /**
+     * The user role in the organization
+     */
+    'role': string;
+}
+/**
+ * The Organization members, including users and groups
+ */
+export interface OrganizationMembers {
+    /**
+     * The list of users in the organization
+     */
+    'users': Array<OrganizationMemberUser>;
+    /**
+     * The list of groups in the organization
+     */
+    'groups': Array<OrganizationMemberGroup>;
 }
 /**
  * The Organization Role
@@ -1177,6 +1306,49 @@ export interface RunnerEditInfo {
     'userId': string;
 }
 /**
+ * A group member of the runner
+ */
+export interface RunnerMemberGroup {
+    /**
+     * The group id
+     */
+    'id': string;
+    /**
+     * The group role in the runner
+     */
+    'role': string;
+    /**
+     * The list of users in the group
+     */
+    'users': Array<string>;
+}
+/**
+ * A user member of the runner
+ */
+export interface RunnerMemberUser {
+    /**
+     * The user id
+     */
+    'id': string;
+    /**
+     * The user role in the runner
+     */
+    'role': string;
+}
+/**
+ * The Runner members, including users and groups
+ */
+export interface RunnerMembers {
+    /**
+     * The list of users in the runner
+     */
+    'users': Array<RunnerMemberUser>;
+    /**
+     * The list of groups in the runner
+     */
+    'groups': Array<RunnerMemberGroup>;
+}
+/**
  * A description object for resource requests and limits. Values must follow the Kubernetes resource requirements/limits syntax:  See https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-units-in-kubernetes Default configuration is basic sizing 
  */
 export interface RunnerResourceSizing {
@@ -1444,6 +1616,49 @@ export interface SolutionEditInfo {
     'userId': string;
 }
 /**
+ * A group member of the solution
+ */
+export interface SolutionMemberGroup {
+    /**
+     * The group id
+     */
+    'id': string;
+    /**
+     * The group role in the solution
+     */
+    'role': string;
+    /**
+     * The list of users in the group
+     */
+    'users': Array<string>;
+}
+/**
+ * A user member of the solution
+ */
+export interface SolutionMemberUser {
+    /**
+     * The user id
+     */
+    'id': string;
+    /**
+     * The user role in the solution
+     */
+    'role': string;
+}
+/**
+ * The Solution members, including users and groups
+ */
+export interface SolutionMembers {
+    /**
+     * The list of users in the solution
+     */
+    'users': Array<SolutionMemberUser>;
+    /**
+     * The list of groups in the solution
+     */
+    'groups': Array<SolutionMemberGroup>;
+}
+/**
  * The Solution Role
  */
 export interface SolutionRole {
@@ -1623,6 +1838,49 @@ export interface WorkspaceFile {
      * The Workspace File name
      */
     'fileName': string;
+}
+/**
+ * A group member of the workspace
+ */
+export interface WorkspaceMemberGroup {
+    /**
+     * The group id
+     */
+    'id': string;
+    /**
+     * The group role in the workspace
+     */
+    'role': string;
+    /**
+     * The list of users in the group
+     */
+    'users': Array<string>;
+}
+/**
+ * A user member of the workspace
+ */
+export interface WorkspaceMemberUser {
+    /**
+     * The user id
+     */
+    'id': string;
+    /**
+     * The user role in the workspace
+     */
+    'role': string;
+}
+/**
+ * The Workspace members, including users and groups
+ */
+export interface WorkspaceMembers {
+    /**
+     * The list of users in the workspace
+     */
+    'users': Array<WorkspaceMemberUser>;
+    /**
+     * The list of groups in the workspace
+     */
+    'groups': Array<WorkspaceMemberGroup>;
 }
 /**
  * The Workspace Role
@@ -2131,6 +2389,52 @@ export const DatasetApiAxiosParamCreator = function (configuration?: Configurati
                 .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
                 .replace('{dataset_id}', encodeURIComponent(String(datasetId)))
                 .replace('{identity_id}', encodeURIComponent(String(identityId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Retrieve detailed information about members of a dataset.
+         * @summary Get the members of a Dataset
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getDatasetMembers: async (organizationId: string, workspaceId: string, datasetId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('getDatasetMembers', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('getDatasetMembers', 'workspaceId', workspaceId)
+            // verify required parameter 'datasetId' is not null or undefined
+            assertParamExists('getDatasetMembers', 'datasetId', datasetId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/members`
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{dataset_id}', encodeURIComponent(String(datasetId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -3021,6 +3325,21 @@ export const DatasetApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Retrieve detailed information about members of a dataset.
+         * @summary Get the members of a Dataset
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getDatasetMembers(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DatasetMembers>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getDatasetMembers(organizationId, workspaceId, datasetId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DatasetApi.getDatasetMembers']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * 
          * @summary Retrieve a data part of a Dataset
          * @param {string} organizationId the Organization identifier
@@ -3356,6 +3675,18 @@ export const DatasetApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getDatasetAccessControl(organizationId, workspaceId, datasetId, identityId, options).then((request) => request(axios, basePath));
         },
         /**
+         * Retrieve detailed information about members of a dataset.
+         * @summary Get the members of a Dataset
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} datasetId the Dataset identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getDatasetMembers(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig): AxiosPromise<DatasetMembers> {
+            return localVarFp.getDatasetMembers(organizationId, workspaceId, datasetId, options).then((request) => request(axios, basePath));
+        },
+        /**
          * 
          * @summary Retrieve a data part of a Dataset
          * @param {string} organizationId the Organization identifier
@@ -3662,6 +3993,19 @@ export class DatasetApi extends BaseAPI {
     }
 
     /**
+     * Retrieve detailed information about members of a dataset.
+     * @summary Get the members of a Dataset
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} datasetId the Dataset identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public getDatasetMembers(organizationId: string, workspaceId: string, datasetId: string, options?: RawAxiosRequestConfig) {
+        return DatasetApiFp(this.configuration).getDatasetMembers(organizationId, workspaceId, datasetId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * 
      * @summary Retrieve a data part of a Dataset
      * @param {string} organizationId the Organization identifier
@@ -3845,6 +4189,169 @@ export class DatasetApi extends BaseAPI {
      */
     public updateDatasetPart(organizationId: string, workspaceId: string, datasetId: string, datasetPartId: string, datasetPartUpdateRequest: DatasetPartUpdateRequest, options?: RawAxiosRequestConfig) {
         return DatasetApiFp(this.configuration).updateDatasetPart(organizationId, workspaceId, datasetId, datasetPartId, datasetPartUpdateRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * IAMInfoApi - axios parameter creator
+ */
+export const IAMInfoApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Get the list of all groups
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listIAMGroups: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/iaminfo/groups`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get ALL IAM members list
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listIAMMembers: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/iaminfo/members`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * IAMInfoApi - functional programming interface
+ */
+export const IAMInfoApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = IAMInfoApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary Get the list of all groups
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listIAMGroups(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listIAMGroups(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['IAMInfoApi.listIAMGroups']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Get ALL IAM members list
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listIAMMembers(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Members>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listIAMMembers(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['IAMInfoApi.listIAMMembers']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * IAMInfoApi - factory interface
+ */
+export const IAMInfoApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = IAMInfoApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary Get the list of all groups
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listIAMGroups(options?: RawAxiosRequestConfig): AxiosPromise<Array<string>> {
+            return localVarFp.listIAMGroups(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get ALL IAM members list
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listIAMMembers(options?: RawAxiosRequestConfig): AxiosPromise<Members> {
+            return localVarFp.listIAMMembers(options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * IAMInfoApi - object-oriented interface
+ */
+export class IAMInfoApi extends BaseAPI {
+    /**
+     * 
+     * @summary Get the list of all groups
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public listIAMGroups(options?: RawAxiosRequestConfig) {
+        return IAMInfoApiFp(this.configuration).listIAMGroups(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get ALL IAM members list
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public listIAMMembers(options?: RawAxiosRequestConfig) {
+        return IAMInfoApiFp(this.configuration).listIAMMembers(options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -4167,6 +4674,44 @@ export const OrganizationApiAxiosParamCreator = function (configuration?: Config
             const localVarPath = `/organizations/{organization_id}/security/access/{identity_id}`
                 .replace('{organization_id}', encodeURIComponent(String(organizationId)))
                 .replace('{identity_id}', encodeURIComponent(String(identityId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Retrieve detailed information about members of an organization.
+         * @summary Get the members of an Organization
+         * @param {string} organizationId The Organization identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getOrganizationMembers: async (organizationId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('getOrganizationMembers', 'organizationId', organizationId)
+            const localVarPath = `/organizations/{organization_id}/members`
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -4613,6 +5158,19 @@ export const OrganizationApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Retrieve detailed information about members of an organization.
+         * @summary Get the members of an Organization
+         * @param {string} organizationId The Organization identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getOrganizationMembers(organizationId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrganizationMembers>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getOrganizationMembers(organizationId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OrganizationApi.getOrganizationMembers']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * 
          * @summary Get the Organization permissions by given role
          * @param {string} organizationId The Organization identifier
@@ -4794,6 +5352,16 @@ export const OrganizationApiFactory = function (configuration?: Configuration, b
             return localVarFp.getOrganizationAccessControl(organizationId, identityId, options).then((request) => request(axios, basePath));
         },
         /**
+         * Retrieve detailed information about members of an organization.
+         * @summary Get the members of an Organization
+         * @param {string} organizationId The Organization identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getOrganizationMembers(organizationId: string, options?: RawAxiosRequestConfig): AxiosPromise<OrganizationMembers> {
+            return localVarFp.getOrganizationMembers(organizationId, options).then((request) => request(axios, basePath));
+        },
+        /**
          * 
          * @summary Get the Organization permissions by given role
          * @param {string} organizationId The Organization identifier
@@ -4952,6 +5520,17 @@ export class OrganizationApi extends BaseAPI {
      */
     public getOrganizationAccessControl(organizationId: string, identityId: string, options?: RawAxiosRequestConfig) {
         return OrganizationApiFp(this.configuration).getOrganizationAccessControl(organizationId, identityId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Retrieve detailed information about members of an organization.
+     * @summary Get the members of an Organization
+     * @param {string} organizationId The Organization identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public getOrganizationMembers(organizationId: string, options?: RawAxiosRequestConfig) {
+        return OrganizationApiFp(this.configuration).getOrganizationMembers(organizationId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5850,6 +6429,52 @@ export const RunnerApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
+         * Retrieve detailed information about members of a runner.
+         * @summary Get the members of a Runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRunnerMembers: async (organizationId: string, workspaceId: string, runnerId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('getRunnerMembers', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('getRunnerMembers', 'workspaceId', workspaceId)
+            // verify required parameter 'runnerId' is not null or undefined
+            assertParamExists('getRunnerMembers', 'runnerId', runnerId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/members`
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)))
+                .replace('{runner_id}', encodeURIComponent(String(runnerId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * 
          * @summary Get the Runner security information
          * @param {string} organizationId the Organization identifier
@@ -6394,6 +7019,21 @@ export const RunnerApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Retrieve detailed information about members of a runner.
+         * @summary Get the members of a Runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getRunnerMembers(organizationId: string, workspaceId: string, runnerId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RunnerMembers>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRunnerMembers(organizationId, workspaceId, runnerId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RunnerApi.getRunnerMembers']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * 
          * @summary Get the Runner security information
          * @param {string} organizationId the Organization identifier
@@ -6619,6 +7259,18 @@ export const RunnerApiFactory = function (configuration?: Configuration, basePat
             return localVarFp.getRunnerAccessControl(organizationId, workspaceId, runnerId, identityId, options).then((request) => request(axios, basePath));
         },
         /**
+         * Retrieve detailed information about members of a runner.
+         * @summary Get the members of a Runner
+         * @param {string} organizationId the Organization identifier
+         * @param {string} workspaceId the Workspace identifier
+         * @param {string} runnerId the Runner identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRunnerMembers(organizationId: string, workspaceId: string, runnerId: string, options?: RawAxiosRequestConfig): AxiosPromise<RunnerMembers> {
+            return localVarFp.getRunnerMembers(organizationId, workspaceId, runnerId, options).then((request) => request(axios, basePath));
+        },
+        /**
          * 
          * @summary Get the Runner security information
          * @param {string} organizationId the Organization identifier
@@ -6818,6 +7470,19 @@ export class RunnerApi extends BaseAPI {
      */
     public getRunnerAccessControl(organizationId: string, workspaceId: string, runnerId: string, identityId: string, options?: RawAxiosRequestConfig) {
         return RunnerApiFp(this.configuration).getRunnerAccessControl(organizationId, workspaceId, runnerId, identityId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Retrieve detailed information about members of a runner.
+     * @summary Get the members of a Runner
+     * @param {string} organizationId the Organization identifier
+     * @param {string} workspaceId the Workspace identifier
+     * @param {string} runnerId the Runner identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public getRunnerMembers(organizationId: string, workspaceId: string, runnerId: string, options?: RawAxiosRequestConfig) {
+        return RunnerApiFp(this.configuration).getRunnerMembers(organizationId, workspaceId, runnerId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -7511,6 +8176,48 @@ export const SolutionApiAxiosParamCreator = function (configuration?: Configurat
                 .replace('{organization_id}', encodeURIComponent(String(organizationId)))
                 .replace('{solution_id}', encodeURIComponent(String(solutionId)))
                 .replace('{identity_id}', encodeURIComponent(String(identityId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Retrieve detailed information about members of a solution.
+         * @summary Get the members of a Solution
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSolutionMembers: async (organizationId: string, solutionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('getSolutionMembers', 'organizationId', organizationId)
+            // verify required parameter 'solutionId' is not null or undefined
+            assertParamExists('getSolutionMembers', 'solutionId', solutionId)
+            const localVarPath = `/organizations/{organization_id}/solutions/{solution_id}/members`
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{solution_id}', encodeURIComponent(String(solutionId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -8387,6 +9094,20 @@ export const SolutionApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Retrieve detailed information about members of a solution.
+         * @summary Get the members of a Solution
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getSolutionMembers(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SolutionMembers>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getSolutionMembers(organizationId, solutionId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SolutionApi.getSolutionMembers']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * 
          * @summary Get the details of a solution parameter
          * @param {string} organizationId the Organization identifier
@@ -8758,6 +9479,17 @@ export const SolutionApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.getSolutionAccessControl(organizationId, solutionId, identityId, options).then((request) => request(axios, basePath));
         },
         /**
+         * Retrieve detailed information about members of a solution.
+         * @summary Get the members of a Solution
+         * @param {string} organizationId the Organization identifier
+         * @param {string} solutionId the Solution identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSolutionMembers(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig): AxiosPromise<SolutionMembers> {
+            return localVarFp.getSolutionMembers(organizationId, solutionId, options).then((request) => request(axios, basePath));
+        },
+        /**
          * 
          * @summary Get the details of a solution parameter
          * @param {string} organizationId the Organization identifier
@@ -9095,6 +9827,18 @@ export class SolutionApi extends BaseAPI {
      */
     public getSolutionAccessControl(organizationId: string, solutionId: string, identityId: string, options?: RawAxiosRequestConfig) {
         return SolutionApiFp(this.configuration).getSolutionAccessControl(organizationId, solutionId, identityId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Retrieve detailed information about members of a solution.
+     * @summary Get the members of a Solution
+     * @param {string} organizationId the Organization identifier
+     * @param {string} solutionId the Solution identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public getSolutionMembers(organizationId: string, solutionId: string, options?: RawAxiosRequestConfig) {
+        return SolutionApiFp(this.configuration).getSolutionMembers(organizationId, solutionId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -9751,6 +10495,48 @@ export const WorkspaceApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
+         * Retrieve detailed information about members of a workspace.
+         * @summary Get the members of a Workspace
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getWorkspaceMembers: async (organizationId: string, workspaceId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'organizationId' is not null or undefined
+            assertParamExists('getWorkspaceMembers', 'organizationId', organizationId)
+            // verify required parameter 'workspaceId' is not null or undefined
+            assertParamExists('getWorkspaceMembers', 'workspaceId', workspaceId)
+            const localVarPath = `/organizations/{organization_id}/workspaces/{workspace_id}/members`
+                .replace('{organization_id}', encodeURIComponent(String(organizationId)))
+                .replace('{workspace_id}', encodeURIComponent(String(workspaceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuth2AuthCode required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuth2AuthCode", [], configuration)
+
+            localVarHeaderParameter['Accept'] = 'application/json,application/yaml';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * 
          * @summary Get the Workspace security information
          * @param {string} organizationId The Organization identifier
@@ -10273,6 +11059,20 @@ export const WorkspaceApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Retrieve detailed information about members of a workspace.
+         * @summary Get the members of a Workspace
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getWorkspaceMembers(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WorkspaceMembers>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getWorkspaceMembers(organizationId, workspaceId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['WorkspaceApi.getWorkspaceMembers']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * 
          * @summary Get the Workspace security information
          * @param {string} organizationId The Organization identifier
@@ -10518,6 +11318,17 @@ export const WorkspaceApiFactory = function (configuration?: Configuration, base
             return localVarFp.getWorkspaceFile(organizationId, workspaceId, fileName, options).then((request) => request(axios, basePath));
         },
         /**
+         * Retrieve detailed information about members of a workspace.
+         * @summary Get the members of a Workspace
+         * @param {string} organizationId The Organization identifier
+         * @param {string} workspaceId The Workspace identifier
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getWorkspaceMembers(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig): AxiosPromise<WorkspaceMembers> {
+            return localVarFp.getWorkspaceMembers(organizationId, workspaceId, options).then((request) => request(axios, basePath));
+        },
+        /**
          * 
          * @summary Get the Workspace security information
          * @param {string} organizationId The Organization identifier
@@ -10744,6 +11555,18 @@ export class WorkspaceApi extends BaseAPI {
      */
     public getWorkspaceFile(organizationId: string, workspaceId: string, fileName: string, options?: RawAxiosRequestConfig) {
         return WorkspaceApiFp(this.configuration).getWorkspaceFile(organizationId, workspaceId, fileName, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Retrieve detailed information about members of a workspace.
+     * @summary Get the members of a Workspace
+     * @param {string} organizationId The Organization identifier
+     * @param {string} workspaceId The Workspace identifier
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public getWorkspaceMembers(organizationId: string, workspaceId: string, options?: RawAxiosRequestConfig) {
+        return WorkspaceApiFp(this.configuration).getWorkspaceMembers(organizationId, workspaceId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

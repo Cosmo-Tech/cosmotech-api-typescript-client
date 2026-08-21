@@ -60,6 +60,7 @@ Class | Method | HTTP request | Description
 *DatasetApi* | [**downloadDatasetPart**](docs/DatasetApi.md#downloaddatasetpart) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts/{dataset_part_id}/download | Download data from a dataset part
 *DatasetApi* | [**getDataset**](docs/DatasetApi.md#getdataset) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id} | Retrieve a Dataset
 *DatasetApi* | [**getDatasetAccessControl**](docs/DatasetApi.md#getdatasetaccesscontrol) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/security/access/{identity_id} | Get a control access for the Dataset
+*DatasetApi* | [**getDatasetMembers**](docs/DatasetApi.md#getdatasetmembers) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/members | Get the members of a Dataset
 *DatasetApi* | [**getDatasetPart**](docs/DatasetApi.md#getdatasetpart) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts/{dataset_part_id} | Retrieve a data part of a Dataset
 *DatasetApi* | [**listDatasetParts**](docs/DatasetApi.md#listdatasetparts) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts | Retrieve all dataset parts of a Dataset
 *DatasetApi* | [**listDatasetSecurityUsers**](docs/DatasetApi.md#listdatasetsecurityusers) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/security/users | Get the Dataset security users list
@@ -72,6 +73,8 @@ Class | Method | HTTP request | Description
 *DatasetApi* | [**updateDatasetAccessControl**](docs/DatasetApi.md#updatedatasetaccesscontrol) | **PATCH** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/security/access/{identity_id} | Update the specified access to User for a Dataset
 *DatasetApi* | [**updateDatasetDefaultSecurity**](docs/DatasetApi.md#updatedatasetdefaultsecurity) | **PATCH** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/security/default | Set the Dataset default security
 *DatasetApi* | [**updateDatasetPart**](docs/DatasetApi.md#updatedatasetpart) | **PATCH** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts/{dataset_part_id} | Update existing dataset parts information of a Dataset
+*IAMInfoApi* | [**listIAMGroups**](docs/IAMInfoApi.md#listiamgroups) | **GET** /iaminfo/groups | Get the list of all groups
+*IAMInfoApi* | [**listIAMMembers**](docs/IAMInfoApi.md#listiammembers) | **GET** /iaminfo/members | Get ALL IAM members list
 *MetaApi* | [**about**](docs/MetaApi.md#about) | **GET** /about | Get various information about the API
 *OrganizationApi* | [**createOrganization**](docs/OrganizationApi.md#createorganization) | **POST** /organizations | Create a new organization
 *OrganizationApi* | [**createOrganizationAccessControl**](docs/OrganizationApi.md#createorganizationaccesscontrol) | **POST** /organizations/{organization_id}/security/access | Add a control access to the Organization
@@ -79,6 +82,7 @@ Class | Method | HTTP request | Description
 *OrganizationApi* | [**deleteOrganizationAccessControl**](docs/OrganizationApi.md#deleteorganizationaccesscontrol) | **DELETE** /organizations/{organization_id}/security/access/{identity_id} | Remove the specified access from the given Organization
 *OrganizationApi* | [**getOrganization**](docs/OrganizationApi.md#getorganization) | **GET** /organizations/{organization_id} | Get the details of an Organization
 *OrganizationApi* | [**getOrganizationAccessControl**](docs/OrganizationApi.md#getorganizationaccesscontrol) | **GET** /organizations/{organization_id}/security/access/{identity_id} | Get a control access for the Organization
+*OrganizationApi* | [**getOrganizationMembers**](docs/OrganizationApi.md#getorganizationmembers) | **GET** /organizations/{organization_id}/members | Get the members of an Organization
 *OrganizationApi* | [**getOrganizationPermissions**](docs/OrganizationApi.md#getorganizationpermissions) | **GET** /organizations/{organization_id}/permissions/{role} | Get the Organization permissions by given role
 *OrganizationApi* | [**getOrganizationSecurity**](docs/OrganizationApi.md#getorganizationsecurity) | **GET** /organizations/{organization_id}/security | Get the Organization security information
 *OrganizationApi* | [**listOrganizationSecurityUsers**](docs/OrganizationApi.md#listorganizationsecurityusers) | **GET** /organizations/{organization_id}/security/users | Get the Organization security users list
@@ -98,6 +102,7 @@ Class | Method | HTTP request | Description
 *RunnerApi* | [**deleteRunnerAccessControl**](docs/RunnerApi.md#deleterunneraccesscontrol) | **DELETE** /organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/security/access/{identity_id} | Remove the specified access from the given Runner
 *RunnerApi* | [**getRunner**](docs/RunnerApi.md#getrunner) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id} | Get the details of a runner
 *RunnerApi* | [**getRunnerAccessControl**](docs/RunnerApi.md#getrunneraccesscontrol) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/security/access/{identity_id} | Get a control access for the Runner
+*RunnerApi* | [**getRunnerMembers**](docs/RunnerApi.md#getrunnermembers) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/members | Get the members of a Runner
 *RunnerApi* | [**getRunnerSecurity**](docs/RunnerApi.md#getrunnersecurity) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/security | Get the Runner security information
 *RunnerApi* | [**listRunnerPermissions**](docs/RunnerApi.md#listrunnerpermissions) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/permissions/{role} | Get the Runner permission by given role
 *RunnerApi* | [**listRunnerSecurityUsers**](docs/RunnerApi.md#listrunnersecurityusers) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/security/users | Get the Runner security users list
@@ -120,6 +125,7 @@ Class | Method | HTTP request | Description
 *SolutionApi* | [**getRunTemplate**](docs/SolutionApi.md#getruntemplate) | **GET** /organizations/{organization_id}/solutions/{solution_id}/runTemplates/{run_template_id} | Retrieve a solution run templates
 *SolutionApi* | [**getSolution**](docs/SolutionApi.md#getsolution) | **GET** /organizations/{organization_id}/solutions/{solution_id} | Get the details of a solution
 *SolutionApi* | [**getSolutionAccessControl**](docs/SolutionApi.md#getsolutionaccesscontrol) | **GET** /organizations/{organization_id}/solutions/{solution_id}/security/access/{identity_id} | Get solution access control
+*SolutionApi* | [**getSolutionMembers**](docs/SolutionApi.md#getsolutionmembers) | **GET** /organizations/{organization_id}/solutions/{solution_id}/members | Get the members of a Solution
 *SolutionApi* | [**getSolutionParameter**](docs/SolutionApi.md#getsolutionparameter) | **GET** /organizations/{organization_id}/solutions/{solution_id}/parameters/{parameter_id} | Get the details of a solution parameter
 *SolutionApi* | [**getSolutionParameterGroup**](docs/SolutionApi.md#getsolutionparametergroup) | **GET** /organizations/{organization_id}/solutions/{solution_id}/parameterGroups/{parameter_group_id} | Get details of a solution parameter group
 *SolutionApi* | [**getSolutionSecurity**](docs/SolutionApi.md#getsolutionsecurity) | **GET** /organizations/{organization_id}/solutions/{solution_id}/security | Get solution security information
@@ -144,6 +150,7 @@ Class | Method | HTTP request | Description
 *WorkspaceApi* | [**getWorkspace**](docs/WorkspaceApi.md#getworkspace) | **GET** /organizations/{organization_id}/workspaces/{workspace_id} | Get the details of a workspace
 *WorkspaceApi* | [**getWorkspaceAccessControl**](docs/WorkspaceApi.md#getworkspaceaccesscontrol) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/security/access/{identity_id} | Get a control access for the Workspace
 *WorkspaceApi* | [**getWorkspaceFile**](docs/WorkspaceApi.md#getworkspacefile) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/files/download | Download the Workspace File specified
+*WorkspaceApi* | [**getWorkspaceMembers**](docs/WorkspaceApi.md#getworkspacemembers) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/members | Get the members of a Workspace
 *WorkspaceApi* | [**getWorkspaceSecurity**](docs/WorkspaceApi.md#getworkspacesecurity) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/security | Get the Workspace security information
 *WorkspaceApi* | [**listWorkspaceFiles**](docs/WorkspaceApi.md#listworkspacefiles) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/files | List all Workspace files
 *WorkspaceApi* | [**listWorkspaceRolePermissions**](docs/WorkspaceApi.md#listworkspacerolepermissions) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/permissions/{role} | Get the Workspace permission by given role
@@ -166,6 +173,9 @@ Class | Method | HTTP request | Description
  - [DatasetAccessControl](docs/DatasetAccessControl.md)
  - [DatasetCreateRequest](docs/DatasetCreateRequest.md)
  - [DatasetEditInfo](docs/DatasetEditInfo.md)
+ - [DatasetMemberGroup](docs/DatasetMemberGroup.md)
+ - [DatasetMemberUser](docs/DatasetMemberUser.md)
+ - [DatasetMembers](docs/DatasetMembers.md)
  - [DatasetPart](docs/DatasetPart.md)
  - [DatasetPartCreateRequest](docs/DatasetPartCreateRequest.md)
  - [DatasetPartTypeEnum](docs/DatasetPartTypeEnum.md)
@@ -174,10 +184,16 @@ Class | Method | HTTP request | Description
  - [DatasetSecurity](docs/DatasetSecurity.md)
  - [DatasetUpdateRequest](docs/DatasetUpdateRequest.md)
  - [LastRunInfo](docs/LastRunInfo.md)
+ - [MemberGroup](docs/MemberGroup.md)
+ - [MemberUser](docs/MemberUser.md)
+ - [Members](docs/Members.md)
  - [Organization](docs/Organization.md)
  - [OrganizationAccessControl](docs/OrganizationAccessControl.md)
  - [OrganizationCreateRequest](docs/OrganizationCreateRequest.md)
  - [OrganizationEditInfo](docs/OrganizationEditInfo.md)
+ - [OrganizationMemberGroup](docs/OrganizationMemberGroup.md)
+ - [OrganizationMemberUser](docs/OrganizationMemberUser.md)
+ - [OrganizationMembers](docs/OrganizationMembers.md)
  - [OrganizationRole](docs/OrganizationRole.md)
  - [OrganizationSecurity](docs/OrganizationSecurity.md)
  - [OrganizationUpdateRequest](docs/OrganizationUpdateRequest.md)
@@ -205,6 +221,9 @@ Class | Method | HTTP request | Description
  - [RunnerCreateRequest](docs/RunnerCreateRequest.md)
  - [RunnerDatasets](docs/RunnerDatasets.md)
  - [RunnerEditInfo](docs/RunnerEditInfo.md)
+ - [RunnerMemberGroup](docs/RunnerMemberGroup.md)
+ - [RunnerMemberUser](docs/RunnerMemberUser.md)
+ - [RunnerMembers](docs/RunnerMembers.md)
  - [RunnerResourceSizing](docs/RunnerResourceSizing.md)
  - [RunnerRole](docs/RunnerRole.md)
  - [RunnerRunTemplateParameterValue](docs/RunnerRunTemplateParameterValue.md)
@@ -216,6 +235,9 @@ Class | Method | HTTP request | Description
  - [SolutionAccessControl](docs/SolutionAccessControl.md)
  - [SolutionCreateRequest](docs/SolutionCreateRequest.md)
  - [SolutionEditInfo](docs/SolutionEditInfo.md)
+ - [SolutionMemberGroup](docs/SolutionMemberGroup.md)
+ - [SolutionMemberUser](docs/SolutionMemberUser.md)
+ - [SolutionMembers](docs/SolutionMembers.md)
  - [SolutionRole](docs/SolutionRole.md)
  - [SolutionSecurity](docs/SolutionSecurity.md)
  - [SolutionUpdateRequest](docs/SolutionUpdateRequest.md)
@@ -224,6 +246,9 @@ Class | Method | HTTP request | Description
  - [WorkspaceCreateRequest](docs/WorkspaceCreateRequest.md)
  - [WorkspaceEditInfo](docs/WorkspaceEditInfo.md)
  - [WorkspaceFile](docs/WorkspaceFile.md)
+ - [WorkspaceMemberGroup](docs/WorkspaceMemberGroup.md)
+ - [WorkspaceMemberUser](docs/WorkspaceMemberUser.md)
+ - [WorkspaceMembers](docs/WorkspaceMembers.md)
  - [WorkspaceRole](docs/WorkspaceRole.md)
  - [WorkspaceSecurity](docs/WorkspaceSecurity.md)
  - [WorkspaceSolution](docs/WorkspaceSolution.md)

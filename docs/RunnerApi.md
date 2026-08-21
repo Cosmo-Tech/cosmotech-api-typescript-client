@@ -10,6 +10,7 @@ All URIs are relative to *http://localhost:8080*
 |[**deleteRunnerAccessControl**](#deleterunneraccesscontrol) | **DELETE** /organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/security/access/{identity_id} | Remove the specified access from the given Runner|
 |[**getRunner**](#getrunner) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id} | Get the details of a runner|
 |[**getRunnerAccessControl**](#getrunneraccesscontrol) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/security/access/{identity_id} | Get a control access for the Runner|
+|[**getRunnerMembers**](#getrunnermembers) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/members | Get the members of a Runner|
 |[**getRunnerSecurity**](#getrunnersecurity) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/security | Get the Runner security information|
 |[**listRunnerPermissions**](#listrunnerpermissions) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/permissions/{role} | Get the Runner permission by given role|
 |[**listRunnerSecurityUsers**](#listrunnersecurityusers) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/runners/{runner_id}/security/users | Get the Runner security users list|
@@ -374,6 +375,64 @@ const { status, data } = await apiInstance.getRunnerAccessControl(
 |-------------|-------------|------------------|
 |**200** | The Runner access |  -  |
 |**404** | the Runner or user specified is unknown or you don\&#39;t have access to it |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getRunnerMembers**
+> RunnerMembers getRunnerMembers()
+
+Retrieve detailed information about members of a runner.
+
+### Example
+
+```typescript
+import {
+    RunnerApi,
+    Configuration
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new RunnerApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let workspaceId: string; //the Workspace identifier (default to undefined)
+let runnerId: string; //the Runner identifier (default to undefined)
+
+const { status, data } = await apiInstance.getRunnerMembers(
+    organizationId,
+    workspaceId,
+    runnerId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
+| **runnerId** | [**string**] | the Runner identifier | defaults to undefined|
+
+
+### Return type
+
+**RunnerMembers**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/yaml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The Runner members |  -  |
+|**404** | the Runner specified is unknown or you don\&#39;t have access to it |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

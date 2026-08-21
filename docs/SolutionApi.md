@@ -17,6 +17,7 @@ All URIs are relative to *http://localhost:8080*
 |[**getRunTemplate**](#getruntemplate) | **GET** /organizations/{organization_id}/solutions/{solution_id}/runTemplates/{run_template_id} | Retrieve a solution run templates|
 |[**getSolution**](#getsolution) | **GET** /organizations/{organization_id}/solutions/{solution_id} | Get the details of a solution|
 |[**getSolutionAccessControl**](#getsolutionaccesscontrol) | **GET** /organizations/{organization_id}/solutions/{solution_id}/security/access/{identity_id} | Get solution access control|
+|[**getSolutionMembers**](#getsolutionmembers) | **GET** /organizations/{organization_id}/solutions/{solution_id}/members | Get the members of a Solution|
 |[**getSolutionParameter**](#getsolutionparameter) | **GET** /organizations/{organization_id}/solutions/{solution_id}/parameters/{parameter_id} | Get the details of a solution parameter|
 |[**getSolutionParameterGroup**](#getsolutionparametergroup) | **GET** /organizations/{organization_id}/solutions/{solution_id}/parameterGroups/{parameter_group_id} | Get details of a solution parameter group|
 |[**getSolutionSecurity**](#getsolutionsecurity) | **GET** /organizations/{organization_id}/solutions/{solution_id}/security | Get solution security information|
@@ -772,6 +773,61 @@ const { status, data } = await apiInstance.getSolutionAccessControl(
 |-------------|-------------|------------------|
 |**200** | Solution access control successfully retrieved |  -  |
 |**404** | Solution or user not found or insufficient access rights |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getSolutionMembers**
+> SolutionMembers getSolutionMembers()
+
+Retrieve detailed information about members of a solution.
+
+### Example
+
+```typescript
+import {
+    SolutionApi,
+    Configuration
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new SolutionApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let solutionId: string; //the Solution identifier (default to undefined)
+
+const { status, data } = await apiInstance.getSolutionMembers(
+    organizationId,
+    solutionId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
+
+
+### Return type
+
+**SolutionMembers**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/yaml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The Solution members |  -  |
+|**404** | the Solution specified is unknown or you don\&#39;t have access to it |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

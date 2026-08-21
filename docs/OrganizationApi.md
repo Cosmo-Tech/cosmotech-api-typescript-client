@@ -10,6 +10,7 @@ All URIs are relative to *http://localhost:8080*
 |[**deleteOrganizationAccessControl**](#deleteorganizationaccesscontrol) | **DELETE** /organizations/{organization_id}/security/access/{identity_id} | Remove the specified access from the given Organization|
 |[**getOrganization**](#getorganization) | **GET** /organizations/{organization_id} | Get the details of an Organization|
 |[**getOrganizationAccessControl**](#getorganizationaccesscontrol) | **GET** /organizations/{organization_id}/security/access/{identity_id} | Get a control access for the Organization|
+|[**getOrganizationMembers**](#getorganizationmembers) | **GET** /organizations/{organization_id}/members | Get the members of an Organization|
 |[**getOrganizationPermissions**](#getorganizationpermissions) | **GET** /organizations/{organization_id}/permissions/{role} | Get the Organization permissions by given role|
 |[**getOrganizationSecurity**](#getorganizationsecurity) | **GET** /organizations/{organization_id}/security | Get the Organization security information|
 |[**listOrganizationSecurityUsers**](#listorganizationsecurityusers) | **GET** /organizations/{organization_id}/security/users | Get the Organization security users list|
@@ -337,6 +338,57 @@ const { status, data } = await apiInstance.getOrganizationAccessControl(
 |-------------|-------------|------------------|
 |**200** | The Organization access |  -  |
 |**404** | The Organization or user specified is unknown or you don\&#39;t have access to it |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getOrganizationMembers**
+> OrganizationMembers getOrganizationMembers()
+
+Retrieve detailed information about members of an organization.
+
+### Example
+
+```typescript
+import {
+    OrganizationApi,
+    Configuration
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new OrganizationApi(configuration);
+
+let organizationId: string; //The Organization identifier (default to undefined)
+
+const { status, data } = await apiInstance.getOrganizationMembers(
+    organizationId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | [**string**] | The Organization identifier | defaults to undefined|
+
+
+### Return type
+
+**OrganizationMembers**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/yaml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The Organization details |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

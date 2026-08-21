@@ -14,6 +14,7 @@ All URIs are relative to *http://localhost:8080*
 |[**getWorkspace**](#getworkspace) | **GET** /organizations/{organization_id}/workspaces/{workspace_id} | Get the details of a workspace|
 |[**getWorkspaceAccessControl**](#getworkspaceaccesscontrol) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/security/access/{identity_id} | Get a control access for the Workspace|
 |[**getWorkspaceFile**](#getworkspacefile) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/files/download | Download the Workspace File specified|
+|[**getWorkspaceMembers**](#getworkspacemembers) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/members | Get the members of a Workspace|
 |[**getWorkspaceSecurity**](#getworkspacesecurity) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/security | Get the Workspace security information|
 |[**listWorkspaceFiles**](#listworkspacefiles) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/files | List all Workspace files|
 |[**listWorkspaceRolePermissions**](#listworkspacerolepermissions) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/permissions/{role} | Get the Workspace permission by given role|
@@ -594,6 +595,61 @@ const { status, data } = await apiInstance.getWorkspaceFile(
 |-------------|-------------|------------------|
 |**200** | The workspace file as a resource |  -  |
 |**404** | The Workspace file specified is unknown or you don\&#39;t have access to it |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getWorkspaceMembers**
+> WorkspaceMembers getWorkspaceMembers()
+
+Retrieve detailed information about members of a workspace.
+
+### Example
+
+```typescript
+import {
+    WorkspaceApi,
+    Configuration
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new WorkspaceApi(configuration);
+
+let organizationId: string; //The Organization identifier (default to undefined)
+let workspaceId: string; //The Workspace identifier (default to undefined)
+
+const { status, data } = await apiInstance.getWorkspaceMembers(
+    organizationId,
+    workspaceId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | [**string**] | The Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | The Workspace identifier | defaults to undefined|
+
+
+### Return type
+
+**WorkspaceMembers**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/yaml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The Workspace members |  -  |
+|**404** | The Workspace specified is unknown or you don\&#39;t have access to it |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

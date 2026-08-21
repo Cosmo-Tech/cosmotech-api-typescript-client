@@ -13,6 +13,7 @@ All URIs are relative to *http://localhost:8080*
 |[**downloadDatasetPart**](#downloaddatasetpart) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts/{dataset_part_id}/download | Download data from a dataset part|
 |[**getDataset**](#getdataset) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id} | Retrieve a Dataset|
 |[**getDatasetAccessControl**](#getdatasetaccesscontrol) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/security/access/{identity_id} | Get a control access for the Dataset|
+|[**getDatasetMembers**](#getdatasetmembers) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/members | Get the members of a Dataset|
 |[**getDatasetPart**](#getdatasetpart) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts/{dataset_part_id} | Retrieve a data part of a Dataset|
 |[**listDatasetParts**](#listdatasetparts) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/parts | Retrieve all dataset parts of a Dataset|
 |[**listDatasetSecurityUsers**](#listdatasetsecurityusers) | **GET** /organizations/{organization_id}/workspaces/{workspace_id}/datasets/{dataset_id}/security/users | Get the Dataset security users list|
@@ -578,6 +579,64 @@ const { status, data } = await apiInstance.getDatasetAccessControl(
 |-------------|-------------|------------------|
 |**200** | The Dataset access |  -  |
 |**404** | The Dataset or user specified is unknown or you don\&#39;t have access to it |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getDatasetMembers**
+> DatasetMembers getDatasetMembers()
+
+Retrieve detailed information about members of a dataset.
+
+### Example
+
+```typescript
+import {
+    DatasetApi,
+    Configuration
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new DatasetApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let workspaceId: string; //the Workspace identifier (default to undefined)
+let datasetId: string; //the Dataset identifier (default to undefined)
+
+const { status, data } = await apiInstance.getDatasetMembers(
+    organizationId,
+    workspaceId,
+    datasetId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **workspaceId** | [**string**] | the Workspace identifier | defaults to undefined|
+| **datasetId** | [**string**] | the Dataset identifier | defaults to undefined|
+
+
+### Return type
+
+**DatasetMembers**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/yaml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The Dataset members |  -  |
+|**404** | The Dataset specified is unknown or you don\&#39;t have access to it |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
