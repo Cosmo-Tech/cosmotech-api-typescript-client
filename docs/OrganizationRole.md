@@ -1,12 +1,12 @@
 # OrganizationRole
 
-the Organization Role
+The Organization Role
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**role** | **string** | the Organization Role | [default to undefined]
+**role** | **string** | The Organization Role | [default to undefined]
 
 ## Example
 

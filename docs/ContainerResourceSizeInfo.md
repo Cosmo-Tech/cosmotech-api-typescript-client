@@ -1,13 +1,13 @@
 # ContainerResourceSizeInfo
 
-define cpus and memory needs
+Define cpus and memory needs
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**cpu** | **string** | define cpu needs | [default to undefined]
-**memory** | **string** | define memory needs | [default to undefined]
+**cpu** | **string** | Define cpu needs | [default to undefined]
+**memory** | **string** | Define memory needs | [default to undefined]
 
 ## Example
 
