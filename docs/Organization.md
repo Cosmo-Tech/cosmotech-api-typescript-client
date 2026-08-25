@@ -1,15 +1,16 @@
 # Organization
 
-an Organization
+An Organization
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | the Organization unique identifier | [optional] [readonly] [default to undefined]
-**name** | **string** | the Organization name | [optional] [default to undefined]
-**ownerId** | **string** | the Owner User Id | [optional] [readonly] [default to undefined]
-**security** | [**OrganizationSecurity**](OrganizationSecurity.md) |  | [optional] [default to undefined]
+**id** | **string** | The Organization unique identifier | [readonly] [default to undefined]
+**name** | **string** | The Organization name | [default to undefined]
+**createInfo** | [**OrganizationEditInfo**](OrganizationEditInfo.md) | The details of the Organization creation | [default to undefined]
+**updateInfo** | [**OrganizationEditInfo**](OrganizationEditInfo.md) | The details of the Organization last update | [default to undefined]
+**security** | [**OrganizationSecurity**](OrganizationSecurity.md) |  | [default to undefined]
 
 ## Example
 
@@ -19,7 +20,8 @@ import { Organization } from '@cosmotech/api-ts';
 const instance: Organization = {
     id,
     name,
-    ownerId,
+    createInfo,
+    updateInfo,
     security,
 };
 ```
