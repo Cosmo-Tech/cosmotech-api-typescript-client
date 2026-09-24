@@ -14,7 +14,7 @@
     "openapi-generator",
     "@cosmotech/api-ts"
   ],
-  "license": "Cosmo Tech",
+  "license": "CosmoTech",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "scripts": {
