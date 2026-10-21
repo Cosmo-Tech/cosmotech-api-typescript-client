@@ -1,13 +1,13 @@
 # ComponentRolePermissions
 
-A RBAC by component
+a RBAC by component
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**component** | **string** |  | [default to undefined]
-**roles** | **{ [key: string]: Array&lt;string&gt;; }** |  | [default to undefined]
+**component** | **string** |  | [optional] [default to undefined]
+**roles** | **{ [key: string]: Array&lt;string&gt;; }** |  | [optional] [default to undefined]
 
 ## Example
 
