@@ -1,53 +1,61 @@
 # SolutionApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost:8080*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**addOrReplaceParameterGroups**](#addorreplaceparametergroups) | **POST** /organizations/{organization_id}/solutions/{solution_id}/parameterGroups | Add Parameter Groups. Any item with the same ID will be overwritten|
-|[**addOrReplaceParameters**](#addorreplaceparameters) | **POST** /organizations/{organization_id}/solutions/{solution_id}/parameters | Add Parameters. Any item with the same ID will be overwritten|
-|[**addOrReplaceRunTemplates**](#addorreplaceruntemplates) | **POST** /organizations/{organization_id}/solutions/{solution_id}/runTemplates | Add Run Templates. Any item with the same ID will be overwritten|
-|[**addSolutionAccessControl**](#addsolutionaccesscontrol) | **POST** /organizations/{organization_id}/solutions/{solution_id}/security/access | Add a control access to the Solution|
-|[**createSolution**](#createsolution) | **POST** /organizations/{organization_id}/solutions | Register a new solution|
+|[**createSolution**](#createsolution) | **POST** /organizations/{organization_id}/solutions | Create a new solution|
+|[**createSolutionAccessControl**](#createsolutionaccesscontrol) | **POST** /organizations/{organization_id}/solutions/{solution_id}/security/access | Create solution access control|
+|[**createSolutionParameter**](#createsolutionparameter) | **POST** /organizations/{organization_id}/solutions/{solution_id}/parameters | Create solution parameter for a solution|
+|[**createSolutionParameterGroup**](#createsolutionparametergroup) | **POST** /organizations/{organization_id}/solutions/{solution_id}/parameterGroups | Create a solution parameter group|
+|[**createSolutionRunTemplate**](#createsolutionruntemplate) | **POST** /organizations/{organization_id}/solutions/{solution_id}/runTemplates | Create a solution run template|
 |[**deleteSolution**](#deletesolution) | **DELETE** /organizations/{organization_id}/solutions/{solution_id} | Delete a solution|
-|[**deleteSolutionRunTemplate**](#deletesolutionruntemplate) | **DELETE** /organizations/{organization_id}/solutions/{solution_id}/runTemplates/{run_template_id} | Remove the specified Solution Run Template|
-|[**findAllSolutions**](#findallsolutions) | **GET** /organizations/{organization_id}/solutions | List all Solutions|
-|[**findSolutionById**](#findsolutionbyid) | **GET** /organizations/{organization_id}/solutions/{solution_id} | Get the details of a solution|
-|[**getSolutionAccessControl**](#getsolutionaccesscontrol) | **GET** /organizations/{organization_id}/solutions/{solution_id}/security/access/{identity_id} | Get a control access for the Solution|
-|[**getSolutionSecurity**](#getsolutionsecurity) | **GET** /organizations/{organization_id}/solutions/{solution_id}/security | Get the Solution security information|
-|[**getSolutionSecurityUsers**](#getsolutionsecurityusers) | **GET** /organizations/{organization_id}/solutions/{solution_id}/security/users | Get the Solution security users list|
-|[**removeAllRunTemplates**](#removeallruntemplates) | **DELETE** /organizations/{organization_id}/solutions/{solution_id}/runTemplates | Remove all Run Templates from the Solution specified|
-|[**removeAllSolutionParameterGroups**](#removeallsolutionparametergroups) | **DELETE** /organizations/{organization_id}/solutions/{solution_id}/parameterGroups | Remove all Parameter Groups from the Solution specified|
-|[**removeAllSolutionParameters**](#removeallsolutionparameters) | **DELETE** /organizations/{organization_id}/solutions/{solution_id}/parameters | Remove all Parameters from the Solution specified|
-|[**removeSolutionAccessControl**](#removesolutionaccesscontrol) | **DELETE** /organizations/{organization_id}/solutions/{solution_id}/security/access/{identity_id} | Remove the specified access from the given Organization Solution|
-|[**setSolutionDefaultSecurity**](#setsolutiondefaultsecurity) | **POST** /organizations/{organization_id}/solutions/{solution_id}/security/default | Set the Solution default security|
+|[**deleteSolutionAccessControl**](#deletesolutionaccesscontrol) | **DELETE** /organizations/{organization_id}/solutions/{solution_id}/security/access/{identity_id} | Delete solution access control|
+|[**deleteSolutionParameter**](#deletesolutionparameter) | **DELETE** /organizations/{organization_id}/solutions/{solution_id}/parameters/{parameter_id} | Delete specific parameter from the solution|
+|[**deleteSolutionParameterGroup**](#deletesolutionparametergroup) | **DELETE** /organizations/{organization_id}/solutions/{solution_id}/parameterGroups/{parameter_group_id} | Delete a parameter group from the solution|
+|[**deleteSolutionRunTemplate**](#deletesolutionruntemplate) | **DELETE** /organizations/{organization_id}/solutions/{solution_id}/runTemplates/{run_template_id} | Delete a specific run template|
+|[**getRunTemplate**](#getruntemplate) | **GET** /organizations/{organization_id}/solutions/{solution_id}/runTemplates/{run_template_id} | Retrieve a solution run templates|
+|[**getSolution**](#getsolution) | **GET** /organizations/{organization_id}/solutions/{solution_id} | Get the details of a solution|
+|[**getSolutionAccessControl**](#getsolutionaccesscontrol) | **GET** /organizations/{organization_id}/solutions/{solution_id}/security/access/{identity_id} | Get solution access control|
+|[**getSolutionMembers**](#getsolutionmembers) | **GET** /organizations/{organization_id}/solutions/{solution_id}/members | Get the members of a Solution|
+|[**getSolutionParameter**](#getsolutionparameter) | **GET** /organizations/{organization_id}/solutions/{solution_id}/parameters/{parameter_id} | Get the details of a solution parameter|
+|[**getSolutionParameterGroup**](#getsolutionparametergroup) | **GET** /organizations/{organization_id}/solutions/{solution_id}/parameterGroups/{parameter_group_id} | Get details of a solution parameter group|
+|[**getSolutionSecurity**](#getsolutionsecurity) | **GET** /organizations/{organization_id}/solutions/{solution_id}/security | Get solution security information|
+|[**listRunTemplates**](#listruntemplates) | **GET** /organizations/{organization_id}/solutions/{solution_id}/runTemplates | List all solution run templates|
+|[**listSolutionParameterGroups**](#listsolutionparametergroups) | **GET** /organizations/{organization_id}/solutions/{solution_id}/parameterGroups | List all solution parameter groups|
+|[**listSolutionParameters**](#listsolutionparameters) | **GET** /organizations/{organization_id}/solutions/{solution_id}/parameters | List all solution parameters|
+|[**listSolutionSecurityUsers**](#listsolutionsecurityusers) | **GET** /organizations/{organization_id}/solutions/{solution_id}/security/users | List solution security users|
+|[**listSolutions**](#listsolutions) | **GET** /organizations/{organization_id}/solutions | List all Solutions|
 |[**updateSolution**](#updatesolution) | **PATCH** /organizations/{organization_id}/solutions/{solution_id} | Update a solution|
-|[**updateSolutionAccessControl**](#updatesolutionaccesscontrol) | **PATCH** /organizations/{organization_id}/solutions/{solution_id}/security/access/{identity_id} | Update the specified access to User for a Solution|
-|[**updateSolutionRunTemplate**](#updatesolutionruntemplate) | **PATCH** /organizations/{organization_id}/solutions/{solution_id}/runTemplates/{run_template_id} | Update the specified Solution Run Template|
+|[**updateSolutionAccessControl**](#updatesolutionaccesscontrol) | **PATCH** /organizations/{organization_id}/solutions/{solution_id}/security/access/{identity_id} | Update solution access control|
+|[**updateSolutionDefaultSecurity**](#updatesolutiondefaultsecurity) | **PATCH** /organizations/{organization_id}/solutions/{solution_id}/security/default | Update solution default security|
+|[**updateSolutionParameter**](#updatesolutionparameter) | **PATCH** /organizations/{organization_id}/solutions/{solution_id}/parameters/{parameter_id} | Update solution parameter|
+|[**updateSolutionParameterGroup**](#updatesolutionparametergroup) | **PATCH** /organizations/{organization_id}/solutions/{solution_id}/parameterGroups/{parameter_group_id} | Update a solution parameter group|
+|[**updateSolutionRunTemplate**](#updatesolutionruntemplate) | **PATCH** /organizations/{organization_id}/solutions/{solution_id}/runTemplates/{run_template_id} | Update a specific run template|
 
-# **addOrReplaceParameterGroups**
-> Array<RunTemplateParameterGroup> addOrReplaceParameterGroups(runTemplateParameterGroup)
+# **createSolution**
+> Solution createSolution(solutionCreateRequest)
 
+Create a new solution with optional run templates and parameter definitions.
 
 ### Example
 
 ```typescript
 import {
     SolutionApi,
-    Configuration
+    Configuration,
+    SolutionCreateRequest
 } from '@cosmotech/api-ts';
 
 const configuration = new Configuration();
 const apiInstance = new SolutionApi(configuration);
 
 let organizationId: string; //the Organization identifier (default to undefined)
-let solutionId: string; //the Solution identifier (default to undefined)
-let runTemplateParameterGroup: Array<RunTemplateParameterGroup>; //the Parameter Groups
+let solutionCreateRequest: SolutionCreateRequest; //The Solution to create
 
-const { status, data } = await apiInstance.addOrReplaceParameterGroups(
+const { status, data } = await apiInstance.createSolution(
     organizationId,
-    solutionId,
-    runTemplateParameterGroup
+    solutionCreateRequest
 );
 ```
 
@@ -55,14 +63,13 @@ const { status, data } = await apiInstance.addOrReplaceParameterGroups(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **runTemplateParameterGroup** | **Array<RunTemplateParameterGroup>**| the Parameter Groups | |
+| **solutionCreateRequest** | **SolutionCreateRequest**| The Solution to create | |
 | **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
 
 
 ### Return type
 
-**Array<RunTemplateParameterGroup>**
+**Solution**
 
 ### Authorization
 
@@ -70,138 +77,22 @@ const { status, data } = await apiInstance.addOrReplaceParameterGroups(
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+ - **Content-Type**: application/json, application/yaml
+ - **Accept**: application/json, application/yaml
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**201** | the Parameter Groups |  -  |
+|**201** | Solution successfully created |  -  |
 |**400** | Bad request |  -  |
-|**404** | the Solution specified is unknown or you don\&#39;t have access to it |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **addOrReplaceParameters**
-> Array<RunTemplateParameter> addOrReplaceParameters(runTemplateParameter)
+# **createSolutionAccessControl**
+> SolutionAccessControl createSolutionAccessControl(solutionAccessControl)
 
-
-### Example
-
-```typescript
-import {
-    SolutionApi,
-    Configuration
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new SolutionApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let solutionId: string; //the Solution identifier (default to undefined)
-let runTemplateParameter: Array<RunTemplateParameter>; //the Parameters
-
-const { status, data } = await apiInstance.addOrReplaceParameters(
-    organizationId,
-    solutionId,
-    runTemplateParameter
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **runTemplateParameter** | **Array<RunTemplateParameter>**| the Parameters | |
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
-
-
-### Return type
-
-**Array<RunTemplateParameter>**
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**201** | the Parameters |  -  |
-|**400** | Bad request |  -  |
-|**404** | the Solution specified is unknown or you don\&#39;t have access to it |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **addOrReplaceRunTemplates**
-> Array<RunTemplate> addOrReplaceRunTemplates(runTemplate)
-
-
-### Example
-
-```typescript
-import {
-    SolutionApi,
-    Configuration
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new SolutionApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let solutionId: string; //the Solution identifier (default to undefined)
-let runTemplate: Array<RunTemplate>; //the Run Templates
-
-const { status, data } = await apiInstance.addOrReplaceRunTemplates(
-    organizationId,
-    solutionId,
-    runTemplate
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **runTemplate** | **Array<RunTemplate>**| the Run Templates | |
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
-
-
-### Return type
-
-**Array<RunTemplate>**
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**201** | the Parameters |  -  |
-|**400** | Bad request |  -  |
-|**404** | the Solution specified is unknown or you don\&#39;t have access to it |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **addSolutionAccessControl**
-> SolutionAccessControl addSolutionAccessControl(solutionAccessControl)
-
+Grant access to a solution for a user or group.
 
 ### Example
 
@@ -217,9 +108,9 @@ const apiInstance = new SolutionApi(configuration);
 
 let organizationId: string; //the Organization identifier (default to undefined)
 let solutionId: string; //the Solution identifier (default to undefined)
-let solutionAccessControl: SolutionAccessControl; //the new Solution security access to add.
+let solutionAccessControl: SolutionAccessControl; //Access control to create
 
-const { status, data } = await apiInstance.addSolutionAccessControl(
+const { status, data } = await apiInstance.createSolutionAccessControl(
     organizationId,
     solutionId,
     solutionAccessControl
@@ -230,7 +121,7 @@ const { status, data } = await apiInstance.addSolutionAccessControl(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **solutionAccessControl** | **SolutionAccessControl**| the new Solution security access to add. | |
+| **solutionAccessControl** | **SolutionAccessControl**| Access control to create | |
 | **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
 | **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
 
@@ -246,19 +137,19 @@ const { status, data } = await apiInstance.addSolutionAccessControl(
 ### HTTP request headers
 
  - **Content-Type**: application/json, application/yaml
- - **Accept**: application/json
+ - **Accept**: application/json, application/yaml
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**201** | The Solution access |  -  |
-|**404** | the Solution specified is unknown or you don\&#39;t have access to it |  -  |
+|**201** | Solution access control successfully created |  -  |
+|**404** | Solution not found or insufficient access rights |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **createSolution**
-> Solution createSolution(solution)
+# **createSolutionParameter**
+> RunTemplateParameter createSolutionParameter(runTemplateParameterCreateRequest)
 
 
 ### Example
@@ -267,18 +158,20 @@ const { status, data } = await apiInstance.addSolutionAccessControl(
 import {
     SolutionApi,
     Configuration,
-    Solution
+    RunTemplateParameterCreateRequest
 } from '@cosmotech/api-ts';
 
 const configuration = new Configuration();
 const apiInstance = new SolutionApi(configuration);
 
 let organizationId: string; //the Organization identifier (default to undefined)
-let solution: Solution; //the Solution to create
+let solutionId: string; //the Solution identifier (default to undefined)
+let runTemplateParameterCreateRequest: RunTemplateParameterCreateRequest; //Parameter to create
 
-const { status, data } = await apiInstance.createSolution(
+const { status, data } = await apiInstance.createSolutionParameter(
     organizationId,
-    solution
+    solutionId,
+    runTemplateParameterCreateRequest
 );
 ```
 
@@ -286,13 +179,14 @@ const { status, data } = await apiInstance.createSolution(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **solution** | **Solution**| the Solution to create | |
+| **runTemplateParameterCreateRequest** | **RunTemplateParameterCreateRequest**| Parameter to create | |
 | **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
 
 
 ### Return type
 
-**Solution**
+**RunTemplateParameter**
 
 ### Authorization
 
@@ -301,14 +195,133 @@ const { status, data } = await apiInstance.createSolution(
 ### HTTP request headers
 
  - **Content-Type**: application/json, application/yaml
- - **Accept**: application/json
+ - **Accept**: application/json, application/yaml
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**201** | the solution details |  -  |
+|**200** | Parameters successfully created |  -  |
 |**400** | Bad request |  -  |
+|**404** | Solution not found or insufficient access rights |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **createSolutionParameterGroup**
+> RunTemplateParameterGroup createSolutionParameterGroup(runTemplateParameterGroupCreateRequest)
+
+
+### Example
+
+```typescript
+import {
+    SolutionApi,
+    Configuration,
+    RunTemplateParameterGroupCreateRequest
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new SolutionApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let solutionId: string; //the Solution identifier (default to undefined)
+let runTemplateParameterGroupCreateRequest: RunTemplateParameterGroupCreateRequest; //Parameter group to create
+
+const { status, data } = await apiInstance.createSolutionParameterGroup(
+    organizationId,
+    solutionId,
+    runTemplateParameterGroupCreateRequest
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **runTemplateParameterGroupCreateRequest** | **RunTemplateParameterGroupCreateRequest**| Parameter group to create | |
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
+
+
+### Return type
+
+**RunTemplateParameterGroup**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, application/yaml
+ - **Accept**: application/json, application/yaml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**201** | Parameter group successfully created |  -  |
+|**400** | Bad request - Invalid parameter group |  -  |
+|**404** | Solution not found or insufficient access rights |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **createSolutionRunTemplate**
+> RunTemplate createSolutionRunTemplate(runTemplateCreateRequest)
+
+
+### Example
+
+```typescript
+import {
+    SolutionApi,
+    Configuration,
+    RunTemplateCreateRequest
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new SolutionApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let solutionId: string; //the Solution identifier (default to undefined)
+let runTemplateCreateRequest: RunTemplateCreateRequest; //Run template to create
+
+const { status, data } = await apiInstance.createSolutionRunTemplate(
+    organizationId,
+    solutionId,
+    runTemplateCreateRequest
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **runTemplateCreateRequest** | **RunTemplateCreateRequest**| Run template to create | |
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
+
+
+### Return type
+
+**RunTemplate**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, application/yaml
+ - **Accept**: application/json, application/yaml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**201** | Run template successfully created |  -  |
+|**400** | Bad request - Invalid run template |  -  |
+|**404** | Solution not found or insufficient access rights |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -361,8 +374,179 @@ void (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**204** | Request succeeded |  -  |
-|**404** | the Solution specified is unknown or you don\&#39;t have access to it |  -  |
+|**204** | Solution successfully deleted |  -  |
+|**404** | Solution not found or insufficient access rights |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **deleteSolutionAccessControl**
+> deleteSolutionAccessControl()
+
+
+### Example
+
+```typescript
+import {
+    SolutionApi,
+    Configuration
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new SolutionApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let solutionId: string; //the Solution identifier (default to undefined)
+let identityId: string; //The User identifier (default to undefined)
+
+const { status, data } = await apiInstance.deleteSolutionAccessControl(
+    organizationId,
+    solutionId,
+    identityId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
+| **identityId** | [**string**] | The User identifier | defaults to undefined|
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**204** | Solution access control successfully deleted |  -  |
+|**404** | Solution or user not found or insufficient access rights |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **deleteSolutionParameter**
+> deleteSolutionParameter()
+
+
+### Example
+
+```typescript
+import {
+    SolutionApi,
+    Configuration
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new SolutionApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let solutionId: string; //the Solution identifier (default to undefined)
+let parameterId: string; //The solution parameter identifier (default to undefined)
+
+const { status, data } = await apiInstance.deleteSolutionParameter(
+    organizationId,
+    solutionId,
+    parameterId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
+| **parameterId** | [**string**] | The solution parameter identifier | defaults to undefined|
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**204** | Parameter successfully deleted |  -  |
+|**404** | Solution or parameter not found or insufficient access rights |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **deleteSolutionParameterGroup**
+> deleteSolutionParameterGroup()
+
+
+### Example
+
+```typescript
+import {
+    SolutionApi,
+    Configuration
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new SolutionApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let solutionId: string; //the Solution identifier (default to undefined)
+let parameterGroupId: string; //The parameter group identifier (default to undefined)
+
+const { status, data } = await apiInstance.deleteSolutionParameterGroup(
+    organizationId,
+    solutionId,
+    parameterGroupId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
+| **parameterGroupId** | [**string**] | The parameter group identifier | defaults to undefined|
+
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**204** | Parameter group successfully deleted |  -  |
+|**404** | Solution or parameter group not found or insufficient access rights |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -383,7 +567,7 @@ const apiInstance = new SolutionApi(configuration);
 
 let organizationId: string; //the Organization identifier (default to undefined)
 let solutionId: string; //the Solution identifier (default to undefined)
-let runTemplateId: string; //the Run Template identifier (default to undefined)
+let runTemplateId: string; //The Run Template identifier (default to undefined)
 
 const { status, data } = await apiInstance.deleteSolutionRunTemplate(
     organizationId,
@@ -398,7 +582,7 @@ const { status, data } = await apiInstance.deleteSolutionRunTemplate(
 |------------- | ------------- | ------------- | -------------|
 | **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
 | **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
-| **runTemplateId** | [**string**] | the Run Template identifier | defaults to undefined|
+| **runTemplateId** | [**string**] | The Run Template identifier | defaults to undefined|
 
 
 ### Return type
@@ -418,69 +602,13 @@ void (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**204** | the operation succeeded |  -  |
-|**404** | the Solution specified is unknown or you don\&#39;t have access to it |  -  |
+|**204** | Run template successfully deleted |  -  |
+|**404** | Solution or run template not found or insufficient access rights |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **findAllSolutions**
-> Array<Solution> findAllSolutions()
-
-
-### Example
-
-```typescript
-import {
-    SolutionApi,
-    Configuration
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new SolutionApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let page: number; //page number to query (first page is at index 0) (optional) (default to undefined)
-let size: number; //amount of result by page (optional) (default to undefined)
-
-const { status, data } = await apiInstance.findAllSolutions(
-    organizationId,
-    page,
-    size
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **page** | [**number**] | page number to query (first page is at index 0) | (optional) defaults to undefined|
-| **size** | [**number**] | amount of result by page | (optional) defaults to undefined|
-
-
-### Return type
-
-**Array<Solution>**
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | the solution details |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **findSolutionById**
-> Solution findSolutionById()
+# **getRunTemplate**
+> RunTemplate getRunTemplate()
 
 
 ### Example
@@ -496,8 +624,66 @@ const apiInstance = new SolutionApi(configuration);
 
 let organizationId: string; //the Organization identifier (default to undefined)
 let solutionId: string; //the Solution identifier (default to undefined)
+let runTemplateId: string; //The Run Template identifier (default to undefined)
 
-const { status, data } = await apiInstance.findSolutionById(
+const { status, data } = await apiInstance.getRunTemplate(
+    organizationId,
+    solutionId,
+    runTemplateId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
+| **runTemplateId** | [**string**] | The Run Template identifier | defaults to undefined|
+
+
+### Return type
+
+**RunTemplate**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/yaml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Run template successfully retrieved |  -  |
+|**404** | Solution not found or insufficient access rights |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getSolution**
+> Solution getSolution()
+
+Retrieve detailed information about a solution.
+
+### Example
+
+```typescript
+import {
+    SolutionApi,
+    Configuration
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new SolutionApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let solutionId: string; //the Solution identifier (default to undefined)
+
+const { status, data } = await apiInstance.getSolution(
     organizationId,
     solutionId
 );
@@ -522,14 +708,14 @@ const { status, data } = await apiInstance.findSolutionById(
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/json, application/yaml
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | the Solution details |  -  |
-|**404** | the Solution specified is unknown or you don\&#39;t have access to it |  -  |
+|**200** | Solution details successfully retrieved |  -  |
+|**404** | Solution not found or insufficient access rights |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -550,7 +736,7 @@ const apiInstance = new SolutionApi(configuration);
 
 let organizationId: string; //the Organization identifier (default to undefined)
 let solutionId: string; //the Solution identifier (default to undefined)
-let identityId: string; //the User identifier (default to undefined)
+let identityId: string; //The User identifier (default to undefined)
 
 const { status, data } = await apiInstance.getSolutionAccessControl(
     organizationId,
@@ -565,7 +751,7 @@ const { status, data } = await apiInstance.getSolutionAccessControl(
 |------------- | ------------- | ------------- | -------------|
 | **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
 | **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
-| **identityId** | [**string**] | the User identifier | defaults to undefined|
+| **identityId** | [**string**] | The User identifier | defaults to undefined|
 
 
 ### Return type
@@ -579,14 +765,184 @@ const { status, data } = await apiInstance.getSolutionAccessControl(
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/json, application/yaml
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | The Solution access |  -  |
-|**404** | The Solution or user specified is unknown or you don\&#39;t have access to it |  -  |
+|**200** | Solution access control successfully retrieved |  -  |
+|**404** | Solution or user not found or insufficient access rights |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getSolutionMembers**
+> SolutionMembers getSolutionMembers()
+
+Retrieve detailed information about members of a solution.
+
+### Example
+
+```typescript
+import {
+    SolutionApi,
+    Configuration
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new SolutionApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let solutionId: string; //the Solution identifier (default to undefined)
+
+const { status, data } = await apiInstance.getSolutionMembers(
+    organizationId,
+    solutionId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
+
+
+### Return type
+
+**SolutionMembers**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/yaml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The Solution members |  -  |
+|**404** | the Solution specified is unknown or you don\&#39;t have access to it |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getSolutionParameter**
+> RunTemplateParameter getSolutionParameter()
+
+
+### Example
+
+```typescript
+import {
+    SolutionApi,
+    Configuration
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new SolutionApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let solutionId: string; //the Solution identifier (default to undefined)
+let parameterId: string; //The solution parameter identifier (default to undefined)
+
+const { status, data } = await apiInstance.getSolutionParameter(
+    organizationId,
+    solutionId,
+    parameterId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
+| **parameterId** | [**string**] | The solution parameter identifier | defaults to undefined|
+
+
+### Return type
+
+**RunTemplateParameter**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/yaml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Parameters successfully retrieved |  -  |
+|**400** | Bad Request |  -  |
+|**404** | Solution or parameter not found or insufficient access rights |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getSolutionParameterGroup**
+> RunTemplateParameterGroup getSolutionParameterGroup()
+
+
+### Example
+
+```typescript
+import {
+    SolutionApi,
+    Configuration
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new SolutionApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let solutionId: string; //the Solution identifier (default to undefined)
+let parameterGroupId: string; //The parameter group identifier (default to undefined)
+
+const { status, data } = await apiInstance.getSolutionParameterGroup(
+    organizationId,
+    solutionId,
+    parameterGroupId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
+| **parameterGroupId** | [**string**] | The parameter group identifier | defaults to undefined|
+
+
+### Return type
+
+**RunTemplateParameterGroup**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/yaml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Parameter groups successfully retrieved |  -  |
+|**404** | Solution or parameter group not found or insufficient access rights |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -633,19 +989,19 @@ const { status, data } = await apiInstance.getSolutionSecurity(
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/json, application/yaml
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | The Solution security |  -  |
-|**404** | the Solution specified is unknown or you don\&#39;t have access to it |  -  |
+|**200** | Solution security information successfully retrieved |  -  |
+|**404** | Solution not found or insufficient access rights |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getSolutionSecurityUsers**
-> Array<string> getSolutionSecurityUsers()
+# **listRunTemplates**
+> Array<RunTemplate> listRunTemplates()
 
 
 ### Example
@@ -662,7 +1018,170 @@ const apiInstance = new SolutionApi(configuration);
 let organizationId: string; //the Organization identifier (default to undefined)
 let solutionId: string; //the Solution identifier (default to undefined)
 
-const { status, data } = await apiInstance.getSolutionSecurityUsers(
+const { status, data } = await apiInstance.listRunTemplates(
+    organizationId,
+    solutionId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
+
+
+### Return type
+
+**Array<RunTemplate>**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/yaml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Run templates successfully listed |  -  |
+|**404** | Solution not found or insufficient access rights |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **listSolutionParameterGroups**
+> Array<RunTemplateParameterGroup> listSolutionParameterGroups()
+
+
+### Example
+
+```typescript
+import {
+    SolutionApi,
+    Configuration
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new SolutionApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let solutionId: string; //the Solution identifier (default to undefined)
+
+const { status, data } = await apiInstance.listSolutionParameterGroups(
+    organizationId,
+    solutionId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
+
+
+### Return type
+
+**Array<RunTemplateParameterGroup>**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/yaml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Parameter groups successfully listed |  -  |
+|**404** | Solution not found or insufficient access rights |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **listSolutionParameters**
+> Array<RunTemplateParameter> listSolutionParameters()
+
+
+### Example
+
+```typescript
+import {
+    SolutionApi,
+    Configuration
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new SolutionApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let solutionId: string; //the Solution identifier (default to undefined)
+
+const { status, data } = await apiInstance.listSolutionParameters(
+    organizationId,
+    solutionId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
+
+
+### Return type
+
+**Array<RunTemplateParameter>**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/yaml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Parameters successfully retrieved |  -  |
+|**400** | Bad Request |  -  |
+|**404** | Solution not found or insufficient access rights |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **listSolutionSecurityUsers**
+> Array<string> listSolutionSecurityUsers()
+
+
+### Example
+
+```typescript
+import {
+    SolutionApi,
+    Configuration
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new SolutionApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let solutionId: string; //the Solution identifier (default to undefined)
+
+const { status, data } = await apiInstance.listSolutionSecurityUsers(
     organizationId,
     solutionId
 );
@@ -687,20 +1206,21 @@ const { status, data } = await apiInstance.getSolutionSecurityUsers(
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/json, application/yaml
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | The Solution security users list |  -  |
-|**404** | the Solution or the User specified is unknown or you don\&#39;t have access to them |  -  |
+|**200** | Solution security users list successfully retrieved |  -  |
+|**404** | Solution not found or insufficient access rights |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **removeAllRunTemplates**
-> removeAllRunTemplates()
+# **listSolutions**
+> Array<Solution> listSolutions()
 
+Retrieve a paginated list of all solutions in an organization that the user has permission to view.
 
 ### Example
 
@@ -714,11 +1234,13 @@ const configuration = new Configuration();
 const apiInstance = new SolutionApi(configuration);
 
 let organizationId: string; //the Organization identifier (default to undefined)
-let solutionId: string; //the Solution identifier (default to undefined)
+let page: number; //Page number to query (first page is at index 0) (optional) (default to undefined)
+let size: number; //Amount of result by page (optional) (default to undefined)
 
-const { status, data } = await apiInstance.removeAllRunTemplates(
+const { status, data } = await apiInstance.listSolutions(
     organizationId,
-    solutionId
+    page,
+    size
 );
 ```
 
@@ -727,12 +1249,13 @@ const { status, data } = await apiInstance.removeAllRunTemplates(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
+| **page** | [**number**] | Page number to query (first page is at index 0) | (optional) defaults to undefined|
+| **size** | [**number**] | Amount of result by page | (optional) defaults to undefined|
 
 
 ### Return type
 
-void (empty response body)
+**Array<Solution>**
 
 ### Authorization
 
@@ -741,242 +1264,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json, application/yaml
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**204** | the operation succeeded |  -  |
-|**404** | the Solution specified is unknown or you don\&#39;t have access to it |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **removeAllSolutionParameterGroups**
-> removeAllSolutionParameterGroups()
-
-
-### Example
-
-```typescript
-import {
-    SolutionApi,
-    Configuration
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new SolutionApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let solutionId: string; //the Solution identifier (default to undefined)
-
-const { status, data } = await apiInstance.removeAllSolutionParameterGroups(
-    organizationId,
-    solutionId
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
-
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: Not defined
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**204** | the operation succeeded |  -  |
-|**404** | the Solution specified is unknown or you don\&#39;t have access to it |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **removeAllSolutionParameters**
-> removeAllSolutionParameters()
-
-
-### Example
-
-```typescript
-import {
-    SolutionApi,
-    Configuration
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new SolutionApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let solutionId: string; //the Solution identifier (default to undefined)
-
-const { status, data } = await apiInstance.removeAllSolutionParameters(
-    organizationId,
-    solutionId
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
-
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: Not defined
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**204** | the operation succeeded |  -  |
-|**404** | the Solution specified is unknown or you don\&#39;t have access to it |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **removeSolutionAccessControl**
-> removeSolutionAccessControl()
-
-
-### Example
-
-```typescript
-import {
-    SolutionApi,
-    Configuration
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new SolutionApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let solutionId: string; //the Solution identifier (default to undefined)
-let identityId: string; //the User identifier (default to undefined)
-
-const { status, data } = await apiInstance.removeSolutionAccessControl(
-    organizationId,
-    solutionId,
-    identityId
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
-| **identityId** | [**string**] | the User identifier | defaults to undefined|
-
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: Not defined
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**204** | Request succeeded |  -  |
-|**404** | The Solution or the user specified is unknown or you don\&#39;t have access to them |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **setSolutionDefaultSecurity**
-> SolutionSecurity setSolutionDefaultSecurity(solutionRole)
-
-
-### Example
-
-```typescript
-import {
-    SolutionApi,
-    Configuration,
-    SolutionRole
-} from '@cosmotech/api-ts';
-
-const configuration = new Configuration();
-const apiInstance = new SolutionApi(configuration);
-
-let organizationId: string; //the Organization identifier (default to undefined)
-let solutionId: string; //the Solution identifier (default to undefined)
-let solutionRole: SolutionRole; //This change the solution default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the solution.
-
-const { status, data } = await apiInstance.setSolutionDefaultSecurity(
-    organizationId,
-    solutionId,
-    solutionRole
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **solutionRole** | **SolutionRole**| This change the solution default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the solution. | |
-| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
-| **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
-
-
-### Return type
-
-**SolutionSecurity**
-
-### Authorization
-
-[oAuth2AuthCode](../README.md#oAuth2AuthCode)
-
-### HTTP request headers
-
- - **Content-Type**: application/json, application/yaml
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**201** | The Solution default visibility |  -  |
-|**404** | the Solution specified is unknown or you don\&#39;t have access to it |  -  |
+|**200** | List of solutions successfully retrieved |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **updateSolution**
-> Solution updateSolution(solution)
+> Solution updateSolution(solutionUpdateRequest)
 
 
 ### Example
@@ -985,7 +1284,7 @@ const { status, data } = await apiInstance.setSolutionDefaultSecurity(
 import {
     SolutionApi,
     Configuration,
-    Solution
+    SolutionUpdateRequest
 } from '@cosmotech/api-ts';
 
 const configuration = new Configuration();
@@ -993,12 +1292,12 @@ const apiInstance = new SolutionApi(configuration);
 
 let organizationId: string; //the Organization identifier (default to undefined)
 let solutionId: string; //the Solution identifier (default to undefined)
-let solution: Solution; //the new Solution details. This endpoint can\'t be used to update security
+let solutionUpdateRequest: SolutionUpdateRequest; //The new Solution details. This endpoint can\'t be used to update security
 
 const { status, data } = await apiInstance.updateSolution(
     organizationId,
     solutionId,
-    solution
+    solutionUpdateRequest
 );
 ```
 
@@ -1006,7 +1305,7 @@ const { status, data } = await apiInstance.updateSolution(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **solution** | **Solution**| the new Solution details. This endpoint can\&#39;t be used to update security | |
+| **solutionUpdateRequest** | **SolutionUpdateRequest**| The new Solution details. This endpoint can\&#39;t be used to update security | |
 | **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
 | **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
 
@@ -1022,15 +1321,15 @@ const { status, data } = await apiInstance.updateSolution(
 ### HTTP request headers
 
  - **Content-Type**: application/json, application/yaml
- - **Accept**: application/json
+ - **Accept**: application/json, application/yaml
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | the solution details |  -  |
-|**400** | Bad request |  -  |
-|**404** | the Solution specified is unknown or you don\&#39;t have access to it |  -  |
+|**200** | Solution successfully updated |  -  |
+|**400** | Bad request - Invalid update parameters |  -  |
+|**404** | Solution not found or insufficient access rights |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1052,8 +1351,8 @@ const apiInstance = new SolutionApi(configuration);
 
 let organizationId: string; //the Organization identifier (default to undefined)
 let solutionId: string; //the Solution identifier (default to undefined)
-let identityId: string; //the User identifier (default to undefined)
-let solutionRole: SolutionRole; //The new Solution Access Control
+let identityId: string; //The User identifier (default to undefined)
+let solutionRole: SolutionRole; //Access control updates
 
 const { status, data } = await apiInstance.updateSolutionAccessControl(
     organizationId,
@@ -1067,10 +1366,10 @@ const { status, data } = await apiInstance.updateSolutionAccessControl(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **solutionRole** | **SolutionRole**| The new Solution Access Control | |
+| **solutionRole** | **SolutionRole**| Access control updates | |
 | **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
 | **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
-| **identityId** | [**string**] | the User identifier | defaults to undefined|
+| **identityId** | [**string**] | The User identifier | defaults to undefined|
 
 
 ### Return type
@@ -1083,20 +1382,20 @@ const { status, data } = await apiInstance.updateSolutionAccessControl(
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+ - **Content-Type**: application/json, application/yaml
+ - **Accept**: application/json, application/yaml
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | The Solution access |  -  |
-|**404** | The Solution specified is unknown or you don\&#39;t have access to it |  -  |
+|**200** | Solution access control successfully updated |  -  |
+|**404** | Solution not found or insufficient access rights |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **updateSolutionRunTemplate**
-> Array<RunTemplate> updateSolutionRunTemplate(runTemplate)
+# **updateSolutionDefaultSecurity**
+> SolutionSecurity updateSolutionDefaultSecurity(solutionRole)
 
 
 ### Example
@@ -1105,7 +1404,7 @@ const { status, data } = await apiInstance.updateSolutionAccessControl(
 import {
     SolutionApi,
     Configuration,
-    RunTemplate
+    SolutionRole
 } from '@cosmotech/api-ts';
 
 const configuration = new Configuration();
@@ -1113,14 +1412,12 @@ const apiInstance = new SolutionApi(configuration);
 
 let organizationId: string; //the Organization identifier (default to undefined)
 let solutionId: string; //the Solution identifier (default to undefined)
-let runTemplateId: string; //the Run Template identifier (default to undefined)
-let runTemplate: RunTemplate; //the Run Templates
+let solutionRole: SolutionRole; //This changes the solution default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the solution.
 
-const { status, data } = await apiInstance.updateSolutionRunTemplate(
+const { status, data } = await apiInstance.updateSolutionDefaultSecurity(
     organizationId,
     solutionId,
-    runTemplateId,
-    runTemplate
+    solutionRole
 );
 ```
 
@@ -1128,15 +1425,14 @@ const { status, data } = await apiInstance.updateSolutionRunTemplate(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **runTemplate** | **RunTemplate**| the Run Templates | |
+| **solutionRole** | **SolutionRole**| This changes the solution default security. The default security is the role assigned to any person not on the Access Control List. If the default security is None, then nobody outside of the ACL can access the solution. | |
 | **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
 | **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
-| **runTemplateId** | [**string**] | the Run Template identifier | defaults to undefined|
 
 
 ### Return type
 
-**Array<RunTemplate>**
+**SolutionSecurity**
 
 ### Authorization
 
@@ -1145,15 +1441,200 @@ const { status, data } = await apiInstance.updateSolutionRunTemplate(
 ### HTTP request headers
 
  - **Content-Type**: application/json, application/yaml
- - **Accept**: application/json
+ - **Accept**: application/json, application/yaml
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | the Parameters |  -  |
+|**200** | Solution default security successfully updated |  -  |
+|**404** | Solution not found or insufficient access rights |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **updateSolutionParameter**
+> RunTemplateParameter updateSolutionParameter(runTemplateParameterUpdateRequest)
+
+
+### Example
+
+```typescript
+import {
+    SolutionApi,
+    Configuration,
+    RunTemplateParameterUpdateRequest
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new SolutionApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let solutionId: string; //the Solution identifier (default to undefined)
+let parameterId: string; //The solution parameter identifier (default to undefined)
+let runTemplateParameterUpdateRequest: RunTemplateParameterUpdateRequest; //Parameter to update
+
+const { status, data } = await apiInstance.updateSolutionParameter(
+    organizationId,
+    solutionId,
+    parameterId,
+    runTemplateParameterUpdateRequest
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **runTemplateParameterUpdateRequest** | **RunTemplateParameterUpdateRequest**| Parameter to update | |
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
+| **parameterId** | [**string**] | The solution parameter identifier | defaults to undefined|
+
+
+### Return type
+
+**RunTemplateParameter**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, application/yaml
+ - **Accept**: application/json, application/yaml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**201** | Parameters successfully updated |  -  |
 |**400** | Bad request |  -  |
-|**404** | the Solution or Run Template specified is unknown or you don\&#39;t have access to it |  -  |
+|**404** | Solution or parameter not found or insufficient access rights |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **updateSolutionParameterGroup**
+> RunTemplateParameterGroup updateSolutionParameterGroup(runTemplateParameterGroupUpdateRequest)
+
+
+### Example
+
+```typescript
+import {
+    SolutionApi,
+    Configuration,
+    RunTemplateParameterGroupUpdateRequest
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new SolutionApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let solutionId: string; //the Solution identifier (default to undefined)
+let parameterGroupId: string; //The parameter group identifier (default to undefined)
+let runTemplateParameterGroupUpdateRequest: RunTemplateParameterGroupUpdateRequest; //Parameter groups to update
+
+const { status, data } = await apiInstance.updateSolutionParameterGroup(
+    organizationId,
+    solutionId,
+    parameterGroupId,
+    runTemplateParameterGroupUpdateRequest
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **runTemplateParameterGroupUpdateRequest** | **RunTemplateParameterGroupUpdateRequest**| Parameter groups to update | |
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
+| **parameterGroupId** | [**string**] | The parameter group identifier | defaults to undefined|
+
+
+### Return type
+
+**RunTemplateParameterGroup**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, application/yaml
+ - **Accept**: application/json, application/yaml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Parameter groups successfully updated |  -  |
+|**400** | Bad request - Invalid parameter group |  -  |
+|**404** | Solution or parameter group not found or insufficient access rights |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **updateSolutionRunTemplate**
+> RunTemplate updateSolutionRunTemplate(runTemplateUpdateRequest)
+
+
+### Example
+
+```typescript
+import {
+    SolutionApi,
+    Configuration,
+    RunTemplateUpdateRequest
+} from '@cosmotech/api-ts';
+
+const configuration = new Configuration();
+const apiInstance = new SolutionApi(configuration);
+
+let organizationId: string; //the Organization identifier (default to undefined)
+let solutionId: string; //the Solution identifier (default to undefined)
+let runTemplateId: string; //The Run Template identifier (default to undefined)
+let runTemplateUpdateRequest: RunTemplateUpdateRequest; //Run template updates
+
+const { status, data } = await apiInstance.updateSolutionRunTemplate(
+    organizationId,
+    solutionId,
+    runTemplateId,
+    runTemplateUpdateRequest
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **runTemplateUpdateRequest** | **RunTemplateUpdateRequest**| Run template updates | |
+| **organizationId** | [**string**] | the Organization identifier | defaults to undefined|
+| **solutionId** | [**string**] | the Solution identifier | defaults to undefined|
+| **runTemplateId** | [**string**] | The Run Template identifier | defaults to undefined|
+
+
+### Return type
+
+**RunTemplate**
+
+### Authorization
+
+[oAuth2AuthCode](../README.md#oAuth2AuthCode)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, application/yaml
+ - **Accept**: application/json, application/yaml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Run template successfully updated |  -  |
+|**400** | Bad request - Invalid run template updates |  -  |
+|**404** | Solution or run template not found or insufficient access rights |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
